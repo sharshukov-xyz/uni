@@ -1,0 +1,9 @@
+recordings/
+
+# Emacs
+.#*
+
+# Big binary files
+*.pdf
+*.djvu
+
