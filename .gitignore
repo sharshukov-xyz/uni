@@ -6,4 +6,6 @@ recordings/
 # Big binary files
 *.pdf
 *.djvu
+*.doc
+*.docx
 
