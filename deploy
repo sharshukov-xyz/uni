@@ -1,4 +1,4 @@
 #!/bin/sh
 
-rsync -avh --exclude={'deploy'} . uni@server:public/
+rsync -ahP --exclude={'deploy'} . uni@server:public/
 
