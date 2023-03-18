@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>06 - Коллоквиум - ТВиМС</title>
+
+    <link href="/assets/css/styles.css" rel="stylesheet">
+    <script defer src="/assets/js/core.js"></script>
+    <script defer src="/assets/js/questions.js"></script>
+    <script defer src="/assets/js/controls.js"></script>
+  </head>
+  <body>
+    <h1 id="title">06 - Коллоквиум - ТВиМС</h1>
+    <nav>
+      <a href="/">Домой</a>
+      <a href="/links">Ссылки</a>
+      <a href="/probability-theory">ТВиМС</a>
+    </nav>
+
+    <div class="controls">
+      <button onclick="HideQuestions()">Скрыть вопросы</button>
+      <button onclick="ShowQuestions()">Показать вопросы</button>
+      <button onclick="ShowRandomElement(HideQuestions)">
+        Показать случайный вопрос
+      </button>
+    </div>
+
+    <ol id="questions">
+      <li class="question">
+        <div class="name">
+          Случайные события
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Аксиоматика теории вероятностей
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Свойства вероятностей
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема о непрерывности вероятностной меры
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Классическое определение вероятности. Урновые схемы
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Геометрические вероятности. Задача о встрече. Задача Бюффона
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Геометрические вероятности. Парадокс Бертрана
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Условные вероятности. Независимость событий
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Формула полной вероятности. Формулы Байеса
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Схема Бернулли. Биномиальное и полиномиальное распределения
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Схема Бернулли. Теорема Пуассона
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Локальная и интегральная теоремы Муавра-Лапласа (без доказательства
+          интегральной теоремы)
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Схема Бернулли. Закон больших чисел Бернулли
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Последовательности зависимых испытаний. Цепи Маркова
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Однородная цепь Маркова. Уравнение Чепмена-Колмогорова. Теорема о
+          предельных вероятностях для цепей Маркова (без док-ва)
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Полуалгебры. Теоремы о продолжении меры
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Примеры измеримых пространств
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Вероятностное пространство на числовой прямой. Функция распределения
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Классификация вероятностных мер. Пример Кантора сингулярной функции
+          распределения
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Конечномерное вероятностное пространство
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Распределения случайных величин
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Свойство измеримости
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Случайные элементы со значениями в конечномерном пространстве
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Функции распределения в конечномерных пространствах
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Независимые случайные величины. Критерии независимости случайных
+          величин
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение и свойства линейности и положительности математического
+          ожидания как интеграла Лебега
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Свойства математического ожидания как интеграла Лебега (кроме свойств
+          линейности и положительности)
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Предельный переход под знаком интеграла Лебега
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Лемма Фату. Теорема Лебега о мажорируемой сходимости
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема о замене переменной под знаком интеграла Лебега. Следствия
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Формулы для вычисления математических ожиданий
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Моменты случайных величин. Дисперсия
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Неравенство Чебышева. Другие неравенства
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Ковариация, корреляция
+        </div>
+      </li>
+    </ol>
+  </body>
+</html>
+
+

@@ -7,7 +7,28 @@
     <title>Численные методы</title>
 
     <link href="/assets/css/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/katex/katex.min.css">
+    <script defer src="/assets/katex/katex.min.js"></script>
+    <script defer src="/assets/katex/auto-render.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false },
+            { left: '\\(', right: '\\)', display: false },
+            { left: '\\[', right: '\\]', display: true }
+          ],
+          // • rendering keys, e.g.:
+          throwOnError: false
+        });
+      });
+    </script>
   </head>
+
   <body>
     <h1 id="title">Численные методы</h1>
     <nav>
@@ -16,20 +37,126 @@
       <a href="/bib">Библиография</a>
     </nav>
 
+    <h2 id="06-sem">6 семестр</h2>
+
+    <table class="teachers">
+      <tr>
+        <td>Лектор</td>
+        <td>
+          <a href="http://old.apmath.spbu.ru/ru/staff/peregudin/index.html"
+            target="_blank">Перегудин Сергей Иванович</a>
+        </td>
+      </tr>
+      <tr>
+        <td>Семинарист</td>
+        <td>
+          <a href="http://old.apmath.spbu.ru/ru/staff/firyulina_o_s/index.html"
+            target="_blank">Фирюлина Оксана Сергеевна</a>
+        </td>
+      </tr>
+    </table>
+
+    <h3>Распределение задач</h3>
+    <ol>
+      <li>Белоус Егор</li>
+      <li>Беляева Александра</li>
+      <li>Муллаянов Тимур</li>
+      <li>Овсеенко Ксения</li>
+      <li>Розенгард Александр</li>
+      <li>Халтобина Мария</li>
+      <li>Шаршуков Владислав</li>
+      <li>Шашкин Илья</li>
+      <li>Шмидт Ян</li>
+    </ol>
+
+    <h3>Задания</h3>
+    <ol>
+      <li>
+        <a href="docs/06-task-1.pdf" target="_blank">
+          Вычисление определённого интеграла
+        </a>
+
+        <ul>
+          <li>
+            <a href="docs/06-task-1-manual.pdf" target="_blank">
+              Методическое пособие
+            </a>
+          </li>
+
+          <li>
+            <a href="docs/06-task-1-cardano.pdf" target="_blank">
+              Формула Кардано для квадратурной формулы Гаусса
+            </a>
+          </li>
+
+          <li>
+            <a href="docs/06-task-1-errors.pdf" target="_blank">
+              Практические способы оценки погрешности СКФ
+            </a>
+          </li>
+
+          <li>
+            <a href="docs/06-task-1-moments.pdf" target="_blank">
+              Вычисление моментов весовой функции
+            </a>
+          </li>
+
+          <li>
+            <a href="docs/06-task-1-weight-formulas.pdf" target="_blank">
+              Квадратурные формулы для случая $p(x) \equiv 1$
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="docs/06-task-2.pdf" target="_blank">
+          Решение задачи Коши
+        </a>
+
+        <ul>
+          <li>
+            <a href="docs/06-task-2-manual.pdf" target="_blank">
+              Методическое пособие
+            </a>
+          </li>
+
+          <li>
+            <a href="docs/06-task-2-schemas.pdf" target="_blank">
+              Расчётные схемы явных методов Рунге-Кутты
+            </a>
+          </li>
+
+          <li>
+            Погрешности:
+
+            <div class="images">
+              <img src="images/06-task-2-local-error.png"/>
+              <img src="images/06-task-2-global-error.png"/>
+            </div>
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+    <hr/>
+
     <h2 id="05-sem">5 семестр</h2>
 
     <table class="teachers">
       <tr>
-	<td>Лектор</td>
-	<td>
-	  <a href="http://old.apmath.spbu.ru/ru/staff/peregudin/index.html" target="_blank">Перегудин Сергей Иванович</a>
-	</td>
+        <td>Лектор</td>
+        <td>
+          <a href="http://old.apmath.spbu.ru/ru/staff/peregudin/index.html"
+            target="_blank">Перегудин Сергей Иванович</a>
+        </td>
       </tr>
       <tr>
-	<td>Семинарист</td>
-	<td>
-	  <a href="http://old.apmath.spbu.ru/ru/staff/firyulina_o_s/index.html" target="_blank">Фирюлина Оксана Сергеевна</a>
-	</td>
+        <td>Семинарист</td>
+        <td>
+          <a href="http://old.apmath.spbu.ru/ru/staff/firyulina_o_s/index.html"
+            target="_blank">Фирюлина Оксана Сергеевна</a>
+        </td>
       </tr>
     </table>
 
@@ -52,12 +179,27 @@
 
     <h3>Задания</h3>
     <ol>
-      <li><a href="docs/05-task-1.pdf" target="_blank">Минимизация квадратичной функции</a></li>
-      <li><a href="docs/05-task-2.pdf" target="_blank">Интерполирование функции</a></li>
-      <li><a href="docs/05-task-3.pdf" target="_blank">Аппроксимация функции</a></li>
+      <li>
+        <a href="docs/05-task-1.pdf" target="_blank">
+          Минимизация квадратичной функции
+        </a>
+      </li>
+
+      <li>
+        <a href="docs/05-task-2.pdf" target="_blank">
+          Интерполирование функции
+        </a>
+      </li>
+
+      <li>
+        <a href="docs/05-task-3.pdf" target="_blank">
+          Аппроксимация функции
+        </a>
+      </li>
     </ol>
 
-    <div class="break"></div>
+    <hr/>
+    <!-- <div class="break"></div> -->
 
     <h2 id="04-sem">4 семестр</h2>
 
@@ -65,17 +207,15 @@
       <tr>
         <td>Лектор</td>
         <td>
-	  <a href="http://old.apmath.spbu.ru/ru/staff/peregudin/index.html" target="_blank">
-	    Перегудин Сергей Иванович
-	  </a>
+          <a href="http://old.apmath.spbu.ru/ru/staff/peregudin/index.html"
+            target="_blank">Перегудин Сергей Иванович</a>
         </td>
       </tr>
       <tr>
         <td>Семинарист</td>
         <td>
-	  <a href="http://old.apmath.spbu.ru/ru/staff/kvitko/index.html" target="_blank">
-	    Квитко Александр Николаевич
-	  </a>
+          <a href="http://old.apmath.spbu.ru/ru/staff/kvitko/index.html"
+            target="_blank">Квитко Александр Николаевич</a>
         </td>
       </tr>
     </table>
@@ -113,11 +253,13 @@
           Вычисление функций
         </a>
       </li>
+
       <li>
         <a href="docs/04-task-2.pdf" target="_blank">
           Решение СЛАУ
         </a>
       </li>
+
       <li>
         <a href="docs/04-task-3.pdf" target="_blank">
           Метод Ньютона
@@ -126,7 +268,7 @@
     </ol>
 
     <hr/>
-    
+
     <h3>Список литературы</h3>
     <ul>
       <li>
