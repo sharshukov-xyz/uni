@@ -1,4 +1,4 @@
 #!/bin/sh
 
-rsync -ahv --exclude={'deploy','.git','.gitignore','node_modules'} . uni@server:public/
+rsync -ahv --exclude={'deploy','.git','.gitignore','node_modules','*.mp4'} . uni@server:public/
 
