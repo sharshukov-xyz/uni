@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>06 - Вопросы к зачёту - Стабилизация нелинейных систем</title>
+
+    <link href="/assets/css/styles.css" rel="stylesheet">
+    <script defer src="/assets/js/core.js"></script>
+    <script defer src="/assets/js/questions.js"></script>
+    <script defer src="/assets/js/controls.js"></script>
+
+    <link rel="stylesheet" href="/assets/katex/katex.min.css">
+    <script defer src="/assets/katex/katex.min.js"></script>
+    <script defer src="/assets/katex/auto-render.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false },
+            { left: '\\(', right: '\\)', display: false },
+            { left: '\\[', right: '\\]', display: true }
+          ],
+          // • rendering keys, e.g.:
+          throwOnError: false
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1 id="title">06 - Вопросы к зачёту - Стабилизация нелинейных систем</h1>
+    <nav>
+      <a href="/">Домой</a>
+      <a href="/links">Ссылки</a>
+      <a href="/bib">Библиография</a>
+      <a href="/nonlinear-stabilization">Стабилизация нелинейных систем</a>
+    </nav>
+
+    <div class="controls">
+      <button onclick="HideQuestions()">Скрыть вопросы</button>
+      <button onclick="ShowQuestions()">Показать вопросы</button>
+      <button onclick="HideAnswers()">Скрыть ответы</button>
+      <button onclick="ShowAnswers()">Показать ответы</button>
+      <button onclick="HideProofs()">Скрыть доказательства</button>
+      <button onclick="ShowProofs()">Показать доказательства</button>
+      <button onclick="ShowRandomElement(HideQuestions)">Показать случайный вопрос</button>
+    </div>
+
+    <div style="display:none">
+      $\global\def\at#1#2{\left. #1 \right\rvert_{#2}}$
+      $\global\def\abs#1{\left\lvert #1 \right\rvert}$
+      $\global\def\norm#1{\left\lVert #1 \right\rVert}$
+      $\global\def\bvec#1{\mathbf{#1}}$
+      $\global\def\floor#1{\left\lfloor #1 \right\rfloor}$
+
+      $\global\def\limto#1{\underset{#1}{\longrightarrow}}$
+      $\global\def\prob#1{\mathbb{P} \left\{ #1 \right\}}$
+      $\global\def\mean#1{\mathbb{E} \left[ #1 \right]}$
+      $\global\def\disp#1{D \left[ #1 \right]}$
+
+      $\global\def\dp#1#2{#1 \cdot #2\,}$
+      $\global\def\vp#1#2{#1 \times #2\,}$
+
+      $\global\def\dv#1#2{\frac{d #1}{d #2}}$
+      $\global\def\pd#1#2{\frac{\partial #1}{\partial #2}}$
+      $\global\def\pdv2#1#2{\frac{\partial^2 #1}{\partial #2^2}}$
+      $\global\def\ppdv#1#2#3{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
+
+      $\global\def\paren#1{\left( #1 \right)}$
+      $\global\def\bydef#1{\overset{\mathrm{def}}{#1}}$
+
+      $\global\def\mbox#1{\text{#1}}$
+
+      $\global\def\div{\text{div}\,}$
+      $\global\def\dsum{\displaystyle\sum\,}$
+      $\global\def\grad{\text{grad}\,}$
+      $\global\def\rot{\text{rot}\,}$
+
+      $\global\def\vb#1{\textbf{#1}}$
+
+      $\global\def\op#1{\mathrm{#1}\,}$
+
+      $\global\def\Im{\text{Im}\,}$
+      $\global\def\Res{\text{Res}\,}$
+      $\global\def\Re{\text{Re}\,}$
+      $\global\def\argtg{\text{argtg}\,}$
+      $\global\def\ch{\text{ch}\,}$
+      $\global\def\const{\text{const}\,}$
+      $\global\def\degree{\text{degree}\,}$
+      $\global\def\proj{\mathrm{proj}}$
+      $\global\def\res{\text{res}\,}$
+      $\global\def\sh{\text{sh}\,}$
+      $\global\def\sign{\text{sign}\,}$
+      $\global\def\tg{\mathrm{tg}\,}$
+    </div>
+
+    <ol id="questions">
+      <li class="question">
+        <div class="name">
+          Принцип аргумента (без док-ва)
+        </div>
+        <div class="content">
+          <div class="theorem">
+            <i>(Принцип аргумента).</i>
+            <br>
+            Пусть $C \subset \mathbb{C}$ &mdash; простой замкнутый контур, а
+            $w = f(z)$ &mdash; аналитическая на $C$ функция. Обозначим
+            количество нулей и полюсов функции $f(z)$ на $C$ как $Z$ и $P$
+            соответственно. Тогда суммарное изменение аргумента (угла) $f(z)$
+            при движении по контуру $C$ равно
+            \[
+            \Delta_C \arg [f(z)] = 2 \pi (Z - P).
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема Руше
+        </div>
+        <div class="content">
+          <div class="theorem">
+            <i>(Теорема Руше).</i>
+            <br>
+            Пусть $C$ &mdash; простой замкнутый контур, а $f(z)$ и $g(z)$
+            &mdash; аналитические в нём и на нём функции. Тогда если на контуре
+            $C$
+            \[
+            \abs{g(z)} \lt \abs{f(z)},
+            \]
+            то $f(z)$ и $f(z) + g(z)$ имеют одинаковое количество нулей внутри
+            $C$ (с учётом кратности).
+
+            <div class="proof">
+              Так как $\abs{g(z)} \lt \abs{f(z)}$, то $f(z) \not\equiv 0$ на
+              $C$, поэтому
+              \[
+              \begin{aligned}
+              \Delta_C \arg[f(z) + g(z)] &= \Delta_C \arg\left\{
+              f(z) \left[ 1 + \frac{g(z)}{f(z)} \right]
+              \right\} \\
+              &= \Delta_C \arg[f(z)] + \Delta_C \arg\left[
+              1 + \frac{g(z)}{f(z)}
+              \right].
+              \end{aligned}
+              \]
+
+              Более того,
+              \[
+              \abs{\frac{g(z)}{f(z)}} \lt 1 \qquad \forall z \in C,
+              \]
+              поэтому точка
+              \[
+              w = 1 + \frac{g(z)}{f(z)}
+              \]
+              находится внутри диска $\abs{w - 1} \lt 1$ при движении $z$ по
+              $C$. Из этого следует, что $w$ не огибает начало координат,
+              поэтому
+              \[
+              \Delta_C \arg\left[ 1 + \frac{g(z)}{f(z)} \right] = 0.
+              \]
+
+              Окончательно получаем
+              \[
+              \Delta_C \arg[f(z) + g(z)] = \Delta_C \arg[f(z)].
+              \]
+            </div>
+          </div>
+
+          <div class="remark">
+            Из условия $\abs{g(z)} \lt \abs{f(z)}, z \in C$ следует, что у
+            функций $f(z)$ и $f(z) + g(z)$ нет нулей на контуре $C$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема о пересечении границ (Boundary Crossing Theorem)
+        </div>
+        <div class="content">
+          <div class="theorem" id="th-poly-roots-in-C_k">
+            Пусть
+            \[
+            \begin{aligned}
+            P(s) &= p_0 + p_1 s + \cdots + p_n s^n
+            = p_n \prod_{j=1}^m (s - s_j)^{t_j}, \quad p_n \neq 0, \\
+            Q(s) &= (p_0 + \varepsilon_0) + (p_1 + \varepsilon_1) s + \cdots +
+            (p_n + \varepsilon_n) s^n.
+            \end{aligned}
+            \]
+
+            Рассмотрим окружность $C_k$ радиуса $r_k$ с центром в точке $s_k$
+            &mdash; корне многочлена $P(s)$ кратности $t_k$. Предположим, что
+            \[
+            0 \lt r_k \lt \min \abs{s_k - s_j}, \quad
+            j = 1, 2, \dots, k-1, k+1, \dots, m.
+            \]
+
+            Тогда существует $\varepsilon \gt 0$ такой, что если
+            \[
+            \abs{\varepsilon_i} \leqslant \varepsilon \quad i = \overline{0, n},
+            \]
+            то у многочлена $Q(s)$ ровно $t_k$ корней лежат внутри $C_k$.
+
+            <div class="proof">
+              $P(s) \not\equiv 0$ и непрерывен на компакте $C_k$, следовательно
+              \[
+              \exists \delta_k \gt 0:
+              \quad \abs{P(s)} \geqslant \delta_k \gt 0
+              \quad \forall s \in C_k.
+              \]
+              <div class="remark">
+                Имеется в виду контур, а не его внутренность.
+              </div>
+
+              Рассмотрим вспомогательный многочлен
+              \[
+              R(s) = \varepsilon_0 + \varepsilon_1 s
+              + \cdots + \varepsilon_n s^n.
+              \]
+
+              Если $s \in C_k$, то
+              \[
+              \begin{aligned}
+              \abs{R(s)}
+              &\leqslant
+              \sum_{j=0}^n \abs{\varepsilon_j} \abs{s^j} \\
+              &\leqslant
+              \sum_{j=0}^n \abs{\varepsilon_j}
+              \paren{\abs{s - s_k} + \abs{s_k}}^j \\
+              &\leqslant
+              \varepsilon \underbrace{
+              \sum_{j=0}^n \paren{r_k + \abs{s_k}}^j
+              }_{M_k}.
+              \end{aligned}
+              \]
+
+              Таким образом, если выбрать $\varepsilon$ так, чтобы
+              \[
+              \varepsilon \lt \frac{\delta_k}{M_k},
+              \]
+              то
+              \[
+              \abs{R(s)} \lt \abs{P(s)} \quad s \in C_k,
+              \]
+              откуда, в силу теоремы Руше, у многочленов $P(s)$ и
+              $Q(s) = P(s) + R(s)$ одинаковое количество нулей внутри $C_k$.
+              Учитывая, что $r_k$ выбран так, чтобы у $P(s)$ внутри $C_k$ был
+              ровно один корень кратности $t_k$, заключаем, что у $Q(s)$ ровно
+              $t_k$ корней внутри $C_k$.
+            </div>
+          </div>
+
+          <div class="corollary">
+            Выберем $m$ попарно непересекающихся шаров $C_1, \dots, C_m$ с
+            центрами в $s_1, \dots, s_m$ сооответственно. Последовательно
+            применяя предыдущую теорему, всегда можно выбрать
+            $\varepsilon \gt 0$ так, что для любого набора
+            $\set{ \varepsilon_0, \dots, \varepsilon_n }$ такого, что
+            \[
+            \abs{\varepsilon_i} \leqslant \varepsilon,
+            \quad i = \overline{1, n},
+            \]
+            у многочлена $Q(s)$ ровно $t_j$ корней попадают в шар $C_j$.
+
+            <div class="remark">
+              В этом случае у многочлена $Q(s)$ ровно
+              $t_1 + t_2 + \cdots + t_m = n$ корней, поэтому его степень равна
+              $n$, то есть необходимо, чтобы
+              \[
+              p_n + \varepsilon_n \neq 0,
+              \]
+              или, иначе,
+              \[
+              \varepsilon \lt \abs{p_n}.
+              \]
+            </div>
+          </div>
+
+          <div class="corollary">
+            Множество полиномов степени $n$, корни которых лежат в открытом
+            множестве $\mathcal{O}$, само является открытым множеством.
+          </div>
+
+          Пусть $S \subset \mathbb{C}$ &mdash; произвольное открытое множество,
+          $\mathcal{U} = \mathbb{C} \setminus S$ &mdash; его дополнение со
+          внутренностью $\mathcal{U}^\circ$. Известно, что
+          \[
+          S \cup \partial S \cup \mathcal{U}^\circ = \mathbb{C}, \qquad
+          S \cap \mathcal{U}^\circ = S \cap \partial S
+          = \partial S \cap \mathcal{U}^\circ = \varnothing.
+          \]
+
+          Также будем предполагать, что $S, \partial S, \mathcal{U}^\circ \neq
+          \varnothing$.
+
+          <br>
+          Рассмотрим $P(\lambda, s)$ &mdash; семейство полиномов
+          <ol>
+            <li>
+              фиксированной степени $n$;
+            </li>
+
+            <li>
+              непрерывное по $\lambda$ на промежутке $I = [a; b]$.
+            </li>
+          </ol>
+
+          Другими словами, каждый элемент множества $P(\lambda, s)$ может быть
+          записан в виде
+          \[
+          P(\lambda, s) = p_0(\lambda) + p_1(\lambda) s 
+          + \cdots + p_n(\lambda) s^n,
+          \]
+          где $p_0(\lambda), \dots, p_n(\lambda) \in C[a;b]$ и
+          $p_n(\lambda) \not\equiv 0$. Пользуясь вторым следствием предыдущей
+          теоремы, можно сделать вывод, что если для какого-нибудь $t \in I$
+          корни полинома $P(t, s)$ лежат в открытом множестве $S$, то существует
+          $\alpha \gt 0$ такое, что
+          \[
+          \forall t' \in (t - \alpha; t + \alpha) \cap I
+          \]
+          корни $P(t', s)$ также лежат внутри $S$.
+
+          <div class="theorem" id="bct">
+            <i>
+              (Boundary Crossing Theorem).
+            </i>
+            <br>
+
+            Если все корни $P(a, s)$ лежат в $S$, а хотя бы один корень
+            $P(b, s)$ лежит в $\mathcal{U}$, то существует $\rho \in (a; b]$
+            такой, что:
+
+            <ol type="a">
+              <li>
+                корни $P(\rho, s)$ лежат в $S \cup \partial S$;
+              </li>
+
+              <li>
+                по крайней мере один из корней $P(\rho, s)$ лежит на
+                $\partial S$.
+              </li>
+            </ol>
+
+            <div class="proof">
+              <p>
+              Обозначим за $E \subset (a; b]$ множество всех чисел
+              $t \in (a; b]$ таких, что
+              \[
+              \forall t' \in (a; t)
+              \quad \text{корни } P(t', s) \text{ лежат в } S.
+              \]
+              По условию теоремы корни $P(a, s)$ лежат в $S$, поэтому (в силу
+              следствия 2 предыдущей теоремы) существует $\alpha \gt 0$ такое,
+              что
+              \[
+              \forall t' \in [a; a + \alpha) \cap I
+              \quad \text{корни } P(t', s) \text{ лежат в } S.
+              \]
+              Отсюда следует, что $E \neq \varnothing$.
+              </p>
+
+              <p>
+              Более того, из определения $E$ следует, что если $t_2 \in E$, то
+              \[
+              \forall t_1: a \lt t_1 \lt t_2 \implies t_1 \in E.
+              \]
+              Значит, $E$ является промежутком, а если
+              \[
+              \rho := \sup\limits_{t \in E} t,
+              \]
+              то $E = (a; \rho]$.
+              </p>
+
+              <p>
+              Рассмотрим многочлен $P(\rho, s)$.
+              </p>
+
+              <ol type="a">
+                <li>
+                  Существует по крайней мере один его корень, не принадлежащий
+                  $S$.
+
+                  <div class="derivation">
+                    От противного: пусть все корни многочлена $P(\rho, s)$ лежат
+                    в $S$. Тогда:
+
+                    <ul>
+                      <li>
+                        $\rho \lt b$ &mdash; следует из условия теоремы;
+                      </li>
+
+                      <li>
+                        $\exists \alpha \gt 0$ такое, что $\rho + \alpha \lt b$
+                        и
+                        \[
+                        \forall t' \in (\rho - \alpha; \rho + \alpha) \cap I
+                        \quad \text{корни } P(t', s) \text{ лежат в } S,
+                        \]
+                        то есть существовало бы число $\beta \gt \rho$,
+                        принадлежащее $E$, что противоречило бы определению
+                        $\rho$ как точной верхней границы.
+                      </li>
+                    </ul>
+                  <div>
+                </li>
+
+                <li>
+                  Ни один из его корней не принадлежит $\mathcal{U}^\circ$.
+
+                  <div class="derivation">
+                    От противного: пусть по крайней мере один из корней
+                    $P(\rho, s)$ принадлежит $\mathcal{U}^\circ$. Так как
+                    $\mathcal{U}^\circ$ &mdash; открытое множество, из следствия
+                    2 предыдущей теоремы следует, что существует $\alpha \gt 0$
+                    такое, что
+                    \[
+                    \forall t' \in (\rho - \alpha; \rho + \alpha) \cap I
+                    \quad \text{по крайней мере один корень } P(t', s)
+                    \text{ лежит в } \mathcal{U}^\circ,
+                    \]
+                    что противоречило бы тому факту, что для достаточно малых
+                    $\varepsilon \gt 0$ число $\rho - \varepsilon \in E$.
+                  </div>
+                </li>
+              </ol>
+
+              Таким образом, можно сделать вывод, что все корни $P(\rho, s)$
+              лежат в $S \cup \partial S$, и по крайней мере один из этих корней
+              лежит на $\partial S$.
+            </div>
+          </div>
+
+          <div class="theorem">
+            Пусть $\set{ P_n(s) }$ &mdash; последовательность устойчивых
+            многочленов ограниченной степени. Если эта последовательность
+            сходится к некоторому многочлену $Q(s)$, то все корни $Q(s)$ лежат в
+            $S \cup \partial S$.
+
+            <div class="proof">
+              <p>
+              Из условия теоремы следует, что существует $N \in \mathbb{N}$
+              такое, что $\degree[P_n] \leqslant N$ для всех $n \in \mathbb{N}$.
+              Таким образом, мы можем каждый многочлен последовательности
+              представить в виде
+              \[
+              P_n(s) = p_{0,n} + p_{1,n} s + \cdots + p_{N,n} s^N.
+              \]
+              Так как последовательность сходится к $Q(s)$, то
+              $\degree [Q(s)] \leqslant N$, поэтому его можно записать в виде
+              \[
+              Q_n(s) = q_{0} + q_{1} s + \cdots + q_{N} s^N.
+              \]
+              Более того,
+              \[
+              \lim_{n \to +\infty} p_{k,n} = q_k, \quad k = \overline{0, N}.
+              \]
+              </p>
+
+              <p>
+              Предположим, что корень $s^*$ многочлена $Q(s)$ принадлежит
+              $\mathcal{U}^\circ$. Так как $\mathcal{U}^\circ$ открыто,
+              существует окрестность $B_r(s^*)$ точки $s^*$ радиуса $r$,
+              полностью лежащая в $\mathcal{U}^\circ$. Из
+              <a href="#th-poly-roots-in-C_k">теоремы</a> следует, что
+              существует $\varepsilon \gt 0$ такой, что если
+              $\abs{\varepsilon_i} \leqslant \varepsilon, \; i=\overline{0,N}$,
+              то у многочлена
+              \[
+              (q_0 + \varepsilon_0) + (q_1 + \varepsilon_1) s
+              + \cdots + (q_N + \varepsilon_N) s^N
+              \]
+              по крайней мере один из корней лежит в
+              $B_r(s^*) \subset \mathcal{U}^\circ$. В силу сходимости
+              коэффициентов
+              \[
+              \exists n_0 \gt 0: \quad \forall n \geqslant n_0 \qquad
+              \abs{p_{k,n} - q_k} \lt \varepsilon, \quad k = \overline{0, N},
+              \]
+              но отсюда следует, что у многочлена
+              \[
+              (q_0 + p_{0,n} - q_0) + (q_1 + p_{1,n} - q_1) s
+              + \cdots + (q_N + p_{N,n} - q_N) s^N = P_n(s)
+              \]
+              по крайней мере один корень лежит в
+              $B_r(s^*) \subset \mathcal{U}^\circ$, то есть $P_n(s)$ неустойчив,
+              что противоречит условию теоремы.
+              </p>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Принцип исключения нуля
+        </div>
+        <div class="content">
+          <p>
+          Рассмотрим семейство многочленов, коэффициенты которых
+          непрерывно зависят от параметра
+          $\bvec{p} \in \Omega \subset \mathbb{R}^l$:
+          \[
+          \Delta(s) := \set{ \delta(s, \bvec{p}): \bvec{p} \in \Omega }.
+          \]
+          Требуется по заданной области устойчивости $S$ проверить, содержит ли
+          семейство $\Delta(s)$ неустойчивый многочлен.
+          </p>
+
+          <p>
+          Предположим, что семейству принадлежит по крайней мере один устойчивый
+          многочлен $\delta(s, \bvec{p}_a)$, а также что все многочлены этого
+          семейства имеют одинаковую степень. Тогда если $\delta(s, \bvec{p}_b)$
+          &mdash; неустойчивый многочлен, то из <a href="#bct">BCT</a> следует,
+          что на любом непрерывном пути из $\bvec{p}_a$ в $\bvec{p}_b$ найдётся
+          точка $\bvec{p}_c$ такая, что у многочлена $\delta(s, \bvec{p}_c)$ по
+          крайней мере один корень будет принадлежать границе области
+          устойчивости $\partial S$. Если $\Omega$ &mdash; связное множество, и
+          $\bvec{p}_b \in \Omega$, то $\bvec{p}_c \in \Omega$. В этом случае
+          наличие в $\Delta(s)$ неустойчивых многочленов эквивалентно наличию в
+          нём многочленов с корнями на границе области устойчивости.
+          </p>
+
+          <p>
+          Если $s^0$ &mdash; корень некоторого многочлена семейства, значит,
+          \[
+          \exists \bvec{p} \in \Omega: \quad \delta(s^0, \bvec{p}) = 0,
+          \]
+          то есть $0 \in \Delta(s^0)$. Отсюда следует, что если семейству
+          принадлежит многочлен с корнями на границе области устойчивости, то
+          \[
+          \exists s^* \in \partial S: \quad 0 \in \Delta(s^*).
+          \]
+
+          Этот факт может быть сформулирован в виде теоремы.
+          </p>
+
+          <div class="theorem">
+            <i>(Принцип исключения нуля).</i>
+            <br>
+            Рассмотрим семейство многочленов
+            \[
+            \Delta(s) := \set{ \delta(s, \bvec{p}): \bvec{p} \in \Omega }.
+            \]
+            постоянной степени, содержащее по крайней мере один устойчивый
+            многочлен, где $\Omega \subset \mathbb{R}^l$ &mdash; связное
+            множество. Тогда для устойчивости всего семейства многочленов
+            необходимо и достаточно, чтобы
+            \[
+            0 \not\in \Delta(s^*) \quad \forall s^* \in \partial S.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Свойства гурвицевых многочленов
+        </div>
+        <div class="content">
+          <div class="definition">
+            Многочлен
+            \[
+            P(s) = p_0 + p_1 s + \cdots + p_n s^n
+            \]
+            называют <i>гурвицевым</i>, если все его корни лежат в левой
+            комплексной полуплоскости.
+          </div>
+
+          Свойства гурвицевых многочленов:
+          <ol>
+            <li>
+              Если коэффициенты гурвицева многочлена $P(s)$ вещественны, то они
+              ненулевые, одинакового знака.
+
+              <div class="derivation">
+                Этот факт следует из того, что любой вещественный многочлен
+                можно представить в виде произведения многочленов первой и
+                второй степени, для которых этот факт очевидным образом
+                выполняется.
+
+                <div class="todo">
+                  Более формально: факт доказывается по мат. индукции.
+                </div>
+              </div>
+            </li>
+
+            <li>
+              Если $P(s)$ &mdash; гурвицев многочлен степени $n$, то
+              $\arg[P(j\omega)]$ (фаза многочлена $P(j\omega)$) &mdash;
+              непрерывная строго возрастающая функция. Более того,
+              \[
+              \arg[P(+j\infty)] - \arg[P(-j\infty)] = n\pi.
+              \]
+
+              <div class="derivation">
+                Так как $P(s)$ &mdash; гурвицев, его можно представить в виде
+                \[
+                P(s) = p_n \prod_{i=1}^n (s - s_i),
+                \]
+                где $s_i = a_i + j b_i, \; a_i \lt 0$. Тогда
+                \[
+                \begin{aligned}
+                \arg[P(j\omega)]
+                &= \arg[p_n] + \sum_{i=1}^n \arg[j\omega - a_i - jb_i] \\
+                &= \arg[p_n]
+                + \sum_{i=1}^n \arctg\left[ \frac{\omega - b_i}{-a_i} \right],
+                \end{aligned}
+                \]
+                следовательно, $\arg[P(j\omega)]$ представляет собой сумму
+                константы и $n$ непрерывных возрастающих функций. Более того,
+                каждая из этих $n$ функций изменяется от $-\frac{\pi}{2}$ до
+                $\frac{\pi}{2}$ при изменении $\omega$ от $-\infty$ до
+                $+\infty$.
+              </div>
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема Эрмита-Билера
+        </div>
+        <div class="content">
+          <p>
+          Рассмотрим вещественный многочлен
+          \[
+          P(s) = p_0 + p_1 s + \cdots + p_n s^n.
+          \]
+          Введём обозначения для чётной и нечётной составляющих:
+          \[
+          \begin{aligned}
+          P^{\text{even}}(s) &:= p_0 + p_2 s^2 + \cdots, \\
+          P^{\text{odd}}(s) &:= p_1 s + p_3 s^3 + \cdots.
+          \end{aligned}
+          \]
+
+          Рассмотрим
+          \[
+          \begin{aligned}
+          P^e(\omega) &:= P^{\text{even}}(j\omega) = p_0 - p_2\omega^2 +
+          p_4\omega^4 - \cdots, \\
+          P^o(\omega) &:= \frac{P^{\text{odd}}(j\omega)}{j\omega} =
+          p_1 - p_3 \omega^2 + p_5 \omega^4 - \cdots.
+          \end{aligned}
+          \]
+
+          Прежде всего отметим, что $P^e(\omega)$ и $P^o(\omega)$ &mdash; чётные
+          функции, поэтому их корни будут симметричны относительно начала
+          координат.
+          </p>
+
+          <div class="definition">
+            Говорят, что многочлен $P(s)$ обладает
+            <i>свойством перемежаемости</i>, если выполненны следующие условия:
+
+            <ul>
+              <li>
+                если степень многочлена чётная (то есть $n = 2m,\; m \in
+                \mathbb{N}$), то
+                <ol type="a">
+                  <li>
+                    $p_{2m}$ и $p_{2m-1}$ одного знака;
+                  </li>
+
+                  <li>
+                    корни многочленов $P^e(\omega)$ и $P^o(\omega)$
+                    вещественные и различные; причём $m$ положительных корней
+                    $P^e(\omega)$ перемежаются с $m-1$ положительным корнем
+                    $P^o(\omega)$ следующим образом:
+                    \[
+                    0 \lt \omega_{e,1} \lt \omega_{o,1} \lt \omega_{e,2} \lt
+                    \cdots
+                    \lt \omega_{e,m-1} \lt \omega_{o,m-1} \lt \omega_{e,m};
+                    \]
+                  </li>
+                </ol>
+              </li>
+
+              <li>
+                если степень многочлена нечётная (то есть $n = 2m+1,\; m \in
+                \mathbb{N}$), то
+                <ol type="a">
+                  <li>
+                    $p_{2m+1}$ и $p_{2m}$ одного знака;
+                  </li>
+
+                  <li>
+                    корни многочленов $P^e(\omega)$ и $P^o(\omega)$
+                    вещественные и различные; причём $m$ положительных корней
+                    $P^e(\omega)$ перемежаются с $m$ положительными корнями
+                    $P^o(\omega)$ следующим образом:
+                    \[
+                    0 \lt \omega_{e,1} \lt \omega_{o,1} \lt \omega_{e,2} \lt
+                    \cdots
+                    \lt \omega_{e,m-1} \lt \omega_{o,m-1} \lt \omega_{e,m} \lt
+                    \omega{o,m}.
+                    \]
+                  </li>
+                </ol>
+              </li>
+            </ul>
+          </div>
+
+          <div class="theorem">
+            <i>(Эрмита-Билера).</i>
+            <br>
+            Вещественный многочлен $P(s)$ гурвицев тогда и только тогда, когда
+            он обладает свойством перемежаемости.
+
+            <div class="proof">
+              <div class="necessity">
+                Рассмотрим гурвицев многочлен
+                \[
+                P(s) = p_0 + p_1 s + p_2 s^2 + \cdots + p_n s^n.
+                \]
+
+                <ol type="a">
+                  <li>
+                    В силу свойств гурвицевых многочленов его коэффициенты
+                    одного знака, поэтому первое условие свойства перемежаемости
+                    выполнено. Не умаляя общности, будем считать, что все
+                    коэффициенты положительны.
+                  </li>
+
+                  <li>
+                    Предположим, что степень многочлена $P(s)$ чётная: $n = 2m$.
+                    Из второго свойства гурвицевых многочленов известно, что
+                    фаза $P(j\omega)$ строго возрастает от $-n \pi/2$ до
+                    $n \pi/2$ при увеличении $\omega$ от $-\infty$ до $+\infty$.
+                    Так как многочлен вещественный, его корни симметричны
+                    относительно вещественной оси, поэтому фаза $P(j\omega)$
+                    возрастает от $0$ до $n \pi/2$ при увеличении $\omega$ от
+                    $0$ до $+\infty$. В связи с этим, при изменении $\omega$ от
+                    $0$ до $+\infty$ многочлен $P(j\omega)$ начинает двигаться с
+                    положительной вещественной полуоси ($P(0) = p_0 \gt 0$),
+                    описывает вокруг начала координат строго против часовой
+                    стрелки угол $m\pi$ и уходит на бесконечность. Также стоит
+                    отметить, что он никогда не проходит через начало координат,
+                    так как $P(j\omega) \neq 0$ для любого $\omega$. Таким
+                    образом, нетрудно видеть, что годограф $P(j\omega)$
+                    пересекает мнимую ось $m$ раз, поэтому вещественная часть
+                    $\Re P(j\omega)$ обращается в ноль $m$ раз в точках
+                    \[
+                    \omega_{\mathcal{R},1},
+                    \quad
+                    \omega_{\mathcal{R},2}, 
+                    \quad
+                    \dots,
+                    \quad
+                    \omega_{\mathcal{R},m}.
+                    \]
+
+                    Рассуждая аналогичным способом, приходим к выводу, что
+                    годограф пересекает вещественную ось $m$ раз в точках
+                    \[
+                    0,
+                    \quad
+                    \omega_{\mathcal{I}, 1},
+                    \quad
+                    \omega_{\mathcal{I}, 2},
+                    \quad
+                    \dots,
+                    \quad
+                    \omega_{\mathcal{I}, m-1},
+                    \]
+
+                    Учитывая, что годограф движется вокруг начала координат
+                    строго против часовой стрелки, имеем
+                    \[
+                    0
+                    \lt \omega_{\mathcal{R}, 1} \lt \omega_{\mathcal{I}, 1}
+                    \lt \omega_{\mathcal{R}, 2} \lt \omega_{\mathcal{I}, 2}
+                    \lt \cdots
+                    \lt \omega_{\mathcal{R}, m-1} \lt \omega_{\mathcal{I}, m-1}
+                    \lt \omega_{\mathcal{R}, m}.
+                    \]
+
+                    Замечая, что
+                    \[
+                    \Re P(j\omega) \bydef= P^e(\omega), \quad
+                    \Im P(j\omega) \bydef= \omega P^o(\omega),
+                    \]
+                    завершаем доказательство.
+                  </li>
+                </ol>
+              </div>
+              
+              <div class="sufficiency">
+                Пусть многочлен $P(s)$ обладает свойством перемежаемости.
+                Предположим также, что степень многочлена чётная ($n = 2m$), а
+                $p_{2m}$ и $p_{2m-1}$ положительны. Рассмотрим корни многочленов
+                $P^e(\omega)$ и $P^o(\omega)$:
+                \[
+                0 \lt \omega_{e,1}^p \lt \omega_{o,1}^p \lt \cdots
+                \lt \omega_{e,m-1}^p \lt \omega_{o,m-1}^p \lt \omega_{e,m}^p.
+                \]
+
+                Запишем эти многочлены в следующем виде:
+                \[
+                \begin{aligned}
+                P^e(\omega)
+                &= p_{2m} \prod_{i=1}^m (\omega^2 - (\omega_{e,i}^p)^2), \\
+                P^o(\omega)
+                &= p_{2m-1} \prod_{i=1}^{m-1} (\omega^2 - (\omega_{o,i}^p)^2).
+                \end{aligned}
+                \]
+
+                Рассмотрим теперь произвольный устойчивый многочлен $Q(s)$
+                степени $n=2m$. В силу необходимой ветки доказательства он
+                обладает свойством перемежаемости:
+                \[
+                0 \lt \omega_{e,1}^q \lt \omega_{o,1}^q \lt \cdots
+                \lt \omega_{e,m-1}^q \lt \omega_{o,m-1}^q \lt \omega_{e,m}^q.
+                \]
+                Поэтому
+                \[
+                \begin{aligned}
+                Q^e(\omega)
+                &= q_{2m} \prod_{i=1}^m (\omega^2 - (\omega_{e,i}^q)^2), \\
+                Q^o(\omega)
+                &= q_{2m-1} \prod_{i=1}^{m-1} (\omega^2 - (\omega_{o,i}^q)^2).
+                \end{aligned}
+                \]
+
+                Рассмотрим теперь многочлен $P_\lambda(s) :=
+                P_\lambda^{\text{even}}(s) + sP_\lambda^\text{odd}(s)$, где:
+                \[
+                \begin{aligned}
+                P_\lambda^e(\omega) &:= \left[
+                (1-\lambda) q_{2m} + \lambda p_{2m}
+                \right] \prod_{i=1}^m \left(
+                \omega^2 - \left[
+                (1-\lambda)(\omega_{e,i}^q)^2 + \lambda(\omega_{e,i}^p)^2
+                \right]
+                \right) \\
+                P_\lambda^o(\omega) &:= \left[
+                (1-\lambda) q_{2m-1} + \lambda p_{2m-1}
+                \right] \prod_{i=1}^{m-1} \left(
+                \omega^2 - \left[
+                (1-\lambda)(\omega_{o,i}^q)^2 + \lambda(\omega_{o,i}^p)^2
+                \right]
+                \right).
+                \end{aligned}
+                \]
+                Очевидно, что коэффициенты $P_\lambda(s)$ &mdash; многочлены по
+                $\lambda$, а, следовательно, они непрерывны на $[0;1]$. Более
+                того, коэффициент при старшей степени $(1-\lambda)q_{2m} +
+                \lambda p_{2m}$ не обращается в ноль при изменении $\lambda$ от
+                $0$ до $1$. Предположим теперь, что $P(s)$ негурвицев. Из
+                <a href="#bct">BCT</a> следует, что существует некоторое
+                $\lambda \in (0; 1]$ такое, что по крайней мере один корень
+                многочлена $P_{\lambda}(s)$ лежит на мнимой оси. Но это
+                возможно тогда и только тогда, когда у $P_\lambda^e(\omega)$ и
+                $P_\lambda^o(\omega)$ есть общий вещественный корень.
+
+                <div class="derivation">
+                  Действительно, если у многочлена $P_{\lambda^*}(s)$ есть чисто
+                  мнимый корень, то, представив его в виде $j\omega^*$,
+                  получаем, что $P_{\lambda^*}(j\omega^*) = 0$, то есть
+                  $P_{\lambda^*}^e(\omega^*) = P_{\lambda^*}^o(\omega^*) = 0$.
+                </div>
+
+                Корни многочлена $P_\lambda^e(\omega)$ удовлетворяют уравнению
+                \[
+                (\omega_{e,i}^\lambda)^2 = (1 - \lambda) (\omega_{e,i}^q)^2 +
+                \lambda (\omega_{e,i}^p)^2,
+                \]
+                а многочлена $P_\lambda^o(\omega)$ &mdash; уравнению
+                \[
+                (\omega_{o,i}^\lambda)^2 = (1 - \lambda) (\omega_{o,i}^q)^2 +
+                \lambda (\omega_{o,i}^p)^2.
+                \]
+                Рассмотрим теперь любые два корня многочлена
+                $P_\lambda^e(\omega)$. Если $i \lt j$, то
+                \[
+                (\omega_{e,i}^p)^2 \lt (\omega_{e,j}^p)^2, \qquad
+                (\omega_{e,i}^q)^2 \lt (\omega_{e,j}^q)^2,
+                \]
+                поэтому
+                \[
+                (\omega_{e,i}^\lambda)^2 \lt (\omega_{e,j}^\lambda)^2.
+                \]
+
+                Аналогично может быть продемонстрировано, что порядок корней
+                сохраняется и для многочлена $P_\lambda^o(\omega)$. Другими
+                словами, второе условие свойства перемежаемости инвариантно
+                относительно подобных линейных комбинаций, поэтому для любого
+                $\lambda \in [0;1]$:
+                \[
+                0 \lt (\omega_{e,1}^\lambda)^2 \lt (\omega_{o,1}^\lambda)^2 \lt
+                \cdots
+                \lt (\omega_{e,m-1}^\lambda)^2 \lt (\omega_{o,m-1}^\lambda)^2
+                \lt (\omega_{e,m}^\lambda)^2.
+                \]
+                Но отсюда следует, что у $P_\lambda^e(\omega)$ и
+                $P_\lambda^o(\omega)$ не может быть одинакового корня &mdash;
+                получили противоречие.
+              </div>
+            </div>
+          </div>
+
+          Пусть $S(\omega)$ и $T(\omega)$ &mdash; произвольные непрерывные
+          положительные функции, определённые для $\omega \in [0; \infty)$.
+          Введём обозначеия:
+          \[
+          x(\omega) := \frac{P^e(\omega)}{S(\omega)}, \qquad
+          y(\omega) := \frac{P^o(\omega)}{T(\omega)}.
+          \]
+
+          <div class="lemma">
+            Вещественный многочлен $P(s)$ гурвицев тогда и только тогда, когда
+            функция $z(\omega) := x(\omega) + jy(\omega)$ движется строго против
+            часовой стрелки и проходит $n$ квадрантов.
+
+            <div class="proof">
+              Знаки $P^e(\omega)$ и $x(\omega)$, а также $P^o(\omega)$ и
+              $y(\omega)$ совпадают при $\omega \gt 0$, поэтому, пользуясь
+              теоремой Эрмита-Билера и свойствами гурвицевых многочленов, данная
+              лемма легко доказывается.
+            </div>
+          </div>
+
+          <div class="remark">
+            Несмотря на то, что график $P(j\omega)$ неограничен, график функции
+            $z(\omega)$ всегда может быть ограничен соответствующим выбором
+            функций $S(\omega)$ и $T(\omega)$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема Эрмита-Биля для комплексных многочленов (без док-ва)
+        </div>
+        <div class="content">
+          Рассмотрим комплексный многочлен
+          \[
+          P(s) = (a_0 + j b_0) + (a_1 + j b_1) s + \cdots
+          + (a_{n-1} + j b_{n-1}) s^{n-1} + (a_n + j b_n) s^n.
+          \]
+
+          Введём обозначения:
+          \[
+          \begin{aligned}
+          P_R(s) &= a_0 + j b_1 s + a_2 s^2 + j b_3 s^3 + \cdots \\
+          P_I(s) &= j b_0 + a_1 s + j b_2 s^2 + a_3 s^3 + \cdots
+          \end{aligned}
+          \]
+          и запишем
+          \[
+          P(j\omega) = P^r(\omega) + j P^i(\omega),
+          \]
+          где
+          \[
+          \begin{aligned}
+          P^r(\omega) &:= P_R(j\omega)
+          = a_0 - b_1 \omega + a_2 \omega^2 - b_3 \omega^3 + \cdots, \\
+          P^i(\omega) &:= \frac{1}{j} P_I(j\omega)
+          = b_0 + a_1 \omega - b_2 \omega^2 - a_3 \omega^3 + \cdots.
+          \end{aligned}
+          \]
+
+          <div class="theorem" id="hermite-biehler-complex">
+            <i>(Эрмита-Биля для комплексных многочленов).</i>
+            <br>
+            Комплексный многочлен $P(s)$ гурвицев тогда и только тогда, когда:
+            <ol>
+              <li>
+                $a_{n-1} a_n + b_{n-1} b_n \gt 0$,
+              </li>
+
+              <li>
+                Нули многочленов $P^r(\omega)$ и $P^i(\omega)$ простые,
+                вещественные, перемежающиеся при изменении $\omega$ от $-\infty$
+                до $+\infty$.
+              </li>
+            </ol>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: многочлен Шура
+        </div>
+        <div class="content">
+          <div class="definition">
+            Многочлен
+            \[
+            P(z) = p_n z^n + p_{n-1} z^{n-1} + \cdots + p_1 z + p_0
+            \]
+            называют <i>многочленом Шура</i>, если все его корни лежат в
+            открытом единичном круге:
+            \[
+            \abs{z} \lt 1.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Необходимое условие устойчивости в смысле Шура
+        </div>
+        <div class="content">
+          <div class="statement">
+            Для того чтобы многочлен
+            \[
+            P(z) = p_n z^n + p_{n-1} z^{n-1} + \cdots + p_1 z + p_0
+            \]
+            был многочленом Шура, необходимо, чтобы $\abs{p_n} \gt \abs{p_0}$.
+
+            <div class="proof">
+              Действительно, если все корни многочлена $P(z)$ лежат внутри
+              единичного круга, то их произведение равно
+              \[
+              (-1)^n \prod_{i=1}^n z_i = \frac{p_0}{p_n},
+              \]
+              <div class="derivation">
+                \[
+                P(0) = p_n \prod_{i=1}^n (-z_i) = p_n (-1)^n \prod_{i=1}^n z_i
+                = p_0.
+                \]
+              </div>
+              откуда следует, что
+              \[
+              \abs{\frac{p_0}{p_n}} = \prod_{i=1}^n \abs{z_i} \lt 1.
+              \]
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема Эрмита-Биля: случай Шура
+        </div>
+        <div class="content">
+          Рассмотрим многочлен
+          \[
+          P(z) = p_n z^n + p_{n-1} z^{n-1} + \cdots + p_1 z + p_0.
+          \]
+          Запишем $P(e^{j\theta}) = R(\theta) + j I(\theta)$, где
+          \[
+          \begin{aligned}
+          R(\theta) &= p_n \cos(n\theta) + \cdots + p_1 \cos(\theta) + p_0, \\
+          I(\theta) &= p_n \sin(n\theta) + \cdots + p_1 \sin(\theta).
+          \end{aligned}
+          \]
+
+          <div class="lemma">
+            Вещественный многочлен $P(s)$ устойчив в смысле Шура при
+            $\abs{p_n} \gt \abs{p_0}$ тогда и только тогда, когда
+            <ol type="a">
+              <li>
+                у многочлена $R(\theta)$ ровно $n$ нулей в интервале $[0;\pi]$;
+              </li>
+
+              <li>
+                у многочлена $I(\theta)$ ровно $n+1$ нулей в $[0;\pi]$;
+              </li>
+
+              <li>
+                нули многочленов $R(\theta)$ и $I(\theta)$ перемежаются.
+              </li>
+            </ol>
+          </div>
+
+          Введём обозначения для симметричной и асимметричной частей многочлена
+          $P(z) = P_s(z) + P_a(z)$:
+          \[
+          P_s(z) = \frac{1}{2} \left[
+          P(z) + z^n P\paren{\frac{1}{z}}
+          \right], \qquad
+          P_a(z) = \frac{1}{2} \left[
+          P(z) - z^n P\paren{\frac{1}{z}}
+          \right].
+          \]
+
+          <div class="theorem">
+            Вещественный многочлен $P(z)$ устойчив в смысле Шура тогда и только
+            тогда, когда
+            <ol type="a">
+              <li>
+                $P_s(z)$ и $P_a(z)$ &mdash; многочлены степени $n$, причём
+                коэффициенты при старших степенях одного знака;
+              </li>
+
+              <li>
+                у $P_s(z)$ и $P_a(z)$ на единичной окружности только простые
+                перемежающиеся нули.
+              </li>
+            </ol>
+
+            <div class="proof">
+              <p>
+              Пусть
+              \[
+              P(z) = p_0 + p_1 z + \cdots + p_n z^n.
+              \]
+              Первое условие эквивалентно условию
+              \[
+              p_n^2 - p_0^2 \gt 0,
+              \]
+              что является необходимым условием устойчивости по Шура.
+              </p>
+
+              <p>
+              Применим теперь билинейное преобразование
+              \[
+              z = \frac{s+1}{s-1}.
+              \]
+              единичной окружности на левую полуплоскость и применим теорему
+              Эрмита-Биля для гурвицевости: многочлен $P(z)$ при этом
+              преобразуется в $\hat P(s)$ следующим образом:
+              \[
+              (s-1)^n P\paren{\frac{s+1}{s-1}} = \hat P(s).
+              \]
+
+              Пусть
+              \[
+              \hat P(s) = \hat p_0 + \hat p_1 s + \cdots + \hat p_n s^n,
+              \]
+              где каждый коэффициент $\hat p_i$ &mdash; функция, зависящая от
+              коэффициентов многочлена $P(z)$. Следовательно, если
+              преобразование сохраняет степень многочлена, то $P(z)$ устойчив в
+              смысле Шура тогда и только тогда, когда $\hat P(s)$ устойчив в
+              смысле Гурвица. Нетрудно показать, что билинейное преобразование
+              сохраняет степень тогда и только тогда, когда
+              \[
+              \hat p_n = \sum_{i=0}^n p_i = P(1) \neq 0,
+              \]
+              что следует из условия теоремы.
+              </p>
+
+              <div class="todo">
+                Показать это.
+              </div>
+
+              <p>
+              Преобразование $P(z)$ в $\hat P(s)$ линейно:
+              \[
+              (s-1)^n P\paren{\frac{s+1}{s-1}} = T\, P(z) = \hat P(s).
+              \]
+              Рассмотрим симметричную и асимметричную части $P(z)$ и их образы
+              $T\, P_s(z)$ и $T\, P_a(z)$. Непосредственная проверка показывает,
+              что
+              \[
+              \begin{cases}
+              T\, P_s(z) = \hat P^\text{even}(s), \quad
+              T\, P_a(z) = \hat P^\text{odd}(s), & n \text{ &mdash; чётно}, \\
+              T\, P_s(z) = \hat P^\text{odd}(s), \quad
+              T\, P_a(z) = \hat P^\text{even}(s), & n \text{ &mdash; нечётно}.
+              \end{cases}
+              \]
+              Тогда второе условие теоремы непосредственно следует из свойства
+              перемежаемости, применённого к $\hat P(s)$.
+              </p>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Для каких областей устойчивости $S$ выполнена теорема Эрмита-Биля?
+        </div>
+        <div class="content">
+          <div class="answer">
+            Теорема Эрмита-Биля выполнена для любой области устойчивости $S$,
+            вдоль границы $\partial S$ которой фаза любого устойчивого
+            многочлена изменяется монотонно.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Критерий устойчивости в смысле Шура
+        </div>
+        <div class="content">
+          Рассмотрим многочлен
+          \[
+          P(z) = p_0 + p_1 z + \cdots + p_n z^n.
+          \]
+
+          Введём обозначения:
+          \[
+          \begin{aligned}
+          Q(z) &= z^n \overline{P\paren{\frac{1}{\overline{z}}}}
+          = \overline{p}_0 z^n + \overline{p}_1 z^{n-1} + \cdots
+          + \overline{p}_{n-1} z + \overline{p}_n, \\
+          R(z) &= \frac{1}{z} \left[
+          P(z) - \frac{p_0}{\overline{p}_n} Q(z)
+          \right].
+          \end{aligned}
+          \]
+          Очевидно, степень многочлена $R(z)$ всегда меньше либо равна $n-1$.
+
+          <div class="lemma">
+            Если для $P(z)$ выполнено условие $\abs{p_n} \gt \abs{p_0}$, то
+            $P(z)$ устойчив в смысле Шура тогда и только тогда, когда $R(z)$
+            устойчив в смысле Шура.
+
+            <div class="proof">
+              <p>
+              Рассмотрим семейство многочленов
+              \[
+              P_\lambda(z) = P(z) - \lambda \frac{p_0}{\overline{p}_n} Q(z),
+              \qquad \lambda \in [0;1].
+              \]
+              Видно, что $P_0(z) = P(z)$ и $P_1(z) = z R(z)$. Коэффициент при
+              старшей степени многочлена $P_\lambda(z)$ равен
+              \[
+              p_n - \lambda \frac{\abs{p_0}^2}{\overline{p}_n}
+              \]
+              и удовлетворяет неравенству
+              \[
+              \abs{p_n - \lambda \frac{\abs{p_0}^2}{\overline{p}_n}}
+              \gt \abs{p_n} - \lambda \abs{\frac{p_0}{p_n}} \abs{p_0}
+              \gt \abs{p_n} - \abs{p_0} \gt 0,
+              \]
+              поэтому многочлен $\degree P_\lambda(z) = n$.
+              </p>
+
+              <p>
+              Предположим, что один из многочленов $P_0(z)$ и $P_1(z)$ устойчив,
+              а другой &mdash; нет. Тогда из <a href="#bct">BCT</a> следует, что
+              существует $\lambda \in (0; 1]$ такой, что у $P_\lambda(z)$ есть
+              по крайней мере один корень на единичной окружности
+              $z_0 = e^{j\theta}, \; \theta \in [0; 2\pi)$, то есть
+              \[
+              P_\lambda(z_0) = P(z_0) - \lambda \frac{p_0}{\overline{p}_n}
+              z_0^n \overline{P\paren{\frac{1}{\overline{z}_0}}} = 0.
+              \]
+              Но для любого комплексного числа на единичной окружности
+              $\overline{z} = \frac{1}{z}$, поэтому
+              \[
+              P(z_0) - \lambda \frac{p_0}{\overline{p}_n}
+              z_0^n \overline{P(z_0)} = 0.
+              \]
+              Взяв комплексное сопряжение от обеих частей равенства, получим
+              \[
+              \overline{P(z_0)} - \lambda \frac{\overline{p}_0}{p_n}
+              \overline{z}_0^n P(z_0) = 0.
+              \]
+              Тогда, учитывая, что $\abs{z_0} = 1$, получим, что
+              \[
+              P(z_0) \paren{
+              1 - \lambda^2 \frac{\abs{p_0}^2}{\abs{p_n}^2}
+              } = 0.
+              \]
+              По условию теоремы $\abs{p_0} \lt \abs{p_n}$, а $\lambda \in
+              [0;1]$, поэтому
+              \[
+              \lambda^2 \frac{\abs{p_0}^2}{\abs{p_n}^2} \lt 1,
+              \]
+              и, следовательно, $P(z_0) = 0$. Но это значит, что
+              \[
+              \overline{P(z_0)}
+              = \overline{P\paren{\frac{1}{\overline{z}_0}}} = 0,
+              \]
+              поэтому
+              \[
+              R(z_0) = 0.
+              \]
+              Но это противоречит предположению о том, что только один из двух
+              многочленов $P(z)$ и $zR(z)$ устойчив.
+              </p>
+            </div>
+          </div>
+
+          <div class="algorithm">
+            <i>
+              (устойчивость в смысле Шура для вещественных и комплексных
+              многочленов).
+            </i>
+
+            <ol>
+              <li>
+                Положим $P^{(0)}(z) = P(z)$.
+              </li>
+
+              <li>
+                Проверим, что
+                \[
+                \abs{p_n^{(i)}} \gt \abs{p_0^{(i)}}.
+                \]
+                <ul>
+                  <li>
+                    Если условие не выполнено, то $P(z)$ неустойчив в смысле
+                    Шура.
+                  </li>
+
+                  <li>
+                    Если же $\degree P^{(i)} = 1$, то это условие является
+                    достаточным, то есть $P(z)$ устойчив в смысле Шура.
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                Построим
+                \[
+                P^{(i+1)}(z) = \frac{1}{z} \left[
+                P^{(i)}(z) - \frac{p_0^{(i)}}{\overline{p}_n^{(i)}} z^n
+                \overline{P(\frac{1}{\overline{z}})}
+                \right].
+                \]
+              </li>
+
+              <li>
+                Вернёмся на шаг 2.
+              </li>
+            </ol>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Критерий устойчивости в смысле Гурвица (для вещественных многочленов)
+        </div>
+        <div class="content">
+          Рассмотрим многочлен
+          \[
+          P(s) = p_0 + p_1 s + \cdots + p_n s^n, \quad p_i \gt 0,
+          \quad i = \overline{0,n}.
+          \]
+          Введём в рассмотрение многочлен $Q(s)$ степени $n-1$:
+          \[
+          \begin{cases}
+          Q(s) = \left[
+          P^\text{even}(s) - \dfrac{p_{2m}}{p_{2m-1}} s P^\text{odd}(s)
+          \right]
+          + P^\text{odd}(s), & n = 2m \\
+          Q(s) = \left[
+          P^\text{odd}(s) - \dfrac{p_{2m+1}}{p_{2m}} s P^\text{even}(s)
+          \right]
+          + P^\text{even}(s), & n = 2m+1
+          \end{cases}
+          \]
+
+          <div class="lemma">
+            Если все коэффициенты многочлена $P(s)$ положительны, то $P(s)$
+            гурвицев тогда и только тогда, когда $Q(s)$ гурвицев.
+
+            <div class="proof">
+              Предположим, что $n = 2m$, и воспользуемся теоремой Эрмита-Билера:
+
+              <div class="necessity">
+                Пусть многочлен $P(s) = p_0 + \cdots + p_{2m} s^{2m}$
+                гурвицев, и, следовательно, удовлетворяет теореме
+                Эрмита-Билера. Обозначим перемежающиеся корни многочленов
+                $P^e(\omega)$ и $P^o(\omega)$:
+                \[
+                0 \lt \omega_{e,1} \lt \omega_{o,1} \lt \omega_{e,2}
+                \lt \omega_{o,2} \lt \cdots \lt \omega_{e,m-1}
+                \lt \omega_{o,m-1} \lt \omega_{e,m}.
+                \]
+                Легко проверить, что
+                \[
+                \begin{aligned}
+                Q^e(\omega) &= P^e(\omega) + \mu \omega^2 P^o(\omega),
+                &&\mu = \frac{p_{2m}}{p_{2m-1}}, \\
+                Q^o(\omega) &= P^o(\omega).
+                \end{aligned}
+                \]
+                Отсюда сразу же следует, что у многочлена $Q^o(\omega)$ уже
+                есть $m-1$ положительный корень
+                $\omega_{o,1}, \dots, \omega_{o,m-1}$. Более того, из-за вида
+                $Q^e(\omega)$ следует, что
+                \[
+                \begin{aligned}
+                Q^e(0) &= P^e(0) \gt 0, \\
+                Q^e(\omega_{o,1}) &= P^e(\omega_{o,1}) \lt 0, \\
+                &\phantom{=} \vdots \\
+                Q^e(\omega_{o,m-2}) &= P^e(\omega_{o,m-2}),
+                \text{ знака } (-1)^{m-2}, \\
+                Q^e(\omega_{o,m-1}) &= P^e(\omega_{o,m-1}),
+                \text{ знака } (-1)^{m-1}.
+                \end{aligned}
+                \]
+
+                <div class="todo">
+                  Расписать.
+                </div>
+
+                <p>
+                Таким образом, у многочлена $Q^e(\omega)$ есть $m-1$
+                положительных корней $\omega_{e,1}', \omega_{e,2}', \dots,
+                \omega_{e,m-1}'$, перемежающихся с корнями $Q^o(\omega)$. Более
+                того, так как у многочлена $Q^e(\omega)$ степень $m-1$
+                (относительно членов $\omega^2$), то это все его положительные
+                корни.
+                </p>
+
+                <p>
+                Наконец, видно, что знак многочлена $Q^e(\omega)$ в точке
+                $\omega_{o,m-1}$ равен $(-1)^{m-1}$. Но старший коэффициент
+                этого многочлена в точности равен
+                \[
+                q_{2m-2} (-1)^{m-1},
+                \]
+                откуда следует, что $q_{2m-2} \gt 0$, как и
+                $q_{2m-1} = p_{2m-1} \gt 0$, ведь иначе многочлен $Q^e(\omega)$
+                снова поменял бы знак при изменении $\omega$ от $\omega_{o,m-1}$
+                до $+\infty$, что привело бы к тому, что у этого многочлена было
+                бы $m$ положительных корней. Итак, $Q(s)$ удовлетворяет условиям
+                теоремы Эрмита-Билера, и, следовательно, является гурвицевым.
+                </p>
+              </div>
+
+              <div class="sufficiency">
+                Предположим, что $Q(s)$ гурвицев. Тогда
+                \[
+                P(s) = \left[
+                Q^\text{even}(s) + \mu s Q^\text{odd}(s)
+                \right] + Q^\text{odd}(s), \quad \mu = \frac{p_{2m}}{p_{2m-1}}.
+                \]
+                Аналогично необходимой ветке доказательства, можно показать, что
+                у $P^o(\omega)$ уже есть необходимое количество ($m-1$)
+                положительных корней на интервале $(0, \omega_{o,m-1})$,
+                перемежающихся с корнями $P^o(\omega)$. Более того, знак
+                многочлена $P^e(\omega)$ в точке $\omega_{o,m-1}$ такой же, как
+                и $(-1)^{m-1}$, в то время как слагаемое $p_{2m} s^{2m}$
+                многочлена $P(s)$ такое, что знак $P^e(\omega)$ в точке
+                $+\infty$ равен $(-1)^m$. Таким образом, у $P^e(\omega)$ есть
+                ещё один положительный корень, причём
+                \[
+                \omega_{e,m} \gt \omega_{o,m-1},
+                \]
+                поэтому $P(s)$ удовлетворяет условиям теоремы Эрмита-Билера, и,
+                следовательно, является гурвицевым.
+              </div>
+            </div>
+          </div>
+
+          <div class="algorithm">
+            <i>
+              (Критерий устойчивости в смысле Гурвица вещественных многочленов).
+            </i>
+
+            <ol>
+              <li>
+                Положим $P^{(0)}(s) = P(s)$.
+              </li>
+
+              <li>
+                Проверим, что коэффициенты многочлена $P^{(i)}(s)$
+                положительные.
+
+                <ul>
+                  <li>
+                    Если нет, то $P(s)$ неустойчив в смысле Гурвица.
+                  </li>
+
+                  <li>
+                    Если $\degree P^{(i)}(s) = 2$, то условие является
+                    достаточным, и, следовательно, $P(s)$ гурвицев.
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                Построим $P^{(i+1)}(s) = Q(s)$, где
+                \[
+                \begin{cases}
+                Q(s) = \left[
+                P^{(i),\text{even}}(s) - \dfrac{p_{2m}}{p_{2m-1}} s
+                P^{(i), \text{odd}}(s)
+                \right]
+                + P^{(i), \text{odd}}(s), & \degree P^{(i)}(s) = 2m \\
+                Q(s) = \left[
+                P^{(i),\text{odd}}(s) - \dfrac{p_{2m+1}}{p_{2m}} s
+                P^{(i),\text{even}}(s)
+                \right]
+                + P^{(i),\text{even}}(s), & \degree P^{(i)}(s) = 2m+1
+                \end{cases}
+                \]
+              </li>
+
+              <li>
+                Перейти к шагу 2.
+              </li>
+            </ol>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Критерий устойчивости в смысле Гурвица (для комплексных многочленов,
+          без док-ва)
+        </div>
+        <div class="content">
+          Рассмотрим комплексный многочлен степени $n$:
+          \[
+          P(s) = (a_0 + j b_0) + (a_1 + j b_1) s + \cdots (a_n + j b_n) s^n,
+          \qquad a_n + j b_n \neq 0.
+          \]
+          Пусть
+          \[
+          T(s) = \frac{1}{a_n + j b)n} P(s).
+          \]
+          Тогда
+          \[
+          T(s) = (c_0 + j d_0) + (c_1 + j d_1) s + \cdots
+          + (c_{n-1} + j d_{n-1}) s^{n-1} + s^n,
+          \]
+          причём
+          \[
+          c_{n-1} = \frac{a_{n-1} a_n + b_{n-1} b_n}{a_n^2 + b_n^2}.
+          \]
+
+          Предположим, что $c_{n-1} \gt 0$, что является необходимым условием
+          гурвицевости многочлена $P(s)$ (см.
+          <a href="#hermite-biehler-complex">
+            теорему Эрмита-Билера для комплексных многочленов</a>).
+
+          Пусть $T(s) = T_R(s) + T_I(s)$, где
+          \[
+          \begin{aligned}
+          T_R(s) &= c_0 + j d_1 s + c_2 s^2 + j d_3 s^3 + \cdots, \\
+          T_I(s) &= j d_0 + c_1 s + j d_2 s^2 + c_3 s^3 + \cdots.
+          \end{aligned}
+          \]
+
+          Введём в рассмотрение многочлен $Q(s)$ степени $n-1$:
+          \[
+          \begin{cases}
+          Q(s) = \left[
+          T_R(s) - \dfrac{1}{c_{2m-1}} s T_I(s)
+          \right] + T_I(s), & n = 2m, \\
+          Q(s) = \left[
+          T_I(s) - \dfrac{1}{c_{2m}} s T_R(s)
+          \right] + T_R(s), & n = 2m+1.
+          \end{cases}
+          \]
+
+          <div class="lemma">
+            Если для комплексного многочлена $P(s)$ выполнено
+            \[
+            a_{n-1} a_n + b_{n-1} b_n \gt 0,
+            \]
+            то $P(s)$ гурвицев тогда и только тогда, когда $Q(s)$ гурвицев.
+          </div>
+
+          <div class="algorithm">
+            <i>
+              (Критерий устойчивости в смысле Гурвица комплексных многочленов).
+            </i>
+
+            <ol>
+              <li>
+                Положим $P^{(0)}(s) = P(s)$.
+              </li>
+
+              <li>
+                Проверим, что для $P^{(i)}(s)$ выполнено условие
+                \[
+                a_{n-1}^{(i)} a_n^{(i)} + b_{n-1}^{(i)} b_n^{(i)} \gt 0.
+                \]
+
+                <ul>
+                  <li>
+                    Если нет, то $P(s)$ неустойчив в смысле Гурвица.
+                  </li>
+
+                  <li>
+                    Если $\degree P^{(i)}(s) = 1$, то условие является
+                    достаточным, и, следовательно, $P(s)$ гурвицев.
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                Построим $P^{(i+1)}(s) = Q(s)$, так, как указано выше.
+              </li>
+
+              <li>
+                Перейти к шагу 2.
+              </li>
+            </ol>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </body>
+</html>
+
