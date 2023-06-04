@@ -941,7 +941,7 @@
 
       <li class="question">
         <div class="name">
-          Теорема Эрмита-Биля для комплексных многочленов (без док-ва)
+          Теорема Эрмита-Билера для комплексных многочленов (без док-ва)
         </div>
         <div class="content">
           Рассмотрим комплексный многочлен
@@ -972,7 +972,7 @@
           \]
 
           <div class="theorem" id="hermite-biehler-complex">
-            <i>(Эрмита-Биля для комплексных многочленов).</i>
+            <i>(Эрмита-Билера для комплексных многочленов).</i>
             <br>
             Комплексный многочлен $P(s)$ гурвицев тогда и только тогда, когда:
             <ol>
@@ -1044,7 +1044,7 @@
 
       <li class="question">
         <div class="name">
-          Теорема Эрмита-Биля: случай Шура
+          Теорема Эрмита-Билера: случай Шура
         </div>
         <div class="content">
           Рассмотрим многочлен
@@ -1122,7 +1122,7 @@
               z = \frac{s+1}{s-1}.
               \]
               единичной окружности на левую полуплоскость и применим теорему
-              Эрмита-Биля для гурвицевости: многочлен $P(z)$ при этом
+              Эрмита-Билера для гурвицевости: многочлен $P(z)$ при этом
               преобразуется в $\hat P(s)$ следующим образом:
               \[
               (s-1)^n P\paren{\frac{s+1}{s-1}} = \hat P(s).
@@ -1174,11 +1174,11 @@
 
       <li class="question">
         <div class="name">
-          Для каких областей устойчивости $S$ выполнена теорема Эрмита-Биля?
+          Для каких областей устойчивости $S$ выполнена теорема Эрмита-Билера?
         </div>
         <div class="content">
           <div class="answer">
-            Теорема Эрмита-Биля выполнена для любой области устойчивости $S$,
+            Теорема Эрмита-Билера выполнена для любой области устойчивости $S$,
             вдоль границы $\partial S$ которой фаза любого устойчивого
             многочлена изменяется монотонно.
           </div>
@@ -1512,7 +1512,7 @@
           \]
           Пусть
           \[
-          T(s) = \frac{1}{a_n + j b)n} P(s).
+          T(s) = \frac{1}{a_n + j b_n} P(s).
           \]
           Тогда
           \[
@@ -1593,6 +1593,762 @@
                 Перейти к шагу 2.
               </li>
             </ol>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Условие ограниченности фазы для отрезка многочленов
+        </div>
+        <div class="content">
+          Пусть $\delta_1(s)$ и $\delta_2(s)$ &mdash; многочлены степени $n$.
+          Введём обозначение
+          \[
+          \delta_\lambda(s) := \lambda \delta_1(s) + (1 - \lambda) \delta_2(s).
+          \]
+
+          <div class="definition">
+            Семейство многочленов
+            \[
+            \left[
+            \delta_1(s), \delta_2(s)
+            \right] := \set{ \delta_\lambda(s): \lambda \in [0;1] }.
+            \]
+            будем называть <i>отрезком многочленов</i>.
+          </div>
+
+          <div class="definition">
+            Отрезок многочленов называют <i>устойчивым</i>, если каждый
+            многочлен этого отрезка устойчив.
+          </div>
+
+          Будем обозначать аргумент комплексного числа $\delta_i(s_0)$ как
+          $\varphi_{\delta_i}(s_0)$.
+
+          <div class="lemma">
+            Пусть $\delta_1(s)$ и $\delta_2(s)$ &mdash; устойчивые многочлены
+            относительно области устойчивости $S$. Будем считать, что
+            \[
+            \degree \delta_\lambda(s) = n \qquad \forall \lambda \in [0;1].
+            \]
+            Тогда следующие утверждения эквивалентны:
+            <ol type="a">
+              <li>
+                Сегмент $\left[ \delta_1(s), \delta_2(s) \right]$ устойчив
+                относительно области $S$;
+              </li>
+
+              <li>
+                $\delta_\lambda(s^*) \neq 0$ для всех $s^* \in \partial S; \quad
+                \lambda \in [0;1]$.
+              </li>
+
+              <li>
+                $\abs{\varphi_{\delta_1}(s^*) - \varphi_{\delta_2}(s^*)} \neq
+                \pi$ для всех $s^* \in \partial S$.
+              </li>
+
+              <li>
+                График функции $\dfrac{\delta_1(s^*)}{\delta_2(s^*)}$ не
+                пересекает отрицательную вещественную полуось ни при каком
+                $s^* \in \partial S$.
+              </li>
+            </ol>
+
+            <div class="proof">
+              <ul>
+                <li>
+                  Эквивалентность утверждений a) и b) следует непосредственно из
+                  <a href="#bct">BCT</a>.
+                </li>
+
+                <li>
+                  Эквивалентность утверждений b) и c) следует из того факта, что
+                  если для некоторого $\lambda \in [0;1]$ найдётся
+                  $s^* \in \partial S$, для которого $\delta_\lambda(s^*) = 0$,
+                  то это означает, что $\delta_1(s^*)$ и $\delta_2(s^*)$
+                  расположены друг напротив друга относительно начала координат,
+                  что и записывается в виде условия
+                  \[
+                  \abs{\varphi_{\delta_1}(s^*) - \varphi_{\delta_2}(s^*)} = \pi.
+                  \]
+
+                  <div class="images">
+                    <img src="images/segment-arg-pi.png" />
+                  </div>
+                </li>
+
+                <li>
+                  Эквивалентность b) и d) следует из того факта, что если
+                  для некоторого $s^* \in \partial S$
+                  \[
+                  \lambda \delta_1(s^*) + (1 - \lambda) \delta_2(s^*) = 0,
+                  \]
+                  то
+                  \[
+                  \frac{\delta_1(s^*)}{\delta_2(s^*)} = - \paren{
+                  \frac{1 - \lambda}{\lambda}
+                  }.
+                  \]
+
+                  При изменении $\lambda$ от 0 до 1 правая часть уравнения
+                  описывает всю отрицательную вещественную полуось. Отсюда
+                  следует, что $\delta_\lambda(s^*) = 0$ для некоторого
+                  $\lambda \in [0;1]$ тогда и только тогда, когда
+                  $\dfrac{\delta_1(s^*)}{\delta_2(s^*)}$ &mdash; вещественная и
+                  отрицательная величина.
+                </li>
+              </ul>
+            </div>
+
+            <div class="definition">
+              Условие
+              \[
+              \abs{\varphi_{\delta_1}(s^*) - \varphi_{\delta_2}(s^*)} \neq \pi
+              \]
+              называют <i>условием ограниченности фазы</i>.
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Лемма об отрезке (случай Гурвица)
+        </div>
+        <div class="content">
+          Напоминание:
+          \[
+          \delta(j\omega) = \delta^e(\omega) + j\omega \delta^o(\omega).
+          \]
+
+          <div class="lemma">
+            Пусть $\delta_1(\cdot)$ и $\delta_2(\cdot)$ &mdash; два
+            произвольных вещественных многочлена. В этом случае
+            найдётся $\lambda \in [0;1]$ такой, что у многочлена
+            $(1 - \lambda) \delta_1(\cdot) + \lambda \delta_2(\cdot)$ есть чисто
+            мнимый корень $j\omega, \; \omega \gt 0$ тогда и только тогда, когда
+            выполнены условия
+            \[
+            \left\{
+            \begin{aligned}
+            &\delta_1^e(\omega) \delta_2^o(\omega) - \delta_2^e(\omega)
+            \delta_1^o(\omega) = 0, \\
+            &\delta_1^e(\omega) \delta_2^e(\omega) \leqslant 0, \\
+            &\delta_1^o(\omega) \delta_2^o(\omega) \leqslant 0.
+            \end{aligned}
+            \right.
+            \]
+
+            <div class="proof">
+              <div class="necessity">
+                Предположим, что существует $\lambda \in [0;1]$ и $\omega \gt 0$
+                такие, что
+                \[
+                (1 - \lambda) \delta_1(j \omega) + \lambda \delta(j\omega) = 0.
+                \]
+                Тогда, учитывая, что
+                \[
+                \begin{aligned}
+                \delta_i(j\omega) &= \delta_i^\text{even} (j\omega) +
+                \delta_i^\text{odd} (j \omega) \\
+                &= \delta_i^e(\omega) + j \omega \delta_i^o(\omega),
+                \qquad i \in \set{1,2},
+                \end{aligned}
+                \]
+                в силу $\omega \gt 0$ следует, что
+                \[
+                \left\{
+                \begin{aligned}
+                (1-\lambda) \delta_1^e (\omega) + \lambda \delta_2^e(\omega)
+                &= 0, \\
+                (1-\lambda) \delta_1^o (\omega) + \lambda \delta_2^o(\omega)
+                &= 0,
+                \end{aligned}
+                \right.
+                \]
+                но в этом случае
+                \[
+                \frac{\delta_1^e(\omega)}{\delta_2^e(\omega)} = -\paren{
+                \frac{\lambda}{1-\lambda}
+                }
+                = \frac{\delta_1^o(\omega)}{\delta_2^o(\omega)},
+                \]
+                то есть
+                \[
+                \delta_1^e(\omega) \delta_2^o(\omega)
+                - \delta_2^e(\omega) \delta_1^o(\omega) = 0,
+                \]
+                а из того факта, что $\lambda$ и $(1 - \lambda)$ неотрицательны,
+                следует, что $\delta_1^e(\omega)$ и $\delta_2^e(\omega)$
+                (соответственно $\delta_1^o(\omega)$ и $\delta_2^o(\omega)$)
+                разных знаков, что можно записать в виде
+                \[
+                \delta_1^e(\omega) \delta_2^e(\omega) \leqslant 0, \qquad
+                \delta_1^o(\omega) \delta_2^o(\omega) \leqslant 0.
+                \]
+              </div>
+
+              <div class="sufficiency">
+                Пусть для некоторого $\omega \geqslant 0$ выполнены условия
+                \[
+                \left\{
+                \begin{aligned}
+                &\delta_1^e(\omega) \delta_2^o(\omega) - \delta_2^e(\omega)
+                \delta_1^o(\omega) = 0, \\
+                &\delta_1^e(\omega) \delta_2^e(\omega) \leqslant 0, \\
+                &\delta_1^o(\omega) \delta_2^o(\omega) \leqslant 0.
+                \end{aligned}
+                \right.
+                \]
+
+                <div class="todo">
+                  Расписать лучше: рассмотреть случай, когда условие
+                  \[
+                  \delta_1^e(\omega) \delta_2^e(\omega) \leqslant 0
+                  \]
+                  обращается в равенство (если не обращается, то выберем
+                  $\lambda$ по формуле ниже), что возможно как при
+                  $\delta_1^e(\omega) = 0$, так и при $\delta_2^e(\omega) = 0$.
+                  Рассмотрим случай $\delta_1^e(\omega) = 0$. Тогда условие:
+                  \[
+                  \delta_1^e(\omega) \delta_2^o(\omega) - \delta_2^e(\omega)
+                  \delta_1^o(\omega) = 0
+                  \]
+                  превращается в
+                  \[
+                  \delta_2^e(\omega) \delta_1^o(\omega) = 0,
+                  \]
+                  откуда либо $\delta_2^e(\omega) = 0$, либо
+                  $\delta_1^o(\omega) = 0$. Первый случай разобран ниже, а
+                  второй означает, что у $\delta_1(s)$ есть чисто мнимый корень
+                  $j \omega$.
+                </div>
+
+                <ul>
+                  <li>
+                    Если выполнены условия
+                    \[
+                    \begin{gathered}
+                    \delta_1^e(\omega) = \delta_2^e(\omega) = 0, \\
+                    \delta_1^o(\omega) = \delta_2^o(\omega) = 0,
+                    \end{gathered}
+                    \]
+                    то и $\delta_1(s)$, и $\delta_2(s)$ имеют мнимый корень
+                    $j\omega$.
+                  </li>
+
+                  <li>
+                    Если не выполнено условие $\delta_1^e(\omega) =
+                    \delta_2^e(\omega) = 0$, тогда
+                    \[
+                    \lambda =
+                    \frac{\delta_1^e(\omega)}
+                    {\delta_1^e(\omega)-\delta_2^e(\omega)}
+                    \]
+                    удовлетворяет условию
+                    \[
+                    \left\{
+                    \begin{aligned}
+                    (1-\lambda) \delta_1^e (\omega) + \lambda \delta_2^e(\omega)
+                    &= 0, \\
+                    (1-\lambda) \delta_1^o (\omega) + \lambda \delta_2^o(\omega)
+                    &= 0,
+                    \end{aligned}
+                    \right.
+                    \]
+                    причём $\lambda \in [0;1]$.
+                  </li>
+
+                  <li>
+                    Если же не выполнено условие $\delta_1^o(\omega) =
+                    \delta_2^o(\omega) = 0$, то
+                    \[
+                    \lambda =
+                    \frac{\delta_1^o(\omega)}
+                    {\delta_1^o(\omega)-\delta_2^o(\omega)}.
+                    \]
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="lemma">
+            <i>
+              (об отрезке, случай Гурвица).
+            </i>
+            <br>
+            Пусть $\delta_1(s), \delta_2(s)$ &mdash; вещественные гурвицевы
+            многочлены степени $n$, у которых ведущие коэффициенты одного знака.
+            В этом случае отрезок $\left[ \delta_1(s), \delta_2(s) \right]$
+            гурвицев тогда и только тогда, когда не существует $\omega \gt 0$
+            такого, что
+            \[
+            \left\{
+            \begin{aligned}
+            &\delta_1^e(\omega) \delta_2^o(\omega) - \delta_2^e(\omega)
+            \delta_1^o(\omega) = 0, \\
+            &\delta_1^e(\omega) \delta_2^e(\omega) \leqslant 0, \\
+            &\delta_1^o(\omega) \delta_2^o(\omega) \leqslant 0.
+            \end{aligned}
+            \right.
+            \]
+
+            <div class="proof">
+              Так как знак ведущих коэффициентов многочленов $\delta_1(s)$ и
+              $\delta_2(s)$ совпадает, то степень всех многочленов на отрезке
+              равна $n$.
+              <br>
+              Ни у одного многочлена из отрезка нет вещественных корней при
+              $s = 0$, так как в этом случае выполнялось бы условие
+              \[
+              \delta_1(0) \delta_2(0) \leqslant 0,
+              \]
+              (то есть годографы стартуют по разные стороны от начала
+              координат), что вкупе с предположением о равных знаках ведущих
+              коэффициентов противоречит гурвицевости $\delta_1(s)$ и
+              $\delta_2(s)$.
+
+              <div class="remark">
+                Условие совпадение знаков ведущих коэффициентов нужно, чтобы
+                нельзя было решить проблему домножением одного из многочленов на
+                $(-1)$.
+              </div>
+
+              Таким образом, из <a href="#bct">BCT</a> следует, что отрезок
+              многочленов может содержать неустойчивые многочлены тогда и только
+              тогда, когда он содержит по крайней мере один многочлен с чисто
+              мнимым корнем $j \omega$ при $\omega \gt 0$, а это эквивалентно
+              выполнению условий теоремы.
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Лемма об отрезке (случай Шура)
+        </div>
+        <div class="content">
+          <div class="lemma">
+            Пусть $P_1(z)$ и $P_2(z)$ &mdash; вещественные устойчивые по Шуру
+            многочлены степени $n$, у которых ведущие коэффициенты совпадают по
+            знаку. В этом случае многочлен из отрезка
+            $\left[ P_1(z), P_2(z) \right]$ с корнем на единичной окружности
+            существует тогда и только тогда, когда найдётся
+            $z_0: \abs{z_0} = 1$, для которого
+            \[
+            \left\{
+            \begin{aligned}
+            &P_1(z_0) P_2(z_0^{-1}) - P_2(z_0) P_1(z_0^{-1}) = 0, \\
+            &\Im\left[ \frac{P_1(z_0)}{P_2(z_0)} \right] = 0, \\
+            &\Re\left[ \frac{P_1(z_0)}{P_2(z_0)} \right] \leqslant 0.
+            \end{aligned}
+            \right.
+            \]
+
+            <div class="proof">
+              <div class="necessity">
+                Пусть найдутся $z_0, \abs{z_0} = 1$ и $\lambda \in [0;1]$ такие,
+                что
+                \[
+                \lambda P_1(z_0) + (1 - \lambda) P_2(z_0) = 0.
+                \]
+                Так как выражение слева вещественное (т.к. справа вещественное
+                число), а также $\abs{z_0} = 1$, то
+                \[
+                \lambda P_1(z_0^{-1}) + (1 - \lambda) P_2(z_0^{-1}) = 0.
+                \]
+                Отсюда следует, что
+                \[
+                \frac{P_1(z_0)}{P_2(z_0)} = -\paren{
+                \frac{1 - \lambda}{\lambda}
+                }
+                =
+                \frac{P_1(z_0^{-1})}{P_2(z_0^{-1})},
+                \]
+                откуда
+                \[
+                P_1(z_0) P_2(z_0^{-1}) - P_2(z_0) P_1(z_0^{-1}) = 0.
+                \]
+                Так как $\lambda$ и $(1 - \lambda)$ вещественные и
+                неотрицательные, из условия
+                \[
+                \frac{P_1(z_0)}{P_2(z_0)} = -\paren{
+                \frac{1 - \lambda}{\lambda}
+                }
+                \]
+                следует, что
+                \[
+                \Im\left[ \frac{P_1(z_0)}{P_2(z_0)} \right] = 0, \qquad
+                \Re\left[ \frac{P_1(z_0)}{P_2(z_0)} \right] \leqslant 0.
+                \]
+              </div>
+
+              <div class="sufficiency">
+                Пусть выполнены условия
+                \[
+                \left\{
+                \begin{aligned}
+                &P_1(z_0) P_2(z_0^{-1}) - P_2(z_0) P_1(z_0^{-1}) = 0, \\
+                &\Im\left[ \frac{P_1(z_0)}{P_2(z_0)} \right] = 0, \\
+                &\Re\left[ \frac{P_1(z_0)}{P_2(z_0)} \right] \leqslant 0.
+                \end{aligned}
+                \right.
+                \]
+                Заметим, что $P_1(z_0) \neq P_2(z_0)$, т.к. в противном случае
+                нарушалось бы условие
+                \[
+                \Re\left[ \frac{P_1(z_0)}{P_2(z_0)} \right] \leqslant 0.
+                \]
+                Поэтому, взяв
+                \[
+                \lambda = \frac{P_2(z_0)}{P_2(z_0) - P_1(z_0)},
+                \]
+                легко проверить, что $\lambda \in [0;1]$, а также что
+                \[
+                \lambda P_1(z_0) + (1 - \lambda) P_2(z_0) = 0.
+                \]
+              </div>
+            </div>
+          </div>
+
+          <div class="remark">
+            Для проверки отрезка на устойчивость в смысле Шура с использованием
+            этой леммы необходимо искать нули функции
+            \[
+            P_1(z_0) P_2(z_0^{-1}) - P_2(z_0) P_1(z_0^{-1}),
+            \]
+            которая многочленом не является. Вместо этого можно искать корни
+            многочлена
+            \[
+            P_1(z_0) z_0^n P_2(z_0^{-1}) - P_2(z_0) z_0^n P_1(z_0^{-1}),
+            \]
+            так как его корни, по модулю не первосходящие единицы, совпадают с
+            исходной функцией.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Лемма об отрезке (случай Шура, разложение на симметричную и
+          антисимметричную части)
+        </div>
+        <div class="content">
+          <div class="reminder">
+            Многочлен можно разложить на симметричную и антисимметричную части:
+            \[
+            P(z) = h(z) + g(z),
+            \]
+            где
+            \[
+            h(z) := \frac{1}{2} \paren{
+            P(z) + z^n P(z^{-1})
+            }, \qquad
+            g(z) := \frac{1}{2} \paren{
+            P(z) - z^n P(z^{-1})
+            }.
+            \]
+          </div>
+
+          <div class="lemma">
+            Пусть $P_1(z)$ и $P_2(z)$ &mdash; вещественные устойчивые по Шуру
+            многочлены, причём
+            \[
+            P_1(z) = h_1(z) + g_1(z), \qquad P_2(z) = h_2(z) + g_2(z).
+            \]
+            В этом случае числа $\lambda \in [0;1]$ и $z_0, \abs{z_0} = 1$
+            такие, что
+            \[
+            \lambda P_1(z_0) + (1 - \lambda) P_2(z_0) = 0
+            \]
+            найдутся тогда и только тогда, когда
+            \[
+            \left\{
+            \begin{aligned}
+            &h_1(z_0) g_2(z_0) - g_1(z_0) h_2(z_0) = 0, \\
+            &z_0^{-n} h_1(z_0) h_2(z_0) \leqslant 0, \\
+            &z_0^{-n} g_1(z_0) g_2(z_0) \geqslant 0.
+            \end{aligned}
+            \right.
+            \]
+
+            <div class="proof">
+              <div class="necessity">
+                Пусть $z_0 = e^{j\theta}$ &mdash; корень многочлена
+                \[
+                \lambda P_1(z) + (1 - \lambda) P_2(z) = 0.
+                \]
+                Тогда
+                \[
+                \lambda \paren{h_1(z) + g_1(z)}
+                + (1 - \lambda) \paren{h_2(z) + g_2(z)} = 0.
+                \]
+                Домножим левую и правую части на $z_0^{-\frac{n}{2}}$:
+                \[
+                \lambda \paren{
+                z_0^{-\frac{n}{2}} h_1(z) + z_0^{-\frac{n}{2}} g_1(z)
+                } + (1 - \lambda) \paren{
+                z_0^{-\frac{n}{2}} h_2(z) + z_0^{-\frac{n}{2}} g_2(z)
+                } = 0.
+                \]
+                Теперь заметим, что
+                \[
+                \begin{aligned}
+                z_0^{-\frac{n}{2}} h(z_0)
+                &= \frac{1}{2}
+                \left[
+                (a_n + a_0) z_0^{\frac{n}{2}}
+                + (a_{n-1} + a_1) z_0^{\frac{n}{2}-1}
+                + \cdots
+                + (a_0 + a_n) z_0^{-\frac{n}{2}}
+                \right] \\
+                &= \frac{1}{2}
+                \left[
+                (a_n + a_0) \paren{
+                \cos\frac{n}{2}\theta + j \sin\frac{n}{2}\theta
+                }
+                + \cdots
+                + (a_0 + a_n) \paren{
+                \cos\frac{n}{2}\theta - j \sin\frac{n}{2}\theta
+                }
+                \right] \\
+                &=
+                (a_n + a_0)
+                \cos\frac{n}{2}\theta
+                + (a_{n-1} + a_1) \cos\paren{\frac{n}{2} - 1}\theta
+                + \cdots
+                \end{aligned}
+                \]
+                &mdash; вещественное число, а
+                \[
+                \begin{aligned}
+                z_0^{-\frac{n}{2}} g(z_0)
+                &= \frac{1}{2}
+                \left[
+                (a_n - a_0) z_0^{\frac{n}{2}}
+                + (a_{n-1} - a_1) z_0^{\frac{n}{2}-1}
+                + \cdots
+                + (a_0 - a_n) z_0^{-\frac{n}{2}}
+                \right] \\
+                &= \frac{1}{2}
+                \left[
+                (a_n - a_0) \paren{
+                \cos\frac{n}{2}\theta + j \sin\frac{n}{2}\theta
+                }
+                + \cdots
+                + (a_0 - a_n) \paren{
+                \cos\frac{n}{2}\theta - j \sin\frac{n}{2}\theta
+                }
+                \right] \\
+                &=
+                j\left[
+                (a_n - a_0)
+                \sin\frac{n}{2}\theta
+                + (a_{n-1} - a_1) \sin\paren{\frac{n}{2} - 1}\theta
+                + \cdots
+                \right]
+                \end{aligned}
+                \]
+                &mdash; мнимое число. В связи с этим перепишем исходное
+                уравнение как
+                \[
+                \lambda \paren{
+                z_0^{-\frac{n}{2}} h_1(z_0)
+                + j z_0^{-\frac{n}{2}} \frac{g_1(z_0)}{j}
+                }
+                + (1 - \lambda) \paren{
+                z_0^{-\frac{n}{2}} h_2(z_0)
+                + j z_0^{-\frac{n}{2}} \frac{g_2(z_0)}{j}
+                }
+                = 0.
+                \]
+                Приравнивая вещественную и мнимую часть к нулю, получим
+                \[
+                \begin{aligned}
+                \lambda z_0^{-\frac{n}{2}} h_1(z_0)
+                + (1 - \lambda) z_0^{-\frac{n}{2}} h_2(z_0) &= 0 \\
+                \lambda z_0^{-\frac{n}{2}} \frac{g_1(z_0)}{j}
+                + (1 - \lambda) z_0^{-\frac{n}{2}} \frac{g_2(z_0)}{j} &= 0 \\
+                \end{aligned}
+                \]
+                Так как $z_0 \neq 0$, а $\lambda$ и $(1 - \lambda)$ &mdash;
+                неотрицательные вещественные числа, то
+                \[
+                \frac{h_1(z_0)}{h_2(z_0)}
+                = -\paren{
+                \frac{1 - \lambda}{\lambda}
+                }
+                = \frac{g_1(z_0)}{g_2(z_0)},
+                \]
+                откуда
+                \[
+                \begin{aligned}
+                &h_1(z_0) g_2(z_0) - g_1(z_0) h_2(z_0) = 0, \\
+                &z_0^{-n} h_1(z_0) h_2(z_0) \leqslant 0, \\
+                &z_0^{-n} g_1(z_0) g_2(z_0) \geqslant 0.
+                \end{aligned}
+                \]
+                <div class="remark">
+                  Второе неравенство поменяло знак, т.к. в знаменателе
+                  $j \cdot j = -1$.
+                </div>
+              </div>
+
+              <div class="sufficiency">
+                Пусть
+                \[
+                \begin{aligned}
+                &h_1(z_0) g_2(z_0) - g_1(z_0) h_2(z_0) = 0, \\
+                &z_0^{-n} h_1(z_0) h_2(z_0) \leqslant 0, \\
+                &z_0^{-n} g_1(z_0) g_2(z_0) \geqslant 0.
+                \end{aligned}
+                \]
+
+                <div class="todo">
+                  Расписать: вообще надо рассмотреть отдельно случаи
+                  $h_1(z_0) \neq h_2(z_0)$ и $h_1(z_0) = h_2(z_0)$. В первом
+                  случае можно взять
+                  \[
+                  \lambda = \frac{h_2(z_0)}{h_2(z_0) - h_1(z_0)},
+                  \]
+                  для которого многочлен от $\lambda$ будет иметь корень на
+                  единичном круге $z_0$. Если же $h_2(z_0) = 0$, то из первого
+                  уравнения следует, что либо $h_1(z_0) = 0$, либо
+                  $g_2(z_0) = 0$. Первый случай невозможен, т.к. рассматриваем
+                  $h_1(z_0) \neq h_2(z_0)$, а второй случай означает, что
+                  $P_2(z)$ имеет корень $z_0$.
+                  <br>
+                  Если же $h_1(z_0) = h_2(z_0)$, то снова два случая:
+                  $g_1(z_0) \neq g_2(z_0)$ и $g_1(z_0) = g_2(z_0)$. В первом
+                  снова можем выбрать $\lambda$, во втором подставляем значения
+                  в формулу
+                  \[
+                  \lambda \paren{h_1(z) + g_1(z)}
+                  + (1 - \lambda) \paren{h_2(z) + g_2(z)} = 0
+                  \]
+                  и получаем, что $h_1(z_0) + g_1(z_0) = 0$, то есть и
+                  $\lambda = 0$, и $\lambda = 1$ удовлетворяют уравнению.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Лемма об отрезке (случай Шура, тригонометрическая версия, без док-ва)
+        </div>
+        <div class="content">
+          Рассмотрим вещественный многочлен $P(z)$ степени $n$, причём
+          \[
+          \begin{aligned}
+          P(z) &= h(z) + g(z) \\
+          &= 2 z^{\frac{n}{2}} \paren{
+          \frac{z^{-\frac{n}{2}} h(z)}{2}
+          + \frac{z^{-\frac{n}{2}} g(z)}{2}
+          },
+          \end{aligned}
+          \]
+          где
+          \[
+          h(z) := \frac{1}{2} \paren{
+          P(z) + z^n P(z^{-1})
+          }, \qquad
+          g(z) := \frac{1}{2} \paren{
+          P(z) - z^n P(z^{-1})
+          }.
+          \]
+
+          Заметим, что
+          \[
+          \begin{aligned}
+          \frac{1}{2} z^{-\frac{n}{2}} h(z)
+          &=
+          \frac{\alpha_n}{2} z^{\frac{n}{2}}
+          + \cdots
+          + \frac{\alpha_1}{2} z^{-\paren{\frac{n}{2} - 1}}
+          + \frac{\alpha_0}{2} z^{-\frac{n}{2}}, \\
+          \frac{1}{2} z^{-\frac{n}{2}} g(z)
+          &=
+          \frac{\beta_n}{2} z^{\frac{n}{2}}
+          + \cdots
+          + \frac{\beta_1}{2} z^{-\paren{\frac{n}{2} - 1}}
+          + \frac{\beta_0}{2} z^{-\frac{n}{2}},
+          \end{aligned}
+          \]
+          где $\alpha_i, \beta_j$ &mdash; вещественные числа, причём
+          $\alpha_i = \alpha_{n-i}$ и $\beta_i = -\beta_{n-i}$. В случае
+          $z = e^{j\theta}$ имеем
+          \[
+          \begin{aligned}
+          \frac{e^{-j\frac{n}{2}\theta} h(e^{j\theta})}{2} &= h^*(\theta), \\
+          \frac{e^{-j\frac{n}{2}\theta} g(e^{j\theta})}{2} &= j g^*(\theta),
+          \end{aligned}
+          \]
+          где
+          \[
+          h^*(\theta)
+          =
+          \begin{cases}
+          \alpha_n \cos\frac{n}{2}\theta
+          + \alpha_{n-1}\cos\paren{\frac{n}{2} - 1}\theta
+          + \cdots
+          + \alpha_{\frac{n}{2}}, & n = 2m, \\
+          \alpha_n \cos\frac{n}{2}\theta
+          + \alpha_{n-1}\cos\paren{\frac{n}{2} - 1}\theta
+          + \cdots
+          + \alpha_{\frac{n}{2}+1} \cos\frac{\theta}{2}, & n = 2m+1,
+          \end{cases}
+          \]
+          и
+          \[
+          g^*(\theta)
+          =
+          \begin{cases}
+          \beta_n \sin\frac{n}{2}\theta
+          + \beta_{n-1}\sin\paren{\frac{n}{2} - 1}\theta
+          + \cdots
+          + \beta_{\frac{n}{2}+1} \sin\theta, & n = 2m, \\
+          \beta_n \sin\frac{n}{2}\theta
+          + \beta_{n-1}\sin\paren{\frac{n}{2} - 1}\theta
+          + \cdots
+          + \beta_{\frac{n}{2}+1} \sin\frac{\theta}{2}, & n = 2m+1.
+          \end{cases}
+          \]
+          Запишем
+          \[
+          P(e^{j\theta}) = 2e^{j n \frac{\theta}{2}} \paren{
+          h^*(\theta) + g^*(\theta)
+          }.
+          \]
+
+          <div class="lemma">
+            Пусть $P_1(z)$ и $P_2(z)$ &mdash; два многочлена степени $n$, причём
+            \[
+            \begin{aligned}
+            P_1(e^{j\theta}) &= 2e^{j n \frac{\theta}{2}} \paren{
+            h_1^*(\theta) + g_1^*(\theta)
+            }, \\
+            P_2(e^{j\theta}) &= 2e^{j n \frac{\theta}{2}} \paren{
+            h_2^*(\theta) + g_2^*(\theta)
+            }.
+            \end{aligned}
+            \]
+            В этом случае многочлен на отрезке $\left[P_1(z), P_2(z)\right]$ с
+            корнем на единичной окружности существует тогда и только тогда,
+            когда существует $\theta \in [0; 2\pi)$, для которого
+            \[
+            \begin{aligned}
+            &h_1^*(\theta) g_2^*(\theta) - g_1^*(\theta) h_2^*(\theta) = 0, \\
+            &h_1^*(\theta) h_2^*(\theta) \leqslant 0, \\
+            &g_1^*(\theta) g_2^*(\theta) \leqslant 0.
+            \end{aligned}
+            \]
           </div>
         </div>
       </li>
