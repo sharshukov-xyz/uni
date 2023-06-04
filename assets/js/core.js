@@ -218,6 +218,18 @@ function SetProofButtonHandlers() {
   Array.from(statements).map(CreateProofControls);
 }
 
+function AssignNumbersToTheorems() {
+  var contents = document.getElementsByClassName('content');
+  for (var i = 0; i < contents.length; ++i) {
+    var content = contents[i];
+    var theorems = content.getElementsByClassName('theorem');
+    for (var j = 0; j < theorems.length; ++j) {
+      var theorem = theorems[j];
+      theorem.setAttribute('theorem-name', `Теорема ${i+1}.${j+1}. `);
+    }
+  }
+}
+
 function ChangeProofType(selectElement) {
   if (selectElement.value === 'ideas') {
     HideProofs();
@@ -236,6 +248,7 @@ function init(elementsClass) {
 
   SetButtonsHandlers();
   SetProofButtonHandlers();
+  AssignNumbersToTheorems();
   HideDerivations();
 
   var elements = document.getElementsByClassName(elementsClass);
@@ -257,7 +270,7 @@ function init(elementsClass) {
 function setup(elementsClass) {
   if (window.addEventListener) // W3C standard
   {
-    // NB **not** 'onload'
+    // NB: **not** 'onload'
     window.addEventListener('load', function () {
       init(elementsClass);
     }, false);
