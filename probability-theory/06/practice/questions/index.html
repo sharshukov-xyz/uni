@@ -1,0 +1,2001 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>06 - Вопросы к зачёту - ТВиМС</title>
+
+    <link href="/assets/css/styles.css" rel="stylesheet">
+    <script defer src="/assets/js/core.js"></script>
+    <script defer src="/assets/js/questions.js"></script>
+    <script defer src="/assets/js/controls.js"></script>
+
+    <link rel="stylesheet" href="/assets/katex/katex.min.css">
+    <script defer src="/assets/katex/katex.min.js"></script>
+    <script defer src="/assets/katex/auto-render.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false },
+            { left: '\\(', right: '\\)', display: false },
+            { left: '\\[', right: '\\]', display: true }
+          ],
+          // • rendering keys, e.g.:
+          throwOnError: false
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1 id="title">06 - Вопросы к зачёту - ТВиМС</h1>
+    <nav>
+      <a href="/">Домой</a>
+      <a href="/links">Ссылки</a>
+      <a href="/bib">Библиография</a>
+      <a href="/probability-theory">ТВиМС</a>
+    </nav>
+
+    <div class="controls">
+      <button onclick="HideQuestions()">Скрыть вопросы</button>
+      <button onclick="ShowQuestions()">Показать вопросы</button>
+      <button onclick="HideAnswers()">Скрыть ответы</button>
+      <button onclick="ShowAnswers()">Показать ответы</button>
+      <button onclick="HideProofs()">Скрыть доказательства</button>
+      <button onclick="ShowProofs()">Показать доказательства</button>
+      <button onclick="ShowRandomElement(HideQuestions)">Показать случайный вопрос</button>
+    </div>
+
+    <div style="display:none">
+      $\global\def\at#1#2{\left. #1 \right\rvert_{#2}}$
+      $\global\def\abs#1{\left\lvert #1 \right\rvert}$
+      $\global\def\norm#1{\left\lVert #1 \right\rVert}$
+      $\global\def\floor#1{\left\lfloor #1 \right\rfloor}$
+
+      $\global\def\limto#1{\underset{#1}{\longrightarrow}}$
+      $\global\def\prob#1{\mathbb{P} \left\{ #1 \right\}}$
+      $\global\def\mean#1{\mathbb{E} \left[ #1 \right]}$
+      $\global\def\disp#1{D \left[ #1 \right]}$
+
+      $\global\def\dp#1#2{#1 \cdot #2\,}$
+      $\global\def\vp#1#2{#1 \times #2\,}$
+
+      $\global\def\dv#1#2{\frac{d #1}{d #2}}$
+      $\global\def\pd#1#2{\frac{\partial #1}{\partial #2}}$
+      $\global\def\pdv2#1#2{\frac{\partial^2 #1}{\partial #2^2}}$
+      $\global\def\ppdv#1#2#3{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
+
+      $\global\def\paren#1{\left( #1 \right)}$
+      $\global\def\bydef#1{\overset{\mathrm{def}}{#1}}$
+
+      $\global\def\mbox#1{\text{#1}}$
+
+      $\global\def\div{\text{div}\,}$
+      $\global\def\dsum{\displaystyle\sum\,}$
+      $\global\def\grad{\text{grad}\,}$
+      $\global\def\rot{\text{rot}\,}$
+
+      $\global\def\vb#1{\textbf{#1}}$
+
+      $\global\def\op#1{\mathrm{#1}\,}$
+
+      $\global\def\proj{\mathrm{proj}}$
+      $\global\def\const{\text{const}\,}$
+      $\global\def\res{\text{res}\,}$
+      $\global\def\Res{\text{Res}\,}$
+      $\global\def\Re{\text{Re}\,}$
+      $\global\def\Im{\text{Im}\,}$
+      $\global\def\sign{\text{sign}\,}$
+      $\global\def\ch{\text{ch}\,}$
+      $\global\def\sh{\text{sh}\,}$
+      $\global\def\tg{\mathrm{tg}\,}$
+      $\global\def\argtg{\text{argtg}\,}$
+    </div>
+
+    <ol id="questions">
+      <li class="question">
+        <div class="name">
+          Виды сходимостей случайных величин
+        </div>
+        <div class="content">
+          Рассмотрим вероятностное пространство
+          $(\Omega, \mathcal{F}, \mathbb{P})$.
+
+          <ol>
+            <li>
+              <i>Сходимость почти наверное:</i>
+              \[
+              \xi_n \overset{\text{п.н.}}{\longrightarrow} \xi \iff
+              \prob{
+              \omega \in \Omega: \;
+              \xi_n(\omega) \limto{n \to \infty} \xi(\omega)
+              } = 1.
+              \]
+            </li>
+
+            <li>
+              <i>Сходимость по вероятности:</i>
+              \[
+              \xi_n \overset{\mathbb{P}}{\longrightarrow} \xi \iff
+              \forall \varepsilon \gt 0 \quad
+              \prob{ \abs{\xi_n - \xi} \gt \varepsilon } \limto{n \to \infty} 0.
+              \]
+            </li>
+
+            <li>
+              <i>Сходимость по распределению:</i>
+              \[
+              \xi_n \overset{d}{\longrightarrow} \xi,
+              \]
+              если для любой непрерывной и ограниченной функции $g(\cdot)$
+              \[
+              \mean{g(\xi_n)} \limto{n \to \infty} \mean{g(\xi)}.
+              \]
+            </li>
+
+            <li>
+              <i>Сходимость в основном:</i> (сходимость функций распределения)
+              \[
+              F_{\xi_n}(x) \limto{n \to \infty} F_\xi(x)
+              \]
+              в точках непрерывности $x$.
+            </li>
+          </ol>
+
+          <div class="proposition">
+            Определения 3 и 4 эквивалентны.
+          </div>
+
+          <div class="proposition">
+            \[
+            \xi_n \overset{\text{п.н.}}{\longrightarrow} \xi \implies
+            \xi_n \overset{\mathbb{P}}{\longrightarrow} \xi \implies
+            \xi_n \overset{d}{\longrightarrow} \xi.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Неравенство Маркова
+        </div>
+        <div class="content">
+          Если $\xi \geqslant 0$, то
+          \[
+          \forall \varepsilon \gt 0 \quad
+          \prob{ \xi \geqslant \varepsilon }
+          \leqslant \frac{\mean{\xi}}{\varepsilon}
+          \]
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Неравенство Чебышёва
+        </div>
+        <div class="content">
+          \[
+          \forall \varepsilon \gt 0 \quad
+          \prob{ \abs{\xi - \mean{\xi}} \geqslant \varepsilon }
+          \leqslant \frac{\disp{\xi}}{\varepsilon^2},
+          \]
+          или
+          \[
+          \forall \varepsilon \gt 0 \quad
+          \prob{ \paren{\xi - \mean{\xi}}^2 \geqslant \varepsilon^2 }
+          \leqslant \frac{\mean{\paren{\xi - \mean{\xi}}^2}}{\varepsilon^2},
+          \]
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Закон больших чисел в форме Чебышёва
+        </div>
+        <div class="content">
+          <div class="theorem">
+            Пусть $\set{ \xi_n }$ &mdash; независимые величины
+            на $(\Omega, \mathcal{F}, \mathbb{P})$. Предполагаем, что выполнены
+            условия:
+            <ol>
+              <li>
+                $\mean{\xi_k} = a_k \lt \infty$;
+              </li>
+
+              <li>
+                $\disp{\xi_k} \leqslant c$.
+              </li>
+            </ol>
+
+            Тогда
+            \[
+            \prob{
+              \abs{
+              \frac{\sum_{k=1}^n \xi_k}{n} - \frac{\sum_{k=1}^n \mean{\xi_k}}{n}
+              }
+              \geqslant \varepsilon
+              } \limto{n \to \infty} 0.
+            \]
+          </div>
+
+          <div class="proposition">
+            Если
+            \[
+            \eta_n := \frac{\sum_{k=1}^n \xi_k}{n}, \quad
+            \mean{\eta_n} := \frac{\sum_{k=1}^n \mean{\xi_k}}{n},
+            \]
+            то из неравенства Чебышёва следует, что
+            \[
+            \prob{
+            \abs{\eta_n - \mean{\eta_n}} \geqslant \varepsilon
+            }
+            \leqslant \frac{\disp{\eta_n}}{\varepsilon^2}
+            = \frac{c}{n \varepsilon^2},
+            \]
+            учитывая, что для независимых величин
+            \[
+            \disp{\sum_{k=1}^n \xi_k} = \sum_{k=1}^n \disp{\xi_k},
+            \]
+            а также тот факт, что
+            \[
+            \disp{a \xi} = a^2 \disp{\xi}.
+            \]
+          </div>
+
+          <div class="remark">
+            Если
+            \[
+            \mean{\xi_k} = a, \qquad k = \overline{1,n},
+            \]
+            то из ЗБЧ следует, что
+            \[
+            \frac{\sum_{k=1}^n \xi_k}{n}
+            \overset{\mathbb{P}}{\longrightarrow} a.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Закон больших чисел в форме Бернулли
+        </div>
+        <div class="content">
+          <div class="theorem">
+            Рассмотрим схему Бернулли:
+            <ul>
+              <li>
+                $p$ &mdash; вероятность успеха;
+              </li>
+
+              <li>
+                $n$ &mdash; число испытаний;
+              </li>
+
+              <li>
+                $\mu_n$ &mdash; число успехов.
+              </li>
+            </ul>
+
+            Тогда
+            \[
+            \prob{
+            \abs{\frac{\mu_n}{n} - p} \geqslant \varepsilon
+            } \limto{n \to \infty} 0.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Центральная предельная теорема
+        </div>
+        <div class="content">
+          <div class="theorem">
+            Пусть $\set{ \xi_n }$ &mdash; последовательность независимых
+            одинаково распределённых случайных величин с конечными мат.
+            ожиданием и дисперсией:
+            \[
+            \mean{\xi_k} = a, \quad \disp{\xi_k} = \sigma^2,
+            \qquad k = \overline{1,n}.
+            \]
+
+            Тогда случайная величина
+            \[
+            \zeta_n = \frac{\sum_{k=1}^n (\xi_k - a)}{\sqrt{n} \sigma}
+            \]
+            сходится по распределению к $\zeta \sim N(0,1)$, то есть
+            \[
+            \zeta_n \overset{d}{\longrightarrow} \zeta \sim N(0,1),
+            \]
+            где $N(0,1)$ &mdash; нормальное распределение с нулевым мат.
+            ожиданием и стандартным отклонением, равным единице.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Описательная статистика. Точечный ряд
+        </div>
+        <div class="content">
+          Рассмотрим случайную величину $\xi$ с частично или полностью
+          неизвестной функцией распределения $F_\xi(x)$. Проведём эксперимент
+          $n$ раз, получим результаты: $(x_1, \dots, x_n)$. Будем считать, что
+          результаты экспериментов независимы.
+
+          <div class="definition">
+            Говорят, что $\xi$ задаёт <i>генеральную совокупность</i>.
+          </div>
+
+          <div class="definition">
+            $(x_1, \dots, x_n)$ называют <i>выборкой</i>.
+          </div>
+
+          <div class="remark">
+            Случайные величины $x_i$ имеют то же распределение, что и $\xi$:
+            \[
+            x_i \sim F_\xi(x).
+            \]
+          </div>
+
+          Упорядочим выборку по возрастанию: $x_{(1)}, x_{(2)}, \dots, x_{(n)}$.
+          <div class="definition">
+            Последовательность $x_{(1)} \leqslant x_{(2)} \leqslant \dots
+            \leqslant x_{(n)}$ называют <i>вариационным рядом</i>, а величину
+            $x_{(k)}$ &mdash; <i>$k$-ой порядковой статистикой</i>.
+          </div>
+
+          <div class="remark">
+            $x_{(k)} \not\sim F_\xi(x)$. Вообще говоря,
+            \[
+            f_{x_{(k)}}(x) = k C_n^k \left[F_\xi(x)\right]^{k-1}
+            \left[ 1 - F_\xi(x) \right]^{n-k} f_\xi (x),
+            \]
+            поэтому
+            \[
+            F_{x_{(k)}}(x) \bydef= \int\limits_{-\infty}^x f_{x_{(k)}}(t) dt.
+            \]
+          </div>
+
+          Выберем теперь уникальные порядковые статистики:
+          <table class="inner-border centered">
+            <tr>
+              <td>$y_{(1)}$</td>
+              <td>$y_{(2)}$</td>
+              <td>$\dots$</td>
+              <td>$y_{(k)}$</td>
+            </tr>
+            <tr>
+              <td>$n_1$</td>
+              <td>$n_2$</td>
+              <td>$\dots$</td>
+              <td>$n_k$</td>
+            </tr>
+          </table>
+
+          <div class="definition">
+            Последовательность $y_{(1)}, \dots, y_{(k)}$ c частотами $n_1,
+            \dots, n_k$ называют <i>точечным вариационным рядом</i>.
+          </div>
+
+          <div class="definition">
+            <i>Полигоном частот</i> называют график зависимости частоты $n_i$ от
+            элемента точечного вариационного ряда $y_{(i)}$.
+          </div>
+
+          <div class="definition">
+            <i>Эмпирической функцией распределения</i> называют функцию
+            \[
+            F_n^*(x) = \frac{\nu(x)}{n},
+            \]
+            где $\nu(x)$ &mdash; число элементов выборки, меньше либо равных
+            $x$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Описательная статистика. Интервальный ряд
+        </div>
+        <div class="content">
+          Рассмотрим генеральную сопокупность $\xi \sim F_\xi(x)$ и
+          упорядоченную в порядке неубывания выборку
+          $(x_{(1)}, \dots, x_{(n)})$.
+
+          <div class="definition">
+            Величину $R = x_{(n)} - x_{(1)}$ называют <i>размахом выборки</i>.
+          </div>
+
+          Разобъём выборку на $k$ интервалов, причём величину $k$ будем искать
+          по <i>правилу Стёрджеса</i>:
+          \[
+          k = \floor{1 + \log_2 n}.
+          \]
+          Тогда шаг разбиения $h = \dfrac{R}{k}$. Составим <i>интервальный
+            вариационный ряд</i>:
+          <table class="inner-border centered">
+            <tr>
+              <td>$[z_1, z_2]$</td>
+              <td>$(z_2, z_3]$</td>
+              <td>$\dots$</td>
+              <td>$(z_{k-1}, z_{k}]$</td>
+            </tr>
+            <tr>
+              <td>$n_1$</td>
+              <td>$n_2$</td>
+              <td>$\dots$</td>
+              <td>$n_k$</td>
+            </tr>
+          </table>
+          где
+          \[
+          \begin{aligned}
+          z_1 &:= x_{(1)}, \\
+          z_2 &:= z_1 + h, \\
+          &\phantom{:}\vdots \\
+          z_k &:= z_{k-1} + h = x_{(n)},
+          \end{aligned}
+          \]
+          а $n_i$ &mdash; количество значений исходной выборки, попавших в
+          интервал $(z_i, z_{i+1}]$.
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Основные выборочные характеристики
+        </div>
+        <div class="content">
+          <ol>
+            <li>
+              Выборочный момент порядка $r$:
+              \[
+              \overline{x^r} = \frac{1}{n} \sum_{i=1}^n x_i^r.
+              \]
+
+              <div class="definition">
+                Выборочный момент порядка 1
+                \[
+                \overline{x} = \frac{1}{n} \sum_{i=1}^n x_i
+                \]
+                называют <i>выборочным средним</i>.
+              </div>
+            </li>
+
+            <li>
+              Центральный выборочный момент порядка $r$:
+              \[
+              \mu^r = \frac{1}{n} \sum_{i=1}^n \paren{x_i - \overline{x}}^r.
+              \]
+
+              <div class="definition">
+                Центральный выборочный момент порядка 2
+                \[
+                s^2 = \frac{1}{n} \sum_{i=1}^n \paren{x_i - \overline{x}}^2
+                \]
+                называют <i>выборочной дисперсией</i>, а значение
+                \[
+                \tilde{s}^2 = \frac{n}{n-1} s^2
+                \]
+                &mdash; <i>исправленной выборочной дисперсией</i>.
+              </div>
+            </li>
+
+            <li>
+              <i>Выборочный квантиль $x_p$ порядка $p$</i> &mdash; элемент
+              вариационного ряда
+              \[
+              x_{(1)} \leqslant x_{(2)} \leqslant \dots \leqslant x_{(n)}
+              \]
+              с номером $\floor{np} + 1$.
+
+              <div class="definition">
+                <ul>
+                  $Q_1$ &mdash; выборочный квантиль $x_{1/4}$ порядка $1/4$
+                  &mdash; <i>первый квартиль</i>;
+                </ul>
+                <ul>
+                  $Q_2$ &mdash; выборочный квантиль $x_{2/4}$ порядка $2/4$
+                  &mdash; <i>медиана</i>;
+                </ul>
+                <ul>
+                  $Q_3$ &mdash; выборочный квантиль $x_{3/4}$ порядка $3/4$
+                  &mdash; <i>третий квартиль</i>.
+                </ul>
+              </div>
+
+              <div class="definition">
+                Величину
+                \[
+                \text{IQR} = Q_3 - Q_1
+                \]
+                называют <i>межквартильным размахом</i>.
+              </div>
+
+              <div class="definition">
+                <i>Метод Тьюки</i> для вычисления краёв статистически значимой
+                выборки (без выбросов):
+                \[
+                \left[
+                Q_1 - 1.5 \cdot \text{IQR}; Q_3 + 1.5 \cdot \text{IQR}
+                \right].
+                \]
+              </div>
+
+              <div class="definition">
+                <i>Ящик с усами</i>: если усы одинаковой длины, то распределение
+                симметричное.
+
+                <div class="images">
+                  <img src="images/box-plot.svg"></img>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <i>Коэффициент вариации:</i>
+              \[
+              v = \frac{s}{\overline{x}}.
+              \]
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Свойства точечных оценок
+        </div>
+        <div class="content">
+          Пусть $\xi$ задаёт генеральную совокупность,
+          $\xi \sim F_\xi(x, \theta)$. По выборке $X_{[n]}$ необходимо построить
+          $\hat\theta (X_{[n]})$ &mdash; оценку неизвестного параметра $\theta$.
+
+          <div class="definition">
+            Статистику $\hat\theta (X_{[n]})$ называют <i>точечной оценкой</i>
+            параметра $\theta$.
+          </div>
+
+          <ol>
+            <li>
+              $\hat\theta$ &mdash; <i>состоятельная оценка</i> параметра
+              $\theta$, если
+              \[
+              \hat\theta\paren{X_{[n]}} \overset{\mathbb{P}}{\longrightarrow}
+              \theta.
+              \]
+            </li>
+
+            <li>
+              $\hat\theta$ &mdash; <i>сильно состоятельная оценка</i> параметра
+              $\theta$, если
+              \[
+              \hat\theta\paren{X_{[n]}} \overset{\text{п.н.}}{\longrightarrow}
+              \theta.
+              \]
+            </li>
+
+            <li>
+              $\hat\theta$ &mdash; <i>несмещённая</i> если
+              \[
+              \mean{\hat\theta\paren{X_{[n]}}} = \theta.
+              \]
+
+              $\hat\theta$ &mdash; <i>асимптотически несмещённая</i> если
+              \[
+              \mean{\hat\theta\paren{X_{[n]}}} \limto{n \to \infty} \theta.
+              \]
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Метод моментов
+        </div>
+        <div class="content">
+          Пусть $\xi$ задаёт генеральную совокупность,
+          $\xi \sim F_\xi(x, \theta)$, причём $\theta = \paren{\theta_1,
+          \theta_2}$ &mdash; параметры, для которых требуется
+          построить точечные оценки.
+
+          <p>
+          Параметры можно найти из системы уравнений:
+          \[
+          \left\{
+          \begin{aligned}
+          \mean{\xi} &= \overline{x}, \\
+          \disp{\xi} &= s^2.
+          \end{aligned}
+          \right.
+          \]
+          </p>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Метод максимального правдоподобия
+        </div>
+        <div class="content">
+          Пусть $\xi \sim F_\xi(x, \theta)$; $X_{[n]}$ &mdash; выборка. Введя в
+          рассмотрение <i>функцию правдоподобия</i> $L(x_1, \dots, x_n, \theta)$,
+          точечную оценку можно выбрать как
+          \[
+          \hat\theta (X_{[n]}) = \argmax\limits_{\theta}
+          L(x_1, \dots, x_n, \theta)
+          \]
+          либо как
+          \[
+          \hat\theta (X_{[n]}) = \argmax\limits_{\theta} \ln
+          L(x_1, \dots, x_n, \theta).
+          \]
+
+          Рассмотрим два случая:
+          <ol>
+            <li>
+              $\xi$ &mdash; дискретная. Тогда
+              \[
+              L(x_1, \dots, x_n, \theta)
+              = \prod_{i=1}^n \prob{ \xi = x_i; \theta }.
+              \]
+            </li>
+
+            <li>
+              $\xi$ &mdash; непрерывная. Тогда
+              \[
+              L(x_1, \dots, x_n, \theta) = \prod_{i=1}^n f_\xi (x_i, \theta).
+              \]
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Построение доверительных интервалов
+        </div>
+        <div class="content">
+          Пусть $\xi \sim F_\xi(x, \theta)$; $X_{[n]}$ &mdash; выборка.
+          Рассмотрим две точечные оценки $\hat\theta_1 (X_{[n]})$ и
+          $\hat\theta_2 (X_{[n]})$.
+
+          <div class="definition">
+            Интервал
+            \[
+            \left[
+            \hat\theta_1 (X_{[n]}),
+            \hat\theta_2 (X_{[n]})
+            \right]
+            \]
+            называют <i>доверительным интервалом параметра $\theta$
+              распределения $F_\xi (x, \theta)$</i>, если
+            \[
+            \prob{
+            \hat\theta_1 (X_{[n]}) \lt \theta \lt \hat\theta_2 (X_{[n]})
+            } = 1 - \varepsilon,
+            \]
+            где
+            <ul>
+              <li>
+                $\varepsilon$ &mdash; <i>уровень значимости</i>;
+              </li>
+
+              <li>
+                $1 - \varepsilon$ &mdash; <i>уровень доверия</i>.
+              </li>
+            </ul>
+          </div>
+
+          <div class="definition">
+            Пусть $x_1, \dots, x_k$ &mdash; совместно независимые случайные
+            величины, причём $x_i \sim N(0, 1)$. Тогда говорят, что случайная
+            величина
+            \[
+            x = x_1^2 + x_2^2 + \dots + x_k^2
+            \]
+            имеет <i>распределение Пирсона с $k$ степенями свободы</i>, и пишут
+            \[
+            x \sim \chi_k^2.
+            \]
+          </div>
+
+          <div class="definition">
+            Пусть $x_0, \dots, x_k$ &mdash; совместно независимые случайные
+            величины, причём $x_i \sim N(0, 1)$. Тогда говорят, что случайная
+            величина
+            \[
+            t = \frac{x_0}{\displaystyle \frac{1}{k} \sum_{i=1}^k x_i^2}
+            \]
+            имеет <i>распределение Стьюдента с $k$ степенями свободы</i>, и пишут
+            \[
+            t \sim T_{k-1}.
+            \]
+          </div>
+
+          Если $\xi \sim N(a, \sigma^2)$, то для $X_{[n]}$ выполнены
+          соотношения:
+          <ol class="big-height">
+            <li>
+              ${\displaystyle
+              \dfrac{\overline{x} - a}{\sigma} \sqrt{n}
+              \sim N(0, 1) }$;
+            </li>
+
+            <li>
+              ${\displaystyle
+              \dfrac{\overline{x} - a}{s} \sqrt{n - 1}
+              = \dfrac{\overline{x} - a}{\tilde s} \sqrt{n}
+              \sim T_{n-1} }$;
+            </li>
+
+            <li>
+              ${\displaystyle
+              \sum\limits_{i=1}^n \paren{\frac{x_i - a}{\sigma}}^2
+              = \frac
+              {n \paren{\overline{x^2} - 2a\overline{x} + a^2}}
+              {\sigma^2}
+              \sim \chi_{n}^2 }$;
+            </li>
+
+            <li>
+              ${\displaystyle
+              \sum\limits_{i=1}^n \paren{\frac{x_i - \overline{x}}{\sigma}}^2
+              = \frac{ns^2}{\sigma^2}
+              = \frac{(n-1) \tilde{s}^2}{\sigma^2}
+              \sim \chi_{n-1}^2 }$;
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Построение асимптотических доверительных интервалов
+        </div>
+        <div class="content">
+          Рассмотрим точные доверительные интервалы (ТДИ) для $N(a, \sigma^2)$ с
+          уровнем доверия $1 - \varepsilon$:
+
+          <ol>
+            <li>
+              ТДИ для $a$ при известном $\sigma^2$:
+              \[
+              \prob{
+              u_{\varepsilon/2}
+              \lt \frac{\overline{x} - a}{\sigma} \sqrt{n}
+              \lt u_{1 - \varepsilon/2}
+              } = 1 - \varepsilon,
+              \]
+              где $u_\alpha$ &mdash; квантиль распределения $N(0,1)$ уровня
+              $\alpha$. Из симметричности нормального распределения следует, что
+              \[
+              -u_{1 - \varepsilon/2} = u_{\varepsilon/2},
+              \]
+              поэтому ТДИ для $a$ будет равен
+              \[
+              \paren{
+              \overline{x} - u_{1 - \varepsilon/2} \frac{\sigma}{\sqrt{n}},
+              \overline{x} + u_{1 - \varepsilon/2} \frac{\sigma}{\sqrt{n}}
+              }.
+              \]
+
+              <div class="remark">
+                Если известна <i>предельная абсолютная ошибка</i> $\delta$,
+                можно найти минимальный объём выборки, необходимый для оценки
+                среднего:
+                \[
+                n = \paren{
+                u_{1-\varepsilon/2} \frac{\sigma}{\delta}
+                }^2.
+                \]
+              </div>
+            </li>
+
+            <li>
+              ТДИ для $a$ при неизвестном $\sigma^2$:
+              \[
+              \paren{
+              \overline{x} - t_{1 - \varepsilon/2, n-1} \frac{s}{\sqrt{n-1}},
+              \overline{x} + t_{1 - \varepsilon/2, n-1} \frac{s}{\sqrt{n-1}}
+              },
+              \]
+              где $t_{1-\varepsilon/2, n-1}$ &mdash; квантиль порядка
+              $1-\varepsilon/2$ распределения Стьюдента с $n-1$ степенями
+              свободы.
+            </li>
+
+            <li>
+              ТДИ для $\sigma^2$ при известном $a$:
+              \[
+              \paren{
+              \frac{\sum_{i=1}^n (x_i - a)^2}{\chi_{1 - \varepsilon/2, n}^2},
+              \frac{\sum_{i=1}^n (x_i - a)^2}{\chi_{\varepsilon/2, n}^2},
+              },
+              \]
+              либо
+              \[
+              \paren{
+              \frac{n \paren{\overline{x^2} - 2a\overline{x} + a^2}}
+              {\chi_{1 - \varepsilon/2, n}^2},
+              \frac{n \paren{\overline{x^2} - 2a\overline{x} + a^2}}
+              {\chi_{\varepsilon/2, n}^2}
+              },
+              \]
+              где $\chi_{\varepsilon/2, n}$ &mdash; квантиль
+              $\chi^2$-распределения с $n$ степенями свободы уровня
+              $\varepsilon/2$.
+            </li>
+
+            <li>
+              ТДИ для $\sigma^2$ при неизвестном $a$:
+              \[
+              \paren{
+              \frac{ns^2}{\chi_{1-\varepsilon/2,n-1}^2},
+              \frac{ns^2}{\chi_{\varepsilon/2,n-1}^2}
+              },
+              \]
+              или
+              \[
+              \paren{
+              \frac{(n-1)\tilde{s}^2}{\chi_{1-\varepsilon/2,n-1}^2},
+              \frac{(n-1)\tilde{s}^2}{\chi_{\varepsilon/2,n-1}^2}
+              }.
+              \]
+            </li>
+          </ol>
+
+          <hr>
+
+          Рассмотрим теперь ТДИ для экспоненциального распределения
+          $\mathcal{E}(\lambda)$ с уровнем доверия $1 - \varepsilon$.
+
+          <div class="theorem">
+            Пусть выборка $X_{[n]}$ получена из генеральной совокупности,
+            порождённой $\xi \sim \mathcal{E}(\lambda)$. Тогда
+            \[
+            2n \overline{x} \lambda \sim \chi_{2n}^2.
+            \]
+          </div>
+
+          Из теоремы следует, что ТДИ для $\lambda$ равен
+          \[
+          \paren{
+          \frac{\chi_{\varepsilon/2,2n}^2}{2n \overline{x}},
+          \frac{\chi_{1-\varepsilon/2,2n}^2}{2n \overline{x}}
+          }.
+          \]
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Общая схема проверки гипотез
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Статистической гипотезой</i> называется любое предположение о
+            виде закона распределения. При этом выдвигается основная
+            (<i>нулевая</i>) гипотеза $H_0$ и <i>альтернативная</i> $H_1$.
+          </div>
+
+          Возможны два вида ошибок:
+          <ol type="I">
+            <li>
+              Отклонение $H_0$ в случае, когда она верна
+              (вероятность: $\alpha$).
+            </li>
+
+            <li>
+              Принятие $H_0$ в случае, когда она неверна
+              (вероятность: $\beta$).
+            </li>
+          </ol>
+
+          <div class="definition">
+            <i>Мощностью критерия</i> называют вероятность не принять неверную
+            гипотезу, т. е. $\mu = 1 - \beta$.
+          </div>
+
+          <hr>
+
+          Схема проверки гипотез:
+          <ol>
+            <li>
+              Выдвигаем гипотезы $H_0, H_1$.
+            </li>
+
+            <li>
+              Задаём уровень значимости $\alpha$.
+            </li>
+
+            <li>
+              Выбираем статистику критерия $\gamma(X_{[n]})$. Если $H_0$ верна,
+              то $\gamma(X_{[n]})$ подчиняется известному закону.
+            </li>
+
+            <li>
+              Строим критическую область и находим вероятность попадания в неё.
+              Если гипотеза $H_0$ верна, то $\gamma(X_{[n]})$ не попадает в эту
+              область.
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Проверка гипотез о параметрах распределения
+        </div>
+        <div class="content">
+          Пусть нам известно, что $\xi \sim N(a, \sigma^2)$.
+
+          <ol type="i">
+            <li>
+              <span style="color:red">$\sigma^2$ известна, ищем $a$</span>:
+
+              <ol>
+                <li>
+                  Выдвигаем гипотезу $H_0: a = a_0$, соответственно
+                  $H_1: a \neq a_0$.
+                </li>
+
+                <li>
+                  Задаём уровень значимости $\alpha$.
+                </li>
+
+                <li>
+                  В качестве критерия примем статистику
+                  \[
+                  \gamma(X_{[n]}) = \frac{\overline{x} - a}{\sigma} \sqrt{n},
+                  \]
+                  причём если $H_0$ верна, то $\gamma(X_{[n]}) \sim N(0, 1)$.
+                </li>
+
+                <li>
+                  Критическая область для $\gamma(X_{[n]})$:
+                  \[
+                  (-\infty, -u_{1-\alpha/2}) \cup (u_{1-\alpha/2}, +\infty).
+                  \]
+                </li>
+              </ol>
+            </li>
+
+            <li>
+              <span style="color:red">$\sigma^2$ неизвестна, ищем $a$</span>:
+
+              <ol>
+                <li>
+                  Выдвигаем гипотезу $H_0: a = a_0$, соответственно
+                  $H_1: a \neq a_0$.
+                </li>
+
+                <li>
+                  Задаём уровень значимости $\alpha$.
+                </li>
+
+                <li>
+                  В качестве критерия примем статистику
+                  \[
+                  \gamma(X_{[n]}) = \frac{\overline{x} - a}{s} \sqrt{n-1},
+                  \]
+                  причём если $H_0$ верна, то $\gamma(X_{[n]}) \sim T_{n-1}$.
+                </li>
+
+                <li>
+                  Критическая область для $\gamma(X_{[n]})$:
+                  \[
+                  (-\infty, -t_{1-\alpha/2, n-1}) \cup
+                  (t_{1-\alpha/2, n-1}, +\infty).
+                  \]
+                </li>
+              </ol>
+            </li>
+
+            <li>
+              <span style="color:red">Ищем $\sigma^2$</span>:
+
+              <ol>
+                <li>
+                  Выдвигаем гипотезу $H_0: \sigma^2 = \sigma_0^2$,
+                  соответственно $H_1: \sigma^2 \neq \sigma_0^2$.
+                </li>
+
+                <li>
+                  Задаём уровень значимости $\alpha$.
+                </li>
+
+                <li>
+                  В качестве критерия примем статистику
+                  \[
+                  \gamma(X_{[n]}) = \frac{ns^2}{\sigma_0^2},
+                  \]
+                  причём если $H_0$ верна, то
+                  $\gamma(X_{[n]}) \sim \chi_{n-1}^2$.
+                </li>
+
+                <li>
+                  Критическая область для $\gamma(X_{[n]})$:
+                  \[
+                  [0, \chi_{\alpha/2,n-1}^2) \cup
+                  (\chi_{1-\alpha/2, n-1}^2, +\infty).
+                  \]
+                </li>
+              </ol>
+            </li>
+          </ol>
+
+          <hr>
+
+          Рассмотрим теперь $\xi_1 \sim N(a_1, \sigma_1^2)$ и
+          $\xi_2 \sim N(a_2, \sigma_2^2)$.
+
+          <ol type="i">
+            <li>
+              <span style="color:red">
+                $\sigma_1, \, \sigma_2$ &mdash; известны.
+              </span>
+
+              <ol>
+                <li>
+                  $H_0: a_1 = a_2$, соответственно $H_1: a_1 \neq a_2$.
+                </li>
+
+                <li>
+                  Выбираем уровень значимости $\alpha$.
+                </li>
+
+                <li>
+                  Критерий:
+                  \[
+                  \gamma(X_{[n_1]}, X_{[n_2]})
+                  = \frac
+                  {\overline{x} - \overline{y}}
+                  {
+                  \sqrt{\dfrac{\sigma_1^2}{n_1} + \dfrac{\sigma_2^2}{n_2}}
+                  },
+                  \]
+                  причём если $H_0$ верна, то
+                  \[
+                  \gamma(X_{[n_1]}, X_{[n_2]}) \sim N(0, 1).
+                  \]
+
+                  Здесь $\overline{x}$ и $\overline{y}$ &mdash; выборочное
+                  среднее соответственно выборок $X_{[n_1]}$ и  $X_{[n_2]}$.
+                </li>
+
+                <li>
+                  Критическая область:
+                  \[
+                  \paren{ -\infty, -u_{1-\alpha/2} }
+                  \cup
+                  \paren{ u_{1-\alpha/2}, +\infty }.
+                  \]
+                </li>
+              </ol>
+            </li>
+
+            <li>
+              <span style="color:red">
+                Известно, что $\sigma_1 = \sigma_2$ (само значение неизвестно).
+              </span>
+
+              <ol>
+                <li>
+                  $H_0: a_1 = a_2$, соответственно $H_1: a_1 \neq a_2$.
+                </li>
+
+                <li>
+                  Выбираем уровень значимости $\alpha$.
+                </li>
+
+                <li>
+                  Критерий:
+                  \[
+                  \gamma(X_{[n_1]}, X_{[n_2]})
+                  = \frac
+                  {\overline{x} - \overline{y}}
+                  {\hat s \sqrt{\dfrac{1}{n_1} + \dfrac{1}{n_2}}},
+                  \]
+                  причём если $H_0$ верна, то
+                  \[
+                  \gamma(X_{[n_1]}, X_{[n_2]}) \sim T_{n_1 + n_2 - 2}.
+                  \]
+
+                  Здесь
+                  \[
+                  \hat s = \sqrt{\frac{s_1^2 n_1 + s_2^2 n_2}{n_1 + n_2 - 2}}.
+                  \]
+                </li>
+
+                <li>
+                  Критическая область:
+                  \[
+                  \paren{ -\infty, -t_{1-\alpha/2, n_1 + n_2 - 2} }
+                  \cup
+                  \paren{ t_{1-\alpha/2, n_1 + n_2 - 2}, +\infty }.
+                  \]
+                </li>
+              </ol>
+            </li>
+
+            <li>
+              <span style="color:red">
+                $a_1, a_2, \sigma_1, \sigma_2$ &mdash; неизвестны.
+              </span>
+
+              <ol>
+                <li>
+                  $H_0: \sigma_1^2 = \sigma_2^2$, соответственно
+                  $H_1: \sigma_1^2 \neq \sigma_2^2$.
+                </li>
+
+                <li>
+                  Выбираем уровень значимости $\alpha$.
+                </li>
+
+                <li>
+                  Критерий:
+                  \[
+                  \gamma(X_{[n_1]}, X_{[n_2]})
+                  = \frac{\hat{s_1}^2}{\hat{s_2}^2}
+                  \]
+                  причём если $H_0$ верна, то
+                  \[
+                  \gamma(X_{[n_1]}, X_{[n_2]}) \sim F_{n_1 - 1, n_2 - 1}.
+                  \]
+
+                  Здесь $F_{n_1 - 1, n_2 - 1}$ &mdash;
+                  <a href="https://ru.wikipedia.org/wiki/%D0%A0%D0%B0%D1%81%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5_%D0%A4%D0%B8%D1%88%D0%B5%D1%80%D0%B0"
+                    target="_blank">распределение Фишера</a>.
+                </li>
+
+                <li>
+                  Критическая область:
+                  \[
+                  \left[ 0; F_{\frac{\alpha}{2}, n_1-1, n_2-1} \right)
+                  \cup
+                  \paren{ F_{1 - \frac{\alpha}{2}, n_1-1, n_2-1}; +\infty }.
+                  \]
+                </li>
+              </ol>
+            </li>
+          </ol>
+
+          <hr>
+
+          Рассмотрим $\xi \sim \mathcal{B}(1, p)$ &mdash; распределение
+          Бернулли. Элементами выборки $X_{[n]}$ будут либо нули, либо единицы.
+
+          <div style="color:red">Ищем p.</div>
+          <ol>
+            <li>
+              $H_0: p = p_0, \implies H_1: p \neq p_0$.
+            </li>
+
+            <li>
+              Задаём уровень значимости $\alpha$.
+            </li>
+
+            <li>
+              Критерий &mdash; число единиц (успехов) в $n$ испытаниях:
+              \[
+              \gamma(X_{[n]}) = \sum_{i=1}^n x_i \sim \mathcal{B}(n, p_0),
+              \]
+              где $\mathcal{B}(n, p_0)$ &mdash; биномиальное распределение.
+            </li>
+
+            <li>
+              Критическая область:
+              \[
+              \left[ 0; b_{\frac{\alpha}{2}, n, p_0} \right] \cup
+              \left[ b_{1 - \frac{\alpha}{2}, n, p_0}; n \right].
+              \]
+            </li>
+          </ol>
+
+          <div class="remark">
+            На практике при больших $n$ можно применить ЦПТ:
+            \[
+            \gamma = \frac{\sum_{i=1}^n x_i - n \mean{x_i}}{\sqrt{n \disp{x_i}}}
+            \limto{n \to \infty} \zeta \sim N(0, 1)
+            \]
+            и рассмотреть критическую область для $N(0, 1)$:
+            \[
+            (-\infty, -u_{1-\alpha/2}) \cup (u_{1-\alpha/2}, +\infty).
+            \]
+          </div>
+
+          <hr>
+
+          Рассмотрим $\xi \sim \mathcal{B}(N, p)$.
+          <div style="color:red">
+            Считаем, что $N$ известно, ищем $p$.
+          </div>
+          <ol>
+            <li>
+              $H_0: p = p_0, \implies H_1: p \neq p_0$.
+            </li>
+
+            <li>
+              Задаём уровень значимости $\alpha$.
+            </li>
+
+            <li>
+              Критерий:
+              \[
+              \gamma
+              = \frac{\sum_{i=1}^n x_i - n \mean{x_i}}{\sqrt{n \disp{x_i}}}
+              = \frac{\sum_{i=1}^n x_i - nNp_0}{\sqrt{nN p_0 (1 - p_0)}}
+              \limto{n \to \infty} \zeta \sim N(0, 1).
+              \]
+            </li>
+
+            <li>
+              Критическая область:
+              \[
+              (-\infty, -u_{1-\alpha/2}) \cup (u_{1-\alpha/2}, +\infty).
+              \]
+            </li>
+          </ol>
+
+          <hr>
+
+          Пусть $\xi$ порождает генеральную совокупность.
+          <span class="important">Оцениваем медиану.</span>
+
+          <ol>
+            <li>
+              $H_0: \theta = \theta_0$.
+            </li>
+
+            <li>
+              Задаём уровень значимости $\alpha$.
+            </li>
+
+            <li>
+              Критерий:
+              \[
+              \gamma(X_{[n]}) = \sum_{i=1}^n s(y_i)
+              \sim \mathcal{B}(n, \frac{1}{2}),
+              \]
+              где
+              \[
+              \begin{gathered}
+              y_i = x_i - \theta_i, \\
+              s(y_i) =
+              \begin{cases}
+              1, & y_i \gt 0, \\
+              0, & y_i \lt 0.
+              \end{cases}
+              \end{gathered}
+              \]
+            </li>
+
+            <li>
+              Критическая область:
+              \[
+              \left[ 0; b_{\frac{\alpha}{2}, n, \frac{1}{2}} \right] \cup
+              \left[ b_{1 - \frac{\alpha}{2}, n, \frac{1}{2}}; n \right].
+              \]
+            </li>
+          </ol>
+
+          <div class="remark">
+            На практике при больших $n$ можно применить ЦПТ:
+            \[
+            \gamma = \frac{\sum_{i=1}^n x_i - n \mean{x_i}}{\sqrt{n \disp{x_i}}}
+            \limto{n \to \infty} \zeta \sim N(0, 1)
+            \]
+            и рассмотреть критическую область для $N(0, 1)$:
+            \[
+            (-\infty, -u_{1-\alpha/2}) \cup (u_{1-\alpha/2}, +\infty).
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Гипотезы согласия
+        </div>
+        <div class="content">
+          Рассмотрим случайную величину $\xi$ с функцией распределения
+          $F_\xi(x)$, порождающую генеральную совокупность.
+
+          <div class="definition">
+            <i>
+              Критерий согласия Пирсона $\chi^2$ для проверки простой гипотезы:
+            </i>
+            <ol>
+              <li>
+                $H_0: F_\xi(x) = F_0(x)$.
+              </li>
+
+              <li>
+                Задаём уровень значимости $\alpha$.
+              </li>
+
+              <li>
+                Разбиваем на $k$ интервалов:
+
+                <table class="inner-border centered">
+                  <tr>
+                    <td>$(-\infty, a_1]$</td>
+                    <td>$(a_1, a_2]$</td>
+                    <td>$\dots$</td>
+                    <td>$(a_{k-1}, +\infty)$</td>
+                  </tr>
+                  <tr>
+                    <td>$n_1$</td>
+                    <td>$n_2$</td>
+                    <td>$\dots$</td>
+                    <td>$n_k$</td>
+                  </tr>
+                </table>
+
+                Введём обозначения:
+                \[
+                p_i^0 = F_0(x_i) - F_0(x_{i-1}) = \prob{ \xi \in (a_{i-1}; a_i] }.
+                \]
+
+                Критерий:
+                \[
+                \gamma(X_{[n]}) = \sum_{i=1}^k \frac{(n_i - n p_i^0)^2}{n p_i^0}
+                \sim \chi_{k-1}^2.
+                \]
+              </li>
+
+              <li>
+                Критическая область:
+                \[
+                \paren{ \chi_{1-\alpha, k-1}^2; +\infty }.
+                \]
+              </li>
+            </ol>
+          </div>
+
+          <div class="definition">
+            <i>
+              Критерий согласия Пирсона $\chi^2$ для проверки сложной гипотезы:
+            </i>
+            <ol>
+              <li>
+                $H_0: F_\xi(x) = F_0(x, \theta)$, где
+                $\theta = (\theta_1, \dots, \theta_l)$.
+              </li>
+
+              <li>
+                Задаём уровень значимости $\alpha$.
+              </li>
+
+              <li>
+                Разбиваем на $k$ интервалов:
+
+                <table class="inner-border centered">
+                  <tr>
+                    <td>$(-\infty, a_1]$</td>
+                    <td>$(a_1, a_2]$</td>
+                    <td>$\dots$</td>
+                    <td>$(a_{k-1}, +\infty)$</td>
+                  </tr>
+                  <tr>
+                    <td>$n_1$</td>
+                    <td>$n_2$</td>
+                    <td>$\dots$</td>
+                    <td>$n_k$</td>
+                  </tr>
+                </table>
+
+                Введём обозначения:
+                \[
+                p_i^0(\theta) = F_0(x_i, \theta) - F_0(x_{i-1}, \theta)
+                = \prob{ \xi \in (a_{i-1}; a_i] }.
+                \]
+
+                Критерий:
+                \[
+                \gamma(X_{[n]}) =
+                \sum_{i=1}^k \frac{(n_i - n p_i^0(\theta))^2}{n p_i^0(\theta)}
+                \sim \chi_{k-l-1}^2.
+                \]
+
+                Вместо $\theta$ ищем точечную оценку (по методу максимальной
+                правдоподобности либо по методу моментов).
+              </li>
+
+              <li>
+                Критическая область:
+                \[
+                \paren{ \chi_{1-\alpha, k-l-1}^2; +\infty }.
+                \]
+              </li>
+            </ol>
+          </div>
+
+          Далее предполагаем, что закон распределения непрерывен.
+
+          <div class="definition">
+            <i>
+              Критерий согласия Колмогорова для проверки простой гипотезы:
+            </i>
+            <ol>
+              <li>
+                $H_0: F_\xi(x) = F_0(x)$.
+              </li>
+
+              <li>
+                Задаём уровень значимости $\alpha$.
+              </li>
+
+              <li>
+                Критерий:
+                \[
+                \gamma(X_{[n]}) = \sqrt{n} D_n \sim K,
+                \]
+                где:
+                <ul>
+                  <li>
+                    $D_n = \sup\limits_{x \in \mathbb{R}}
+                    \abs{F_n^*(x) - F_0(x)}$;
+                  </li>
+
+                  <li>
+                    $F_n^*(x)$ &mdash; эмпирическая функция распределения:
+                    \[
+                    F_n^*(x) = \frac{\nu(x)}{n},
+                    \]
+                    где $\nu(x)$ &mdash; количество элементов выборки, меньших
+                    либо равных $x$.
+                  </li>
+
+                  <li>
+                    $K$ &mdash;
+                    <a
+                      href="https://ru.wikipedia.org/wiki/%D0%A0%D0%B0%D1%81%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5_%D0%9A%D0%BE%D0%BB%D0%BC%D0%BE%D0%B3%D0%BE%D1%80%D0%BE%D0%B2%D0%B0"
+                      target="_blank">распределение Колмогорова</a>; функция
+                    распределения:
+                    \[
+                    K(x) = 1 + 2\sum_{m=1}^\infty (-1)^m e^{-2 m^2 x^2}.
+                    \]
+                  </li>
+                </ul>
+
+                <div class="remark">
+                  Эквивалентная формула:
+                  \[
+                  D_n = \max\limits_{1 \leqslant i \leqslant k} \set{
+                  F_n^*(y_{(i)}) - F_0(y_{(i)}),
+                  F_0(y_{(i)}) - F_n^*(y_{(i-0)})
+                  }.
+                  \]
+                </div>
+              </li>
+
+              <li>
+                Критическая область:
+                \[
+                \paren{ k_{1-\alpha}; +\infty },
+                \]
+                где $k_{1-\alpha}$ &mdash; квантиль уровня $1 - \alpha$
+                распределения Колмогорова $K(x)$.
+              </li>
+            </ol>
+          </div>
+
+          <div class="definition">
+            <i>
+              Критерий согласия Колмогорова для проверки сложной гипотезы (для
+              нормального распределения):
+            </i>
+            <ol>
+              <li>
+                $H_0: F_\xi(x) = F_0(x, \theta)$.
+              </li>
+
+              <li>
+                Задаём уровень значимости $\alpha$.
+              </li>
+
+              <li>
+                Обозначение:
+                \[
+                D_n(\theta) = \sup\limits_{x \in \mathbb{R}}
+                \abs{F_n^*(x) - F_0(x, \theta)}.
+                \]
+                Критерий:
+                \[
+                \gamma(X_{[n]}) = D_n(\theta) \paren{
+                \sqrt{n} - 0.01 + \frac{0.85}{\sqrt{n}}
+                } \sim K;
+                \]
+                точечную оценку параметра $\theta$ можно найти методом
+                максимального правдопобия или методом моментов.
+              </li>
+
+              <li>
+                Критическая область:
+                \[
+                \paren{ k; +\infty },
+                \]
+                где $k$ &mdash; критическое значение, которое можно найти из
+                таблицы:
+
+                <table class="with-borders centered">
+                  <tr>
+                    <td>$\alpha$</td>
+                    <td>0.15</td>
+                    <td>0.10</td>
+                    <td>0.05</td>
+                    <td>0.025</td>
+                    <td>0.01</td>
+                  </tr>
+                  <tr>
+                    <td>Критическое значение</td>
+                    <td>0.775</td>
+                    <td>0.819</td>
+                    <td>0.895</td>
+                    <td>0.955</td>
+                    <td>1.035</td>
+                  </tr>
+                </table>
+              </li>
+            </ol>
+          </div>
+
+          <div class="definition">
+            <i>
+              Критерий согласия Колмогорова для проверки сложной гипотезы (для
+              экспоненциального распределения):
+            </i>
+            <ol>
+              <li>
+                $H_0: F_\xi(x) = F_0(x, \theta)$.
+              </li>
+
+              <li>
+                Задаём уровень значимости $\alpha$.
+              </li>
+
+              <li>
+                Обозначение:
+                \[
+                D_n(\theta) = \sup\limits_{x \in \mathbb{R}}
+                \abs{F_n^*(x) - F_0(x, \theta)}.
+                \]
+                Критерий:
+                \[
+                \gamma(X_{[n]}) = \paren{D_n(\theta) - \frac{0.2}{n}}
+                \paren{ \sqrt{n} + 0.26 + \frac{0.5}{\sqrt{n}} } \sim K;
+                \]
+                точечную оценку параметра $\theta$ можно найти методом
+                максимального правдопобия или методом моментов.
+              </li>
+
+              <li>
+                Критическая область:
+                \[
+                \paren{ k; +\infty },
+                \]
+                где $k$ &mdash; критическое значение, которое можно найти из
+                таблицы:
+
+                <table class="with-borders centered">
+                  <tr>
+                    <td>$\alpha$</td>
+                    <td>0.15</td>
+                    <td>0.10</td>
+                    <td>0.05</td>
+                    <td>0.025</td>
+                    <td>0.01</td>
+                  </tr>
+                  <tr>
+                    <td>Критическое значение</td>
+                    <td>0.926</td>
+                    <td>0.990</td>
+                    <td>1.094</td>
+                    <td>1.190</td>
+                    <td>1.308</td>
+                  </tr>
+                </table>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Гипотезы об однородности
+        </div>
+        <div class="content">
+          Рассмотрим выборки $X_{[n]}, Y_{[m]}$ из генеральных совокупностей
+          $\xi, \eta$ соответственно, а также их вариационные ряды $x_{(i)},
+          y_{(i)}$. Пусть $m \leqslant n$, а функции распределения случайных
+          величин $\xi, \eta$ (соответственно $F(x), G(x)$) непрерывны.
+
+          <span class="important">
+          Требуется проверить, равны ли функции распределения двух генеральных
+          совокупностей.
+          </span>
+
+          <div class="definition">
+            <i>Статистика Смирнова:</i>
+            \[
+            D_{m,n} = \sup\limits_{x \in \mathbb{R}} \abs{G_m(x) - F_n(x)},
+            \]
+            где $F_n(x), G_m(x)$ &mdash; эмпирические функции распределения
+            выборок $X_{[n]}, Y_{[m]}$ соответственно.
+          </div>
+
+          <div class="remark">
+            Статистику Смирнова проще вычислять следующим образом:
+            \[
+            \begin{gathered}
+            \begin{aligned}
+            D_{m,n}^+ &= \max_{1 \leqslant r \leqslant m}
+            \left[ \frac{r}{m} - F_n(y_{(r)}) \right]
+            &&= \max_{1 \leqslant s \leqslant n}
+            \left[ G_m(x_{(s)}) - \frac{s - 1}{n} \right], \\
+            D_{m,n}^- &= \max_{1 \leqslant r \leqslant m}
+            \left[ F_n(y_{(r)}) - \frac{r - 1}{m} \right]
+            &&= \max_{1 \leqslant s \leqslant n}
+            \left[ \frac{s}{n} - G_m(x_{(s)}) \right],
+            \end{aligned} \\
+            D_{m,n} = \max \set{ D_{m,n}^+, D_{m,n}^- }.
+            \end{gathered}
+            \]
+          </div>
+
+          <div class="definition">
+            <i>
+              Алгоритм критерия однородности двух выборок Колмогорова-Смирнова:
+            </i>
+
+            <ol>
+              <li>
+                $H_0: F(\cdot) \equiv G(\cdot)$. Альтернативная гипотеза:
+                $H_1: \sup\limits_{x \in \mathbb{R}} \abs{F(x) - G(x)} \gt 0$.
+              </li>
+
+              <li>
+                Задаём уровень значимости критерия $\alpha$.
+              </li>
+
+              <li>
+                Вычисляем статистику Смирнова $D_{m,n}$ и находим значение
+                статистики критерия:
+                \[
+                \gamma(X_{[n]}, Y_{[m]}) = \sqrt{\frac{mn}{m+n}} D_{m,n}
+                \sim K.
+                \]
+              </li>
+
+              <li>
+                Критическая область:
+                \[
+                (k_{1-\alpha}, +\infty),
+                \]
+                где $k_{1-\alpha}$ &mdash; квантиль уровня $1 - \alpha$
+                распределения Колмогорова.
+              </li>
+            </ol>
+          </div>
+
+          <div class="definition">
+            <i>
+              Критерий однородности Вилкоксона:
+            </i>
+
+            <ol>
+              <li>
+                $H_0: F(\cdot) \equiv G(\cdot)$. Альтернативная гипотеза
+                $H_1: F(\cdot) \neq G(\cdot)$.
+              </li>
+
+              <li>
+                Задаём уровень значимости критерия $\alpha$.
+              </li>
+
+              <li>
+                Объединим выборки $X_{[n]}$ и $Y_{[m]}$ в общий вариационный
+                ряд. Припишем каждому элементу этого вариационного ряда ранг,
+                равный номеру этого элемента в общем ряду. Равным элементам
+                приписываем средний ранг. Например, если два равных элемента
+                стоят на местах 4 и 5, то каждому из них приписываем 4,5.
+                Обозначим ранги элементов выборки $Y_{[m]}$ в общем вариационном
+                ряду через $r_1, \dots, r_m$.
+              </li>
+
+              <li>
+                Вычисляем статистику Вилкоксона:
+                \[
+                W(X_{[n]}, Y_{[m]}) = r_1 + \dots + r_m.
+                \]
+              </li>
+
+              <li>
+                Критическая область:
+                \[
+                \left[
+                \frac{m(m+1)}{2}; w_{\alpha,m,n}
+                \right]
+                \cup
+                \left[
+                m(n + m + 1) - w_{\alpha/2,m,n}; mn + \frac{m(m+1)}{2}
+                \right],
+                \]
+                где $w_{\alpha,m,n}$ &mdash; квантиль уровня $\alpha$
+                предельного распределения статистики $W(X_{[n]}, Y_{[m]})$.
+
+                <div class="remark">
+                  Если гипотеза $H_0$ выполняется, то
+                  \[
+                  \begin{aligned}
+                  \mean\gamma &= \frac{m(n+m+1)}{2}, \\
+                  \disp\gamma &= \frac{mn(m+n+1)}{12}.
+                  \end{aligned}
+                  \]
+                </div>
+              </li>
+            </ol>
+          </div>
+
+          <div class="remark">
+            Для больших выборок можно использовать аппроксимацию статистики
+            Вилкоксона:
+            \[
+            W^*(X_{[n]}, Y_{[m]}) = \frac{W - m(n+m+1)/2}{\sqrt{mn(m+n+1)/12}}.
+            \]
+            При справедливости гипотезы $H_0$ статистика $W^* \sim N(0, 1)$,
+            поэтому критическую область можно записать как
+            \[
+            (-\infty, -u_{1-\alpha/2}) \cup (u_{1-\alpha/2}, +\infty).
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Анализ таблиц сопряжённости
+        </div>
+        <div class="content">
+          <table class="inner-border centered">
+            <tr>
+              <td>$\xi$</td>
+              <td>$F_\xi(x)$</td>
+              <td>$X_{[n]}$</td>
+            </tr>
+            <tr>
+              <td>$\eta$</td>
+              <td>$G_\eta(y)$</td>
+              <td>$Y_{[m]}$</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="definition">
+          <i>
+            Критерий независимости двух выборок:
+          </i>
+
+          <ol>
+            <li>
+              $H_0: F_{\xi, \eta}(x, y) = F_\xi(x) G_\eta(y)$;
+              альтернативная гипотеза $H_1$: случайные величины зависимы.
+            </li>
+
+            <li>
+              Задаём уровень значимости критерия $\alpha$.
+            </li>
+
+            <li>
+              Используем критерий согласия Пирсона $\chi^2$, т.е. строим
+              интервалы:
+
+              <table class="inner-border centered">
+                <tr>
+                  <td></td>
+                  <td>$\nabla_1$</td>
+                  <td>$\nabla_2$</td>
+                  <td>$\dots$</td>
+                  <td>$\nabla_m$</td>
+                </tr>
+                <tr>
+                  <td>$\Delta_1$</td>
+                  <td>$n_{11}$</td>
+                  <td>$n_{12}$</td>
+                  <td>$\dots$</td>
+                  <td>$n_{1m}$</td>
+                </tr>
+                <tr>
+                  <td>$\Delta_2$</td>
+                  <td>$n_{21}$</td>
+                  <td>$n_{22}$</td>
+                  <td>$\dots$</td>
+                  <td>$n_{2m}$</td>
+                </tr>
+                <tr>
+                  <td>$\vdots$</td>
+                  <td>$\vdots$</td>
+                  <td>$\vdots$</td>
+                  <td>$\vdots$</td>
+                  <td>$\vdots$</td>
+                </tr>
+                <tr>
+                  <td>$\Delta_k$</td>
+                  <td>$n_{k1}$</td>
+                  <td>$n_{k2}$</td>
+                  <td>$\dots$</td>
+                  <td>$n_{km}$</td>
+                </tr>
+              </table>
+
+              Складывая частоты по строкам и столбцам, получим
+              \[
+              \begin{aligned}
+              n_{\cdot, 1} &= \sum_{i=1}^k n_{i1}, \\
+              &\dots \\
+              n_{\cdot, m} &= \sum_{i=1}^k n_{im},
+              \end{aligned}
+              \qquad
+              \begin{aligned}
+              n_{1, \cdot} &= \sum_{j=1}^m n_{1j}, \\
+              &\dots \\
+              n_{k, \cdot} &= \sum_{j=1}^m n_{kj}.
+              \end{aligned}
+              \]
+
+              Сумма всех частот:
+              \[
+              n = \sum_{i=1}^m n_{\cdot, i} = \sum_{j=1}^k n_{j, \cdot}.
+              \]
+
+              Заметим, что
+              \[
+              \begin{gathered}
+              \frac{n_{i,\cdot}}{n}
+              \overset{\mathbb{P}}{\longrightarrow} p_i^x, \\
+              \frac{n_{\cdot,j}}{n}
+              \overset{\mathbb{P}}{\longrightarrow} p_j^y,
+              \end{gathered}
+              \]
+              где:
+              <ul>
+                <li>
+                  $p_i^x$ &mdash; вероятность, что $x$ попадёт в $\Delta_i$;
+                </li>
+
+                <li>
+                  $p_j^y$ &mdash; вероятность, что $y$ попадёт в $\Delta_j$.
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              Критерий:
+              \[
+              \gamma(X_{[n]}, Y_{[m]}) = n \sum_{i=1}^k \sum_{j=1}^m
+              \frac
+              {\paren{n_{ij} - \dfrac{n_{i,\cdot} \cdot n_{\cdot, j}}{n}}^2}
+              {n_{i, \cdot} \cdot n_{\cdot, j}}
+              \sim \chi_{(k-1) \cdot (m-1)}^2.
+              \]
+            </li>
+
+            <li>
+              Критическая область:
+              \[
+              \paren{ \chi_{1-\alpha, (k-1) \cdot (m-1)}^2; +\infty }.
+              \]
+            </li>
+          </ol>
+        </div>
+
+        <hr>
+
+        <div class="definition">
+          <i>
+            Коэффициент корреляции Пирсона:
+          </i>
+
+          \[
+          \hat \rho
+          = \frac
+          {\sum_{i=1}^n (x_i - \overline{x}) (y_i - \overline{y})}
+          {\sqrt{
+          \sum_{i=1}^n (x_i - \overline{x})^2
+          \sum_{i=1}^n (y_i - \overline{y})^2
+          }}.
+          \]
+
+          Похоже на
+          \[
+          \rho = \frac
+          {\mean{(\xi - \mean\xi) (\eta - \mean\eta)}}
+          {\sqrt{\disp \xi \disp \eta}}.
+          \]
+
+          <ol>
+            <li>
+              $H_0: \rho = 0$.
+            </li>
+
+            <li>
+              Задаём уровень значимости критерия $\alpha$.
+            </li>
+
+            <li>
+              Статистика:
+              \[
+              \gamma = \frac{\hat\rho \sqrt{n-2}}{\sqrt{1 - \hat\rho^2}}
+              \sim T_{n-2}.
+              \]
+            </li>
+
+            <li>
+              Критическая область:
+              \[
+              (-\infty, -t_{1-\frac{\alpha}{2}, n-2}) \cup
+              (t_{1-\frac{\alpha}{2}, n-2}, +\infty).
+              \]
+            </li>
+          </ol>
+        </div>
+
+        <hr>
+
+        <div class="definition">
+          <i>
+            Коэффициент ранговой корреляции Спирмена:
+          </i>
+
+          \[
+          \tilde\rho = \hat\rho (r(X_{[n]}), r(Y_{[m]}))
+          = 1 - \frac{6\sum_{i=1}^n \paren{r(x_i) - r(y_i)}^2}{n(n-1)(n-2)},
+          \]
+          где $r(z)$ &mdash; ранг элемента $z$ в общем вариационном ряду.
+
+          <ol>
+            <li>
+              $H_0: \rho_S = 0$.
+            </li>
+
+            <li>
+              Задаём уровень значимости критерия $\alpha$.
+            </li>
+
+            <li>
+              Статистика:
+              \[
+              \gamma = \tilde\rho \sqrt{n - 1} \sim N(0, 1).
+              \]
+            </li>
+
+            <li>
+              Критическая область:
+              \[
+              (-\infty, -u_{1-\frac{\alpha}{2}})
+              \cup
+              (u_{1-\frac{\alpha}{2}}, +\infty).
+              \]
+            </li>
+          </ol>
+        </div>
+      </li>
+    </ol>
+  </body>
+</html>
+
