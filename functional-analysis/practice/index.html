@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>06 &mdash; Практика &mdash; Функциональный анализ</title>
+
+    <link href="/assets/css/styles.css" rel="stylesheet">
+    <script defer src="/assets/js/core.js"></script>
+    <script defer src="/assets/js/questions.js"></script>
+    <script defer src="/assets/js/controls.js"></script>
+
+    <link rel="stylesheet" href="/assets/katex/katex.min.css">
+    <script defer src="/assets/katex/katex.min.js"></script>
+    <script defer src="/assets/katex/auto-render.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false },
+            { left: '\\(', right: '\\)', display: false },
+            { left: '\\[', right: '\\]', display: true }
+          ],
+          // • rendering keys, e.g.:
+          throwOnError: false
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1 id="title">Функциональный анализ &mdash; 06 &mdash; Практика</h1>
+    <nav>
+      <a href="/">Домой</a>
+      <a href="/links">Ссылки</a>
+      <a href="/bib">Библиография</a>
+      <a href="/functional-analysis">Функциональный анализ</a>
+    </nav>
+
+    <div style="display:none">
+      $\global\def\at#1#2{\left. #1 \right\rvert_{#2}}$
+      $\global\def\abs#1{\left\lvert #1 \right\rvert}$
+      $\global\def\norm#1{\left\lVert #1 \right\rVert}$
+
+      $\global\def\dp#1#2{#1 \cdot #2\,}$
+      $\global\def\vp#1#2{#1 \times #2\,}$
+
+      $\global\def\dv#1#2{\frac{d #1}{d #2}}$
+      $\global\def\pd#1#2{\frac{\partial #1}{\partial #2}}$
+      $\global\def\pdv2#1#2{\frac{\partial^2 #1}{\partial #2^2}}$
+      $\global\def\ppdv#1#2#3{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
+
+      $\global\def\paren#1{\left( #1 \right)}$
+
+      $\global\def\mbox#1{\text{#1}}$
+
+      $\global\def\div{\text{div}\,}$
+      $\global\def\dsum{\displaystyle\sum\,}$
+      $\global\def\grad{\text{grad}\,}$
+      $\global\def\rot{\text{rot}\,}$
+
+      $\global\def\bydef#1{\overset{\mathrm{def}}{#1}}$
+      $\global\def\vb#1{\textbf{#1}}$
+
+      $\global\def\rddots{\cdot^{\displaystyle \cdot^{\displaystyle \cdot}}}$
+
+      $\global\def\op#1{\mathrm{#1}\,}$
+
+      $\global\def\diag{\mathrm{diag}\,}$
+      $\global\def\rank{\mathrm{rank}\,}$
+      $\global\def\Sp{\,\mathrm{Sp}\,}$
+      $\global\def\proj{\mathrm{proj}}$
+      $\global\def\grad{\,\mathrm{grad}\,}$
+      $\global\def\const{\text{const}\,}$
+      $\global\def\res{\text{res}\,}$
+      $\global\def\Res{\text{Res}\,}$
+      $\global\def\Lin{\,\text{Lin}\,}$
+      $\global\def\Re{\text{Re}\,}$
+      $\global\def\Im{\text{Im}\,}$
+      $\global\def\ch{\text{ch}\,}$
+      $\global\def\sh{\text{sh}\,}$
+      $\global\def\tg{\mathrm{tg}\,}$
+      $\global\def\argtg{\text{argtg}\,}$
+    </div>
+
+    <div class="definition">
+      Пара $(X, T)$ называется <i>топологическим пространством</i>, если
+      <ol>
+        <li>
+          $X \in T$;
+        </li>
+
+        <li>
+          $\varnothing \in T$;
+        </li>
+
+        <li>
+          не более чем счётное объединение множеств из $T$ также принадлежит
+          $T$:
+          \[
+          \forall x_i \in T \qquad \bigcup_i x_i \in T;
+          \]
+        </li>
+
+        <li>
+          конечное пересечение множеств из $T$ также принадлежит $T$:
+          \[
+          \forall x_1, \dots, x_n \in T \qquad \bigcap_{i=1}^n x_i \in T.
+          \]
+        </li>
+      </ol>
+
+      Множество $X$ называют <i>носителем топологии</i>, а множества,
+      принадлежащие $T$ &mdash; <i>открытыми множествами</i>.
+    </div>
+  </body>
+
+</html>
+
+
