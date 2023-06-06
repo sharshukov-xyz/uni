@@ -67,6 +67,13 @@
       $\global\def\at#1#2{\left. #1 \right\rvert_{#2}}$
       $\global\def\abs#1{\left\lvert #1 \right\rvert}$
       $\global\def\norm#1{\left\lVert #1 \right\rVert}$
+      $\global\def\bvec#1{\mathbf{#1}}$
+      $\global\def\floor#1{\left\lfloor #1 \right\rfloor}$
+
+      $\global\def\limto#1{\underset{#1}{\longrightarrow}}$
+      $\global\def\prob#1{\mathbb{P} \left\{ #1 \right\}}$
+      $\global\def\mean#1{\mathbb{E} \left[ #1 \right]}$
+      $\global\def\disp#1{D \left[ #1 \right]}$
 
       $\global\def\dp#1#2{#1 \cdot #2\,}$
       $\global\def\vp#1#2{#1 \times #2\,}$
@@ -77,6 +84,7 @@
       $\global\def\ppdv#1#2#3{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
 
       $\global\def\paren#1{\left( #1 \right)}$
+      $\global\def\bydef#1{\overset{\mathrm{def}}{#1}}$
 
       $\global\def\mbox#1{\text{#1}}$
 
@@ -89,25 +97,362 @@
 
       $\global\def\op#1{\mathrm{#1}\,}$
 
-      $\global\def\proj{\mathrm{proj}}$
-      $\global\def\bydef{\mathrm{def}}$
-      $\global\def\const{\text{const}\,}$
-      $\global\def\res{\text{res}\,}$
+      $\global\def\Im{\text{Im}\,}$
       $\global\def\Res{\text{Res}\,}$
       $\global\def\Re{\text{Re}\,}$
-      $\global\def\Im{\text{Im}\,}$
-      $\global\def\ch{\text{ch}\,}$
-      $\global\def\sh{\text{sh}\,}$
-      $\global\def\tg{\mathrm{tg}\,}$
       $\global\def\argtg{\text{argtg}\,}$
+      $\global\def\ch{\text{ch}\,}$
+      $\global\def\const{\text{const}\,}$
+      $\global\def\degree{\text{degree}\,}$
+      $\global\def\proj{\mathrm{proj}}$
+      $\global\def\res{\text{res}\,}$
+      $\global\def\sh{\text{sh}\,}$
+      $\global\def\sign{\text{sign}\,}$
+      $\global\def\tg{\mathrm{tg}\,}$
     </div>
 
     <ol id="questions">
       <li class="question">
         <div class="name">
-          Общее уравнение механики и принцип возможных перемещений
+          Классификация связей
         </div>
         <div class="content">
+          Рассмотрим произвольную систему $n$ материальных точек $M_i$ с
+          обобщёнными координатами $q_1, \dots, q_r$.
+
+          <div class="definition">
+            Если материальная система не свободна, то её обобщённые координаты
+            $q_1, \dots, q_r$, так же как и обобщённые скорости $\dot q_1,
+            \dots, \dot q_r$, подчиняются ограничительным условиям, которые
+            называют <i>связями</i>.
+          </div>
+
+          <div class="definition">
+            Связи, выражаемые аналитические уравнениями вида
+            \[
+            \begin{aligned}
+            \Phi_\alpha (t; q_1, \dots, q_r; \dot q_1, \dots, \dot q_r) &= 0 \\
+            \Phi_\alpha (t; q_1, \dots, q_r; \dot q_1, \dots, \dot q_r)
+            &\leqslant 0 \\
+            \Phi_\alpha (t; q_1, \dots, q_r; \dot q_1, \dots, \dot q_r)
+            &\geqslant 0,
+            \end{aligned}
+            \]
+            называют <i>кинематическими</i>.
+          </div>
+
+          <div class="definition">
+            Если время не входит явно в уравнения связей, то такие связи
+            называют <i>стационарными</i>, в противном случае &mdash;
+            <i>нестационарными</i>.
+          </div>
+
+          <div class="definition">
+            Кинематические связи, уравнения которых не содержат обобщённых
+            скоростей или путём интегрирования могут быть к такому виду
+            приведены, называют <i>голономными</i>, в противном случае &mdash;
+            <i>неголономными</i>.
+          </div>
+
+          <div class="definition">
+            Связи, заданные неравенствами
+            \[
+            \begin{aligned}
+            \Phi_\alpha (t; q_1, \dots, q_r; \dot q_1, \dots, \dot q_r)
+            &\leqslant 0 \\
+            \Phi_\alpha (t; q_1, \dots, q_r; \dot q_1, \dots, \dot q_r)
+            &\geqslant 0,
+            \end{aligned}
+            \]
+            называют <i>освобождающими</i> (<i>неудерживающими,
+              односторонними</i>).
+            <br><br>
+            Связи, заданные равенствами
+            \[
+            \Phi_\alpha (t; q_1, \dots, q_r; \dot q_1, \dots, \dot q_r) = 0,
+            \]
+            называют <i>неосвобождающими</i> (<i>удерживающими,
+              двусторонними</i>).
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: истинное перемещение, виртуальное перемещение
+        </div>
+        <div class="content">
+          Рассмотрим бесконечно малые перемещения точек системы, совместимые со
+          связями, наложенными на эту систему.
+
+          <div class="definition">
+            Перемещения точек системы, осуществляемые за данный бесконечно малый
+            промежуток времени точками несвободной системы в их действительном
+            движении под действием приложенных сил, называют <i>истинными</i>
+            (<i>действительными</i>).
+
+            <div class="notation">
+              $d\bvec{r}(t), dx, dy, dz, dt$.
+            </div>
+          </div>
+
+          Если связи нестационарны, то бесконечно малые перемещения точек
+          системы можно представить себе разложенными на два слагаемых:
+          <ol>
+            <li>
+              совместимые со связями бесконечно малые перемещения, которые имели
+              бы место, если бы связи на мгновение перестали изменяться;
+            </li>
+
+            <li>
+              перемещения, обусловленные изменением самих связей.
+            </li>
+          </ol>
+
+          <div class="definition">
+            Бесконечно малые перемещения точек системы, совместимые со связями,
+            зафиксированными в данный момент времени, называют
+            <i>виртуальными</i>.
+
+            <div class="notation">
+              $\delta \bvec{r}(t), \delta x, \delta y, \delta z$.
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          При каких условиях истинные перемещения совпадают с виртуальными?
+        </div>
+        <div class="content">
+          <div class="statement">
+            Истинные перемещения совпадают с виртуальными, если связи
+            стационарны.
+
+            <div class="proof">
+              <p>
+              Рассмотрим несвободную систему с удерживающей связью
+              \[
+              f(x,y,z,t) = 0.
+              \]
+
+              По определению виртуального перемещения, оно должно удовлетворять
+              этой связи, то есть
+              \[
+              f(x + \delta x, y + \delta y, z + \delta z, t) = 0.
+              \]
+
+              Рассмотрим разложение функции
+              $f(x + \delta x, y + \delta y, z + \delta z, t)$ в ряд в
+              окрестности точки $0$:
+              \[
+              f(x, y, z, t) + \pd{f}{x}\delta x + \pd{f}{y} \delta y
+              + \pd{f}{z} \delta z + \cdots = 0.
+              \]
+              Отбрасывая члены высшего порядка малости (в силу того, что
+              $\delta x, \delta y, \delta z$ &mdash; бесконечно малые
+              перемещения) и учитывая, что $f(x,y,z,t) = 0$ для любых $x,y,z,t$,
+              получаем, что
+              \[
+              \pd{f}{x}\delta x + \pd{f}{y} \delta y + \pd{f}{z} \delta z = 0.
+              \]
+              </p>
+
+              <p>
+              Рассмотрим теперь истинное перемещение. Для него так же
+              \[
+              f(x + dx, y + dy, z + dz, t + dt) = 0.
+              \]
+              Разложение в ряд в окрестности точки 0:
+              \[
+              f(x, y, z, t) + \pd{f}{x} dx + \pd{f}{y} dy + \pd{f}{z} dz
+              + \pd{f}{t} dt + \cdots = 0.
+              \]
+              Пользуясь аналогичными рассуждениями, приходим к равенству
+              \[
+              \pd{f}{x} dx + \pd{f}{y} dy + \pd{f}{z} dz + \pd{f}{t} dt = 0.
+              \]
+
+              Нетрудно видеть, что если связь стационарная, то
+              ${\displaystyle \pd{f}{t} = 0}$, а предыдущее уравнение принимает
+              вид
+              \[
+              \pd{f}{x} dx + \pd{f}{y} dy + \pd{f}{z} dz = 0.
+              \]
+              </p>
+            </div>
+          </div>
+
+          <div class="remark">
+            Из равенства
+            \[
+            \pd{f}{x} \delta x + \pd{f}{y} \delta y + \pd{f}{z} \delta z = 0
+            \]
+            следует, что только две вариации могут быть независимыми.
+          </div>
+
+          <div class="remark">
+            Данное утверждение верно и для системы из $n$ материальных точек; в
+            этом случае разложение в ряд примет вид
+            \[
+            \pd{f}{t} dt + \sum_{i=1}^n \paren{
+            \pd{f}{x_i} dx_i + \pd{f}{y_i} dy_i + \pd{f}{z_i} dz_i
+            } = 0.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: реакции связей
+        </div>
+        <div class="content">
+          <div class="definition">
+            Ограничивая свободу движения системы, связи действуют на точки
+            системы посредством сил, называемых <i>реакциями связей</i>.
+          </div>
+
+          <div class="definition">
+            Силы, приложенные к точкам несвободной системы, называют
+            <i>активными</i>, а реакции связей &mdash; <i>реактивными
+            силами</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: идеальная связь
+        </div>
+        <div class="content">
+          Рассмотрим систему из $N$ материальных точек, подчинённую $m$ связям.
+          Обозначим равнодействующую всех реактивных сил, действующих на $j$-ую
+          точку, как $\bvec{R}_j$.
+
+          <div class="definition">
+            <i>Идеальными связями</i> называют такие связи, сумма элементарных
+            работ реакций которых на любом виртуальном перемещении системы равна
+            нулю:
+            \[
+            \sum_{j=1}^N \bvec{R}_j \cdot \delta \bvec{r}_j = 0.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Общее уравнение механики
+        </div>
+        <div class="content">
+          Рассмотрим несвободную систему из $N$ материальных точек массами
+          $m_j$. Составим уравнения движения системы:
+          \[
+          m_j \dv{\bvec{v}_j}{t} = \bvec{F}_j + \bvec{R}_j,
+          \]
+          где
+          <ul>
+            <li>
+              $\bvec{F}_j$ &mdash; равнодействующая активных сил,
+              приложенных к $j$-ой точке;
+            </li>
+            <li>
+              $\bvec{R}_j$ &mdash; равнодействующая реактивных сил,
+              приложенных к $j$-ой точке.
+            </li>
+          </ul>
+
+          Рассмотрим равенство
+          \[
+          \sum_{j=1}^N \paren{
+          m_j \pd{\bvec{v}_j}{dt} - \bvec{F}_j - \bvec{R}_j
+          } \delta \bvec{r}_j = 0.
+          \]
+
+          Если связи идеальны, то по определению их виртуальные работы равны
+          нулю:
+          \[
+          \sum_{j=1}^N \bvec{R}_j \cdot \delta \bvec{r}_j = 0.
+          \]
+          Учитывая этот факт, приходим к <i class="important">
+            общему уравнению механики</i>:
+          \[
+          \sum_{j=1}^N \paren{
+          m_j \pd{\bvec{v_j}}{t} - \bvec{F}_j
+          } \delta \bvec{r}_j = 0,
+          \]
+          которое также называют <i class="important">
+            уравнением Даламбера-Лагранжа в декартовых координатах</i>.
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Принцип возможных перемещений
+        </div>
+        <div class="content">
+          <div class="statement">
+            Необходимое и достаточное условие равновесия системы, подчинённой
+            стационарным неосвобождающим идеальным связям, заключается в
+            равенстве нулю суммы элементарных работ активных сил на любом
+            возможном перемещении системы из рассматриваемого положения
+            равновесия, т.е.
+            \[
+            \sum_{j=1}^N \bvec{F}_j \cdot \delta \bvec{r}_j = 0.
+            \]
+
+            <div class="proof">
+              <div class="necessity">
+                Предположим, что несвободная система, подчинённая стационарным
+                неосвобождающим идеальным связям, находится в состоянии
+                равновесия. Тогда каждая её точка $M_j$ находится в состоянии
+                равновесия, и равнодействующая сил $\bvec{F}_j$ и $\bvec{R}_j$,
+                приложенных к точке $M_j$, должна быть равна нулю. Равна нулю
+                будет и работа этой равнодействующей, так что
+                \[
+                \sum_{j=1}^N \paren{
+                \bvec{F}_j + \bvec{R}_j
+                } \delta \bvec{r}_j = 0,
+                \]
+                или
+                \[
+                \sum_{j=1}^N \bvec{F}_j \cdot \delta \bvec{r}_j
+                + \sum_{j=1}^N \bvec{R}_j \cdot \delta \bvec{r}_j = 0,
+                \]
+                но вторая сумма равна нулю в силу идеальности связей, и,
+                следовательно,
+                \[
+                \sum_{j=1}^N \bvec{F}_j \cdot \delta \bvec{r}_j = 0.
+                \]
+              </div>
+
+              <div class="sufficiency">
+                Если выполнено условие
+                \[
+                \sum_{j=1}^N \bvec{F}_j \cdot \delta \bvec{r}_j = 0,
+                \]
+                то общее уравнение механики
+                \[
+                \sum_{j=1}^N \paren{
+                m_j \pd{\bvec{v_j}}{t} - \bvec{F}_j
+                } \delta \bvec{r}_j = 0
+                \]
+                примет вид
+                \[
+                \sum_{j=1}^N \pd{\bvec{v_j}}{t} \cdot \delta \bvec{r}_j = 0,
+                \]
+                откуда (в силу произвольности перемещения $\delta \bvec{r}_j$)
+                следует, что
+                \[
+                \pd{\bvec{v_j}}{t} = 0 \qquad \forall j = \overline{1,N},
+                \]
+                то есть равнодействующая активных и реактивных сил, приложенных
+                к каждой точке, равна нулю.
+              </div>
+            </div>
+          </div>
         </div>
       </li>
 

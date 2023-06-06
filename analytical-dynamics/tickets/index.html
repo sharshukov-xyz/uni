@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>АДУС - 06 - Билеты</title>
+
+    <link href="/assets/css/styles.css" rel="stylesheet">
+    <script defer src="/assets/js/core.js"></script>
+    <script defer src="/assets/js/tickets.js"></script>
+    <script defer src="/assets/js/controls.js"></script>
+
+    <link rel="stylesheet" href="/assets/katex/katex.min.css">
+    <script defer src="/assets/katex/katex.min.js"></script>
+    <script defer src="/assets/katex/auto-render.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false },
+            { left: '\\(', right: '\\)', display: false },
+            { left: '\\[', right: '\\]', display: true }
+          ],
+          // • rendering keys, e.g.:
+          throwOnError: false
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1 id="title">АДУС - 06 - Билеты</h1>
+    <nav>
+      <a href="/">Домой</a>
+      <a href="..">АДУС</a>
+      <a href="/links">Ссылки</a>
+      <a href="/about">Контакты</a>
+    </nav>
+
+    <div class="controls">
+      <button onclick="HideTickets()">Спрятать билеты</button>
+      <button onclick="ShowTickets()">Показать все билеты</button>
+      <button onclick="ShowRandomElement(HideTickets)">Показать случайный билет</button>
+    </div>
+
+    <div style="display:none">
+      $\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}$
+      $\newcommand{\dv}[2]{\frac{d #1}{d #2}}$
+      $\newcommand{\pdv}[2]{\frac{\partial #1}{\partial #2}}$
+      $\newcommand{\ppdv}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
+      $\DeclareMathOperator{\rot}{rot}$
+      $\DeclareMathOperator{\const}{const}$
+    </div>
+
+    <ol id="tickets">
+      <li class="ticket">
+        <div class="name">
+          Общее уравнение механики и принцип возможных перемещений
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Уравнения Лагранжа I рода и реакции идеальных связей
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Лагранжевы координаты. Вариации лагранжевых координат. Общее уравнение
+          механики в лагранжевых координатах
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Уравнения Лагранжа II рода, их инвариантность
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Разрешимость уравнений Лагранжа II рода относительно старших
+          производных
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Вывод канонических уравнений
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Канонические уравнения: интеграл механической энергии
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Циклические координаты
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Полный интеграл и характеристики уравнений в частных производных
+          первого порядка
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Уравнение Гамильтона-Якоби. Метод Якоби
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Решение задачи о движении точки относительно планеты методом Якоби
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Скобки Пуассона и теорема Пуассона. Построение интеграла в
+          стационарном случае
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Вариации канонических переменных. Основной дифференциальный принцип
+          механики
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Изохронная и полная вариации функционала действия
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Принцип Гамильтона-Остроградского
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Действие &mdash; решение уравнений Гамильтона-Якоби
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Принцип Эйлера-Лагранжа
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Контактные преобразования
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Контактные преобразования и уравнения Гамильтона-Якоби
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Геометрия масс. Моменты инерции. Тензор инерции. Эллипсоид инерции
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Движение твёрдого тела около неподвижной точки. Динамические и
+          кинематические уравнения Эйлера
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Задача вращательного движения тела в однородном поле тяжести.
+          Уравнения движения и интегралы. Случаи Эйлера, Лагранжа, Ковалевской
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Постановка задач оптимального управления: критерии качества и
+          ограничения
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Постановка вариационных задач управления движением. Сильные и слабые
+          вариации условного функционала
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Полная вариация условного функционала: слабое варьирование
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Полная вариация условного функционала: сильное варьирование. Условия
+          Эрдмана-Вейерштрасса
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Необходимые условия экстремума для задачи классического вариационного
+          исчисления
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Принцип максимума Понтрягина: формулировки, замечания
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Оптимальное по быстродействию управление в задаче Лагранжа
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Метод динамического программирования: вывод уравнения Беллмана,
+          замечания о методе динамического программирования
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Построение управления с помощью метода динамического программирования
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Связь метода динамического программирования с принципум максимума
+          Понтрягина
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Оптимальное по быстродействию управление вращательным движением в
+          случае Эйлера
+        </div>
+      </li>
+    </ol>
+  </body>
+</html>
