@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>06 &mdash; Вопросы &mdash; АДУС</title>
+
+    <link href="/assets/css/styles.css" rel="stylesheet">
+    <script defer src="/assets/js/core.js"></script>
+    <script defer src="/assets/js/questions.js"></script>
+    <script defer src="/assets/js/controls.js"></script>
+
+    <link rel="stylesheet" href="/assets/katex/katex.min.css">
+    <script defer src="/assets/katex/katex.min.js"></script>
+    <script defer src="/assets/katex/auto-render.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false },
+            { left: '\\(', right: '\\)', display: false },
+            { left: '\\[', right: '\\]', display: true }
+          ],
+          // • rendering keys, e.g.:
+          throwOnError: false
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1 id="title">06 &mdash; Вопросы &mdash; АДУС</h1>
+    <nav>
+      <a href="/">Домой</a>
+      <a href="..">АДУС</a>
+      <a href="/links">Ссылки</a>
+      <a href="/about">Контакты</a>
+    </nav>
+
+    <div class="controls">
+      <button onclick="HideQuestions()">Скрыть вопросы</button>
+      <button onclick="ShowQuestions()">Показать вопросы</button>
+      <button onclick="HideAnswers()">Скрыть ответы</button>
+      <button onclick="ShowAnswers()">Показать ответы</button>
+      <button onclick="HideProofs()">Скрыть доказательства</button>
+      <button onclick="ShowProofs()">Показать доказательства</button>
+      <button onclick="ShowRandomElement(HideQuestions)">
+        Показать случайный вопрос
+      </button>
+    </div>
+
+    <div class="proof-type">
+      Показывать
+      <select id="select-proof-type" name="select-proof-type">
+        <option value="proofs">доказательства полностью</option>
+        <option value="ideas">только идеи доказательств</option>
+      </select>
+    </div>
+
+    <div style="display:none">
+      $\global\def\at#1#2{\left. #1 \right\rvert_{#2}}$
+      $\global\def\abs#1{\left\lvert #1 \right\rvert}$
+      $\global\def\norm#1{\left\lVert #1 \right\rVert}$
+
+      $\global\def\dp#1#2{#1 \cdot #2\,}$
+      $\global\def\vp#1#2{#1 \times #2\,}$
+
+      $\global\def\dv#1#2{\frac{d #1}{d #2}}$
+      $\global\def\pd#1#2{\frac{\partial #1}{\partial #2}}$
+      $\global\def\pdv2#1#2{\frac{\partial^2 #1}{\partial #2^2}}$
+      $\global\def\ppdv#1#2#3{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
+
+      $\global\def\paren#1{\left( #1 \right)}$
+
+      $\global\def\mbox#1{\text{#1}}$
+
+      $\global\def\div{\text{div}\,}$
+      $\global\def\dsum{\displaystyle\sum\,}$
+      $\global\def\grad{\text{grad}\,}$
+      $\global\def\rot{\text{rot}\,}$
+
+      $\global\def\vb#1{\textbf{#1}}$
+
+      $\global\def\op#1{\mathrm{#1}\,}$
+
+      $\global\def\proj{\mathrm{proj}}$
+      $\global\def\bydef{\mathrm{def}}$
+      $\global\def\const{\text{const}\,}$
+      $\global\def\res{\text{res}\,}$
+      $\global\def\Res{\text{Res}\,}$
+      $\global\def\Re{\text{Re}\,}$
+      $\global\def\Im{\text{Im}\,}$
+      $\global\def\ch{\text{ch}\,}$
+      $\global\def\sh{\text{sh}\,}$
+      $\global\def\tg{\mathrm{tg}\,}$
+      $\global\def\argtg{\text{argtg}\,}$
+    </div>
+
+    <ol id="questions">
+      <li class="question">
+        <div class="name">
+          Общее уравнение механики и принцип возможных перемещений
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Уравнения Лагранжа I рода и реакции идеальных связей
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Лагранжевы координаты. Вариации лагранжевых координат. Общее уравнение
+          механики в лагранжевых координатах
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Уравнения Лагранжа II рода, их инвариантность
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Разрешимость уравнений Лагранжа II рода относительно старших
+          производных
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Вывод канонических уравнений
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Канонические уравнения: интеграл механической энергии
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Циклические координаты
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Полный интеграл и характеристики уравнений в частных производных
+          первого порядка
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Уравнение Гамильтона-Якоби. Метод Якоби
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Решение задачи о движении точки относительно планеты методом Якоби
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Скобки Пуассона и теорема Пуассона. Построение интеграла в
+          стационарном случае
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Вариации канонических переменных. Основной дифференциальный принцип
+          механики
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Изохронная и полная вариации функционала действия
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Принцип Гамильтона-Остроградского
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Действие &mdash; решение уравнений Гамильтона-Якоби
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Принцип Эйлера-Лагранжа
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Контактные преобразования
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Контактные преобразования и уравнения Гамильтона-Якоби
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Геометрия масс. Моменты инерции. Тензор инерции. Эллипсоид инерции
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Движение твёрдого тела около неподвижной точки. Динамические и
+          кинематические уравнения Эйлера
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Задача вращательного движения тела в однородном поле тяжести.
+          Уравнения движения и интегралы. Случаи Эйлера, Лагранжа, Ковалевской
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Постановка задач оптимального управления: критерии качества и
+          ограничения
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Постановка вариационных задач управления движением. Сильные и слабые
+          вариации условного функционала
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Полная вариация условного функционала: слабое варьирование
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Полная вариация условного функционала: сильное варьирование. Условия
+          Эрдмана-Вейерштрасса
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Необходимые условия экстремума для задачи классического вариационного
+          исчисления
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Принцип максимума Понтрягина: формулировки, замечания
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Оптимальное по быстродействию управление в задаче Лагранжа
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Метод динамического программирования: вывод уравнения Беллмана,
+          замечания о методе динамического программирования
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Построение управления с помощью метода динамического программирования
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Связь метода динамического программирования с принципум максимума
+          Понтрягина
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Оптимальное по быстродействию управление вращательным движением в
+          случае Эйлера
+        </div>
+        <div class="content">
+        </div>
+      </li>
+    </ol>
+  </body>
+
+</html>

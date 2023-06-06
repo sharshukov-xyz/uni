@@ -37,9 +37,9 @@
     <h1 id="title">06 - Вопросы к зачёту - Стабилизация нелинейных систем</h1>
     <nav>
       <a href="/">Домой</a>
+      <a href="..">Стабилизация нелинейных систем</a>
       <a href="/links">Ссылки</a>
-      <a href="/bib">Библиография</a>
-      <a href="/nonlinear-stabilization">Стабилизация нелинейных систем</a>
+      <a href="/about">Контакты</a>
     </nav>
 
     <div class="controls">
@@ -50,6 +50,14 @@
       <button onclick="HideProofs()">Скрыть доказательства</button>
       <button onclick="ShowProofs()">Показать доказательства</button>
       <button onclick="ShowRandomElement(HideQuestions)">Показать случайный вопрос</button>
+    </div>
+
+    <div class="proof-type">
+      Показывать
+      <select id="select-proof-type" name="select-proof-type">
+        <option value="proofs">доказательства полностью</option>
+        <option value="ideas">только идеи доказательств</option>
+      </select>
     </div>
 
     <div style="display:none">

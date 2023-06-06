@@ -99,7 +99,9 @@
 }
 
 .definition i {
-  color: red;
+  /* background-color: lightgreen; */
+  border-bottom: 3px double lightgreen;
+  /* color: red; */
 }
 
 .definition::before {
