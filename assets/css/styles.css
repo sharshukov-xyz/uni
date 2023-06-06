@@ -3,10 +3,6 @@
   margin-right: auto;
 }
 
-.important {
-  color: red;
-}
-
 /* FIXME: change to `ol.big-height > li` margins */
 .big-height {
   line-height: 400%;
@@ -98,10 +94,9 @@
   margin: 5px 0 5px 0;
 }
 
+.important,
 .definition i {
-  /* background-color: lightgreen; */
   border-bottom: 3px double lightgreen;
-  /* color: red; */
 }
 
 .definition::before {
