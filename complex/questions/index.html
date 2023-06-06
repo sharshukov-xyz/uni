@@ -49,7 +49,9 @@
       <button onclick="ShowAnswers()">Показать ответы</button>
       <button onclick="HideProofs()">Скрыть доказательства</button>
       <button onclick="ShowProofs()">Показать доказательства</button>
-      <button onclick="ShowRandomQuestion()">Показать случайный вопрос</button>
+      <button onclick="ShowRandomElement(HideQuestions)">
+        Показать случайный вопрос
+      </button>
     </div>
 
     <div style="display:none">
@@ -71,7 +73,7 @@
       $\global\def\argtg{\text{argtg}\,}$
     </div>
 
-    <div class="note">
+    <div class="remark">
       Синим цветом выделены вопросы из прошлого семестра.
     </div>
 
@@ -81,37 +83,39 @@
           Определение: аналитичность функции $f(z)$
         </div>
         <div class="content">
-          Говорят, что $f(z)$ <i>аналитична</i> в некоторой области $A \subset
-          \mathbb{C}$ (<i>область аналитичности</i>), если выполняется одно из
-          следующих равносильных условий:
-          <ol>
-            <li>
-              Ряд Тейлора функции в каждой точке $z \in A$ сходится, и его сумма
-              равна $f(z)$ (<i>аналитичность в смысле Вейерштрасса</i>)
-            </li>
+          <div class="definition">
+            Говорят, что $f(z)$ <i>аналитична</i> в некоторой области $A \subset
+            \mathbb{C}$ (<i>область аналитичности</i>), если выполняется одно из
+            следующих равносильных условий:
+            <ol>
+              <li>
+                Ряд Тейлора функции в каждой точке $z \in A$ сходится, и его сумма
+                равна $f(z)$ (<i>аналитичность в смысле Вейерштрасса</i>)
+              </li>
 
-            <li>
-              В каждой точке $z = x + i y \in A$ выполняются условия
-              Коши-Римана:
-              \[
-              \pdv{u}{x} = \pdv{v}{y}, \quad \pdv{u}{y} = -\pdv{v}{x},
-              \]
-              где $u(z), v(z)$ &mdash; вещественная и мнимая части
-              рассматриваемой функции $f(z)$
-              (<i>аналитичность в смысле Коши-Римана</i>)
-            </li>
+              <li>
+                В каждой точке $z = x + i y \in A$ выполняются условия
+                Коши-Римана:
+                \[
+                \pdv{u}{x} = \pdv{v}{y}, \quad \pdv{u}{y} = -\pdv{v}{x},
+                \]
+                где $u(z), v(z)$ &mdash; вещественная и мнимая части
+                рассматриваемой функции $f(z)$
+                (<i>аналитичность в смысле Коши-Римана</i>)
+              </li>
 
-            <li>
-              Интеграл $\displaystyle \int\limits_\Gamma f(z) dz = 0$ для любой
-              замкнутой кривой $\Gamma \subset A$
-              (<i>аналитичность в смысле Коши</i>)
-            </li>
+              <li>
+                Интеграл $\displaystyle \int\limits_\Gamma f(z) dz = 0$ для любой
+                замкнутой кривой $\Gamma \subset A$
+                (<i>аналитичность в смысле Коши</i>)
+              </li>
 
-            <li>
-              Функция $f(z)$ является голоморфной в области $A$, то есть
-              комплексно дифференцируема в каждой точке $z \in A$
-            </li>
-          </ol>
+              <li>
+                Функция $f(z)$ является голоморфной в области $A$, то есть
+                комплексно дифференцируема в каждой точке $z \in A$
+              </li>
+            </ol>
+          </div>
         </div>
       </li>
 
@@ -120,8 +124,10 @@
           Определение: целая функция
         </div>
         <div class="content">
-          Говорят, что функция $f(z)$ &mdash; целая, если она голоморфна во всей
-          $\mathbb{C}$.
+          <div class="definition">
+            Говорят, что функция $f(z)$ &mdash; <i>целая</i>, если она
+            голоморфна во всей $\mathbb{C}$.
+          </div>
         </div>
       </li>
 
@@ -185,15 +191,17 @@
           Определение: равномерная сходимость функционального ряда
         </div>
         <div class="content">
-          Ряд
-          \[
-          \sum_{k=1}^\infty f_k(z),
-          \]
-          сходящийся в области $D$, называется <i>равномерно сходящимся</i> в
-          этой области, если $\forall \varepsilon \gt 0 \; \exists N =
-          N(\varepsilon) \gt 0: \quad \forall n \gt N \; \abs{R_n(z)} \lt
-          \varepsilon$
-          одновременно для всех $z \in D$.
+          <div class="definition">
+            Ряд
+            \[
+            \sum_{k=1}^\infty f_k(z),
+            \]
+            сходящийся в области $D$, называется <i>равномерно сходящимся</i> в
+            этой области, если $\forall \varepsilon \gt 0 \; \exists N =
+            N(\varepsilon) \gt 0: \quad \forall n \gt N \; \abs{R_n(z)} \lt
+            \varepsilon$
+            одновременно для всех $z \in D$.
+          </div>
         </div>
       </li>
 
@@ -207,18 +215,19 @@
             соответствующими элементами какого-нибудь сходящегося числового ряда
             $\sum\limits_{k=1}^\infty a_k$, то функциональный ряд
             $\sum\limits_{k=1}^\infty f_k(z)$ сходится равномерно в $D$.
-          </div>
-          <div class="proof">
-            \[
-            \begin{aligned}
-            \abs{R_n(z)} &= \abs{f_{n+1}(z) + f_{n+2}(z) + \dots} \\
-            &\leqslant \abs{f_{n+1}(z)} + \abs{f_{n+2}(z)} + \dots \\
-            &\leqslant a_{n+1} + a_{n+2} + \dots \\
-            &= R_n \lt \varepsilon
-            \end{aligned}
-            \]
-            при $n \gt N(\varepsilon)$, так как числовой ряд
-            $\sum\limits_{k=1}^\infty a_k$ сходится.
+
+            <div class="proof">
+              \[
+              \begin{aligned}
+              \abs{R_n(z)} &= \abs{f_{n+1}(z) + f_{n+2}(z) + \dots} \\
+              &\leqslant \abs{f_{n+1}(z)} + \abs{f_{n+2}(z)} + \dots \\
+              &\leqslant a_{n+1} + a_{n+2} + \dots \\
+              &= R_n \lt \varepsilon
+              \end{aligned}
+              \]
+              при $n \gt N(\varepsilon)$, так как числовой ряд
+              $\sum\limits_{k=1}^\infty a_k$ сходится.
+            </div>
           </div>
         </div>
       </li>
@@ -238,41 +247,42 @@
                 Сумма $S(z)$ функционального ряда, равномерно сходящегося в $D$,
                 непрерывна в области $D$, если $f_k(z)$ являются непрерывными в
                 $D$ функциями.
-              </div>
-              <div class="proof">
-                Возьмём произвольную точку $z \in D$. Рассмотрим приращение
-                \[
-                \begin{aligned}
-                S(z + \Delta z) - S(z) &= S_n(z + \Delta z) + R_n(z + \Delta z) -
-                S_n(z) - R_n(z) \\
-                &= S_n(z + \Delta z) - S_n(z) + R_n(z + \Delta z) - R_n(z).
-                \end{aligned}
-                \]
 
-                Возьмём произвольно малый $\varepsilon \gt 0$. В силу
-                равномерной сходимости ряда
-                \[
-                \abs{R_n(z)} \lt \frac{\varepsilon}{3}, \quad
-                \abs{R_n(z + \Delta z)} \lt \frac{\varepsilon}{3}.
-                \]
-                В силу непрерывности функций $f_k(z)$ частичная сумма $S_n$
-                также непрерывна, поэтому
-                \[
-                \abs{S_n(z + \Delta z) - S_n(z)} \lt \frac{\varepsilon}{3}.
-                \]
-                
-                Возвращаясь к приращению, окончательно получаем
-                \[
-                \begin{aligned}
-                S(z + \Delta z) - S(z) &\leqslant
-                \abs{S_n(z + \Delta z) - S_n(z)} + \abs{R_n(z + \Delta z)}
-                + \abs{R_n(z)} \\
-                &\lt \frac{\varepsilon}{3} + \frac{\varepsilon}{3} +
-                \frac{\varepsilon}{3} = \varepsilon,
-                \end{aligned}
-                \]
-                откуда, в силу произвольности $z \in D$, следует
-                непрерывность $S(z)$ в $D$.
+                <div class="proof">
+                  Возьмём произвольную точку $z \in D$. Рассмотрим приращение
+                  \[
+                  \begin{aligned}
+                  S(z + \Delta z) - S(z) &= S_n(z + \Delta z) + R_n(z + \Delta z) -
+                  S_n(z) - R_n(z) \\
+                  &= S_n(z + \Delta z) - S_n(z) + R_n(z + \Delta z) - R_n(z).
+                  \end{aligned}
+                  \]
+
+                  Возьмём произвольно малый $\varepsilon \gt 0$. В силу
+                  равномерной сходимости ряда
+                  \[
+                  \abs{R_n(z)} \lt \frac{\varepsilon}{3}, \quad
+                  \abs{R_n(z + \Delta z)} \lt \frac{\varepsilon}{3}.
+                  \]
+                  В силу непрерывности функций $f_k(z)$ частичная сумма $S_n$
+                  также непрерывна, поэтому
+                  \[
+                  \abs{S_n(z + \Delta z) - S_n(z)} \lt \frac{\varepsilon}{3}.
+                  \]
+
+                  Возвращаясь к приращению, окончательно получаем
+                  \[
+                  \begin{aligned}
+                  S(z + \Delta z) - S(z) &\leqslant
+                  \abs{S_n(z + \Delta z) - S_n(z)} + \abs{R_n(z + \Delta z)}
+                  + \abs{R_n(z)} \\
+                  &\lt \frac{\varepsilon}{3} + \frac{\varepsilon}{3} +
+                  \frac{\varepsilon}{3} = \varepsilon,
+                  \end{aligned}
+                  \]
+                  откуда, в силу произвольности $z \in D$, следует
+                  непрерывность $S(z)$ в $D$.
+                </div>
               </div>
             </li>
 
@@ -285,59 +295,63 @@
                 \int\limits_\gamma S(z) dz = \sum_{k=1}^\infty
                 \int\limits_\gamma f_k(z) dz.
                 \]
-              </div>
 
-              <div class="proof">
-                <p>
-                По условию $f_k(z)$ непрерывны, а ряд сходится равномерно,
-                следовательно, $S(z)$ также непрерывна, поэтому $\exists
-                \int\limits_\gamma f_k(z) dz$.
-                </p>
+                <div class="proof">
+                  <p>
+                  По условию $f_k(z)$ непрерывны, а ряд сходится равномерно,
+                  следовательно, $S(z)$ также непрерывна, поэтому $\exists
+                  \int\limits_\gamma f_k(z) dz$.
+                  </p>
 
-                <p>
-                Полагая
-                \[
-                G_n = \sum_{k=0}^n \int\limits_\gamma f_k(z) dz,
-                \]
-                рассмотрим разность
-                \[
-                \int\limits_\gamma S(z) dz - G_n =
-                \int\limits_\gamma \left( S(z) - S_n(z) \right) =
-                \int\limits_\gamma R_n(z) dz.
-                \]
-                </p>
+                  <p>
+                  Полагая
+                  \[
+                  G_n = \sum_{k=0}^n \int\limits_\gamma f_k(z) dz,
+                  \]
+                  рассмотрим разность
+                  \[
+                  \int\limits_\gamma S(z) dz - G_n =
+                  \int\limits_\gamma \left( S(z) - S_n(z) \right) =
+                  \int\limits_\gamma R_n(z) dz.
+                  \]
+                  </p>
 
-                <p>
-                Возьмём произвольный $\varepsilon \gt 0$; в силу равномерной
-                сходимости ряда
-                \[
-                \exists N(\varepsilon): \; \forall n \gt N(\varepsilon) \quad
-                \abs{R_n(z)} \leqslant \frac{\varepsilon}{2 l_\gamma},
-                \]
-                где $l_\gamma$ &mdash; длина дуги $\gamma$.
-                </p>
+                  <p>
+                  Возьмём произвольный $\varepsilon \gt 0$; в силу равномерной
+                  сходимости ряда
+                  \[
+                  \exists N(\varepsilon): \; \forall n \gt N(\varepsilon) \quad
+                  \abs{R_n(z)} \leqslant \frac{\varepsilon}{2 l_\gamma},
+                  \]
+                  где $l_\gamma$ &mdash; длина дуги $\gamma$.
+                  </p>
 
-                <p>
-                Оценим модуль разности
-                \[
-                \rho_n = \abs{\int\limits_\gamma S(z) dz - G_n} =
-                \abs{\int\limits_\gamma R_n(z) dz} \leqslant
-                \frac{\varepsilon}{2 l_\gamma} \cdot l_\gamma \lt \varepsilon,
-                \]
-                откуда следует, что
-                $\displaystyle \lim_{n \to \infty} \rho_n = 0$, что влечёт за
-                собой равенство
-                \[
-                \int\limits_\gamma S(z) dz = \lim_{n \to \infty} G_n = \lim_{n
-                \to \infty} \sum_{k=1}^n \int\limits_\gamma f_k(z) dz =
-                \sum_{k=1}^\infty \int\limits_\gamma f_k(z)dz.
-                \]
-                </p>
+                  <p>
+                  Оценим модуль разности
+                  \[
+                  \rho_n = \abs{\int\limits_\gamma S(z) dz - G_n} =
+                  \abs{\int\limits_\gamma R_n(z) dz} \leqslant
+                  \frac{\varepsilon}{2 l_\gamma} \cdot l_\gamma \lt \varepsilon,
+                  \]
+                  откуда следует, что
+                  $\displaystyle \lim_{n \to \infty} \rho_n = 0$, что влечёт за
+                  собой равенство
+                  \[
+                  \int\limits_\gamma S(z) dz = \lim_{n \to \infty} G_n = \lim_{n
+                  \to \infty} \sum_{k=1}^n \int\limits_\gamma f_k(z) dz =
+                  \sum_{k=1}^\infty \int\limits_\gamma f_k(z)dz.
+                  \]
+                  </p>
+                </div>
               </div>
             </li>
 
             <li>
-              <div class="theorem"> (Вейерштрасса).
+              <div class="theorem">
+                <i>
+                  (Вейерштрасса).
+                </i>
+                <br>
                 Пусть $f_k(z)$ являются аналитическими в $D$ функциями, а ряд
                 сходится равномерно в любой области $\overline{D_1} \subset D$
                 к функции $S(z)$. Тогда $S(z)$ также аналитична в области $D$,
@@ -346,60 +360,61 @@
                 \[
                 \frac{d^n S(z)}{dz^n} = \sum_{k=1}^\infty \frac{d^n f_k(z)}{dz^n}.
                 \]
-              </div>
-              <div class="proof">
-                <p>
-                Докажем первую часть теоремы.
-                Рассмотрим произвольную точку $z_0 \in D$. Введём обозначение:
-                \[
-                D_r = \{ z: \abs{z - z_0} \lt r \}, \quad \left(\abs{z - z_0}
-                \leqslant r \right) \subset D.
-                \]
-                $S(z)$ непрерывна в $D_r$ и интегрируема по любому контуру
-                $\gamma \subset D_r$, поэтому (в силу аналитичности $f_k(z)$)
-                \[
-                \oint\limits_\gamma S(z) dz = \sum_{k=1}^\infty
-                \oint\limits_\gamma f_k(z) dz = 0.
-                \]
-                Выходит, что интеграл $\displaystyle \int\limits_\gamma S(z)dz =
-                0$ по любому замкнутому контуру $\gamma \subset D_r$, $\implies$
-                функция $S(z)$ аналитична в $D_r$, откуда, в силу произвольности
-                $z_0$ и $r$, она аналитична в $D$.
-                </p>
 
-                <p>
-                Докажем вторую часть теоремы.
-                Функции $S(z), f_k(z)$ аналитичны в $D$, тогда $\forall z_0 \in
-                D$
-                \[
-                \begin{aligned}
-                S^{(m)}(z_0) &= \frac{m!}{2\pi i} \oint\limits_L
-                \frac{S(z)}{(z - z_0)^{m+1}} dz, \\
-                f_k^{(m)}(z_0) &= \frac{m!}{2\pi i} \oint\limits_L
-                \frac{f_k(z)}{(z - z_0)^{m+1}} dz,
-                \end{aligned}
-                \]
-                где $L = \{ z: \abs{z - z_0} = r \}$.
-                </p>
+                <div class="proof">
+                  <p>
+                  Докажем первую часть теоремы.
+                  Рассмотрим произвольную точку $z_0 \in D$. Введём обозначение:
+                  \[
+                  D_r = \{ z: \abs{z - z_0} \lt r \}, \quad \left(\abs{z - z_0}
+                  \leqslant r \right) \subset D.
+                  \]
+                  $S(z)$ непрерывна в $D_r$ и интегрируема по любому контуру
+                  $\gamma \subset D_r$, поэтому (в силу аналитичности $f_k(z)$)
+                  \[
+                  \oint\limits_\gamma S(z) dz = \sum_{k=1}^\infty
+                  \oint\limits_\gamma f_k(z) dz = 0.
+                  \]
+                  Выходит, что интеграл $\displaystyle \int\limits_\gamma S(z)dz =
+                  0$ по любому замкнутому контуру $\gamma \subset D_r$, $\implies$
+                  функция $S(z)$ аналитична в $D_r$, откуда, в силу произвольности
+                  $z_0$ и $r$, она аналитична в $D$.
+                  </p>
 
-                <p>
-                Из равномерной сходимости ряда следует, что
-                \[
-                \sum_{k=1}^\infty \frac{f_k(z)}{(z - z_0)^{m+1}} = \frac{S(z)}{(z
-                - z_0)^{m+1}},
-                \]
-                а также
-                \[
-                \sum_{k=1}^\infty \oint\limits_L \frac{f_k(z)}{(z - z_0)^{m+1}}
-                = \oint\limits_L \frac{S(z)}{(z - z_0)^{m+1}},
-                \]
-                откуда, в силу аналитичности функций $S(z), f_k(z)$,
-                \[
-                \frac{d^n S(z)}{dz^n} = \sum_{k=1}^\infty \frac{d^n
-                f_k(z)}{dz^n},
-                \]
-                для любого $z_0 \in D$.
-                </p>
+                  <p>
+                  Докажем вторую часть теоремы.
+                  Функции $S(z), f_k(z)$ аналитичны в $D$, тогда $\forall z_0 \in
+                  D$
+                  \[
+                  \begin{aligned}
+                  S^{(m)}(z_0) &= \frac{m!}{2\pi i} \oint\limits_L
+                  \frac{S(z)}{(z - z_0)^{m+1}} dz, \\
+                  f_k^{(m)}(z_0) &= \frac{m!}{2\pi i} \oint\limits_L
+                  \frac{f_k(z)}{(z - z_0)^{m+1}} dz,
+                  \end{aligned}
+                  \]
+                  где $L = \{ z: \abs{z - z_0} = r \}$.
+                  </p>
+
+                  <p>
+                  Из равномерной сходимости ряда следует, что
+                  \[
+                  \sum_{k=1}^\infty \frac{f_k(z)}{(z - z_0)^{m+1}} = \frac{S(z)}{(z
+                  - z_0)^{m+1}},
+                  \]
+                  а также
+                  \[
+                  \sum_{k=1}^\infty \oint\limits_L \frac{f_k(z)}{(z - z_0)^{m+1}}
+                  = \oint\limits_L \frac{S(z)}{(z - z_0)^{m+1}},
+                  \]
+                  откуда, в силу аналитичности функций $S(z), f_k(z)$,
+                  \[
+                  \frac{d^n S(z)}{dz^n} = \sum_{k=1}^\infty \frac{d^n
+                  f_k(z)}{dz^n},
+                  \]
+                  для любого $z_0 \in D$.
+                  </p>
+                </div>
               </div>
             </li>
           </ol>
@@ -411,49 +426,54 @@
           Теорема Абеля
         </div>
         <div class="content">
-          <div class="theorem"> (Абеля).
+          <div class="theorem">
+            <i>
+              (Абеля).
+            </i>
             Если степенной ряд $\sum\limits_{n=0}^\infty c_n (z - z_0)^n$ сходится
-            в точке $z_1 \neq z_0$, то он абсолютно сходится внутри круга $\abs{z
-            - z_0} \lt \abs{z_1 - z_0}$, причём во всяком круге $\abs{z - z_0}
-            \leqslant \rho \lt \abs{z_1 - z_0}$ ряд сходится равномерно.
-          </div>
-          <div class="proof">
-            <p>
-            Из сходимости ряда $\displaystyle \sum_{k=0}^\infty c_k (z - z_0)^k$
-            в точке $z = z_1$ следует, что также будет сходится числовой ряд
-            \[
-            \sum_{k=0}^\infty c_k (z_1 - z_0)^k,
-            \]
-            откуда следует, что
-            \[
-            \lim_{k \to \infty} c_k (z_1 - z_0)^k = 0,
-            \]
-            что означает, что последовательность ограничена, то есть
-            $\exists M$:
-            \[
-            \abs{c_k (z_1 - z_0)^k} \leqslant M.
-            \]
-            Отсюда получаем оценку на $c_k$:
-            \[
-            \abs{c_k} \leqslant \frac{M}{\abs{z_1 - z_0}^k}.
-            \]
-            </p>
+            в точке $z_1 \neq z_0$, то он абсолютно сходится внутри круга
+            $\abs{z - z_0} \lt \abs{z_1 - z_0}$, причём во всяком круге
+            $\abs{z - z_0} \leqslant \rho \lt \abs{z_1 - z_0}$ ряд сходится
+            равномерно.
 
-            <p>
-            Рассмотрим теперь произвольную точку $z: \abs{z - z_0} \lt \abs{z_1
-            - z_0}$. Положим $\abs{z - z_0} = q \cdot \abs{z_1 - z_0}$,
-            где $q \lt 1$; тогда
-            \[
-            \abs{c_k (z - z_0)^k} = \abs{c_k} \cdot \abs{z - z_0}^k \leqslant
-            \frac{M}{\abs{z_1 - z_0}^k} \cdot q^k \cdot \abs{z_1 - z_0}^k = M
-            q^k.
-            \]
-            Ряд $\displaystyle \sum_{k=0}^\infty Mq^k$ сходится при $q \lt 1$,
-            поэтому ряд $\displaystyle \sum_{k=0}^\infty \abs{c_k (z - z_0)^k}$
-            сходится абсолютно в $\abs{z - z_0} \lt \abs{z_1 - z_0}$,
-            а в круге $\abs{z - z_0} \leqslant \rho \lt \abs{z_1 - z_0}$, по
-            признаку Вейерштрасса, он сходится равномерно.
-            </p>
+            <div class="proof">
+              <p>
+              Из сходимости ряда $\displaystyle \sum_{k=0}^\infty c_k (z - z_0)^k$
+              в точке $z = z_1$ следует, что также будет сходится числовой ряд
+              \[
+              \sum_{k=0}^\infty c_k (z_1 - z_0)^k,
+              \]
+              откуда следует, что
+              \[
+              \lim_{k \to \infty} c_k (z_1 - z_0)^k = 0,
+              \]
+              что означает, что последовательность ограничена, то есть
+              $\exists M$:
+              \[
+              \abs{c_k (z_1 - z_0)^k} \leqslant M.
+              \]
+              Отсюда получаем оценку на $c_k$:
+              \[
+              \abs{c_k} \leqslant \frac{M}{\abs{z_1 - z_0}^k}.
+              \]
+              </p>
+
+              <p>
+              Рассмотрим теперь произвольную точку $z: \abs{z - z_0} \lt \abs{z_1
+              - z_0}$. Положим $\abs{z - z_0} = q \cdot \abs{z_1 - z_0}$,
+              где $q \lt 1$; тогда
+              \[
+              \abs{c_k (z - z_0)^k} = \abs{c_k} \cdot \abs{z - z_0}^k \leqslant
+              \frac{M}{\abs{z_1 - z_0}^k} \cdot q^k \cdot \abs{z_1 - z_0}^k = M
+              q^k.
+              \]
+              Ряд $\displaystyle \sum_{k=0}^\infty Mq^k$ сходится при $q \lt 1$,
+              поэтому ряд $\displaystyle \sum_{k=0}^\infty \abs{c_k (z - z_0)^k}$
+              сходится абсолютно в $\abs{z - z_0} \lt \abs{z_1 - z_0}$,
+              а в круге $\abs{z - z_0} \leqslant \rho \lt \abs{z_1 - z_0}$, по
+              признаку Вейерштрасса, он сходится равномерно.
+              </p>
+            </div>
           </div>
 
           <div class="theorem">
@@ -470,22 +490,24 @@
           Радиус сходимости и область сходимости степенного ряда
         </div>
         <div class="content">
-          <ul>
-            <li>
-              <i>Радиус сходимости</i> $R$ определяется с помощью признаков
-              Даламбера или Коши:
-              \[
-              R = \lim_{n \to \infty} \abs{\frac{c_n}{c_{n+1}}}
-              \quad \mbox{ или } \quad
-              R = \lim_{n \to \infty} \frac{1}{\sqrt[n]{\abs{c_n}}}.
-              \]
-            </li>
+          <div class="definition">
+            <ul>
+              <li>
+                <i>Радиус сходимости</i> $R$ определяется с помощью признаков
+                Даламбера или Коши:
+                \[
+                R = \lim_{n \to \infty} \abs{\frac{c_n}{c_{n+1}}}
+                \quad \mbox{ или } \quad
+                R = \lim_{n \to \infty} \frac{1}{\sqrt[n]{\abs{c_n}}}.
+                \]
+              </li>
 
-            <li>
-              <i>Областью сходимости</i> степенного ряда называется внутренность
-              круга $\abs{z - z_0} \lt R$.
-            </li>
-          </ul>
+              <li>
+                <i>Областью сходимости</i> степенного ряда называется
+                внутренность круга $\abs{z - z_0} \lt R$.
+              </li>
+            </ul>
+          </div>
         </div>
       </li>
 
@@ -494,11 +516,13 @@
           Ряд Тейлора
         </div>
         <div class="content">
-          Степенной ряд вида
-          \[
-          f(z) = \sum_{n=0}^\infty c_n (z - z_0)^n, \quad
-          c_n = \frac{1}{n!} f^{(n)} (z_0).
-          \]
+          <div class="definition">
+            <i>Рядом Тейлора</i> называют степенной ряд вида
+            \[
+            f(z) = \sum_{n=0}^\infty c_n (z - z_0)^n, \quad
+            c_n = \frac{1}{n!} f^{(n)} (z_0).
+            \]
+          </div>
         </div>
       </li>
 
@@ -514,9 +538,9 @@
             f(z) = \sum_{n=0}^\infty c_n (z - z_0)^n,
             \]
             причём этот ряд определён однозначно.
-          </div>
-          <div class="proof">
-            <span class="todo"></span>
+            <div class="proof">
+              <span class="todo"></span>
+            </div>
           </div>
         </div>
       </li>
@@ -609,25 +633,25 @@
           $\displaystyle \sum_{n=0}^\infty a_n (z - z_0)^{-n}$?
         </div>
         <div class="content">
-          <div class="answer">
+          <div class="statement">
             Областью сходимости этого ряда является внешность круга
             \[
             \abs{z - z_0} \gt r.
             \]
-          </div>
 
-          <div class="proof">
-            \[
-            \lim_{n \to \infty} \abs{ \frac{a_{n+1}}{(z - z_0)^{n+1}} \cdot
-            \frac{(z - z_0)^n}{a_n} } =
-            \underbrace{\lim_{n \to \infty}
-            \frac{\abs{a_{n+1}}}{\abs{a_n}}}_{\displaystyle r}
-            \cdot \frac{1}{\abs{z - z_0}} \lt 1,
-            \]
+            <div class="proof">
+              \[
+              \lim_{n \to \infty} \abs{ \frac{a_{n+1}}{(z - z_0)^{n+1}} \cdot
+              \frac{(z - z_0)^n}{a_n} } =
+              \underbrace{\lim_{n \to \infty}
+              \frac{\abs{a_{n+1}}}{\abs{a_n}}}_{\displaystyle r}
+              \cdot \frac{1}{\abs{z - z_0}} \lt 1,
+              \]
 
-            \[
-            \implies \abs{z - z_0} \gt r.
-            \]
+              \[
+              \implies \abs{z - z_0} \gt r.
+              \]
+            </div>
           </div>
         </div>
       </li>
@@ -637,12 +661,18 @@
           Ряд Лорана
         </div>
         <div class="content">
-          Ряд вида
-          \[
-          \sum_{n=-\infty}^\infty a_n (z - z_0)^n =
-          \underbrace{\sum_{n=1}^\infty a_{-n} (z - z_0)^{-n}}_{\mbox{главная часть}} +
-          \underbrace{\sum_{n=0}^\infty a_n (z - z_0)^n}_{\mbox{правильная часть}}.
-          \]
+          <div class="definition">
+            <i>Рядом Лорана</i> называют ряд вида
+            \[
+            \sum_{n=-\infty}^\infty a_n (z - z_0)^n =
+            \underbrace{
+            \sum_{n=1}^\infty a_{-n} (z - z_0)^{-n}
+            }_{\mbox{главная часть}} +
+            \underbrace{
+            \sum_{n=0}^\infty a_n (z - z_0)^n
+            }_{\mbox{правильная часть}}.
+            \]
+          </div>
         </div>
       </li>
 
@@ -652,7 +682,7 @@
         </div>
         <div class="content">
           <div class="answer">
-            Круговое кольцо вида
+            Областью сходимости ряда Лорана является круговое кольцо вида
             \[
             r \lt \abs{z - z_0} \lt R.
             \]
@@ -679,9 +709,10 @@
             \]
             а $\gamma$ &mdash; любая окружность $\abs{t - z_0} = \rho$, $r \lt
             \rho \lt R$, ориентированная против часовой стрелки.
-          </div>
-          <div class="proof">
-            <span class="todo"></span>
+
+            <div class="proof">
+              <span class="todo"></span>
+            </div>
           </div>
         </div>
       </li>
@@ -694,8 +725,10 @@
           <div class="assumptions">
             $f(z) \not\equiv 0$.
           </div>
-          Точка $z_0$ называется <i>корнем</i> (<i>нулём</i>) функции $f(z)$,
-          если $f(z_0) = 0$.
+          <div class="definition">
+            Точка $z_0$ называется <i>корнем</i> (<i>нулём</i>) функции $f(z)$,
+            если $f(z_0) = 0$.
+          </div>
         </div>
       </li>
 
@@ -704,12 +737,14 @@
           Определение: нуль порядка $m$
         </div>
         <div class="content">
-          Точка $z_0$ называется <i>нулём порядка $m$</i> для аналитической
-          функции $f(z)$, если её разложение в степенной ряд имеет вид
-          \[
-          f(z) = \sum_{k=m}^\infty c_k (z - z_0)^k, \quad c_m \neq 0, \;
-          m \geqslant 1.
-          \]
+          <div class="definition">
+            Точка $z_0$ называется <i>нулём порядка $m$</i> для аналитической
+            функции $f(z)$, если её разложение в степенной ряд имеет вид
+            \[
+            f(z) = \sum_{k=m}^\infty c_k (z - z_0)^k, \quad c_m \neq 0, \;
+            m \geqslant 1.
+            \]
+          </div>
         </div>
       </li>
 
@@ -719,11 +754,13 @@
           $m$
         </div>
         <div class="content">
-          Число $z_0$ является нулём порядка $m$ функции $f(z)$ тогда и только
-          тогда, когда $f(z)$ делится на $(z - z_0)^m$:
-          \[
-          f(z) = (z - z_0)^m \varphi(z), \quad \varphi(z_0) \neq 0.
-          \]
+          <div class="statement">
+            Число $z_0$ является нулём порядка $m$ функции $f(z)$ тогда и только
+            тогда, когда $f(z)$ делится на $(z - z_0)^m$:
+            \[
+            f(z) = (z - z_0)^m \varphi(z), \quad \varphi(z_0) \neq 0.
+            \]
+          </div>
         </div>
       </li>
 
@@ -732,8 +769,10 @@
           Определение: особые точки
         </div>
         <div class="content">
-          Точки, в которых функция $f(z)$ не является аналитической, называются
-          <i>особыми точками</i> этой функции.
+          <div class="definition">
+            Точки, в которых функция $f(z)$ не является аналитической,
+            называются <i>особыми точками</i> этой функции.
+          </div>
         </div>
       </li>
 
@@ -742,10 +781,12 @@
           Определение: изолированная особая точка
         </div>
         <div class="content">
-          Особая точка $z_0$ функции $f(z)$ является <i>изолированной особой
-            точкой</i>, если функция $f(z)$ аналитична в некотором кольце $0 \lt
-          \abs{z - z_0} \lt R$, то есть если в достаточно малой окрестности
-          особой точки $z_0$ нет других особых точек.
+          <div class="definition">
+            Особая точка $z_0$ функции $f(z)$ является <i>изолированной особой
+              точкой</i>, если функция $f(z)$ аналитична в некотором кольце
+            $0 \lt \abs{z - z_0} \lt R$, то есть если в достаточно малой
+            окрестности особой точки $z_0$ нет других особых точек.
+          </div>
         </div>
       </li>
 
@@ -754,11 +795,13 @@
           Определение: устранимая особая точка (УОС)
         </div>
         <div class="content">
-          Изолированная особая точка $z_0$ функции $f(z)$ называется
-          <i>устранимой</i>, если существует конечный предел
-          \[
-          \lim_{z \to z_0} f(z) = A \neq \infty.
-          \]
+          <div class="definition">
+            Изолированная особая точка $z_0$ функции $f(z)$ называется
+            <i>устранимой</i>, если существует конечный предел
+            \[
+            \lim_{z \to z_0} f(z) = A \neq \infty.
+            \]
+          </div>
         </div>
       </li>
 
@@ -767,11 +810,13 @@
           Определение: полюс
         </div>
         <div class="content">
-          Изолированная особая точка $z_0$ функции $f(z)$ называется
-          <i>полюсом</i>, если
-          \[
-          \lim_{z \to z_0} f(z) = \infty.
-          \]
+          <div class="definition">
+            Изолированная особая точка $z_0$ функции $f(z)$ называется
+            <i>полюсом</i>, если
+            \[
+            \lim_{z \to z_0} f(z) = \infty.
+            \]
+          </div>
         </div>
       </li>
 
@@ -780,9 +825,11 @@
           Определение: существенно особая точка (СОТ)
         </div>
         <div class="content">
-          Изолированная особая точка $z_0$ функции $f(z)$ называется
-          <i>существенно особой</i>, если $\lim\limits_{z \to z_0} f(z)$
-          не существует.
+          <div class="definition">
+            Изолированная особая точка $z_0$ функции $f(z)$ называется
+            <i>существенно особой</i>, если $\lim\limits_{z \to z_0} f(z)$
+            не существует.
+          </div>
         </div>
       </li>
 
@@ -799,9 +846,10 @@
             \[
             f(z) = \sum_{n=0}^\infty c_n (z - z_0)^n.
             \]
-          </div>
-          <div class="proof">
-            <span class="todo"></span>
+
+            <div class="proof">
+              <span class="todo"></span>
+            </div>
           </div>
         </div>
       </li>
@@ -822,9 +870,10 @@
 
             Если $m \gt 0$, $c_{-m} \neq 0$, то $m$ называется <i>порядком</i>
             полюса. Если $m = 1$, то полюс называется <i>простым</i>.
-          </div>
-          <div class="proof">
-            <span class="todo"></span>
+
+            <div class="proof">
+              <span class="todo"></span>
+            </div>
           </div>
         </div>
       </li>
@@ -840,9 +889,10 @@
             </li>
 
             <li>
-              Точка $z = z_0$ является нулём функции $\dfrac{\varphi(z)}{f(z)}$
-              кратности $m$, где $\varphi(z)$ &mdash; аналитичная в окрестности
-              $z = z_0$ функция, причём $\varphi(z_0) \neq 0$.
+              Точка $z = z_0$ является нулём функции
+              $\dfrac{\varphi(z)}{f(z)}$ кратности $m$, где $\varphi(z)$
+              &mdash; аналитичная в окрестности $z = z_0$ функция, причём
+              $\varphi(z_0) \neq 0$.
             </li>
 
             <li>
@@ -857,8 +907,10 @@
           Определение: мероморфная функция
         </div>
         <div class="content">
-          Функция, имеющая особыми точками только полюсы, называется
-          <i>мероморфной</i>.
+          <div class="definition">
+            Функция, имеющая особыми точками только полюсы, называется
+            <i>мероморфной</i>.
+          </div>
         </div>
       </li>
 
@@ -875,9 +927,10 @@
             \[
             f(z) = \sum_{n=-\infty}^\infty c_n (z - z_0)^n.
             \]
-          </div>
-          <div class="proof">
-            <span class="todo"></span>
+
+            <div class="proof">
+              <span class="todo"></span>
+            </div>
           </div>
         </div>
       </li>
@@ -887,11 +940,13 @@
           Теорема Сохоцкого
         </div>
         <div class="content">
-          Если точка $z_0$ &mdash; СОТ функции $f(z)$, то для любого числа $A$
-          (конечного или бесконечного) существует такая последовательность $\{
-          z_n \}$ значений аргумента, стремящаяся к пределу $z_0$, для которой
-          последовательность $\{ f(z_n) \}$ соответствующих значений функции
-          $f(z)$ стремится к $A$.
+          <div class="theorem">
+            Если точка $z_0$ &mdash; СОТ функции $f(z)$, то для любого числа $A$
+            (конечного или бесконечного) существует такая последовательность
+            $\{ z_n \}$ значений аргумента, стремящаяся к пределу $z_0$, для
+            которой последовательность $\{ f(z_n) \}$ соответствующих значений
+            функции $f(z)$ стремится к $A$.
+          </div>
         </div>
       </li>
 
@@ -900,8 +955,10 @@
           Теорема Пикара
         </div>
         <div class="content">
-          Аналитичная функция в окрестности СОТ принимает все значения, кроме,
-          может быть, одного.
+          <div class="theorem">
+            Аналитичная функция в окрестности СОТ принимает все значения, кроме,
+            может быть, одного.
+          </div>
         </div>
       </li>
 
@@ -910,9 +967,11 @@
           Определение: бесконечно удалённая изолированная особая точка
         </div>
         <div class="content">
-          Точка $z = \infty$ называется бесконечно удалённой изолированной
-          особой точкой, если все другие особые точки находятся на конечном
-          расстоянии от начала координат.
+          <div class="definition">
+            Точка $z = \infty$ называется <i>бесконечно удалённой изолированной
+              особой точкой</i>, если все другие особые точки находятся на
+            конечном расстоянии от начала координат.
+          </div>
         </div>
       </li>
 
@@ -921,8 +980,11 @@
           Определение: окрестность бесконечно удалённой точки
         </div>
         <div class="content">
-          Внешность круга $\abs{z} \gt r$, где $r \geqslant 0$ &mdash; любое
-          наперёд заданное число.
+          <div class="definition">
+            <i>Окрестностью бесконечно удалённой точки</i> является внешность
+            круга $\abs{z} \gt r$, где $r \geqslant 0$ &mdash; любое наперёд
+            заданное число.
+          </div>
         </div>
       </li>
 
@@ -932,9 +994,12 @@
           $f(z)$
         </div>
         <div class="content">
-          Бесконечно удалённая точка $z = \infty$ называется изолированной
-          особой точкой функции $f(z)$, если в некоторой окрестности этой точки
-          (то есть вне круга с центром в $z = 0$) функция $f(z)$ аналитична.
+          <div class="definition">
+            Бесконечно удалённая точка $z = \infty$ называется <i>изолированной
+              особой точкой</i> функции $f(z)$, если в некоторой окрестности
+            этой точки (то есть вне круга с центром в $z = 0$) функция $f(z)$
+            аналитична.
+          </div>
         </div>
       </li>
 
@@ -943,17 +1008,19 @@
           Определение: бесконечно удалённая УОТ
         </div>
         <div class="content">
-          Точку $z = \infty$ будем называть <i>устранимой особой точкой</i>
-          функции $f(z)$, если её разложение в ряд Лорана имеет вид
-          \[
-          f(z) = \sum_{n=0}^\infty c_n z^{-n},
-          \]
-          или если существует предел
-          \[
-          \lim_{z \to \infty} f(z) = c_0, \quad c_0 \neq \infty,
-          \]
-          то есть когда функция ограничена в окрестности бесконечно удалённой
-          точки.
+          <div class="definition">
+            Точку $z = \infty$ будем называть <i>устранимой особой точкой</i>
+            функции $f(z)$, если её разложение в ряд Лорана имеет вид
+            \[
+            f(z) = \sum_{n=0}^\infty c_n z^{-n},
+            \]
+            или если существует предел
+            \[
+            \lim_{z \to \infty} f(z) = c_0, \quad c_0 \neq \infty,
+            \]
+            то есть когда функция ограничена в окрестности бесконечно удалённой
+            точки.
+          </div>
         </div>
       </li>
 
@@ -962,16 +1029,18 @@
           Определение: бесконечно удалённый полюс порядка $m$
         </div>
         <div class="content">
-          Точка $z = \infty$ называется <i>полюсом порядка $m$</i> функции
-          $f(z)$, если разложение в ряд Лорана в окрестности этой точки имеет
-          вид
-          \[
-          f(z) = \sum_{n=-m}^\infty c_n z^{-n}, \quad c_{-m} \neq 0,
-          \]
-          или если
-          \[
-          \lim_{z \to \infty} f(z) = \infty.
-          \]
+          <div class="definition">
+            Точка $z = \infty$ называется <i>полюсом порядка $m$</i> функции
+            $f(z)$, если разложение в ряд Лорана в окрестности этой точки имеет
+            вид
+            \[
+            f(z) = \sum_{n=-m}^\infty c_n z^{-n}, \quad c_{-m} \neq 0,
+            \]
+            или если
+            \[
+            \lim_{z \to \infty} f(z) = \infty.
+            \]
+          </div>
         </div>
       </li>
 
@@ -980,12 +1049,15 @@
           Определение: бесконечно удалённая СОТ
         </div>
         <div class="content">
-          Бесконечно удалённая точка называется существенно особой точкой
-          функции $f(z)$, если разложение в ряд Лорана для неё имеет вид
-          \[
-          f(z) = \sum_{n=-\infty}^\infty c_n z^n,
-          \]
-          причём главная часть состоит из бесконечного числа членов.
+          <div class="definition">
+            Бесконечно удалённая точка называется <i>существенно особой
+              точкой</i> функции $f(z)$, если разложение в ряд Лорана для неё
+            имеет вид
+            \[
+            f(z) = \sum_{n=-\infty}^\infty c_n z^n,
+            \]
+            причём главная часть состоит из бесконечного числа членов.
+          </div>
         </div>
       </li>
 
@@ -994,12 +1066,14 @@
           Первое определение вычета функции
         </div>
         <div class="content">
-          <i>Вычетом</i> функции $f(z)$ относительно особой точки $z_0$
-          называется коэффициент $c_{-1}$ при $(z - z_0)^{-1}$ в разложении в
-          ряд Лорана этой функции в окрестности $z_0$.
-          <div class="notation">
-            $\Res f(z_0), \; \underset{z = z_0}{\Res} f(z), \; \underset{z =
-            z_0}{\res} f(z)$.
+          <div class="definition">
+            <i>Вычетом</i> функции $f(z)$ относительно особой точки $z_0$
+            называется коэффициент $c_{-1}$ при $(z - z_0)^{-1}$ в разложении в
+            ряд Лорана этой функции в окрестности $z_0$.
+            <div class="notation">
+              $\Res f(z_0), \; \underset{z = z_0}{\Res} f(z), \; \underset{z =
+              z_0}{\res} f(z)$.
+            </div>
           </div>
         </div>
       </li>
@@ -1009,13 +1083,15 @@
           Второе определение вычета функции
         </div>
         <div class="content">
-          <i>Вычетом</i> функции $f(z)$ в точке $z_0$ называется интеграл
-          \[
-          \Res f(z_0) = \frac{1}{2 \pi i} \oint\limits_{L} f(z) dz,
-          \]
-          где $L$ &mdash; произвольный контур в кольце $0 \lt \abs{z - z_0} \lt
-          R$, ориентированный против часовой стрелки ($L$ должен окружать точку
-          $z_0$).
+          <div class="definition">
+            <i>Вычетом</i> функции $f(z)$ в точке $z_0$ называется интеграл
+            \[
+            \Res f(z_0) = \frac{1}{2 \pi i} \oint\limits_{L} f(z) dz,
+            \]
+            где $L$ &mdash; произвольный контур в кольце
+            $0 \lt \abs{z - z_0} \lt R$, ориентированный против часовой стрелки
+            ($L$ должен окружать точку $z_0$).
+          </div>
         </div>
       </li>
 
@@ -1033,39 +1109,40 @@
             \]
             где $L$ &mdash; полная граница области $D$, проходимая в положительном
             направлении.
-          </div>
-          <div class="proof">
-            Функция $f(z)$ в области $D \setminus K_1 \cup K_2 \cup \dots \cup
-            K_N$ аналитична, следовательно, по теореме Коши,
-            \[
-            \oint\limits_L f(z) dz = \oint\limits_{l_1} f(z) dz + \dots +
-            \oint\limits_{l_N} f(z) dz.
-            \]
-            Для $\displaystyle \oint\limits_{l_k} f(z) dz$ разложим $f(z)$ в ряд
-            Лорана в окрестности точки $z_k$:
-            \[
-            \oint\limits_{l_k} f(z) dz = \dots + c_{-2} \oint\limits_{l_k}
-            \frac{dz}{(z - z_k)^2} + c_{-1} \oint\limits_{l_k}\frac{dz}{z - z_k}
-            + c_0 \oint\limits_{l_k} dz + \dots
-            \]
-            Учитывая, что
-            \[
-            \oint\limits_{L^+} \frac{dz}{(z - a)^n} =
-            \begin{cases}
+
+            <div class="proof">
+              Функция $f(z)$ в области $D \setminus K_1 \cup K_2 \cup \dots \cup
+              K_N$ аналитична, следовательно, по теореме Коши,
+              \[
+              \oint\limits_L f(z) dz = \oint\limits_{l_1} f(z) dz + \dots +
+              \oint\limits_{l_N} f(z) dz.
+              \]
+              Для $\displaystyle \oint\limits_{l_k} f(z) dz$ разложим $f(z)$ в ряд
+              Лорана в окрестности точки $z_k$:
+              \[
+              \oint\limits_{l_k} f(z) dz = \dots + c_{-2} \oint\limits_{l_k}
+              \frac{dz}{(z - z_k)^2} + c_{-1} \oint\limits_{l_k}\frac{dz}{z - z_k}
+              + c_0 \oint\limits_{l_k} dz + \dots
+              \]
+              Учитывая, что
+              \[
+              \oint\limits_{L^+} \frac{dz}{(z - a)^n} =
+              \begin{cases}
               0, & n \neq 1, \\
               2 \pi i, & n = 1,
-            \end{cases}
-            \]
-            получаем
-            \[
-            \oint\limits_{l_k} f(z) dz = c_{-1} \cdot 2 \pi i = 2 \pi i \cdot
-            \underset{z = z_k}{\Res} f(z).
-            \]
-            Таким образом,
-            \[
-            \oint\limits_L f(z) dz = \sum_{k=1}^N \oint\limits_{l_k} f(z) dz =
-            2\pi i \sum_{k=1}^N \underset{z = z_k}{\Res} f(z).
-            \]
+              \end{cases}
+              \]
+              получаем
+              \[
+              \oint\limits_{l_k} f(z) dz = c_{-1} \cdot 2 \pi i = 2 \pi i \cdot
+              \underset{z = z_k}{\Res} f(z).
+              \]
+              Таким образом,
+              \[
+              \oint\limits_L f(z) dz = \sum_{k=1}^N \oint\limits_{l_k} f(z) dz =
+              2\pi i \sum_{k=1}^N \underset{z = z_k}{\Res} f(z).
+              \]
+            </div>
           </div>
         </div>
       </li>
@@ -1156,20 +1233,23 @@
           Определение: вычет в бесконечно удалённой точке
         </div>
         <div class="content">
-          Вычетом функции $f(z)$ в бесконечно удалённой точке называется
-          \[
-          \Res f(\infty) = \frac{1}{2 \pi i} \oint\limits_{L^-} f(z) dz,
-          \]
-          где $L^-$ &mdash; произвольный замкнутый контур, ориентированный по
-          часовой стрелке, принадлежащий множеству $\abs{z} \gt r$ (где функция
-          $f(z)$ аналитична).
-          <br>
-          Кроме того, если $\displaystyle f(z) = \sum_{k=-\infty}^\infty c_k
-          z^k$ &mdash; ряд Лорана функции во внешней окружности $\abs{z} = r$,
-          то
-          \[
-          \Res f(\infty) = -c_{-1}.
-          \]
+          <div class="definition">
+            <i>Вычетом функции $f(z)$ в бесконечно удалённой точке</i>
+            называется
+            \[
+            \Res f(\infty) = \frac{1}{2 \pi i} \oint\limits_{L^-} f(z) dz,
+            \]
+            где $L^-$ &mdash; произвольный замкнутый контур, ориентированный по
+            часовой стрелке, принадлежащий множеству $\abs{z} \gt r$ (где функция
+            $f(z)$ аналитична).
+          </div>
+          <div class="remark">
+            Если $\displaystyle f(z) = \sum_{k=-\infty}^\infty c_k z^k$ &mdash;
+            ряд Лорана функции во внешней окружности $\abs{z} = r$, то
+            \[
+            \Res f(\infty) = -c_{-1}.
+            \]
+          </div>
         </div>
       </li>
 
@@ -1261,23 +1341,24 @@
             \[
             \sum_{k=1}^N \Res f(z_k) + \Res f(\infty) = 0.
             \]
-          </div>
-          <div class="proof">
-            Число изолированных особых точек конечно, следовательно, существует
-            контур $L$, состоящий из $L^+, l_1, \dots, l_N$. $f(z)$ аналитична в
-            многосвязной области, следовательно, по теореме Коши для
-            многосвязной области
-            \[
-            \begin{aligned}
-            \oint\limits_{L^+} f(z) dz + \sum_{k=1}^N \oint\limits_{l_k^-} f(z)
-            dz &= 0 \quad \big| : -2\pi i \\
-            \underbrace{\frac{1}{2 \pi i} \oint\limits_{L^-} f(z) dz}_{-c_{-1}}
-            +
-            \underbrace{\frac{1}{2 \pi i} \sum_{k=1}^N \oint\limits_{l_k^+} f(z)
-            dz}_{c_{-1k}} &= 0, \implies \\
-            \implies \Res f(\infty) + \sum_{k=1}^N \Res f(z_k) &= 0.
-            \end{aligned}
-            \]
+
+            <div class="proof">
+              Число изолированных особых точек конечно, следовательно, существует
+              контур $L$, состоящий из $L^+, l_1, \dots, l_N$. $f(z)$ аналитична в
+              многосвязной области, следовательно, по теореме Коши для
+              многосвязной области
+              \[
+              \begin{aligned}
+              \oint\limits_{L^+} f(z) dz + \sum_{k=1}^N \oint\limits_{l_k^-} f(z)
+              dz &= 0 \quad \big| : -2\pi i \\
+              \underbrace{\frac{1}{2 \pi i} \oint\limits_{L^-} f(z) dz}_{-c_{-1}}
+              +
+              \underbrace{\frac{1}{2 \pi i} \sum_{k=1}^N \oint\limits_{l_k^+} f(z)
+              dz}_{c_{-1k}} &= 0, \implies \\
+              \implies \Res f(\infty) + \sum_{k=1}^N \Res f(z_k) &= 0.
+              \end{aligned}
+              \]
+            </div>
           </div>
         </div>
       </li>
@@ -1294,28 +1375,29 @@
             \]
             где $z_1, \dots, z_m$ &mdash; особые точки, лежащие внутри контура
             $L$.
-          </div>
-          <div class="proof">
-            По основной теореме о вычетах
-            \[
-            \oint\limits_{L} f(z) dz = 2 \pi i \sum_{k=1}^m \Res f(z_k),
-            \]
-            но по теореме о сумме вычетов
-            \[
-            \sum_{k=1}^N \Res f(z_k) + \Res f(\infty) =
-            \sum_{k=1}^m \Res f(z_k) + \sum_{k=m+1}^N \Res f(z_k)
-            + \Res f(\infty) = 0,
-            \]
-            откуда следует, что
-            \[
-            \sum_{k=1}^m \Res f(z_k) = - \sum_{k=m+1}^N \Res f(z_k)
-            - \Res f(\infty),
-            \]
-            то есть
-            \[
-            \oint\limits_{L} f(z) dz = -2 \pi i \left( \Res f(-\infty) +
-            \sum_{k=m+1}^N \Res f(z_k) \right).
-            \]
+
+            <div class="proof">
+              По основной теореме о вычетах
+              \[
+              \oint\limits_{L} f(z) dz = 2 \pi i \sum_{k=1}^m \Res f(z_k),
+              \]
+              но по теореме о сумме вычетов
+              \[
+              \sum_{k=1}^N \Res f(z_k) + \Res f(\infty) =
+              \sum_{k=1}^m \Res f(z_k) + \sum_{k=m+1}^N \Res f(z_k)
+              + \Res f(\infty) = 0,
+              \]
+              откуда следует, что
+              \[
+              \sum_{k=1}^m \Res f(z_k) = - \sum_{k=m+1}^N \Res f(z_k)
+              - \Res f(\infty),
+              \]
+              то есть
+              \[
+              \oint\limits_{L} f(z) dz = -2 \pi i \left( \Res f(-\infty) +
+              \sum_{k=m+1}^N \Res f(z_k) \right).
+              \]
+            </div>
           </div>
         </div>
       </li>
@@ -1364,7 +1446,6 @@
           вычетов
         </div>
         <div class="content">
-          <p>
           Рассмотрим
           \[
           \int\limits_{-\infty}^{+\infty} f(x) dx.
@@ -1386,7 +1467,6 @@
           \int\limits_{L_R} f(z) dz = 2 \pi i \sum_{k} \Res f(z_k);
           \]
           слева стоят вычеты во всех особых точках, для которых $\Im z_k \gt 0$.
-          </p>
 
           <p>
           Рассмотрим частный случай:
@@ -1427,47 +1507,62 @@
             \quad R \to \infty.
             \]
 
-            <div class="note">
+            <div class="remark">
               Для случая $\lambda \lt 0$ в условиях леммы нужно заменить верхнюю
               полуплоскость на нижнюю и соответственно верхнюю полуокружность на
               нижнюю.
             </div>
-          </div>
-          <div class="proof">
-            \[
-            \begin{aligned}
-            \abs{\int\limits_{\gamma_R} f(z) e^{i \lambda z} dz} &\leqslant M(R)
-            \cdot \int\limits_{\gamma_R} \abs{e^{i \lambda z}} dz =&& \left( z =
-            Re^{i\varphi} \right) \\
-            &= M(R) \int\limits_0^\pi \abs{e^{\displaystyle i \lambda
-            R(\cos\varphi + i \sin\varphi)} Rie^{i\varphi}} d\varphi \\
-            &= M(R) \cdot R \int\limits_0^\pi \underbrace{\abs{e^{\displaystyle
-            i (\lambda R\cos\varphi + \varphi)}}}_{=1}
-            \cdot \abs{ie^{\displaystyle -\lambda R \sin\varphi}} d\varphi \\
-            &= M(R) \cdot R \cdot 2 \int\limits_0^{\pi/2}
-            e^{\displaystyle -\lambda R \sin\varphi} d\varphi \leqslant&& \left(
-            \sin\varphi \geqslant \frac{2}{\pi}\varphi \; \mbox{при} \;
-            \varphi\in[0;\pi/2] \right) \\
-            &\leqslant M(R) \cdot R \cdot 2 \int\limits_0^{\pi/2}
-            e^{\displaystyle -\lambda R \frac{2}{\pi}\varphi} d\varphi \\
-            &= \frac{2R \cdot M(R) \pi}{2R \cdot (-\lambda)}
-            e^{\displaystyle -\lambda R \frac{2}{\pi}\varphi} \big|_0^{\pi/2} \\
-            &= -M(R) \cdot \frac{\pi}{\lambda} \left(e^{-\lambda R} - 1 \right)
-            \underset{R \to \infty}{\longrightarrow} 0.
-            \end{aligned}
-            \]
 
-            Осталось доказать, что $\sin\varphi \geqslant \frac{2}{\pi}\varphi$
-            при $\varphi\in[0;\pi/2]$. Рассмотрим
-            \[
-            \begin{aligned}
-            h(\varphi) &= \sin\varphi - \frac{2}{\pi} \varphi \\
-            h'(\varphi) &= \cos\varphi - \frac{2}{\pi},
-            \end{aligned}
-            \]
-            производная обращается в ноль на $[0;\pi/2]$ в точке $\varphi_1 =
-            \arccos \frac{2}{\pi}$. Так как $h(0) = 0, \; h(\frac{\pi}{2}) = 0$,
-            то $h(\varphi) \geqslant 0$ на $[0;\pi/2]$.
+            <div class="proof">
+              \[
+              \abs{\int\limits_{\gamma_R} f(z) e^{i \lambda z} dz}
+              \leqslant
+              M(R) \int\limits_{\gamma_R} \abs{e^{i \lambda z}} dz.
+              \]
+              Так как $z = Re^{i\varphi}$, то
+              \[
+              \begin{aligned}
+              M(R) \int\limits_{\gamma_R} \abs{e^{i \lambda z}} dz
+              &= M(R) \int\limits_0^\pi \abs{e^{\displaystyle i \lambda
+              R(\cos\varphi + i \sin\varphi)} Rie^{i\varphi}} d\varphi \\
+              &= M(R) \cdot R \int\limits_0^\pi \underbrace{\abs{e^{\displaystyle
+              i (\lambda R\cos\varphi + \varphi)}}}_{=1}
+              \cdot \abs{ie^{\displaystyle -\lambda R \sin\varphi}} d\varphi \\
+              &= M(R) \cdot R \cdot 2 \int\limits_0^{\pi/2}
+              e^{\displaystyle -\lambda R \sin\varphi} d\varphi.
+              \end{aligned}
+              \]
+              Известно, что $\sin\varphi \geqslant \frac{2}{\pi}\varphi$ при 
+              $\varphi\in[0;\pi/2]$.
+
+              <div class="derivation">
+                Рассмотрим
+                \[
+                \begin{aligned}
+                h(\varphi) &= \sin\varphi - \frac{2}{\pi} \varphi \\
+                h'(\varphi) &= \cos\varphi - \frac{2}{\pi},
+                \end{aligned}
+                \]
+                производная обращается в ноль на $[0;\pi/2]$ в точке
+                $\varphi_1 = \arccos \frac{2}{\pi}$. Так как
+                $h(0) = 0, \; h(\frac{\pi}{2}) = 0$, то
+                $h(\varphi) \geqslant 0$ на $[0;\pi/2]$.
+              </div>
+
+              Отсюда следует, что
+              \[
+              \begin{aligned}
+              M(R) \cdot R \cdot 2 \int\limits_0^{\pi/2}
+              e^{\displaystyle -\lambda R \sin\varphi} d\varphi.
+              &\leqslant M(R) \cdot R \cdot 2 \int\limits_0^{\pi/2}
+              e^{\displaystyle -\lambda R \frac{2}{\pi}\varphi} d\varphi \\
+              &= \frac{2R \cdot M(R) \pi}{2R \cdot (-\lambda)}
+              e^{\displaystyle -\lambda R \frac{2}{\pi}\varphi} \big|_0^{\pi/2} \\
+              &= -M(R) \cdot \frac{\pi}{\lambda} \left(e^{-\lambda R} - 1 \right)
+              \underset{R \to \infty}{\longrightarrow} 0.
+              \end{aligned}
+              \]
+            </div>
           </div>
         </div>
       </li>
@@ -1614,11 +1709,13 @@
           Определение: логарифмическая производная
         </div>
         <div class="content">
-          <i>Логарифмической производной</i> функции $f(z)$ называется
-          производная её логарифма:
-          \[
-          \left( \ln f(z) \right)' = \frac{f'(z)}{f(z)}.
-          \]
+          <div class="definition">
+            <i>Логарифмической производной</i> функции $f(z)$ называется
+            производная её логарифма:
+            \[
+            \left( \ln f(z) \right)' = \frac{f'(z)}{f(z)}.
+            \]
+          </div>
         </div>
       </li>
 
@@ -1628,15 +1725,17 @@
           производной?
         </div>
         <div class="content">
-          <div class="answer">
-            Простым полюсом, причём вычет логарифмической производной в этой
-            точке равен кратности нуля, то есть $n$:
+          <div class="statement">
+            $n$-кратный нуль функции $f(z)$ является для её логарифмической
+            производной простым полюсом, причём вычет логарифмической
+            производной в этой точке равен кратности нуля, то есть $n$:
             \[
             (\ln f(z))' = \frac{n}{z - z_0} + b_1 + b_2(z - z_0) + \dots
             \]
-          </div>
-          <div class="proof">
-            <span class="todo"></span>
+
+            <div class="proof">
+              <span class="todo"></span>
+            </div>
           </div>
         </div>
       </li>
@@ -1647,15 +1746,18 @@
           производной?
         </div>
         <div class="content">
-          <div class="answer">
-            Простым полюсом, причём вычет логарифмической производной в этой
-            точке равен порядку полюса, взятому с обратным знаком, то есть $-p$:
+          <div class="statement">
+            $p$-кратный полюс функции $f(z)$ является для её логарифмической
+            производной простым полюсом, причём вычет логарифмической
+            производной в этой точке равен порядку полюса, взятому с обратным
+            знаком, то есть $-p$:
             \[
             (\ln f(z))' = -\frac{p}{z - z_1} + c_1 + c_2(z - z_1) + \dots
             \]
-          </div>
-          <div class="proof">
-            <span class="todo"></span>
+
+            <div class="proof">
+              <span class="todo"></span>
+            </div>
           </div>
         </div>
       </li>
@@ -1665,14 +1767,16 @@
           Определение: логарифмический вычет функции $f(z)$ в точке $z = a$
         </div>
         <div class="content">
-          <i>Логарифмическим вычетом</i> функции $f(z)$ в точке $z = a$
-          называется вычет её логарифмической производной в этой точке:
-          \[
-          \underset{z=a}{\Res} \frac{f'(z)}{f(z)} = \frac{1}{2 \pi i}
-          \oint\limits_{L} \frac{f'(z)}{f(z)}dz,
-          \]
-          где в качестве контура $L$ интегрирования можно взять любую окружность
-          с центром в точке $z = a$.
+          <div class="definition">
+            <i>Логарифмическим вычетом</i> функции $f(z)$ в точке $z = a$
+            называется вычет её логарифмической производной в этой точке:
+            \[
+            \underset{z=a}{\Res} \frac{f'(z)}{f(z)} = \frac{1}{2 \pi i}
+            \oint\limits_{L} \frac{f'(z)}{f(z)}dz,
+            \]
+            где в качестве контура $L$ интегрирования можно взять любую
+            окружность с центром в точке $z = a$.
+          </div>
         </div>
       </li>
 
@@ -1682,14 +1786,16 @@
           контура $L$
         </div>
         <div class="content">
-          Если $f(z)$ является аналитической функцией на замкнутом контуре $L$ и
-          не имеет нулей на нём, то значение
-          \[
-          \underset{L}{\Res} \frac{f'(z)}{f(z)} = \frac{1}{2 \pi i}
-          \oint\limits_{L} \frac{f'(z)}{f(z)} dz
-          \]
-          называют логарифмическим вычетом функции $f(z)$ относительно контура
-          $L$.
+          <div class="definition">
+            Если $f(z)$ является аналитической функцией на замкнутом контуре $L$
+            и не имеет нулей на нём, то значение
+            \[
+            \underset{L}{\Res} \frac{f'(z)}{f(z)} = \frac{1}{2 \pi i}
+            \oint\limits_{L} \frac{f'(z)}{f(z)} dz
+            \]
+            называют <i>логарифмическим вычетом функции $f(z)$ относительно
+              контура $L$</i>.
+          </div>
         </div>
       </li>
 
@@ -1710,21 +1816,22 @@
             где $N$ и $P$ &mdash; общее количество нулей и полюсов функции $f(z)$
             в $D$, причём каждый нуль следует считать столько раз, какова его
             кратность, а каждый полюс &mdash; каков его порядок.
-          </div>
-          <div class="proof">
-            \[
-            \begin{aligned}
-            \underset{L}{\Res} \frac{f'(z)}{f(z)} &\triangleq \frac{1}{2 \pi i}
-            \oint\limits_{L} \frac{f'(z)}{f(z)} dz =
-            \frac{1}{2 \pi i} \cdot 2 \pi i \left(
-            \overbrace{\sum_i \underset{a_i}{\Res}
-            \frac{f'(z)}{f(z)}}^{\mbox{вычеты в нулях}} +
-            \overbrace{\sum_j \underset{b_j}{\Res}
-            \frac{f'(z)}{f(z)}}^{\mbox{вычеты в полюсах}}
-            \right) \\
-            &= q_1 + q_2 + \dots + q_m - (p_1 + p_2 + \dots + p_k) = N - P.
-            \end{aligned}
-            \]
+
+            <div class="proof">
+              \[
+              \begin{aligned}
+              \underset{L}{\Res} \frac{f'(z)}{f(z)} &\triangleq \frac{1}{2 \pi i}
+              \oint\limits_{L} \frac{f'(z)}{f(z)} dz =
+              \frac{1}{2 \pi i} \cdot 2 \pi i \left(
+              \overbrace{\sum_i \underset{a_i}{\Res}
+              \frac{f'(z)}{f(z)}}^{\mbox{вычеты в нулях}} +
+              \overbrace{\sum_j \underset{b_j}{\Res}
+              \frac{f'(z)}{f(z)}}^{\mbox{вычеты в полюсах}}
+              \right) \\
+              &= q_1 + q_2 + \dots + q_m - (p_1 + p_2 + \dots + p_k) = N - P.
+              \end{aligned}
+              \]
+            </div>
           </div>
         </div>
       </li>
@@ -1734,9 +1841,11 @@
           Следствие из теоремы о логарифмическом вычете
         </div>
         <div class="content">
-          Логарифмический вычет многочлена $P_n(z)$ степени $n$ относительно
-          контура $L$, на котором нет нулей $P_n(z)$, равен числу нулей
-          многочлена (с учётом их кратности) внутри контура.
+          <div class="corollary">
+            Логарифмический вычет многочлена $P_n(z)$ степени $n$ относительно
+            контура $L$, на котором нет нулей $P_n(z)$, равен числу нулей
+            многочлена (с учётом их кратности) внутри контура.
+          </div>
         </div>
       </li>
 
@@ -1765,40 +1874,41 @@
             где
             <ul>
               <li>
-                 $q_i$ &mdash; кратность нуля $a_i$, $i = 1, \dots, m$
+                $q_i$ &mdash; кратность нуля $a_i$, $i = 1, \dots, m$
               </li>
 
               <li>
-                 $p_i$ &mdash; порядок полюса $b_j$, $j = 1, \dots, k$
+                $p_i$ &mdash; порядок полюса $b_j$, $j = 1, \dots, k$
               </li>
             </ul>
-          </div>
-          <div class="proof">
-            \[
-            \begin{aligned}
-            \oint\limits_L \left( \ln f(z) \right)' dz = \oint\limits_L
-            \frac{f'(z)}{f(z)} dz &= 2 \pi i \left(
-            \sum_i \underset{a_i}{\Res} \frac{f'(z)}{f(z)} +
-            \sum_j \underset{b_j}{\Res} \frac{f'(z)}{f(z)}
-            \right) \\
-            &= 2 \pi i (N - P),
-            \end{aligned}
-            \]
-            но, с другой стороны,
-            \[
-            \left( \ln f(z) \right)' dz = d \left( \ln (f(z)) \right)
-            = d \left( \ln\abs{f(z)} \right) + i \cdot d \left(\arg f(z)
-            \right),
-            \]
-            поэтому
-            \[
-            \oint\limits_L \left( \ln f(z) \right)' dz =
-            \underbrace{\oint\limits_L d \left( \ln\abs{f(z)} \right)}_{\Delta_L
-            \ln \abs{f(z)} = 0} +
-            i \underbrace{\oint\limits_L d \left( \arg f(z) \right)}_{\Delta_L
-            \arg f(z)} = i \cdot \Delta_L \arg f(z).
-            \]
-            Итого: $\displaystyle \Delta_L \arg f(z) = 2 \pi (N - P)$.
+
+            <div class="proof">
+              \[
+              \begin{aligned}
+              \oint\limits_L \left( \ln f(z) \right)' dz = \oint\limits_L
+              \frac{f'(z)}{f(z)} dz &= 2 \pi i \left(
+              \sum_i \underset{a_i}{\Res} \frac{f'(z)}{f(z)} +
+              \sum_j \underset{b_j}{\Res} \frac{f'(z)}{f(z)}
+              \right) \\
+              &= 2 \pi i (N - P),
+              \end{aligned}
+              \]
+              но, с другой стороны,
+              \[
+              \left( \ln f(z) \right)' dz = d \left( \ln (f(z)) \right)
+              = d \left( \ln\abs{f(z)} \right) + i \cdot d \left(\arg f(z)
+              \right),
+              \]
+              поэтому
+              \[
+              \oint\limits_L \left( \ln f(z) \right)' dz =
+              \underbrace{\oint\limits_L d \left( \ln\abs{f(z)} \right)}_{\Delta_L
+              \ln \abs{f(z)} = 0} +
+              i \underbrace{\oint\limits_L d \left( \arg f(z) \right)}_{\Delta_L
+              \arg f(z)} = i \cdot \Delta_L \arg f(z).
+              \]
+              Итого: $\displaystyle \Delta_L \arg f(z) = 2 \pi (N - P)$.
+            </div>
           </div>
         </div>
       </li>
@@ -1838,8 +1948,8 @@
             \]
             в правой полуплоскости.
           </div>
+
           <div class="solution">
-            <p>
             Построим контур $L$ в правой полуплоскости, состоящий из
             полуокружности $\gamma_R$ и её диаметра $\gamma = [-iR; iR]$.
             <div class="images">
@@ -1850,12 +1960,13 @@
             Также отметим, что чисто мнимых корней у многочлена нет, так как
             вещественная и мнимая части $P(z)$ не обращаются в нуль одновременно
             при $z = it$.
-            </p>
+
             <p>
             Согласно принципу аргумента, многочлен $P(z)$ имеет $N =
             \dfrac{1}{2\pi} \Delta_L \arg P(z)$ нулей в области, ограниченной
             контуром $L$.
             </p>
+
             <p>
             Вычислим приращение аргумента при $R \to \infty$ на полуокружности
             $\gamma_R$ и на отрезке мнимой оси $\gamma$ отдельно.
@@ -1912,9 +2023,11 @@
             \lim_{t \to \pm \infty} \arg P(z) = \lim_{t \to \pm \infty}
             \left( \argtg \frac{v(t)}{u(t)} + \pi \right) = \pi.
             \]
+            </p>
             <div class="images">
               <img src="images/algo-trajectory.png"></img>
             </div>
+            <p>
             Как видно из рисунка, радиус-вектор точки $\omega$ при изменении $t$
             от $+\infty$ до $-\infty$ поворачивается на три полных круга вокруг
             начала координат по часовой стрелке (то есть в отрицательном
@@ -1952,56 +2065,58 @@
             Тогда полное число нулей (с учётом их кратности) в $D$ функции $F(z) =
             f(z) + \varphi(z)$ равно полному числу нулей (с учётом их кратности)
             функции $f(z)$.
-          </div>
-          <div class="proof">
-            <p>
-            $f(z) + \varphi(z) \neq 0$ на $L$, так как $\abs{f(z) + \varphi(z)}
-            \geqslant \abs{f(z)} + \abs{\varphi(z)} \gt 0$ на $L$.
-            </p>
-            <p>
-            $f(z) \neq 0$ на $L$, так как $\abs{f(z)} \gt \abs{\varphi(z)}
-            \geqslant 0$ на $L$, поэтому можно записать
-            \[
-            f(z) + \varphi(z) = f(z) \left( 1 + \frac{\varphi(z)}{f(z)} \right),
-            \]
-            в этом случае аргумент $f(z) + \varphi(z)$ запишется в виде
-            \[
-            \arg \left( f(z) + \varphi(z) \right) = \arg f(z) + \arg \left( 1 +
-            \frac{\varphi(z)}{f(z)} \right), \quad z \in L,
-            \]
-            поэтому
-            \[
-            \Delta_L \arg \left( f(z) + \varphi(z) \right) =
-            \Delta_L \arg f(z) +
-            \Delta_L \arg \left( 1 + \frac{\varphi(z)}{f(z)} \right),
-            \quad z \in L,
-            \]
-            </p>
 
-            <p>
-            Рассмотрим движение радиус-вектора $w = 1 +
-            \dfrac{\varphi(z)}{f(z)}$. Из условия теоремы следует, что при $z
-            \in L$
-            \[
-            \abs{\frac{\varphi(z)}{f(z)}} \lt 1.
-            \]
-            В таком случае
-            \[
-            w = 1 + \frac{\varphi(z)}{f(z)} \implies \abs{w - 1} \lt 1,
-            \]
-            откуда видно, что радиус-вектор $w$ не делает ни одного оборота
-            вокруг начала координат, поэтому
-            \[
-            \Delta_L \arg \left( 1 + \frac{\varphi(z)}{f(z)} \right) = 0,
-            \]
-            откуда, согласно принципу аргумента,
-            \[
-            \Delta_L \arg \left( f(z) + \varphi(z) \right) =
-            \Delta_L \arg f(z) +
-            \Delta_L \arg \left( 1 + \frac{\varphi(z)}{f(z)} \right) =
-            \Delta_L \arg f(z) = 2\pi N.
-            \]
-            </p>
+            <div class="proof">
+              <p>
+              $f(z) + \varphi(z) \neq 0$ на $L$, так как $\abs{f(z) + \varphi(z)}
+              \geqslant \abs{f(z)} + \abs{\varphi(z)} \gt 0$ на $L$.
+              </p>
+
+              <p>
+              $f(z) \neq 0$ на $L$, так как $\abs{f(z)} \gt \abs{\varphi(z)}
+              \geqslant 0$ на $L$, поэтому можно записать
+              \[
+              f(z) + \varphi(z) = f(z) \left( 1 + \frac{\varphi(z)}{f(z)} \right),
+              \]
+              в этом случае аргумент $f(z) + \varphi(z)$ запишется в виде
+              \[
+              \arg \left( f(z) + \varphi(z) \right) = \arg f(z) + \arg \left( 1 +
+              \frac{\varphi(z)}{f(z)} \right), \quad z \in L,
+              \]
+              поэтому
+              \[
+              \Delta_L \arg \left( f(z) + \varphi(z) \right) =
+              \Delta_L \arg f(z) +
+              \Delta_L \arg \left( 1 + \frac{\varphi(z)}{f(z)} \right),
+              \quad z \in L,
+              \]
+              </p>
+
+              <p>
+              Рассмотрим движение радиус-вектора $w = 1 +
+              \dfrac{\varphi(z)}{f(z)}$. Из условия теоремы следует, что при $z
+              \in L$
+              \[
+              \abs{\frac{\varphi(z)}{f(z)}} \lt 1.
+              \]
+              В таком случае
+              \[
+              w = 1 + \frac{\varphi(z)}{f(z)} \implies \abs{w - 1} \lt 1,
+              \]
+              откуда видно, что радиус-вектор $w$ не делает ни одного оборота
+              вокруг начала координат, поэтому
+              \[
+              \Delta_L \arg \left( 1 + \frac{\varphi(z)}{f(z)} \right) = 0,
+              \]
+              откуда, согласно принципу аргумента,
+              \[
+              \Delta_L \arg \left( f(z) + \varphi(z) \right) =
+              \Delta_L \arg f(z) +
+              \Delta_L \arg \left( 1 + \frac{\varphi(z)}{f(z)} \right) =
+              \Delta_L \arg f(z) = 2\pi N.
+              \]
+              </p>
+            </div>
           </div>
         </div>
       </li>
@@ -2012,59 +2127,60 @@
         </div>
         <div class="content">
           <div class="theorem">
-          Полином $n$-той степени имеет на комплексной плоскости ровно $n$ нулей
-          (с учётом их кратности)
-          </div>
-          <div class="proof">
-            <p>
-            Рассмотрим полином $n$-той степени
-            \[
-            P_n(z) = a_0 z^n + \dots + a_n, \quad n \geqslant 1.
-            \]
-            Представим его в виде
-            \[
-            P_n(z) = f(z) + \varphi(z),
-            \]
-            где
-            \[
-            f(z) = a_0 z^n, \quad \varphi(z) = a_1 z^{n-1} + \dots + a_n.
-            \]
-            Рассмотрим контур $\abs{z} = R$; тогда перепишем отношение этих
-            функций:
-            \[
-            \begin{aligned}
-            \abs{\frac{\varphi(z)}{f(z)}} &= \abs{\frac{a_1}{a_0} \cdot
-            \frac{1}{z} + \dots + \frac{a_n}{a_0} \cdot \frac{1}{z^n}} \\
-            & \leqslant \frac{1}{\abs{a_0}} \cdot \left(
-            \frac{\abs{a_1}}{\abs{z}} + \dots + \frac{\abs{a_n}}{\abs{z}^n}
-            \right) \\
-            &\leqslant \frac{1}{\abs{a_0}} \cdot \frac{\abs{a_1} + \dots +
-            \abs{a_n}}{\abs{z}} \\
-            &= \frac{\abs{a_1} + \dots + \abs{a_n}}{\abs{a_0} \cdot R},
-            \end{aligned}
-            \]
-            откуда следует, что если
-            \[
-            R_0 = \frac{\abs{a_1} + \dots + \abs{a_n}}{\abs{a_0}},
-            \]
-            то на контуре $\abs{z} = R_0$ выполнено неравенство
-            \[
-            \abs{\frac{\varphi(z)}{f(z)}} \leqslant 1.
-            \]
-            Всегда можно найти $R \gt R_0$ такой, что на $\abs{z} = R$
-            выполняется
-            \[
-            \abs{\varphi(z)} \lt \abs{f(z)},
-            \]
-            поэтому, по теореме Руше, число нулей функции $f(z) = a_0 z^n$ равно
-            числу нулей функции $f(z) = \varphi(z) = P_n(z)$.
-            </p>
+            Полином $n$-той степени имеет на комплексной плоскости ровно $n$
+            нулей (с учётом их кратности)
 
-            <p>
-            Очевидно, $a_0 z^n$ имеет в начале координат нуль кратности $n$,
-            откуда следует, что общее число корней многочлена $P_n(z)$ также
-            равно $n$.
-            </p>
+            <div class="proof">
+              <p>
+              Рассмотрим полином $n$-той степени
+              \[
+              P_n(z) = a_0 z^n + \dots + a_n, \quad n \geqslant 1.
+              \]
+              Представим его в виде
+              \[
+              P_n(z) = f(z) + \varphi(z),
+              \]
+              где
+              \[
+              f(z) = a_0 z^n, \quad \varphi(z) = a_1 z^{n-1} + \dots + a_n.
+              \]
+              Рассмотрим контур $\abs{z} = R$; тогда перепишем отношение этих
+              функций:
+              \[
+              \begin{aligned}
+              \abs{\frac{\varphi(z)}{f(z)}} &= \abs{\frac{a_1}{a_0} \cdot
+              \frac{1}{z} + \dots + \frac{a_n}{a_0} \cdot \frac{1}{z^n}} \\
+              & \leqslant \frac{1}{\abs{a_0}} \cdot \left(
+              \frac{\abs{a_1}}{\abs{z}} + \dots + \frac{\abs{a_n}}{\abs{z}^n}
+              \right) \\
+              &\leqslant \frac{1}{\abs{a_0}} \cdot \frac{\abs{a_1} + \dots +
+              \abs{a_n}}{\abs{z}} \\
+              &= \frac{\abs{a_1} + \dots + \abs{a_n}}{\abs{a_0} \cdot R},
+              \end{aligned}
+              \]
+              откуда следует, что если
+              \[
+              R_0 = \frac{\abs{a_1} + \dots + \abs{a_n}}{\abs{a_0}},
+              \]
+              то на контуре $\abs{z} = R_0$ выполнено неравенство
+              \[
+              \abs{\frac{\varphi(z)}{f(z)}} \leqslant 1.
+              \]
+              Всегда можно найти $R \gt R_0$ такой, что на $\abs{z} = R$
+              выполняется
+              \[
+              \abs{\varphi(z)} \lt \abs{f(z)},
+              \]
+              поэтому, по теореме Руше, число нулей функции $f(z) = a_0 z^n$
+              равно числу нулей функции $f(z) = \varphi(z) = P_n(z)$.
+              </p>
+
+              <p>
+              Очевидно, $a_0 z^n$ имеет в начале координат нуль кратности $n$,
+              откуда следует, что общее число корней многочлена $P_n(z)$ также
+              равно $n$.
+              </p>
+            </div>
           </div>
         </div>
       </li>
@@ -2087,9 +2203,11 @@
               \quad \abs{f(t)} \leqslant Me^{st}$.
             </li>
           </ol>
-          Функция $f(t)$, удовлетворяющая этим условиям, называется
-          <i>функцией ограниченного роста</i>, а число $s_0 = \inf s$ &mdash;
-          <i>показателем роста</i> $f(t)$.
+          <div class="definition">
+            Функция $f(t)$, удовлетворяющая этим условиям, называется
+            <i>функцией ограниченного роста</i>, а число $s_0 = \inf s$ &mdash;
+            <i>показателем роста</i> $f(t)$.
+          </div>
         </div>
       </li>
 
@@ -2120,23 +2238,26 @@
           Определение: изображение и оригинал по Лапласу
         </div>
         <div class="content">
-          Функция комплексного переменного $p \in \mathbb{C}$
-          \[
-          F(p) = \int\limits_0^{+\infty} f(t) e^{-pt} dt, \quad p = s + i \sigma
-          \]
-          называется <i>изображением по Лапласу</i>, если существует указанный
-          интеграл. Исходная функция $f(t)$ называется <i>оригиналом</i>.
-          <div class="notation">
-            <ul>
-              <li>
-                $F(p) \doteqdot f(t), \quad f(t) \doteqdot F(p)$,
-              </li>
+          <div class="definition">
+            Функция комплексного переменного $p \in \mathbb{C}$
+            \[
+            F(p) = \int\limits_0^{+\infty} f(t) e^{-pt} dt,
+            \quad p = s + i \sigma
+            \]
+            называется <i>изображением по Лапласу</i>, если существует указанный
+            интеграл. Исходная функция $f(t)$ называется <i>оригиналом</i>.
+            <div class="notation">
+              <ul>
+                <li>
+                  $F(p) \doteqdot f(t), \quad f(t) \doteqdot F(p)$,
+                </li>
 
-              <li>
-                $F(p) = \mathcal{L}\{f(t)\}, \quad f(t) =
-                \mathcal{L}^{-1}\{F(p)\}$.
-              </li>
-            </ul>
+                <li>
+                  $F(p) = \mathcal{L}\{f(t)\}, \quad f(t) =
+                  \mathcal{L}^{-1}\{F(p)\}$.
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </li>
@@ -2152,45 +2273,46 @@
             существует изображение $\displaystyle F(p) =
             \int\limits_0^{+\infty} f(t) e^{-pt} dt$, причём $F(p)$ &mdash;
             аналитическая функция.
-          </div>
-          <div class="proof">
-            Докажем существование.
-            <p>
-            По условию: $\abs{f(t)} \leqslant Me^{s_0 t}$. Пусть $p = s + i
-            \sigma$, тогда
-            \[
-            \abs{f(t) e^{-pt}} = \abs{f(t)} \cdot \abs{e^{-pt}} = \abs{f(t)}
-            \cdot e^{-\Re p \cdot t} = \abs{f(t)} e^{-st} \leqslant
-            Me^{s_0 t} \cdot e^{-st} = Me^{(s_0 - s) t}.
-            \]
 
-            \[
-            \abs{\int\limits_0^{+\infty} f(t) e^{-pt} dt} \leqslant
-            \int\limits_0^{+\infty} Me^{(s_0 - s) t} dt = \frac{M}{s_0 - s}
-            e^{(s_0 - s) t} \Big|_0^{+\infty} = \frac{M}{s - s_0}.
-            \]
-            По условию $\Re p \gt s_0$, поэтому доказано существование $F(p)$.
-            </p>
+            <div class="proof">
+              Докажем существование.
+              <p>
+              По условию: $\abs{f(t)} \leqslant Me^{s_0 t}$. Пусть $p = s + i
+              \sigma$, тогда
+              \[
+              \abs{f(t) e^{-pt}} = \abs{f(t)} \cdot \abs{e^{-pt}} = \abs{f(t)}
+              \cdot e^{-\Re p \cdot t} = \abs{f(t)} e^{-st} \leqslant
+              Me^{s_0 t} \cdot e^{-st} = Me^{(s_0 - s) t}.
+              \]
 
-            Докажем аналитичность $F(p)$.
-            <p>
-            \[
-            \begin{aligned}
-            \abs{\dv{}{p} \int\limits_0^{+\infty} f(t) e^{-pt} dt} &=
-            \abs{\int\limits_0^{+\infty} t f(t) e^{-pt} dt} \\
-            &\leqslant \int\limits_0^{+\infty} M \underbrace{t}_u
-            \underbrace{e^{(s_0 - s)t} dt}_{dv} \\
-            &= M \left.\left( t e^{(s_0 - s)t}
-            \cdot \frac{1}{s_0 - s} \right)\right|_0^{+\infty} - M
-            \int\limits_0^{+\infty} \frac{e^{(s_0 - s) t}}{s_0 - s} dt \\
-            &= -M \left.\frac{e^{(s_0 - s) t}}{(s_0 - s)^2} \right|_0^{+\infty}
-            \\
-            &= \frac{M}{(s - s_0)^2}.
-            \end{aligned}
-            \]
-            Итак, $\displaystyle \dv{}{p} F(p)$ существует во всех точках
-            полуплоскости $\Re p \gt s_0$. Аналитичность доказана.
-            </p>
+              \[
+              \abs{\int\limits_0^{+\infty} f(t) e^{-pt} dt} \leqslant
+              \int\limits_0^{+\infty} Me^{(s_0 - s) t} dt = \frac{M}{s_0 - s}
+              e^{(s_0 - s) t} \Big|_0^{+\infty} = \frac{M}{s - s_0}.
+              \]
+              По условию $\Re p \gt s_0$, поэтому доказано существование $F(p)$.
+              </p>
+
+              Докажем аналитичность $F(p)$.
+              <p>
+              \[
+              \begin{aligned}
+              \abs{\dv{}{p} \int\limits_0^{+\infty} f(t) e^{-pt} dt} &=
+              \abs{\int\limits_0^{+\infty} t f(t) e^{-pt} dt} \\
+              &\leqslant \int\limits_0^{+\infty} M \underbrace{t}_u
+              \underbrace{e^{(s_0 - s)t} dt}_{dv} \\
+              &= M \left.\left( t e^{(s_0 - s)t}
+              \cdot \frac{1}{s_0 - s} \right)\right|_0^{+\infty} - M
+              \int\limits_0^{+\infty} \frac{e^{(s_0 - s) t}}{s_0 - s} dt \\
+              &= -M \left.\frac{e^{(s_0 - s) t}}{(s_0 - s)^2} \right|_0^{+\infty}
+              \\
+              &= \frac{M}{(s - s_0)^2}.
+              \end{aligned}
+              \]
+              Итак, $\displaystyle \dv{}{p} F(p)$ существует во всех точках
+              полуплоскости $\Re p \gt s_0$. Аналитичность доказана.
+              </p>
+            </div>
           </div>
         </div>
       </li>
@@ -2203,14 +2325,15 @@
           <div class="corollary">
             Если функция $f(t)$ &mdash; оригинал, то $\displaystyle
             \lim_{\Re p \to \infty} F(p) = 0$.
-          </div>
-          <div class="proof">
-            Пользуясь оценкой интеграла из доказательства теоремы о
-            существовании изображения, получаем
-            \[
-            \abs{F(p)} \leqslant \frac{M}{s - s_0} \underset{s \to
-            +\infty}{\longrightarrow} 0.
-            \]
+
+            <div class="proof">
+              Пользуясь оценкой интеграла из доказательства теоремы о
+              существовании изображения, получаем
+              \[
+              \abs{F(p)} \leqslant \frac{M}{s - s_0} \underset{s \to
+              +\infty}{\longrightarrow} 0.
+              \]
+            </div>
           </div>
         </div>
       </li>
@@ -2304,14 +2427,21 @@
             \[
             f(at) \doteqdot \frac{1}{a} F(\frac{p}{a}).
             \]
-          </div>
-          <div class="proof">
-            \[
-            f(at) \doteqdot \int\limits_0^{+\infty} f(at) \cdot e^{-pt} dt
-            = \int\limits_0^{+\infty} f(\tau) e^{-p\frac{\tau}{a}} \frac{d\tau}{a}
-            = \frac{1}{a} \int\limits_0^{+\infty} f(\tau) e^{-\frac{p}{a} \tau}
-            d\tau \triangleq \frac{1}{a} F(\frac{p}{a}).
-            \]
+
+            <div class="proof">
+              \[
+              \begin{aligned}
+              f(at) &\doteqdot \int\limits_0^{+\infty} f(at) \cdot e^{-pt} dt \\
+              &=
+              \int\limits_0^{+\infty} f(\tau) e^{-p\frac{\tau}{a}} \frac{d\tau}{a} \\
+              &=
+              \frac{1}{a} \int\limits_0^{+\infty} f(\tau) e^{-\frac{p}{a} \tau}
+              d\tau \\
+              &\triangleq
+              \frac{1}{a} F(\frac{p}{a}).
+              \end{aligned}
+              \]
+            </div>
           </div>
         </div>
       </li>
@@ -2326,14 +2456,15 @@
             \[
             e^{\alpha t} \cdot f(t) \doteqdot F(p - \alpha).
             \]
-          </div>
-          <div class="proof">
-            \[
-            e^{\alpha t} \cdot f(t) \doteqdot
-            \int\limits_0^{+\infty} e^{\alpha t} f(t) \cdot e^{-pt} dt = 
-            \int\limits_0^{+\infty} f(t) \cdot e^{-(p-\alpha)t} dt =
-            F(p - \alpha).
-            \]
+
+            <div class="proof">
+              \[
+              e^{\alpha t} \cdot f(t) \doteqdot
+              \int\limits_0^{+\infty} e^{\alpha t} f(t) \cdot e^{-pt} dt = 
+              \int\limits_0^{+\infty} f(t) \cdot e^{-(p-\alpha)t} dt =
+              F(p - \alpha).
+              \]
+            </div>
           </div>
         </div>
       </li>
@@ -2348,16 +2479,17 @@
             \[
             f(t - \tau) \doteqdot e^{-p\tau} F(p).
             \]
-          </div>
-          <div class="proof">
-            Если $f(t)$ &mdash; оригинал, то $\forall c \gt 0$ $f(t - \tau)$
-            также будет оригиналом, причём $f(t - \tau) = 0$ при $t \lt \tau$.
-            Тогда
-            \[
-            f(t - \tau) \doteqdot \int\limits_0^{+\infty} f(t - \tau) e^{-pt} dt
-            = \int\limits_0^{+\infty} \underline{f(t - \tau) e^{-p(t - \tau)}}
-            e^{-p \tau} \underline{d(t - \tau)} = e^{-p\tau} \cdot F(p).
-            \]
+
+            <div class="proof">
+              Если $f(t)$ &mdash; оригинал, то $\forall c \gt 0$ $f(t - \tau)$
+              также будет оригиналом, причём $f(t - \tau) = 0$ при $t \lt \tau$.
+              Тогда
+              \[
+              f(t - \tau) \doteqdot \int\limits_0^{+\infty} f(t - \tau) e^{-pt} dt
+              = \int\limits_0^{+\infty} \underline{f(t - \tau) e^{-p(t - \tau)}}
+              e^{-p \tau} \underline{d(t - \tau)} = e^{-p\tau} \cdot F(p).
+              \]
+            </div>
           </div>
         </div>
       </li>
@@ -2376,20 +2508,21 @@
             F^{(n)}(p) &\doteqdot (-1)^n t^n f(t).
             \end{aligned}
             \]
-          </div>
-          <div class="proof">
-            $f(t) \doteqdot F(p)$, причём $F(p)$ &mdash; аналитическая функция
-            при $\Re p \gt s_0$. Тогда
-            \[
-            \begin{aligned}
-            F(p) &= \int\limits_0^{+\infty} f(t) e^{-pt} dt, \\
-            F'(p) &= \int\limits_0^{+\infty} f(t) (-t) e^{-pt} dt &&\doteqdot
-            -f(t) \cdot t, \\
-            F''(p) &= \left( F'(p) \right)' = -t(-f(t) \cdot t) &&= t^2 f(t), \\
-            &\dots \\
-            F^{(n)}(p) &\doteqdot &&\doteqdot (-1)^n t^n f(t).
-            \end{aligned}
-            \]
+
+            <div class="proof">
+              $f(t) \doteqdot F(p)$, причём $F(p)$ &mdash; аналитическая функция
+              при $\Re p \gt s_0$. Тогда
+              \[
+              \begin{aligned}
+              F(p) &= \int\limits_0^{+\infty} f(t) e^{-pt} dt, \\
+              F'(p) &= \int\limits_0^{+\infty} f(t) (-t) e^{-pt} dt &&\doteqdot
+              -f(t) \cdot t, \\
+              F''(p) &= \left( F'(p) \right)' = -t(-f(t) \cdot t) &&= t^2 f(t), \\
+              &\dots \\
+              F^{(n)}(p) &\doteqdot &&\doteqdot (-1)^n t^n f(t).
+              \end{aligned}
+              \]
+            </div>
           </div>
         </div>
       </li>
@@ -2410,20 +2543,21 @@
             f^{(n)}(t) &\doteqdot f^n F(p) - p^{n-1}f(0) - \dots - f^{(n-1)}(0).
             \end{aligned}
             \]
-          </div>
-          <div class="proof">
-            \[
-            \begin{aligned}
-            f'(t) &\doteqdot \int\limits_0^{+\infty} \underbrace{f'(t)}_{dv}
-            \underbrace{e^{-pt}}_{u} dt = e^{-pt} f(t) \big|_0^{+\infty} -
-            \int\limits_0^{+\infty} f(t) (-p) e^{-pt} dt = -f(0) + p F(p) \\
-            f''(t) &= \left(f'(t)\right)' \doteqdot p\left(pF(p) - f(0)\right) -
-            f'(0) = p^2 F(p) - p f(0) - f'(0), \\
-            &\dots \\
-            f^{(n)}(t) &\doteqdot p^n F(p) - p^{n-1} f(0) - \dots -
-            f^{(n-1)}(0).
-            \end{aligned}
-            \]
+
+            <div class="proof">
+              \[
+              \begin{aligned}
+              f'(t) &\doteqdot \int\limits_0^{+\infty} \underbrace{f'(t)}_{dv}
+              \underbrace{e^{-pt}}_{u} dt = e^{-pt} f(t) \big|_0^{+\infty} -
+              \int\limits_0^{+\infty} f(t) (-p) e^{-pt} dt = -f(0) + p F(p) \\
+              f''(t) &= \left(f'(t)\right)' \doteqdot p\left(pF(p) - f(0)\right) -
+              f'(0) = p^2 F(p) - p f(0) - f'(0), \\
+              &\dots \\
+              f^{(n)}(t) &\doteqdot p^n F(p) - p^{n-1} f(0) - \dots -
+              f^{(n-1)}(0).
+              \end{aligned}
+              \]
+            </div>
           </div>
         </div>
       </li>
@@ -2437,35 +2571,36 @@
             \[
             \int\limits_0^t f(\tau) d\tau \doteqdot \frac{F(p)}{p}.
             \]
-          </div>
-          <div class="proof">
-            Рассмотрим вспомогательную функцию
-            \[
-            g(t) = \int\limits_0^{t} f(\tau) d\tau;
-            \]
-            <ol>
-              <li>
-                $g(0) = 0, g(t \lt 0) = 0$ &mdash; по свойству $f(t)$,
-              </li>
 
-              <li>
-                $\displaystyle \abs{g(t)} \leqslant \int\limits_0^t
-                \abs{f(\tau)}d\tau \leqslant M \int\limits_0^t e^{s_0 \tau}
-                d\tau = \frac{M}{s_0} \left( e^{s_0 t} - 1\right) \leqslant
-                \frac{M}{s_0} e^{s_0 t}$.
-              </li>
-            </ol>
-            Итак, $g(t)$ по определению оригинал, тогда
-            \[
-            \begin{gathered}
-            f(t) \doteqdot F(p), \quad g(t) \doteqdot G(p), \implies \\
-            \implies f(t) = g'(t) \doteqdot p G(p) - g(0) = p G(p) = F(p),
-            \end{gathered}
-            \]
-            окончательно получаем:
-            \[
-            g(t) \doteqdot G(p) = \frac{F(p)}{p}.
-            \]
+            <div class="proof">
+              Рассмотрим вспомогательную функцию
+              \[
+              g(t) = \int\limits_0^{t} f(\tau) d\tau;
+              \]
+              <ol>
+                <li>
+                  $g(0) = 0, g(t \lt 0) = 0$ &mdash; по свойству $f(t)$,
+                </li>
+
+                <li>
+                  $\displaystyle \abs{g(t)} \leqslant \int\limits_0^t
+                  \abs{f(\tau)}d\tau \leqslant M \int\limits_0^t e^{s_0 \tau}
+                  d\tau = \frac{M}{s_0} \left( e^{s_0 t} - 1\right) \leqslant
+                  \frac{M}{s_0} e^{s_0 t}$.
+                </li>
+              </ol>
+              Итак, $g(t)$ по определению оригинал, тогда
+              \[
+              \begin{gathered}
+              f(t) \doteqdot F(p), \quad g(t) \doteqdot G(p), \implies \\
+              \implies f(t) = g'(t) \doteqdot p G(p) - g(0) = p G(p) = F(p),
+              \end{gathered}
+              \]
+              окончательно получаем:
+              \[
+              g(t) \doteqdot G(p) = \frac{F(p)}{p}.
+              \]
+            </div>
           </div>
         </div>
       </li>
@@ -2482,30 +2617,31 @@
             \[
             \int\limits_p^{+\infty} F(p) dp \doteqdot \frac{f(t)}{t}.
             \]
-          </div>
-          <div class="proof">
-            \[
-            \int\limits_0^{+\infty} f(t) e^{-pt}dt = F(p).
-            \]
-            Проинтегрируем $p$ от точки $p_0 = \xi_0 + i \eta_0$ до $\infty$ по
-            отрезку горизонтальной прямой $p = \sigma + i \eta$:
-            \[
-            \begin{aligned}
-            \int\limits_{p_0}^\infty dp \int\limits_0^{+\infty} f(t) e^{-pt} dt
-            &= \int\limits_{\xi_0}^\infty d\sigma \int\limits_0^{+\infty} f(t)
-            e^{-(\sigma + i \eta) t} dt \\
-            &= \int\limits_0^{+\infty} dt \int\limits_{\xi_0}^\infty f(t)
-            e^{-(\sigma + i \eta) t} d\sigma \\
-            &= \int\limits_0^{+\infty} f(t) e^{i \eta t} dt
-            \int\limits_{\xi_0}^{+\infty} e^{-\sigma t} d\sigma \\
-            &= \int\limits_0^{+\infty} \frac{f(t)}{t} e^{-(\xi + i \eta)t} dt =
-            \int\limits_{p_0}^\infty F(p) dp.
-            \end{aligned}
-            \]
-            Таким образом,
-            \[
-            \int\limits_p^{+\infty} F(p) dp \doteqdot \frac{f(t)}{t}.
-            \]
+
+            <div class="proof">
+              \[
+              \int\limits_0^{+\infty} f(t) e^{-pt}dt = F(p).
+              \]
+              Проинтегрируем $p$ от точки $p_0 = \xi_0 + i \eta_0$ до $\infty$ по
+              отрезку горизонтальной прямой $p = \sigma + i \eta$:
+              \[
+              \begin{aligned}
+              \int\limits_{p_0}^\infty dp \int\limits_0^{+\infty} f(t) e^{-pt} dt
+              &= \int\limits_{\xi_0}^\infty d\sigma \int\limits_0^{+\infty} f(t)
+              e^{-(\sigma + i \eta) t} dt \\
+              &= \int\limits_0^{+\infty} dt \int\limits_{\xi_0}^\infty f(t)
+              e^{-(\sigma + i \eta) t} d\sigma \\
+              &= \int\limits_0^{+\infty} f(t) e^{i \eta t} dt
+              \int\limits_{\xi_0}^{+\infty} e^{-\sigma t} d\sigma \\
+              &= \int\limits_0^{+\infty} \frac{f(t)}{t} e^{-(\xi + i \eta)t} dt =
+              \int\limits_{p_0}^\infty F(p) dp.
+              \end{aligned}
+              \]
+              Таким образом,
+              \[
+              \int\limits_p^{+\infty} F(p) dp \doteqdot \frac{f(t)}{t}.
+              \]
+            </div>
           </div>
         </div>
       </li>
@@ -2515,12 +2651,15 @@
           Определение: свёртка
         </div>
         <div class="content">
-          Интеграл
-          \[
-          \int\limits_0^t f(t) g(t - \tau) d\tau =: (f*g) (t)
-          \]
-          называют <i>свёрткой</i> функций $f(t)$ и $g(t)$.
-          <div class="note">
+          <div class="definition">
+            Интеграл
+            \[
+            \int\limits_0^t f(t) g(t - \tau) d\tau =: (f*g) (t)
+            \]
+            называют <i>свёрткой</i> функций $f(t)$ и $g(t)$.
+          </div>
+
+          <div class="remark">
             Свёртка коммутативна:
             \[
             (f*g)(t) = (g*f)(t) =
@@ -2664,7 +2803,7 @@
             \]
           </div>
 
-          <div class="note">
+          <div class="remark">
             Пусть $F(p)$ &mdash; дробно-рациональная функция, а $p_1, p_2,
             \dots$ &mdash; её полюсы (простые или кратные). Тогда
             \[
@@ -2849,8 +2988,10 @@
           Определение: интегральное уравнение
         </div>
         <div class="content">
-          <i>Интегральное уравнение</i> &mdash; уравнение, содержащее искомую
-          функцию под знаком интеграла.
+          <div class="definition">
+            <i>Интегральное уравнение</i> &mdash; уравнение, содержащее искомую
+            функцию под знаком интеграла.
+          </div>
         </div>
       </li>
 
