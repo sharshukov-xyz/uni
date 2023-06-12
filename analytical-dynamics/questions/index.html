@@ -105,6 +105,7 @@
       $\global\def\const{\text{const}\,}$
       $\global\def\degree{\text{degree}\,}$
       $\global\def\proj{\mathrm{proj}}$
+      $\global\def\rank{\mathrm{rank}}$
       $\global\def\res{\text{res}\,}$
       $\global\def\sh{\text{sh}\,}$
       $\global\def\sign{\text{sign}\,}$
@@ -461,23 +462,499 @@
           Уравнения Лагранжа I рода и реакции идеальных связей
         </div>
         <div class="content">
+          Рассмотрим систему $N$ точек. Введём обозначения:
+          <ul>
+            <li>
+              $m_{3j-2} = m_{3j-1} = m_{3j}$ &mdash; масса $j$-ой точки;
+            </li>
+
+            <li>
+              $x_{3j-2}, x_{3j-1}, x_{3j}$ &mdash; координаты $j$-ой точки;
+            </li>
+
+            <li>
+              $X_{3j-2}, X_{3j-1}, X_{3j}$ &mdash; проекции равнодействующей
+              активных связей $\bvec{F}_j$, действующих на $j$-ую точку;
+            </li>
+
+            <li>
+              $R_{3j-2}, R_{3j-1}, R_{3j}$ &mdash; проекции равнодействующей
+              реактивных связей $\bvec{R}_j$, действующих на $j$-ую точку.
+            </li>
+
+            <li>
+              $x = (x_1, \dots, x_{3N})$.
+            </li>
+          </ul>
+
+          В общем виде несвободная система подчиняется как голономным
+          \[
+          f_j(x,t) = 0, \qquad j = \overline{1,k},
+          \]
+          так и неголономным связям:
+          \[
+          \sum_{\nu=1}^{3N} a_{\rho \nu}(t) \dot{x}_{\nu} + a_\rho(t) = 0,
+          \qquad \rho = \overline{1, r}
+          \]
+          что вкупе со вторым законом Ньютона
+          \[
+          m_\nu \ddot{x}_\nu = X_\nu + R_\nu, \qquad \nu = \overline{1,3N}
+          \]
+          даёт $3N + k + r$ уравнений относительно $6N$ неизвестных
+          $x_\nu, R_\nu$.
+
+          <p>
+          Если связи идеальны, то общее уравнение механики для данной системы
+          запишется в виде
+          \[
+          \sum_{\nu=1}^{3N} \paren{
+          m_\nu \ddot{x}_\nu - X_\nu
+          } \delta x_\nu = 0.
+          \]
+          Связи удерживающие, поэтому они накладывают на вариации следующие
+          ограничения:
+          \[
+          \sum_{\nu=1}^{3N} \pd{f_i}{x_\nu} \delta x_\nu,
+          \qquad i = \overline{1,k}.
+          \]
+          Умножим обе части уравнений неголономных связей на $dt$:
+          \[
+          \sum_{\nu=1}^{3N} a_{\rho \nu}(t) \frac{d x_\nu}{\cancel{dt}}
+          \cancel{dt} + a_\rho(t) dt = 0,
+          \qquad \rho = \overline{1, r}.
+          \]
+          Перейдём к изохронному варьированию: $\delta t = 0$, поэтому
+          ограничения, накладываемые неголономными связями на вариации, примут
+          следующий вид:
+          \[
+          \sum_{\nu=1}^{3N} a_{\rho \nu}(t) \delta x_\nu = 0,
+          \qquad \rho = \overline{1, r}.
+          \]
+
+          Итак, имеем $k+r$ ограничений на вариации, следовательно, среди $3N$
+          вариаций $k+r$ будут зависимыми.
+          </p>
+
+          <p>
+          Введём в рассмотрение <i class="important">множители Лагранжа</i>:
+          $\lambda_1(t), \dots, \lambda_k(t)$ для голономных связей и $\mu_1(t),
+          \dots, \mu_r(t)$ &mdash; для неголономных. Домножим уравнения связей
+          на соответствующие множители и вычтем из общего уравнения механики:
+          \[
+          \sum_{\mu=1}^{3N} \paren{
+          m_\nu \ddot{x}_\nu - X_\nu
+          - \sum_{i=1}^k \lambda_i \pd{f_i}{x_\nu}
+          - \sum_{\rho=1}^r \mu_\rho a_{\rho \nu}
+          } \delta x_\nu = 0.
+          \]
+          Выберем $\lambda_i$ и $\mu_\rho$ так, чтобы какие-либо $r+k$ скобок
+          обнулились. Считая оставшиеся $3N - r-k$ вариаций независимыми,
+          воспользуемся тем фактом, что сумма произведений некоторых выражений
+          на произвольные величины равна нулю только в том случае, когда все эти
+          выражения по отдельности обращаются в ноль. Таким образом, оставшиеся
+          $3N - r-k$ выражений также равны нулю.
+          </p>
+
+          <p>
+          Итак, имеем $3N+r+k$ уравнений
+          \[
+          \left\{
+          \begin{aligned}
+          m_\nu \ddot{x}_\nu - X_\nu
+          - \sum_{i=1}^k \lambda_i \pd{f_i}{x_\nu}
+          - \sum_{\rho=1}^r \mu_\rho a_{\rho \nu} &= 0,
+          & \nu = \overline{1,3N}, \\
+          f_j(x,t) &= 0,
+          & j = \overline{1,k}, \\
+          \sum_{\nu=1}^{3N} a_{\rho \nu}(t) \dot{x}_{\nu} + a_\rho(t) &= 0,
+          & \rho = \overline{1, r}.
+          \end{aligned}
+          \right.
+          \]
+          относительно $3N+r+k$ неизвестных $x_\nu, \lambda_i, \mu_\rho$.
+          </p>
+
+          <p>
+          Эти уравнения называют <i class="important">уравнениями Лагранжа I
+            рода</i>.
+          </p>
+
+          <p>
+          Заметим, что из второго закона Ньютона следует, что
+          \[
+          m_\nu \ddot{x}_\nu - X_\nu - R_\nu = 0, \qquad \nu = \overline{1,3N},
+          \]
+          поэтому <i class="important">реакции идеальных связей</i> (вернее, их
+          проекции) можно найти из уравнений
+          \[
+          R_\nu = \sum_{i=1}^k \lambda_i \pd{f_i}{x_\nu}
+          + \sum_{\rho=1}^r \mu_\rho a_{\rho \nu}.
+          \]
+          </p>
         </div>
       </li>
 
       <li class="question">
         <div class="name">
-          Лагранжевы координаты. Вариации лагранжевых координат. Общее уравнение
-          механики в лагранжевых координатах
+          Определение: лагранжевы координаты
         </div>
         <div class="content">
+          Рассмотрим несвободную систему $N$ точек. Будем считать, что она
+          подчинена только голономным связям:
+          \[
+          f_i(x,t) = 0, \qquad i = \overline{1,m},
+          \]
+          причём
+          <ul>
+            <li>
+              $x \in M \subset \mathbb{R}^{3N}$;
+            </li>
+
+            <li>
+              $f_i \in C^2 \paren{M \times [t_1, t_2]}$.
+            </li>
+          </ul>
+
+          Также будем считать, что связи линейно независимы, то есть
+          \[
+          \rank \paren{\pd{f_i}{x_k}} = m, \qquad x \in M.
+          \]
+          Тогда из $3N$ вариаций зависимыми будут $m$.
+
+          <div class="definition">
+            Число $s = 3N - m$ называют <i>числом степеней свободы</i>.
+          </div>
+
+          <div class="remark">
+            Если присутствуют неголономные связи или $m$ голономных связей
+            линейно зависимы, то $s$, вообще говоря, не равно $3N - m$.
+          </div>
+
+          Рассмотрим $s$ координат
+          $q = (q_1, \dots, q_s) \in D \subset \mathbb{R}^s$.
+          <div class="definition">
+            Если координаты $q = (q_1, \dots, q_s) \in D$ удовлетворяют условиям
+            <ol type="a">
+              <li>
+                $x(q,t) \in M$, если $q \in D, t \in (t_1, t_2)$;
+              </li>
+
+              <li>
+                $f_i(x(q,t),t) = 0$ при $q \in D, t \in (t_1, t_2)$;
+              </li>
+            </ol>
+            то их называют <i>обобщёнными (лагранжевыми) координатами</i>.
+          </div>
+
+          <div class="statement">
+            Если $(q,t) \in D \times (t_1, t_2)$, то
+            \[
+            \rank \paren{
+            \pd{x_\nu}{q_i}
+            } = s \neq 0.
+            \]
+
+            <div class="proof">
+              Эта матрица имеет размеры $(3N - m) \times 3N$, следовательно,
+              $k \leqslant 3N - m$. С другой стороны, по теореме о неявных
+              функциях $x_1,\dots,x_{3N}$ должны удовлетворять $3N - k$
+              независимым уравнениям. Так как рассматриваемая система стестена
+              только $m$ связями, то
+              \[
+              3N - k \leqslant m, \implies k \geqslant 3N - m \bydef= s,
+              \]
+              то есть получили противоречие.
+            </div>
+          </div>
         </div>
       </li>
 
       <li class="question">
         <div class="name">
-          Уравнения Лагранжа II рода, их инвариантность
+          Связь вариаций декартовых и обобщённых координат. Вариации лагранжевых
+          координат
         </div>
         <div class="content">
+          Рассмотрим несвободную систему $N$ точек, подчинённую идеальным
+          голономным удерживающим связям. Обозначим за
+          $\bvec{r} = \bvec{r}(q,t)$ радиус-вектор $j$-ой точки системы. Тогда
+          \[
+          \left\{
+          \begin{aligned}
+          \bvec{v}_j &= \dv{\bvec{r}_j(q,t)}{t}
+          = \sum_{i=1}^s \pd{\bvec{r}_j}{q_i} \dot{q}_i + \pd{\bvec{r}_j}{t},
+          & j=\overline{1,N}, \\
+          \dot{x}_\nu &= \dv{x_\nu(q,t)}{t}
+          = \sum_{i=1}^s \pd{x_\nu}{q_i} \dot{q}_i + \pd{x_\nu}{t},
+          & \nu=\overline{1,3N},
+          \end{aligned}
+          \right.
+          \]
+          или, переходя к (изохронным) вариациям,
+          \[
+          \left\{
+          \begin{aligned}
+          \delta \bvec{r}_j &=
+          \sum_{i=1}^s \pd{\bvec{r}_j}{q_i} \delta q_i + \pd{\bvec{r}_j}{t}
+          \delta t = \sum_{i=1}^s \pd{\bvec{r}_j}{q_i} \delta q_i,
+          & j=\overline{1,N}, \\
+          \delta x_\nu &=
+          \sum_{i=1}^s \pd{x_\nu}{q_i} \delta q_i + \pd{x_\nu}{t} \delta t
+          = \sum_{i=1}^s \pd{x_\nu}{q_i} \delta q_i,
+          & \nu=\overline{1,3N},
+          \end{aligned}
+          \right.
+          \]
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Общее уравнение механики в обобщённых координатах
+        </div>
+        <div class="content">
+          Рассмотрим общее уравнение механики в декартовых координатах для
+          системы $N$ точек, подчинённой идеальным связям:
+          \[
+          \sum_{j=1}^N \paren{
+          m_j \pd{\bvec{v}_j}{t} - \bvec{F}_j
+          } \delta \bvec{r}_j = 0.
+          \]
+          Так как
+          \[
+          \delta \bvec{r}_j = \sum_{i=1}^s \pd{\bvec{r}_j}{q_i} \delta q_i,
+          \qquad j=\overline{1,N},
+          \]
+          то
+          \[
+          \sum_{j=1}^N \paren{
+          m_j \pd{\bvec{v}_j}{t} - \bvec{F}_j
+          } \sum_{i=1}^s \pd{\bvec{r}_j}{q_i} \delta q_i = 0.
+          \]
+
+          <div class="statement">
+            Справедливо тождество Лагранжа:
+            \[
+            \dv{\bvec{v}_j}{t} \pd{\bvec{r}_j}{q_i}
+            =
+            \dv{}{t} \paren{ \bvec{v}_j \pd{\bvec{r}_j}{q_i} }
+            -
+            \bvec{v}_j \dv{}{t} \pd{\bvec{r}_j}{q_i}.
+            \]
+
+            <div class="proof">
+              Действительно,
+              \[
+              \dv{}{t} \paren{ \bvec{v}_j \pd{\bvec{r}_j}{q_i} }
+              =
+              \dv{\bvec{v}_j}{t} \pd{\bvec{r}_j}{q_i}
+              +
+              \bvec{v}_j \dv{}{t} \pd{\bvec{r}_j}{q_i}.
+              \]
+            </div>
+          </div>
+
+          Из уравнений
+          \[
+          \bvec{v}_j =
+          \sum_{i=1}^s \pd{\bvec{r}_j}{q_i} \dot{q}_i + \pd{\bvec{r}_j}{t},
+          \qquad j=\overline{1,N},
+          \]
+          следует, что
+          \[
+          \pd{\bvec{r}_j}{q_i} = \pd{\bvec{v}_j}{\dot{q}_i}.
+          \]
+
+          <div class="statement">
+            Справедливо равенство:
+            \[
+            \dv{}{t} \pd{\bvec{r}_j}{q_i} = \pd{\bvec{v}_j}{q_i}.
+            \]
+
+            <div class="proof">
+              Так как
+              \[
+              \bvec{v}_j = \dot{\bvec{r}}_j =
+              \sum_{i=1}^s \pd{\bvec{r}_j}{q_i} \dot{q}_i + \pd{\bvec{r}_j}{t},
+              \]
+              то
+              \[
+              \pd{\bvec{v}_j}{q_i}
+              = \pd{\dot{\bvec{r}}_j}{q_k}
+              = \sum_{i=1}^s \ppdv{\bvec{r}_j}{q_k}{q_i} \dot{q}_i
+              + \ppdv{\bvec{r}_j}{q_k}{t},
+              \]
+              но
+              \[
+              \dv{}{t} \paren{ \pd{\bvec{r}_j}{q_k} }
+              = \sum_{i=1}^s \ppdv{\bvec{r}_j}{q_k}{q_i} \dot{q}_i
+              + \ppdv{\bvec{r}_j}{q_k}{t},
+              \]
+              откуда следует справедливость равенства
+              \[
+              \dv{}{t} \pd{\bvec{r}_j}{q_i} = \pd{\bvec{v}_j}{q_i}.
+              \]
+            </div>
+          </div>
+
+          Итак, домножим тождество Лагранжа
+          \[
+          \dv{\bvec{v}_j}{t} \pd{\bvec{r}_j}{q_i}
+          =
+          \dv{}{t} \paren{ \bvec{v}_j \pd{\bvec{r}_j}{q_i} }
+          -
+          \bvec{v}_j \dv{}{t} \pd{\bvec{r}_j}{q_i}
+          \]
+          на $m_j$ и просуммируем полученные равенства:
+          \[
+          \sum_{j=1}^N m_j \dv{\bvec{v}_j}{t} \pd{\bvec{r}_j}{q_i}
+          =
+          \sum_{j=1}^N m_j \dv{}{t} \paren{ \bvec{v}_j \pd{\bvec{r}_j}{q_i} }
+          -
+          \sum_{j=1}^N m_j \bvec{v}_j \dv{}{t} \pd{\bvec{r}_j}{q_i}.
+          \]
+          Введём в рассмотрение уравнение <i class="important">кинетической
+            энергии</i>:
+          \[
+          T = \frac{1}{2} \sum_{j=1}^N m_j \dp{\bvec{v}_j}{\bvec{v}_j}.
+          \]
+          Используя его, перепишем уравнение в следующем виде:
+          \[
+          \sum_{j=1}^N m_j \dv{\bvec{v}_j}{t} \pd{\bvec{r}_j}{q_i}
+          =
+          \dv{}{t} \pd{T}{\dot{q}_i} - \pd{T}{q_i}.
+          \]
+          Также рассмотрим <i class="important">обобщённую силу</i>
+          \[
+          Q_i = \sum_{j=1}^N \bvec{F}_j \pd{\bvec{r}_j}{q_i}.
+          \]
+
+          <div class="remark">
+            Если активные силы консервативны, то
+            \[
+            Q_i = -\pd{\Pi}{q_i},
+            \]
+            где $\Pi$ &mdash; потенциальная энергия системы.
+          </div>
+
+          Расскрыв скобки в уравнении
+          \[
+          \sum_{j=1}^N \paren{
+          m_j \pd{\bvec{v}_j}{t} - \bvec{F}_j
+          } \sum_{i=1}^s \pd{\bvec{r}_j}{q_i} \delta q_i = 0,
+          \]
+          придём к уравнению
+          \[
+          \sum_{j=1}^N \paren{
+          \sum_{i=1}^s m_j \pd{\bvec{v}_j}{t} \pd{\bvec{r}_j}{q_i}
+          -
+          \sum_{i=1}^s \bvec{F}_j \pd{\bvec{r}_j}{q_i}
+          } \delta q_i = 0,
+          \]
+          которое можно записать в виде
+          \[
+          \sum_{j=1}^N \paren{
+          \dv{}{t} \pd{T}{\dot{q}_i} - \pd{T}{q_i} - Q_i
+          } \delta q_i = 0.
+          \]
+          В этом виде оно известно как <i class="important">общее уравнение
+            механики в обобщённых координатах</i>.
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Уравнения Лагранжа II рода
+        </div>
+        <div class="content">
+          Рассмотрим голономную механическую систему с идеальными связями и $s$
+          степенями свободы, зададим обобщённые координаты
+          $q = (q_1, \dots, q_s)$.
+
+          <p>
+          В силу независимости вариаций обобщённых координат из общего уравнения
+          механики
+          \[
+          \sum_{j=1}^N \paren{
+          \dv{}{t} \pd{T}{\dot{q}_i} - \pd{T}{q_i} - Q_i
+          } \delta q_i = 0
+          \]
+          следует, что
+          \[
+          \dv{}{t} \pd{T}{\dot{q}_i} - \pd{T}{q_i} = Q_i,
+          \qquad i=\overline{1,s}.
+          \]
+          </p>
+
+          <div class="definition">
+            Эти уравнения называют <i class="important">уравнениями Лагранжа II
+              рода</i>.
+          </div>
+
+          Если активные силы консервативны, то
+          \[
+          Q_i = -\pd{\Pi}{q_i}.
+          \]
+          Введя <i class="important">функцию Лагранжа</i>
+          \[
+          L = T - \Pi,
+          \]
+          уравнения Лагранжа II рода примут вид
+          \[
+          \dv{}{t} \pd{L}{\dot{q}_i} - \pd{L}{q_i} = 0,
+          \qquad i=\overline{1,s}.
+          \]
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          В чём преимущество уравнений Лагранжа II рода перед уравнениями I
+          рода?
+        </div>
+        <div class="content">
+          <div class="answer">
+            <ol>
+              <li>
+                Они не зависят от точек системы &mdash; только от степени
+                свободы, следовательно, размерность у них меньше.
+              </li>
+
+              <li>
+                В них не входят заранее неизвестные реакции идеальных связей.
+              </li>
+            </ol>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Инвариантность уравнений Лагранжа II рода
+        </div>
+        <div class="content">
+          <div class="definition">
+            Говорят, что уравнения Лагранжа II рода <i
+              class="important">инвариантны относительно какого-то класса
+              преобразований</i>, если каждое преобразование этого класса не
+            изменяет кинетическую энергию $T$ и обобщённые силы $Q_i$.
+          </div>
+
+          <div class="example">
+            Рассмотрим движение материальной точки в центральном поле сил. Пусть
+            $m$ &mdash; масса точки, а $x_1, x_2, x_3$ &mdash; её координаты,
+            тогда
+            \[
+            \begin{aligned}
+            T &= \frac{1}{2} m v^2 = \frac{1}{2} m \paren{
+            \dot{x}_1^2 + \dot{x}_2^2 + \dot{x}_3^2
+            }, \\
+            \Pi &= - \frac{\mu}{r} = \frac{-\mu}{\sqrt{x_1^2 + x_2^2 + x_3^2}}.
+            \end{aligned}
+            \]
+            Видно, что уравнения Лагранжа II рода инвариантны относительно
+            поворота системы координат в силу инвариантности длины векторов.
+          </div>
         </div>
       </li>
 
@@ -487,6 +964,116 @@
           производных
         </div>
         <div class="content">
+          Рассмотрим кинетическую энергию механической системы в декартовых
+          координатах:
+          \[
+          T = \frac{1}{2} \sum_{j=1}^N m_j \bvec{v}_j^2.
+          \]
+          Так как
+          \[
+          \bvec{v}_j =
+          \sum_{i=1}^s \pd{\bvec{r}_j}{q_i} \dot{q}_i + \pd{\bvec{r}_j}{t},
+          \]
+          то
+          \[
+          \begin{aligned}
+          T &= \frac{1}{2} \sum_{j=1}^N m_j
+          \paren{
+          \sum_{i=1}^s \pd{\bvec{r}_j}{q_i} \dot{q}_i + \pd{\bvec{r}_j}{t},
+          }
+          \paren{
+          \sum_{i=1}^s \pd{\bvec{r}_j}{q_i} \dot{q}_i + \pd{\bvec{r}_j}{t},
+          } \\
+          &= T_2 + T_1 + T_0,
+          \end{aligned}
+          \]
+          где
+          \[
+          \begin{aligned}
+          T_2 &= \frac{1}{2} \sum_{j=1}^N m_j \paren{
+          \sum_{i=1}^s \pd{\bvec{r}_j}{q_i} \dot{q}_i
+          }^2 \\
+          T_1 &= \sum_{p=1}^s \paren{
+          \sum_{j=1}^N m_j \pd{\bvec{r}_j}{q_p} \pd{\bvec{r}_j}{t}
+          } \dot{q}_p, \\
+          T_0 &= \frac{1}{2} \sum_{j=1}^N m_j \paren{
+          \pd{\bvec{r}_j}{t}
+          }^2.
+          \end{aligned}
+          \]
+          Если ввести обознчаения
+          \[
+          \begin{aligned}
+          a_{ik} = a_{ki} &=
+          \sum_{j=1}^N m_j \pd{\bvec{r}_j}{q_i} \pd{\bvec{r}_j}{q_k}, \\
+          a_p &= 
+          \sum_{j=1}^N m_j \pd{\bvec{r}_j}{q_p} \pd{\bvec{r}_j}{t},
+          \end{aligned}
+          \]
+          то уравнения можно представить в виде
+          \[
+          \begin{aligned}
+          T_2 &= \frac{1}{2} \sum_{i,k=1}^s a_{ik} \dot{q}_i \dot{q}_k, \\
+          T_1 &= \sum_{p=1}^s a_p \dot{q}_p, \\
+          T_0 &= \frac{1}{2} \sum_{j=1}^N m_j \paren{
+          \pd{\bvec{r}_j}{t}
+          }^2.
+          \end{aligned}
+          \]
+          Значит, уравнения Лагранжа
+          \[
+          \dv{}{t} \pd{T}{\dot{q}_i} - \pd{T}{q_i} = Q_i,
+          \qquad i=\overline{1,s}
+          \]
+          можно представить в виде
+          \[
+          \sum_{k=1}^s a_{ik} \ddot{q}_k = B_i,
+          \qquad i=\overline{1,s},
+          \]
+          где $B_i$ не зависят от обобщённых ускорений
+          $\ddot{q}_1, \dots, \ddot{q}_s$. Значит, для доказательства
+          разрешимости уравнений Лагранжа II рода относительно обобщённых
+          ускорений достаточно доказать, что
+          \[
+          \det A \neq 0, \quad A = (a_{ik})_{i,k=1}^s.
+          \]
+          При $u = (u_1, \dots, u_s)$ рассмотрим квадратичную форму
+          \[
+          T_2(u) = \frac{1}{2} \sum_{i,k=1}^s a_{ik} u_i u_k.
+          \]
+          Применим к ней критерий Сильвестра &mdash; для положительной
+          определённости этой формы необходимо и достаточно, чтобы все главные
+          миноры были строго положительны, то есть, в частности,
+          \[
+          \det A \gt 0.
+          \]
+          Значит, доказав положительную определённость этой формы, мы докажем,
+          что $\det A \neq 0$. Так как
+          \[
+          T_2(u) = \frac{1}{2} \sum_{j=1}^N m_j \paren{
+          \sum_{i=1}^s \pd{\bvec{r}_j}{q_i} u_i
+          }^2,
+          \]
+          то $T_2(u) \geqslant 0$ для всех $u$. Докажем, что
+          $T_2(u) = 0 \iff u = 0$. Рассуждаем от противного: пусть
+          $\exists u \neq 0$, для которого $T_2(u) = 0$. Тогда
+          \[
+          \sum_{i=1}^s \pd{\bvec{r}_j}{q_i} u_i = 0,
+          \qquad j = \overline{1,N},
+          \]
+          или
+          \[
+          \sum_{i=1}^s \pd{x_{3j-2}}{q_i}
+          =
+          \sum_{i=1}^s \pd{x_{3j-1}}{q_i}
+          =
+          \sum_{i=1}^s \pd{x_{3j}}{q_i}
+          = 0,
+          \]
+          откуда следует линейная зависимость столбцов якобиана
+          $\dfrac{D(x)}{D(q)}$, то есть $\rank \dfrac{D(x)}{D(q)} \lt s$, то
+          известно, что $\rank \dfrac{D(x)}{D(q)} = s$ &mdash; получили
+          противоречие.
         </div>
       </li>
 
@@ -495,6 +1082,90 @@
           Вывод канонических уравнений
         </div>
         <div class="content">
+          Рассмотрим голономную механическую систему с идеальными связями. Пусть
+          активные силы консервативны, то есть $L = T - \Pi$ и
+          \[
+          \dv{}{t} \pd{L}{\dot{q}_i} - \pd{L}{q_i} = 0,
+          \qquad i=\overline{1,s}.
+          \]
+
+          <div class="definition">
+            Величины
+            \[
+            p_i = \pd{L}{\dot{q}_i}, \qquad i = \overline{1,s}
+            \]
+            называют <i>обобщёнными импульсами</i>.
+          </div>
+
+          Потенциальная энергия не зависит от обобщённых скоростей, поэтому
+          \[
+          \ppdv{L}{\dot{q}_i}{\dot{q}_k}
+          =
+          \ppdv{T}{\dot{q}_i}{\dot{q}_k}, \qquad i,k=\overline{1,s}.
+          \]
+          Так как
+          \[
+          \det 
+          \left. \paren{
+          \ppdv{T}{\dot{q}_i}{\dot{q}_k}
+          }
+          \right|_{i,k=1}^s,
+          \]
+          то уравнения импульсов разрешимы относительно обобщённых скоростей, то
+          есть
+          \[
+          \dot{q}_i = \dot{q}_i(q, p, t), \qquad i = \overline{1,s}.
+          \]
+
+          <div class="definition">
+            Функцию
+            \[
+            H(q,p,t) = \sum_{k=1}^s p_k \dot{q}_k(q,p,t)
+            - L(q, \dot{q}(q,p,t), t)
+            \]
+            называют <i class="important">функцией Гамильтона</i> (<i
+              class="important">гамильтонианом</i>).
+          </div>
+
+          Нетрудно видеть, что справедливы соотношения:
+          \[
+          \begin{aligned}
+          \pd{H}{p_i}
+          &= \dot{q}_i + \sum_{k=1}^s \paren{
+          p_k \pd{\dot{q}_k}{p_i} - \pd{L}{\dot{q}_k} \pd{\dot{q}_k}{p_i}
+          }
+          = \dot{q}_i, \\
+          \pd{H}{q_i}
+          &= \sum_{k=1}^s \paren{
+          p_k \pd{\dot{q}_k}{q_i} - \pd{L}{\dot{q}_k} \pd{\dot{q}_k}{q_i}
+          }
+          - \pd{L}{q_i}
+          = -\pd{L}{q_i}, \\
+          \pd{H}{t}
+          &= \sum_{k=1}^s \paren{
+          p_k \pd{\dot{q}_k}{t} - \pd{L}{\dot{q}_k} \pd{\dot{q}_k}{t}
+          }
+          - \pd{L}{t}
+          = -\pd{L}{t}.
+          \end{aligned}
+          \]
+          Учитывая, что
+          \[
+          \dv{}{t} p_i = \pd{L}{q_i} = - \pd{H}{q_i},
+          \]
+          можно записать уравнения, называемые <i
+            class="important">каноническими уравнениями</i>:
+          \[
+          \left\{
+          \begin{aligned}
+          \dot{q}_i &= \phantom{-}\pd{H}{p_i}, \\
+          \dot{p}_i &= -\pd{H}{q_i}.
+          \end{aligned}
+          \right.
+          \]
+          <div class="definition">
+            Переменные $(q,p)$ называют <i>каноническими</i>.
+          </div>
         </div>
       </li>
 
@@ -503,6 +1174,94 @@
           Канонические уравнения: интеграл механической энергии
         </div>
         <div class="content">
+          Рассмотрим гамильтониан
+          \[
+          H(q,p,t) = \sum_{k=1}^s p_k \dot{q}_k(q,p,t)
+          - L(q, \dot{q}(q,p,t), t)
+          \]
+          и канонические уравнения
+          \[
+          \left\{
+          \begin{aligned}
+          \dot{q}_i &= \phantom{-}\pd{H}{p_i}, \\
+          \dot{p}_i &= -\pd{H}{q_i}.
+          \end{aligned}
+          \right.
+          \]
+
+          Также рассмотрим полную производную гамильтониана:
+          \[
+          \begin{aligned}
+          \dv{H}{t}
+          &= \pd{H}{t} + \sum_{i=1}^s \paren{
+          \pd{H}{q_i} \dot{q}_i + \pd{H}{p_i} \dot{p}_i
+          } = \\
+          &= \pd{H}{t} + \sum_{i=1}^s \underbrace{\paren{
+          \pd{H}{q_i} \pd{H}{p_i} - \pd{H}{p_i} \pd{H}{q_i}
+          }}_{=0} \\
+          \implies \dv{H}{t} &= \pd{H}{t}.
+          \end{aligned}
+          \]
+          Значит, если гамильтониан не зависит явно от времени $t$ (то есть
+          $H = H(q,p)$), то
+          \[
+          \pd{H}{t} = 0, \implies \dv{H}{t} = 0, \implies H = h = \const.
+          \]
+          Нетрудно проверить, что $H(q,p) = h$ является первым интегралом
+          канонической системы.
+
+          <p>
+          Механический смысл первого интеграла $H(q,p) = h$: по определению
+          \[
+          H(q,p,t) = \sum_{k=1}^s p_k \dot{q}_k(q,p,t)
+          - L(q, \dot{q}(q,p,t), t).
+          \]
+          Если $H = H(q,p)$, то
+          \[
+          \begin{aligned}
+          H(q,p) &= \sum_{k=1}^s p_k \dot{q}_k(q,p)
+          - L(q, \dot{q}(q,p)) = \\
+          &= \sum_{k=1}^s \pd{L}{\dot{q}_k} \dot{q}_k(q,p)
+          - L(q, \dot{q}(q,p)).
+          \end{aligned}
+          \]
+          Так как
+          \[
+          L = T - \Pi = T_2 + T_1 + T_0 - \Pi,
+          \]
+          а
+          \[
+          \begin{aligned}
+          T_2 &= \frac{1}{2} \sum_{i,k=1}^s a_{ik} \dot{q}_i \dot{q}_k, \\
+          T_1 &= \sum_{p=1}^s a_p \dot{q}_p, \\
+          T_0 &= \frac{1}{2} \sum_{j=1}^N m_j \paren{
+          \pd{\bvec{r}_j}{t}
+          }^2,
+          \end{aligned}
+          \]
+          то
+          \[
+          \sum_{k=1}^s \pd{L}{\dot{q}_k} \dot{q}_k = 2T_2 + T_1,
+          \]
+          поэтому
+          \[
+          H = T_2 - T_0 + \Pi = h.
+          \]
+          </p>
+
+          <div class="definition">
+            Функция
+            \[
+            H = T_2 - T_0 + \Pi = h
+            \]
+            называется <i>функцией Гамильтона в форме Якоби-Остроградского</i>.
+          </div>
+
+          Если $\bvec{r}_j = \bvec{r}_j(q)$ (то есть радиус-векторы точек не
+          зависят явно от времени), то $T_0 = 0$, и, следовательно,
+          \[
+          H = T + \Pi = h = \const.
+          \]
         </div>
       </li>
 
@@ -511,6 +1270,54 @@
           Циклические координаты
         </div>
         <div class="content">
+          Рассмотрим обобщённые координаты $q = (q_1, \dots, q_s)$.
+
+          <div class="definition">
+            Обобщённые координаты координат $q_1, \dots, q_\sigma$ (где $\sigma
+            \lt s$), от которых функция Лагранжа $L = L(q, p, t)$ явно не
+            зависит, называют <i>обобщёнными</i>. Остальные координаты называют
+            <i>позиционными</i>.
+          </div>
+
+          Из канонических уравнений известно, что
+          \[
+          \pd{H}{q_i} = -\dot{p}_i \bydef= -\pd{L}{q_i} = 0,
+          \qquad i = \overline{1,\sigma},
+          \]
+          поэтому
+          \[
+          \dot{p}_i = 0, \implies p_i = C_i = \const,
+          \]
+          то есть <i class="important">циклические импульсы являются первыми
+            интегралами канонической системы</i>.
+
+          <div class="remark">
+            Каждая циклическая координата снижает порядок системы на 2.
+          </div>
+
+          Так как
+          \[
+          p_i \bydef= \pd{L(q, \dot{q}(q, p, t), t)}{\dot{q}_i},
+          \]
+          а
+          \[
+          \det \paren{
+          \ppdv{L}{\dot{q}_i}{\dot{q}_k}
+          } \neq 0,
+          \]
+          то по теореме о неявных функциях
+          \[
+          \dot{q}_i = \dot{q}_i(
+          q_{\sigma+1}, \dots, q_s, C_1, \dots, C_\sigma, p_{\sigma+1}, \dots,
+          p_s, t
+          ), \qquad i = \overline{1,\sigma}.
+          \]
+          Такие скорости называют <i class="important">циклическими</i>.
+
+          <div class="remark">
+            Циклические скорости не зависят от циклических координат по
+            построению: от них не зависит лагранжиан $L$.
+          </div>
         </div>
       </li>
 
@@ -727,5 +1534,4 @@
       </li>
     </ol>
   </body>
-
 </html>

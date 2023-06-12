@@ -314,17 +314,6 @@ div.todo {
   --width-xl: 1200px;
 }
 
-/* @media (prefers-color-scheme: dark) { */
-/*   :root { */
-/*     --background-color: #1c1c1c; */
-/*     --text-color: white; */
-/*     --border-color: white; */
-
-/*     --blue-color: rgb(113, 170, 235); */
-/*     --red-color: lightpink; */
-/*   } */
-/* } */
-
 body {
   background-color: var(--background-color);
   color: var(--text-color);
@@ -456,5 +445,14 @@ div.break {
     margin: 24px auto;
 }
 
+/* @media (prefers-color-scheme: dark) { */
+  /* :root { */
+  /*   --background-color: #1c1c1c; */
+  /*   --text-color: white; */
+  /*   --border-color: white; */
 
+  /*   --blue-color: rgb(113, 170, 235); */
+  /*   --red-color: lightpink; */
+  /* } */
+/* } */
 
