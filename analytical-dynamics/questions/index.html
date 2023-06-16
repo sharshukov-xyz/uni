@@ -79,10 +79,13 @@
       $\global\def\vp#1#2{#1 \times #2\,}$
 
       $\global\def\dv#1#2{\frac{d #1}{d #2}}$
+      $\global\def\rdv#1#2{\frac{d' #1}{d #2}}$ <!-- относительная производная -->
       $\global\def\pd#1#2{\frac{\partial #1}{\partial #2}}$
       $\global\def\pdv2#1#2{\frac{\partial^2 #1}{\partial #2^2}}$
+      $\global\def\pdvk#1#2#3{\frac{\partial^#1 #2}{\partial #3^#1}}$
       $\global\def\ppdv#1#2#3{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
 
+      $\global\def\pois#1{\left\{ #1 \right\}}$
       $\global\def\paren#1{\left( #1 \right)}$
       $\global\def\bydef#1{\overset{\mathrm{def}}{#1}}$
 
@@ -1327,14 +1330,273 @@
           первого порядка
         </div>
         <div class="content">
+          Рассмотрим голономную систему с идеальными связями в потенциальном
+          поле сил.
+
+          <div class="idea">
+            Свести систему дифференциальных уравнений к одному ДУЧП. В этом
+            случае полный интеграл ДУЧП позволит найти общее решение исходной
+            системы.
+          </div>
+
+          Рассмотрим ДУЧП 1 порядка относительно функции $z = z(x)$:
+          \[
+          \left\{
+          \begin{aligned}
+          F(x,z,p) &= 0, \\
+          p_j &= \pd{z}{x_j}, & j = \overline{1,n},
+          \end{aligned}
+          \right.
+          \]
+          где $x \in D \subset \mathbb{R}^n, p \in \mathbb{R}^n$.
+
+          <div class="definition">
+            Любая функция $z = z(x)$, обращающая уравнение $F(x,z,p) = 0$ в
+            тождество, называется <i>частным интегралом</i> этого уравнения.
+          </div>
+
+          <div class="definition">
+            <i>Полным интегралом</i> называется любое $n$-параметрическое
+            семейство функций $z = z(x, a)$ (где
+            $a \in A \subset \mathbb{R}^n)$, для которого выполнены условия:
+            <ul type="a">
+              <li>
+                функции $z, {\displaystyle \pd{z}{x_j}}$ непрерывно
+                дифференцируемы на множестве $D \times A$;
+              </li>
+
+              <li>
+                из уравнений
+                \[
+                p_j = \pd{z}{x_j}, \qquad j = \overline{1,n}
+                \]
+                исключением параметров $a$ получается уравнение $F(x,z,p) = 0$.
+              </li>
+            </ul>
+          </div>
+
+          Частные случаи:
+          <ol>
+            <li>
+              $F(x,p) = 0$ &mdash; не зависит от $z$. Тогда
+              \[
+              z = z(x, a_1, \dots, a_{n-1}) + a_n.
+              \]
+            </li>
+
+            <li id="pde_missing_variables">
+              $F(x_{k+1}, \dots, x_n, p_1, \dots, p_n) = 0$ &mdash; не зависит
+              от $z$ и от $x_1, \dots, x_k$. Тогда
+              \[
+              z = \sum_{j=1}^k a_j x_j + \zeta(x_{k+1}, \dots, x_n).
+              \]
+
+              <div class="derivation">
+                <div class="todo">
+                  расписать.
+                </div>
+              </div>
+            </li>
+          </ol>
+
+          <div class="statement">
+            Если $F = F(x,p)$, то
+            \[
+            \frac{d x_1}{P_1} = \frac{d x_2}{P_2} = \cdots = \frac{d x_n}{P_n}
+            = -\frac{d p_1}{X_1} = \cdots = -\frac{d p_n}{X_n},
+            \]
+            где
+            \[
+            P_j = {\displaystyle \pd{F}{p_j}},
+            \qquad X_j = {\displaystyle \pd{F}{x_j}},
+            \]
+            является <i class="important">уравнением характеристик</i> для ДУЧП
+            $F(x,p) = 0$.
+
+            <div class="proof">
+              См. <a
+                href="https://en.wikipedia.org/wiki/Method_of_characteristics#Fully_nonlinear_case"
+                target="_blank">вывод</a>.
+            </div>
+          </div>
         </div>
       </li>
 
       <li class="question">
         <div class="name">
-          Уравнение Гамильтона-Якоби. Метод Якоби
+          Уравнение Гамильтона-Якоби, главная функция Гамильтона
         </div>
         <div class="content">
+          Рассмотрим канонические уравнения
+          \[
+          \left\{
+          \begin{aligned}
+          \dot{q}_i &= \phantom{-}\pd{H}{p_i}, \\
+          \dot{p}_i &= -\pd{H}{q_i}.
+          \end{aligned}
+          \right.
+          \]
+          Их можно записать в виде
+          \[
+          \frac{d q_1}{\partial H / \partial p_1}
+          = \frac{d q_2}{\partial H / \partial p_2}
+          = \cdots
+          = \frac{d q_n}{\partial H / \partial p_n}
+          = -\frac{d p_1}{\partial H / \partial q_1}
+          = \cdots
+          = -\frac{d p_n}{\partial H / \partial q_n}
+          = \frac{dt}{1}.
+          \]
+
+          Эти уравнения могут рассматриваться как уравнения характеристик для
+          ДУЧП 1-го порядка
+          \[
+          \pd{s}{t} + H(q_1, \dots, q_n, \pd{s}{q_1}, \dots, \pd{s}{q_n}, t)
+          = 0,
+          \]
+          которое называют <i class="important">уравнением Гамильтона-Якоби</i>.
+
+          <p>
+          Так как левая часть уравнения Гамильтона-Якоби не зависит от $s$, то
+          полный интеграл этого ДУЧП представим в виде
+          \[
+          s = s(t, q_1, \dots, q_n, a_1, \dots, a_n) + a_{n+1},
+          \]
+          которое называют <i class="important">главной функцией Гамильтона</i>.
+          </p>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Метод Якоби
+        </div>
+        <div class="content">
+          <div class="theorem">
+            <i>(Якоби)</i>.
+            <br>
+            Если $D \subset \mathbb{R}^{2n+1}$ &mdash; область, а $S(t,q,a) \in
+            C^2(D)$ &mdash; полный интеграл вида
+            \[
+            S = S(t, q_1, \dots, q_n, a_1, \dots, a_n) + a_{n+1}
+            \]
+            уравнения
+            \[
+            \pd{S}{t} + H(q_1, \dots, q_n, \pd{S}{q_1}, \dots, \pd{S}{q_n}, t)
+            = 0,
+            \]
+            удовлетворяющий условию
+            \[
+            \det \paren{
+            \ppdv{s}{q_i}{a_k}
+            } \neq 0,
+            \qquad (t,q,a) \in D,
+            \]
+            то существует область $D' \subset D \times \mathbb{R}^n$ такая, что
+            равенства
+            \[
+            \left\{
+            \begin{aligned}
+            \pd{S}{q_i} &= p_i, \\
+            \pd{S}{a_i} &= b_i, & i = \overline{1,n}
+            \end{aligned}
+            \right.
+            \]
+            представляют собой $2n$ независимых интегралов канонических
+            уравнений
+            \[
+            \left\{
+            \begin{aligned}
+            \dot{q}_i &= \phantom{-}\pd{H}{p_i}, \\
+            \dot{p}_i &= -\pd{H}{q_i},
+            \end{aligned}
+            \right.
+            \]
+            где $a,b$ &mdash; произвольные постоянные.
+
+            <div class="proof">
+              Если для некоторого $(t_0, q_0, a_0) \in D$ выполнено
+              \[
+              \left\{
+              \begin{aligned}
+              \pd{S}{q_{0i}} &= p_{0i}, \\
+              \pd{S}{a_{0i}} &= b_{0i}, & i = \overline{1,n},
+              \end{aligned}
+              \right.
+              \]
+              то из условия
+              \[
+              \det \paren{
+              \ppdv{s}{q_i}{a_k}
+              } \neq 0
+              \]
+              по теореме о неявных функциях следует, что в некоторой окрестности
+              точки $(t_0, q_0, a_0, b_0)$ равенства
+              \[
+              \left\{
+              \begin{aligned}
+              \pd{S}{q_i} &= p_i, \\
+              \pd{S}{a_i} &= b_i, & i = \overline{1,n}
+              \end{aligned}
+              \right.
+              \]
+              однозначно определяют дважды непрерывно дифференицруемые функции
+              $p = p(t,a,b)$ и $q = q(t,a,b)$. Остаётся показать, что эти
+              функции удовлетворяют каноническим уравнениям.
+
+              <p>
+              Подставим полученную функцию $q$ во вторую группу уравнений и
+              продифференцируем их по $t$:
+              \[
+              \ppdv{S}{t}{a_i} + \sum_{k=1}^n \ppdv{S}{q_k}{a_i} \dv{q_k}{t}
+              = 0, \qquad i = \overline{1,n}.
+              \]
+              С другой стороны, подставляя полный интеграл
+              \[
+              S = S(t, q_1, \dots, q_n, a_1, \dots, a_n) + a_{n+1}
+              \]
+              в уравнение Гамильтона-Якоби и дифференцируя полученное тождество
+              по $a_i$, приходим к равенствам:
+              \[
+              \ppdv{S}{t}{a_i} + \sum_{k=1}^n \pd{H}{(\partial S /\partial q_k)}
+              \ppdv{S}{q_k}{a_i} = 0, \qquad i = \overline{1,n}.
+              \]
+              Вычитая из полученных равенств предыдущие и учитывая равенства
+              \[
+              \left\{
+              \begin{aligned}
+              \pd{S}{q_i} &= p_i, \\
+              \pd{S}{a_i} &= b_i, & i = \overline{1,n},
+              \end{aligned}
+              \right.
+              \]
+              получаем, что
+              \[
+              \sum_{k=1}^n \ppdv{S}{q_k}{a_i} \paren{
+              \dv{q_k}{t} - \pd{H}{p_k}
+              } = 0, \qquad i = \overline{1,n}.
+              \]
+              Так как
+              \[
+              \det \paren{
+              \ppdv{s}{q_i}{a_k}
+              } \neq 0,
+              \qquad (t,q,a) \in D,
+              \]
+              то
+              \[
+              \dot{q}_k = \pd{H}{p_k}, \qquad i = \overline{1,n}.
+              \]
+              Аналогичным образом, подставляя полученную функцию $q$ в равенства
+              \[
+              p_i = \pd{S}{q_i}, \qquad i = \overline{1,n}
+              \]
+              и дифференцируя полученные тождества по $t$, а также подставляя
+              полный интеграл $S$ в уравнение Гамильтона-Якоби и дифференцируя
+              его по $q_i$, получаем вторую группу канонических уравнений.
+              </p>
+            </div>
+          </div>
         </div>
       </li>
 
@@ -1343,32 +1605,837 @@
           Решение задачи о движении точки относительно планеты методом Якоби
         </div>
         <div class="content">
+          Рассмотрим движение материальной точки массы $m$ в потенциальном поле
+          сил. Пусть движение задаётся обобщёнными координатами $x,y,z$.
+          Составим лагранжиан:
+          \[
+          \begin{gathered}
+          T = \frac{1}{2} m \paren{
+          \dot{x}^2 + \dot{y}^2 + \dot{z}^2
+          }, \qquad \Pi = \Pi(x,y,z,t), \\
+          \implies L = T - \Pi = 
+          \frac{1}{2} m \paren{
+          \dot{x}^2 + \dot{y}^2 + \dot{z}^2
+          } - \Pi(x,y,z,t).
+          \end{gathered}
+          \]
+          Составим обобщённые импульсы:
+          \[
+          \left\{
+          \begin{aligned}
+          p_x &= \pd{L}{\dot{x}} = m \dot{x}, \\
+          p_y &= \pd{L}{\dot{y}} = m \dot{y}, \\
+          p_z &= \pd{L}{\dot{z}} = m \dot{z},
+          \end{aligned}
+          \right.
+          \implies
+          \left\{
+          \begin{aligned}
+          \dot{x} &= \frac{p_x}{m}, \\
+          \dot{y} &= \frac{p_y}{m}, \\
+          \dot{z} &= \frac{p_z}{m}.
+          \end{aligned}
+          \right.
+          \]
+
+          Представив кинетическую энергию в виде
+          \[
+          \begin{aligned}
+          T
+          &= \frac{1}{2} m \paren{
+          \dfrac{p_x^2}{m^2}
+          + \dfrac{p_y^2}{m^2}
+          + \dfrac{p_z^2}{m^2}
+          } = \\
+          &= \frac{1}{2m} \paren{
+          p_x^2
+          + p_y^2
+          + p_z^2
+          },
+          \end{aligned}
+          \]
+          составим гамильтониан:
+          \[
+          \begin{aligned}
+          H(q,p,t)
+          &= \sum_{i=1}^3 p_i \dot{q}_i(q,p,t) - L(q, \dot{q}(q,p,t), t) \\
+          &= p_x \frac{p_x}{m} + p_y \frac{p_y}{m} + p_z \frac{p_z}{m}
+          - \frac{1}{2m} \paren{
+          p_x^2
+          + p_y^2
+          + p_z^2
+          } + \Pi \\
+          &= \frac{1}{2m} \paren{
+          p_x^2
+          + p_y^2
+          + p_z^2
+          } + \Pi.
+          \end{aligned}
+          \]
+
+          Запишем уравнение Гамильтона-Якоби:
+          \[
+          \pd{S}{t} + \frac{1}{2m} \left[
+          \paren{\pd{S}{x}}^2 +
+          \paren{\pd{S}{y}}^2 +
+          \paren{\pd{S}{z}}^2
+          \right] + \Pi(x,y,z,t) = 0.
+          \]
+
+          <div class="remark">
+            Если $\Pi = \Pi(x,y,z)$, то $H$ не зависит от $t$, <a
+              href="#pde_missing_variables"> поэтому</a> будем искать полный
+            интеграл в виде
+            \[
+            S = ht + S_1(x,y,z).
+            \]
+
+            Так как $H(q,p) = E = \const$ является первым интегралом
+            канонической системы, то из уравнения Гамильтона-Якоби следует, что
+            \[
+            \pd{S}{t} = -H = -E,
+            \]
+            но
+            \[
+            \pd{S}{t} = h, \implies h = -E,
+            \]
+            поэтому
+            \[
+            S = -Et + S_1(x,y,z),
+            \]
+            а уравнение Гамильтона-Якоби запишется в виде
+            \[
+            \frac{1}{2m} \left[
+            \paren{\pd{S_1}{x}}^2 +
+            \paren{\pd{S_1}{y}}^2 +
+            \paren{\pd{S_1}{z}}^2
+            \right] + \Pi(x,y,z) = E.
+            \]
+          </div>
         </div>
       </li>
 
       <li class="question">
         <div class="name">
-          Скобки Пуассона и теорема Пуассона. Построение интеграла в
+          Определение: скобки Пуассона
+        </div>
+        <div class="content">
+          Рассмотрим две функции $f(q,p,t)$ и $g(q,p,t)$.
+
+          <div class="definition">
+            Выражение
+            \[
+            \pois{f, g} = \sum_{i=1}^n \paren{
+            \pd{f}{q_i} \pd{g}{p_i} - \pd{g}{q_i} \pd{f}{p_i}
+            }
+            \]
+            называют <i>скобками Пуассона</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Свойства скобок Пуассона
+        </div>
+        <div class="content">
+          <ol type="a" class="big-height">
+            <li>
+              $\pois{f,g} = -\pois{g,f}$; $\pois{f,f} = 0$.
+            </li>
+
+            <li>
+              Если $C = \const$, то $\pois{f,C} = \pois{C,f} = 0$.
+            </li>
+
+            <li>
+              $\pois{f_1 + f_2, g} = \pois{f_1, g} + \pois{f_2, g}$.
+              <br>
+              $\pois{f_1 \cdot f_2, g} = f_1 \pois{f_2, g} + f_2 \pois{f_1, g}$.
+            </li>
+
+            <li>
+              ${\displaystyle
+              \pd{}{t} \pois{f,g} = \pois{\pd{f}{t}, g} + \pois{f, \pd{g}{t}}
+              }$.
+            </li>
+
+            <li>
+              ${\displaystyle
+              \pois{f, q_k} = -\pd{f}{p_k}; \quad
+              \pois{f, p_k} = \phantom{-}\pd{f}{q_k}
+              }$.
+            </li>
+
+            <li>
+              ${\displaystyle
+              \pois{q_i, q_k} = 0;
+              \quad \pois{p_i, p_k} = 0;
+              \quad \pois{q_i, p_k} = \delta_{ik}.
+              }$
+            </li>
+
+            <li>
+              <i class="important">Тождество Пуассона</i>:
+              \[
+              \pois{f, \pois{g, h}}
+              + \pois{g, \pois{h, f}}
+              + \pois{h, \pois{f, g}} \equiv 0.
+              \]
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема Пуассона
+        </div>
+        <div class="content">
+          Рассмотрим канонические уравнения:
+          \[
+          \left\{
+          \begin{aligned}
+          \dot{q}_i &= \phantom{-}\pd{H}{p_i}, \\
+          \dot{p}_i &= -\pd{H}{q_i}.
+          \end{aligned}
+          \right.
+          \]
+
+          Также рассмотрим функцию $f = f(q,p,t)$; её производная в силу системы
+          равна
+          \[
+          \begin{aligned}
+          \dv{f}{t}(q,p,t) &= \pd{f}{t} + \sum_{i=1}^n \left[
+          \pd{f}{q_i} \dot{q}_i + \pd{f}{p_i} \dot{p_i}
+          \right] = \\
+          &=
+          \pd{f}{t} + \sum_{i=1}^n \left[
+          \pd{f}{q_i} \pd{H}{p_i} - \pd{f}{p_i} \pd{H}{q_i}
+          \right], \\
+          \implies
+          \dv{f}{t}(q,p,t) &= \pd{f}{t} + \pois{f, H}.
+          \end{aligned}
+          \]
+
+          Если $f(q,p,t)$ &mdash; первый интеграл канонической системы, то её
+          производная в силу системы равна нулю, то есть
+          \[
+          \pd{f}{t} + \pois{f, H} = 0.
+          \]
+
+          <div class="theorem">
+            <i>(Пуассона)</i>.
+            <br>
+            
+            Если $\varphi(q,p,t)$ и $\psi(q,p,t)$ &mdash; первые интегралы
+            канонической системы, то
+            \[
+            f = \pois{\varphi, \psi}
+            \]
+            также является первым интегралом этой системы.
+
+            <div class="proof">
+              Так как $\varphi$ и $\psi$ &mdash; первые интегралы, то
+              \[
+              \begin{aligned}
+              \pd{\varphi}{t} + \pois{\varphi, H} &= 0, \\
+              \pd{\psi}{t} + \pois{\psi, H} &= 0.
+              \end{aligned}
+              \]
+
+              Рассмотрим тождество Пуассона:
+              \[
+              \pois{H, \pois{\varphi, \psi}}
+              + \pois{\varphi, \pois{\psi, H}}
+              + \pois{\psi, \pois{H, \varphi}} \equiv 0.
+              \]
+              Подставив
+              \[
+              \pois{\psi, H} = -\pd{\psi}{t}, \qquad
+              \pois{\varphi, H} = -\pd{\varphi}{t},
+              \]
+              получим, что
+              \[
+              \begin{aligned}
+              &\phantom{=} \pois{H, \pois{\varphi, \psi}}
+              + \pois{\varphi, -\pd{\psi}{t}}
+              + \pois{\psi, \pd{\varphi}{t}}
+              = \\
+              &= \pois{\pois{\varphi, \psi}, H}
+              + \pois{\varphi, \pd{\psi}{t}}
+              + \pois{\pd{\varphi}{t}, \psi}
+              = \\
+              &= 
+              \pois{\pois{\varphi, \psi}, H}
+              + \pd{}{t} \pois{\varphi, \psi} \equiv 0.
+              \end{aligned}
+              \]
+
+              Отсюда следует, что $f \bydef= \pois{\varphi, \psi}$ также
+              является первым интегралом канонической системы.
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Скобки Пуассона: построение интеграла в
           стационарном случае
         </div>
         <div class="content">
+          Рассмотрим стационарный случай: $H = H(q,p)$. В этом случае $H =
+          \const$ &mdash; первый интеграл канонической системы
+          \[
+          \left\{
+          \begin{aligned}
+          \dot{q}_i &= \phantom{-}\pd{H}{p_i}, \\
+          \dot{p}_i &= -\pd{H}{q_i}.
+          \end{aligned}
+          \right.
+          \]
+          Пусть $\varphi(q,p,t)$ также является первым интегралом системы, тогда
+          по теореме Пуассона $f = \pois{\varphi, H} = \const$ &mdash; тоже
+          первый интеграл. Но
+          \[
+          \pd{\varphi}{t} + \pois{\varphi, H} = 0, \implies
+          f \bydef= \pois{\varphi, H} = -\pd{\varphi}{t} = \const,
+          \]
+          то есть ${\displaystyle -\pd{\varphi}{t} = \const}$ также является
+          первым интегралом этой системы, то есть
+          \[
+          \pdv2{\varphi}{t} + \pois{\pd{\varphi}{t}, H} = 0,
+          \]
+          но по теореме Пуассона
+          ${\displaystyle \pois{\pd{\varphi}{t}, H} = \const}$ также является
+          первым интегралом, поэтому
+          ${\displaystyle \pdv2{\varphi}{t} = \const}$ &mdash; тоже первый
+          интеграл.
+
+          <div class="theorem">
+            Если система стационарна ($H = H(q,p)$) и известен первый интеграл
+            $\varphi(q,p,t)$, причём $\varphi \in C^{k}_t$, то
+            \[
+            \pdvk{m}{f}{t} = \const, \qquad m = \overline{1,k}
+            \]
+            являются либо первыми интегралами, либо константами.
+          </div>
         </div>
       </li>
 
       <li class="question">
         <div class="name">
-          Вариации канонических переменных. Основной дифференциальный принцип
-          механики
+          Вариации канонических переменных
         </div>
         <div class="content">
+          Рассмотрим систему $N$ точек, подчинённую идеальным голономным
+          удерживающим связям. Пусть $\bvec{r}_j$ и $\bvec{r}_j'$ &mdash; два
+          бесконечно близких кинематических движения.
+
+          <div class="definition">
+            Величину
+            \[
+            \delta \bvec{v}_j = \bvec{v}_j' - \bvec{v}_j
+            = \dv{}{t} \bvec{r}_j' - \dv{}{t} \bvec{r}_j
+            \]
+            называют <i>вариацией скорости $j$-ой точки системы</i>.
+          </div>
+
+          Рассмотрим проекции точек на оси координат: $(x_1, \dots, x_{3N})$.
+          Тогда вариацию скорости можно записать в виде
+          \[
+          \delta \dot{x}_\nu = \dot{x}_\nu' - \dot{x}_\nu.
+          \]
+          Учитывая, что вариация координаты имеет вид
+          \[
+          \delta x_\nu = x_\nu' - x_\nu,
+          \]
+          получаем, что
+          \[
+          \dv{}{t} \delta x_\nu = \dot{x}_\nu' - \dot{x}_\nu
+          \bydef= 
+          \delta \dot{x}_\nu.
+          \]
+          Отсюда следует важный факт: <i class="important">операторы
+            варьирования и дифференцирования перестановочны</i>.
+
+          <p>
+          Рассмотрим теперь обобщённые координаты $q = (q_1, \dots, q_s)$:
+          \[
+          \begin{aligned}
+          x_\nu &= x_\nu(q_1, \dots, q_s, t), & \nu &= \overline{1,3N}, \\
+          \bvec{r}_j &= \bvec{r}_j(q_1, \dots, q_s, t), & j &= \overline{1,N}.
+          \end{aligned}
+          \]
+          Тогда
+          \[
+          \begin{aligned}
+          \dot{x}_\nu &= \dv{}{t} x_\nu(q,t)
+          = \pd{x_\nu}{t} + \sum_{i=1}^s \pd{x_\nu}{q_i} \dot{q}_i, \\
+          \bvec{v}_j &= \dv{}{t} \bvec{r}_j(q,t)
+          = \pd{\bvec{r}_j}{t} + \sum_{i=1}^s \pd{\bvec{r}_j}{q_i} \dot{q}_i.
+          \end{aligned}
+          \]
+
+          Рассмотрим вариацию скорости:
+          \[
+          \delta \bvec{v}_j
+          = \sum_{i=1}^s \ppdv{\bvec{r}_j}{q_i}{t} \delta q_i
+          + \sum_{i=1}^s \pd{\bvec{r}_j}{q_i} \delta \dot{q}_i
+          + \sum_{i,k=1}^s \ppdv{\bvec{r}_j}{q_i}{q_k} \dot{q}_k \delta q_i.
+          \]
+          Продифференцируем равенство
+          \[
+          \delta \bvec{r}_j = \sum_{i=1}^s \pd{\bvec{r}_j}{q_i} \delta q_i
+          \]
+          по $t$:
+          \[
+          \begin{aligned}
+          \dv{}{t} \delta \bvec{r}_j
+          &= \sum_{i=1}^s \pd{\bvec{r}_j}{q_i} \dv{}{t} \delta q_i
+          + \sum_{i=1}^s \paren{
+          \sum_{k=1}^s \ppdv{\bvec{r}_j}{q_k}{q_i} \dot{q}_k
+          + \ppdv{\bvec{r}_j}{t}{q_i}
+          } \delta q_i = \\
+          &= \sum_{i=1}^s \pd{\bvec{r}_j}{q_i} \dv{}{t} \delta q_i
+          + \sum_{i,k=1}^s \ppdv{\bvec{r}_j}{q_k}{q_i} \dot{q}_k \delta q_i
+          + \sum_{i=1}^s \ppdv{\bvec{r}_j}{t}{q_i} \delta q_i.
+          \end{aligned}
+          \]
+
+          Вычтем полученное равенство из уравнения вариации скорости:
+          \[
+          \sum_{i=1}^s \pd{\bvec{r}_j}{q_i} \paren{
+          \delta \dot{q}_i - \dv{}{t} \delta q_i
+          } = 0.
+          \]
+          Так как
+          \[
+          \rank \paren{ \pd{x_\nu}{q_i} } = s,
+          \]
+          то равенство возможно только при
+          \[
+          \delta \dot{q}_i = \dv{}{t} \delta q_i.
+          \]
+          </p>
+
+          <div class="remark">
+            Величины $\delta q_i$ независимы, поэтому из полученного равенства
+            следует, что $\delta \dot{q}_i$ не являются независимыми от
+            $\delta q_i$ как функции времени. С другой стороны, в любой
+            фиксированный момент времени $t = \tilde t$ вариации
+            $\delta \dot{q}_i$ и $\delta q_i$ можно рассматривать как
+            независимые величины.
+          </div>
+
+          В канонических координатах
+          \[
+          p_i = \pd{L(q,p,t)}{\dot{q}_i},
+          \]
+          поэтому вариация обобщённых импульсов запишется в виде
+          \[
+          \delta p_i = \sum_{i=1}^s \left[
+          \ppdv{L}{q_k}{\dot{q}_i} \delta q_k
+          +
+          \ppdv{L}{\dot{q}_k}{\dot{q}_i} \delta \dot{q}_k
+          \right].
+          \]
         </div>
       </li>
 
       <li class="question">
         <div class="name">
-          Изохронная и полная вариации функционала действия
+          Основной дифференциальный принцип механики
         </div>
         <div class="content">
+          Рассмотрим общее уравнение механики в случае потенциального поля сил:
+          \[
+          \paren{
+          \dv{}{t} \pd{L}{\dot{q}} - \pd{L}{q}
+          } \delta q = 0.
+          \]
+
+          Рассмотрим уравнение
+          \[
+          \dv{}{t} \paren{
+          \pd{L}{\dot{q}} \delta q
+          }
+          = \paren{ \dv{}{t} \pd{L}{\dot{q}} } \delta q
+          + \pd{L}{\dot{q}} \delta \dot{q}.
+          \]
+
+          Так как
+          \[
+          \pd{L}{\dot{q}} \bydef= p,
+          \]
+          а из общего уравнения механики следует (в силу произвольности вариации
+          $\delta q$), что
+          \[
+          \dv{}{t} \pd{L}{\dot{q}} = \pd{L}{q},
+          \]
+          то
+          \[
+          \begin{aligned}
+          \dv{}{t} \paren{ p \delta q }
+          &= \pd{L}{q} \delta q
+          + \pd{L}{\dot{q}} \delta \dot{q} = \\
+          &= \delta L.
+          \end{aligned}
+          \]
+
+          <div class="definition">
+            Уравнение
+            \[
+            \dv{}{t} \paren{p \delta q} = \delta L
+            \]
+            называют <i>основным дифференциальным принципом механики</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Вывод канонических уравнений из основного дифференциального принципа
+        </div>
+        <div class="content">
+          Рассмотрим гамильтониан
+          \[
+          H \bydef= p \dot{q} - L, 
+          \implies L = p \dot{q} - H.
+          \]
+          Тогда
+          \[
+          \delta L
+          = \dot{q} \delta p + p \delta \dot{q}
+          - \pd{H}{q} \delta q
+          - \pd{H}{p} \delta p.
+          \]
+
+          Подставим это выражение в основной дифференциальный принцип:
+          \[
+          \begin{aligned}
+          \delta L &= \dv{}{t} \paren{p \delta q}
+          = \dot{p} \delta q + \cancel{p \delta \dot{q}} = \\
+          &= \dot{q} \delta p + \cancel{p \delta \dot{q}}
+          - \pd{H}{q} \delta q
+          - \pd{H}{p} \delta p.
+          \end{aligned}
+          \]
+          Перенося все слагаемые в левую часть, получаем, что
+          \[
+          \paren{
+          \pd{H}{q} + \dot{p}
+          } \delta q
+          + \paren{
+          \pd{H}{p} - \dot{q}
+          } \delta p = 0,
+          \]
+          откуда, в силу независимости вариаций $\delta q$ и $\delta p$,
+          выводятся канонические уравнения:
+          \[
+          \left\{
+          \begin{aligned}
+          \dot{q} &= \phantom{-}\pd{H}{p}, \\
+          \dot{p} &= -\pd{H}{q}.
+          \end{aligned}
+          \right.
+          \]
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: функционал действия
+        </div>
+        <div class="content">
+          <div class="definition">
+            Величину
+            \[
+            W = \int\limits_{t_1}^{t_2} L(q'(t), \dot{q}'(t), t) dt,
+            \]
+            где
+            <ul>
+              <li>
+                $L$ &mdash; функция Лагранжа механической системы;
+              </li>
+
+              <li>
+                $q'(t) = \paren{ q_1'(t), \dots, q_s'(t) }$ &mdash; любое
+                кинематически возможное движение;
+              </li>
+            </ul>
+
+            называют <i>действием (по Гамильтону)</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: изохронная вариация функционала действия
+        </div>
+        <div class="content">
+          <div class="definition">
+            Бесконечно малую величину
+            \[
+            \delta \int\limits_{t_1}^{t_2} L dt
+            =
+            \int\limits_{t_1}^{t_2} L(q', \dot{q}', t) dt
+            -
+            \int\limits_{t_1}^{t_2} L(q, \dot{q}, t) dt,
+            \]
+            рассматриваемую как функционал от $q'(t)$, называют
+            <i>изохронной вариацией функционала действия</i>.
+          </div>
+
+          В силу перестановочности операторов варьирования и дифференцирования
+          \[
+          \delta \int\limits_{t_1}^{t_2} L dt = 
+          \int\limits_{t_1}^{t_2} \delta L dt,
+          \]
+          причём равенство понимается как равенство с точностью до бесконечно
+          малых высшего порядка.
+
+          <p>
+          Используя основной дифференциальный принцип
+          \[
+          \dv{}{t} \paren{p \delta q} = \delta L,
+          \]
+          получаем, что
+          \[
+          \delta \int\limits_{t_1}^{t_2} L dt
+          = \left.\paren{ p \delta q }\right|_{t_1}^{t_2}.
+          \]
+          </p>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: полная вариация координат, скоростей и функций
+        </div>
+        <div class="content">
+          <div class="definition">
+            Бесконечно малые величины
+            \[
+            \begin{gathered}
+            \Delta q = q'(t + \Delta t) - q(t), \\
+            \Delta \dot{q} = \dot{q}'(t + \Delta t) - \dot{q}(t)
+            \end{gathered}
+            \]
+            при
+            <ul>
+              <li>
+                $Delta t \to 0$;
+              </li>
+
+              <li>
+                $q' \to q$;
+              </li>
+
+              <li>
+                $\dot{q}' \to \dot{q}$
+              </li>
+            </ul>
+
+            называют <i>полными вариациями координат и скоростей</i>.
+          </div>
+
+          <div class="definition">
+            <i>Полная вариация $\Delta \Phi$ функции $\Phi(q, \dot{q}, t)$</i>
+            определяется как
+            \[
+            \Delta \Phi(q, \dot{q}, t)
+            = \Phi(q'(t + \Delta t), \dot{q}'(t + \Delta t), t + \Delta t)
+            - \Phi(q, \dot{q}, t).
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Вывод формул, связывающих полную и изохронную вариации координат,
+          скоростей и функций
+        </div>
+        <div class="content">
+          Рассмотрим полную вариацию
+          \[
+          \begin{aligned}
+          \Delta q &= q'(t + \Delta t) - q(t) = \\
+          &= q'(t + \Delta t) - q(t + \Delta t) + q(t + \Delta t) - q(t) = \\
+          &= \left.\delta q\right|_{t + \Delta t} + \dot{q}(t) \Delta t.
+          \end{aligned}
+          \]
+          В силу перестановочности операторов варьирования и дифференцирования
+          \[
+          \begin{aligned}
+          \left. \delta q \right|_{t + \Delta t}
+          &= \left. \delta q \right|_t
+          + \Delta t \dv{}{t} \left. \delta q \right|_t = \\
+          &= \left. \delta q \right|_t
+          + \Delta t \left. \delta \dot{q} \right|_t.
+          \end{aligned}
+          \]
+
+          Подставляя это выражение в исходное уравнение и отбрасывая член
+          второго порядка малости (при $\delta \dot{q}$), получаем искомую
+          формулу:
+          \[
+          \Delta q = \delta q + \dot{q} \Delta t.
+          \]
+
+          Аналогично получаем, что
+          \[
+          \Delta \dot{q} = \delta \dot{q} + \ddot{q} \Delta t.
+          \]
+
+          Наконец, используя формулы
+          \[
+          \begin{aligned}
+          \Delta \Phi
+          &= \pd{\Phi}{q} \Delta q
+          + \pd{\Phi}{\dot{q}} \Delta \dot{q}
+          + \pd{\Phi}{t} \Delta t, \\
+          \delta \Phi
+          &= \pd{\Phi}{q} \delta q
+          + \pd{\Phi}{\dot{q}} \delta \dot{q},
+          \end{aligned}
+          \]
+          приходим к равенству:
+          \[
+          \Delta \Phi = \delta \Phi + \dot{\Phi} \Delta t.
+          \]
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: полная вариация функционала действия
+        </div>
+        <div class="content">
+          <div class="definition">
+            Бесконечно малую величину
+            \[
+            \Delta \int\limits_{t_1}^{t_2} L dt
+            =
+            \int\limits_{t_1 + \Delta t_1}^{t_2 + \Delta t_2}
+            L(q', \dot{q}', t) dt
+            -
+            \int\limits_{t_1}^{t_2} L(q, \dot{q}, t) dt
+            \]
+            при
+            <ul>
+              <li>
+                $\Delta t_1, \Delta t_2 \to 0$;
+              </li>
+
+              <li>
+                $q' \to q$;
+              </li>
+
+              <li>
+                $\dot{q}' \to \dot{q}$
+              </li>
+            </ul>
+
+            называют <i>полной вариацией функционала действия</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Вывод формулы, связывающей полную и изохронную вариации функционала
+          действия
+        </div>
+        <div class="content">
+          Введём обозначения
+          \[
+          L_i = L(q(t_i), \dot{q}(t_i), t_i), \qquad i = 1,2
+          \]
+          и учитывая, что
+          \[
+          \Delta t_1, \Delta t_2 \to 0,
+          \quad q' \to q, 
+          \quad \dot{q}' \to \dot{q},
+          \]
+          последовательно получаем
+          \[
+          \begin{aligned}
+          \Delta \int\limits_{t_1}^{t_2} L dt
+          &=
+          \int\limits_{t_1 + \Delta t_1}^{t_2 + \Delta t_2}
+          L(q', \dot{q}', t) dt
+          -
+          \int\limits_{t_1}^{t_2} L(q, \dot{q}, t) dt = \\
+          &=
+          \int\limits_{t_1 + \Delta t_1}^{t_1}
+          L(q', \dot{q}', t) dt
+          +
+          \int\limits_{t_1}^{t_2}
+          L(q', \dot{q}', t) dt + \\
+          &\phantom{=} +
+          \int\limits_{t_2}^{t_2 + \Delta t_2}
+          L(q', \dot{q}', t) dt
+          -
+          \int\limits_{t_1}^{t_2} L(q, \dot{q}, t) dt = \\
+          &=
+          \int\limits_{t_1}^{t_2}
+          \left[ L(q', \dot{q}', t) - L(q, \dot{q}, t) \right] dt -\\
+          &\phantom{=}-
+          \int\limits_{t_1}^{t_1 + \Delta t_1}
+          L(q', \dot{q}', t) dt
+          +
+          \int\limits_{t_2}^{t_2 + \Delta t_2}
+          L(q', \dot{q}', t) dt = \\
+          &=
+          \int\limits_{t_1}^{t_2} \delta L dt
+          -
+          L(q'(t_1), \dot{q}'(t_1), t_1) \Delta t_1
+          +
+          L(q'(t_2), \dot{q}'(t_2), t_2) \Delta t_2 = \\
+          &=
+          \int\limits_{t_1}^{t_2} \delta L dt
+          - L_1 \Delta t_1 + L_2 \Delta t_2.
+          \end{aligned}
+          \]
+
+          Используя равенство
+          \[
+          \delta \int\limits_{t_1}^{t_2} L dt
+          = \left.\paren{ p \delta q }\right|_{t_1}^{t_2},
+          \]
+          можно записать, что
+          \[
+          \Delta \int\limits_{t_1}^{t_2} L dt
+          =
+          \left.
+          \paren{
+          p \delta q + L \Delta t
+          }
+          \right|_{t_1}^{t_2}.
+          \]
+
+          Учитывая, что
+          \[
+          \Delta q = \delta q + \dot{q} \Delta t,
+          \]
+          а также определение гамильтониана
+          \[
+          H \bydef= p \dot{q} - L,
+          \]
+          окончательно получаем, что
+          \[
+          \Delta \int\limits_{t_1}^{t_2} L dt
+          =
+          \left.
+          \paren{
+          p \Delta q - H \Delta t
+          }
+          \right|_{t_1}^{t_2}.
+          \]
         </div>
       </li>
 
@@ -1377,6 +2444,112 @@
           Принцип Гамильтона-Остроградского
         </div>
         <div class="content">
+          Пусть $q = (q_1, \dots, q_s)$ &mdash; лагранжевы координаты голономной
+          механической системы, имеющей $s$ степеней свободы и находящейся под
+          действием только потенциальных сил.
+
+          <p>
+          Если $(t_1, t_2)$ &mdash; произвольный промежуток, причём
+          \[
+          \left. \delta q_i \right|_{t_1} = 
+          \left. \delta q_i \right|_{t_2} = 0, \quad i = \overline{1,s},
+          \]
+          то равенство
+          \[
+          \delta \int\limits_{t_1}^{t_2} L dt
+          = \left. \paren{ p \delta q } \right|_{t_1}^{t_2}
+          \]
+          примет вид
+          \[
+          \delta \int\limits_{t_1}^{t_2} L dt = 0.
+          \]
+          </p>
+
+          <div class="statement">
+            <i>(принцип Гамильтона-Остроградского)</i>.
+            <br>
+            
+            Пусть все действующие на механическую систему активные силы
+            потенциальны, а её движения стеснены только голономными идеальными
+            удерживающими связями. Тогда истинные движения этой системы,
+            удовлетворяющие условиям
+            \[
+            \delta \int\limits_{t_1}^{t_2} L dt
+            = \left. \paren{ p \delta q } \right|_{t_1}^{t_2},
+            \]
+            принадлежат тому подмножеству множества всех кинематически возможных
+            её движений, для которых выполнено равенство
+            \[
+            \delta \int\limits_{t_1}^{t_2} L dt = 0.
+            \]
+          </div>
+
+          <p>
+          Другими словами: действие на истинном движении имеет стационарное
+          значение по Гамильтону.
+          </p>
+
+          <p>
+          Чтобы сформулированное утверждение можно было считать принципом,
+          покажем, что его можно положить в основу некоторого раздела механики
+          (в данном случае &mdash; механики голономных систем с идеальными
+          связями и потенциальными активными силами). Покажем, что из принципа
+          Гамильтона-Остроградского следуют уравнения Лагранжа II рода. Так как
+          операторы варьирования и дифференцирования перестановочны и
+          \[
+          \begin{aligned}
+          \delta L
+          &= \pd{L}{q} \delta q + \pd{L}{\dot{q}} \delta \dot{q} = \\
+          &= \dv{}{t} \paren{
+          \pd{L}{\dot{q}} \delta q
+          }
+          - \paren{
+          \dv{}{t} \pd{L}{\dot{q}} - \pd{L}{q}
+          } \delta q,
+          \end{aligned}
+          \]
+          то
+          \[
+          \delta W
+          = \delta \int\limits_{t_1}^{t_2} L dt
+          = \int\limits_{t_1}^{t_2} \paren{
+          \pd{L}{\dot{q}} - \dv{}{t} \pd{L}{\dot{q}}
+          } \delta q dt
+          + \left. \paren{
+          \pd{L}{\dot{q}} \delta q
+          } \right|_{t_1}^{t_2}.
+          \]
+
+          Так как
+          \[
+          \left. \delta q_i \right|_{t_1} = 
+          \left. \delta q_i \right|_{t_2} = 0, \quad i = \overline{1,s},
+          \]
+          в силу принципа Гамильтона-Остроградского получаем, что
+          \[
+          \int\limits_{t_1}^{t_2} \left[
+          \paren{
+          \dv{}{t} \pd{L}{\dot{q}} - \pd{L}{\dot{q}}
+          } \delta q
+          \right] dt = 0,
+          \]
+          откуда следует, что
+          \[
+          \paren{
+          \dv{}{t} \pd{L}{\dot{q}} - \pd{L}{\dot{q}}
+          } \delta q = 0.
+          \]
+          </p>
+
+          <div class="todo">
+            Доказать от противного (см. Бабаджанянц, стр. 183).
+          </div>
+
+          В силу независимости вариаций $\delta q$ следуют уравнения Лагранжа II
+          рода:
+          \[
+          \dv{}{t} \pd{L}{\dot{q}} - \pd{L}{\dot{q}} = 0.
+          \]
         </div>
       </li>
 
@@ -1385,6 +2558,72 @@
           Действие &mdash; решение уравнений Гамильтона-Якоби
         </div>
         <div class="content">
+          Пусть $q$ &mdash; решение уравнений движения рассматриваемой системы.
+          Введём в рассмотрение величину
+          \[
+          W = \int\limits_{t_1}^{t_2} L(q, \dot q, t) dt,
+          \]
+          совпадающую с функционалом действия при $q' = q$. С другой стороны,
+          полагая, что решение $q$ однозначно определяется начальным
+          $q^1 = q(t_1)$ и конечным $q^2 = q(t_2)$ положениями, можно
+          рассматривать величину $W$ как функцию $W(q^1, q^2, t_1, t_2)$
+          параметров $q^1, q^2, t_1, t_2$.
+
+          <div class="definition">
+            Функцию $W = W(q^1, q^2, t_1, t_2)$ называют <i>функцией
+              действия</i>.
+          </div>
+
+          <p>
+          Будем предполагать, что функция действия $W(q^1, q^2, t_1, t_2)$
+          определена в некоторой области $D_W \subset \mathbb{R}^{2s+2}$.
+          </p>
+
+          Из определения функции действия (то есть в силу того, что движение
+          истинное) следует, что
+          \[
+          \Delta t = dt, \quad \Delta q = dq, \quad \Delta W = dW,
+          \]
+          поэтому уравнение
+          \[
+          \Delta \int\limits_{t_1}^{t_2} L dt
+          =
+          \left.
+          \paren{
+          p \Delta q - H \Delta t
+          }
+          \right|_{t_1}^{t_2}
+          \]
+          примет вид
+          \[
+          \begin{aligned}
+          dW &= \left. \paren{
+          p dq - H dt
+          } \right|_{t_1}^{t_2}, \\
+          \implies
+          W &= \left. \paren{
+          p q - H t
+          } \right|_{t_1}^{t_2}.
+          \end{aligned}
+          \]
+
+          Тогда
+          \[
+          \left\{
+          \begin{aligned}
+          \pd{W}{q_2} &= p^2 = \left. p \right|_{t_2}, \\
+          \pd{W}{t_2} &= -H(q^2, p^2, t_2).
+          \end{aligned}
+          \right.
+          \]
+          Подставляя первое уравнение во второе, получаем
+          \[
+          \pd{W}{t_2} + H\paren{q^2, \pd{W}{q_2}, t_2} = 0
+          \]
+          то есть функция действия $W = W(q^1, q^2, t_1, t_2)$ задаёт
+          $s+1$-параметрическое семейство решений уравнений Гамильтона-Якоби по
+          переменным $q^2, t_2$ при таких значениях параметров $q^1, t_1$, что
+          $(q^1, q^2, t_1, t_2) \in D_W$.
         </div>
       </li>
 
@@ -1393,6 +2632,189 @@
           Принцип Эйлера-Лагранжа
         </div>
         <div class="content">
+          Рассмотрим голономную механическую систему с идеальными связями,
+          имеющую $s$ степеней свободы и находящуюся под действием только
+          потенциальных сил. Также пусть лагранжевы координаты связаны c
+          декартовыми координатами стационарными соотношениями и пусть
+          ${\displaystyle \pd{H}{t} = 0}$. В этом случае гамильтониан является
+          первым интегралом уравнений движения, то есть
+          \[
+          H = T + \Pi = h,
+          \]
+          где $h$ принимает конкретное значение для каждого конкретного движения
+          системы. Отсюда также следует, что
+          \[
+          L = T - \Pi = 2T - h.
+          \]
+
+          <p>
+          Среди кинематически возможных вариаций выделим только те, которые
+          соответствуют выполнению равенства
+          \[
+          T + \Pi = h,
+          \]
+          из которого следует, что
+          \[
+          \Delta h = \pd{h}{\dot{q}} \Delta \dot q + \pd{h}{q} \Delta q = 0.
+          \]
+          Считаем вариации $\Delta q$ независимыми, а $\Delta t$ выберем так,
+          чтобы выполнялось предыдущее уравнение.
+          </p>
+
+          <p>
+          Из формул
+          \[
+          \begin{aligned}
+          \Delta q &= \delta q - \dot q \Delta t, \\
+          \Delta \dot q &= \delta \dot q - \ddot q \Delta t
+          \end{aligned}
+          \]
+          следует
+          \[
+          \begin{aligned}
+          \dv{}{t} \Delta q
+          &= \dv{}{t} \delta q + \ddot q \Delta t
+          + \dot q \dv{}{t} \Delta t = \\
+          &= \Delta \dot q + \dot q \dv{}{t} \Delta t, \\
+          \implies
+          \Delta \dot q
+          &= \dv{}{t} \Delta q - \dot q \dv{}{t} \Delta t.
+          \end{aligned}
+          \]
+
+          Тогда
+          \[
+          \begin{aligned}
+          \Delta h
+          &=
+          \pd{h}{\dot{q}} \Delta \dot q + \pd{h}{q} \Delta q = \\
+          &=
+          \pd{h}{\dot{q}} \dv{}{t} \Delta q
+          - \pd{h}{\dot{q}} \dot q \dv{}{t} \Delta t
+          + \pd{h}{q} \Delta q = 0,
+          \end{aligned}
+          \]
+          откуда следует равенство
+          \[
+          \pd{h}{\dot{q}} \dv{}{t} \Delta q
+          + \pd{h}{q} \Delta q = \pd{h}{\dot{q}} \dot q \dv{}{t} \Delta t.
+          \]
+          </p>
+
+          <p>
+          В рассматриваемом случае
+          \[
+          \pd{\Pi}{\dot{q}} = 0, \quad T = T_2,
+          \]
+          причём $T_2$ &mdash; квадратичная форма по $\dot{q}_i$, поэтому
+          \[
+          \pd{h}{\dot{q}} \dot{q} = \pd{\paren{T + \Pi}}{\dot{q}} \dot{q}
+          = \pd{T_2}{\dot{q}} \dot{q} = 2T_2 = 2T.
+          \]
+          </p>
+
+          <p>
+          Подставляя полученное уравнение в формулу
+          \[
+          \pd{h}{\dot{q}} \dv{}{t} \Delta q
+          + \pd{h}{q} \Delta q = \pd{h}{\dot{q}} \dot q \dv{}{t} \Delta t,
+          \]
+          приходим к
+          \[
+          \dv{}{t} \Delta t = \frac{1}{2T} \paren{
+          \pd{h}{\dot{q}} \dv{}{t} \Delta q + \pd{h}{q} \Delta q
+          }.
+          \]
+          Интегрируя это равенство от $t_1$ до $t$, получаем
+          \[
+          \Delta t
+          = \Delta t_1
+          + \int\limits_{t_1}^t \frac{1}{2T} \paren{
+          \pd{h}{\dot{q}} \dv{}{t} \Delta q + \pd{h}{q} \Delta q
+          } dt,
+          \]
+          где
+          <ul>
+            <li>
+              $\Delta q_i$ &mdash; независимые вариации координат,
+            </li>
+
+            <li>
+              $\Delta t_1$ &mdash; независимая точечная вариация (значение
+              $\Delta t$ в точке $t = t_1$).
+            </li>
+          </ul>
+          </p>
+
+          <p>
+          Обратимся теперь к формуле для полной вариации функционала действия:
+          \[
+          \Delta \int\limits_{t_1}^{t_2} L dt
+          = \left. \paren{ p \Delta q - H \Delta t } \right|_{t_1}^{t_2}.
+          \]
+          Учитвая условия
+          \[
+          \Delta t_1 = 0, \quad \left. \Delta q \right|_{t_1, t_2} = 0,
+          \]
+          получаем, что
+          \[
+          \Delta \int\limits_{t_1}^{t_2} L dt
+          = -h \Delta t_2.
+          \]
+          Кроме того, из формулы
+          \[
+          L = 2T - h
+          \]
+          следует, что
+          \[
+          \Delta \int\limits_{t_1}^{t_2} L dt
+          =
+          \Delta \int\limits_{t_1}^{t_2} 2T dt
+          - h \Delta t_2,
+          \]
+          поэтому
+          \[
+          \Delta \int\limits_{t_1}^{t_2} 2T dt = 0,
+          \]
+          то есть полная вариация <i class="important">действия по Лагранжу</i>
+          равна нулю.
+          </p>
+
+          <div class="statement">
+            <i>(принцип Эйлера-Лагранжа)</i>.
+            <br>
+
+            Пусть все действующие на механическую систему активные силы
+            потенциальны, её движение стеснено только голономными идеальными
+            удерживающими связями, лагранжевы координаты системы связаны с
+            декартовыми координатами стационарными соотношениями, а гамильтониан
+            не зависит от времени явно. Тогда истинные движениия этой системы,
+            удовлетворяющие условию
+            \[
+            \Delta t_1 = 0, \quad \left. \Delta q \right|_{t_1, t_2} = 0,
+            \]
+            принадлежат тому подмножеству множества всех кинематически возможных
+            её движений, для которых выполнено равенство
+            \[
+            \Delta \int\limits_{t_1}^{t_2} 2T dt = 0
+            \]
+            с учётом того, что
+            \[
+            \Delta t_2
+            = \int\limits_{t_1}^t \frac{1}{2T} \paren{
+            \pd{h}{\dot{q}} \dv{}{t} \Delta q + \pd{h}{q} \Delta q
+            } dt,
+            \]
+          </div>
+
+          Иначе говоря, принцип Эйлера-Лагранжа означает, что среди всех
+          кинематически возможных движений данной системы, удовлетворяющих
+          условиям
+          \[
+          \Delta t_1 = 0, \quad \left. \Delta q \right|_{t_1, t_2} = 0,
+          \]
+          истинное движение таково, что для него полная вариация действия по
+          Лагранжу равна нулю.
         </div>
       </li>
 
@@ -1401,6 +2823,147 @@
           Контактные преобразования
         </div>
         <div class="content">
+          Рассмотрим канонические уравнения
+          \[
+          \left\{
+          \begin{aligned}
+          \dot{q}_i &= \phantom{-}\pd{H}{p_i}, \\
+          \dot{p}_i &= -\pd{H}{q_i}.
+          \end{aligned}
+          \right.
+          \]
+
+          Введём функции $Q = (Q_1, \dots, Q_n)$ и $P = (P_1, \dots, P_n)$:
+          \[
+          \left\{
+          \begin{aligned}
+          Q_i &= Q_i(q,p,t), \\
+          P_i &= P_i(q,p,t).
+          \end{aligned}
+          \right.
+          \]
+
+          <div class="definition">
+            Если существует функция $H'$ такая, что выполняются соотношения
+            \[
+            \left\{
+            \begin{aligned}
+            \dot{Q}_i &= \phantom{-}\pd{H'}{P_i}, \\
+            \dot{P}_i &= -\pd{H'}{Q_i},
+            \end{aligned}
+            \right.
+            \]
+            то формулы
+            \[
+            \left\{
+            \begin{aligned}
+            Q_i &= Q_i(q,p,t), \\
+            P_i &= P_i(q,p,t)
+            \end{aligned}
+            \right.
+            \]
+            определяют <i>каноническое преобразование</i>.
+          </div>
+
+          <div class="definition">
+            Говорят, что каноническое преобразование
+            \[
+            \left\{
+            \begin{aligned}
+            Q_i &= Q_i(q,p,t), \\
+            P_i &= P_i(q,p,t)
+            \end{aligned}
+            \right.
+            \]
+            является <i>контактным</i>, если выполняется одно из следующих
+            условий:
+
+            <ol type="a">
+              <li>
+                $p \delta q + Q \delta P = \delta S(q,P,t)$, или
+                \[
+                \left\{
+                \begin{aligned}
+                p_i &= \pd{S}{q_i}, \\
+                Q_i &= \pd{S}{P_i},
+                \end{aligned}
+                \right.
+                \]
+              </li>
+
+              <li>
+                $p \delta q - P \delta Q = \delta S(q,Q,t)$, или
+                \[
+                \left\{
+                \begin{aligned}
+                p_i &= \pd{S}{q_i}, \\
+                P_i &= -\pd{S}{Q_i},
+                \end{aligned}
+                \right.
+                \]
+              </li>
+
+              <li>
+                $q \delta p - Q \delta P = \delta S(p,P,t)$, или
+                \[
+                \left\{
+                \begin{aligned}
+                q_i &= \pd{S}{p_i}, \\
+                Q_i &= -\pd{S}{P_i},
+                \end{aligned}
+                \right.
+                \]
+              </li>
+
+              <li>
+                $q \delta p + P \delta Q = \delta S(p,Q,t)$, или
+                \[
+                \left\{
+                \begin{aligned}
+                q_i &= \pd{S}{p_i}, \\
+                P_i &= \pd{S}{Q_i}.
+                \end{aligned}
+                \right.
+                \]
+              </li>
+            </ol>
+
+            Функция $S$ называется <i>производящей (преобразующей)</i>.
+          </div>
+
+          <div class="theorem">
+            <ol>
+              <li>
+                Любое контактное преобразование является каноническим.
+              </li>
+
+              <li>
+                Гамильтониан $H'$ преобразованной системы связан с $H$ исходной
+                системы следующим соотношением:
+                \[
+                H' = H + \pd{S}{t}.
+                \]
+              </li>
+            </ol>
+
+            <div class="proof">
+              <div class="todo">Расписать.</div>
+              Рассмотрим, например,
+              \[
+              p \delta q + Q \delta P = \delta S(q,P,t).
+              \]
+
+              Продифференцируем по $t$:
+              \[
+              \dv{}{t} \paren{ p \delta q} + \dot Q \delta P
+              + Q \delta \dot P = \dv{}{t} \delta S(q, P, t).
+              \]
+
+              <div class="images">
+                <img src="images/18-1.png" alt="">
+              </div>
+            </div>
+          </div>
         </div>
       </li>
 
@@ -1409,6 +2972,13 @@
           Контактные преобразования и уравнения Гамильтона-Якоби
         </div>
         <div class="content">
+          <div class="todo">Расписать.</div>
+          \[
+          4(a): \quad p \delta q + Q \delta P = \delta S(q,P,t).
+          \]
+          <div class="images">
+            <img src="images/19-1.png" alt="">
+          </div>
         </div>
       </li>
 
@@ -1417,6 +2987,150 @@
           Геометрия масс. Моменты инерции. Тензор инерции. Эллипсоид инерции
         </div>
         <div class="content">
+          Пусть $x,y,z$ &mdash; декартовы координаты произвольной точки твёрдого
+          тела. Пусть плотность тела $\rho = \rho(x,y,z)$ &mdash; непрерывная
+          функция координат в области $V$, занимаемой телом.
+
+          <div class="definition">
+            Величину
+            \[
+            \iiint\limits_V \rho(x,y,z) x^i y^j z^k dx dy dz,
+            \qquad i,j,k \in [0; +\infty)
+            \]
+            называют <i>моментом порядка $\alpha = i + j + k$</i>. Обозначение:
+            $\sum m x^i y^j z^k$.
+          </div>
+
+          Введём в рассмотрение шесть величин:
+          \[
+          \begin{aligned}
+          J_{yz} &= \sum m yz,
+          & J_{zx} &= \sum m zx,
+          & J_{xy} &= \sum m xy, \\
+          J_{xx} &= \sum m (y^2 + z^2),
+          & J_{yy} &= \sum m (x^2 + z^2),
+          & J_{zz} &= \sum m (x^2 + y^2).
+          \end{aligned}
+          \]
+
+          <div class="definition">
+            $J_{yz}, J_{zx}, J_{xy}$ &mdash; <i>центробежные моменты</i>,
+            $J_{xx}, J_{yy}, J_{zz}$ &mdash; <i>осевые моменты</i>.
+          </div>
+
+          <p>
+          Момент инерции материальной точки относительно оси $l$ &mdash;
+          величина $mh^2$, где $m$ &mdash; масса точки, $h$ &mdash; расстояние
+          до оси $l$.
+          </p>
+
+          <p>
+          Пусть $\rho(x,y,z)$ &mdash; плотность тела &mdash; непрерывная функция
+          координат в области $V$, а $h(x,y,z)$ &mdash; расстояние точки
+          $(x,y,z)$ до оси $l$.
+          </p>
+
+          <div class="definition">
+            Величину
+            \[
+            \iiint\limits_V \rho(x,y,z) h^2(x,y,z) dx dy dz
+            \]
+            называют <i>моментом инерции твёрдого тела относительно оси $l$</i>.
+            Обозначение: $\sum m h^2$.
+          </div>
+
+          <div class="definition">
+            Пусть $J_l$ &mdash; момент инерции относительно оси $l$, а $M$
+            &mdash; масса твёрдого тела. Тогда величину $\rho_l$ такую, что
+            \[
+            J_l = M \rho_l^2,
+            \]
+            называют <i>радиусом инерции твёрдого тела относительно оси $l$</i>.
+          </div>
+
+          Средством вычисления $J_l$ является следующая
+          <div class="theorem">
+            Пусть ось $l$ проходит через точку $O$, а $\alpha, \beta, \gamma$
+            &mdash; её направляющие косинусы в системе координат $Oxyz$. Тогда
+            \[
+            J_l = J_{xx} \alpha^2 + J_{yy} \beta^2 + J_{zz} \gamma^2
+            - 2 J_{yz} \beta \gamma - 2 J_{zx} \gamma \alpha
+            - 2 J_{xy} \alpha \beta.
+            \]
+          </div>
+
+          <p>
+          Пусть система координат $Oxyz$ фиксирована. Рассмотрим пучок прямых
+          $l$, проходящих через точку $O$. Относительно каждой из осей $l$ этого
+          пучка данное тело имеет свой момент инерции $J_l$. Наглядную картину
+          распределения моментов инерции $J_l$ твёрдого тела (в зависимости от
+          выбора оси $l$) даёт <i class="important">эллипсоид инерции</i>.
+          </p>
+
+          <p>
+          Пусть $\bvec{e} = (\alpha, \beta, \gamma)$ &mdash; единичный вектор,
+          направленный вдоль $l$. Взяв на $l$ произвольную точку $M(x,y,z)$ и
+          обозначая $OM = R$, получаем
+          \[
+          x = R \alpha, \quad y = R \beta, \quad z = R \gamma.
+          \]
+          Тогда из формулы
+          \[
+          J_l = J_{xx} \alpha^2 + J_{yy} \beta^2 + J_{zz} \gamma^2
+          - 2 J_{yz} \beta \gamma - 2 J_{zx} \gamma \alpha
+          - 2 J_{xy} \alpha \beta
+          \]
+          получаем
+          \[
+          k^2 = J_{xx} x^2 + J_{yy} y^2 + J_{zz} z^2
+          - 2 J_{yz} y z - 2 J_{zx} z x - 2 J_{xy} x y,
+          \]
+          где $k^2 = J_l R^2$. Данная формула задаёт поверхность второго
+          порядка. Будем считать, что $k = \const$, поэтому
+          \[
+          R = \frac{k}{\sqrt{J_l}}.
+          \]
+          Так как $J_l$ существенно больше нуля, то $R \lt \infty$ и,
+          следовательно, задаёт эллипсоид (единственная поверхность 2 порядка,
+          не имеющая бесконечно удалённых точек). Этот эллипсоид и называется
+          <i class="important">эллипсоидом инерции</i>. Центр эллипсоида
+          находится в точке $O$, а $k$ определяет масштаб. Итак, с точностью до
+          выбора масштаба $k$ каждой точке $O$ тела соответствует свой эллипсоид
+          инерции. Главные оси эллипсоида инерции называют
+          <i class="important">главными осями инерции тела для точки $O$</i>.
+          Если точка $O$ совпадает с центром масс, то построенный для неё
+          эллипсоид инерции называют <i class="important">центральным</i>, а его
+          главные оси &mdash; <i class="important">главными центральными осями
+            инерции</i>.
+          </p>
+
+          <p>
+          Положим
+          \[
+          J_{xy} = J_{yx}, \quad J_{yz} = J_{zy}, \quad J_{zx} = J_{xz}
+          \]
+          (это следует из определения произведений инерции) и рассмотрим матрицу
+          квадратичной формы
+          \[
+          (J) =
+          \begin{pmatrix}
+           J_{xx} & -J_{xy} & -J_{xz} \\
+          -J_{yx} &  J_{yy} & -J_{yz} \\
+          -J_{zx} & -J_{zy} &  J_{zz}
+          \end{pmatrix}
+          \]
+          </p>
+
+          <div class="definition">
+            Матрица $(J)$ называется <i>тензором инерции</i>.
+          </div>
+
+          Если оси $Oxyz$ направить вдоль главных осей эллипсоида инерции для
+          точки $O$, то тензор инерции становится диагональной матрицей, а
+          уравнение эллипсоида инерции имеет каноническую форму
+          \[
+          J_{xx} x^2 + J_{yy} y^2 + J_{zz} z^2 = k^2.
+          \]
         </div>
       </li>
 
@@ -1426,6 +3140,235 @@
           кинематические уравнения Эйлера
         </div>
         <div class="content">
+          <p>
+          Пусть $\bvec{K}_O$ &mdash; вектор кинетического момента твёрдого тела
+          относительно неподвижной точки $O$. Тогда
+          \[
+          \begin{aligned}
+          \bvec{K}_O
+          &= \sum \bvec{r}_i \times m_i \bvec{v}_i = \\
+          &= \sum \bvec{r}_i \times m_i \paren{
+          \bvec{\omega} \times \bvec{r}_i
+          } = \\
+          &= \bvec{\omega} \sum m_i r_i^2
+          - \sum m_i \bvec{r}_i (\dp{\bvec{r}_i}{\bvec{\omega}}),
+          \end{aligned}
+          \]
+          где $\bvec{r}_i, \bvec{v}_i$ &mdash; радиус-вектор относительно точки
+          $O$ и скорость произвольной точки тела; $\bvec{\omega}$ &mdash;
+          угловая скорость твёрдого тела.
+          </p>
+
+          <div class="remark">
+            Здесь $\sum$ &mdash; условное обознчаение.
+          </div>
+
+          <p>
+          Пусть $O\xi\eta\zeta$ &mdash; неподвижная система координат, а $Oxyz$
+          &mdash; СК, жёстко связанная с твёрдым телом.
+          </p>
+
+          <p>
+          Пусть $p,q,r$ &mdash; координаты вектора $\bvec{\omega}$ в подвижной
+          СК $Oxyz$, а $K_x, K_y, K_z$ &mdash; координаты $\bvec{K}_O$ в той же
+          СК $Oxyz$. Тогда, проектируя формулу
+          \[
+          \bvec{K}_O
+          = \bvec{\omega} \sum m_i r_i^2
+          - \sum m_i \bvec{r}_i (\dp{\bvec{r}_i}{\bvec{\omega}})
+          \]
+          на оси $x, y, z$, получим
+          \[
+          \begin{aligned}
+          K_x &= p \sum m_i (y_i^2 + z_i^2)
+          - q \sum m_i x_i y_i - r \sum m_i x_i z_i, \\
+          K_y &= q \sum m_i (x_i^2 + z_i^2)
+          - p \sum m_i y_i x_i - r \sum m_i y_i z_i, \\
+          K_z &= r \sum m_i (x_i^2 + y_i^2)
+          - p \sum m_i z_i x_i - q \sum m_i z_i y_i,
+          \end{aligned}
+          \]
+          то есть
+          \[
+          \begin{aligned}
+          K_x &=  J_{xx} p - J_{xy} q - J_{xz} r, \\
+          K_y &= -J_{yx} p + J_{yy} q - J_{zz} r, \\
+          K_z &= -J_{zx} p - J_{zy} q + J_{zz} r,
+          \end{aligned}
+          \]
+          или, иначе,
+          \[
+          \bvec{K}_O = (J) \bvec{\omega}.
+          \]
+          </p>
+
+          <p>
+          Если за подвижные оси взять главные оси инерции для точки $O$, то
+          тензор инерции становится диагональным, и координаты $\bvec{K}_O$:
+          \[
+          K_x = J_{xx}p, \quad K_y = J_{yy} q, \quad K_z = J_{zz} r.
+          \]
+          </p>
+
+          <p>
+          Выразим кинетическую энергию твёрдого тела как функцию компонент
+          вектора $\bvec{\omega}$:
+          \[
+          \begin{aligned}
+          2T
+          &= \sum m_i \dp{\bvec{v}_i}{\bvec{v}_i} = \\
+          &= \sum m_i \bvec{v}_i \paren{ \bvec{\omega} \times \bvec{r}_i } = \\
+          &= \sum \bvec{\omega} \paren{
+          \bvec{r}_i \times m_i \bvec{v}_i
+          } = \\
+          &= \bvec{\omega} \sum \paren{
+          \bvec{r}_i \times m_i \bvec{v}_i
+          } = \\
+          &= \bvec{\omega} \bvec{K}_O.
+          \end{aligned}
+          \]
+          Здесь:
+          <ul>
+            <li>
+              $\bvec{K}_O$ &mdash; вектор кинетического момента твёрдого тела
+              относительно неподвижной точки $O$;
+            </li>
+
+            <li>
+              $\bvec{\omega}$ &mdash; угловая скорость твёрдого тела.
+            </li>
+          </ul>
+          </p>
+
+          <p>
+          В подвижной СК
+          \[
+          \bvec{\omega} = (p,q,r), \quad \bvec{K}_O = (K_x, K_y, K_z),
+          \]
+          поэтому
+          \[
+          2T = J_{xx} p^2 + J_{yy} q^2 + J_{zz} r^2
+          - 2 J_{yz} qr - 2 J_{zx} rp - 2 J_{xy} qp.
+          \]
+          </p>
+
+          <p>
+          Если за подвижные оси взяты главные оси инерции тела для точки $O$, то
+          это уравнение принимает вид
+          \[
+          2T = J_{xx} p^2 + J_{yy} q^2 + J_{zz} r^2.
+          \]
+          </p>
+
+          <hr>
+          
+          <p>
+          В неподвижной СК $O\xi\eta\zeta$ запишем теорему об изменении
+          кинетического момента:
+          \[
+          \dv{\bvec{K}_O}{t} = \bvec{M}_O,
+          \]
+          где $\bvec{M}_O$ &mdash; главный момент всех внешних сил относительно
+          неподвижной точки $O$.
+          </p>
+
+          <div class="definition">
+            <i>Относительная производная</i> &mdash; производная в подвижной
+            системе отсчёта.
+          </div>
+
+          <p>
+          Справедлива формула:
+          \[
+          \dv{\bvec{P}}{t} = \rdv{\bvec{P}}{t} + \vp{\bvec{\omega}}{\bvec{P}},
+          \]
+          где $\bvec{P}$ &mdash; произвольный вектор.
+          </p>
+
+          <p>
+          Используя эту формулу, получаем
+          \[
+          \dv{\bvec{K}_O}{t} = \rdv{\bvec{K_O}}{t} +
+          \vp{\bvec{\omega}}{\bvec{K_O}} = \bvec{M}_O.
+          \]
+          Спроецируем эту формулу на оси подвижной СК $Oxyz$, направленные по
+          главным осям инерции твёрдого тела в точке $O$:
+          \[
+          \begin{aligned}
+          \dv{K_x}{t} + q K_z - r K_y &= M_x, \\
+          \dv{K_y}{t} + r K_x - p K_z &= M_y, \\
+          \dv{K_z}{t} + p K_y - q K_x &= M_z.
+          \end{aligned}
+          \]
+          Учитывая выражения
+          \[
+          K_x = J_{xx}p, \quad K_y = J_{yy} q, \quad K_z = J_{zz} r
+          \]
+          и вводя обозначения
+          \[
+          J_{xx} = A, \quad J_{yy} = B, \quad J_{zz} = C,
+          \]
+          получаем уравнения, которые называют <i
+            class="important">динамическими уравнениями Эйлера</i>:
+          \[
+          \begin{aligned}
+          A \dot p + (C - B) qr = M_x, \\
+          B \dot q + (A - C) pr = M_y, \\
+          C \dot r + (B - A) pq = M_z.
+          \end{aligned}
+          \]
+          </p>
+
+          Чтобы полностью описать движение твёрдого тела с неподвижной точкой, к
+          динамическим уравнениям Эйлера необходимо добавить <i
+            class="important">кинематические уравнения Эйлера</i>, связывающие
+          проекции $(p,q,r)$ угловой скорости твёрдого тела $\bvec{\omega}$ в СК
+          $Oxyz$ и углы Эйлера:
+          \[
+          \left\{
+          \begin{aligned}
+          p &= \dot\psi \sin\theta \sin\varphi + \dot\theta \cos\varphi, \\
+          q &= \dot\psi \sin\theta \cos\varphi - \dot\theta \sin\varphi, \\
+          r &= \dot\psi \cos\theta + \dot\varphi,
+          \end{aligned}
+          \right.
+          \]
+          <div class="images">
+            <img src="images/21-1.png" alt="">
+          </div>
+          где:
+          <ul>
+            <li>
+              $O\xi\eta\zeta$ &mdash; неподвижная СК;
+            </li>
+
+            <li>
+              $Oxyz$ &mdash; подвижная СК;
+            </li>
+
+            <li>
+              $ON$ &mdash; линия узлов, образуемая пересечением плоскостей
+              $O\xi\eta$ и $Oxy$;
+            </li>
+
+            <li>
+              $\psi$ &mdash; угол <i class="important">прецессии</i> &mdash;
+              угол между $O\xi$ и $ON$;
+            </li>
+
+            <li>
+              $\theta$ &mdash; угол <i class="important">нутации</i> &mdash;
+              угол между $O\xi$ и $Oz$;
+            </li>
+
+            <li>
+              $\varphi$ &mdash; угол <i class="important">чистого вращения</i>
+              &mdash; угол между $\Ox$ и $ON$.
+            </li>
+          </ul>
+
+          Скорости $\dot\psi, \dot\varphi, \dot\theta$ направлены по осям
+          $O\xi, Oz, ON$, соответственно.
         </div>
       </li>
 
@@ -1435,6 +3378,43 @@
           Уравнения движения и интегралы. Случаи Эйлера, Лагранжа, Ковалевской
         </div>
         <div class="content">
+          Рассмотрим движение твёрдого тела с неподвижной точкой под действием
+          только силы тяжести $\bvec{P}$. Введём в рассмотрение две СК с началом
+          в точке $O$: неподвижную $O\xi\eta\zeta$, связанную с Землёй, и
+          подвижную $Oxyz$, которая совпадает с главными осями инерции тела для
+          точки $O$. Ось $O\zeta$ направлена вертикально вверх. Обозначим орт
+          этой оси за $\bvec{e}$, а его направляющие косинусы в СК $Oxyz$
+          &mdash; за $(\gamma_1, \gamma_2, \gamma_3)$. Так как направление
+          $O\zeta$ неподвижно относительно Земли, то
+          \[
+          \dv{\bvec{e}}{t} = 0,
+          \]
+          или
+          \[
+          \dv{\bvec{e}}{t}
+          = \rdv{\bvec{e}}{t} + \vp{\bvec{\omega}}{\bvec{e}} = 0.
+          \]
+          Проецируя это уравнение на подвижные оси $Oxyz$, получаем <i>уравнения
+            Пуассона</i>:
+          \[
+          \begin{aligned}
+          \dot\gamma_1 &= r \gamma_2 - q \gamma_3, \\
+          \dot\gamma_2 &= p \gamma_3 - r \gamma_1, \\
+          \dot\gamma_3 &= q \gamma_1 - p \gamma_2.
+          \end{aligned}
+          \]
+          <div class="todo">
+            Расписать до конца.
+          </div>
+
+          <div class="images">
+            <img src="images/22-1.png" alt="">
+            <img src="images/22-2.png" alt="">
+            <img src="images/22-3.png" alt="">
+            <img src="images/22-4.png" alt="">
+            <img src="images/22-5.png" alt="">
+            <img src="images/22-6.png" alt="">
+          </div>
         </div>
       </li>
 
@@ -1444,6 +3424,15 @@
           ограничения
         </div>
         <div class="content">
+
+          <div class="images">
+            <img src="images/23-1.png" alt="">
+            <img src="images/23-2.png" alt="">
+            <img src="images/23-3.png" alt="">
+            <img src="images/23-4.png" alt="">
+            <img src="images/23-5.png" alt="">
+            <img src="images/23-6.png" alt="">
+          </div>
         </div>
       </li>
 
@@ -1453,6 +3442,13 @@
           вариации условного функционала
         </div>
         <div class="content">
+
+          <div class="images">
+            <img src="images/24-1.png" alt="">
+            <img src="images/24-2.png" alt="">
+            <img src="images/24-3.png" alt="">
+            <img src="images/24-4.png" alt="">
+          </div>
         </div>
       </li>
 
@@ -1461,6 +3457,12 @@
           Полная вариация условного функционала: слабое варьирование
         </div>
         <div class="content">
+
+          <div class="images">
+            <img src="images/25-1.png" alt="">
+            <img src="images/25-2.png" alt="">
+            <img src="images/25-3.png" alt="">
+          </div>
         </div>
       </li>
 
@@ -1470,6 +3472,12 @@
           Эрдмана-Вейерштрасса
         </div>
         <div class="content">
+
+          <div class="images">
+            <img src="images/26-1.png" alt="">
+            <img src="images/26-2.png" alt="">
+            <img src="images/26-3.png" alt="">
+          </div>
         </div>
       </li>
 
@@ -1479,6 +3487,22 @@
           исчисления
         </div>
         <div class="content">
+
+          <div class="images">
+            <img src="images/27-1.png" alt="">
+            <img src="images/27-2.png" alt="">
+            <img src="images/27-3.png" alt="">
+            <img src="images/27-4.png" alt="">
+            <img src="images/27-5.png" alt="">
+            <img src="images/27-6.png" alt="">
+            <img src="images/27-7.png" alt="">
+            <img src="images/27-8.png" alt="">
+            <img src="images/27-9.png" alt="">
+            <img src="images/27-10.png" alt="">
+            <img src="images/27-11.png" alt="">
+            <img src="images/27-12.png" alt="">
+            <img src="images/27-13.png" alt="">
+          </div>
         </div>
       </li>
 
@@ -1487,6 +3511,11 @@
           Принцип максимума Понтрягина: формулировки, замечания
         </div>
         <div class="content">
+
+          <div class="images">
+            <img src="images/28-1.png" alt="">
+            <img src="images/28-2.png" alt="">
+          </div>
         </div>
       </li>
 
@@ -1495,6 +3524,11 @@
           Оптимальное по быстродействию управление в задаче Лагранжа
         </div>
         <div class="content">
+
+          <div class="images">
+            <img src="images/29-1.png" alt="">
+            <img src="images/29-2.png" alt="">
+          </div>
         </div>
       </li>
 
@@ -1504,6 +3538,13 @@
           замечания о методе динамического программирования
         </div>
         <div class="content">
+
+          <div class="images">
+            <img src="images/30-1.png" alt="">
+            <img src="images/30-2.png" alt="">
+            <img src="images/30-3.png" alt="">
+            <img src="images/30-4.png" alt="">
+          </div>
         </div>
       </li>
 
@@ -1512,6 +3553,10 @@
           Построение управления с помощью метода динамического программирования
         </div>
         <div class="content">
+
+          <div class="images">
+            <img src="images/31-1.png" alt="">
+          </div>
         </div>
       </li>
 
@@ -1521,6 +3566,12 @@
           Понтрягина
         </div>
         <div class="content">
+
+          <div class="images">
+            <img src="images/32-1.png" alt="">
+            <img src="images/32-2.png" alt="">
+            <img src="images/32-3.png" alt="">
+          </div>
         </div>
       </li>
 
@@ -1530,6 +3581,13 @@
           случае Эйлера
         </div>
         <div class="content">
+          <div class="images">
+            <img src="images/32-1.png" alt="">
+            <img src="images/32-2.png" alt="">
+            <img src="images/32-3.png" alt="">
+            <img src="images/32-4.png" alt="">
+            <img src="images/32-5.png" alt="">
+          </div>
         </div>
       </li>
     </ol>

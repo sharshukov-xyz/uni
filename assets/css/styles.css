@@ -3,9 +3,9 @@
   margin-right: auto;
 }
 
-/* FIXME: change to `ol.big-height > li` margins */
-.big-height {
-  line-height: 400%;
+ol.big-height > li {
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .content {
@@ -172,7 +172,7 @@
 .derivation {
     margin: 10px;
     padding: 0 10px;
-    border-left: 3px solid var(--blue-color);
+    border: 1px dashed var(--blue-color);
 }
 
 .theorem::before {
@@ -240,10 +240,12 @@ button.derivation-toggle {
 .derivation::before {
   content: 'Вывод. ';
   font-style: italic;
+  color: var(--blue-color);
 }
 
 .derivation::after {
   content: ' \25A1';
+  color: var(--blue-color);
 }
 
 .example::before {
