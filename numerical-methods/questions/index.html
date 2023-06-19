@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>ЧМ &mdash; 06 &mdash; Вопросы</title>
+
+    <link href="/assets/css/styles.css" rel="stylesheet">
+    <script defer src="/assets/js/core.js"></script>
+    <script defer src="/assets/js/questions.js"></script>
+    <script defer src="/assets/js/controls.js"></script>
+
+    <link rel="stylesheet" href="/assets/katex/katex.min.css">
+    <script defer src="/assets/katex/katex.min.js"></script>
+    <script defer src="/assets/katex/auto-render.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false },
+            { left: '\\(', right: '\\)', display: false },
+            { left: '\\[', right: '\\]', display: true }
+          ],
+          // • rendering keys, e.g.:
+          throwOnError: false
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1 id="title">ЧМ &mdash; 06 &mdash; Вопросы</h1>
+    <nav>
+      <a href="/">Домой</a>
+      <a href="..">ЧМ</a>
+      <a href="/links">Ссылки</a>
+      <a href="/about">Контакты</a>
+    </nav>
+
+    <div class="controls">
+      <button onclick="HideQuestions()">Скрыть вопросы</button>
+      <button onclick="ShowQuestions()">Показать вопросы</button>
+      <button onclick="HideAnswers()">Скрыть ответы</button>
+      <button onclick="ShowAnswers()">Показать ответы</button>
+      <button onclick="HideProofs()">Скрыть доказательства</button>
+      <button onclick="ShowProofs()">Показать доказательства</button>
+      <button onclick="ShowRandomElement(HideQuestions)">
+        Показать случайный вопрос
+      </button>
+    </div>
+
+    <div class="proof-type">
+      Показывать
+      <select id="select-proof-type" name="select-proof-type">
+        <option value="proofs">доказательства полностью</option>
+        <option value="ideas">только идеи доказательств</option>
+      </select>
+    </div>
+
+    <div style="display:none">
+      $\global\def\at#1#2{\left. #1 \right\rvert_{#2}}$
+      $\global\def\abs#1{\left\lvert #1 \right\rvert}$
+      $\global\def\norm#1{\left\lVert #1 \right\rVert}$
+      $\global\def\bvec#1{\mathbf{#1}}$
+      $\global\def\floor#1{\left\lfloor #1 \right\rfloor}$
+
+      $\global\def\limto#1{\underset{#1}{\longrightarrow}}$
+      $\global\def\prob#1{\mathbb{P} \left\{ #1 \right\}}$
+      $\global\def\mean#1{\mathbb{E} \left[ #1 \right]}$
+      $\global\def\disp#1{D \left[ #1 \right]}$
+
+      $\global\def\dp#1#2{#1 \cdot #2\,}$
+      $\global\def\vp#1#2{#1 \times #2\,}$
+
+      $\global\def\dv#1#2{\frac{d #1}{d #2}}$
+      $\global\def\rdv#1#2{\frac{d' #1}{d #2}}$ <!-- относительная производная -->
+      $\global\def\pd#1#2{\frac{\partial #1}{\partial #2}}$
+      $\global\def\pdv2#1#2{\frac{\partial^2 #1}{\partial #2^2}}$
+      $\global\def\pdvk#1#2#3{\frac{\partial^#1 #2}{\partial #3^#1}}$
+      $\global\def\ppdv#1#2#3{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
+
+      $\global\def\pois#1{\left\{ #1 \right\}}$
+      $\global\def\paren#1{\left( #1 \right)}$
+      $\global\def\bydef#1{\overset{\mathrm{def}}{#1}}$
+
+      $\global\def\mbox#1{\text{#1}}$
+
+      $\global\def\div{\text{div}\,}$
+      $\global\def\dsum{\displaystyle\sum}$
+      $\global\def\grad{\text{grad}\,}$
+      $\global\def\rot{\text{rot}\,}$
+
+      $\global\def\vb#1{\textbf{#1}}$
+
+      $\global\def\op#1{\mathrm{#1}\,}$
+
+      $\global\def\Im{\text{Im}\,}$
+      $\global\def\Res{\text{Res}\,}$
+      $\global\def\Re{\text{Re}\,}$
+      $\global\def\argtg{\text{argtg}\,}$
+      $\global\def\ch{\text{ch}\,}$
+      $\global\def\const{\text{const}\,}$
+      $\global\def\degree{\text{degree}\,}$
+      $\global\def\proj{\mathrm{proj}}$
+      $\global\def\rank{\mathrm{rank}}$
+      $\global\def\res{\text{res}\,}$
+      $\global\def\sh{\text{sh}\,}$
+      $\global\def\sign{\text{sign}\,}$
+      $\global\def\tg{\mathrm{tg}\,}$
+    </div>
+
+    <ol id="questions">
+      <li class="ticket">
+        <div class="name">
+          Вычисление определённого интеграла. Постановка задачи. Понятие
+          квадратурной формулы, весовой функции и методической погрешности
+        </div>
+        <div class="content">
+          <div class="problem">
+            Вычилить однократный интеграл
+            \[
+            J(F) = \int\limits_a^b F(x) dx
+            \]
+            с использованием конечного числа значений интегрируемой функции,
+            где
+            <ul>
+              <li>
+                $[a;b] \subset \mathbb{R}$ &mdash; отрезок интегрирования;
+              </li>
+
+              <li>
+                $F(x)$ &mdash; интегрируемая по Риману на отрезке $[a;b]$
+                функция.
+              </li>
+            </ul>
+          </div>
+
+          Представим интеграл в следующем виде:
+          \[
+          \int\limits_a^b F(x) dx = \int\limits_a^b p(x) f(x) dx,
+          \]
+          где $p(x)$ &mdash; <i class="important">весовая функция</i>,
+          содержащая все особенности функции $F(x)$, а $f(x)$ &mdash; гладкая
+          функция. Важно, чтобы $p(x)$ имела аналитически вычисляемые <i
+          class="important">$j$-ые моменты</i>:
+          \[
+          \mu_j = \int\limits_a^b p(x) x^j dx, \quad j = 0,1,\dots
+          \]
+
+          <p>
+          Считая вес $p(x)$ фиксированным, а $f(x)$ &mdash; произвольной гладкой
+          функцией, строим правила интегрирования вида
+          \[
+          J(F) = \int\limits_a^b p(x) f(x) dx
+          \approx \sum_{j=1}^n A_j f(x_j) = S_n,
+          \quad x_j \in [a;b],
+          \]
+          рассчитанные на функции, имеющие одинаковые, заранее известные
+          особенности, причём $p(x)$ &mdash; <i
+            class="important">неотрицательная на $[a;b]$</i> функция, для
+          которой
+          \[
+          \int\limits_a^b p(x) dx \gt 0,
+          \]
+          и для любой $f(x)$ существует
+          \[
+          \int\limits_a^b p(x) \abs{f(x)} dx.
+          \]
+          </p>
+
+          <div class="definition">
+            Формулу
+            \[
+            J(F) = \int\limits_a^b p(x) f(x) dx
+            \approx \sum_{j=1}^n A_j f(x_j)
+            \quad x_j \in [a;b]
+            \]
+            называют <i>формулой механических квадратур</i> или просто
+            <i>квадратурной формулой (КФ)</i>. Также вводят следующие понятия:
+            <ul>
+              <li>
+                $S_n = \dsum_{j=1}^n A_j f(x_j)$ &mdash; <i>квадратурная
+                  сумма</i>;
+              </li>
+
+              <li>
+                $A_j$ &mdash; <i>квадратурные коэффициенты</i>;
+              </li>
+
+              <li>
+                $x_j$ &mdash; <i>узлы</i> квадратурой формулы.
+              </li>
+            </ul>
+          </div>
+
+          Условимся считать, что
+          \[
+          a \leqslant x_0 \lt x_1 \lt \cdots \lt x_n \leqslant b.
+          \]
+
+          <div class="definition">
+            Величина
+            \[
+            R_n(f) = \int\limits_a^b p(x) f(x) dx - \sum_{j=1}^n A_j f(x_j)
+            = J(f) - S_n(f)
+            \]
+            называется <i>методической погрешностью</i> или <i>остаточным
+              членом</i> квадратурной формулы.
+          </div>
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Различные подходы к построению квадратурной формулы. Квадратурные
+          формулы наилучшей степени точности. Квадратурный процесс. Сходимость
+          квадратурного процесса
+        </div>
+        <div class="content">
+          Пусть $\Phi(a,b)$ &mdash; некоторый класс функций $f(\cdot)$.
+          Рассмотрим последовательность $\set{ \varphi_k(x) }$ базисных функций
+          таких, что $p(x) \varphi_k(x)$ суммируемы на $[a;b]$. Образуем
+          линейную комбинацию:
+          \[
+          s_n(x) = \sum_{k=1}^n a_k \varphi_k(x)
+          \]
+          и введём величину
+          \[
+          \rho(f, s_n) :=
+          \int\limits_a^b \abs{ p(x) \paren{ f(x) - s_n(x) } } dx,
+          \]
+          которую будем считать расстоянием между $f(x)$ и $s_n(x)$.
+
+          <div class="definition">
+            Система функций $\set{ \varphi_k(x) }$ называется <i>полной в классе
+            $\Phi(a,b)$</i>, если для каждой функции $f \in \Phi(a,b)$ и для
+            любого $\varepsilon \gt 0$ существует такая линейная комбинация
+            $s_n(x)$, что
+            \[
+            \rho(f, x_n) \lt \varepsilon.
+            \]
+          </div>
+
+          Из неравенства
+          \[
+          \begin{aligned}
+          &\abs{
+          \int\limits_a^b p(x) f(x) dx - \int\limits_a^b p(x) s_n(x) dx
+          } \leqslant \\
+          &\quad
+          \leqslant \int\limits_a^b \abs{p(x) \paren { f(x) - s_n(x) } } dx
+          \bydef= \rho(f,s_n)
+          \end{aligned}
+          \]
+          следует, что интеграл
+          \[
+          \int\limits_a^b p(x) f(x) dx
+          \]
+          может быть вычислен с любой сколь угодно высокой точностью, если
+          интегрируемую функцию $f(x)$ заменить специально подобранной линейной
+          комбинацией $s_n(x)$.
+
+          <div class="definition">
+            Квадратурная формула
+            \[
+            J(F) = \int\limits_a^b p(x) f(x) dx
+            \approx \sum_{j=1}^n A_j f(x_j)
+            \quad x_j \in [a;b]
+            \]
+            имеет <i>степень точности $m$ относительно функций
+              $\set{\varphi_k(x)}$</i>, если она точна для функций
+            $\varphi_1, \dots, \varphi_m$, то есть
+            \[
+            \int\limits_a^b p(x) \varphi_i dx = \sum_{k=1}^n A_k \varphi_i(x_k),
+            \qquad i = \overline{1,m}
+            \]
+            и не верна для $\varphi_{m+1}$, то есть
+            \[
+            \int\limits_a^b p(x) \varphi_{m+1} dx
+            \neq \sum_{k=1}^n A_k \varphi_{m+1}(x_k),
+            \]
+          </div>
+
+          Таким образом, неизвестные $x_k$ и $A_k$ можно выбирать таким образом,
+          чтобы повысить степень точности КФ.
+
+          <div class="example">
+            Известна
+            <div class="theorem">
+              <i>(Вейерштрасса)</i>.
+              <br>
+              
+              Для любых $f \in C[a;b]$ и $\varepsilon \gt 0$ существует
+              многочлен $P(x)$ такой, что
+              \[
+              \abs{f(x) - P(x)} \lt \varepsilon, \qquad x \in [a;b].
+              \]
+            </div>
+
+            Отсюда следует, что система алгебраических многочленов полна в
+            классе непрерывных на $[a;b]$ функций. Таким образом, можно взять
+            $1,x,x^2,\dots$ за систему базисных функций.
+          </div>
+
+          <div class="definition">
+            Квадратурная формула
+            \[
+            J(F) = \int\limits_a^b p(x) f(x) dx
+            \approx \sum_{j=1}^n A_j f(x_j)
+            \quad x_j \in [a;b]
+            \]
+            имеет <i>алгебраическую степень точности $m$</i>, если она верна для
+            любых многочленов степени $m$ и не верна для многочленов степени
+            $m+1$.
+          </div>
+
+          <h4>Квадратурные формулы с наилучшей оценкой на классе функций</h4>
+
+          Введём обозначение:
+          \[
+          R_n \equiv \sup_{f \in \Phi(a,b)} \abs{R_n(f)}.
+          \]
+
+          <div class="problem">
+            Определить узлы $x_k \in [a;b]$ и коэффициенты $A_k$ квадратурной
+            формулы так, чтобы величина $R_n$ была наименьшей. Такие КФ называют
+            <i class="important">
+              квадратурными формулами с наилучшей оценкой на классе функций
+              $\Phi(a,b)$
+            </i>.
+          </div>
+
+          <div class="remark">
+            При вычислении $f(x_k)$ почти всегда приходится иметь дело с
+            приближёнными значениями функции $\overline{f}(x_k)$:
+            \[
+            \abs{f(x_k) - \overline{f}(x_k)} \lt \varepsilon,
+            \qquad k = \overline{1,n}.
+            \]
+            Квадратурная сумма тогда будет вычислена с погрешностью
+            \[
+            \abs{s_n(x_k) - \overline{s}_n(x_k)}
+            \lt \varepsilon \sum_{k=1}^n \abs{A_k}.
+            \]
+
+            Если сумма $\dsum_{k=1}^n \abs{A_k}$ велика, то это может вызывать
+            большую погрешность в приближённом значении интеграла. В связи с
+            этим фактом стремятся уменьшить её значение. В случае, если
+            \[
+            p(x) \geqslant 0, \quad x \in [a;b]
+            \]
+            и квадратурная формула верна для $f(x) \equiv 1$, то есть
+            \[
+            \int\limits_a^b p(x) dx = \sum_{k=1}^n A_k,
+            \]
+            сумма $\dsum_{k=1}^n \abs{A_k}$ будет иметь наименьшее значение,
+            когда $A_k \gt 0$.
+          </div>
+
+          <h4>Квадратурный процесс</h4>
+
+          <div class="definition">
+            Последовательность квадратурных формул называют <i>квадратурным
+              процессом</i>. Она определяется матрицами узлов
+            \[
+            X =
+            \begin{vmatrix}
+            x_1^{(1)} & & & & \\
+            x_1^{(2)} & x_2^{(2)} & & & \\
+            \cdots & \cdots & \cdots & & \\
+            x_1^{(n)} & x_2^{(n)} & \cdots & x_n^{(n)} & \\
+            \cdots & \cdots & \cdots & \cdots & \cdots
+            \end{vmatrix}
+            \]
+            и коэффициентов
+            \[
+            A =
+            \begin{vmatrix}
+            A_1^{(1)} & & & & \\
+            A_1^{(2)} & A_2^{(2)} & & & \\
+            \cdots & \cdots & \cdots & & \\
+            A_1^{(n)} & A_2^{(n)} & \cdots & A_n^{(n)} & \\
+            \cdots & \cdots & \cdots & \cdots & \cdots
+            \end{vmatrix}
+            \]
+          </div>
+
+          Квадратурная формула, соответствующая $n$-ой строке этих матриц, имеет
+          вид
+          \[
+          \int\limits_a^b p(x) f(x) dx
+          = \sum_{k=1}^n A_k^{(n)} f(x_k^{(n)}) + R_n(f).
+          \]
+
+          Введём обозначение:
+          \[
+          S_n = \sum_{k=1}^n A_k^{(n)} f(x_k^{(n)}).
+          \]
+
+          <div class="definition">
+            Говорят, что квадратурный процесс, определённый матрицами $X$ и $A$,
+            <i>сходится</i> для функции $f$, если
+            \[
+            \lim_{n \to \infty} S_n(f)
+            = \lim_{n \to \infty} \sum_{k=1}^n A_k^{(n)} f(x_k^{(n)})
+            = \int\limits_a^b p(x) f(x) dx.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Интерполяционная квадратурная формула (квадратурные формулы
+          Ньютона-Котеса). Погрешность интерполяционной квадратурной формулы
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Квадратурные формулы, использующие значения функции и её производной.
+          Оценка погрешности соответствующей квадратурной формулы
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Алгоритм построения интерполяционных квадратурных формул. Квадратурная
+          формула прямоугольников с соответствующей оценкой погрешности
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Алгоритм построения интерполяционных квадратурных формул. Квадратурная
+          формула трапецией с соответствующей оценкой погрешности
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Алгоритм построения интерполяционных квадратурных формул. Квадратурная
+          формула Симпсона (парабол) с соответствующей оценкой погрешности
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Квадратурные формулы с равностоящими узлами. Правило трёх восьмых
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Ортогональные многочлены
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Весовая функция Якоби. Формула Родрига
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Значения коэффициентов при старших степенях у многочлена Якоби
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Многочлен Лежандра
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Многочлены Чебышёва первого рода
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Многочлены Чебышёва второго рода
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Многочлены Эрмита
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Квадратурные формулы типа Гаусса. Сходимость квадратурного процесса
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Алгоритм построения квадратурной формулы Гаусса вычисления
+          определённого интеграла
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Квадратурные формулы с равными коэффициентами
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Составные квадратурные формулы
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Практические способы оценки квадратурных формул
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Задача Коши для обыкновенных дифференциальных уравнений. Приближённое
+          решение задачи Коши
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Метод Эйлера решения задачи Коши для обыкновенных дифференциальных
+          уравнений первого порядка
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Методы Рунге-Кутты
+        </div>
+        <div class="content">
+        </div>
+      </li>
+    </ol>
+  </body>
+</html>
+
