@@ -1,0 +1,2335 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>ТВиМС &mdash; 06 &mdash; Вопросы</title>
+
+    <link href="/assets/css/styles.css" rel="stylesheet">
+    <script defer src="/assets/js/core.js"></script>
+    <script defer src="/assets/js/questions.js"></script>
+    <script defer src="/assets/js/controls.js"></script>
+
+    <link rel="stylesheet" href="/assets/katex/katex.min.css">
+    <script defer src="/assets/katex/katex.min.js"></script>
+    <script defer src="/assets/katex/auto-render.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false },
+            { left: '\\(', right: '\\)', display: false },
+            { left: '\\[', right: '\\]', display: true }
+          ],
+          // • rendering keys, e.g.:
+          throwOnError: false
+        });
+      });
+    </script>
+
+    <style>
+      .content {
+        font-size: 23px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1 id="title">ТВиМС &mdash; 06 &mdash; Вопросы</h1>
+    <nav>
+      <a href="/">Домой</a>
+      <a href="/probability-theory">ТВиМС</a>
+      <a href="/links">Ссылки</a>
+      <a href="/about">Контакты</a>
+    </nav>
+
+    <div class="controls">
+      <button onclick="HideQuestions()">Скрыть вопросы</button>
+      <button onclick="ShowQuestions()">Показать вопросы</button>
+      <button onclick="HideAnswers()">Скрыть ответы</button>
+      <button onclick="ShowAnswers()">Показать ответы</button>
+      <button onclick="HideExamples()">Скрыть примеры</button>
+      <button onclick="ShowExamples()">Показать примеры</button>
+      <button onclick="HideProofs()">Скрыть доказательства</button>
+      <button onclick="ShowProofs()">Показать доказательства</button>
+      <button onclick="ShowRandomElement(HideQuestions)">
+        Показать случайный вопрос
+      </button>
+    </div>
+
+    <div class="proof-type">
+      Показывать
+      <select id="select-proof-type" name="select-proof-type">
+        <option value="proofs">доказательства полностью</option>
+        <option value="ideas">только идеи доказательств</option>
+      </select>
+    </div>
+
+    <div style="display:none">
+      $\global\def\at#1#2{\left. #1 \right\rvert_{#2}}$
+      $\global\def\abs#1{\left\lvert #1 \right\rvert}$
+      $\global\def\norm#1{\left\lVert #1 \right\rVert}$
+      $\global\def\bvec#1{\mathbf{#1}}$
+      $\global\def\floor#1{\left\lfloor #1 \right\rfloor}$
+
+      $\global\def\limto#1{\underset{#1}{\longrightarrow}}$
+      $\global\def\prob#1{\mathbb{P} \left\{ #1 \right\}}$
+      $\global\def\mean#1{\mathbb{E} \left[ #1 \right]}$
+      $\global\def\disp#1{D \left[ #1 \right]}$
+
+      $\global\def\dp#1#2{#1 \cdot #2\,}$
+      $\global\def\vp#1#2{#1 \times #2\,}$
+
+      $\global\def\dv#1#2{\frac{d #1}{d #2}}$
+      $\global\def\rdv#1#2{\frac{d' #1}{d #2}}$ <!-- относительная производная -->
+      $\global\def\pd#1#2{\frac{\partial #1}{\partial #2}}$
+      $\global\def\pdv2#1#2{\frac{\partial^2 #1}{\partial #2^2}}$
+      $\global\def\pdvk#1#2#3{\frac{\partial^#1 #2}{\partial #3^#1}}$
+      $\global\def\ppdv#1#2#3{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
+
+      $\global\def\pois#1{\left\{ #1 \right\}}$
+      $\global\def\paren#1{\left( #1 \right)}$
+      $\global\def\bydef#1{\overset{\mathrm{def}}{#1}}$
+
+      $\global\def\mbox#1{\text{#1}}$
+
+      $\global\def\div{\text{div}\,}$
+      $\global\def\dsum{\displaystyle\sum\,}$
+      $\global\def\grad{\text{grad}\,}$
+      $\global\def\rot{\text{rot}\,}$
+
+      $\global\def\vb#1{\textbf{#1}}$
+
+      $\global\def\op#1{\mathrm{#1}\,}$
+
+      $\global\def\Im{\text{Im}\,}$
+      $\global\def\Res{\text{Res}\,}$
+      $\global\def\Re{\text{Re}\,}$
+      $\global\def\argtg{\text{argtg}\,}$
+      $\global\def\ch{\text{ch}\,}$
+      $\global\def\const{\text{const}\,}$
+      $\global\def\degree{\text{degree}\,}$
+      $\global\def\proj{\mathrm{proj}}$
+      $\global\def\rank{\mathrm{rank}}$
+      $\global\def\res{\text{res}\,}$
+      $\global\def\sh{\text{sh}\,}$
+      $\global\def\sign{\text{sign}\,}$
+      $\global\def\tg{\mathrm{tg}\,}$
+    </div>
+
+    <ol id="questions">
+      <h2 class="subtitle">5 семестр</h2>
+
+      <li class="question">
+        <div class="name">
+          Случайные события
+        </div>
+        <div class="content">
+          Пусть проводится некоторый эксперимент, в результате которого может
+          произойти одно из элементарных событий.
+
+          <div class="definition">
+            Под <i>элементарными событиями</i> понимают события (исходы),
+            которые нельзя разделить на составные части, также являющиеся
+            событиями. Объединение элементарных событий образует
+            <i>пространство элементарных событий $\Omega$</i>.
+          </div>
+
+          <p>
+          Любое событие $A$ является совокупностью элементарных событий, то есть
+          $A \subset \Omega$.
+          </p>
+
+          <div class="definition">
+            Говорят, что <i>событие $A$ произошло</i>, если произошло некоторое
+            элементарное событие $\omega \in A$.
+          </div>
+
+          <ul>
+            <li>
+              Событие, заключающееся в том, что произошло хотя бы одно из
+              событий $A$ или $B$, обозначают через $A \cup B$.
+            </li>
+
+            <li>
+              Событие, которое происходит, когда происходят одновременно и
+              событие $A$, и событие $B$, обозначают как $A \cap B$.
+            </li>
+          </ul>
+
+          <div class="definition">
+            Если $A \cap B = \varnothing$, то события $A$ и $B$ называют
+            <i>несовместными</i>.
+          </div>
+
+          <div class="definition">
+            Пустое множество $\varnothing$ принято называть <i>невозможным
+              событием</i>, а множество $\Omega$ &mdash; <i>достоверным
+              событием</i>.
+          </div>
+
+          <div class="definition">
+            <i>Дополнение</i> события $A$ принято обозначать как
+            \[
+            \overline{A} = \Omega \setminus A
+            = \set{ \omega: \omega \not\in A }.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Аксиоматика теории вероятностей
+        </div>
+        <div class="content">
+          Рассмотрим множества $A_1, \dots, A_m$ такие, что выполнены условия:
+          <ol>
+            <li>
+              Пересечение любых двух различных множеств является пустым:
+              \[
+              A_i \cap A_j = \varnothing, \quad i \neq j.
+              \]
+            </li>
+
+            <li>
+              Объединение всех множеств совпадает с пространством элементарных
+              событий:
+              \[
+              \bigcup_{i=1}^m A_i = \Omega.
+              \]
+            </li>
+          </ol>
+
+          <div class="definition">
+            Система множеств $\set{A_i}_{i=1}^m$, удовлетворяющая условиям 1 и
+            2, называется <i>разбиением множества $\Omega$</i> или <i>полной
+            группой событий</i>.
+          </div>
+
+          <div class="definition">
+            Совокупность $\mathcal{A} \subset 2^\Omega$ называется
+            <i>алгеброй</i>, если выполнены следующие условия:
+            <ol>
+              <li>
+                $\Omega \in \mathcal{A}$.
+              </li>
+
+              <li>
+                Если $A \in \mathcal{A}$ и $B \in \mathcal{A}$, то
+                $A \cup B \in \mathcal{A}$.
+              </li>
+
+              <li>
+                $\forall A \in \mathcal{A} \quad \overline{A} \in \mathcal{A}$.
+              </li>
+            </ol>
+
+            Множества, входящие в алгебру, будем называть <i>событиями</i>.
+          </div>
+
+          <div class="proposition">
+            Пусть существуют множества $\set{A_\gamma} \subset \Omega$, где
+            $\gamma \in \Gamma$. Тогда справедливы
+            <i class="important">законы двойственности</i>:
+            \[
+            \begin{aligned}
+            \overline{\bigcup_{\gamma \in \Gamma} A_\gamma}
+            &=
+            \bigcap_{\gamma \in \Gamma} \overline{A}_\gamma, \\
+            \overline{\bigcap_{\gamma \in \Gamma} A_\gamma}
+            &=
+            \bigcup_{\gamma \in \Gamma} \overline{A}_\gamma.
+            \end{aligned}
+            \]
+
+            <div class="proof">
+              Докажем первое равенство.
+
+              <p>
+              Рассмотрим произвольное элементарное событие $\omega$ из множества
+              $\overline{\bigcup_{\gamma \in \Gamma} A_\gamma}$. Очевидно, что
+              событие $\omega$ не принадлежит его дополнению
+              $\bigcup_{\gamma \in \Gamma} A_\gamma$, что означает, что $\omega$
+              не принадлежит ни одному из множеств $A_\gamma$. Следовательно,
+              событие $\omega$ принадлежит всем дополнениям
+              $\overline{A}_\gamma$, откуда следует, что $\omega$ принадлежит их
+              пересечению $\bigcap_{\gamma \in \Gamma} \overline{A}_\gamma$.
+              Итак, мы показали, что
+              \[
+              \overline{\bigcup_{\gamma \in \Gamma} A_\gamma}
+              \subseteq
+              \bigcap_{\gamma \in \Gamma} \overline{A}_\gamma.
+              \]
+              </p>
+
+              <p>
+              Рассмотрим теперь произвольное событие $\omega$ из пересечения
+              $\bigcap_{\gamma \in \Gamma} \overline{A}_\gamma$. Очевидно, что
+              $\omega \in \overline{A}_\gamma$ для всех $\gamma \in \Gamma$,
+              откуда следует, что $\omega$ не принадлежит ни одному множеству
+              $A_\gamma$. В таком случае $\omega$ не принадлежит и их
+              объединению $\bigcup_{\gamma \in \Gamma} A_\gamma$. Тогда можно
+              утверждать, что оно принадлежит его дополнению
+              $\overline{\bigcup_{\gamma \in \Gamma} A_\gamma}$.
+              </p>
+
+              <p>
+              Итак, мы показали, что
+              \[
+              \overline{\bigcup_{\gamma \in \Gamma} A_\gamma}
+              \subseteq
+              \bigcap_{\gamma \in \Gamma} \overline{A}_\gamma,
+              \qquad
+              \overline{\bigcup_{\gamma \in \Gamma} A_\gamma}
+              \supseteq
+              \bigcap_{\gamma \in \Gamma} \overline{A}_\gamma,
+              \]
+              откуда следует, что
+              \[
+              \overline{\bigcup_{\gamma \in \Gamma} A_\gamma}
+              =
+              \bigcap_{\gamma \in \Gamma} \overline{A}_\gamma.
+              \]
+              </p>
+
+              <p>
+              Аналогичным образом доказывается и второе равенство.
+              </p>
+            </div>
+          </div>
+
+          <div class="corollary">
+            Любая алгебра замкнута относительно операции конечного пересечения.
+
+            <div class="proof">
+              Пусть $A \in \mathcal{A}$ и $B \in \mathcal{A}$. Рассмотрим
+              выражение $\overline{A \cap B}$. Из теоремы двойственности
+              следует, что
+              \[
+              \overline{A \cap B}
+              = \overline{A} \cup \overline{B} \in \mathcal{A},
+              \]
+              а по определению алгебры
+              \[
+              A \cap B = \overline{\overline{A \cap B}} \in \mathcal{A}.
+              \]
+            </div>
+          </div>
+
+          <div class="definition">
+            <i>Алгеброй, порождённой множеством $B \subset \Omega$</i>, называют
+            систему подмножеств
+            \[
+            \alpha(B) = \set{ B, \overline{B}, \varnothing, \Omega }.
+            \]
+          </div>
+
+          <div class="definition">
+            Рассмотрим некоторое событие $A \in \mathcal{A}$. Проведём
+            эксперимент $N$ раз, в котором событие $A$ произошло $N(A)$ раз.
+            Тогда соотношение $N(A)/N$ называют
+            <i>относительной частотой появления события $A$</i>.
+
+            <div class="remark">
+              При $N \to \infty$ относительная частота стабилизируется, однако о
+              сходимости говорить нельзя. Можно говорить лишь о
+              <i class="important">&laquo;статистической устойчивости&raquo;
+                относительных частот.</i>
+            </div>
+
+            <div class="remark">
+              <i class="important">Вероятность $P(A)$ появления события $A$</i>
+              приближённо равна $N(A) / N$.
+            </div>
+          </div>
+
+          <div class="definition">
+            Пусть $\mathcal{A}$ &mdash; алгебра подмножеств множества $\Omega$.
+            Функция $\mu : \mathcal{A} \to \mathbb{R}$ называется
+            <i>конечно-аддитивной мерой</i>, если выполнены следующие условия:
+            <ol>
+              <li>
+                $\mu(A) \geqslant 0$ для любого множества $A \in \mathcal{A}$.
+              </li>
+
+              <li>
+                Для любых дизъюнктных множеств $A_1, A_2 \in \mathcal{A}$ имеет
+                место равенство:
+                \[
+                \mu(A_1 \cup A_2) = \mu(A_1) + \mu(A_2).
+                \]
+
+                <div class="remark">
+                  <i>Дизъюнктными</i> называют два множества $A$ и $B$, для
+                  которых $A \cap B = \varnothing$.
+                </div>
+              </li>
+
+              <li>
+                $\mu(\varnothing) = 0$.
+              </li>
+            </ol>
+          </div>
+
+          <div class="definition">
+            Конечно-аддитивная мера $\mu$ называется <i>конечной</i>, если
+            $\mu(\Omega)$ конечно.
+          </div>
+
+          <div class="definition">
+            Если $\mu(\Omega) = 1$, то конечно-аддитивная мера $\mu$ называется
+            <i>конечно-аддитивной вероятностной мерой</i> и обозначается через
+            $P$.
+          </div>
+
+          <div class="definition">
+            Пусть $\mathcal{A}$ &mdash; алгебра подмножеств множества $\Omega$.
+            Конечно-аддитивная мера $\mu(\cdot): \mathcal{A} \to \mathbb{R}$
+            называется <i>счётно-аддитивной ($\sigma$-аддитивной) мерой</i>,
+            если выполнено следующее условие:
+            <ul>
+              <li>
+                Для любой счётной совокупности событий $\set{A_i}_{i=1}^\infty$
+                из алгебры $\mathcal{A}$ такой, что
+                \[
+                \bigcup_{i=1}^\infty A_i \in \mathcal{A},
+                \qquad
+                A_i \cap A_j = \varnothing, \quad i \neq j,
+                \]
+                справедливо равенство
+                \[
+                \mu\paren{ \bigcup_{i=1}^\infty A_i }
+                =
+                \sum_{i=1}^\infty \mu(A_i).
+                \]
+              </li>
+            </ul>
+          </div>
+
+          <div class="definition">
+            Счётно-аддитивная мера $\mu$ называется <i>$\sigma$-конечной</i>,
+            если существует счётное разбиение множества
+            \[
+            \Omega = \bigcup_{i=1}^\infty D_i,
+            \quad D_i \in \mathcal{A}
+            \quad \mbox{ и } \quad
+            D_i \cap D_j = \varnothing, \quad i \neq j
+            \]
+            такое, что
+            \[
+            \mu\paren{ D_i } \lt \infty.
+            \]
+          </div>
+
+          <div class="definition">
+            Счётно-аддитивная мера $\mu$ называется
+            <i>конечной счётно-аддитивной</i>, если $\mu(\Omega) \lt \infty$.
+            Если $\mu(\Omega) = 1$, то счётно-аддитивная мера $\mu$ называется
+            <i>счётно-аддитивной вероятностной мерой</i>, или
+            <i>вероятностью</i>.
+          </div>
+
+          <div class="definition">
+            Алгебра $\mathcal{F}$ подмножеств множества $\Omega$ называется
+            <i>$\sigma$-алгеброй</i>, если она замкнута относительно
+            объединения счётной совокупности множеств, т.е. если
+            $\set{A_n}_{n=1}^\infty$ &mdash; последовательность событий
+            $A_n \in \mathcal{F}$, то
+            \[
+            \bigcup_{n=1}^\infty A_n \in \mathcal{F}.
+            \]
+          </div>
+
+          <div class="definition">
+            Пусть на $\sigma$-алгебре $\mathcal{F}$ задана счётно-аддитивная
+            вероятностная мера $P$. Тогда считается заданным <i>вероятностное
+              пространство</i> $(\Omega, \mathcal{F}, P)$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Свойства вероятностей
+        </div>
+        <div class="content">
+          <ol>
+            <li>
+              Вероятность невозможного события равна нулю: $P(\varnothing) = 0$.
+
+              <div class="derivation">
+                Очевидны следующие равенства:
+                \[
+                \Omega \cup \varnothing = \Omega, \qquad
+                \Omega \cap \varnothing = \varnothing.
+                \]
+                В силу свойства аддитивности имеем
+                \[
+                P(\Omega) = P(\Omega \cup \varnothing) = P(\Omega) +
+                P(\varnothing) = 1,
+                \]
+                откуда следует равенство $P(\varnothing) = 0$.
+              </div>
+            </li>
+
+            <li>
+              Для любого события $A \in \mathcal{A}$
+              \[
+              P(A) = 1 - P(\overline{A}).
+              \]
+
+              <div class="derivation">
+                Так как $A \cup \overline{A} = \Omega$, то в силу аддитивности
+                \[
+                P(A) + P(\overline{A}) = P(\Omega) = 1,
+                \]
+                и, следовательно,
+                \[
+                P(A) = 1 - P(\overline{A}).
+                \]
+              </div>
+            </li>
+
+            <li>
+              Рассмотрим события $A,B \in \mathcal{A}$. Тогда
+              \[
+              A \subset B \implies P(A) \leqslant P(B).
+              \]
+
+              <div class="derivation">
+                Поскольку $A \subset B$, то множество $B$ можно представить
+                следующим образом:
+                \[
+                B = A \cup (B \setminus A).
+                \]
+                Из условия аддитивности следует равенство
+                \[
+                P(B) = P(A) + P(B \setminus A).
+                \]
+                При этом $P(B \setminus A) \geqslant 0$, поэтому
+                \[
+                P(A) \leqslant P(B).
+                \]
+                Заметим, что $A \neq B \cup (A \setminus B)$, так как
+                $A \setminus B = \varnothing$, поэтому
+                \[
+                P(A) \not\geqslant P(B).
+                \]
+              </div>
+            </li>
+
+            <li>
+              <i class="important">Формула сложения вероятностей</i>.
+              <br>
+              
+              Для любых двух событий $A,B \in \mathcal{A}$ справедливо
+              равенство:
+              \[
+              P(A \cup B) = P(A) + P(B) - P(A \cap B).
+              \]
+
+              <div class="derivation">
+                Представим событие $A \cup B$ в следующем виде:
+                \[
+                A \cup B = (A \setminus B) \cup (B \setminus A) \cup (A \cap B).
+                \]
+
+                Тогда в силу аддитивности вероятности
+                \[
+                \begin{aligned}
+                P(A \cup B)
+                &= P(A \setminus B) + P(B \setminus A) + P(A \cap B) = \\
+                &= P(A \setminus B) + P(B \setminus A) + P(A \cap B)
+                + P(A \cap B) - P(A \cap B) = \\
+                &=
+                \left[ P(A \setminus B) + P(A \cap B) \right]
+                + \left[ P(B \setminus A) + P(A \cap B) \right]
+                - P(A \cap B).
+                \end{aligned}
+                \]
+                Так как
+                \[
+                \begin{aligned}
+                P(A \setminus B) + P(A \cap B) &= P(A), \\
+                P(B \setminus A) + P(B \cap A) &= P(B),
+                \end{aligned}
+                \]
+                то
+                \[
+                P(A \cup B) = P(A) + P(B) - P(A \cap B).
+                \]
+              </div>
+            </li>
+
+            <li>
+              Для любых событий $A_1, \dots, A_m \in \mathcal{A}$ выполняется
+              неравенство
+              \[
+              P\paren{ \bigcup_{i=1}^m A_i } \leqslant \sum_{i=1}^m P(A_i).
+              \]
+
+              <div class="derivation">
+                Введём систему событий:
+                \[
+                \begin{aligned}
+                B_1 &= A_1, \\
+                B_2 &= A_2 \setminus A_1, \\
+                &\dots \\
+                B_m &= A_m \setminus \bigcup_{i=1}^{m-1} A_i.
+                \end{aligned}
+                \]
+                Очевидно, что
+                \[
+                B_i \cap B_j = \varnothing, \quad i \neq j
+                \quad \mbox{ и } \quad
+                \bigcup_{i=1}^m A_i = \bigcup_{i=1}^m B_i.
+                \]
+
+                Тогда
+                \[
+                P\paren{ \bigcup_{i=1}^m A_i }
+                =
+                P\paren{ \bigcup_{i=1}^m B_i }
+                =
+                \sum_{i=1}^m P(B_i).
+                \]
+                Так как $B_i \subset A_i$ для любого $i = \overline{1,m}$, то по
+                третьему свойству
+                \[
+                \sum_{i=1}^m P(B_i) \leqslant \sum_{i=1}^m P(A_i),
+                \]
+                откуда следует, что
+                \[
+                P\paren{ \bigcup_{i=1}^m A_i } \leqslant \sum_{i=1}^m P(A_i).
+                \]
+              </div>
+            </li>
+
+            <li>
+              Для любых событий $A_1, \dots, A_m \in \mathcal{A}$ справедливо
+              равенство
+              \[
+              \begin{aligned}
+              P\paren{ \bigcup_{i=1}^m A_i }
+              &= \phantom{-} \sum_{i=1}^m P(A_i)
+              - \sum_{1 \leqslant i_1 \lt i_2 \leqslant m}
+              P(A_{i_1} \cap A_{i_2}) + \\
+              &\phantom{=} - \sum_{1 \leqslant i_1 \lt i_2 \lt i_3 \leqslant m}
+              P(A_{i_1} \cap A_{i_2} \cap A_{i_3}) - \cdots + \\
+              &\phantom{=} + (-1)^{m-1} P(A_1 \cap \cdots \cap A_m).
+              \end{aligned}
+              \]
+
+              <div class="derivation">
+                <div class="idea">
+                  Это утверждение доказывается методом математической индукцией
+                  с базой $m=2$.
+                </div>
+              </div>
+            </li>
+
+            <li>
+              Пусть $\set{ A_i }_{i=1}^\infty$ &mdash; последовательность
+              событий такая, что $A_i \in \mathcal{A}$, и объединение этих
+              событий $\bigcup_{i=1}^\infty A_i \in \mathcal{A}$. Тогда
+              \[
+              P\paren{ \bigcup_{i=1}^\infty A_i }
+              \leqslant \sum_{i=1}^\infty P(A_i).
+              \]
+
+              <div class="derivation">
+                Введём систему событий:
+                \[
+                \begin{aligned}
+                B_1 &= A_1, \\
+                B_2 &= A_2 \setminus A_1, \\
+                &\dots \\
+                B_m &= A_m \setminus \bigcup_{i=1}^{m-1} A_i, \\
+                &\dots
+                \end{aligned}
+                \]
+                Очевидно, что
+                \[
+                B_i \cap B_j = \varnothing, \quad i \neq j
+                \quad \mbox{ и } \quad
+                \bigcup_{i=1}^\infty A_i = \bigcup_{i=1}^\infty B_i.
+                \]
+
+                Тогда
+                \[
+                P\paren{ \bigcup_{i=1}^\infty A_i }
+                =
+                P\paren{ \bigcup_{i=1}^\infty B_i }
+                =
+                \sum_{i=1}^\infty P(B_i).
+                \]
+                Так как $B_i \subset A_i$ для любого $i = \overline{1,m}$, то по
+                третьему свойству
+                \[
+                \sum_{i=1}^\infty P(B_i) \leqslant \sum_{i=1}^\infty P(A_i),
+                \]
+                откуда следует, что
+                \[
+                P\paren{ \bigcup_{i=1}^\infty A_i }
+                \leqslant \sum_{i=1}^\infty P(A_i).
+                \]
+              </div>
+            </li>
+          </ol>
+
+          <div class="remark">
+            Свойства 1-6 справедливы для любой конечно-аддитивной вероятностной
+            меры. Свойство 7 предполагает счётную аддитивность вероятностной
+            меры.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема о непрерывности вероятностной меры
+        </div>
+        <div class="content">
+          <div class="theorem">
+            <i>(о непрерывности вероятностной меры)</i>.
+            <br>
+            Пусть $\mathcal{A}$ &mdash; алгебра подмножеств множества $\Omega$,
+            $P$ &mdash; конечно-аддитивная вероятностная мера, заданная на
+            алгебре $\mathcal{A}$. Следующие утверждения эквивалентны:
+            <ol>
+              <li>
+                Вероятностная мера $P$ &mdash; счётно-аддитивная.
+              </li>
+
+              <li>
+                Конечно-аддитивная вероятностная мера $P$ непрерывна
+                &laquo;сверху&raquo;, т.е. для любой последовательности множеств
+                $\set{ A_n }_{n=1}^\infty$ такой, что
+                \[
+                A_n \in \mathcal{A},
+                \qquad \bigcup_{i=1}^\infty A_i \in \mathcal{A},
+                \qquad A_n \subset A_{n+1},
+                \]
+                выполняется
+                \[
+                P(A_n) \limto{n \to \infty} P\paren{ \bigcup_{i=1}^\infty A_i }.
+                \]
+              </li>
+
+              <li>
+                Конечно-аддитивная вероятностная мера $P$ непрерывна
+                &laquo;снизу&raquo;, т.е. для любой последовательности множеств
+                $\set{ A_n }_{n=1}^\infty$ такой, что
+                \[
+                A_n \in \mathcal{A},
+                \qquad \bigcap_{i=1}^\infty A_i \in \mathcal{A},
+                \qquad A_n \supset A_{n+1},
+                \]
+                выполняется
+                \[
+                P(A_n) \limto{n \to \infty} P\paren{ \bigcap_{i=1}^\infty A_i }.
+                \]
+              </li>
+
+              <li>
+                Конечно-аддитивная вероятностная мера $P$ &laquo;непрерывна в
+                нуле&raquo;, т.е. для любой последовательности событий
+                $\set{ A_i }_{i=1}^\infty$ такой, что
+                \[
+                A_n \in \mathcal{A},
+                \qquad \bigcap_{i=1}^\infty A_i = \varnothing,
+                \qquad A_n \supset A_{n+1},
+                \]
+                выполняется
+                \[
+                P(A_n) \limto{n \to \infty} 0.
+                \]
+              </li>
+            </ol>
+
+            <div class="derivation">
+              <div class="plan">
+                Покажем, что
+                \[
+                1 \implies 2 \implies 3 \implies 4 \implies 1.
+                \]
+              </div>
+
+              <ul>
+                <li>
+                  $1 \implies 2$.
+                  <br>
+                  Пусть $P$ &mdash; счётно-аддитивная. Рассмотрим произвольную
+                  последовательность событий $\set{A_i}_{i=1}^\infty$ такую, что
+                  выполнены все требования 2 пункта теоремы. Определим систему
+                  событий
+                  \[
+                  \begin{aligned}
+                  D_1 &= A_1, \\
+                  D_2 &= A_2 \setminus A_1, \\
+                  &\dots \\
+                  D_k &= A_k \setminus A_{k-1},
+                  &\dots
+                  \end{aligned}
+                  \]
+                  Очевидно, что
+                  \[
+                  D_i \cap D_j = \varnothing, \quad i \neq j,
+                  \]
+                  и имеет место равенство
+                  \[
+                  \bigcup_{i=1}^\infty A_i = \bigcup_{i=1}^\infty D_i.
+                  \]
+                  Вычислим вероятность события $\bigcup_{i=1}^\infty A_i$.
+                  Очевидно следующие равенства:
+                  \[
+                  P\paren{ \bigcup_{i=1}^\infty A_i }
+                  = \sum_{i=1}^\infty P(D_i)
+                  = \lim\limits_{n \to \infty} P(A_n).
+                  \]
+                </li>
+
+                <li>
+                  $2 \implies 3$
+                  <br>
+                  Рассмотрим последовательность событий $\set{A_n}$, для которой
+                  выполнены требования 3 пункта, тогда для последовательности
+                  $\set{ \overline{A}_n }$ выполнено
+                  \[
+                  \overline{A}_n \subset \overline{A}_{n+1},
+                  \qquad
+                  \bigcup_{i=1}^\infty \overline{A}_i
+                  = \overline{ \bigcap_{i=1}^\infty A_i } \in \mathcal{A}.
+                  \]
+
+                  Согласно пункту 2 имеет место сходимость:
+                  \[
+                  P(A_n) \limto{n \to \infty}
+                  P\paren{ \bigcup_{i=1}^\infty A_i },
+                  \]
+                  или, иначе,
+                  \[
+                  P(\overline{A}_n) \limto{n \to \infty}
+                  P\paren{ \overline{ \bigcap_{i=1}^\infty A_i } },
+                  \]
+                  что эквивалентно сходимости
+                  \[
+                  1 - P(A_n) \limto{n \to \infty}
+                  1 - P\paren{ \bigcap_{i=1}^\infty A_i },
+                  \]
+                  откуда следует утверждение 3 теоремы:
+                  \[
+                  P(A_n) \limto{n \to \infty}
+                  P\paren{ \bigcap_{i=1}^\infty A_i }.
+                  \]
+                </li>
+
+                <li>
+                  $3 \implies 4$, так как 4 является частным случаем 3.
+                </li>
+
+                <li>
+                  $4 \implies 1$
+                  <br>
+                  Рассмотрим произвольную последовательность
+                  $\set{ B_n }_{n=1}^\infty$ такую, что
+                  \[
+                  B_n \in \mathcal{A},
+                  \qquad B_i \cap B_j = \varnothing, \quad i \neq j,
+                  \qquad \bigcup_{n=1}^\infty B_n \in \mathcal{A}.
+                  \]
+
+                  Очевидно, что
+                  \[
+                  \bigcup_{n=1}^\infty B_n
+                  = \bigcup_{n=1}^k B_n + \bigcup_{n=k+1}^\infty B_n.
+                  \]
+                  Так как
+                  \[
+                  \bigcup_{n=1}^\infty B_n \in \mathcal{A},
+                  \qquad
+                  \bigcup_{n=1}^k B_n \in \mathcal{A},
+                  \]
+                  то
+                  \[
+                  \bigcup_{n=k+1}^\infty B_n \in \mathcal{A}.
+                  \]
+                  Из того, что $P$ &mdash; конечно-аддитивная мера, следует
+                  равенство
+                  \[
+                  P\paren{ \bigcup_{n=1}^\infty B_n }
+                  = \sum_{n=1}^k P(B_n) +
+                  P\paren{ \bigcup_{n=k+1}^\infty B_n }.
+                  \]
+
+                  Покажем, что
+                  \[
+                  \lim_{k \to \infty} P \paren{ \bigcup_{l=k+1}^\infty B_l }
+                  = 0.
+                  \]
+                  Пусть
+                  \[
+                  \bigcup_{l=k+1}^\infty B_l = A_{k+1}.
+                  \]
+                  Очевидно, что $A_n \supset A_{n+1}$. Если
+                  \[
+                  \bigcap_{k=1}^\infty A_{k+1} = \varnothing,
+                  \]
+                  то получаем, что из 4 следует 1 утвердждение теоремы.
+                  Предположим теперь, что
+                  \[
+                  \bigcap_{k=1}^\infty A_{k+1} \neq \varnothing,
+                  \]
+                  т.е. существует
+                  $\tilde\omega \in \bigcap_{k=1}^\infty A_{k+1}$.
+                  Следовательно, $\tilde\omega \in A_n$ для всех $n$, или
+                  \[
+                  \tilde\omega \in \bigcup_{l=n}^\infty B_l,
+                  \]
+                  но это означает, что $\tilde\omega$ должна принадлежать по
+                  крайней мере одному множеству из объединения, но так как эти
+                  множества попарно непересекаются, то $\tilde\omega$ должно
+                  принадлежать какому-то одному множеству:
+                  \[
+                  \tilde\omega \in B_i
+                  \quad \mbox{ и } \quad
+                  \tilde\omega \not\in B_j, \quad j \gt i,
+                  \]
+                  из чего следует, что $\tilde\omega \not\in A_j$ &mdash;
+                  получили противоречие, т.к. $\tilde\omega \in A_j$ для всех
+                  $j$. Значит, предположение
+                  \[
+                  \bigcap_{k=1}^\infty A_{k+1} \neq \varnothing
+                  \]
+                  неверно.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Классическое определение вероятности. Урновые схемы
+        </div>
+        <div class="content">
+          <div class="images">
+            <img src="images/05-01.png" alt="pic">
+          </div>
+
+          <div class="theorem">
+            <div class="images">
+              <img src="images/05-02.png" alt="pic">
+            </div>
+
+            <div class="proof">
+              <div class="images">
+                <img src="images/05-03.png" alt="pic">
+                <img src="images/05-04.png" alt="pic">
+                <img src="images/05-05.png" alt="pic">
+              </div>
+            </div>
+          </div>
+
+          <div class="definition">
+            <i>Урновые схемы</i>:
+
+            <div class="images">
+              <img src="images/05-06.png" alt="pic">
+              <img src="images/05-07.png" alt="pic">
+              <img src="images/05-08.png" alt="pic">
+              <img src="images/05-09.png" alt="pic">
+              <img src="images/05-10.png" alt="pic">
+              <img src="images/05-11.png" alt="pic">
+              <img src="images/05-12.png" alt="pic">
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Геометрические вероятности. Задача о встрече. Задача Бюффона
+        </div>
+        <div class="content">
+          <div class="images">
+            <img src="images/06-01.png" alt="pic">
+          </div>
+
+          <div class="remark">
+            <div class="images">
+              <img src="images/06-02.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="images">
+            <img src="images/06-03.png" alt="pic">
+          </div>
+
+          <div class="problem">
+            <div class="images">
+              <img src="images/06-04.png" alt="pic">
+            </div>
+
+            <div class="solution">
+              <div class="images">
+                <img src="images/06-05.png" alt="pic">
+                <img src="images/06-06.png" alt="pic">
+              </div>
+            </div>
+          </div>
+
+          <div class="problem">
+            <div class="images">
+              <img src="images/06-07.png" alt="pic">
+            </div>
+
+            <div class="solution">
+              <div class="images">
+                <img src="images/06-08.png" alt="pic">
+                <img src="images/06-09.png" alt="pic">
+                <img src="images/06-10.png" alt="pic">
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Геометрические вероятности. Парадокс Бертрана
+        </div>
+        <div class="content">
+          <div class="images">
+            <img src="images/07-01.png" alt="pic">
+          </div>
+
+          <div class="remark">
+            <div class="images">
+              <img src="images/07-02.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="images">
+            <img src="images/07-03.png" alt="pic">
+          </div>
+
+          <div class="problem">
+            <div class="images">
+              <img src="images/07-04.png" alt="pic">
+              <img src="images/07-05.png" alt="pic">
+            </div>
+
+            <div class="solution">
+              <div class="images">
+                <img src="images/07-06.png" alt="pic">
+                <img src="images/07-07.png" alt="pic">
+                <img src="images/07-08.png" alt="pic">
+                <img src="images/07-09.png" alt="pic">
+                <img src="images/07-10.png" alt="pic">
+                <img src="images/07-11.png" alt="pic">
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Условные вероятности. Независимость событий
+        </div>
+        <div class="content">
+          <h4 class="subtitle">Условные вероятности</h4>
+
+          <div class="images">
+            <img src="images/08-01.png" alt="pic">
+            <img src="images/08-02.png" alt="pic">
+          </div>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/08-03.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="images">
+            <img src="images/08-04.png" alt="pic">
+            <img src="images/08-05.png" alt="pic">
+          </div>
+
+          <h4 class="subtitle">Независимость событий</h4>
+
+          <div class="images">
+            <img src="images/08-06.png" alt="pic">
+          </div>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/08-07.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="remark">
+            <div class="images">
+              <img src="images/08-08.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="remark">
+            <div class="images">
+              <img src="images/08-09.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/08-10.png" alt="pic">
+              <img src="images/08-11.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="images">
+              <img src="images/08-12.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/08-13.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="remark">
+            <div class="images">
+              <img src="images/08-14.png" alt="pic">
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Формула полной вероятности. Формулы Байеса
+        </div>
+        <div class="content">
+          <div class="images">
+            <img src="images/09-01.png" alt="pic">
+            <img src="images/09-02.png" alt="pic">
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Схема Бернулли. Биномиальное и полиномиальное распределения
+        </div>
+        <div class="content">
+          <div class="images">
+            <img src="images/10-01.png" alt="pic">
+            <img src="images/10-02.png" alt="pic">
+            <img src="images/10-03.png" alt="pic">
+            <img src="images/10-04.png" alt="pic">
+          </div>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/10-05.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="images">
+            <img src="images/10-06.png" alt="pic">
+            <img src="images/10-07.png" alt="pic">
+          </div>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/10-08.png" alt="pic">
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Схема Бернулли. Теорема Пуассона
+        </div>
+        <div class="content">
+          <div class="images">
+            <img src="images/11-01.png" alt="pic">
+          </div>
+
+          <div class="theorem">
+            <div class="images">
+              <img src="images/11-02.png" alt="pic">
+            </div>
+
+            <div class="proof">
+              <div class="images">
+                <img src="images/11-03.png" alt="pic">
+              </div>
+            </div>
+          </div>
+
+          <div class="remark">
+            <div class="images">
+              <img src="images/11-04.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="remark">
+            <div class="images">
+              <img src="images/11-05.png" alt="pic">
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Локальная и интегральная теоремы Муавра-Лапласа (без док-ва
+          интегральной теоремы)
+        </div>
+        <div class="content">
+          <div class="images">
+            <img src="images/12-01.png" alt="pic">
+          </div>
+
+          <div class="theorem">
+            <div class="images">
+              <img src="images/12-02.png" alt="pic">
+            </div>
+
+            <div class="remark">
+              <div class="images">
+                <img src="images/12-03.png" alt="pic">
+              </div>
+            </div>
+
+            <div class="proof">
+              <div class="images">
+                <img src="images/12-04.png" alt="pic">
+                <img src="images/12-05.png" alt="pic">
+                <img src="images/12-06.png" alt="pic">
+              </div>
+            </div>
+          </div>
+
+          <div class="remark">
+            <div class="images">
+              <img src="images/12-07.png" alt="pic">
+              <img src="images/12-08.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/12-09.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/12-10.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="theorem">
+            <div class="images">
+              <img src="images/12-11.png" alt="pic">
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Схема Бернулли. Закон больших чисел Бернулли
+        </div>
+        <div class="content">
+          <div class="theorem">
+            <div class="images">
+              <img src="images/13-01.png" alt="pic">
+            </div>
+
+            <div class="proof">
+              <div class="images">
+                <img src="images/13-02.png" alt="pic">
+                <img src="images/13-03.png" alt="pic">
+              </div>
+
+              Теорема 3.2 &mdash; интегральная теорема Муавра-Лапласа.
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Последовательности зависимых испытаний. Цепи Маркова
+        </div>
+        <div class="content">
+          <div class="images">
+            <img src="images/14-01.png" alt="pic">
+          </div>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/14-02.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="remark">
+            <div class="images">
+              <img src="images/14-03.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="remark">
+            <div class="images">
+              <img src="images/14-04.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="remark">
+            <div class="images">
+              <img src="images/14-05.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="images">
+            <img src="images/14-06.png" alt="pic">
+          </div>
+
+          <div class="example">
+            <div class="images">
+              <img src="images/14-07.png" alt="pic">
+              <img src="images/14-08.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/14-09.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="remark">
+            <div class="images">
+              <img src="images/14-10.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="lemma">
+            <div class="images">
+              <img src="images/14-11.png" alt="pic">
+              <img src="images/14-12.png" alt="pic">
+            </div>
+
+            <div class="proof">
+              <div class="images">
+                <img src="images/14-13.png" alt="pic">
+              </div>
+            </div>
+          </div>
+
+          <div class="images">
+            <img src="images/14-14.png" alt="pic">
+            <img src="images/14-15.png" alt="pic">
+          </div>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/14-16.png" alt="pic">
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Однородная цепь Маркова. Уравнение Чепмена-Колмогорова. Теорема о
+          предельных вероятностях для цепей Маркова (без док-ва)
+        </div>
+        <div class="content">
+          <div class="definition">
+            <div class="images">
+              <img src="images/15-01.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="images">
+            <img src="images/15-02.png" alt="pic">
+            <img src="images/15-03.png" alt="pic">
+          </div>
+
+          <div class="lemma">
+            <div class="images">
+              <img src="images/15-04.png" alt="pic">
+            </div>
+
+            <div class="proof">
+              <div class="images">
+                <img src="images/15-05.png" alt="pic">
+              </div>
+            </div>
+          </div>
+
+          <div class="images">
+            <img src="images/15-06.png" alt="pic">
+          </div>
+
+          <div class="theorem">
+            <div class="images">
+              <img src="images/15-07.png" alt="pic">
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Полуалгебры. Теоремы о продолжении меры
+        </div>
+        <div class="content">
+          <div class="definition">
+            <div class="images">
+              <img src="images/16-01.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/16-02.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/16-03.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="images">
+            <img src="images/16-04.png" alt="pic">
+          </div>
+
+          <div class="theorem">
+            <div class="images">
+              <img src="images/16-05.png" alt="pic">
+            </div>
+
+            <div class="proof">
+              <div class="images">
+                <img src="images/16-06.png" alt="pic">
+              </div>
+            </div>
+          </div>
+
+          <div class="theorem">
+            <div class="images">
+              <img src="images/16-07.png" alt="pic">
+            </div>
+
+            <div class="proof">
+              <div class="images">
+                <img src="images/16-08.png" alt="pic">
+                <img src="images/16-09.png" alt="pic">
+              </div>
+            </div>
+          </div>
+
+          <div class="theorem">
+            <div class="images">
+              <img src="images/16-10.png" alt="pic">
+            </div>
+
+            <div class="proof">
+              <div class="images">
+                <img src="images/16-11.png" alt="pic">
+              </div>
+            </div>
+          </div>
+
+          <div class="remark">
+            <div class="images">
+              <img src="images/16-12.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="theorem">
+            <div class="images">
+              <img src="images/16-13.png" alt="pic">
+              <img src="images/16-14.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="remark">
+            <div class="images">
+              <img src="images/16-15.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/16-16.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="remark">
+            <div class="images">
+              <img src="images/16-17.png" alt="pic">
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Примеры измеримых пространств
+        </div>
+        <div class="content">
+          <div class="example">
+            <div class="images">
+              <img src="images/17-01.png" alt="pic">
+              <img src="images/17-02.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="images">
+              <img src="images/17-03.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="images">
+              <img src="images/17-04.png" alt="pic">
+              <img src="images/17-05.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="remark">
+            <div class="images">
+              <img src="images/17-06.png" alt="pic">
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Вероятностное пространство на числовой прямой. Функция распределения
+        </div>
+        <div class="content">
+          <div class="images">
+            <img src="images/18-01.png" alt="pic">
+          </div>
+
+          <h4 class="subtitle">Свойства функции распределения</h4>
+          <ol>
+            <li>
+              Пусть $x_1 \lt x_2$, тогда $F(x_1) \leqslant F(x_2)$; функция
+              $F(x)$ монотонно неубывающая.
+
+              <div class="derivation">
+                <div class="images">
+                  <img src="images/18-02.png" alt="pic">
+                </div>
+              </div>
+            </li>
+
+            <li>
+              В любой точке $y \in \mathbb{R}$ выполняется равенство:
+              \[
+              F(y+0) = F(y);
+              \]
+              функция непрерывна справа:
+              \[
+              \lim_{x \to y+0} F(x) = F(y);
+              \]
+              существует предел слева $\lim\limits_{x \to y-0} F(x)$, который
+              может не совпадать с $F(y)$.
+
+              <div class="derivation">
+                <div class="images">
+                  <img src="images/18-03.png" alt="pic">
+                </div>
+              </div>
+            </li>
+
+            <li>
+              Справедливы следующие равенства:
+              \[
+              \lim_{x \to \infty} F(x) = F(\infty) = 1,
+              \qquad
+              \lim_{x \to -\infty} F(x) = F(-\infty) = 0.
+              \]
+
+              <div class="derivation">
+                <div class="images">
+                  <img src="images/18-04.png" alt="pic">
+                </div>
+              </div>
+            </li>
+          </ol>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/18-05.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="theorem">
+            <div class="images">
+              <img src="images/18-06.png" alt="pic">
+            </div>
+
+            <div class="proof">
+              <div class="images">
+                <img src="images/18-07.png" alt="pic">
+                <img src="images/18-08.png" alt="pic">
+                <img src="images/18-09.png" alt="pic">
+                <img src="images/18-10.png" alt="pic">
+                <img src="images/18-11.png" alt="pic">
+                <img src="images/18-12.png" alt="pic">
+                <img src="images/18-13.png" alt="pic">
+              </div>
+
+              Теорема 1.4 &mdash; теорема о продолжении $\sigma$-конечной
+              счётно-аддитивной меры с алгебры на $\sigma$-алгебру.
+            </div>
+          </div>
+
+          <div class="remark">
+            <div class="images">
+              <img src="images/18-14.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="images">
+            <img src="images/18-15.png" alt="pic">
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Классификация вероятностных мер. Пример Кантора сингулярной функции
+          распределения
+        </div>
+        <div class="content">
+          <h4 class="subtitle">Дискретная вероятностная мера</h4>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/19-01.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="images">
+            <img src="images/19-02.png" alt="pic">
+          </div>
+
+          <h4 class="subtitle">Абсолютно непрерывная вероятностная мера</h4>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/19-03.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="images">
+            <img src="images/19-04.png" alt="pic">
+            <img src="images/19-05.png" alt="pic">
+          </div>
+
+          <div class="remark">
+            <div class="images">
+              <img src="images/19-06.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="remark">
+            <div class="images">
+              <img src="images/19-07.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/19-08.png" alt="pic">
+            </div>
+          </div>
+
+          <h4 class="subtitle">Сингулярная мера</h4>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/19-09.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/19-10.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="images">
+            <img src="images/19-11.png" alt="pic">
+          </div>
+
+          <div class="example">
+            <div class="images">
+              <img src="images/19-12.png" alt="pic">
+              <img src="images/19-13.png" alt="pic">
+              <img src="images/19-14.png" alt="pic">
+              <img src="images/19-15.png" alt="pic">
+              <img src="images/19-16.png" alt="pic">
+              <img src="images/19-17.png" alt="pic">
+              <img src="images/19-18.png" alt="pic">
+              <img src="images/19-19.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="theorem">
+            <div class="images">
+              <img src="images/19-20.png" alt="pic">
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Конечномерное вероятностное пространство
+        </div>
+        <div class="content">
+          <div class="images">
+            <img src="images/20-01.png" alt="pic">
+            <img src="images/20-02.png" alt="pic">
+          </div>
+
+          <ol>
+            <li>
+              Последовательно применим разностный оператор (каждый по своей
+              оси), тогда
+              \[
+              \Delta_{a_1,b_1}^{(1)}
+              \Delta_{a_2,b_2}^{(2)}
+              \cdots
+              \Delta_{a_n,b_n}^{(n)}
+              F(x_1, \dots, x_n) \geqslant 0,
+              \]
+              где $a_i \lt b_i, \; i = \overline{1,n}$.
+
+              <div class="derivation">
+                <div class="images">
+                  <img src="images/20-03.png" alt="pic">
+                </div>
+              </div>
+            </li>
+
+            <li>
+              Функция $F(x)$ непрерывна справа в любой точке по всем аргументам.
+              Для любого $y = (y_1, \dots, y_n)$ имеет место равенство:
+              \[
+              \lim_{\forall i: x_i \to y_i + 0} F(x_1, \dots, x_n)
+              = F(y_1, \dots, y_n).
+              \]
+
+              <div class="derivation">
+                <div class="images">
+                  <img src="images/20-04.png" alt="pic">
+                </div>
+              </div>
+            </li>
+
+            <li>
+              Справедливы утверждения:
+              \[
+              \lim_{\forall i: x_i \to +\infty} F(x_1, \dots, x_n) = 1
+              \]
+              и
+              \[
+              \lim_{\exists i: x_i \to -\infty} F(x_1, \dots, x_n) = 0,
+              \]
+              если существует $x_i \to -\infty$.
+
+              <div class="derivation">
+                <div class="images">
+                  <img src="images/20-05.png" alt="pic">
+                </div>
+              </div>
+            </li>
+          </ol>
+
+          <div class="definition">
+            Любая функция от $n$ аргументов, удовлетворяющая свойствам 1-3,
+            называется <i>функцией распределения в $\mathbb{R}^n$</i>.
+          </div>
+
+          <div class="theorem">
+            <div class="images">
+              <img src="images/20-06.png" alt="pic">
+            </div>
+
+            <div class="proof">
+              Доказательство аналогично доказательству соответствующей теоремы
+              на прямой.
+            </div>
+          </div>
+
+          <div class="remark">
+            <div class="images">
+              <img src="images/20-07.png" alt="pic">
+            </div>
+          </div>
+
+          <h4 class="subtitle">Классификация мер</h4>
+
+          <ol>
+            <li>
+              <i class="important">
+                Дискретная вероятностная мера
+              </i>
+
+              <div class="definition">
+                <div class="images">
+                  <img src="images/20-08.png" alt="pic">
+                  <img src="images/20-09.png" alt="pic">
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <i class="important">
+                Абсолютно непрерывная мера относительно меры Лебега
+              </i>
+
+              <div class="definition">
+                <div class="images">
+                  <img src="images/20-10.png" alt="pic">
+                </div>
+              </div>
+            </li>
+          </ol>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/20-11.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="remark">
+            <div class="images">
+              <img src="images/20-12.png" alt="pic">
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Распределения случайных величин
+        </div>
+        <div class="content">
+          <div class="definition">
+            <div class="images">
+              <img src="images/21-01.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="images">
+            <img src="images/21-02.png" alt="pic">
+          </div>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/21-03.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="proposition">
+            $P_\xi(\cdot)$ представляет собой вероятностную меру на борелевской
+            прямой $\paren{ \mathbb{R}, \mathcal{B}(\mathcal{R}) }$.
+
+            <div class="proof">
+              <div class="images">
+                <img src="images/21-04.png" alt="pic">
+                <img src="images/21-05.png" alt="pic">
+              </div>
+            </div>
+          </div>
+
+          <div class="remark">
+            <div class="images">
+              <img src="images/21-06.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/21-07.png" alt="pic">
+              <img src="images/21-08.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="remark">
+            <div class="images">
+              <img src="images/21-09.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="lemma">
+            <div class="images">
+              <img src="images/21-10.png" alt="pic">
+            </div>
+
+            <div class="proof">
+              <div class="images">
+                <img src="images/21-11.png" alt="pic">
+              </div>
+            </div>
+          </div>
+
+          <div class="remark">
+            <div class="images">
+              <img src="images/21-12.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/21-13.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="images">
+            <img src="images/21-14.png" alt="pic">
+          </div>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/21-15.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/21-16.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="images">
+            <img src="images/21-17.png" alt="pic">
+            <img src="images/21-18.png" alt="pic">
+          </div>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/21-19.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/21-20.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/21-21.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/21-22.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/21-23.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/21-24.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/21-25.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/21-26.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="definition">
+            <div class="images">
+              <img src="images/21-27.png" alt="pic">
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Свойство измеримости
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Случайные элементы со значениями в конечномерном пространстве
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Функции распределения в конечномерных пространствах
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Независимые случайные величины. Критерии независимости случайных
+          величин
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение и свойства линейности и положительности математического
+          ожидания как интеграла Лебега
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Свойства математического ожидания как интеграла Лебега (кроме свойств
+          линейности и положительности)
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Предельный переход под знаком интеграла Лебега
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Лемма Фату. Теорема Лебега о мажорируемой сходимости
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема о замене переменной под знаком интеграла Лебега. Следствия
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Формулы для вычисления математических ожиданий
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Моменты случайных величин. Дисперсия
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Неравенство Чебышёва. Другие неравенства
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Ковариация, корреляция
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <h2 class="subtitle">6 семестр</h2>
+
+      <li class="question">
+        <div class="name">
+          Условные математические ожидания простых случайных величин
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Условные математические ожидания произвольных случайных величин
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Многомерное нормальное распределение
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Виды сходимостей последовательностей случайных величин (все
+          определения)
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Иерархия видов сходимостей. Теорема и пример
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение сходимости почти наверное и фундаментальности с
+          вероятностью единица. Критерий сходимости почти наверное (без док-ва)
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Лемма Бореля-Кантелли (док-во первого пункта)
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение сходимости по распределению, сходимости функции
+          распределения в основном. Эквивалентность этих сходимостей (без
+          док-ва). Теорема о сходимости в основном. Теорема о сходимости по
+          распределению к константе
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Комплексные случайные величины и их свойства
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Характеристические функции и их свойства
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Примеры характеристических функций
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Характеристические функции нормального распределения (одномерное и
+          многомерное)
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Метод характеристических функций в доказательстве предельных теорем
+          (док-во первого пункта)
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Закон больших чисел для сумм независимых одинаково распределённых
+          случайных величин. Следствие для схемы Бернулли
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Центральная предельная теорема для сумм независимых одинаково
+          распределённых случайных величин. Два следствия
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Неравенство Колмогорова, лемма Теплица. Лемма о сходимости ряда
+          случайных величин
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Лемма Кронекера. Усиленный закон больших чисел для сумм независимых
+          произвольно распределённых случайных величин
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Выборочное пространство
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Эмпирическая функция распределения. Предельная теорема для
+          эмпирической функции распределения
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема Гливенко-Кантелли
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Гистограмма. Описательная статистика
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Статистика хи-квадрат. Предельное распределение статистики хи-квадрат
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Критерий согласия Пирсона хи-квадрат
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Критерий согласия Колмогорова
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Свойства точечных оценок
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Методы построения точечных оценок. Метод моментов, примеры
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Методы построения точечных оценок. Метод максимального правдоподобия,
+          примеры
+        </div>
+        <div class="content">
+        </div>
+      </li>
+    </ol>
+  </body>
+</html>
+

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Теоретическая информатика &mdash; 06 &mdash; Билеты</title>
+
+    <link href="/assets/css/styles.css" rel="stylesheet">
+    <script defer src="/assets/js/core.js"></script>
+    <script defer src="/assets/js/tickets.js"></script>
+    <script defer src="/assets/js/controls.js"></script>
+
+    <link rel="stylesheet" href="/assets/katex/katex.min.css">
+    <script defer src="/assets/katex/katex.min.js"></script>
+    <script defer src="/assets/katex/auto-render.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false },
+            { left: '\\(', right: '\\)', display: false },
+            { left: '\\[', right: '\\]', display: true }
+          ],
+          // • rendering keys, e.g.:
+          throwOnError: false
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1 id="title">Теоретическая информатика &mdash; 06 &mdash; Билеты</h1>
+    <nav>
+      <a href="/">Домой</a>
+      <a href="..">Теоретическая информатика</a>
+      <a href="/links">Ссылки</a>
+      <a href="/about">Контакты</a>
+    </nav>
+
+    <div class="controls">
+      <button onclick="HideTickets()">Спрятать билеты</button>
+      <button onclick="ShowTickets()">Показать все билеты</button>
+      <button onclick="ShowRandomElement(HideTickets)">Показать случайный билет</button>
+    </div>
+
+    <ol id="tickets">
+      <li class="ticket">
+        <div class="name">
+          Основные понятия теории информации
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Энтропия. Определение и основные свойства
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Единственность определения функции энтропии
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Совместная энтропия, условная энтропия, взаимная информация. Свойства
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Кодирование сигналов. Основные определения
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Неравенство Крафта для префиксных кодов
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Оптимальное кодирование
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Неравенство Крафта-Макмиллана для однозначно декодируемых кодов
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Понятие информационной ёмкости канала. Примеры
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Передача информации по каналам с шумом. Основные определения
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Теорема Шеннона
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Задача кластеризации. Иерархические методы
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Задача кластеризации. Алгоритм $k$-средних
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Спектральная кластеризация. Постановка задачи
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Алгоритм спектральной кластеризации
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Метод опорных векторов для линейно разделимых выборок
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Метод опорных векторов с мягким зазором
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Задача линейной регрессии
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Сингулярное разложение матрицы
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Гребневая регрессия
+        </div>
+      </li>
+    </ol>
+  </body>
+</html>
+
+
+

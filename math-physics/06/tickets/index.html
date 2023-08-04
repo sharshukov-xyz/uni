@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>УМФ &mdash; 06 &mdash; Билеты</title>
+
+    <link href="/assets/css/styles.css" rel="stylesheet">
+    <script defer src="/assets/js/core.js"></script>
+    <script defer src="/assets/js/tickets.js"></script>
+    <script defer src="/assets/js/controls.js"></script>
+
+    <link rel="stylesheet" href="/assets/katex/katex.min.css">
+    <script defer src="/assets/katex/katex.min.js"></script>
+    <script defer src="/assets/katex/auto-render.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false },
+            { left: '\\(', right: '\\)', display: false },
+            { left: '\\[', right: '\\]', display: true }
+          ],
+          // • rendering keys, e.g.:
+          throwOnError: false
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1 id="title">УМФ &mdash; 06 &mdash; Билеты</h1>
+    <nav>
+      <a href="/">Домой</a>
+      <a href="/math-physics">УМФ</a>
+      <a href="/links">Ссылки</a>
+      <a href="/about">Контакты</a>
+    </nav>
+
+    <div class="controls">
+      <button onclick="HideTickets()">Спрятать билеты</button>
+      <button onclick="ShowTickets()">Показать все билеты</button>
+      <button onclick="ShowRandomElement(HideTickets)">
+        Показать случайный билет
+      </button>
+    </div>
+
+    <div style="display:none">
+      $\global\def\abs#1{\left\lvert #1 \right\rvert}$
+
+      $\global\def\dv#1#2{\frac{d #1}{d #2}}$
+      $\global\def\pd#1#2{\frac{\partial #1}{\partial #2}}$
+      $\global\def\pdv2#1#2{\frac{\partial^2 #1}{\partial #2^2}}$
+      $\global\def\ppdv#1#2#3{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
+
+      $\global\def\paren#1{\left( #1 \right)}$
+
+      $\global\def\mbox#1{\text{#1}}$
+
+      $\global\def\div{\text{div}\,}$
+      $\global\def\grad{\text{grad}\,}$
+      $\global\def\rot{\text{rot}\,}$
+
+      $\global\def\vb#1{\textbf{#1}}$
+
+      $\global\def\const{\text{const}\,}$
+      $\global\def\res{\text{res}\,}$
+      $\global\def\Res{\text{Res}\,}$
+      $\global\def\Re{\text{Re}\,}$
+      $\global\def\Im{\text{Im}\,}$
+      $\global\def\ch{\text{ch}\,}$
+      $\global\def\sh{\text{sh}\,}$
+      $\global\def\argtg{\text{argtg}\,}$
+    </div>
+
+    <ol id="tickets">
+      <li class="ticket">
+        <div class="name">
+          Метод разделения переменных для однородных гиперболических уравнений.
+          Теорема Стеклова
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Лемма и основная теорема метода разделения переменных для однородных
+          гиперболических уравнений
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Собственные числа, собственные функции задачи Штурма-Лиувилля, их
+          свойства
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Задача о свободных колебаниях прямоугольной мембраны
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Метод разделения переменных для неоднородных гиперболических
+          уравнений. Решение уравнения с ненулевыми начальными условиями
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Решение задачи для неоднородного гиперболического уравнения в общем
+          случае. Вынужденные колебания прямоугольной мембраны
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Метод разделения переменных для параболических уравнений. Неоднородное
+          параболическое уравнение
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Функция Грина решения неоднородного дифференциального уравнения в
+          частных производных
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Уравнение Лапласа. Фундаментальное решение. Замена переменных в
+          уравнении Лапласа
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Преобразования, не меняющие вида уравнения Лапласа
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Свойства гармонических функций. Интегральное представление
+          гармонической функции
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Формулы о среднем арифметическом гармонической функции. Принцип
+          экстремума гармонической функции
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Основные краевые задачи для уравнений эллиптического типа.
+          Единственность решения задачи Дирихле
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Функция Грина задачи Дирихле и её свойство симметрии
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Решение задачи Дирихле для шара
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Решение задачи Дирихле для полупространства
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Следствия из формулы Пуассона для шара (теоремы Лиувилля и Гарнака)
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Объёмный потенциал. Вывод уравнения Пуассона для объёмного потенциала
+          (без док-ва существования 1-х и 2-х производных)
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Решение задачи Дирихле для уравнения Пуассона при помощи функции Грина
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Интеграл Гаусса. Формула Гаусса
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Потенциал двойного слоя. Физическое истолкование. Разрыв потенциала
+          двойного слоя на поверхности интегрирования
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Непрерывность потенциала простого слоя и скачок его нормальной
+          производной
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Интегральные уравнения теории потенциала. Особенность решения внешней
+          задачи Дирихле
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Интегральное уравнение Фредгольма 2-го рода. Решение методом
+          проследовательных приближений
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Теоремы Фредгольма для интегральных уравнений с вырожденными ядрами
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Итерированное ядро и резольвента уравнения Фредгольма
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Альтернатива Фредгольма
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Понятие спектра ядра Фредгольма
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Применение теории Фредгольма к внутренней задаче Дирихле
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Применение теории Фредгольма к внутренней задаче Неймана
+        </div>
+      </li>
+    </ol>
+  </body>
+
+</html>

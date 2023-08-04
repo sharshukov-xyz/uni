@@ -76,6 +76,13 @@ function HideDerivations() {
   HideElements('derivation-toggle');
 }
 
+function HideExamples() {
+  HideElements('example-toggle');
+}
+function ShowExamples() {
+  ShowElements('example-toggle');
+}
+
 function ShowSubtitles() {
   var subtitles = document.getElementsByClassName("subtitle");
   Array.from(subtitles).map(function (subtitle) { subtitle.style.display = 'block'; });
@@ -138,6 +145,11 @@ function SetButtonsHandlers() {
   var derivations = document.getElementsByClassName('derivation');
   Array.from(derivations).map(function (derivation) {
     PrependButtonWithHandler(derivation, 'derivation-toggle', 'вывод');
+  });
+
+  var derivations = document.getElementsByClassName('example');
+  Array.from(derivations).map(function (derivation) {
+    PrependButtonWithHandler(derivation, 'example-toggle', 'пример');
   });
 }
 
@@ -216,6 +228,12 @@ function SetProofButtonHandlers() {
 
   var statements = document.getElementsByClassName('statement');
   Array.from(statements).map(CreateProofControls);
+
+  var propositions = document.getElementsByClassName('proposition');
+  Array.from(propositions).map(CreateProofControls);
+
+  var derivations = document.getElementsByClassName('derivation');
+  Array.from(derivations).map(CreateProofControls);
 }
 
 function AssignNumbersToTheorems() {
@@ -249,7 +267,8 @@ function init(elementsClass) {
   SetButtonsHandlers();
   SetProofButtonHandlers();
   AssignNumbersToTheorems();
-  HideDerivations();
+  // HideExamples();
+  // HideDerivations();
 
   var elements = document.getElementsByClassName(elementsClass);
   var nonEmptyQuestions = Array.from(elements).filter(function (element) {

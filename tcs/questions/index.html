@@ -1,0 +1,2551 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Теоретическая информатика &mdash; 06 &mdash; Вопросы</title>
+
+    <link href="/assets/css/styles.css" rel="stylesheet">
+    <script defer src="/assets/js/core.js"></script>
+    <script defer src="/assets/js/questions.js"></script>
+    <script defer src="/assets/js/controls.js"></script>
+
+    <link rel="stylesheet" href="/assets/katex/katex.min.css">
+    <script defer src="/assets/katex/katex.min.js"></script>
+    <script defer src="/assets/katex/auto-render.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false },
+            { left: '\\(', right: '\\)', display: false },
+            { left: '\\[', right: '\\]', display: true }
+          ],
+          // • rendering keys, e.g.:
+          throwOnError: false
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1 id="title">Теоретическая информатика &mdash; 06 &mdash; Вопросы</h1>
+    <nav>
+      <a href="/">Домой</a>
+      <a href="..">Теоретическая информатика</a>
+      <a href="/links">Ссылки</a>
+      <a href="/about">Контакты</a>
+    </nav>
+
+    <div class="controls">
+      <button onclick="HideQuestions()">Скрыть вопросы</button>
+      <button onclick="ShowQuestions()">Показать вопросы</button>
+      <button onclick="HideAnswers()">Скрыть ответы</button>
+      <button onclick="ShowAnswers()">Показать ответы</button>
+      <button onclick="HideExamples()">Скрыть примеры</button>
+      <button onclick="ShowExamples()">Показать примеры</button>
+      <button onclick="HideProofs()">Скрыть доказательства</button>
+      <button onclick="ShowProofs()">Показать доказательства</button>
+      <button onclick="ShowRandomElement(HideQuestions)">
+        Показать случайный вопрос
+      </button>
+    </div>
+
+    <div class="proof-type">
+      Показывать
+      <select id="select-proof-type" name="select-proof-type">
+        <option value="proofs">доказательства полностью</option>
+        <option value="ideas">только идеи доказательств</option>
+      </select>
+    </div>
+
+    <div style="display:none">
+      $\global\def\at#1#2{\left. #1 \right\rvert_{#2}}$
+      $\global\def\abs#1{\left\lvert #1 \right\rvert}$
+      $\global\def\norm#1{\left\lVert #1 \right\rVert}$
+      $\global\def\bvec#1{\mathbf{#1}}$
+      $\global\def\ceil#1{\left\lceil #1 \right\rceil}$
+      $\global\def\floor#1{\left\lfloor #1 \right\rfloor}$
+
+      $\global\def\limto#1{\underset{#1}{\longrightarrow}}$
+      $\global\def\prob#1{\mathbb{P} \left\{ #1 \right\}}$
+      $\global\def\mean#1{\mathbb{E} \left[ #1 \right]}$
+      $\global\def\disp#1{D \left[ #1 \right]}$
+
+      $\global\def\dp#1#2{\left\langle #1, #2 \right\rangle}$
+      <!-- $\global\def\dp#1#2{#1 \cdot #2\,}$ -->
+      $\global\def\vp#1#2{#1 \times #2\,}$
+
+      $\global\def\dv#1#2{\frac{d #1}{d #2}}$
+      $\global\def\rdv#1#2{\frac{d' #1}{d #2}}$ <!-- относительная производная -->
+      $\global\def\pd#1#2{\frac{\partial #1}{\partial #2}}$
+      $\global\def\pdv2#1#2{\frac{\partial^2 #1}{\partial #2^2}}$
+      $\global\def\pdvk#1#2#3{\frac{\partial^#1 #2}{\partial #3^#1}}$
+      $\global\def\ppdv#1#2#3{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
+
+      $\global\def\pois#1{\left\{ #1 \right\}}$
+      $\global\def\paren#1{\left( #1 \right)}$
+      $\global\def\bydef#1{\overset{\mathrm{def}}{#1}}$
+
+      $\global\def\mbox#1{\text{#1}}$
+
+      $\global\def\div{\text{div}\,}$
+      $\global\def\dsum{\displaystyle\sum\,}$
+      $\global\def\grad{\text{grad}\,}$
+      $\global\def\rot{\text{rot}\,}$
+
+      $\global\def\vb#1{\textbf{#1}}$
+
+      $\global\def\op#1{\mathrm{#1}\,}$
+
+      $\global\def\Im{\text{Im}\,}$
+      $\global\def\Res{\text{Res}\,}$
+      $\global\def\Re{\text{Re}\,}$
+      $\global\def\argtg{\text{argtg}\,}$
+      $\global\def\ch{\text{ch}\,}$
+      $\global\def\const{\text{const}\,}$
+      $\global\def\degree{\text{degree}\,}$
+      $\global\def\proj{\mathrm{proj}}$
+      $\global\def\diag{\mathrm{diag}}$
+      $\global\def\rank{\mathrm{rank}}$
+      $\global\def\avg{\mathrm{avg}}$
+      $\global\def\res{\text{res}\,}$
+      $\global\def\sh{\text{sh}\,}$
+      $\global\def\sign{\text{sign}\,}$
+      $\global\def\tg{\mathrm{tg}\,}$
+    </div>
+
+    <ol id="questions">
+      <li class="question">
+        <div class="name">
+          Определение: алфавит
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Алфавит</i> &mdash; произвольное конечное множество $X$.
+            <i>Длина алфавита</i> &mdash; мощность множества $X$ (обозначение:
+            $l(X)$).
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: энтропия (Хартли)
+        </div>
+        <div class="content">
+          <div class="definition">
+            Рассмотрим алфавит $X$ длины $n$. Величина
+            \[
+            H(n) = K \log_2 n
+            \]
+            называется <i>энтропией по Хартли</i>.
+
+            <div class="remark">
+              Константа $K$ отвечает за размерность.
+            </div>
+          </div>
+
+          <div class="remark">
+            Нетрудно видеть, что функция $H(n)$ обладает следующими свойствами:
+            <ol>
+              <li>
+                $H(1) = 0$, т.е. алфавитом из одного символа нельзя передавать
+                информацию.
+              </li>
+
+              <li>
+                $H(mn) = H(m) + H(n)$.
+              </li>
+            </ol>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: энтропия (Шеннон)
+        </div>
+        <div class="content">
+          <div class="definition">
+            Рассмотрим алфавит $X$ длины $N$. Пусть $x$ &mdash; случайная
+            величина, принимающая $N$ независимых случайных значений $x_i$ с
+            вероятностями $p_i$. Тогда величина
+            \[
+            H(x) = - K \sum_{i=1}^n p_i \log_2 p_i
+            \]
+            называется <i>энтропией по Шеннону</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Свойства энтропии
+        </div>
+        <div class="content">
+          Рассмотрим энтропию
+          \[
+          H(x) = - \sum_{i=1}^n p_i \log p_i.
+          \]
+          Она удовлетворяет следующим свойствам:
+          <ol>
+            <li>
+              $H(x) \leqslant \log n$, где $n$ &mdash; длина алфавита.
+
+              <div class="derivation">
+                Рассмотрим разницу:
+                \[
+                \begin{aligned}
+                H(x) - \log n
+                &= - \sum_{i=1}^n p_i \log p_i - \sum_{i=1}^n p_i \log n = \\
+                &= - \sum_{i=1}^n p_i \left[ \log p_i + \log n \right] = \\
+                &= \phantom{-} \sum_{i=1}^n p_i \log \frac{1}{p_i n}.
+                \end{aligned}
+                \]
+
+                Пользуясь свойством логарифма
+                \[
+                \log_a b = \frac{\log_c b}{\log_c a}
+                \implies
+                \log_c b = \log_c a \cdot \log_a b,
+                \]
+                получаем
+                \[
+                \sum_{i=1}^n p_i \log \frac{1}{p_i n}
+                =
+                \log e \cdot \sum_{i=1}^n p_i \ln \frac{1}{p_i n}.
+                \]
+
+                Известно, что
+                \[
+                \ln x \leqslant x - 1,
+                \]
+                поэтому
+                \[
+                \log e \cdot \sum_{i=1}^n p_i \ln \frac{1}{p_i n}
+                \leqslant
+                \log e \cdot \sum_{i=1}^n p_i \left[ \frac{1}{p_i n} - 1 \right]
+                =
+                \log e \cdot \sum_{i=1}^n \left[ \frac{1}{n} - p_i \right].
+                \]
+
+                Окончательно, учитывая, что
+                \[
+                \sum_{i=1}^n \frac{1}{n} = 1,
+                \qquad
+                \sum_{i=1}^n p_i = 1,
+                \]
+                имеем
+                \[
+                \log e \cdot \sum_{i=1}^n \left[ \frac{1}{n} - p_i \right] = 0,
+                \]
+                то есть
+                \[
+                H(x) - \log n \leqslant 0, \implies H(x) \leqslant \log n,
+                \]
+                причём равенство выполняется, если
+                \[
+                \frac{1}{p_i n} = 1, \implies p_i = \frac{1}{n}.
+                \]
+              </div>
+            </li>
+
+            <li>
+              $H(x) \geqslant 0$, причём равенство достигается, если
+              \[
+              \exists i \in \overline{1,n}: \quad p_i = 1.
+              \]
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Единственность определения функции энтропии
+        </div>
+        <div class="content">
+          Требования к функции энтропии:
+          <ol>
+            <li>
+              $H(p_1, \dots, p_n)$ определена и непрерывна для всех
+              $p_1, \dots, p_n$, причём
+              \[
+              \sum_{i=1}^n p_i = 1.
+              \]
+            </li>
+
+            <li>
+              В случае, когда все буквы равновероятны, увеличение количества
+              букв должно всегда увеличивать значение функции, то есть
+              \[
+              H
+              \underbrace{
+              \paren{
+              \frac{1}{n}, \dots, \frac{1}{n}
+              }
+              }_{n}
+              \lt
+              H
+              \underbrace{
+              \paren{
+              \frac{1}{n+1}, \dots, \frac{1}{n+1}
+              }
+              }_{n+1}.
+              \]
+            </li>
+
+            <li>
+              Должно быть выполнено соотношение
+              \[
+              H(p_1 q_1, \dots, p_1 q_m,
+              \dots,
+              p_n r_1, \dots, p_n r_s)
+              =
+              H(p_1, \dots, p_n) + p_1 H(q_1, \dots, q_m) + 
+              \cdots
+              + p_n H(r_1, \dots, r_s).
+              \]
+
+              <div class="example">
+                <div class="images">
+                  <img src="images/choice-decomposition.png" alt="pic">
+                </div>
+                В этом случае
+                \[
+                H\paren{ \frac{1}{2}, \frac{1}{3}, \frac{1}{6} }
+                =
+                H\paren{ \frac{1}{2}, \frac{1}{2} }
+                + \frac{1}{2} H\paren{ \frac{2}{3}, \frac{1}{3} }.
+                \]
+              </div>
+            </li>
+          </ol>
+
+          <div class="theorem">
+            Свойствам 1-3 удовлетворяет только функция
+            \[
+            H = -K \sum_{i=1}^n p_i \log p_i, \qquad K \gt 0.
+            \]
+
+            <div class="proof">
+              <p>
+              Пусть
+              \[
+              A(n) := H\paren{ \frac{1}{n}, \dots, \frac{1}{n} }.
+              \]
+              Рассмотрим некоторые $s \gt 1, m \in \mathbb{N}$. Из свойства 3
+              следует, что
+              \[
+              A(s^m) = m A(s).
+              \]
+              <!-- \[ -->
+              <!-- \begin{aligned} -->
+              <!-- A(s^m) &= A(s) + A(s^{m-1}) = \\ -->
+              <!-- &= A(s) + A(s) + A(s^{m-2}) = \cdots =\\ -->
+              <!-- &= m A(s). -->
+              <!-- \end{aligned} -->
+              <!-- \] -->
+              Аналогично, для некоторых $t \gt 1, n \in \mathbb{N}$
+              \[
+              A(t^n) = n A(t).
+              \]
+              </p>
+
+              <p>
+              Для любого $n \in \mathbb{N}$ всегда найдётся $m \in \mathbb{N}$
+              такой, что
+              \[
+              s^m \leqslant t^n \lt s^{m+1}.
+              \]
+              Преобразуем эти неравенства: возьмём логарифм
+              \[
+              m \log s \leqslant n \log t \lt (m+1) \log s
+              \]
+              и поделим на $n \log s$:
+              \[
+              \frac{m}{n}
+              \leqslant \frac{\log t}{\log s}
+              \lt \frac{m}{n} + \frac{1}{n}.
+              \]
+              Очевидно, что
+              \[
+              \frac{m}{n} - \frac{1}{n}
+              \lt \frac{\log t}{\log s}
+              \lt \frac{m}{n} + \frac{1}{n},
+              \]
+              откуда следует, что
+              \[
+              \abs{
+              \frac{\log t}{\log s} - \frac{m}{n}
+              } \lt \varepsilon
+              \]
+              для любого $\varepsilon \gt 0$.
+              </p>
+
+              <p>
+              Из монотонности $A(n)$ следует, что
+              \[
+              \begin{gathered}
+              A(s^m) \leqslant A(t^n) \lt A(s^{m+1}), \\
+              m A(s) \leqslant n A(t) \lt (m+1) A(s).
+              \end{gathered}
+              \]
+              Поделим на $n A(s)$:
+              \[
+              \frac{m}{n}
+              \leqslant \frac{A(t)}{A(s)}
+              \lt \frac{m}{n} + \frac{1}{n},
+              \]
+              или
+              \[
+              \abs{
+              \frac{m}{n} - \frac{A(t)}{A(s)}
+              } \lt \varepsilon,
+              \]
+              откуда окончательно получаем, что
+              \[
+              \abs{
+              \frac{A(t)}{A(s)} - \frac{\log t}{\log s}
+              } \lt 2 \varepsilon,
+              \]
+              то есть
+              \[
+              A(t) = K \log t,
+              \]
+              причём $K \gt 0$ для выполнения условия 2.
+              </p>
+
+              <p>
+              Предположим теперь, что вероятность появления $i$-ой буквы равна
+              \[
+              p_i = \frac{n_i}{\sum_{j=1}^n n_j}, \qquad n_i \in \mathbb{Z}.
+              \]
+              Разобьём выбор из $\sum n_j$ букв на два этапа:
+              </p>
+
+              <ul>
+                <li>
+                  выбор из $n$ вариантов с вероятностями $p_1, \dots, p_n$;
+                </li>
+
+                <li>
+                  пусть выбрали $p_i$, тогда выбираем из $n_i$ равновероятных
+                  вариантов.
+                </li>
+              </ul>
+
+              <p>
+              Математически это можно записать в виде
+              \[
+              K \log \sum_{j=1}^n n_j
+              = H(p_1, \dots, p_n) + \sum_{j=1}^{n} p_j \cdot K \log n_j.
+              \]
+              Выразим из этого равенства функцию $H$:
+              \[
+              \begin{aligned}
+              H(p_1, \dots, p_n)
+              &= K
+              \left[
+              \sum_{j=1}^n p_j \log \sum_{k=1}^n n_k
+              - \sum_{j=1}^n p_j \log n_j
+              \right] = \\
+              &= -K \sum_{j=1}^n p_j \log \frac{n_j}{\sum_{k=1}^n n_k} = \\
+              &= -K \sum_{j=1}^n p_j \log p_j, & p_j \in \mathbb{Q}.
+              \end{aligned}
+              \]
+              </p>
+
+              <p>
+              Если же $p_j \in \mathbb{R}$, то их можно сколь угодно хорошо
+              приблизить рациональными числами, и в силу непрерывности функции
+              $H(p_1, \dots, p_n)$ выполняется то же равенство
+              \[
+              H(p_1, \dots, p_n) = -K \sum_{j=1}^n p_j \log p_j.
+              \]
+              </p>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: совместная энтропия
+        </div>
+        <div class="content">
+          Рассмотрим два источника сигнала: $X$ и $Y$. Обозначим за
+          \[
+          p(x,y) = p(x | y) p(y)
+          \]
+          вероятность появления пары $(x,y)$.
+
+          <div class="definition">
+            Величина
+            \[
+            H(X, Y) = - \sum_{x \in X} \sum_{y \in Y} p(x,y) \log p(x,y)
+            \]
+            называется <i>совместной энтропией</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: условная энтропия
+        </div>
+        <div class="content">
+          <div class="definition">
+            Величину
+            \[
+            H(X|Y) = -\sum_{x \in X} \sum_{y \in Y} p(x,y) \log p(x|y)
+            \]
+            называют <i>условной энтропией</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Свойство условной энтропии
+        </div>
+        <div class="content">
+          <div class="proposition">
+            \[
+            H(X|Y) \leqslant H(X),
+            \]
+            причём равенство достигается только тогда, когда $X,Y$ &mdash;
+            независимые сигналы.
+
+            <div class="proof">
+              Рассмотрим разницу
+              \[
+              H(X|Y) - H(X) = - \sum_{x \in X} \sum_{y \in Y} p(x,y) \log p(x|y)
+              + \sum_{x \in X} p(x) \log p(x).
+              \]
+              Так как
+              \[
+              p(x) = \sum_{y \in Y} p(x|y) p(y) = \sum_{y \in Y} p(x,y),
+              \]
+              то
+              \[
+              \begin{aligned}
+              H(X|Y) - H(X)
+              &= - \sum_{x \in X} \sum_{y \in Y} p(x,y) \log p(x|y)
+              + \sum_{x \in X} p(x) \log p(x) = \\
+              &= - \sum_{x \in X} \sum_{y \in Y} p(x,y) \log p(x|y)
+              + \sum_{x \in X} \sum_{y \in Y} p(x,y) \log p(x) = \\
+              &= \sum_{x \in X} \sum_{y \in Y} p(x,y)
+              \left[
+              \log p(x) - \log p(x|y)
+              \right] = \\
+              &= \sum_{x \in X} \sum_{y \in Y} p(x,y) \log \frac{p(x)}{p(x|y)}.
+              \end{aligned}
+              \]
+              Заметим, что если $X, Y$ &mdash; независимые величины, то
+              $p(x|y) = p(x)$ и
+              \[
+              H(X|Y) - H(X) = 0, \implies H(X|Y) = H(X).
+              \]
+
+              Пусть $X,Y$ &mdash; зависимые величины. Воспользуемся свойствами
+              \[
+              \log_a b = \log_a c \cdot \log_c b
+              \quad \mbox{ и } \quad
+              \ln x \leqslant x - 1;
+              \]
+              имеем
+              \[
+              \begin{aligned}
+              H(X|Y) - H(X)
+              &= \sum_{x \in X} \sum_{y \in Y} p(x,y) \log \frac{p(x)}{p(x|y)}
+              = \\
+              &= \log e \sum_{x \in X} \sum_{y \in Y} p(x,y)
+              \ln \frac{p(x)}{p(x|y)} \leqslant \\
+              &\leqslant \log e \sum_{x \in X} \sum_{y \in Y} p(x,y) \paren{
+              \frac{p(x)}{p(x|y)} - 1
+              } = \\
+              &= \log e \sum_{x \in X} \sum_{y \in Y} \paren{
+              p(y) p(x) - p(x,y)
+              } = \\
+              &= \log e \cdot (1 - 1) = 0,
+              \end{aligned}
+              \]
+              откуда и следует, что
+              \[
+              H(X|Y) \leqslant H(X).
+              \]
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Задача: выразить совместную энтропию через условную
+        </div>
+        <div class="content">
+          <div class="theorem">
+            Справедливо равенство
+            \[
+            H(X,Y) = H(X) + H(Y|X).
+            \]
+
+            <div class="proof">
+              По определению совместной энтропии
+              \[
+              H(X, Y) = - \sum_{x \in X} \sum_{y \in Y} p(x,y) \log p(x,y).
+              \]
+              Так как
+              \[
+              p(x,y) = p(x) p(y|x),
+              \]
+              то
+              \[
+              \begin{aligned}
+              H(X, Y)
+              &= - \sum_{x \in X} \sum_{y \in Y} p(x,y) \log p(x,y) = \\
+              &= - \sum_{x \in X} \sum_{y \in Y} p(x,y) \left[
+              \log p(x) + \log p(y|x)
+              \right] = \\
+              &= - \sum_{x \in X} \sum_{y \in Y} p(x,y) \log p(x)
+              - \sum_{x \in X} \sum_{y \in Y} p(x,y) \log p(y|x).
+              \end{aligned}
+              \]
+
+              Используя равенство
+              \[
+              \begin{gathered}
+              \sum_{y \in Y} p(x,y) = p(x), \\
+              \implies 
+              H(X) = - \sum_{x \in X} p(x) \log p(x)
+              = - \sum_{x \in X} \sum_{y \in Y} p(x,y) \log p(x),
+              \end{gathered}
+              \]
+              а также определение условной энтропии
+              \[
+              H(Y|X) \bydef= - \sum_{x \in X} \sum_{y \in Y} p(x,y) \log p(y|x),
+              \]
+              окончательно получаем, что
+              \[
+              H(X,Y) = H(X) + H(Y|X).
+              \]
+            </div>
+          </div>
+
+          <div class="corollary">
+            \[
+            H(X,Y) \leqslant H(X) + H(Y),
+            \]
+            причём равенство достигается только тогда, когда $X,Y$ &mdash;
+            независимые величины.
+
+            <div class="proof">
+              Действительно, известно свойство условной энтропии:
+              \[
+              H(Y|X) \leqslant H(Y),
+              \]
+              причём равенство достигается только тогда, когда $X,Y$ &mdash;
+              независимые величины.
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: взаимная информация
+        </div>
+        <div class="content">
+          <div class="definition">
+            Величину
+            \[
+            I(X,Y) = \sum_{x \in X} \sum_{y \in Y} p(x,y)
+            \log \frac{p(x,y)}{p(x) p(y)}
+            \]
+            называют <i>взаимной информацией</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Чему равна взаимная информация двух независимых величин $X$ и $Y$?
+        </div>
+        <div class="content">
+          <div class="answer">
+            Взаимная информация двух независимых величин равна нулю.
+
+            <div class="solution">
+              По определению взаимной информации
+              \[
+              \begin{aligned}
+              I(X,Y) &= \sum_{x \in X} \sum_{y \in Y} p(x,y)
+              \log \frac{p(x,y)}{p(x) p(y)} = \\
+              &= \sum_{x \in X} \sum_{y \in Y} p(x,y) \log \frac{p(y|x)}{p(y)},
+              \end{aligned}
+              \]
+              но для независимых случайных величин $p(y|x) = p(y)$, поэтому
+              \[
+              \begin{aligned}
+              I(X,Y)
+              &= \sum_{x \in X} \sum_{y \in Y}
+              p(x,y) \log \frac{p(y|x)}{p(y)} = \\
+              &= \sum_{x \in X} \sum_{y \in Y}
+              p(x,y) \log \frac{p(y)}{p(y)} = \\
+              &= 0.
+              \end{aligned}
+              \]
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Задача: выразить совместную энтропию через взаимную информацию
+        </div>
+        <div class="content">
+          <div class="proposition">
+            Справедливо равенство
+            \[
+            H(X,Y) = H(X) + H(Y) - I(X,Y).
+            \]
+
+            <div class="proof">
+              По определению взаимной информации
+              \[
+              I(X,Y) = \sum_{x \in X} \sum_{y \in Y} p(x,y)
+              \log \frac{p(x,y)}{p(x) p(y)}.
+              \]
+              Пользуясь равенством
+              \[
+              p(x,y) = p(y|x) p(x),
+              \]
+              запишем
+              \[
+              \begin{aligned}
+              I(X,Y)
+              &= \sum_{x \in X} \sum_{y \in Y} p(x,y)
+              \log \frac{p(x,y)}{p(x) p(y)} = \\
+              &= \sum_{x \in X} \sum_{y \in Y} p(x,y)
+              \log \frac{p(y|x)}{p(y)} = \\
+              &= \sum_{x \in X} \sum_{y \in Y} p(x,y) \log p(y|x)
+              - \sum_{x \in X} \sum_{y \in Y} p(x,y) \log p(y).
+              \end{aligned}
+              \]
+              Из равенства
+              \[
+              \begin{gathered}
+              \sum_{x \in X} p(x,y) = p(y), \\
+              \implies
+              H(Y)
+              = - \sum_{y \in Y} p(y) \log p(y)
+              = - \sum_{x \in X} \sum_{y \in Y} p(x,y) \log p(y),
+              \end{gathered}
+              \]
+              а также из определения условной энтропии
+              \[
+              H(Y|X) \bydef
+              = - \sum_{x \in X} \sum_{y \in Y} p(x,y) \log p(y|x)
+              \]
+              следует, что
+              \[
+              I(X,Y) = H(Y) - H(Y|X).
+              \]
+
+              Аналогичные рассуждения можно провести, заметив, что
+              \[
+              p(x,y) = p(x|y) p(y);
+              \]
+              тогда получим, что
+              \[
+              I(X,Y) = H(X) - H(X|Y).
+              \]
+
+              <div class="remark">
+                Заметим, что из свойства условной энтропии
+                \[
+                H(X|Y) \leqslant H(X)
+                \]
+                следует, что $I(X,Y) \geqslant 0$, причём равенство достигается,
+                когда $X,Y$ &mdash; независимые величины.
+              </div>
+
+              Используя равенства
+              \[
+              H(X,Y) = H(X) + H(Y|X), \qquad
+              H(X,Y) = H(Y) + H(X|Y),
+              \]
+              получаем, что
+              \[
+              I(X,Y) = H(X) + H(Y) - H(X,Y).
+              \]
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: код
+        </div>
+        <div class="content">
+          Рассмотрим два алфавита: исходный $X$ и для кодирования $D$. Обозначим
+          множество всех слов алфавита $D$ как
+          \[
+          D^* := \bigcup_{k=1}^\infty D^k,
+          \]
+          где $D^k$ &mdash; все слова длины $k$.
+
+          <div class="definition">
+            Отображение
+            \[
+            C: X \to D^*
+            \]
+            называют <i>кодом</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: сингулярный (вырожденный) код
+        </div>
+        <div class="content">
+          <div class="definition">
+            Код
+            \[
+            C: X \to D^*
+            \]
+            называют <i>сингулярным (вырожденным)</i>, если
+            \[
+            \exists x_1, x_2 \in X: \qquad C(x_1) = C(x_2).
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: невырожденный код
+        </div>
+        <div class="content">
+          <div class="definition">
+            Код
+            \[
+            C: X \to D^*
+            \]
+            называют <i>невырожденным</i>, если
+            \[
+            \forall x_1, x_2 \in X:
+            \qquad x_1 \neq x_2 \implies C(x_1) \neq C(x_2).
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: расширение кода
+        </div>
+        <div class="content">
+          <div class="definition">
+            Код
+            \[
+            C^*: X^* \to D^*
+            \]
+            называют <i>расширением</i> кода
+            \[
+            C: X \to D^*,
+            \]
+            если
+            \[
+            C^*(x_1, \dots, x_n) = C(x_1) \cdots C(x_2),
+            \]
+            где справа стоит конкатенация.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Когда говорят, что код допускает однозначное декодирование?
+        </div>
+        <div class="content">
+          <div class="answer">
+            Говорят, что код
+            \[
+            C: X \to D^*
+            \]
+            <i>допускает однозначное декодирование</i>, если его расширение
+            $C^*$ невырождено.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: префиксный код
+        </div>
+        <div class="content">
+          <div class="definition">
+            Код
+            \[
+            C: X \to D^*
+            \]
+            называют <i>префиксным</i>, если для любого символа $x \in X$ его
+            кодовое слово не является началом другого кодового слова.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: оптимальный код
+        </div>
+        <div class="content">
+          Рассмотрим код
+          \[
+          C: X \to D^*.
+          \]
+          Введём обозначение: $l(x)$ &mdash; длина кодового слова для символа
+          $x \in X$.
+
+          <div class="definition">
+            Обозначим вероятность появления символа $x$ за $p(x)$. Тогда
+            величину
+            \[
+            L(C) = \sum_{x \in X} p(x) l(x)
+            \]
+            называют <i>средней длиной</i>.
+          </div>
+
+          <div class="definition">
+            Код $\overline{C}$ (префиксный или однозначно декодируемый)
+            называют <i>оптимальным</i>, если для любого другого кода $C$
+            (префиксного или однозначно декодируемого) выполняется неравенство
+            \[
+            L(\overline{C}) \leqslant L(C).
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Неравенство Крафта для префиксных кодов
+        </div>
+        <div class="content">
+          <div class="theorem">
+            <i>(неравенство Крафта)</i>.
+            <br>
+
+            Рассмотрим алфавиты $X$ и $D$ длин $l(X) = n$ и $l(D) = d$
+            соответственно. Пусть $C: X \to D^*$ &mdash; префиксный код, причём
+            $l_1, \dots, l_n$ &mdash; длины кодовых слов для символов
+            $x_1, \dots, x_n$. Тогда
+            \[
+            \sum_{k=1}^n d^{-l_k} \leqslant 1.
+            \]
+            Более того, если найдутся $l_1, \dots, l_n \in \mathbb{N}$,
+            удовлетворяющие этому неравенству, то существует префиксный код $C$
+            такой, что длины кодовых слов &mdash; $l_1, \dots, l_n$.
+
+            <div class="proof">
+              Пусть $l_{\max} = \max_{k=1}^n l_k$. Обозначим за $d^{l_{\max}}$
+              все слова длины $l_{\max}$. Заметим, что если у слова длины
+              $l_{\max}$ последний символ имеет код $l_i$, то это слово могло
+              получиться из любого слова длины $l_{\max} - l_i$. Обозначим
+              множество всех таких слов за $d^{l_{\max} - l_i}$ и рассмотрим их
+              сумму
+              \[
+              \sum_{i=1}^n d^{l_{\max} - l_i}.
+              \]
+              Так как код префиксный, то он невырожденный, поэтому
+              \[
+              \sum_{i=1}^n d^{l_{\max} - l_i} \leqslant d^{l_{\max}}.
+              \]
+
+              <div class="derivation">
+                Действительно, если предположить, что
+                \[
+                \sum_{i=1}^n d^{l_{\max} - l_i} \gt d^{l_{\max}},
+                \]
+                то это означает, что, прибавив по одному символу к уже имеющимся
+                словам, мы уменьшили их количество, то есть по крайней мере два
+                кодовых слова совпали, что противоречит предположению о
+                невырожденности кода $C$.
+              </div>
+
+              Переписав сумму как
+              \[
+              \sum_{i=1}^n d^{l_{\max} - l_i} = 
+              d^{l_{\max}} \sum_{i=1}^n d^{-l_i}
+              \]
+              и разделив обе части неравенства на $d^{l_{\max}} \gt 0$,
+              окончательно получаем, что
+              \[
+              \sum_{k=1}^n d^{-l_k} \leqslant 1.
+              \]
+            </div>
+          </div>
+
+          <div class="corollary">
+            Для префиксного кода $C$ справедливо неравенство
+            \[
+            L(C) \geqslant H_d(X) = - \sum_{x \in X} p(x) \log_d p(x).
+            \]
+
+            <div class="proof">
+              Рассмотрим разницу
+              \[
+              H_d(X) - L(C)
+              =
+              - \sum_{x \in X} p(x) \log_d p(x) - \sum_{x \in X} p(x) l(x).
+              \]
+
+              Представив $l(x)$ в виде
+              \[
+              -l(x) = \log_d d^{-l(x)},
+              \]
+              получим, что
+              \[
+              \begin{aligned}
+              H_d(X) - L(C)
+              &=
+              - \sum_{x \in X} p(x) \log_d p(x)
+              - \sum_{x \in X} p(x) l(x) = \\
+              &=
+              - \sum_{x \in X} p(x) \log_d p(x)
+              + \sum_{x \in X} p(x) \log_d d^{-l(x)} = \\
+              &=
+              \sum_{x \in X} p(x) \log_d \frac{d^{-l(x)}}{p(x)}.
+              \end{aligned}
+              \]
+
+              Пользуясь тем, что
+              \[
+              \begin{gathered}
+              \log_a b = \log_a c \cdot \log_c b, \\
+              \ln x \leqslant x - 1,
+              \end{gathered}
+              \]
+              получаем, что
+              \[
+              \begin{aligned}
+              H_d(X) - L(C)
+              &=
+              \sum_{x \in X} p(x) \log_d \frac{d^{-l(x)}}{p(x)} = \\
+              &=
+              \log_d e \sum_{x \in X} p(x) \ln \frac{d^{-l(x)}}{p(x)}
+              \leqslant \\
+              &\leqslant
+              \log_d e \sum_{x \in X} p(x)
+              \left[
+              \frac{d^{-l(x)}}{p(x)} - 1
+              \right]
+              = \\
+              &=
+              \log_d e \sum_{x \in X} \left[ d^{-l(x)} - p(x) \right] = \\
+              &=
+              \log_d e \left[ \sum_{x \in X} d^{-l(x)} - 1 \right] \leqslant 0
+              \end{aligned}
+              \]
+              в силу неравенства Крафта.
+
+              <p>
+              Итак, окончательно получаем, что
+              \[
+              L(C) \geqslant H_d(X).
+              \]
+              </p>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Оптимальное кодирование
+        </div>
+        <div class="content">
+          Поставим прямую задачу условной оптимизации:
+          \[
+          \left\{
+          \begin{aligned}
+          &\sum_{x \in X} p(x) l(x) \to \min, \\
+          &\sum_{x \in X} d^{-l(x)} = 1.
+          \end{aligned}
+          \right.
+          \]
+
+          Составим для неё функцию Лагранжа:
+          \[
+          L(l(x), \lambda) = \sum_{x \in X} p(x) l(x) + \lambda \left[
+          \sum_{x \in X} d^{-l(x)} - 1
+          \right].
+          \]
+
+          Необходимое условие экстремума:
+          \[
+          \pd{L}{l(x)} = 0,
+          \]
+          то есть
+          \[
+          p(x) - \lambda \ln d \cdot d^{-l(x)} = 0.
+          \]
+
+          Отсюда найдём, что
+          \[
+          \sum_{x \in X} \frac{p(x)}{\lambda \ln d}
+          = \sum_{x \in X} d^{-l(x)} = 1.
+          \]
+
+          Но
+          \[
+          \sum_{x \in X} p(x) = 1,
+          \]
+          поэтому
+          \[
+          \frac{1}{\lambda \ln d} = 1, \implies \lambda = \frac{1}{\ln d}.
+          \]
+
+          Подставляя значение $\lambda$ в необходимое условие экстремума,
+          получаем, что
+          \[
+          d^{-l(x)} = p(x),
+          \]
+          то есть
+          \[
+          l(x) = \log_d \frac{1}{p(x)}.
+          \]
+          Так как длина должна быть целой, положим
+          \[
+          l(x) = \ceil{ -\log_d p(x) }.
+          \]
+
+          <div class="theorem">
+            Если $\overline{C}$ &mdash; оптимальный префиксный код (в смысле
+            решения прямой задачи условной оптимизации), то
+            \[
+            L(\overline{C}) \leqslant H_d(X) + 1.
+            \]
+
+            <div class="proof">
+              Рассмотрим
+              \[
+              \begin{aligned}
+              \sum_{x \in X} d^{-l(x)}
+              &= \sum_{x \in X} d^{\ceil{ \log_d p(x) }} \leqslant \\
+              &\leqslant \sum_{x \in X} d^{\log_d p(x)} = \\
+              &= \sum_{x \in X} p(x) = 1,
+              \end{aligned}
+              \]
+              поэтому из теоремы Крафта следует, что существует префиксный код
+              $C$ длины $l(x)$.
+
+              <p>
+              По определению средней длины
+              \[
+              \begin{aligned}
+              L(C) &\bydef= \sum_{x \in X} p(x) l(x) = \\
+              &= \sum_{x \in X} p(x) \ceil{-\log_d p(x)} \leqslant \\
+              &\leqslant \sum_{x \in X} p(x) \paren{- \log_d p(x) + 1}
+              = \\
+              &= H_d(x) + \sum_{x \in X} p(x) = \\
+              &= H_d(x) + 1.
+              \end{aligned}
+              \]
+              </p>
+            </div>
+          </div>
+
+          <div class="definition">
+            Код $\overline{C}$, для которого $l(x) = \ceil{ -\log_d p(x) }$,
+            называют <i>кодом Шеннона</i>.
+          </div>
+
+          <div class="algorithm">
+            Построение кода Шеннона происходит по следующему алгоритму:
+            <ol>
+              <li>
+                подсчитывают вероятности $p_i$ появления символов $x_i$;
+              </li>
+
+              <li>
+                вычисляют длины $l_i = l(x_i) \bydef= \ceil{ -\log_d p_i }$;
+              </li>
+
+              <li>
+                составляют кумулятивную вероятность:
+                \[
+                \sum_{k=1}^{i-1} p_k;
+                \]
+              </li>
+
+              <li>
+                переводят каждую кумулятивную вероятность в двоичный код
+              </li>
+
+              <li>
+                в качестве кодового слова для символа $x_i$ берут из разложения
+                $i$-ой кумулятивной вероятности $l_i$ знаков после запятой.
+              </li>
+            </ol>
+          </div>
+
+          <div class="example">
+            <table class="with-borders centered">
+              <tr>
+                <th>
+                  $x_i$
+                </th>
+
+                <th>
+                  $p(x_i)$
+                </th>
+
+                <th>
+                  $l_i$
+                </th>
+
+                <th>
+                  сумма от $0$ до $i-1$
+                </th>
+
+                <th>
+                  двоичный код суммы
+                </th>
+
+                <th>
+                  итоговый код
+                </th>
+              </tr>
+
+              <tr>
+                <th>
+                  $x_1$
+                </th>
+                <td>
+                  0,36
+                </td>
+                <td>
+                  2
+                </td>
+                <td>
+                  0,0
+                </td>
+                <td>
+                  0,0000
+                </td>
+                <td>
+                  00
+                </td>
+              </tr>
+
+              <tr>
+                <th>
+                  $x_2$
+                </th>
+                <td>
+                  0,18
+                </td>
+                <td>
+                  3
+                </td>
+                <td>
+                  0,36
+                </td>
+                <td>
+                  0,0101
+                </td>
+                <td>
+                  010
+                </td>
+              </tr>
+
+              <tr>
+                <th>
+                  $x_3$
+                </th>
+                <td>
+                  0,18
+                </td>
+                <td>
+                  3
+                </td>
+                <td>
+                  0,54
+                </td>
+                <td>
+                  0,1000
+                </td>
+                <td>
+                  100
+                </td>
+              </tr>
+
+              <tr>
+                <th>
+                  $x_4$
+                </th>
+                <td>
+                  0,12
+                </td>
+                <td>
+                  4
+                </td>
+                <td>
+                  0,72
+                </td>
+                <td>
+                  0,1011
+                </td>
+                <td>
+                  1011
+                </td>
+              </tr>
+
+              <tr>
+                <th>
+                  $x_5$
+                </th>
+                <td>
+                  0,09
+                </td>
+                <td>
+                  4
+                </td>
+                <td>
+                  0,84
+                </td>
+                <td>
+                  0,1101
+                </td>
+                <td>
+                  1101
+                </td>
+              </tr>
+
+              <tr>
+                <th>
+                  $x_6$
+                </th>
+                <td>
+                  0,07
+                </td>
+                <td>
+                  4
+                </td>
+                <td>
+                  0,93
+                </td>
+                <td>
+                  0,1110
+                </td>
+                <td>
+                  1110
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Неравенство Крафта-Макмиллана для однозначно декодируемых кодов
+        </div>
+        <div class="content">
+          <div class="theorem">
+            <i>(неравенство Крафта-Макмиллана)</i>.
+            <br>
+
+            Если код $C$ однозначно декодируемый, то
+            \[
+            \sum_{x \in X} d^{-l(x)} \leqslant 1.
+            \]
+
+            <div class="proof">
+              Рассмотрим
+              \[
+              \begin{aligned}
+              \paren{ \sum_{x \in X} d^{-l(x)} }^k
+              &= \sum_{x_1 \in X} d^{-l(x_1)}
+              \cdots
+              \sum_{x_k \in X} d^{-l(x_k)} = \\
+              &= \sum_{(x_1, \dots, x_k) \in X^k}
+              d^{-l(x_1)} \cdots d^{-l(x_k)} = \\
+              &= \sum_{(x_1, \dots, x_k) \in X^k}
+              d^{-\left[l(x_1) + \cdots + l(x_k)\right]} = \\
+              &= \sum_{(x_1, \dots, x_k) \in X^k}
+              d^{-l(x_1, \dots, x_k)}.
+              \end{aligned}
+              \]
+
+              Обозначим число слов $(x_1, \dots, x_k)$, которые кодируются
+              словом длины $i$, как $\alpha(i)$. Заметим, что
+              \[
+              \alpha(i) \leqslant d^i
+              \]
+              в силу невырожденности кода $C$.
+
+              <div class="derivation">
+                Действительно, если бы
+                \[
+                \alpha(i) \gt d^i,
+                \]
+                то, по
+                <a
+                  href="https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B8%D0%BD%D1%86%D0%B8%D0%BF_%D0%94%D0%B8%D1%80%D0%B8%D1%85%D0%BB%D0%B5_(%D0%BA%D0%BE%D0%BC%D0%B1%D0%B8%D0%BD%D0%B0%D1%82%D0%BE%D1%80%D0%B8%D0%BA%D0%B0)"
+                  target="_blank">
+                  принципу Дирихле</a>, нашлись бы по крайней мере два символа,
+                кодовые слова которых совпадали бы.
+              </div>
+
+              Тогда
+              \[
+              \begin{aligned}
+              \sum_{(x_1, \dots, x_k) \in X^k} d^{-l(x_1, \dots, x_k)}
+              &\leqslant
+              \sum_{i=k}^{k l_{\max}} 1 = \\
+              &= k l_{\max} - k + 1 \leqslant \\
+              &\leqslant k l_{\max}.
+              \end{aligned}
+              \]
+
+              Итак,
+              \[
+              \paren{ \sum_{x \in X} d^{-l(x)} }^k \leqslant k l_{\max}
+              \implies
+              \sum_{x \in X} d^{-l(x)} \leqslant \paren{ k l_{\max} }^{1/k}.
+              \]
+
+              В силу того, что $k \in \mathbb{N}$ произвольно, получаем, что
+              \[
+              \sum_{x \in X} d^{-l(x)}
+              \leqslant \lim_{k \to \infty} \paren{ k l_{\max} }^{1/k}
+              = 1.
+              \]
+            </div>
+          </div>
+
+          <div class="corollary">
+            Если $C$ &mdash; однозначно декодируемый код с длинами кодовых слов
+            $l(x)$, то существует префиксный код $C'$ с теми же длинами кодовых
+            слов; отсюда также следует, что
+            \[
+            L(C) = L(C').
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: информационная ёмкость канала
+        </div>
+        <div class="content">
+          <p>
+          Рассмотрим два алфавита: входных $X$ и выходных $Y$ символов. Будем
+          предполагать, что канал связи подвержен шумам. Пусть заданы условные
+          вероятности $p(y|x)$ &mdash; вероятности получить на выходе $y$ при
+          условии, что на вход подавался символ $x$.
+          </p>
+
+          <p>
+          Если известны вероятности $p(x)$ появления символа $x \in X$, то
+          известны и вероятности $p(y)$, так как
+          \[
+          p(y) = \sum_{x \in X} p(y|x) p(x).
+          \]
+
+          Для наглядности можно представить их в виде матрицы:
+          \[
+          \begin{pmatrix}
+          p(y_1|x_1) & \dots & p(y_1|x_n) \\
+          p(y_2|x_1) & \dots & p(y_2|x_n) \\
+          \vdots & \ddots & \vdots \\
+          p(y_m|x_1) & \dots & p(y_m|x_n)
+          \end{pmatrix}
+          \]
+          </p>
+
+          <div class="definition">
+            Величину
+            \[
+            C := \max_{p(x)} I(X,Y)
+            \]
+            называют <i>информационной ёмкостью канала</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Свойства информационной ёмкости канала
+        </div>
+        <div class="content">
+          <ol>
+            <li>
+              $C \geqslant 0$.
+
+              <div class="derivation">
+                Этот факт следует из неотрицательности взаимной информации
+                $I(X,Y)$.
+              </div>
+            </li>
+
+            <li>
+              $C \leqslant \min \left[ \log l(X), \log l(Y) \right]$.
+
+              <div class="derivation">
+                Неравенство напрямую следует из следующих соотношений:
+                \[
+                \begin{gathered}
+                I(X,Y) = H(X) - H(X|Y) \leqslant H(X) \leqslant l(X), \\
+                I(X,Y) = H(Y) - H(Y|X) \leqslant H(Y) \leqslant l(Y).
+                \end{gathered}
+                \]
+              </div>
+            </li>
+
+            <li>
+              $C$ &mdash; непрерывная функция, достигающая максимума на
+              компакте.
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Примеры информационной ёмкости канала
+        </div>
+        <div class="content">
+          <div class="example">
+            $X = Y = \set{0, 1}$. Считаем, что шума нет:
+
+            <div class="images">
+              <img
+                src="images/example-1.png"
+                alt="pic"
+                style="width: 80%; max-width: 350px">
+            </div>
+
+            Тогда взаимная информация
+            \[
+            I(X,Y) = H(X) - \underbrace{H(X|Y)}_{=0} = H(X)
+            \]
+            достигает максимума при $p(x=0) = p(x=1) = 1/2$, то есть
+            \[
+            C = \max_{p(x)} I(X,Y) = \log_2 2 = 1.
+            \]
+          </div>
+
+          <div class="example">
+            $X = Y = \set{0, 1}$. Пусть канал симметричен:
+            <div class="images">
+              <img
+                src="images/example-2.png"
+                alt="pic"
+                style="width: 80%; max-width: 350px">
+            </div>
+
+            Тогда
+            \[
+            I(X,Y) = H(Y) - H(Y|X).
+            \]
+
+            Но
+            \[
+            H(Y) \bydef= p(x=0) H(Y|x=0) + p(x=1) H(Y|x=1),
+            \]
+            причём
+            \[
+            H(Y|x=0) = H(Y|x=1) = -p \log p - (1-p) \log (1 - p).
+            \]
+
+            Введя обозначение
+            \[
+            h(p) := -p \log p - (1-p) \log (1 - p),
+            \]
+            получим, что
+            \[
+            \begin{aligned}
+            H(Y) &= p(x=0) h(p) + p(x=1) h(p) = \\
+            &= h(p) \left[ p(x=0) + p(x=1) \right] = \\
+            &= h(p).
+            \end{aligned}
+            \]
+
+            Принимая во внимание, что
+            \[
+            H(Y) \leqslant \log_2 l(Y) = \log_2 2 = 1,
+            \]
+            получаем, что
+            \[
+            C \leqslant 1 - h(p).
+            \]
+
+            Отметим, что при $p = 1/2$ информационная ёмкость канала обнуляется:
+            \[
+            \begin{aligned}
+            C &\leqslant 1 - h(p) = \\
+            &= 1 + p \log p + (1-p) \log (1 - p) = \\
+            &= 1 - \frac{1}{2} \log_2 2 - \frac{1}{2} \log_2 2 = \\
+            &= 1 - \log_2 2 = \\
+            &= 0.
+            \end{aligned}
+            \]
+
+            Это связано с тем, что при такой вероятности невозможно восстановить
+            информацию.
+          </div>
+
+          <div class="example">
+            <div class="images">
+              <img src="images/example-3.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="images">
+              <img src="images/example-4.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="images">
+              <img src="images/example-5.png" alt="pic">
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Передача информации по каналам с шумом. Основные определения
+        </div>
+        <div class="content">
+          Рассмотрим процесс отправки сообщений:
+          \[
+          1,\dots,M
+          \overset{W}{\longrightarrow} E
+          \overset{x \in X^n}{\longrightarrow} p(Y|X)
+          \overset{y \in Y^n}{\longrightarrow} D
+          \overset{\hat{W}}{\longrightarrow}
+          \]
+
+          Будем предполагать, что
+          <ol>
+            <li>
+               сообщения равновероятны:
+               \[
+               p_i = \frac{1}{M} \implies H = \log M;
+               \]
+            </li>
+
+            <li>
+              канал без памяти и без обратной связи:
+              \[
+              p(y|x) = \prod_{i=1}^n p(y_i|x_i)
+              \]
+            </li>
+          </ol>
+
+          <div class="definition">
+            Величину
+            \[
+            R := \frac{\log M}{n}
+            \]
+            называют <i>скоростью передачи информации при кодировании</i>.
+          </div>
+
+          <div class="definition">
+            Величина
+            \[
+            \lambda_i := p(\hat{W} \neq i | w = i)
+            \]
+            характеризует
+            <i>вероятность ошибиться при передачи сообщения $i$</i>.
+          </div>
+
+          Обозначим максимальную вероятность ошибки как
+          \[
+          \lambda_{(n)} = \max_{i = 1,\dots,M} \lambda_i,
+          \]
+          а среднюю вероятность &mdash; как
+          \[
+          P_n^{\text{err}} := \frac{1}{M} \sum_{i=1}^M \lambda_i
+          \leqslant \lambda_{(n)}.
+          \]
+
+          Заметим, что
+          \[
+          R = \frac{\log M}{n} \implies
+          nR = \log M \implies M = 2^{nR}.
+          \]
+
+          <div class="definition">
+            Говорят, что скорость $R$ <i>достижима</i>, если существует
+            последовательность кодов для $\ceil{ 2^{nR} }$ сообщений словами
+            длины $n$, для которой
+            \[
+            \lim_{n \to \infty} \lambda_{(n)} = 0.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема Шеннона
+        </div>
+        <div class="content">
+          Для доказательства понадобится
+          <div class="lemma">
+            <div class="images">
+              <img src="images/11-01.png" alt="pic">
+            </div>
+          </div>
+
+          <div class="theorem">
+            <i>(Шеннона)</i>.
+            <br>
+            
+            <ol>
+              <li>
+                Если скорость передачи информации $R$ такая, что
+                \[
+                0 \lt R \lt C,
+                \]
+                то $R$ достижима.
+              </li>
+
+              <li>
+                Если $R$ &mdash; достижима, то $R \leqslant C$.
+              </li>
+            </ol>
+
+            <div class="idea">
+              <div class="images">
+                <img src="images/11-02.png" alt="pic">
+              </div>
+            </div>
+
+            <div class="proof">
+              <div class="images">
+                <img src="images/11-03.png" alt="pic">
+                <img src="images/11-04.png" alt="pic">
+                <img src="images/11-05.png" alt="pic">
+                <img src="images/11-06.png" alt="pic">
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: задача кластеризации
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Кластеризация</i> &mdash; задача группировки множества объектов
+            на подмножества (кластеры) таким образом, чтобы объекты из однго
+            кластера были более похожи друг на друга, чем на объекты из других
+            кластеров по какому-то критерию.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: иерархическая кластеризация
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Иерархическая кластеризация</i> &mdash; множество алгоритмов
+            кластеризации, направленных на создание иерархии вложенных разбиений
+            исходного множества объектов.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Алгоритм иерархической кластеризации
+        </div>
+        <div class="content">
+          Будем строить дерево от листьев к корню. В начальный момент времени
+          каждый объект содержится в собственном кластере. Далее происходит
+          итеративный процесс слияния двух ближайших кластеров до тех пор, пока
+          все кластеры не объединятся в один или не будет найдено необходимое
+          число кластеров. На каждом шаге необходимо уметь вычислять расстояние
+          между кластерами и пересчитывать расстояние между новыми кластерами.
+          Расстояние между одноэлементными кластерами определяется через
+          расстояние между объектами. Для вычисления расстояния между кластерами
+          на практике используются различные функции в зависимости от специфики
+          задачи:
+
+          <ol>
+            <li>
+              Метод одиночной связи:
+              \[
+              R_{\min}(U,V) = \min_{u \in U, v \in V} \rho(u,v).
+              \]
+            </li>
+
+            <li>
+              Метод полной связи:
+              \[
+              R_{\max}(U,V) = \max_{u \in U, v \in V} \rho(u,v).
+              \]
+            </li>
+
+            <li>
+              Метод средней связи:
+              \[
+              R_{\avg}(U,V) = \frac{1}{\abs{U} \cdot \abs{V}}
+              \sum_{u \in U} \sum_{v \in V} \rho(u,v).
+              \]
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: алгоритм $k$-средних. Основная идея, цель алгоритма
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Алгоритм $k$-средних</i> &mdash; один из алгоритмов машинного
+            обучения, решающий задачу кластеризации. Этот алгоритм является
+            неиерархическим, итерационным методом кластеризации.
+          </div>
+
+          <p>
+          Основная идея алгоритма $k$-средних заключается в том, что данные
+          произвольно разбиваются на кластеры, после чего итеративно
+          перевычисляется центр масс для каждого кластера, полученного на
+          предыдущем шаге, затем векторы разбиваются на кластеры вновь в
+          соответствии с тем, какой из новых центров оказался ближе по выбранной
+          метрике.
+          </p>
+
+          <p>
+          Цель алгоритма заключается в разделении $n$ наблюдений на $k$
+          кластеров таким образом, чтобы каждое наблюдение принадлежало ровно
+          одному кластеру, расположенному на наименьшем расстоянии от
+          наблюдения.
+          </p>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Математическое описание алгоритма $k$-средних
+        </div>
+        <div class="content">
+          <div class="problem">
+            Дано:
+            <ul>
+              <li>
+                набор из $n$ наблюдений $X = \set{x_1, \dots, x_n}$, причём
+                $x_i \in \mathbb{R}^d$;
+              </li>
+
+              <li>
+                требуемое число кластеров $k \in \mathbb{N}$, причём\
+                $k \leqslant n$.
+              </li>
+            </ul>
+
+            Требуется разделить множество наблюдений $X$ на $k$ кластеров $S_1,
+            \dots, S_k$ таких, что
+            <ul>
+              <li>
+                $S_i \cap S_j = \varnothing, \quad i \neq j$;
+              </li>
+
+              <li>
+                $\bigcup_{i=1}^k S_i = X$.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Шаги алгоритма $k$-средних
+        </div>
+        <div class="content">
+          <ol>
+            <li>
+              Инициализация кластеров: выбирается произвольное множество точек
+              $\mu_i$ рассматриваемых как начальные центры кластеров:
+              \[
+              \mu_i^{(0)} = \mu_i, \qquad i = 1,\dots,k.
+              \]
+            </li>
+
+            <li>
+              Распределение векторов по кластерам: для всех $x_i \in X$
+              выбирается число $j$ такое, чтобы
+              \[
+              j = \argmin_k \rho\paren{x_i, \mu_i^{(t-1)}}^2.
+              \]
+              Считаем, что $x_i \in S_j$.
+            </li>
+
+            <li>
+              Пересчёт центров кластеров:
+              \[
+              \mu_i^{(t)} = \frac{1}{\abs{S_i}} \sum_{x \in S_i} x_i,
+              \qquad i = 1,\dots,k.
+              \]
+            </li>
+
+            <li>
+              Если
+              \[
+              \mu_i^{(t)} = \mu_i^{(t-1)} \qquad \forall i = 1, \dots, k,
+              \]
+              то есть центры кластеров не изменились, то завершаем работу, иначе
+              $t = t+1$ и возвращаемся на шаг 2.
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Спектральная кластеризация. Постановка задачи
+        </div>
+        <div class="content">
+          <div class="problem">
+            Имея набор данных $x_1, \dots, x_n$ и некоторую меру сходства
+            $s_{ij} \gt 0$, кластеризовать точки таким образом, чтобы в каждом
+            кластере точки были "похожи", а между кластерами &mdash; "не
+            похожи".
+          </div>
+
+          <div class="definition">
+            Если кроме меры сходства другой информации нет, то можно построить
+            <i>граф сходства</i> $G = (V,E)$:
+            <ul>
+              <li>
+                каждая вершина $v_i$ соответствует точке $x_i$;
+              </li>
+
+              <li>
+                две вершины $v_i$ и $v_j$ соединены ребром $(v_i, v_j)$, если
+                мера схожести $s_{ij}$ точек $x_i$ и $x_j$ положительна или
+                превышает какое-нибудь заранее заданное пороговое значение,
+                причём вес ребра зависит от $s_{ij}$.
+              </li>
+            </ul>
+          </div>
+
+          <div class="definition">
+            Рассмотрим неориентированный взвешенный граф $G = (V,E)$ с весами
+            $w_{ij} \geqslant 0$.
+
+            <ul>
+              <li>
+                <i>Взвешенной матрицей смежности</i> называют матрицу
+                $W = \paren{w_{ij}}_{i,j=1,\dots,n}$. Если $w_{ij} = 0$, то
+                вершины $v_i,v_j$ не соединены ребром. Граф неориентирован,
+                поэтому $w_{ij} = w_{ji}$.
+              </li>
+
+              <li>
+                <i>Степенью</i> вершины $v_i \in V$ называют величину
+                \[
+                d_i = \sum_{j=1}^n w_{ij}.
+                \]
+                <i>Степенной матрицей</i> называют диагональную матрицу
+                $D = \diag(d_1, \dots, d_n)$.
+              </li>
+            </ul>
+          </div>
+
+          Существует несколько подходов к построению графа по заданным точкам
+          $x_1, \dots, x_n$ с попарной мерой схожести $s_{ij}$ или попарным
+          расстоянием $d_{ij}$:
+          <ol>
+            <li>
+              <i class="important">Граф $\varepsilon$-окрестностей</i>
+              <p>
+              Соединяем все точки, расстояние между которыми не превышает
+              некоторого наперёд заданного $\varepsilon$. Так как расстояния
+              между всеми точками отличаются несильно, обычно такой граф считают
+              невзвешенным.
+              </p>
+            </li>
+
+            <li>
+              <i class="important">Граф $k$-ближайших соседей</i>
+              <p>
+              Соединяем вершину $v_i$ с ближайшими $k$ вершинами $v_j$. Однако
+              отношение близости может быть несимметричным, поэтому получится
+              ориентированный граф. Чтобы построить неориентированный граф,
+              можно воспользоваться одним из двух подходов:
+              </p>
+
+              <ul>
+                <li>
+                  можно проигнорировать ориентированность ребра, то есть
+                  соединить $v_i$ и $v_j$, если $v_j$ находится среди $k$
+                  ближайших соседей $v_i$ <i>или</i> $v_i$ находится среди $k$
+                  ближайших соседей $v_j$. Получившийся граф называют графом $k$
+                  ближайших соседей.
+                </li>
+
+                <li>
+                  можно соединять вершины $v_i$ и $v_j$ только если $v_j$
+                  находится среди $k$ ближайших соседей $v_i$ <i>и</i> $v_i$
+                  находится среди $k$ ближайших соседей $v_j$. Получившийся граф
+                  называют графом $k$ взаимно ближайших соседей.
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <i class="important">Полностью связный граф</i>
+              <p>
+              В данном подходе мы просто соединяем все вершины $v_i$ и $v_j$ с
+              положительной мерой схожести $s_{ij}$, и придаём им вес $s_{ij}$.
+              Так как граф должен представлять отношение близости, построение
+              подобного графа имеет смысл только в том случае, когда мера
+              схожести сама моделирует окрестности. Пример такой меры &mdash;
+              функция Гаусса:
+              \[
+              s(x_i, x_j) = \exp \paren{ -\norm{x_i - x_j}^2 / (2 \sigma^2) },
+              \]
+              причём параметр $\sigma$ регулирует размах окрестности.
+              </p>
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Алгоритм спектральной кластеризации
+        </div>
+        <div class="content">
+          <ol>
+            <li>
+              Построить матрицу Кирхгофа:
+              \[
+              L = D - W,
+              \]
+              где
+              <ul>
+                <li>
+                  $D$ &mdash; степенная матрица:
+                  \[
+                  D_{i,j} =
+                  \begin{cases}
+                  \deg(v_i), & i = j, \\
+                  0, & \mbox{иначе},
+                  \end{cases}
+                  \]
+                  где
+                  \[
+                  \deg(v_i) := \sum_{j=1}^n w_{ij}
+                  \quad \mbox{&mdash;} \quad \mbox{степень вершины;}
+                  \]
+                </li>
+
+                <li>
+                  $W$ &mdash; матрица смежности:
+                  \[
+                  W_{i,j} =
+                  \begin{cases}
+                  w_{ij}, & i \neq j \; \mbox{ и существует ребро } (v_i, v_j), \\
+                  0, & \mbox{иначе},
+                  \end{cases}
+                  \]
+                  $w_{ij}$ &mdash; вес ребра $(v_i, v_j)$.
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              Найти $k$ собственных векторов $u_i, \dots, u_k$, соответствующих
+              наименьшим собственным числам (кроме 0);
+            </li>
+
+            <li>
+              Построить матрицу $U \in \mathbb{R}^{n \times k}$ из векторов
+              $u_1, \dots, u_k$ в качестве столбцов;
+            </li>
+
+            <li>
+              Кластеризовать точки $y_k \in \mathbb{R}^k$, соответствующие
+              строкам матрицы $U$ (например, с помощью алгоритма $k$-средних).
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Метод опорных векторов для линейно разделимых выборок
+        </div>
+        <div class="content">
+          <p>
+          Метод опорных векторов (support vector machine, SVM) &mdash; один из
+          наиболее популярных методов обучения, который применяется для решения
+          задач классификации и регрессии.
+          </p>
+
+          <p>
+          Основная идея метода заключается в построении гиперплоскости,
+          разделяющей объекты выборки оптимальным способом. Алгоритм работает в
+          предположении, что чем больше расстояние (зазор) между разделяющей
+          гиперплоскостью и объектами разделяемых классов, тем меньше будет
+          средняя ошибка классификатора.
+          </p>
+
+          <div class="problem">
+            Рассмотрим задачу бинарной классификации, в которой объектам из
+            $X = \mathbb{R}^n$ соответствует один из двух классов
+            $Y = \set{-1,+1}$. Пусть задана обучающая выборка пар "объект-ответ"
+            \[
+            T^l = (\vec{x}_i, y_i)_{i=1}^l.
+            \]
+            Необходимо построить алгоритм классификации $a: X \to Y$.
+          </div>
+
+          <p>
+          Пусть выборка линейно разделима, то есть существует некоторая
+          гиперплоскость, разделяющая классы -1 и +1. Тогда в качестве алгоритма
+          классификации можно использовать линейный пороговый классификатор:
+          \[
+          \begin{aligned}
+          a(\vec{x}) &= \sign \paren{ \dp{\vec{w}}{\vec{x}} - b} = \\
+          &= \sign \paren{ \sum_{i=1}^n w_i x_i - b},
+          \end{aligned}
+          \]
+          где $\vec{w} \in \mathbb{R}^n$ и $b \in \mathbb{R}$ &mdash; параметры
+          гиперплоскости.
+          </p>
+
+          <p>
+          Для двух линейно разделимых классов возможны различные варианты
+          построения гиперплоскостей. Метод опорных векторов выбирает ту
+          гиперплоскость, которая максимизирует отступ между классами.
+          </p>
+
+          <div class="definition">
+            <i>Отступ</i> &mdash; характеристика, оценивающая, насколько объект
+            "погружён" в свой класс, насколько типичным представителем своего
+            класса он является. Чем меньше значение отступа, тем ближе объект
+            подходит к границе классов и тем выше становится вероятность ошибки.
+            Отступ $M_i$ отрицателен тогда и только тогда, когда алгоритм
+            $a(\vec{x})$ допускает ошибку на элементе.
+
+            <p>
+            Для линейного порогового классификатора отступ определяется
+            уравнением:
+            \[
+            M_i(\vec{w}, b) = y_i \cdot \paren{ \dp{\vec{w}}{\vec{x_i}} - b }.
+            \]
+            </p>
+          </div>
+
+          <div class="proposition">
+            Если выборка линейно разделима, то существует такая гиперплоскость,
+            отступ от которой до каждого объекта положителен:
+            \[
+            \exists \vec{w}, b: \qquad M_i(\vec{w}, b) \gt 0, \quad i = 1,
+            \dots, l.
+            \]
+          </div>
+
+          <p>
+          Заметим, что при умножении $\vec{w}$ и $b$ на константу $c \neq 0$
+          уравнение
+          \[
+          \dp{c \vec{w}}{\vec{x_i}} - c b = 0
+          \]
+          определяет ту же гиперплоскость, что и
+          \[
+          \dp{\vec{w}}{\vec{x_i}} - b = 0,
+          \]
+          поэтому для удобства проведём нормировку: выберем константу $c \neq 0$
+          таким образом, чтобы $\min M_i(\vec{w}, b) = 1$. При этом в каждом из
+          двух классов найдётся хотя бы один объект обучающей выборки, отступ
+          которого равен этому минимуму: иначе можно было бы сместить
+          гиперплоскость в сторону класса с бóльшим отступом, тем самым увеличив
+          минимальное расстояние от гиперплоскости до объектов обучающей
+          выборки.
+          </p>
+
+          <p>
+          Обозначим любой "граничный" объект из класса $+1$ как $\vec{x}_+$, а
+          из класса $-1$ &mdash; как $\vec{x}_-$. их отступ равен единице, то
+          есть
+          \[
+          \left\{
+          \begin{aligned}
+          M_+(\vec{w}, b) &= (+1) \cdot \paren{ \dp{\vec{w}}{\vec{x}_+} - b }
+          = 1, \\
+          M_-(\vec{w}, b) &= (-1) \cdot \paren{ \dp{\vec{w}}{\vec{x}_-} - b }
+          = 1.
+          \end{aligned}
+          \right.
+          \]
+
+          Нормировка позволяет ограничить разделяющую полосу между классами:
+          \[
+          \set{ x: -1 \lt \dp{\vec{w}}{\vec{x}_i} - b \lt 1 }.
+          \]
+          Внутри неё не может лежать ни один объект обучающей выборки. Ширину
+          разделяющей полосы можно выразить как проекцию вектора
+          $\vec{x}_+ - \vec{x}_-$ на нормаль к гиперплоскости $\vec{w}$. Чтобы
+          разделяющая гиперплоскость находилась на наибольшем расстоянии от
+          точек выборки, ширина полосы должна быть максимальной:
+          \[
+          \begin{aligned}
+          \frac{\dp{\vec{x}_+ - \vec{x}_-}{\vec{w}}}{\norm{w}}
+          &=
+          \frac{
+          \dp{\vec{x}_+}{\vec{w}} - \dp{\vec{x}_-}{\vec{w}} - b + b
+          }{\norm{w}} = \\
+          &= \frac{
+          (+1) \paren{ \dp{\vec{x}_+}{\vec{w}} - b } +
+          (-1) \paren{ \dp{\vec{x}_-}{\vec{w}} - b }
+          }{\norm{w}} = \\
+          &= \frac{ M_+(\vec{w}, b) + M_-(\vec{w}, b) }{\norm{w}} = \\
+          &= \frac{2}{\norm{w}} \to \max \implies \norm{w} \to \min.
+          \end{aligned}
+          \]
+          </p>
+
+          <p>
+          Полученный результат можно записать как постановку задачи оптимизации
+          в терминах квадратичного программирования:
+          \[
+          \left\{
+          \begin{aligned}
+          &\norm{\vec{w}}^2 \to \min_{\vec{w}, b}, \\
+          &M_i(\vec{w}, b) \geqslant 1, \quad i = 1,\dots,l.
+          \end{aligned}
+          \right.
+          \]
+          </p>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Метод опорных векторов с мягким зазором
+        </div>
+        <div class="content">
+          <p>
+          На практике линейно разделимые выборки практически не встречаются: в
+          данных возможны выбросы и нечёткие границы между классами. В таком
+          случае метод опорных векторов требуется модифицировать, ослабив
+          ограничения и позволив некоторым объектам попадать на территорию
+          другого класса. Для каждого объекта отнимем от отступа некоторую
+          положительную величину $\xi_i \gt 0$, но потребуем, чтобы эти
+          введённые поправки были минимальны. Это приведёт нас к постановке
+          задачи, называемой также
+          <i class="important">методом опорных векторов с мягким отступом</i>:
+          \[
+          \left\{
+          \begin{aligned}
+          &\frac{1}{2} \norm{\vec{w}}^2 + C \sum_{i=1}^l \xi_i
+          \to \min_{\vec{w}, b, \xi}, \\
+          &M_i(\vec{w}, b) \geqslant 1 - \xi_i, \quad i = 1,\dots,l, \\
+          &\xi_i \geqslant 0, \quad i = 1, \dots, l.
+          \end{aligned}
+          \right.
+          \]
+          Отметим, что константу $C$ необходимо будет определить при помощи
+          кросс-валидации.
+          </p>
+
+          <a
+            href="https://neerc.ifmo.ru/wiki/index.php?title=%D0%9C%D0%B5%D1%82%D0%BE%D0%B4_%D0%BE%D0%BF%D0%BE%D1%80%D0%BD%D1%8B%D1%85_%D0%B2%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%BE%D0%B2_(SVM)#.D0.9B.D0.B8.D0.BD.D0.B5.D0.B9.D0.BD.D0.BE_.D0.BD.D0.B5.D1.80.D0.B0.D0.B7.D0.B4.D0.B5.D0.BB.D0.B8.D0.BC.D0.B0.D1.8F_.D0.B2.D1.8B.D0.B1.D0.BE.D1.80.D0.BA.D0.B0"
+            target="_blank">См. больше в викиконспектах</a>.
+
+          <!-- <p> -->
+          <!-- Заметим, что постановку задачи можно упростить: -->
+          <!-- \[ -->
+          <!-- \left\{ -->
+          <!-- &\xi_i \geqslant 0, \\ -->
+          <!-- &\xi_i \geqslant 1 - M_i(\vec{w}, b), \\ -->
+          <!-- &\sum_{i=1}^l \xi_i \to \min -->
+          <!-- \right. -->
+          <!-- \implies -->
+          <!-- \left\{ -->
+          <!-- &\xi_i \geqslant \max\paren{ 0, 1 - M_i(\vec{w}, b) }, \\ -->
+          <!-- &\sum_{i=1}^l \xi_i \to \min -->
+          <!-- \right. -->
+          <!-- \implies -->
+          <!-- \xi_i = \paren{1 - M_i(\vec{w}, b)}_+ -->
+          <!-- \] -->
+          <!-- </p> -->
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Задача линейной регрессии
+        </div>
+        <div class="content">
+          <p>
+          Линейная регрессия &mdash; метод восстановления зависимости одной
+          переменной $y$ от другой или нескольких других переменных $x$ с
+          линейной функцией зависимости. Данный метод позволяет предсказывать
+          значения зависимой переменной $y$ по значениям независимой переменной
+          $x$.
+          </p>
+
+          <div class="problem">
+            Дано:
+            <ol>
+              <li>
+                $f_1(x), \dots, f_n(x)$ &mdash; числовые признаки;
+              </li>
+
+              <li>
+                модель многомерной регрессии:
+                \[
+                f(x,\alpha) = \sum_{j=1}^n \alpha_j f_j(x),
+                \qquad \alpha \in \mathbb{R}^n;
+                \]
+              </li>
+
+              <li>
+                обучающая выборка:
+                \[
+                T^n = (x_i, y_i)_{i=1}^n;
+                \]
+              </li>
+
+              <li>
+                $x_i \in \mathbb{R}^n, y_i \in \mathbb{R}$.
+              </li>
+            </ol>
+
+            Введём матричные обозначения:
+            \[
+            \begin{gathered}
+            F_{l \times n} =
+            \begin{pmatrix}
+            f_1(x_1) & \dots & f_n(x_1) \\
+            f_1(x_2) & \dots & f_n(x_2) \\
+            \vdots & \ddots & \vdots \\
+            f_1(x_l) & \dots & f_n(x_l)
+            \end{pmatrix}, \\
+            y_{l \times 1} =
+            \begin{pmatrix}
+            y_1 \\
+            \vdots \\
+            y_l
+            \end{pmatrix},
+            \qquad
+            \alpha_{n \times 1} =
+            \begin{pmatrix}
+            \alpha_1 \\
+            \vdots \\
+            \alpha_n
+            \end{pmatrix}.
+            \end{gathered}
+            \]
+          </div>
+
+          Задача:
+          \[
+          Q(\alpha) = \sum_{i=1}^n \paren{
+          f(x_i, \alpha) - y_i
+          }^2 = \norm{F \alpha - y}^2 \to \min_\alpha.
+          \]
+
+          <div class="solution">
+            <p>
+            Запишем необходимые условия экстремума в матричном виде:
+            \[
+            \pd{Q}{\alpha} = 2 F^T \paren{ F \alpha - y } = 0.
+            \]
+            Отсюда следует нормальная система задачи МНК:
+            \[
+            F^T F \alpha = F^T y,
+            \]
+            где $\dim F^T F = n \times n$.
+            </p>
+
+            <p>
+            Пусть
+            \[
+            \alpha^* = (F^T F)^{-1} F^T y = F^+ y
+            \]
+            &mdash; решение, где $F^+$ &mdash; псевдообратная матрица. Тогда
+            функционал примет значение
+            \[
+            Q(\alpha^*) = \norm{P_F y - y}^2,
+            \]
+            где
+            \[
+            P_F = F F^+ = F \paren{F^T F}^{-1} F^T
+            \]
+            &mdash; проекционная матрица.
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Сингулярное разложение матрицы
+        </div>
+        <div class="content">
+          <div class="theorem">
+            У любой матрицы $A_{n \times m}$ существует разложение
+            \[
+            A_{n \times m} = U_{n \times n} \times \Sigma_{n \times m} \times
+            V_{m \times m}^T,
+            \]
+            где $U,V$ &mdash; ортогональные матрицы, а $\Sigma$ &mdash;
+            диагональная.
+          </div>
+
+          <h4 class="subtitle">Свойства сингулярного разложения</h4>
+          <ul>
+            <li>
+              $U_{n \times n}$ ортогональна, $U^T U = I_n$, столбцы $u_i$
+              &mdash; собственные векторы матрицы $F F^*$;
+            </li>
+
+            <li>
+              $V_{m \times m}$ ортогональна, $V^T V = I_m$, столбцы $u_i$
+              &mdash; собственные векторы матрицы $F^* F$;
+            </li>
+
+            <li>
+              $\Sigma_{n \times m}$ диагональная:
+              \[
+              \Sigma = \diag\paren{
+              \sqrt{\lambda_1}, \dots, \sqrt{\lambda_{\min(n,m)}}
+              },
+              \]
+              где $\lambda_j \geqslant 0$ &mdash; собственные значения матриц
+              $F F^T$ и $F^T F$.
+            </li>
+          </ul>
+
+          Пользуясь сингулярным разложением
+          \[
+          F = V D U^T,
+          \]
+          найдём псевдообратную матрицу:
+          \[
+          \begin{aligned}
+          F^+ &= \paren{
+          U D V^T V D U^T
+          }^{-1} U D V^T = \\
+          &= U D^{-1} V^T = \\
+          &= \sum_{j=1}^n \frac{1}{\sqrt{\lambda_j}} u_j v_j^T.
+          \end{aligned}
+          \]
+
+          Найдём теперь решение задачи наименьших квадратов:
+          \[
+          \alpha^* = F^+ y = 
+          \sum_{j=1}^n \frac{1}{\sqrt{\lambda_j}} u_j \paren{ v_j^T y }.
+          \]
+          Вектор, которым наша модель аппроксимирует целевой вектор $y$,
+          равняется
+          \[
+          \begin{aligned}
+          F \alpha^* &= P_F y = \\
+          &= \paren{ V D U^T } U D^{-1} V^T y = \\
+          &= V V^T y = \\
+          &= \sum_{j=1}^n v_j \paren{ v_j^T y }.
+          \end{aligned}
+          \]
+
+          Квадрат нормы вектора коэффициентов равен
+          \[
+          \norm{\alpha^*}^2 = \norm{D^{-1} V^T y}^2 =
+          \sum_{j=1}^n \frac{1}{\lambda_j} \paren{ v_j^T y }^2.
+          \]
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Гребневая регрессия
+        </div>
+        <div class="content">
+          <p>
+          Гребневая, или ридж-регрессия &mdash; один из методов понижения
+          размерности. Применяется для борьбы с избыточностью данных, когда
+          независимые переменные коррелируют друг с другом, вследствие чего
+          проявляется неустойчивость оценок коэффициентов многомерной линейной
+          регрессии.
+          </p>
+
+          <div class="problem">
+            <p>
+            Рассмотрим задачу многомерной линейной регрессии: пусть существует
+            линейная зависимость $f(x,\beta) = \dp{\beta}{x}$. Найдём вектор
+            $\beta^*$, при котором достигается минимум среднего квадрата ошибки:
+            \[
+            \begin{aligned}
+            &Q(\beta) = \norm{F\beta - y}^2, \\
+            &\beta^* = \argmin_\beta Q(\beta).
+            \end{aligned}
+            \]
+            </p>
+
+            <p>
+            Используя МНК, находим решение:
+            \[
+            \beta^* = (F^T F)^{-1} F^T y.
+            \]
+            </p>
+
+            <p>
+            В условиях <a href="https://en.wikipedia.org/wiki/Multicollinearity"
+              target="_blank">мультиколлинеарности</a> матрица $F^T F$
+            становится плохо обусловленной. Для решения этой проблемы представим
+            решение в виде
+            \[
+            \beta^* = \paren{ F^T F + \lambda I_n }^{-1} F^T y,
+            \qquad \lambda \geqslant 0.
+            \]
+            Это изменение увеличивает собственные значения матрицы $F^T F$, но
+            не изменяет её собственные векторы. В результате получаем хорошо
+            обусловленную матрицу.
+            </p>
+
+            <div class="definition">
+              <p>
+              Диагональная матрица $\lambda I_n$ называется <i>гребнем</i>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </body>
+</html>
+

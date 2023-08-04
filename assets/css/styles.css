@@ -8,6 +8,12 @@ ol.big-height > li {
   padding-bottom: 10px;
 }
 
+h4.subtitle {
+  font-size: 23px;
+  text-align: center;
+  /* border-bottom: 1px solid var(--text-color); */
+}
+
 .content {
   margin-top: 10px;
 }
@@ -18,12 +24,11 @@ ol.big-height > li {
 
 .tickets,
 .questions {
-  max-width: 900px;
+  max-width: 1200px;
 }
 
 .question {
   margin: 10px 0 10px 0;
-  max-width: 800px;
 }
 
 .quote {
@@ -115,13 +120,13 @@ ol.big-height > li {
 }
 
 .images {
-  max-width: 700px;
+  max-width: 100%;
   margin: 10px auto 10px auto;
   text-align: center;
 }
 
 .images img {
-  max-width: 700px;
+  max-width: 100%;
 }
 
 .statement::before {
@@ -148,6 +153,7 @@ ol.big-height > li {
 .example,
 .proposition,
 .remark,
+.problem,
 .solution,
 .explanation,
 .reminder,
@@ -169,6 +175,7 @@ ol.big-height > li {
 }
 
 .idea,
+.plan,
 .derivation {
     margin: 10px;
     padding: 0 10px;
@@ -201,7 +208,10 @@ ol.big-height > li {
 
 .idea::before {
   content: 'Основная идея. ';
-  color: var(--blue-color);
+}
+
+.plan::before {
+  content: 'План доказательства. ';
 }
 
 .necessity,
@@ -211,14 +221,10 @@ ol.big-height > li {
 
 .necessity::before {
   content: 'Необходимость. ';
-  font-style: italic;
-  color: var(--blue-color);
 }
 
 .sufficiency::before {
   content: 'Достаточность. ';
-  font-style: italic;
-  color: var(--blue-color);
 }
 
 .necessity::after,
@@ -237,8 +243,16 @@ button.derivation-toggle {
     margin-bottom: 5px;
 }
 
+
 .derivation::before {
   content: 'Вывод. ';
+}
+
+.idea::before,
+.plan::before,
+.necessity::before,
+.sufficiency::before,
+.derivation::before {
   font-style: italic;
   color: var(--blue-color);
 }
@@ -251,10 +265,6 @@ button.derivation-toggle {
 .example::before {
   content: 'Пример. ';
   font-weight: bold;
-}
-
-.problem {
-  margin: 10px 0 10px 0;
 }
 
 .problem::before {
@@ -323,9 +333,15 @@ body {
   /* font: normal 1.21em KaTeX_Main,Times New Roman,serif; */
 }
 
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 1200px) {
   body {
-    margin: 0 20%;
+    margin: 0 10%;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+  body {
+    margin: 0 10%;
   }
 }
 

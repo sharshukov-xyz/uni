@@ -1,0 +1,5550 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>УМФ &mdash; 06 &mdash; Вопросы</title>
+
+    <link href="/assets/css/styles.css" rel="stylesheet">
+    <script defer src="/assets/js/core.js"></script>
+    <script defer src="/assets/js/questions.js"></script>
+    <script defer src="/assets/js/controls.js"></script>
+
+    <link rel="stylesheet" href="/assets/katex/katex.min.css">
+    <script defer src="/assets/katex/katex.min.js"></script>
+    <script defer src="/assets/katex/auto-render.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false },
+            { left: '\\(', right: '\\)', display: false },
+            { left: '\\[', right: '\\]', display: true }
+          ],
+          // • rendering keys, e.g.:
+          throwOnError: false
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1 id="title">УМФ &mdash; 06 &mdash; Вопросы</h1>
+    <nav>
+      <a href="/">Домой</a>
+      <a href="/math-physics">УМФ</a>
+      <a href="/links">Ссылки</a>
+      <a href="/about">Контакты</a>
+    </nav>
+
+    <div class="controls">
+      <button onclick="HideQuestions()">Скрыть вопросы</button>
+      <button onclick="ShowQuestions()">Показать вопросы</button>
+      <button onclick="HideAnswers()">Скрыть ответы</button>
+      <button onclick="ShowAnswers()">Показать ответы</button>
+      <button onclick="HideExamples()">Скрыть примеры</button>
+      <button onclick="ShowExamples()">Показать примеры</button>
+      <button onclick="HideProofs()">Скрыть доказательства</button>
+      <button onclick="ShowProofs()">Показать доказательства</button>
+      <button onclick="ShowRandomElement(HideQuestions)">
+        Показать случайный вопрос
+      </button>
+    </div>
+
+    <div class="proof-type">
+      Показывать
+      <select id="select-proof-type" name="select-proof-type">
+        <option value="proofs">доказательства полностью</option>
+        <option value="ideas">только идеи доказательств</option>
+      </select>
+    </div>
+
+    <div style="display:none">
+      $\global\def\at#1#2{\left. #1 \right\rvert_{#2}}$
+      $\global\def\abs#1{\left\lvert #1 \right\rvert}$
+      $\global\def\norm#1{\left\lVert #1 \right\rVert}$
+      $\global\def\bvec#1{\mathbf{#1}}$
+      $\global\def\ceil#1{\left\lceil #1 \right\rceil}$
+      $\global\def\floor#1{\left\lfloor #1 \right\rfloor}$
+
+      $\global\def\limto#1{\underset{#1}{\longrightarrow}}$
+      $\global\def\prob#1{\mathbb{P} \left\{ #1 \right\}}$
+      $\global\def\mean#1{\mathbb{E} \left[ #1 \right]}$
+      $\global\def\disp#1{D \left[ #1 \right]}$
+
+      $\global\def\dp#1#2{\left\langle #1, #2 \right\rangle}$
+      <!-- $\global\def\dp#1#2{#1 \cdot #2\,}$ -->
+      $\global\def\vp#1#2{#1 \times #2\,}$
+
+      $\global\def\dv#1#2{\frac{d #1}{d #2}}$
+      $\global\def\rdv#1#2{\frac{d' #1}{d #2}}$ <!-- относительная производная -->
+      $\global\def\pd#1#2{\frac{\partial #1}{\partial #2}}$
+      $\global\def\pdv2#1#2{\frac{\partial^2 #1}{\partial #2^2}}$
+      $\global\def\pdvk#1#2#3{\frac{\partial^#1 #2}{\partial #3^#1}}$
+      $\global\def\ppdv#1#2#3{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
+
+      $\global\def\pois#1{\left\{ #1 \right\}}$
+      $\global\def\paren#1{\left( #1 \right)}$
+      $\global\def\bydef#1{\overset{\mathrm{def}}{#1}}$
+
+      $\global\def\mbox#1{\text{#1}}$
+
+      $\global\def\div{\text{div}\,}$
+      $\global\def\dsum{\displaystyle\sum\,}$
+      $\global\def\grad{\text{grad}\,}$
+      $\global\def\rot{\text{rot}\,}$
+
+      $\global\def\vb#1{\textbf{#1}}$
+
+      $\global\def\op#1{\mathrm{#1}\,}$
+
+      $\global\def\Im{\text{Im}\,}$
+      $\global\def\Res{\text{Res}\,}$
+      $\global\def\Re{\text{Re}\,}$
+      $\global\def\argtg{\text{argtg}\,}$
+      $\global\def\ch{\text{ch}\,}$
+      $\global\def\const{\text{const}\,}$
+      $\global\def\degree{\text{degree}\,}$
+      $\global\def\proj{\mathrm{proj}}$
+      $\global\def\diag{\mathrm{diag}}$
+      $\global\def\rank{\mathrm{rank}}$
+      $\global\def\avg{\mathrm{avg}}$
+      $\global\def\res{\text{res}\,}$
+      $\global\def\sh{\text{sh}\,}$
+      $\global\def\sign{\text{sign}\,}$
+      $\global\def\tg{\mathrm{tg}\,}$
+    </div>
+
+    <ol id="questions">
+      <li class="question">
+        <div class="name repeat">
+          Формула Гаусса-Остроградского
+        </div>
+        <div class="content">
+          Если $\vec{n}$ &mdash; вектор внешней нормали к поверхности $S$, то
+          \[
+          \iint\limits_{S} \dp{\vec{a}}{\vec{n}} dS = \iiint\limits_{V} \div
+          \vec{a} \, dV.
+          \]
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name repeat">
+          Формула интегрирования по частям (многомерный случай)
+        </div>
+        <div class="content">
+          Пусть $\Omega \subset \mathbb{R}^m$ &mdash; открытое ограниченное
+          множество с кусочно-гладкой границей $\Gamma = \partial \Omega$. Если
+          $u,v$ &mdash; гладкие на $\overline{\Omega}$ функции, то справедлива
+          формула
+          \[
+          \int\limits_\Omega \pd{u}{x_\alpha} v dx
+          = \int\limits_{\Gamma} u v n_\alpha d\mu
+          - \int\limits_\Omega u \pd{v}{x_\alpha} dx,
+          \]
+          где $\vec{n} = (n_1, \dots, n_m)$ &mdash; внешняя нормаль к $\Gamma$.
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Метод разделения переменных для однородных гиперболических уравнений
+        </div>
+        <div class="content">
+          Рассмотрим гиперболическое уравнение:
+          \[
+          L[u] = \rho(x) \pdv2{u}{t},
+          \]
+          где:
+          <ul>
+            <li>
+              $L$ &mdash; линейный дифференциальный оператор:
+              \[
+              L[u] = \pd{}{x_\alpha} \paren{
+              A_{\alpha \beta} \pd{u}{x_\beta}
+              } - Au,
+              \]
+              причём $A \geqslant 0$, а матрица $A_{\alpha \beta}$ положительно
+              определена:
+              \[
+              A_{\alpha \beta} \xi_\alpha \xi_\beta
+              \geqslant B \sum_{j=1}^m \xi_j^2,
+              \qquad \alpha, \beta = \overline{1,m},
+              \quad B \gt 0.
+              \]
+            </li>
+
+            <li>
+              точка $x \in \overline{\Omega} \subset \mathbb{R}^m$, а
+              $t \in [0;+\infty)$ &mdash; переменная времени;
+            </li>
+
+            <li>
+              $\rho(x) \gt 0$ &mdash; заданная функция;
+            </li>
+
+            <li>
+              $u(x,t)$ определена и непрерывна на
+              $\overline{\Omega} \times [0;+\infty)$;
+            </li>
+
+            <li>
+              область $\Omega$ ограничена кусочно-гладкой поверхностью
+              $\Gamma = \partial \Omega$.
+            </li>
+          </ul>
+
+          Подчиним функцию $u(x,t)$ дополнительным условиям: начальным
+          \[
+          u(x,0) = \varphi_0(x),
+          \qquad
+          \at{\pd{u}{t}}{t=0} = \varphi_1(x)
+          \]
+          и граничному:
+          \[
+          \at{
+          \paren{
+          \gamma_1 A_{\alpha \beta} \pd{u}{x_\beta}
+          \cos\paren{ \vec{n}, x_\alpha } + \gamma_2 u
+          }
+          }{\Gamma} = 0,
+          \quad
+          t \gt 0,
+          \]
+          где $\vec{n}$ &mdash; вектор внешней нормали к границе $\Gamma$.
+
+          <div class="remark">
+            <ul>
+              <li>
+                $\gamma_1 = 0$ &mdash; первая краевая задача;
+              </li>
+
+              <li>
+                $\gamma_2 = 0$ &mdash; вторая краевая задача;
+              </li>
+
+              <li>
+                $\gamma_1,\gamma_2 \neq 0$ &mdash; третья краевая задача.
+              </li>
+            </ul>
+          </div>
+
+          <p>
+          Будем искать решение задачи в виде
+          \[
+          u(x,t) = \Phi(x) \Psi(t).
+          \]
+          Такое представление решения &mdash; суть <i class="important">метода
+            разделённых переменных</i>, который также называют
+          <i class="important">методом Фурье</i>.
+          </p>
+
+          <div class="remark">
+            Вообще говоря, метод Фурье хорошо применим в том случае, когда
+            граница области совпадает с координатными линиями. Например, если бы
+            границей области являлась окружность, задачу стоило бы
+            расссматривать в полярных координатах. Если же граница сложная, то
+            нужно постараться найти систему координат, где хотя бы одна
+            координатная линия совпадала бы с границей.
+          </div>
+
+          <p>
+          Подставив его в исходное уравнение, получим
+          \[
+          \frac{L[\Phi(\cdot)]}{\rho(x) \Phi(x)}
+          = \frac{\Psi''(t)}{\Psi(t)} = -\lambda,
+          \]
+          где $\lambda = \const$, так как обе дроби зависят каждая от своей
+          переменной. Получаем два независимых уравнения:
+          \[
+          \begin{aligned}
+          \Psi'' + \lambda \Psi &= 0, \\
+          L[\Phi] + \lambda \rho \Phi &= 0.
+          \end{aligned}
+          \]
+          </p>
+
+          <p>
+          Подставив представление $u = \Phi(x) \Psi(t)$ в краевые условия,
+          получаем
+          \[
+          \left.
+          \left[
+          \paren{
+          \gamma_1 A_{\alpha \beta} \pd{\Phi}{x_\beta} \cos(\vec{n}, x_\alpha)
+          + \gamma_2 \Phi
+          } \Psi
+          \right]
+          \right|_{\Gamma}
+          = 0.
+          \]
+          Так как $\Psi(t)$ не зависит от $x$, то это равенство равносильно
+          \[
+          \left.
+          \paren{
+          \gamma_1 A_{\alpha \beta} \pd{\Phi}{x_\beta} \cos(\vec{n}, x_\alpha)
+          + \gamma_2 \Phi
+          }
+          \right|_{\Gamma}
+          = 0.
+          \]
+          </p>
+
+          <div class="definition">
+            Задача
+            \[
+            L[\Phi] + \lambda \rho \Phi = 0
+            \]
+            с краевыми условиями
+            \[
+            \left.
+            \paren{
+            \gamma_1 A_{\alpha \beta} \pd{\Phi}{x_\beta} \cos(\vec{n}, x_\alpha)
+            + \gamma_2 \Phi
+            }
+            \right|_{\Gamma}
+            = 0
+            \]
+            называется <i>задачей Штурма-Лиувилля</i>. Значения $\lambda$, при
+            которых эта задача имеет нетривиальное решение, называются
+            <i>собственными числами</i>, а соответствующие им нетривиальные
+            решения $\Phi(x)$ &mdash; <i>собственными функциями</i>.
+          </div>
+
+          <div class="theorem">
+            Существует бесконечное множество собственных чисел $\lambda_n$ и
+            соответствующих им собственных функций $\Phi_n(x)$ краевой задачи
+            Штурма-Лиувилля.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: ряд Фурье функции $f(x)$
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Рядом Фурье</i> функции $f(x)$ по ортогональным функциям
+            $\Phi_n(x) \gt 0$ с весом $\rho(x)$ называется ряд
+            \[
+            f(x) = \sum_{n=1}^\infty C_n \Phi_n(x),
+            \]
+            где
+            \[
+            \begin{aligned}
+            C_n &= \frac{1}{\norm{\Phi_n}^2} \int\limits_\Omega f(x) \rho(x)
+            \Phi_n(x) d\mu, \\
+            \norm{\Phi_n}^2 &= \int\limits_{\Omega} \rho(x) \Phi_n^2(x) d\mu,
+            \end{aligned}
+            \]
+            где $d\mu$ &mdash; неотрицательная мера, определённая в $\Omega$. В
+            частности, для лебеговой меры $d\mu = dx = dx_1 dx_2 \dots dx_m$
+            &mdash; элемент объёма $\Omega$ (обозначение: $d\Omega$).
+          </div>
+
+          <div class="remark">
+            Если ввести нормировку
+            \[
+            \widetilde{\Phi}_n(x) = \frac{\Phi_n(x)}{\norm{\Phi_n(x)}},
+            \]
+            то
+            \[
+            f(x) = \sum_{n=1}^\infty \widetilde{C}_n \widetilde{\Phi}_n(x),
+            \]
+            где
+            \[
+            \widetilde{C}_n = C_n \norm{\Phi_n(x)} =
+            \int\limits_\Omega f(x) \rho(x) \widetilde{\Phi}_n(x) d\mu.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема Стеклова о разложимости
+        </div>
+        <div class="content">
+          <p>
+          Обозначим через $A$ класс функций,
+          </p>
+          <ol>
+            <li>
+              непрерывных в $\overline{\Omega}$;
+            </li>
+
+            <li>
+              имеющих кусочно-непрерывные частные производные 1-го и 2-го
+              порядков в $\overline{\Omega}$;
+            </li>
+
+            <li>
+              удовлетворяющих краевому условию
+              \[
+              \left.
+              \paren{
+              \gamma_1 A_{\alpha \beta} \pd{\Phi}{x_\beta}
+              \cos(\vec{n}, x_\alpha)
+              + \gamma_2 \Phi
+              }
+              \right|_{\Gamma}
+              = 0.
+              \]
+            </li>
+          </ol>
+
+          <p>
+          Нетрудно убедиться, что собственные функции задачи Штурма-Лиувилля
+          принадлежат классу $A$.
+          </p>
+
+          <div class="theorem">
+            <i>(Стеклова о разложимости)</i>.
+
+            <p>
+            Произвольная функция $f(x) \in A$ разлагается в ряд Фурье по
+            собственным функциям краевой задачи Штурма-Лиувилля
+            \[
+            \begin{gathered}
+            L[\Phi] + \lambda \rho \Phi = 0, \\
+            \left.
+            \paren{
+            \gamma_1 A_{\alpha \beta} \pd{\Phi}{x_\beta} \cos(\vec{n}, x_\alpha)
+            + \gamma_2 \Phi
+            }
+            \right|_{\Gamma}
+            = 0,
+            \end{gathered}
+            \]
+            абсолютно и равномерно сходящийся в области $\Omega$.
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: собственные колебания
+        </div>
+        <div class="content">
+          Пусть задача Штурма-Лиувилля
+          \[
+          \begin{gathered}
+          L[\Phi] + \lambda \rho \Phi = 0, \\
+          \left.
+          \paren{
+          \gamma_1 A_{\alpha \beta} \pd{\Phi}{x_\beta} \cos(\vec{n}, x_\alpha)
+          + \gamma_2 \Phi
+          }
+          \right|_{\Gamma}
+          = 0
+          \end{gathered}
+          \]
+          решена. Тогда для каждого собственного числа $\lambda_n \gt 0$
+          уравнение
+          \[
+          \Psi'' + \lambda \Psi = 0
+          \]
+          имеет решение
+          \[
+          \Phi_n(t) =
+          A_n \cos\paren{ \sqrt{\lambda_n} t }
+          + B_n \sin\paren{ \sqrt{\lambda_n} t }.
+          \]
+
+          Учитывая, что $u(x,t) = \Phi(x) \Psi(t)$, можно утверждать, что
+          частными решениями уравнения
+          \[
+          L[u] = \rho(x) \pdv2{u}{t}
+          \]
+          являются функции
+          \[
+          u_n(x,t) = \left[
+          A_n \cos\paren{ \sqrt{\lambda_n} t }
+          + B_n \sin\paren{ \sqrt{\lambda_n} t }
+          \right] \Phi_n(x).
+          \]
+
+          <div class="definition">
+            Физические процессы, описываемые функциями $u_n(x,t)$, принято
+            называть <i>собственными колебаниями</i> (или
+            <i>стоячими волнами</i>). Числа $\sqrt{\lambda_n}$ &mdash;
+            <i>частоты</i> собственных колебаний, а функции $\Phi_n(x)$ &mdash;
+            <i>формы</i> собственных колебаний.
+          </div>
+
+          <div class="remark">
+            Частота и форма собственных колебаний не зависит от начальных
+            условий.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Лемма и основная теорема метода разделения переменных для однородных
+          гиперболических уравнений
+        </div>
+        <div class="content">
+          <p>
+          Рассмотрим гиперболическое уравнение
+          \[
+          L[u] = \rho(x) \pdv2{u}{t}
+          \]
+          с заданными начальными
+          \[
+          u(x,0) = \varphi_0(x), \qquad \at{\pd{u}{t}}{t=0} = \varphi_1(x)
+          \]
+          и краевыми
+          \[
+          \at{
+          \paren{
+          \gamma_1 A_{\alpha \beta} \pd{u}{x_\beta}
+          \cos\paren{ \vec{n}, x_\alpha } + \gamma_2 u
+          }
+          }{\Gamma} = 0
+          \]
+          условиями.
+          </p>
+
+          <p>
+          Обозначим через $A$ класс функций $\Phi$,
+          </p>
+          <ol>
+            <li>
+              непрерывных в $\overline{\Omega}$;
+            </li>
+
+            <li>
+              имеющих кусочно-непрерывные частные производные 1-го и 2-го
+              порядков в $\overline{\Omega}$;
+            </li>
+
+            <li>
+              удовлетворяющих краевому условию
+              \[
+              \left.
+              \paren{
+              \gamma_1 A_{\alpha \beta} \pd{\Phi}{x_\beta}
+              \cos(\vec{n}, x_\alpha)
+              + \gamma_2 \Phi
+              }
+              \right|_{\Gamma}
+              = 0.
+              \]
+            </li>
+          </ol>
+
+          <div class="lemma">
+            Функционал
+            \[
+            R[W,\Phi] = - \int\limits_{\Omega} W L[\Phi] d\mu
+            \]
+            симметричен на функциях класса $A$:
+            \[
+            R[W,\Phi] = R[\Phi,W] \qquad \forall W,\Phi \in A.
+            \]
+
+            <div class="proof">
+              \[
+              \begin{aligned}
+              R[W,\Phi]
+              &= - \int\limits_\Omega W \left[
+              \pd{}{x_\alpha} \paren{ A_{\alpha \beta} \pd{\Phi}{x_\beta} }
+              - A \Phi
+              \right] d\Omega = \\
+              &= \int\limits_\Omega A W \Phi d\Omega
+              - \int\limits_\Omega W
+              \pd{}{x_\alpha} \paren{ A_{\alpha \beta} \pd{\Phi}{x_\beta} }
+              d\Omega.
+              \end{aligned}
+              \]
+
+              Применим формулу интегрирования по частям:
+              \[
+              \int\limits_\Omega \pd{u}{x_\alpha} v d\Omega
+              = \int\limits_{\Gamma} u v n_\alpha d\Gamma
+              - \int\limits_\Omega u \pd{u}{x_\alpha} d\Omega,
+              \]
+              получим
+              \[
+              \begin{aligned}
+              R[W,\Phi]
+              &= \int\limits_\Omega A W \Phi d\Omega
+              -
+              \int\limits_\Gamma
+              W A_{\alpha \beta} \pd{\Phi}{x_\beta} \cos(\vec{n}, x_\alpha)
+              d\Gamma
+              + \int\limits_\Omega
+              A_{\alpha \beta} \pd{W}{x_\alpha} \pd{\Phi}{x_\beta}
+              d\Omega = \\
+              &=
+              \int\limits_\Omega \left[
+              A_{\alpha \beta} \pd{W}{x_\alpha} \pd{\Phi}{x_\beta}
+              + A W \Phi
+              \right] d\Omega
+              -
+              \int\limits_\Gamma
+              W A_{\alpha \beta} \pd{\Phi}{x_\beta} \cos(\vec{n}, x_\alpha)
+              d\Gamma.
+              \end{aligned}
+              \]
+
+              <p>
+              Заметим, что первое слагаемое симметрично.
+              </p>
+
+              Если $\gamma_1 = 0$ или $\gamma_2 = 0$, то
+              \[
+              \int\limits_\Gamma
+              W A_{\alpha \beta} \pd{\Phi}{x_\beta} \cos(\vec{n}, x_\alpha)
+              d\Gamma = 0.
+              \]
+              Если же $\gamma_1 \neq 0$ и $\gamma_2 \neq 0$, то
+              \[
+              A_{\alpha \beta} \pd{\Phi}{x_\beta} \cos(\vec{n}, x_\alpha)
+              = - \frac{\gamma_2}{\gamma_1} \Phi,
+              \]
+              поэтому
+              \[
+              R[W,\Phi]
+              =
+              \int\limits_\Omega \left[
+              A_{\alpha \beta} \pd{W}{x_\alpha} \pd{\Phi}{x_\beta}
+              + A W \Phi
+              \right] d\Omega
+              +
+              \frac{\gamma_2}{\gamma_1}
+              \int\limits_\Gamma W \Phi d\Gamma,
+              \]
+              откуда и следует симметричность оператора $R[W,\Phi]$.
+            </div>
+          </div>
+
+          <p>
+          Рассмотрим сумму частных решений:
+          \[
+          u(x,t) = \sum_{n=1}^\infty \left[
+          A_n \cos\paren{ \sqrt{\lambda_n} t }
+          + B_n \sin\paren{ \sqrt{\lambda_n} t }
+          \right] \Phi_n(x).
+          \]
+          </p>
+
+          <div class="theorem">
+            Непрерывное в $\overline{\Omega} \times [0;\infty)$ решение исходной
+            задачи представляется в виде ряда
+            \[
+            u(x,t) = \sum_{n=1}^\infty \left[
+            A_n \cos\paren{ \sqrt{\lambda_n} t }
+            + B_n \sin\paren{ \sqrt{\lambda_n} t }
+            \right] \Phi_n(x),
+            \]
+            в котором коэффициенты $A_n$ и $B_n$ определяются по формулам
+            \[
+            \begin{aligned}
+            A_n &= \frac{1}{\norm{\Phi_n}^2}
+            \int\limits_\Omega \rho(x) \varphi_0(x) \Phi_n(x) d\mu, \\
+            B_n &= \frac{1}{\norm{\Phi_n}^2 \sqrt{\lambda_n}}
+            \int\limits_\Omega \rho(x) \varphi_1(x) \Phi_n(x) d\mu.
+            \end{aligned}
+            \]
+
+            <div class="proof">
+              Пусть $u(x,t)$ &mdash; искомое решение. Так как для любого $t$
+              функция $u(x,t)$ непрерывна в $\overline{\Omega}$ и удовлетворяет
+              краевым условиям
+              \[
+              \gamma_1 A_{\alpha \beta} \pd{u}{x_\beta} \cos(\vec{n}, x_\alpha)
+              + \gamma_2 \at{u}{\Gamma} = 0,
+              \]
+              то $u \in A$. Значит &mdash; по теореме Стеклова &mdash; функцию
+              $u(x,t)$ можно представить в виде ряда Фурье
+              \[
+              u(x,t) = \sum_{n=1}^\infty \Phi_n(x) \Psi_n(t),
+              \]
+              где
+              \[
+              \Psi_n(t) = \frac{1}{\norm{\Phi_n}^2}
+              \int\limits_\Omega \rho(x) u(x,t) \Phi_n(x) d\mu.
+              \]
+
+              Так как функции $\Phi_n(x)$ собственные, то они удовлетворяют
+              уравнению
+              \[
+              L[\Phi_n] + \lambda_n \rho \Phi_n = 0,
+              \]
+              откуда
+              \[
+              \Phi_n(x) = - \frac{1}{\lambda_n \rho(x)} L[\Phi_n],
+              \]
+              поэтому
+              \[
+              \begin{aligned}
+              \Psi_n(t) &= -\frac{1}{\norm{\Phi_n}^2 \lambda_n}
+              \int\limits_\Omega u(x,t) L[\Phi_n] d\mu = \\
+              &= \frac{R[u, \Phi_n]}{\lambda_n \norm{\Phi_n}^2}.
+              \end{aligned}
+              \]
+              Из леммы известно, что $R[u,v] = R[v,u]$, следовательно,
+              \[
+              \begin{aligned}
+              \Psi_n(t) &= \frac{R[\Phi_n, u]}{\lambda_n \norm{\Phi_n}^2} = \\
+              &= -\frac{1}{\norm{\Phi_n}^2 \lambda_n}
+              \int\limits_\Omega \Phi_n(x) L[u] d\mu.
+              \end{aligned}
+              \]
+
+              Учитывая исходное уравнение
+              \[
+              L[u] = \rho(x) \pdv2{u}{t},
+              \]
+              имеем
+              \[
+              \Psi_n(t) = -\frac{1}{\norm{\Phi_n}^2 \lambda_n}
+              \int\limits_\Omega \rho(x) \Phi_n(x) \pdv2{u}{t} d\mu.
+              \]
+
+              Сравнивая его с уравнением
+              \[
+              \Psi_n(t) = \frac{1}{\norm{\Phi_n}^2}
+              \int\limits_\Omega \rho(x) u(x,t) \Phi_n(x) d\mu,
+              \]
+              приходим к выводу, что функция $\Psi_n(t)$ должна удовлетворять
+              уравнению
+              \[
+              \Psi_n'' + \lambda_n \Psi_n = 0.
+              \]
+              Его решения могут быть записаны в виде
+              \[
+              \Psi_n(t) =
+              A_n \cos(\sqrt{\lambda_n} t) + B_n \sin(\sqrt{\lambda_n} t),
+              \]
+              где
+              \[
+              A_n = \Psi_n(0), \qquad B_n \sqrt{\lambda_n} = \Psi_n'(0).
+              \]
+              Используя уравнение
+              \[
+              \Psi_n(t) = \frac{1}{\norm{\Phi_n}^2}
+              \int\limits_\Omega \rho(x) u(x,t) \Phi_n(x) d\mu,
+              \]
+              получаем требуемые зависимости:
+              \[
+              \begin{aligned}
+              A_n &= \frac{1}{\norm{\Phi_n}^2}
+              \int\limits_\Omega \rho(x) \varphi_0(x) \Phi_n(x) d\mu, \\
+              B_n &= \frac{1}{\norm{\Phi_n}^2 \sqrt{\lambda_n}}
+              \int\limits_\Omega \rho(x) \varphi_1(x) \Phi_n(x) d\mu.
+              \end{aligned}
+              \]
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: пространство $L_2(\Omega, \rho)$
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Пространство $L_2(\Omega,\rho)$</i> &mdash; пространство функций
+            $f(x)$ таких, что
+            \[
+            \int\limits_\Omega \rho(x) f^2(x) d\mu \lt \infty.
+            \]
+          </div>
+
+          <div class="remark">
+            Если $f$ непрерывна в конечной области $\Omega$, то
+            $f \in L_2(\Omega,\rho)$. Обратное, вообще говоря, неверно.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: система ортогональных функций, полная в
+          $L^2(\Omega,\rho)$
+        </div>
+        <div class="content">
+          <div class="definition">
+            Система попарно ортогональных в $L_2(\Omega,\rho)$ функций $\Phi_n$
+            называется <i>полной в $L_2(\Omega,\rho)$</i>, если для любой
+            функции $f \in L_2(\Omega,\rho)$ выполняется
+            <i>равенство Парсеваля</i>:
+            \[
+            \int\limits_\Omega \rho(x) f^2(x) d\mu =
+            \sum_{k=1}^\infty C_k^2 \norm{\Phi_k}^2,
+            \]
+            где
+            \[
+            C_k = \frac{\dp{f}{\Phi_k}}{\norm{\Phi_k}^2}
+            = \frac{1}{\norm{\Phi_k}^2}
+            \int\limits_\Omega \rho(x) f(x) \Phi_k(x) d\mu.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Достаточный признак полноты $\set{\Phi_n}$ в $L_2(\Omega,\rho)$ (без
+          док-ва)
+        </div>
+        <div class="content">
+          <div class="theorem">
+            <i>
+              (достаточный признак полноты $\set{\Phi_n}$ в $L_2(\Omega,\rho)$)
+            </i>.
+            <p>
+            Если для любой $F(x) \in C(\overline{\Omega})$ и для любого
+            $\varepsilon \gt 0$ существует $n \in \mathbb{N}$ такой, что
+            линейная комбинация
+            \[
+            S_n(x) = \sum_{k=1}^n \alpha_k \Phi_k(x)
+            \]
+            удовлетворяет неравенству
+            \[
+            \int\limits_\Omega \rho(x) \paren{ F(x) - S_n(x) }^2 d\mu
+            \lt \varepsilon,
+            \]
+            то $\set{ \Phi_n }$ полна в $L_2(\Omega, \rho)$.
+            </p>
+          </div>
+
+          <div class="definition">
+            Говорят, что последовательность $S_n$ <i>сходится в среднем</i> к
+            функции $F(x)$.
+          </div>
+
+          <div class="remark">
+            <p>
+            Условие теоремы можно переписать в следующем виде:
+            \[
+            \lim_{n \to \infty} 
+            \int\limits_\Omega \rho(x) \paren{ F(x) - S_n(x) }^2 d\mu = 0.
+            \]
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема об интегрировании ряда функций (без док-ва)
+        </div>
+        <div class="content">
+          <div class="theorem">
+            Если система попарно ортогональных функций $\set{ \Phi_n }$ полна в
+            $L_2(\Omega,\rho)$, то ряд Фурье для любой функции
+            $f \in L_2(\Omega,\rho)$ можно почленно интегрировать независимо от
+            того, сходится ли этот интеграл или расходится, то есть для любой
+            подобласти $\Omega' \subset \Omega$ справедливо равенство
+            \[
+            \int\limits_{\Omega'} f(x) d\mu = \sum_{k=1}^\infty C_n
+            \int\limits_{\Omega'} \Phi_n(x) d\mu.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: множество, плотное в $L_2(\Omega,\rho)$
+        </div>
+        <div class="content">
+          <div class="definition">
+            Говорят, что множество $M$ <i>плотно в $L_2(\Omega,\rho)$</i>, если
+            для любой функции $f \in L_2(\Omega,\rho)$ существует
+            последовательность $\set{ f_n }$ функций $f_n \in M$ такая, что
+            \[
+            \lim_{n \to \infty} f_n = f.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Свойства собственных функций и собственных чисел задачи
+          Штурма-Лиувилля
+        </div>
+        <div class="content">
+          Рассмотрим задачу Штурма-Лиувилля
+          \[
+          \begin{gathered}
+          L[\Phi] + \lambda \rho \Phi = 0, \\
+          \left.
+          \paren{
+          \gamma_1 A_{\alpha \beta} \pd{\Phi}{x_\beta} \cos(\vec{n}, x_\alpha)
+          + \gamma_2 \Phi
+          }
+          \right|_{\Gamma}
+          = 0.
+          \end{gathered}
+          \]
+
+          <ol>
+            <li>
+              Если $\Phi$ &mdash; собственная функция, отвечающая собственному
+              значению $\lambda$, то $C \Phi$ (где $C = \const$) также является
+              собственной функцией, отвечающей собственному значению $\lambda$.
+
+              <div class="derivation">
+                Свойство вытекает напрямую из задачи Штурма-Лиувилля.
+              </div>
+            </li>
+
+            <li>
+              Собственные функции $\Phi_i, \Phi_j$, отвечающие разным
+              собственным числам $\lambda_i \neq \lambda_j$, ортогональны в
+              $L_2(\Omega,\rho)$ с весом $\rho(x)$:
+              \[
+              \int\limits_{\Omega} \rho(x) \Phi_i(x) \Phi_j(x) d\mu = 0.
+              \]
+
+              <div class="derivation">
+                Так как
+                \[
+                L[\Phi_n] = - \lambda_n \rho \Phi_n,
+                \]
+                то
+                \[
+                (\lambda_i - \lambda_j)
+                \int\limits_{\Omega} \rho(x) \Phi_i(x) \Phi_j(x) d\mu
+                =
+                R[\Phi_j, \Phi_i] - R[\Phi_i, \Phi_j] = 0.
+                \]
+              </div>
+            </li>
+
+            <li>
+              Все собственные числа вещественны: $\lambda_n \in \mathbb{R}$.
+
+              <div class="derivation">
+                Данное утверждение является следствием свойства 2:
+                \[
+                (\lambda - \overline{\lambda})
+                \int\limits_{\Omega}
+                \rho(x) \Phi_i(x) \overline{\Phi}_i(x) d\mu = 0,
+                \implies \lambda = \overline{\lambda}
+                \]
+              </div>
+            </li>
+
+            <li>
+              <div class="proposition">
+                Если $L$ &mdash; линейный дифференциальный оператор:
+                \[
+                L[u] = \pd{}{x_\alpha} \paren{
+                A_{\alpha \beta} \pd{u}{x_\beta}
+                } - Au,
+                \]
+                причём $A \geqslant 0$, а матрица $A_{\alpha \beta}$
+                положительно определена:
+                \[
+                A_{\alpha \beta} \xi_\alpha \xi_\beta
+                \geqslant B \sum_{j=1}^m \xi_j^2,
+                \qquad \alpha, \beta = \overline{1,m},
+                \quad B \gt 0,
+                \]
+                то собственные числа $\lambda_n$, которым соответствуют
+                собственные функции задачи Штурма-Лиувилля, неотрицательные:
+                \[
+                \lambda_n \geqslant 0, \qquad n \in \mathbb{N}.
+                \]
+
+                <div class="proof">
+                  Домножим уравнение
+                  \[
+                  L[\Phi] + \lambda \rho \Phi = 0
+                  \]
+                  на $\Phi_m$ и проинтегрируем по области $\Omega$. В силу того,
+                  что $\Phi_m$ &mdash; система ортогональных с весом $\rho(x)$
+                  функций, справедливо, что
+                  \[
+                  \int\limits_\Omega \rho(x) \Phi_n(x) \Phi_m(x) d\Omega = 0,
+                  \qquad n \neq m.
+                  \]
+                  Тогда
+                  \[
+                  \begin{aligned}
+                  \lambda_n
+                  &= - \frac{1}{\norm{\Phi_n(x)}^2}
+                  \int\limits_\Omega \Phi_n(x) L[\Phi_n] d\Omega = \\
+                  &= - \frac{1}{\norm{\Phi_n(x)}^2}
+                  \int\limits_\Omega \Phi_n(x) \left[
+                  \pd{}{x_\alpha} \paren{
+                  A_{\alpha \beta} \pd{\Phi_n}{x_\beta}
+                  } - A\Phi_n
+                  \right] d\Omega = \\
+                  &= \frac{1}{\norm{\Phi_n(x)}^2}
+                  \int\limits_\Omega A \Phi_n^2 d\Omega
+                  - \frac{1}{\norm{\Phi_n(x)}^2}
+                  \int\limits_\Omega \Phi_n(x)
+                  \pd{}{x_\alpha} \paren{
+                  A_{\alpha \beta} \pd{\Phi_n}{x_\beta}
+                  }
+                  d\Omega = \\
+                  \end{aligned}
+                  \]
+
+                  Применим ко второму слагаемому формулу интегрирования по
+                  частям:
+                  \[
+                  \int\limits_\Omega \pd{u}{x_\alpha} v d\Omega
+                  = \int\limits_{\Gamma} u v n_\alpha d\Gamma
+                  - \int\limits_\Omega u \pd{u}{x_\alpha} d\Omega,
+                  \]
+                  получим
+                  \[
+                  \begin{aligned}
+                  \lambda_n
+                  &= \frac{1}{\norm{\Phi_n}^2}
+                  \int\limits_\Omega A \Phi_n^2 d\Omega
+                  - \frac{1}{\norm{\Phi_n}^2}
+                  \int\limits_\Gamma \Phi_n
+                  A_{\alpha \beta} \pd{\Phi_n}{x_\beta} \cos(\vec{n}, x_\alpha)
+                  d\Gamma + \phantom{1} \\
+                  &\phantom{=1} + \frac{1}{\norm{\Phi_n}^2}
+                  \int\limits_\Omega
+                  A_{\alpha \beta} \pd{\Phi_n}{x_\alpha} \pd{\Phi_n}{x_\beta}
+                  d\Omega = \\
+                  &= \frac{1}{\norm{\Phi_n}^2}
+                  \int\limits_\Omega \left[
+                  A_{\alpha \beta} \pd{\Phi_n}{x_\alpha} \pd{\Phi_n}{x_\beta}
+                  + A \Phi_n^2
+                  \right] d\Omega
+                  -
+                  \frac{1}{\norm{\Phi_n}^2}
+                  \int\limits_\Gamma
+                  \Phi_n A_{\alpha \beta} \pd{\Phi_n}{x_\beta}
+                  \cos( \vec{n}, x_\alpha ) d\Gamma.
+                  \end{aligned}
+                  \]
+
+                  <p>
+                  Рассмотрим варианты постановки краевой задачи:
+                  </p>
+                  <ul type="i">
+                    <li>
+                      если $\gamma_1 = 0, \gamma_2 \neq 0$, то
+                      \[
+                      \at{\Phi_n}{\Gamma} = 0, \implies
+                      \int\limits_\Gamma
+                      \Phi_n A_{\alpha \beta} \pd{\Phi_n}{x_\beta}
+                      \cos( \vec{n}, x_\alpha ) d\Gamma = 0,
+                      \]
+                      откуда следует, что
+                      \[
+                      \lambda_n =
+                      \frac{1}{\norm{\Phi_n}^2}
+                      \int\limits_\Omega \left[
+                      A_{\alpha \beta}
+                      \pd{\Phi_n}{x_\alpha} \pd{\Phi_n}{x_\beta}
+                      + A \Phi_n^2
+                      \right] d\Omega.
+                      \]
+
+                      В силу того, что
+                      \[
+                      A \geqslant 0,
+                      \]
+                      а $A_{\alpha \beta}$ положительно определена, заключаем,
+                      что $\lambda_n \geqslant 0$.
+                    </li>
+
+                    <li>
+                      если $\gamma_1 \neq 0, \gamma_2 = 0$, то
+                      \[
+                      \left.
+                      \paren{
+                      A_{\alpha \beta} \pd{\Phi}{x_\beta}
+                      \cos(\vec{n}, x_\alpha)
+                      }
+                      \right|_{\Gamma}
+                      = 0,
+                      \]
+                      поэтому $\lambda_n \geqslant 0$ (аналогично предыдущему
+                      пункту).
+                    </li>
+
+                    <li>
+                      если $\gamma_1 \neq 0, \gamma_2 \neq 0$, то на границе
+                      $\Gamma$ справедливо равенство
+                      \[
+                      A_{\alpha \beta} \pd{\Phi}{x_\beta}
+                      \cos(\vec{n}, x_\alpha)
+                      = -\frac{\gamma_2}{\gamma_1} \Phi_n,
+                      \]
+                      то есть
+                      \[
+                      \lambda_n =
+                      \frac{1}{\norm{\Phi_n}^2}
+                      \int\limits_\Omega \left[
+                      A_{\alpha \beta}
+                      \pd{\Phi_n}{x_\alpha} \pd{\Phi_n}{x_\beta}
+                      + A \Phi_n^2
+                      \right] d\Omega
+                      +
+                      \frac{\gamma_2}{\gamma_1} \cdot
+                      \frac{1}{\norm{\Phi_n}^2}
+                      \int\limits_\Gamma
+                      \Phi_n^2 \, d\Gamma.
+                      \]
+                      Нетрудно видеть, что при $\gamma_1 \gamma_2 \gt 0$
+                      собственные числа $\lambda_n \geqslant 0$.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="remark">
+                Собственные числа можно представить в виде
+                \[
+                \lambda_n = \frac{R[\Phi_n, \Phi_n]}{\norm{\Phi_n^2}}.
+                \]
+              </div>
+            </li>
+
+            <li>
+              <div class="proposition">
+                Если $\Omega' \subset \Omega$, то $\lambda_n' \geqslant
+                \lambda_n$, то есть при сужении области определения решения
+                задачи Штурма-Лиувилля собственные числа не уменьшаются.
+
+                <div class="proof">
+                  <p>
+                  Пусть $\lambda_1 = \inf \set{ \lambda_n }$ для задачи
+                  Штурма-Лиувилля с областью определения $\Omega$. Предположим,
+                  что области $\Omega$ соответствует класс $A'$, а области
+                  $\Omega'$ &mdash; класс $A'$.
+                  </p>
+
+                  <p>
+                  Пусть $\Gamma = \partial \Omega$. Тогда границу сужения можно
+                  представить в виде
+                  \[
+                  \Gamma' = \partial \Omega' = \gamma' \cup \Gamma_1,
+                  \]
+                  где $\Gamma_1 = \partial \Omega \cap \partial \Omega'$.
+                  </p>
+
+                  <p>
+                  Рассмотрим $\Phi_n' \in A'$. Тогда
+                  \[
+                  \left.
+                  \paren{
+                  \gamma_1 A_{\alpha \beta} \pd{\Phi_n'}{x_\beta}
+                  \cos(\vec{n}, x_\alpha)
+                  + \gamma_2 \Phi_n'
+                  }
+                  \right|_{\Gamma'}
+                  = 0.
+                  \]
+                  Расширим эту функцию на множество $\overline{\Omega}$
+                  следующим образом:
+                  \[
+                  \Phi_n'' =
+                  \begin{cases}
+                  \Phi_n', & x \in \overline{\Omega'}, \\
+                  0, & x \in \overline{\Omega} \setminus \overline{\Omega'}.
+                  \end{cases}
+                  \]
+                  Очевидно, что $\Phi_n'' \in A'$, а также $\Phi_n'' \in A$
+                  (выполнены граничные условия). Обозначим класс таких функций
+                  как $\widetilde{A}' := \set{ \Phi_n'' }$. Ясно, что
+                  $\widetilde{A}' \subset A$. Тогда
+                  \[
+                  \begin{aligned}
+                  \lambda_1'
+                  &= \inf_{\Phi_n \in A'}
+                  \left\{
+                  \frac{R_{\Omega'}[\Phi_n, \Phi_n]}{\norm{\Phi_n}_{\Omega'}^2}
+                  \right\} = \\
+                  &= \inf_{\Phi_n \in \widetilde{A}'}
+                  \left\{
+                  \frac{R_{\Omega}[\Phi_n, \Phi_n]}{\norm{\Phi_n}_{\Omega}^2}
+                  \right\} \geqslant \\
+                  &\geqslant \inf_{\Phi_n \in A}
+                  \left\{
+                  \frac{R_{\Omega}[\Phi_n, \Phi_n]}{\norm{\Phi_n}_{\Omega}^2}
+                  \right\} =: \lambda_1.
+                  \end{aligned}
+                  \]
+                  </p>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="proposition">
+                Система собственных функций краевой задачи Штурма-Лиувилля полна
+                в $L_2(\Omega,\rho)$.
+
+                <div class="proof">
+                  Рассмотрим функцию $f \in C(\overline{\Omega})$.
+                  Примем без доказательства, что множество функций класса $A$
+                  полно в $L_2(\Omega,\rho)$, тогда для любого
+                  $\varepsilon \gt 0$ найдётся $g \in A$ такая, что
+                  \[
+                  \int\limits_\Omega \rho(x) (f(x) - g(x))^2 d\Omega
+                  \lt \frac{\varepsilon}{4}.
+                  \]
+                  Для функции $g(x)$ справедливо представление рядом Фурье:
+                  \[
+                  g(x) = \sum_{k=1}^\infty C_k \Phi_k(x)
+                  \]
+                  по собственным функциям задачи Штурма-Лиувилля, равномерно
+                  сходящемся в $\overline{\Omega}$, то есть для любого
+                  $\varepsilon_1 \gt 0$ существует такой номер
+                  $N = N(\varepsilon_1)$, что для всех $n \gt N$ выполняется
+                  неравенство
+                  \[
+                  \abs{g(x) - \sum_{k=1}^n C_k \Phi_k} \lt \varepsilon_1.
+                  \]
+
+                  В таком случае, пользуясь неравенством
+                  \[
+                  2AB \leqslant A^2 + B^2,
+                  \]
+                  справедлива оценка:
+                  \[
+                  \begin{aligned}
+                  \int\limits_\Omega \rho \paren{
+                  f - \sum_{k=1}^n C_k \Phi_k
+                  }^2 d\Omega
+                  &=
+                  \int\limits_\Omega \rho \paren{
+                  f - g + g - \sum_{k=1}^n C_k \Phi_k
+                  }^2 d\Omega \leqslant \\
+                  &\leqslant
+                  2 \int\limits_\Omega \rho \paren{ f - g }^2 d\Omega
+                  +
+                  2 \int\limits_\Omega \rho \paren{
+                  g - \sum_{k=1}^n C_k \Phi_k
+                  }^2 d\Omega \lt \\
+                  &\lt
+                  \frac{\varepsilon}{2} + 2 \varepsilon_1^2 \int\limits_\Omega
+                  \rho d\Omega.
+                  \end{aligned}
+                  \]
+
+                  Выбрав
+                  \[
+                  2\varepsilon_1^2 :=
+                  \frac{\varepsilon}
+                  {\displaystyle 2 \int\limits_\Omega \rho d\Omega},
+                  \]
+                  завершаем доказательство.
+                </div>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Задача о свободных колебаниях прямоугольной мембраны
+        </div>
+        <div class="content">
+          <p>
+          Рассмотрим однородную изотропную мембрану
+          \[
+          0 \lt x \lt a, \qquad 0 \lt y \lt b
+          \]
+          с закреплёнными концами:
+          \[
+          \begin{aligned}
+          &\at{u}{x=0} = \at{u}{x=a} = 0, \\
+          &\at{u}{y=0} = \at{u}{y=b} = 0.
+          \end{aligned}
+          \]
+          Малые колебания мембраны описываются уравнением
+          \[
+          \pdv2{u}{t} - c^2 \Delta u = 0,
+          \]
+          где
+          </p>
+          <ul>
+            <li>
+              $\Delta = \pdv2{}{x} + \pdv2{}{y}$;
+            </li>
+
+            <li>
+              $c^2 = \dfrac{T_0}{\rho}$, $T_0$ &mdash; равномерное натяжение.
+            </li>
+          </ul>
+
+          <p>
+          Пусть начальные условия задаются уравнениями
+          \[
+          u(x,y,0) = \varphi_0(x,y), \qquad
+          \pd{u}{t}(x,y,0) = \varphi_1(x,y).
+          \]
+          Решать полученную смешанную задачу будем методом Фурье:
+          \[
+          u(x,y,t) = \Phi(x,y) T(t).
+          \]
+          </p>
+
+          <p>
+          Подставим это представление в уравнение колебаний:
+          \[
+          \frac{T''}{c^2 T} = \frac{\Delta \Phi}{\Phi} = -\lambda,
+          \]
+          где $\lambda = \const$. Отсюда приходим к уравнению
+          \[
+          \Delta \Phi + \lambda \Phi = 0
+          \]
+          с граничными условиями
+          \[
+          \begin{aligned}
+          &\Phi(0,y) = \Phi(a,y) = 0, \\
+          &\Phi(x,0) = \Phi(x,b) = 0.
+          \end{aligned}
+          \]
+          Аналогично приходим к уравнению для функции $T$:
+          \[
+          T'' + c^2 \lambda T = 0.
+          \]
+          </p>
+
+          <p>
+          Решение задачи для $\Phi$ будем искать в виде
+          \[
+          \Phi(x,y) = X(x) Y(y).
+          \]
+          Тогда
+          \[
+          \frac{X''}{X} + \frac{Y''}{Y} + \lambda = 0.
+          \]
+          Введём обозначения:
+          \[
+          \frac{X''}{X} = -\alpha, \qquad \lambda - \alpha = \beta;
+          \]
+          тогда предыдущее уравнение сводится к системе
+          \[
+          \begin{aligned}
+          X'' + \alpha X &= 0, \\
+          Y'' + \beta Y &= 0
+          \end{aligned}
+          \]
+          с краевыми условиями
+          \[
+          \begin{aligned}
+          X(0) = X(a) &= 0, \\
+          Y(0) = Y(b) &= 0.
+          \end{aligned}
+          \]
+          </p>
+
+          <p>
+          Нетрудно заметить, что мы получили две задачи Штурма-Лиувилля:
+          \[
+          \begin{gathered}
+          X'' + \alpha X = 0, \qquad X(0) = X(a) = 0, \\
+          Y'' + \alpha Y = 0, \qquad Y(0) = Y(b) = 0.
+          \end{gathered}
+          \]
+          Решение первой из них имеет вид
+          \[
+          X_n(x) = A \cos \sqrt{\alpha_n} x + B \sin \sqrt{\alpha_n} x.
+          \]
+          Из граничных условий находим, что $A = 0$. Тогда $B \neq 0$, так как
+          нас интересуют нетривиальные решения. Из свойств собственных функций
+          известно, что они определяются с точностью до постоянного множителя,
+          поэтому положим $B = 1$. Тогда
+          \[
+          X_n(x) = \sin \sqrt{\alpha_n} x,
+          \qquad \sqrt{\alpha_n} = \frac{n \pi}{a}, \quad n \in \mathbb{N}.
+          \]
+          Аналогичным образом получаем, что
+          \[
+          Y_k(x) = \sin \sqrt{\beta_k} y,
+          \qquad \sqrt{\beta_k} = \frac{k \pi}{b}, \quad k \in \mathbb{N}.
+          \]
+          Следовательно,
+          \[
+          \Phi_{nk}(x,y) = \sin \frac{n \pi x}{a} \sin \frac{k \pi y}{b}
+          \]
+          и
+          \[
+          \lambda_{nk} = \beta_k + \alpha_n
+          = \pi^2 \paren{ \frac{n^2}{a^2} + \frac{k^2}{b^2} }.
+          \]
+          Каждому $\lambda_{nk}$ соответствует решение
+          \[
+          T_{nk}(t) =
+          C_{nk} \cos \paren{ c \sqrt{\lambda_{nk}} t }
+          + D_{nk} \sin \paren{ c \sqrt{\lambda_{nk}} t }.
+          \]
+          Окончательно получаем
+          \[
+          u(x,y,t) = \sum_{n,k=1}^\infty T_{nk}(t) \Phi_{nk}(x,y).
+          \]
+          </p>
+
+          <p>
+          Если ряд для $u(x,y,t)$ и ряды, полученные из него двукратным
+          дифференцированием, сходятся, то это решение удовлетворяет исходному
+          уравнению малых колебаний мембраны с заданными краевыми условиями.
+          </p>
+
+          <p>
+          Уравнение
+          \[
+          u(x,y,t) = \sum_{n,k=1}^\infty T_{nk}(t) \Phi_{nk}(x,y)
+          \]
+          при $t = 0$ принимает вид
+          \[
+          \varphi_0(x,y) = \sum_{n,k=1}^\infty C_{nk} \Phi_{nk}(x,y).
+          \]
+          Домножением на $\Phi_{ml}(x,y)$ и двойным интегрированием получаем
+          выражение
+          \[
+          C_{nk} = \frac{1}{\norm{\Phi_{nk}}^2}
+          \int\limits_0^a \int\limits_0^b \varphi_0(x,y) \Phi_{nk}(x,y) dx dy.
+          \]
+          </p>
+
+          <p>
+          Дифференцируя уравнение
+          \[
+          u(x,y,t) = \sum_{n,k=1}^\infty T_{nk}(t) \Phi_{nk}(x,y)
+          \]
+          и принимая $t = 0$, получаем
+          \[
+          \varphi_1(x,y) = \sum_{n,k=1}^\infty
+          D_{nk} c \sqrt{\lambda_{nk}} \Phi_{nk}(x,y).
+          \]
+          Домножая на $\Phi_{ml}(x,y)$ и интегрируя, приходим к выражению
+          \[
+          D_{nk} = \frac{1}{\norm{\Phi_{nk}}^2 c \sqrt{\lambda_{nk}}}
+          \int\limits_0^a \int \limits_0^b \varphi_1(x,y) \Phi_{nk}(x,y) dx dy.
+          \]
+          </p>
+
+          <div class="proposition">
+            \[
+            \norm{\Phi_{nk}}^2
+            = \int\limits_0^a \int\limits_0^b \Phi_{nk}^2 (x,y) dx dy
+            = \frac{ab}{4}.
+            \]
+
+            <div class="proof">
+              Рассмотрим интеграл
+              \[
+              \int\limits_0^a \sin^2 \frac{n \pi x}{a} dx.
+              \]
+
+              Интегрируя его по частям, получаем
+              \[
+              \int\limits_0^a \sin^2 \frac{n \pi x}{a} dx = 
+              \int\limits_0^a \cos^2 \frac{n \pi x}{a} dx.
+              \]
+              Но
+              \[
+              \begin{aligned}
+              \int\limits_0^a \sin^2 \frac{n \pi x}{a} dx
+              &=
+              \int\limits_0^a \paren{ 1 - \cos^2 \frac{n \pi x}{a}} dx = \\
+              &= a - \int\limits_0^a \cos^2 \frac{n \pi x}{a} dx.
+              \end{aligned}
+              \]
+
+              Складывая равенства, получаем, что
+              \[
+              \int\limits_0^a \sin^2 \frac{n \pi x}{a} dx = \frac{a}{2}.
+              \]
+
+              Переменой обознчаений приходим к равенству
+              \[
+              \int\limits_0^b \sin^2 \frac{k \pi y}{b} dy = \frac{b}{2}.
+              \]
+
+              Тогда
+              \[
+              \int\limits_0^a \int\limits_0^b
+              \sin^2 \frac{n \pi x}{a} \sin^2 \frac{k \pi y}{b} dx dy
+              = \frac{ab}{4}.
+              \]
+            </div>
+
+            <p>
+            Представим $T_{nk}(t)$ в виде
+            \[
+            \begin{aligned}
+            C_{nk} \cos(c \sqrt{\lambda_{nk}} t)
+            + D_{nk} \sin(c \sqrt{\lambda_{nk}} t)
+            &= M_{nk} \sin(c \sqrt{\lambda_{nk}} t + \varphi_{nk}) = \\
+            &= M_{nk} \paren{
+            \sin(c \sqrt{\lambda_{nk}} t) \cos \varphi_{nk}
+            + \cos(c \sqrt{\lambda_{nk}} t) \sin \varphi_{nk}
+            } = \\
+            &= M_{nk} \cos \varphi_{nk} \sin(c \sqrt{\lambda_{nk}} t)
+            + M_{nk} \sin \varphi_{nk} \cos(c \sqrt{\lambda_{nk}} t).
+            \end{aligned}
+            \]
+            Пусть
+            \[
+            \begin{aligned}
+            M_{nk} \cos \varphi_{nk} &= C_{nk}, \\
+            M_{nk} \sin \varphi_{nk} &= D_{nk},
+            \end{aligned}
+            \]
+            тогда
+            \[
+            \begin{aligned}
+            \tg \varphi_{nk} = \frac{C_{nk}}{D_{nk}},
+            \implies
+            \varphi_{nk} &= \arctg \frac{C_{nk}}{D_{nk}}, \\
+            M_{nk} &= \sqrt{C_{nk}^2 + D_{nk}^2}.
+            \end{aligned}
+            \]
+            В конечном итоге получаем следующее выражение для решения:
+            \[
+            u(x,y,t) = \sum_{n,k=1}^\infty M_{nk}
+            \sin \frac{n \pi x}{a} \sin \frac{k \pi y}{b}
+            \sin \paren{ c \sqrt{\lambda_{nk}} t + \varphi_{nk} }.
+            \]
+            </p>
+
+            <p>
+            Отсюда видно, что колебание мембраны есть сумма бесконечного
+            множества собственных гармонических колебаний типа стоячих волн,
+            частота которых равна
+            \[
+            \omega_{nk} = c \sqrt{\lambda_{nk}}
+            = c \pi \sqrt{ \frac{n^2}{a^2} + \frac{k^2}{b^2} },
+            \]
+            а период равен
+            \[
+            T_{nk} = \frac{2 \pi}{\omega_{nk}}
+            = \frac{2ab}{c \sqrt{n^2 b^2 + k^2 a^2}}.
+            \]
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: узловая линия
+        </div>
+        <div class="content">
+          <div class="definition">
+            Линия $y = g(x)$, вдоль которой амплитуды собственных колебаний
+            равны нулю, называется <i>узловой</i>.
+
+            <p>
+            Например, если $\Phi_{nk}(x,y)$ единственна для данной частоты, то
+            \[
+            \Phi_{nk}(x,g(x)) \equiv 0.
+            \]
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Метод разделения переменных для неоднородных гиперболических
+          уравнений. Решение уравнения с ненулевыми начальными условиями
+        </div>
+        <div class="content">
+          <p>
+          Рассмотрим уравнение
+          \[
+          L[u] + f(x,t) = \rho(x) \pdv2{u}{t},
+          \qquad x \in \overline{\Omega} \subset \mathbb{R}^m,
+          \quad t \geqslant 0.
+          \]
+          Поставим смешанную задачу с начальными
+          \[
+          u(x,0) = 0, \qquad u_t'(x,0) = 0
+          \]
+          и граничными
+          \[
+          \at{
+          \paren{
+          \gamma_1 A_{\alpha \beta} \pd{u}{x_\beta} \cos(\vec{n}, x_\alpha)
+          - \gamma_2 u
+          }
+          }{\Gamma} = 0
+          \]
+          условиями.
+          </p>
+
+          <p>
+          Введём обозначение:
+          $\overline{D} := \overline{\Omega} \times [0; +\infty)$.
+          Будем искать решение задачи в классе функций
+          $u(x,t) \in C(\overline{D})$, $u(x,t) \in C^2 (D)$.
+          </p>
+
+          <p>
+          Так как $u(x,t)$ принадлежит классу $A$ для любого $t$, то по теореме
+          Стеклова её можно представить в виде ряда по собственным функциям
+          $\set{\Phi_n}$ соответствующей однородной задачи:
+          \[
+          u(x,t) = \sum_{k=1}^\infty \Psi_n(t) \Phi_n(x),
+          \]
+          где
+          \[
+          \Psi_n(t) = \frac{1}{\norm{\Phi_n}^2}
+          \int\limits_\Omega \rho(x) u(x,t) \Phi_n(x) d\Omega.
+          \]
+
+          Так как $\Phi_n$ &mdash; собственные функции, то
+          \[
+          \rho(x) \Phi_n(x) = - \frac{L[\Phi_n]}{\lambda_n}.
+          \]
+          Тогда
+          \[
+          \begin{aligned}
+          \Psi_n(t)
+          &= \frac{1}{\norm{\Phi_n}^2}
+          \int\limits_\Omega \rho(x) u(x,t) \Phi_n(x) d\Omega = \\
+          &= \frac{R[u,\Phi_n]}{\lambda_n \norm{\Phi_n}^2}
+          = \frac{R[\Phi_n,u]}{\lambda_n \norm{\Phi_n}^2} = \\
+          &= -\frac{1}{\lambda_n \norm{\Phi_n}^2}
+          \int\limits_\Omega \Phi_n(x) L[u] d\Omega.
+          \end{aligned}
+          \]
+
+          Вспоминая, что
+          \[
+          L[u] \bydef= \pd{}{x_\alpha} \paren{
+          A_{\alpha \beta} \pd{u}{x_\beta}
+          } - Au,
+          \]
+          получаем, что
+          \[
+          \Psi_n(t)
+          =
+          - \frac{1}{\lambda_n \norm{\Phi_n}^2}
+          \int\limits_\Omega \rho(x) u_{tt}(x,t) \Phi_n(x) d\Omega
+          + \frac{1}{\lambda_n \norm{\Phi_n}^2}
+          \int\limits_\Omega f(x,y) \Phi_n(x) d\Omega.
+          \]
+          </p>
+
+          <p>
+          Так как
+          \[
+          \Psi_n(t) = \frac{1}{\norm{\Phi_n}^2}
+          \int\limits_\Omega \rho(x) u(x,t) \Phi_n(x) d\Omega,
+          \]
+          то
+          \[
+          \Psi_n''(t) = \frac{1}{\norm{\Phi_n}^2}
+          \int\limits_\Omega \rho(x) u_{tt}(x,t) \Phi_n(x) d\Omega,
+          \]
+          поэтому
+          \[
+          \Psi_n''(t) + \lambda_n \Psi_n(t) = f_n(t),
+          \]
+          где
+          \[
+          f_n(t) = \frac{1}{\norm{\Phi_n}^2}
+          \int\limits_\Omega f(x,t) \Phi_n(x) d\Omega
+          \]
+          &mdash; коэффициент разложения функции $f(x,t)$ по собственным
+          функциям задачи Штурма-Лиувилля. Кроме того, подставляя выражение
+          \[
+          \Psi_n(t) = \frac{1}{\norm{\Phi_n}^2}
+          \int\limits_\Omega \rho(x) u(x,t) \Phi_n(x) d\Omega,
+          \]
+          в начальные условия, получаем, что
+          \[
+          \Psi_n(0) = 0, \qquad \Psi_n'(0) = 0.
+          \]
+          Решая однородное уравнение
+          \[
+          \Psi_n''(t) + \lambda_n \Psi_n(t) = 0,
+          \]
+          находим его решение:
+          \[
+          \Psi_n^o(t)
+          = C_n \cos (\sqrt{\lambda_n} t) + D_n \sin(\sqrt{\lambda_n} t).
+          \]
+          Общее решение неоднородного уравнения найдём, пользуясь методом
+          вариации постоянных:
+          \[
+          \Psi_n(t)
+          = C_n(t) \cos (\sqrt{\lambda_n} t) + D_n(t) \sin(\sqrt{\lambda_n} t).
+          \]
+          Потребуем, чтобы неизвестные функции $C_n(t), D_n(t)$ подчинялись
+          условию
+          \[
+          C_n'(t) \cos(\sqrt{\lambda_n} t)
+          + D_n'(t) \sin(\sqrt{\lambda_n} t) = 0.
+          \]
+          </p>
+
+          <div class="remark">
+            Насколько я понял, вместо нуля может стоять любое число.
+          </div>
+
+          Подставив выражение в $\Psi_n(t)$, получим, что
+          \[
+          -C_n'(t) \sin(\sqrt{\lambda_n} t) + D_n'(t) \cos(\sqrt{\lambda_n} t)
+          = \frac{f_n(t)}{\sqrt{\lambda_n}}.
+          \]
+
+          Итак, имеем систему
+          \[
+          \begin{aligned}
+          C_n'(t) \cos(\sqrt{\lambda_n} t)
+          + D_n'(t) \sin(\sqrt{\lambda_n} t) &= 0, \\
+          -C_n'(t) \sin(\sqrt{\lambda_n} t) + D_n'(t) \cos(\sqrt{\lambda_n} t)
+          &= \frac{f_n(t)}{\sqrt{\lambda_n}};
+          \end{aligned}
+          \]
+          она невырождена:
+          \[
+          \begin{vmatrix}
+          \phantom{-}\cos(\sqrt{\lambda_n} t) & \sin(\sqrt{\lambda_n} t) \\
+          -\sin(\sqrt{\lambda_n} t) & \cos(\sqrt{\lambda_n} t)
+          \end{vmatrix}
+          = \cos^2 (\sqrt{\lambda_n} t) + \sin^2 (\sqrt{\lambda_n} t) \equiv 1.
+          \]
+
+          <p>
+          Решая её, например, методом Крамера, получаем, что
+          \[
+          \begin{aligned}
+          C_n'(t) &= -\frac{1}{\sqrt{\lambda_n}}
+          f_n(t) \sin(\sqrt{\lambda_n} t), \\
+          D_n'(t) &= \phantom{+}\frac{1}{\sqrt{\lambda_n}}
+          f_n(t) \cos(\sqrt{\lambda_n} t).
+          \end{aligned}
+          \]
+          После интегрирования получаем следующие выражения:
+          \[
+          \begin{aligned}
+          C_n(t) &= -\frac{1}{\sqrt{\lambda_n}}
+          \int\limits_0^t f_n(\tau) \sin(\sqrt{\lambda_n} \tau) d\tau
+          + C_{0n}, \\
+          D_n(t) &= \phantom{+}\frac{1}{\sqrt{\lambda_n}}
+          \int\limits_0^t f_n(\tau) \cos(\sqrt{\lambda_n} \tau) d\tau
+          + D_{0n}.
+          \end{aligned}
+          \]
+
+          Из граничных условий задачи Штурма-Лиувилля находим, что
+          $D_{0n} = C_{0n} = 0$. Тогда
+          \[
+          \begin{aligned}
+          \Psi_n(t) &=
+          -\frac{1}{\sqrt{\lambda_n}}
+          \int\limits_0^t f_n(\tau) \sin(\sqrt{\lambda_n} \tau) d\tau
+          \cdot \cos (\sqrt{\lambda_n} t) + \phantom{1} \\
+          &\phantom{=} + \frac{1}{\sqrt{\lambda_n}}
+          \int\limits_0^t f_n(\tau) \cos(\sqrt{\lambda_n} \tau) d\tau
+          \cdot \sin(\sqrt{\lambda_n} t) = \\
+          &=
+          \frac{1}{\sqrt{\lambda_n}}
+          \int\limits_0^t f_n(\tau) \paren{
+          -\sin(\sqrt{\lambda_n} \tau) \cos (\sqrt{\lambda_n} t)
+          + \cos(\sqrt{\lambda_n} \tau) \sin(\sqrt{\lambda_n} t)
+          } d\tau = \\
+          &=
+          \frac{1}{\sqrt{\lambda_n}} \int\limits_0^t f_n(\tau)
+          \sin \left[ \sqrt{\lambda_n} (t - \tau) \right] d\tau.
+          \end{aligned}
+          \]
+          </p>
+
+          <p>
+          Таким образом, решение найдено:
+          \[
+          u(x,t) = \sum_{k=n}^\infty \Psi_n(t) \Phi_n(x).
+          \]
+          </p>
+
+          <p>
+          Можно сформулировать более общие задачи:
+          </p>
+
+          <ol>
+            <li>
+              <p>
+              Рассмотрим неоднородную смешанную задачу
+              \[
+              L[u] + f(x,t) = \rho(x) \pdv2{u}{t}
+              \]
+              с ненулевыми начальными
+              \[
+              u(x,0) = \varphi_0(x), \qquad u_t(x,0) = \varphi_1(x)
+              \]
+              и нулевыми граничными
+              \[
+              \at{
+              \paren{
+              \gamma_1 A_{\alpha \beta} \pd{u}{x_\beta} \cos(\vec{n}, x_\alpha)
+              - \gamma_2 u
+              }
+              }{\Gamma} = 0
+              \]
+              условиями.
+              </p>
+
+              <p>
+              Будем искать решение в виде суммы
+              \[
+              u(x,t) = v(x,t) + w(x,t),
+              \]
+              где $v(x,t)$ &mdash; решение однородного уравнения
+              \[
+              L[v] = \rho(x) \pdv2{v}{t}
+              \]
+              при условиях
+              \[
+              \begin{gathered}
+              v(x,0) = \varphi_0(x), \qquad v_t(x,0) = \varphi_1(x), \\
+              \at{
+              \paren{
+              \gamma_1 A_{\alpha \beta} \pd{v}{x_\beta} \cos(\vec{n}, x_\alpha)
+              - \gamma_2 v
+              }
+              }{\Gamma} = 0,
+              \end{gathered}
+              \]
+              а $w(x,t)$ &mdash; решение неоднородного уравнения
+              \[
+              L[w] + f(x,t) = \rho(x) \pdv2{w}{t}
+              \]
+              с нулевыми начальными и граничными условиями:
+              \[
+              \begin{gathered}
+              w(x,0) = 0, \qquad w_t(x,0) = 0, \\
+              \at{
+              \paren{
+              \gamma_1 A_{\alpha \beta} \pd{w}{x_\beta} \cos(\vec{n}, x_\alpha)
+              - \gamma_2 w
+              }
+              }{\Gamma} = 0.
+              \end{gathered}
+              \]
+              </p>
+            </li>
+
+            <li>
+              <p>
+              Рассмотрим неоднородную смешанную задачу
+              \[
+              L[u] + f(x,t) = \rho(x) \pdv2{u}{t}
+              \]
+              с ненулевыми начальными
+              \[
+              u(x,0) = \varphi_0(x), \qquad u_t(x,0) = \varphi_1(x)
+              \]
+              и граничными
+              \[
+              \at{
+              \paren{
+              \gamma_1 A_{\alpha \beta} \pd{u}{x_\beta} \cos(\vec{n}, x_\alpha)
+              - \gamma_2 u
+              }
+              }{\Gamma} = \mu(x,t)
+              \]
+              условиями.
+              </p>
+
+              <p>
+              Выберем функцию $U(x,t) \in C^2(\overline{D})$ так, чтобы
+              \[
+              \at{
+              \paren{
+              \gamma_1 A_{\alpha \beta} \pd{U}{x_\beta} \cos(\vec{n}, x_\alpha)
+              - \gamma_2 U
+              }
+              }{\Gamma} = \mu(x,t).
+              \]
+
+              Тогда будем искать решение в виде суммы
+              \[
+              u(x,t) = U(x,t) + w(x,t),
+              \]
+              где $w(x,t)$ &mdash; решение задачи
+              \[
+              L[w] + f_1(x,t) = \rho(x) \pdv2{w}{t}
+              \]
+              с ненулевыми начальными
+              \[
+              w(x,0) = \psi_0(x), \qquad w_t(x,0) = \psi_1(x)
+              \]
+              и нулевыми граничными
+              \[
+              \at{
+              \paren{
+              \gamma_1 A_{\alpha \beta} \pd{w}{x_\beta} \cos(\vec{n}, x_\alpha)
+              - \gamma_2 w
+              }
+              }{\Gamma} = 0,
+              \]
+              причём
+              \[
+              \begin{aligned}
+              f_1(x,t) &= f(x,t) + L[U] - \rho(x) \pdv2{U}{t}, \\
+              \psi_0(x) &= \varphi_0(x) - U(x,0), \\
+              \psi_1(x) &= \varphi_1(x) - U_t(x,0).
+              \end{aligned}
+              \]
+              </p>
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Решение задачи для неоднородного гиперболического уравнения в общем
+          случае. Вынужденные колебания прямоугольной мембраны
+        </div>
+        <div class="content">
+          <p>
+          Рассмотрим однородную изотропную мембрану
+          \[
+          0 \lt x \lt a, \qquad 0 \lt y \lt b
+          \]
+          с закреплёнными концами:
+          \[
+          \begin{aligned}
+          \at{v}{x=0} = \at{v}{x=a} &= 0, \\
+          \at{v}{y=0} = \at{v}{y=b} &= 0
+          \end{aligned}
+          \]
+          и нулевыми начальными условиями:
+          \[
+          \at{v}{t=0} = \at{v_t}{t=0} = 0.
+          \]
+
+          Вынужденные малые колебания мембраны описываются уравнением
+          \[
+          \pdv2{v}{t} - c^2 \Delta v = f(x,y,t).
+          \]
+          </p>
+
+          <p>
+          Будем искать решение в виде двойного ряда по собственным функциям
+          задачи Штурма-Лиувилля:
+          \[
+          \begin{aligned}
+          v(x,y,t)
+          &= \sum_{k,n=1}^\infty T_{nk}(t) \Phi_{nk}(x,y) = \\
+          &= \sum_{k,n=1}^\infty T_{nk}(t)
+          \sin \frac{n \pi x}{a} \sin \frac{k \pi y}{b}.
+          \end{aligned}
+          \]
+
+          Подставим это выражение в исходное уравнение:
+          \[
+          \sum_{k,n=1}^\infty \paren{ T_{nk}''(t) + \omega_{nk}^2 T_{nk}(t) }
+          \sin \frac{n \pi x}{a} \sin \frac{k \pi y}{b} = f(x,y,t),
+          \]
+          где
+          \[
+          \omega_{nk}^2 = c^2 \pi^2 \paren{ \frac{n^2}{a^2} + \frac{k^2}{b^2} }.
+          \]
+          </p>
+
+          <p>
+          Разложим функцию $f(x,y,t)$ в аналогичный ряд:
+          \[
+          f(x,y,t) = \sum_{k,n=1}^\infty g_{nk}(t)
+          \sin \frac{n \pi x}{a} \sin \frac{k \pi y}{b},
+          \]
+          где
+          \[
+          g_{nk}(t) = \frac{1}{\norm{\Phi_{nk}}^2}
+          \int\limits_0^a \int\limits_0^b f(x,y,t) \Phi_{nk}(x,y) dx dy.
+          \]
+          Тогда можно поставить следующую задачу:
+          \[
+          T_{nk}''(t) + \omega_{nk}^2 T_{nk}(t) = g_{nk}(t)
+          \]
+          с начальными условиями
+          \[
+          T_{nk}(0) = T_{nk}'(0) = 0.
+          \]
+
+          Решая её методом вариации произвольных постоянных Лагранжа, получаем,
+          что
+          \[
+          T_{nk}(t) = \frac{1}{\omega_{nk}}
+          \int\limits_0^t g_{nk}(\tau)
+          \sin \left[ \omega_{nk} (t - \tau) \right] d\tau.
+          \]
+          </p>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Метод разделения переменных для однородных параболических уравнений
+        </div>
+        <div class="content">
+          Рассмотрим параболическое уравнение
+          \[
+          L[u] = \rho(x) \pd{u}{t},
+          \]
+          где $x \in \Omega \subset \mathbb{R}^m$, граница
+          $\Gamma = \partial \Omega$ &mdash; гладкая, а
+          \[
+          L[u] = \dp{\nabla}{k \nabla u} - qu.
+          \]
+          Поставим смешанную задачу:
+          \[
+          \begin{gathered}
+          u(x,0) = \varphi(x), \\
+          \at{
+          \paren{
+          \gamma_1 \pd{u}{\vec{n}} + \gamma_2 u
+          }
+          }{\Gamma} = 0.
+          \end{gathered}
+          \]
+
+          Решение будем искать в классе функций
+          $u(x,t) \in C^2(\Omega) \cap C^1[0; +\infty)$ методом Фурье:
+          \[
+          u(x,t) = \Phi(x) \Psi(t).
+          \]
+          Подставив это выражение в исходное уравнение, получаем, что
+          \[
+          \frac{L[\Phi]}{\rho \Phi} = \frac{\Psi'}{\Psi} = -\lambda.
+          \]
+
+          Пусть $\set{\lambda_n}$ и $\set{\Phi_n}$ &mdash; собственные числа и
+          собственные функции задачи
+          \[
+          \begin{gathered}
+          L[\Phi] + \lambda \rho \Phi = 0, \\
+          \at{
+          \paren{
+          \gamma_1 \pd{u}{\vec{n}} + \gamma_2 u
+          }
+          }{\Gamma} = 0,
+          \end{gathered}
+          \]
+          тогда
+          \[
+          \Psi_n'(t) + \lambda_n \Psi_n(t) = 0,
+          \implies
+          \Psi_n(t) = C_n e^{-\lambda_n t}.
+          \]
+
+          Таким образом,
+          \[
+          u(x,t) = \sum_{n=1}^\infty C_n e^{-\lambda_n t} \Phi_n(x).
+          \]
+
+          <p>
+          Если $t = 0$, то это уравнение принимает вид
+          \[
+          \varphi(x) = \sum_{n=1}^\infty C_n \Phi_n(x).
+          \]
+          Домножив обе части на $\Phi_m(x)$ и проинтегрировав с весом $\rho(x)$,
+          находим:
+          \[
+          C_n = \frac{1}{\norm{\Phi_n}^2}
+          \int\limits_\Omega \rho(x) \varphi(x) \Phi_n(x) d\Omega.
+          \]
+          </p>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Метод разделения переменных для неоднородных параболических уравнений
+        </div>
+        <div class="content">
+          Рассмотрим неоднородное параболическое уравнение
+          \[
+          L[u] + f(x,t) = \rho(x) \pd{u}{t}
+          \]
+          с поставленной смешанной задачей
+          \[
+          \begin{gathered}
+          u(x,0) = 0, \\
+          \at{
+          \paren{
+          \gamma_1 \pd{u}{\vec{n}} + \gamma_2 u
+          }
+          }{\Gamma} = 0.
+          \end{gathered}
+          \]
+
+          Так как $u(x,t)$ принадлежит классу $A$, то по теореме Стеклова её
+          можно разложить в ряд по собственным функциям задачи Штурма-Лиувилля:
+          \[
+          u(x,t) = \sum_{n=1}^\infty \Psi_n(t) \Phi_n(t),
+          \]
+          где
+          \[
+          \Psi_n(t) = \frac{1}{\norm{\Phi_n}^2}
+          \int\limits_\Omega \rho(x) u(x,t) \Phi_n(x) d\Omega.
+          \]
+
+          Из задачи Штурма-Лиувилля следует, что
+          \[
+          \rho \Phi_n = - \frac{L[\Phi]}{\lambda_n},
+          \]
+          поэтому
+          \[
+          \Psi_n(t) =
+          -\frac{1}{\lambda_n \norm{\Phi_n}^2}
+          \int\limits_\Omega \rho(x) u_t(x,t) \Phi_n(x) d\Omega
+          +\frac{1}{\lambda_n \norm{\Phi_n}^2}
+          \int\limits_\Omega f(x, t) \Phi_n(x) d\Omega.
+          \]
+
+          Дифференцируя уравнение
+          \[
+          \Psi_n(t) = \frac{1}{\norm{\Phi_n}^2}
+          \int\limits_\Omega \rho(x) u(x,t) \Phi_n(x) d\Omega,
+          \]
+          приходим к уравнению
+          \[
+          \Psi_n'(t) + \lambda_n \Psi_n(t) = f_n(t),
+          \]
+          где
+          \[
+          f_n(t) = \frac{1}{\norm{\Phi_n}^2}
+          \int\limits_\Omega f(x,t) \Phi_n(x) d\Omega.
+          \]
+
+          Добавим к нему начальное условие, полученное из начального условия
+          исходной задачи:
+          \[
+          \Psi_n(0) = 0.
+          \]
+
+          Решение данной неоднородной задачи будем искать методом Лагранжа:
+          \[
+          \Psi_n(t) = C_n(t) e^{-\lambda_n t}.
+          \]
+          Подставляя это выражение в уравнение
+          \[
+          \Psi_n'(t) + \lambda_n \Psi_n(t) = f_n(t),
+          \]
+          приходим к уравнению
+          \[
+          C_n'(t) e^{-\lambda_n t} = f_n(t),
+          \implies
+          C_n(t) = C_0 + \int\limits_0^t f_n(\tau) e^{\lambda_n \tau} d\tau.
+          \]
+
+          Из начальных условий следует, что $C_0 = 0$, поэтому
+          \[
+          \Psi_n(t) = \int\limits_0^t f_n(\tau) e^{-\lambda_n (t - \tau)} d\tau.
+          \]
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема о единственности решения смешанной задачи для уравнения
+          параболического типа
+        </div>
+        <div class="content">
+          <div class="theorem">
+            <i>(единственности для уравнения параболического типа)</i>.
+            <p>
+            Рассмотрим задачу
+            \[
+            L[u] = \rho(x) \pd{u}{t}
+            \]
+            с начальными и граничными условиями:
+            \[
+            \begin{gathered}
+            u(x,0) = \varphi(x), \\
+            \at{
+            \paren{
+            \gamma_1 \pd{u}{\vec{n}} + \gamma_2 u
+            }
+            }{\Gamma} = \mu(x,t),
+            \end{gathered}
+            \]
+            решение которой ищется в области
+            $\overline{D} = \overline{\Omega} \times [0;+\infty)$.
+            </p>
+
+            <p>
+            Тогда решение поставленной задачи
+            \[
+            u(x,t) \in C^2(\Omega) \cap C^1(\overline{\Omega}) \cap
+            C^1[0;+\infty)
+            \]
+            единственно.
+            </p>
+
+            <div class="proof">
+              Пусть $u_1, u_2$ &mdash; два различных решения поставленной
+              задачи. Рассмотрим функцию $v = u_1 - u_2$, также являющуюся
+              решением задачи. Рассмотрим величину
+              \[
+              \begin{aligned}
+              \int\limits_0^t R[v,v] d\tau
+              &= - \int\limits_0^t
+              \int\limits_\Omega v L[v] d\Omega d\tau = \\
+              &= - \int\limits_0^t
+              \int\limits_\Omega v \rho v_t d\Omega d\tau = \\
+              &= - \frac{1}{2} \int\limits_0^t
+              \int\limits_\Omega \rho \pd{}{t} \paren{ v^2 } d\Omega d\tau.
+              \end{aligned}
+              \]
+              Так как
+              \[
+              \int\limits_0^t \pd{}{\tau} \paren{ v^2(x,\tau) } d\tau
+              = v^2(x,t) - v^2(x,0),
+              \]
+              то
+              \[
+              \begin{aligned}
+              \int\limits_0^t R[v,v] d\tau
+              &= - \frac{1}{2} \int\limits_0^t \int\limits_\Omega
+              \rho(x) \pd{}{\tau} \paren{ v^2(x,\tau) } d\Omega d\tau = \\
+              &= - \frac{1}{2} \int\limits_0^t \int\limits_\Omega
+              \rho(x) v^2(x,\tau) d\Omega d\tau
+              + \frac{1}{2} \int\limits_0^t \int\limits_\Omega
+              \rho(x) \underbrace{v^2(x,0)}_{=0} d\Omega d\tau = \\
+              &= - \frac{1}{2} \int\limits_0^t \int\limits_\Omega
+              \rho(x) v^2(x,\tau) d\Omega d\tau.
+              \end{aligned}
+              \]
+
+              Заметим теперь, что
+              \[
+              \int\limits_0^t R[v,v] d\tau \geqslant 0,
+              \]
+              так как $R[v,v] \geqslant 0$ для функций из класса $A$, но
+              \[
+              - \frac{1}{2} \int\limits_0^t \int\limits_\Omega
+              \rho(x) v^2(x,\tau) d\Omega d\tau \leqslant 0,
+              \]
+              так как подынтегральное выражение неотрицательно, поэтому
+              равенство возможно тогда и только тогда, когда $v(x,t) \equiv 0$,
+              то есть $u_1(x,t) \equiv u_2(x,t)$.
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: финитная функция
+        </div>
+        <div class="content">
+          <div class="definition">
+            Пусть $\varphi(x) \in C(\mathbb{R}^m)$, и пусть существует некоторое
+            ограниченное множество $\Omega \subset \mathbb{R}^m$ такое, что
+            \[
+            \begin{cases}
+            \varphi(x) \neq 0, & x \in \Omega, \\
+            \varphi(x) = 0, & x \in \mathbb{R}^m \setminus \Omega.
+            \end{cases}
+            \]
+
+            Тогда кусочно-непрерывная функция $\varphi(x)$ называется
+            <i>финитной</i>, а множество $\Omega$ &mdash; её <i>носителем</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: основная функция, основное пространство
+        </div>
+        <div class="content">
+          <div class="definition">
+            Функция $\varphi(x)$ называется <i>основной</i>, если она финитна и
+            имеет непрерывные производные всех порядков.
+          </div>
+
+          <div class="definition">
+            Совокупность $K$ основных функций называется <i>основным
+              пространством</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Понятие $\delta$-функции Дирака
+        </div>
+        <div class="content">
+          Рассмотрим материальную точку массой 1, расположенную в начале
+          координат $x = 0$, где $x \in \mathbb{R}^3$. Обозначим плотность
+          среды, создаваемую этой точкой, через $\delta(x)$. Представим, что
+          точка &laquo;размазана&raquo; по шару
+          \[
+          B_\varepsilon = \set{ x \in \mathbb{R}^3: \abs{x} \lt \varepsilon }.
+          \]
+          Тогда средняя плотность $f_\varepsilon$ равна
+          \[
+          f_\varepsilon(x) =
+          \left\{
+          \begin{aligned}
+          \frac{3}{4 \pi \varepsilon^3} &= \frac{1}{V_\varepsilon},
+          & \abs{x} &\lt \varepsilon, \\
+          &0,
+          & \abs{x} &\geqslant \varepsilon, \\
+          \end{aligned}
+          \right.
+          \]
+
+          <p>
+          Примем сначала в качестве плотности $\delta(x)$ поточечный предел
+          средней плотности $f_\varepsilon(x)$:
+          \[
+          \delta(x) := \lim_{\varepsilon \to 0} f_\varepsilon(x) =
+          \begin{cases}
+          +\infty, & x = 0, \\
+          0, & x \neq 0.
+          \end{cases}
+          \]
+
+          Естественно потребовать, чтобы интеграл от плотности $\delta(x)$ по
+          объёму $V$ давал бы массу этого объёма, то есть
+          \[
+          \int\limits_V \delta(x) dx =
+          \begin{cases}
+          1, & 0 \in V, \\
+          0, & 0 \not\in V.
+          \end{cases}
+          \]
+
+          Если же интеграл ${\displaystyle \int\limits_V \delta(x) dx }$
+          понимать как несобственный, то он всегда равен нулю в силу определения
+          $\delta(x)$ как поточечного предела. Это означает, что поточечный
+          предел не может быть принят в качестве определения $\delta$-функции.
+          </p>
+
+          <p>
+          Рассмотрим теперь слабый предел функции $f_\varepsilon(x)$ при
+          $\varepsilon \to 0$, то есть для любой функции
+          $f(x) \in C(\mathbb{R}^3)$ найдём предел
+          \[
+          \lim_{\varepsilon \to 0} \int\limits_V f_\varepsilon(x) \varphi(x) dx.
+          \]
+          </p>
+
+          <div class="proposition">
+            Справедливо равенство
+            \[
+            \lim_{\varepsilon \to 0}
+            \int\limits_V f_\varepsilon(x) \varphi(x) dx
+            = \varphi(0).
+            \]
+
+            <div class="proof">
+              Функция $\varphi(x)$ непрерывна, то есть для любого $\eta \gt 0$
+              можно найти $\varepsilon_0$ такое, что
+              \[
+              \abs{\varphi(x) - \varphi(0)} \lt \eta,
+              \quad \mbox{если} \quad
+              \abs{x} \lt \varepsilon_0.
+              \]
+              Тогда для всех $\varepsilon \leqslant \varepsilon_0$
+              \[
+              \begin{aligned}
+              \abs{
+              \int\limits_{B_\varepsilon} f_\varepsilon(x) \varphi(x) dx
+              - \varphi(0)
+              }
+              &= \frac{3}{4 \pi \varepsilon^3}
+              \abs{
+              \int\limits_{B_\varepsilon}
+              \paren{ \varphi(x) - \varphi(0) } dx
+              } \leqslant \\
+              &\leqslant \frac{3}{4 \pi \varepsilon^3}
+              \int\limits_{B_\varepsilon}
+              \abs{ \varphi(x) - \varphi(0) } dx \lt \\
+              &\lt \eta \frac{3}{4 \pi \varepsilon^3}
+              \int\limits_{B_\varepsilon}
+              dx = \eta,
+              \end{aligned}
+              \]
+              что и требовалось доказать.
+            </div>
+          </div>
+
+          <p>
+          Итак, выражение
+          \[
+          \lim_{\varepsilon \to 0}
+          \int\limits_V f_\varepsilon(x) \varphi(x) dx
+          = \varphi(0)
+          \]
+          можно считать определением $\delta$-функции на основных функциях.
+          Формально обозначают
+          \[
+          \int\limits_{\mathbb{R}^m} \delta(x) \varphi(x) dx
+          = (\delta, \varphi).
+          \]
+          </p>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Свойства многомерной $\delta$-функции
+        </div>
+        <div class="content">
+          <ol>
+            <li>
+              $\delta(x) = \delta(-x)$;
+            </li>
+
+            <li>
+              $\delta'(x) = -\delta'(-x)$;
+            </li>
+
+            <li>
+              $\varphi(\xi) \delta(\xi - x) = \varphi(x) - \delta(\xi - x)$;
+            </li>
+
+            <li>
+              $x \delta(x) = 0$;
+            </li>
+
+            <li>
+              ${\displaystyle
+              \delta(\varphi(x))
+              = \sum_k \frac{\delta(x - x_k)}{\abs{\varphi'(x_k)}}
+              = \sum_k \frac{\delta(x - x_k)}{\abs{\varphi'(x)}},
+              }$
+              где $x_k$ &mdash; простые корни уравнения $\varphi(x) = 0$.
+
+              <p>
+              В частности
+              \[
+              \begin{aligned}
+              \delta(ax) &= \frac{\delta(x)}{\abs{a}}, \\
+              \delta(x^2 - a^2) &= \frac{\delta(x-a) + \delta(x+a)}{2\abs{a}},
+              \end{aligned}
+              \]
+              следовательно, при $x \to 0$
+              \[
+              \abs{a} \delta(a^2) = \delta(a).
+              \]
+              </p>
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Свойства одномерной $\delta$-функции
+        </div>
+        <div class="content">
+          В одномерном случае $\delta$-функция обладает следующими свойствами:
+          <ol>
+            <li>
+              $
+              \delta(x) =
+              \begin{cases}
+              +\infty, & x = 0, \\
+              0, & x \neq 0.
+              \end{cases}
+              $
+            </li>
+
+            <li>
+              ${\displaystyle
+              \int\limits_{-\infty}^{\infty} \delta(x) dx = 1.
+              }$
+            </li>
+
+            <li>
+              ${\displaystyle
+              \int\limits_{-A}^{A} f(x) \delta(x) dx = f(0).
+              }$
+            </li>
+          </ol>
+
+          <div class="remark">
+            Если из выполнения неравенства
+            \[
+            \int\limits_{-\infty}^{\infty} f(x) dx \lt \infty
+            \]
+            следует, что
+            \[
+            f(x) = O(x^{-\alpha}) \quad \alpha \gt 1, \quad x \to \infty,
+            \]
+            то можно принять $A = \infty$, то есть
+            \[
+            \int\limits_{-\infty}^{\infty} f(x) \delta(x) dx = f(0).
+            \]
+            В этом случае $\delta$-функция как подынтегральный сомножитель может
+            быть определена равенством
+            \[
+            \delta(x) = \pd{h(x)}{x} = h'(x),
+            \]
+            где $h(x)$ &mdash; функция Хевисайда:
+            \[
+            h(x) =
+            \begin{cases}
+            1, & x \geqslant 0, \\
+            0, & x \lt 0.
+            \end{cases}
+            \]
+
+            <div class="derivation">
+              Действительно,
+              \[
+              \begin{aligned}
+              \int\limits_{-\infty}^{\infty} f(x) h'(x) dx
+              &=
+              \left.
+              f(x) h(x)
+              \right|_{-\cancel\infty}^{+\cancel\infty}
+              - \int\limits_{-\infty}^\infty f'(x) h(x) dx = \\
+              &= -\int\limits_0^\infty f'(x) dx = \\
+              &= \left. -f(x) \right|_{0}^{\cancel\infty} = f(0)
+              \end{aligned}
+              \]
+              в силу того, что $f(x) = O(x^{-\alpha})$.
+            </div>
+          </div>
+
+          <div class="remark">
+            Смещая начало координат из точки $\xi = 0$ в точку $\xi = x$, по
+            определению имеем
+            \[
+            \begin{aligned}
+            \int\limits_a^b \varphi(\xi) \delta(\xi - x) d\xi
+            &=
+            \lim_{\varepsilon \to 0}
+            \int\limits_a^b \varphi(\xi) f_\varepsilon(\xi - x) d\xi = \\
+            &=
+            \lim_{\varepsilon \to 0}
+            \int\limits_{a-x}^{b-x} \varphi(t + x) f_\varepsilon(t) dt = \\
+            &= \varphi(x),
+            \end{aligned}
+            \]
+            где $\xi - x = t$, причём $t = 0 \in [a-x, b-x]$. Кроме того,
+            \[
+            \int\limits_a^b \varphi(\xi) \pd{\delta(\xi - x)}{\xi} d\xi
+            =
+            \lim_{\varepsilon \to 0}
+            \int\limits_a^b \varphi(\xi) \pd{f_\varepsilon(\xi - x)}{\xi} d\xi.
+            \]
+
+            Интегрируем по частям с учётом того, что $\delta(\xi - x) = 0$, если
+            $\xi \neq x$:
+            \[
+            \begin{aligned}
+            \int\limits_a^b \varphi(\xi) \pd{\delta(\xi - x)}{\xi} d\xi
+            &=
+            \left. \varphi(\xi) \delta(\xi - x) \right|_{\cancel a}^{\cancel b}
+            -
+            \int\limits_a^b \varphi'(\xi) \delta(\xi - x) d\xi = \\
+            &= - \varphi'(x), \qquad a \lt x \lt b.
+            \end{aligned}
+            \]
+
+            Аналогичным образом продолжая рассуждения, приходим к формуле
+            \[
+            \int\limits_a^b \varphi(\xi) \delta^{(n)}(\xi - x) d\xi
+            =
+            (-1)^n \varphi^{(n)}(x), \qquad a \lt x \lt b.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name repeat">
+          Теорема о дифференцировании по параметру интеграла с переменными
+          пределами интегрирования
+        </div>
+        <div class="content">
+          <div class="theorem">
+            <i>(о дифференцировании по параметру интеграла с переменными
+              пределами интегрирования)</i>.
+
+            <p>
+            Пусть на отрезке $[\alpha_0, \alpha_1]$ заданы непрерывно
+            дифференцируемые функции $\varphi(\alpha)$ и $\psi(\alpha)$,
+            причём
+            \[
+            \varphi(\alpha) \leqslant \psi(\alpha)
+            \qquad \forall \alpha \in [\alpha_0, \alpha_1].
+            \]
+            Пусть в некотором множестве $G \subset \mathbb{R}^2$, содержащем
+            множество
+            \[
+            E = \set{
+            (x,\alpha):
+            \alpha \in [\alpha_0, \alpha_1],
+            x \in [\varphi(\alpha), \psi(\alpha_1)]
+            },
+            \]
+            задана функция $f(x,\alpha)$, непрерывная вместе со своей
+            производной $f_\alpha'(x,\alpha)$. Тогда функция
+            \[
+            J(\alpha) =
+            \int\limits_{\varphi(\alpha)}^{\psi(\alpha)} f(x,\alpha) dx,
+            \]
+            дифференцируема на отрезке $[\alpha_0, \alpha_1]$ и для любого
+            $\alpha$ из этого отрезка справедливо равенство
+            \[
+            J'(\alpha) =
+            f(\psi(\alpha), \alpha) \psi'(\alpha)
+            - f(\varphi(\alpha), \alpha) \varphi'(\alpha)
+            + \int\limits_{\varphi(\alpha)}^{\psi(\alpha)}
+            f_\alpha'(x,\alpha) dx.
+            \]
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Функция Грина решения неоднородного дифференциального уравнения в
+          частных производных
+        </div>
+        <div class="content">
+          Пусть дано неоднородное дифференциальное уравнение
+          \[
+          L[u] = -\rho(x),
+          \]
+          где $L[u]$ &mdash; линейный дифференциальный оператор 2-го порядка (в
+          общем случае порядок может быть произвольным), функция $u$ определена
+          и непрерывна в области $\Omega \subset \mathbb{R}^n$. Поставим
+          граничные условия:
+          \[
+          \at{
+          \paren{
+          \gamma_1 A_{\alpha \beta} \pd{u}{x_\beta}
+          \cos\paren{ \vec{n}, x_\alpha } + \gamma_2 u
+          }
+          }{\Gamma} = 0.
+          \]
+
+          Формально представим решение уравнения в символьном виде:
+          \[
+          u(x) = -L^{-1}[\rho(x)].
+          \]
+          Используя представление
+          \[
+          \rho(x) = \int\limits_\Omega \rho(\xi) \delta(\xi - x) d\xi,
+          \]
+          можно записать, что
+          \[
+          u(x) = -\int\limits_\Omega \rho(\xi) L^{-1}[\delta(\xi - x)] d\xi.
+          \]
+
+          Введём обозначение:
+          \[
+          G^*(\xi,x) = -L^{-1}[\delta(\xi - x)].
+          \]
+          Используя его, решение исходного уравнения можно представить в виде
+          \[
+          u(x) = \int\limits_\Omega \rho(\xi) G^*(\xi, x) d\xi,
+          \]
+          где функция $G^*(\xi,x)$ является решением уравнения
+          \[
+          L[G^*(\xi, x)] = -\delta(\xi - x).
+          \]
+
+          <p>
+          Очевидно, что если к $G^*(\xi, x)$ добавить достаточно гладкую функцию
+          $v(\xi, x)$, удовлетворяющую уравнению
+          \[
+          L[v(\xi,x)] = 0,
+          \]
+          то функция
+          \[
+          G(\xi,x) = G^*(\xi,x) + v(\xi,x)
+          \]
+          также будет удовлетворять условию
+          \[
+          L[G(\xi, x)] = -\delta(\xi - x).
+          \]
+          </p>
+
+          <div class="definition">
+            <i>Функцией Грина</i> задачи
+            \[
+            \begin{gathered}
+            L[u] = -\rho(x), \\
+            \at{
+            \paren{
+            \gamma_1 A_{\alpha \beta} \pd{u}{x_\beta}
+            \cos\paren{ \vec{n}, x_\alpha } + \gamma_2 u
+            }
+            }{\Gamma} = 0
+            \end{gathered}
+            \]
+            называется функция $G(\xi,x)$, удовлетворяющая условию
+            \[
+            L[G(\xi, x)] = -\delta(\xi - x)
+            \]
+            и краевому условию:
+            \[
+            \at{
+            \paren{
+            \gamma_1 A_{\alpha \beta} \pd{G}{x_\beta}
+            \cos\paren{ \vec{n}, x_\alpha } + \gamma_2 G
+            }
+            }{\Gamma} = 0, \qquad \xi,x \in \Gamma.
+            \]
+          </div>
+
+          <p>
+          В данном случае функция $v(\xi, x)$ является однозначным решением
+          краевой задачи
+          \[
+          \begin{gathered}
+          L[v(\xi,x)] = 0, \\
+          \at{
+          \paren{
+          \gamma_1 A_{\alpha \beta} \pd{v}{x_\beta}
+          \cos\paren{ \vec{n}, x_\alpha } + \gamma_2 v
+          }
+          }{\Gamma} = 
+          -\at{
+          \paren{
+          \gamma_1 A_{\alpha \beta} \pd{G^*}{x_\beta}
+          \cos\paren{ \vec{n}, x_\alpha } + \gamma_2 G^*
+          }
+          }{\Gamma}.
+          \end{gathered}
+          \]
+
+          Таким образом, при известной функции $G^*$ и найденной функции $v$
+          решение исходной задачи определяется формулой
+          \[
+          u(x) = \int\limits_\Omega \rho(\xi) G(\xi, x) d\xi,
+          \]
+          </p>
+
+          <div class="example">
+            Рассмотрим однородное параболическое уравнение
+            \[
+            L[u] = \pd{u}{t}
+            \]
+            с ненулевым начальным условием:
+            \[
+            u(x,0) = \varphi(x)
+            \]
+            и нулевым граничным условием:
+            \[
+            \at{
+            \paren{
+            \gamma_1 A_{\alpha \beta} \pd{u}{x_\beta}
+            \cos\paren{ \vec{n}, x_\alpha } + \gamma_2 u
+            }
+            }{\Gamma} = 0.
+            \]
+
+            Решение будем искать в области $\Omega \times [0;+\infty)$, причём
+            \[
+            u(x,t)
+            \in C(\overline{\Omega} \times [0;+\infty))
+            \cap C^2(\Omega \times (0;+\infty)).
+            \]
+
+            <p>
+            Заданной функции $\varphi(x)$ соответствует единственное решение:
+            \[
+            u(x,t) = M[\varphi(x)];
+            \]
+            предполагаем, что оператор $M$ можно представить в виде
+            \[
+            M[\varphi(x)] = \int\limits_\Omega G(x,\xi,t) \varphi(\xi) d\Omega,
+            \]
+            где $G(x,\xi,t)$ &mdash; ядро оператора $M$.
+            </p>
+
+            <p>
+            Для нахождения этого ядра положим
+            \[
+            \varphi(x) := \delta(\xi - \eta).
+            \]
+            Тогда
+            \[
+            u(x,t) = G(x, \eta, t),
+            \]
+            то есть функция $G(x,\eta,t)$ является решением следующей задачи:
+            \[
+            \begin{aligned}
+            L[G(x, \eta, t)] = \pd{G(x, \eta, t)}{t}, \\
+            G(x,\eta,0) = \delta(x - \eta), \\
+            \at{
+            \paren{
+            \gamma_1 A_{\alpha \beta} \pd{G}{x_\beta}
+            \cos\paren{ \vec{n}, x_\alpha } + \gamma_2 G
+            }
+            }{\Gamma} = 0.
+            \end{aligned}
+            \]
+
+            Обратим внимание на то, что $G \in C(\overline{\Omega} \times
+            [0;+\infty))$ кроме точки $\eta = x, t = 0$. Функция $G(x, \eta, t)$
+            является функцией Грина исходной задачи, а также задачи с ненулевыми
+            краевыми условиями.
+            </p>
+
+            <p>
+            Таким образом, исходная задача свелась к поиску функции Грина и
+            проверке законности дифференцирования под знаком интеграла в формуле
+            \[
+            u(x,t) = \int\limits_\Omega G(x,\xi,t) \varphi(\xi) d\Omega.
+            \]
+            </p>
+          </div>
+
+          <div class="example">
+            Рассмотрим неоднородное параболическое уравнение
+            \[
+            L[u] + f(x,t) = \rho\pd{u}{t}
+            \]
+            с ненулевым начальным условием:
+            \[
+            u(x,0) = \varphi(x)
+            \]
+            и нулевым граничным условием:
+            \[
+            \at{
+            \paren{
+            \gamma_1 A_{\alpha \beta} \pd{u}{x_\beta}
+            \cos\paren{ \vec{n}, x_\alpha } + \gamma_2 u
+            }
+            }{\Gamma} = 0.
+            \]
+
+            <p>
+            Будем искать решение в виде суммы
+            \[
+            u(x,t) = u_1(x,t) + u_2(x,t),
+            \]
+            причём пусть функция $u_1$ удовлетворяет условиям
+            \[
+            \begin{gathered}
+            L[u_1] = \rho \pd{u_1}{t}, \\
+            u_1(x,0) = \varphi(x), \qquad
+            \at{
+            \paren{
+            \gamma_1 A_{\alpha \beta} \pd{u_1}{x_\beta}
+            \cos\paren{ \vec{n}, x_\alpha } + \gamma_2 u_1
+            }
+            }{\Gamma} = 0,
+            \end{gathered}
+            \]
+            а функция $u_2$ &mdash; условиям
+            \[
+            \begin{gathered}
+            L[u_2] + f(x,t) = \rho \pd{u_2}{t}, \\
+            u_2(x,0) = 0, \qquad
+            \at{
+            \paren{
+            \gamma_1 A_{\alpha \beta} \pd{u_2}{x_\beta}
+            \cos\paren{ \vec{n}, x_\alpha } + \gamma_2 u_2
+            }
+            }{\Gamma} = 0.
+            \end{gathered}
+            \]
+            </p>
+
+            <p>
+            Решение первой задачи имеет вид
+            \[
+            u_1(x,t) = \int\limits_\Omega G(x,\xi,t) \varphi(\xi) d\xi.
+            \]
+            </p>
+
+            <p>
+            Покажем, что решение второй задачи имеет вид
+            \[
+            u_2(x,t) = \int\limits_0^t v(x,t,\tau) d\tau,
+            \]
+            где $v(x,t,\tau)$ &mdash; решение краевой задачи
+            \[
+            \begin{gathered}
+            L[v] = \rho \pd{v}{t}, \\
+            \at{v(x,t,\tau)}{t-\tau=0} = \frac{f(x,\tau)}{\rho(x)},
+            \qquad
+            \at{
+            \paren{
+            \gamma_1 A_{\alpha \beta} \pd{v}{x_\beta}
+            \cos\paren{ \vec{n}, x_\alpha } + \gamma_2 v
+            }
+            }{\Gamma} = 0.
+            \end{gathered}
+            \]
+            </p>
+
+            <p>
+            Действительно, положив
+            \[
+            u_2(x,t) = \int\limits_0^t v(x,t,\tau) d\tau,
+            \]
+            из этой краевой задачи получаем, что
+            \[
+            L[u_2] = \int\limits_0^t L[v] d\tau
+            = \int\limits_0^t \rho \pd{v}{t} d\tau.
+            \]
+
+            Продифференцируем $u_2(x,t)$ по $t$:
+            \[
+            \begin{aligned}
+            \pd{u_2}{t}
+            &= \at{v(x,t,\tau)}{t-\tau=0}
+            + \int\limits_0^t \pd{v}{t} d\tau = \\
+            &= \frac{f(x,\tau)}{\rho(x)}
+            + \int\limits_0^t \pd{v}{t} d\tau.
+            \end{aligned}
+            \]
+            Домножим на $\rho(x)$:
+            \[
+            \begin{aligned}
+            \rho(x) \pd{u_2}{t}
+            &= f(x,\tau) + \int\limits_0^t \rho(x) \pd{v}{t} d\tau = \\
+            &= f(x,\tau) + L[u_2].
+            \end{aligned}
+            \]
+            Таким образом, функция
+            \[
+            u_2(x,t) = \int\limits_0^t v(x,t,\tau) d\tau
+            \]
+            удовлетворяет неоднородному параболическому уравнению. Граничные
+            условия
+            \[
+            u_2(x,0) = 0, \qquad
+            \at{
+            \paren{
+            \gamma_1 A_{\alpha \beta} \pd{u_2}{x_\beta}
+            \cos\paren{ \vec{n}, x_\alpha } + \gamma_2 u_2
+            }
+            }{\Gamma} = 0
+            \]
+            проверяются непосредственно.
+            </p>
+
+            <p>
+            По аналогии с решением
+            \[
+            u_1(x,t) = \int\limits_\Omega G(x,\xi,t) \varphi(\xi) d\xi
+            \]
+            запишем
+            \[
+            v(x,t,\tau)
+            = \int\limits_\Omega
+            G(x,\xi,t - \tau) \frac{f(\xi,\tau)}{\rho(\xi)} d\Omega,
+            \]
+            тогда
+            \[
+            u_2(x,t) = \int\limits_0^t \int\limits_\Omega
+            G(x,\xi,t - \tau) \frac{f(\xi,\tau)}{\rho(\xi)} d\Omega d\tau.
+            \]
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: уравнение Лапласа
+        </div>
+        <div class="content">
+          <div class="definition">
+            Для стационарного процесса $f(x,t) = f(x), u(x,t) = u(x)$ уравнения
+            колебания и диффузии принимают вид
+            \[
+            -\Delta u = f(x), \quad x \in \Omega \subset \mathbb{R}^n,
+            \]
+            причём $\Omega$ &mdash; многосвязная область, ограниченная конечной
+            кусочно-гладкой поверхностью $\Gamma$.
+            <p>
+            Это уравнение называют <i>неоднородным уравнением Лапласа</i> (или
+            <i>уравнением Пуассона</i>), если $f(x) \not\equiv 0$. Если же
+            $f(x) \equiv 0$, то уравнение принимает вид
+            <i>(однородного) уравнения Лапласа</i>:
+            \[
+            \Delta u = 0.
+            \]
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: гармоническая функция
+        </div>
+        <div class="content">
+          <div class="definition">
+            Вещественнозначная функция $u(x)$ называется
+            <i>гармонической в конечной области $\Omega$</i>,
+            если
+            <ol>
+              <li>
+                $u(x) \in C^2(\Omega)$;
+              </li>
+
+              <li>
+                $u(x)$ удовлетворяет уравнению Лапласа $\Delta u = 0$ в этой
+                области.
+              </li>
+            </ol>
+          </div>
+
+          <div class="definition">
+            Вещественнозначная функция $u(x)$ называется
+            <i>гармонической в бесконечной области $\Omega$</i>,
+            если
+            <ol>
+              <li>
+                $u(x) \in C^2(\Omega)$ для каждой точки $x \in \Omega$ такой,
+                что $\abs{x} \lt \infty$;
+              </li>
+
+              <li>
+                $u(x)$ удовлетворяет уравнению Лапласа $\Delta u = 0$ в любой
+                конечной области $\Omega_k$;
+              </li>
+
+              <li>
+                на бесконечности имеет место оценка:
+                \[
+                \abs{u(x)} \leqslant \frac{C}{\abs{x}^{n-2}},
+                \qquad x \to \infty,
+                \]
+                где $n \geqslant 2$ &mdash; размерность пространства, а
+                $C = \const$.
+
+                <div class="remark">
+                  Это условие можно переписать в виде
+                  \[
+                  u(x) = \frac{C_1}{x^{n-2}} + o(x^{-n+2}),
+                  \]
+                  то есть при разложении функции $u(x)$ в степенной ряд главный
+                  член разложения будет равен
+                  \[
+                  \frac{C_1}{x^{n-2}}.
+                  \]
+                </div>
+              </li>
+            </ol>
+          </div>
+
+          <div class="remark">
+            Для $n = 2$ гармоническая в бесконечной области функция ограничена
+            на бесконечности. Определение гармонической функции относится только
+            к случаю открытой области. Кроме того, определение не накладывает
+            никаких условий на поведение функции на границе $\Gamma$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: фундаментальное (сингулярное) решение уравнения Лапласа
+        </div>
+        <div class="content">
+          Рассмотрим уравнение Лапласа:
+          \[
+          \Delta u = 0.
+          \]
+
+          <div class="definition">
+            <i>Фундаментальным (сингулярным) решением</i> уравнения Лапласа
+            называют функцию
+            \[
+            E(x,\xi) =
+            \begin{cases}
+            \frac{1}{(n-2) r^{n-2}}, & n \gt 2, \\
+            \ln \frac{1}{r}, & n = 2,
+            \end{cases}
+            \]
+            где $r := \abs{x - \xi}$ &mdash; расстояние от $x$ до $\xi$.
+          </div>
+
+          <div class="proposition">
+            Функция $E(x,\xi)$ является гармонической в любой конечной &mdash; а
+            при $n \gt 2$ и в бесконечной &mdash; области, не содержащей точки
+            $\xi$.
+
+            <div class="proof">
+              При $x \neq \xi$ для любого $n \geqslant 2$ справедливо равенство
+              \[
+              \begin{aligned}
+              \pdv2{E}{x_k}
+              &= \pd{}{x_k} \left[
+              -r^{-n+1} \pd{r}{x_k}
+              \right] = \\
+              &= \pd{}{x_k} \left[
+              -r^{-n} (x_k - \xi_k)
+              \right] = \\
+              &= -r^{-n} + n r^{-n-2} (x_k - \xi_k)^2,
+              \end{aligned}
+              \]
+              откуда следует, что
+              \[
+              \Delta E = -n r^{-n} + nr^{-n-2} r^2 = 0.
+              \]
+
+              <p>
+              Так как $E(x,\xi)$ симметрична относительно $x$ и $\xi$, то
+              очевидна её гармоничность и по $\xi$.
+              </p>
+            </div>
+          </div>
+
+          <div class="proposition">
+            Функция
+            \[
+            v(x,\xi) = \frac{E(x,\xi)}{\abs{B_1}},
+            \]
+            где $B_1$ &mdash; площадь поверхности единичного $n$-мерного шара,
+            удовлетворяет уравнению Пуассона
+            \[
+            \Delta v = -\delta(x - \xi),
+            \]
+            причём
+            \[
+            \int\limits_\Omega \delta(x - \xi) =
+            \begin{cases}
+            0, & \xi \not\in \Omega, \\
+            1, & \xi \in \Omega.
+            \end{cases}
+            \]
+          </div>
+
+          <div class="remark">
+            Функцию $v(x,\xi)$ можно назвать функцией Грина, так как она
+            удовлетворяет неоднородному уравнению, в котором неоднородность
+            представлена $\delta$-функцией.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name repeat">
+          Первая формула Грина
+        </div>
+        <div class="content">
+          <div class="assumptions">
+            <ul>
+              <li>
+                $\Omega \subset \mathbb{R}^n, \; \Gamma = \partial\Omega$.
+              </li>
+
+              <li>
+                $\vb{n}$ &mdash; внешняя нормаль к $\Gamma$.
+              </li>
+            </ul>
+          </div>
+
+          Для дифференциального выражения
+          \[
+          \op{L} u = \pd{}{x_\alpha} \paren{A_{\alpha \beta} \pd{u}{x_\beta}}
+          + B_\alpha \pd{u}{x_\alpha} + C u.
+          \]
+          можно записать <i class="important">первую формулу Грина</i>:
+          \[
+          \int\limits_\Omega v \op{L} u d\Omega
+          = - \int\limits_\Omega A_{\alpha \beta}
+          \pd{v}{x_\alpha} \pd{u}{x_\beta} d\Omega
+          + \int\limits_\Omega v \left[ B_\alpha
+          \pd{u}{x_\alpha} + C u \right] d\Omega
+          + \int\limits_\Gamma v A_{\alpha \beta}
+          \pd{u}{x_\beta} \cos(\vb{n}, x_\alpha) d\Gamma.
+          \]
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name repeat">
+          Вторая формула Грина
+        </div>
+        <div class="content">
+          <div class="assumptions">
+            <ul>
+              <li>
+                $\Omega \subset \mathbb{R}^n, \; \Gamma = \partial\Omega$.
+              </li>
+
+              <li>
+                $\vb{n}$ &mdash; внешняя нормаль к $\Gamma$.
+              </li>
+            </ul>
+          </div>
+
+          Для дифференциального выражения
+          \[
+          \op{L} u = \pd{}{x_\alpha} \paren{A_{\alpha \beta} \pd{u}{x_\beta}}
+          + B_\alpha \pd{u}{x_\alpha} + C u.
+          \]
+          и его формально сопряжённого
+          \[
+          \op{M} u
+          = \pd{}{x_\alpha} \paren{A_{\alpha \beta} \pd{u}{x_\beta}}
+          - \pd{}{x_\alpha} \paren{B_\alpha u} + C u.
+          \]
+          можно записать <i class="important">вторую формулу Грина</i>:
+          \[
+          \begin{aligned}
+          \iint\limits_\Omega \left[ v \op{L} u - u \op{M} v \right] d\Omega
+          &= \int\limits_\Gamma \left[
+          A_{\alpha \beta} \paren{
+          v \pd{u}{x_\alpha} - u \pd{v}{x_\alpha}
+          } + B_\beta uv
+          \right] \cos(\vb{n}, x_\beta) d\Gamma \\
+          &= \int\limits_\Gamma \left[
+          A \paren{v \nabla u - u \nabla v} + B uv
+          \right] \cdot \vb{n} \, d\Gamma.
+          \end{aligned}
+          \]
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Замена переменных в уравнении Лапласа
+        </div>
+        <div class="content">
+          Пусть область $\Omega \subset \mathbb{R}^n$ конечна и
+          $u \in C^2(\Omega)$. Рассмотрим уравнение Пуассона
+          \[
+          \Delta u = -f(x).
+          \]
+
+          Рассмотрим некоторую финитную функцию $\eta$ с носителем $\Omega$
+          такую, что $\eta \in C^\infty(\Omega)$. Домножим на неё уравнение
+          Пуассона и проинтегрируем обе части по всему пространству $\Omega$.
+          Так как $\at{\eta}{\Gamma} = 0$, то первая формула Грина
+          \[
+          \int\limits_\Omega v \op{L} u d\Omega
+          = - \int\limits_\Omega A_{\alpha \beta}
+          \pd{v}{x_\alpha} \pd{u}{x_\beta} d\Omega
+          + \int\limits_\Omega v \left[ B_\alpha
+          \pd{u}{x_\alpha} + C u \right] d\Omega
+          + \int\limits_\Gamma v A_{\alpha \beta}
+          \pd{u}{x_\beta} \cos(\vb{n}, x_\alpha) d\Gamma
+          \]
+          принимает вид
+          \[
+          \iint\limits_\Omega \paren{
+          \pd{u}{x_\alpha} \pd{\eta}{x_\alpha} - f \eta
+          } d\Omega = 0, \qquad \alpha = \overline{1,n}.
+          \]
+
+          <div class="derivation">
+            <div class="idea">
+              В данном случае
+              \[
+              L[u] = \sum_{\alpha=1}^n \pdv2{u}{x_\alpha}.
+              \]
+            </div>
+          </div>
+
+          <div class="proposition">
+            Уравнения
+            \[
+            \Delta u = -f(x)
+            \]
+            и
+            \[
+            \iint\limits_\Omega \paren{
+            \pd{u}{x_\alpha} \pd{\eta}{x_\alpha} - f \eta
+            } d\Omega = 0, \qquad \alpha = \overline{1,n}
+            \]
+            равносильны.
+
+            <div class="proof">
+              Так как
+              \[
+              L[u] = \sum_{\alpha=1}^n \pdv2{u}{x_\alpha},
+              \]
+              то есть
+              \[
+              A_{\alpha \beta} = I_n, \quad B_\alpha = 0, \quad C = 0,
+              \]
+              то первая формула Грина принимает вид
+              \[
+              \iint\limits_\Omega \eta \Delta u d\Omega
+              =
+              - \iint\limits_\Omega \pd{\eta}{x_\alpha} \pd{u}{x_\beta} d\Omega
+              + \int\limits_\Gamma \eta \pd{u}{\vec{n}} d\Gamma,
+              \]
+              но $\at{\eta}{\Gamma} = 0$, поэтому приходим к равенству
+              \[
+              \iint\limits_\Omega \eta \Delta u d\Omega
+              =
+              - \iint\limits_\Omega \pd{\eta}{x_\alpha} \pd{u}{x_\beta} d\Omega.
+              \]
+            </div>
+          </div>
+
+          <p>
+          Введём в $\Omega$ новые переменные
+          \[
+          z_k = z_k(x_1, \dots, x_n) = z_k(x), \qquad k = \overline{1,n}.
+          \]
+          Пусть это преобразование координат взаимно-однозначное, дважды
+          непрерывно дифференцируемое и его якобиан не равен нулю:
+          \[
+          J = \frac{D(x)}{D(z)} \neq 0.
+          \]
+          Введём обозначение:
+          \[
+          g_{jk} = \sum_{\alpha=1}^n \pd{z_j}{x_\alpha} \pd{z_k}{x_\alpha},
+          \qquad g_{jk} = g_{kj}.
+          \]
+
+          Тогда для любых $u,v$ справедливо равенство
+          \[
+          \sum_{\alpha=1}^n \pd{u}{x_\alpha} \pd{v}{x_\alpha}
+          =
+          \sum_{\beta,\gamma=1}^n
+          g_{\beta \gamma} \pd{u}{z_\beta} \pd{v}{z_\gamma}
+          \]
+          и, в частности, при $u = v$
+          \[
+          \begin{aligned}
+          \sum_{\beta,\gamma=1}^n
+          g_{\beta \gamma} \pd{u}{z_\beta} \pd{v}{z_\gamma}
+          &= \sum_{\alpha=1}^n \paren{ \pd{u}{x_\alpha} }^2 = \\
+          &= (\nabla u)^2.
+          \end{aligned}
+          \]
+          </p>
+
+          <p>
+          Таким образом, $g_{jk}$ &mdash; коэффициенты в выражении
+          $(\nabla u)^2$, преобразованном к новым переменным. В новых переменных
+          $z_k$ уравнение
+          \[
+          \iint\limits_\Omega \paren{
+          \pd{u}{x_\alpha} \pd{\eta}{x_\alpha} - f \eta
+          } d\Omega = 0, \qquad \alpha = \overline{1,n}
+          \]
+          принимает вид
+          \[
+          \int\limits_\Omega \left[
+          \sum_{\beta,\gamma=1}^n
+          g_{\beta \gamma} \pd{u}{z_\beta} \pd{v}{z_\gamma}
+          - f \eta
+          \right] J d\Omega = 0.
+          \]
+          Проинтегрировав по частям, с учётом $\at{\eta}{\Gamma} = 0$ получим
+          \[
+          -\int\limits_\Omega \eta \left[
+          \sum_{\beta,\gamma=1}^n
+          \pd{}{z_\gamma} \paren{
+          g_{\beta \gamma} J \pd{u}{z_\beta}
+          }
+          + fJ
+          \right] d\Omega = 0.
+          \]
+          </p>
+
+          <div class="todo">
+            Расписать интегрирование по частям.
+          </div>
+
+          <p>
+          В силу произвольности функции $\eta(x)$
+          \[
+          \sum_{\beta,\gamma=1}^n
+          \pd{}{z_\gamma} \paren{
+          g_{\beta \gamma} J \pd{u}{z_\beta}
+          }
+          + fJ = 0,
+          \]
+          но
+          \[
+          \Delta u = -f(x),
+          \]
+          поэтому
+          \[
+          \Delta u = \frac{1}{J}
+          \sum_{\beta,\gamma=1}^n
+          \pd{}{z_\gamma} \paren{
+          g_{\beta \gamma} J \pd{u}{z_\beta}
+          }.
+          \]
+          Для ортогональной системы координат $z_k$ величины $g_{jk} = 0$, если
+          $j \neq k$, поэтому, введя обозначение
+          \[
+          g_{jj} = H_j^{-2},
+          \]
+          получим:
+          \[
+          \Delta u = \frac{1}{J}
+          \sum_{j=1}^n
+          \pd{}{z_j} \paren{
+          \frac{J}{H_j^2} \pd{u}{z_j}
+          }.
+          \]
+          </p>
+
+          Из дифференциальной геометрии известно
+          <div class="proposition">
+            ${\displaystyle
+            J = \prod\limits_{j=1}^n H_j
+            }$.
+          </div>
+
+          <div class="definition">
+            Коэффициенты $H_j$ называются <i>параметрами Ламе</i>.
+          </div>
+
+          <p>
+          В $\mathbb{R}^3$ в криволинейной ортогональной системе координат $z_j$
+          действие оператора Лапласа имеет вид:
+          \[
+          \Delta u = \frac{1}{H_1 H_2 H_3} \left[
+          \pd{}{z_1} \paren{ \frac{H_2 H_3}{H_1} \pd{u}{z_1} }
+          +
+          \pd{}{z_2} \paren{ \frac{H_1 H_3}{H_2} \pd{u}{z_2} }
+          +
+          \pd{}{z_3} \paren{ \frac{H_1 H_2}{H_3} \pd{u}{z_3} }
+          \right].
+          \]
+          </p>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Геометрический смысл параметров Ламе
+        </div>
+        <div class="content">
+          <p>
+          Рассмотрим ДПСК. Пусть задано преобразование координат
+          \[
+          z_k = z_k(x_1, \dots, x_n) = z_k(x), \qquad k = \overline{1,n}
+          \]
+          взаимно-однозначное, дважды непрерывно дифференцируемое с ненулевым
+          якобианом:
+          \[
+          J = \frac{D(x)}{D(z)} \neq 0.
+          \]
+          </p>
+
+          Обозначим элемент длины через $ds$. Тогда в ДПСК
+          \[
+          ds^2 = dx_1^2 + dx_2^2 + \cdots + dx_n^2.
+          \]
+
+          Рассмотрим обратное преобразование
+          \[
+          x_k = x_k(z), \qquad k = \overline{1,n}.
+          \]
+
+          <p>
+          Известно, что $z_j = C_j = \const$ &mdash; семейство координатных
+          поверхностей криволинейной системы координат $z_j$. Напомним, что
+          в случае $\mathbb{R}^3$ уравнение координатной линии $z_1$
+          определяется двумя равенствами:
+          \[
+          z_2 = \const, \qquad z_3 = \const.
+          \]
+          Аналогично определяются координатные линии $z_2, z_3$.
+          </p>
+
+          <p>
+          Направляющие косинусы линий $z_j$ пропорциональны соответственно
+          \[
+          \pd{x_1}{z_j}, \pd{x_2}{z_j}, \pd{x_3}{z_j}, \qquad j = 1,2,3.
+          \]
+          </p>
+
+          <p>
+          Уравнение ортогональности рёбер элементарного криволинейного
+          параллелепипеда, лежащих на координатных линиях $z_j$ ортогональной
+          криволинейной системы координат, имеет вид
+          \[
+          \pd{x_1}{z_j} \pd{x_1}{z_k}
+          + \pd{x_2}{z_j} \pd{x_2}{z_k}
+          + \pd{x_3}{z_j} \pd{x_3}{z_k} = 0, \qquad j \neq k.
+          \]
+          Так как
+          \[
+          dx_j = \pd{x_j}{z_1} dz_1 + \pd{x_j}{z_2} dz_2 + \pd{x_j}{z_3} dz_3,
+          \]
+          то
+          \[
+          ds^2 = H_1^2 dz_1^2 + H_2^2 dz_2^2 + H_3^2 dz_3^2,
+          \]
+          где
+          \[
+          H_j^2 = \sum_{k=1}^3 \paren{ \pd{x_k}{z_j} }^2.
+          \]
+          </p>
+
+          <p>
+          Элемент длины координатной линии $z_j$ равен
+          \[
+          ds_j = H_j dz_j,
+          \]
+          тогда объём элементарного криволинейного параллелепипеда с рёбрами
+          $H_j dz_j$ равен
+          \[
+          dv = ds_1 ds_2 ds_3 = H_1 H_2 H_3 dz_1 dz_2 dz_3 = J dz_1 dz_2 dz_3.
+          \]
+          </p>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Пример: оператор Лапласа в сферических координатах
+        </div>
+        <div class="content">
+          <div class="example">
+            Пусть $n = 3$. Рассмотрим замену переменных:
+            \[
+            z_1 = r, \qquad z_2 = \theta, \qquad z_3 = \psi,
+            \]
+            причём $\theta \in [0;\pi]$, а $\psi \in [0; 2\pi]$.
+            Тогда
+            \[
+            \begin{aligned}
+            x_1 &= r \sin\theta \cos\psi, \\
+            x_2 &= r \sin\theta \sin\psi, \\
+            x_3 &= r \cos\theta.
+            \end{aligned}
+            \]
+
+            Коэффициенты Ламе примут вид
+            \[
+            H_1 = 1, \qquad H_2 = r, \qquad H_3 = r \sin \theta.
+            \]
+
+            Выражение для оператора Лапласа:
+            \[
+            \Delta u
+            = \frac{1}{r^2} \pd{}{r} \paren{ r^2 \pd{u}{r} }
+            + \frac{1}{r^2 \sin \theta} \pd{}{\theta} \paren{
+            \sin\theta \pd{u}{\theta}
+            }
+            + \frac{1}{r^2 \sin^2\theta} \pdv2{u}{\psi}.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Пример: оператор Лапласа в цилиндрических координатах
+        </div>
+        <div class="content">
+          <div class="example">
+            Пусть $n = 3$. Рассмотрим замену переменных:
+            \[
+            z_1 = \rho, \qquad z_2 = \varphi, \qquad z_3 = z,
+            \]
+            Тогда
+            \[
+            \begin{aligned}
+            x_1 &= \rho \cos\varphi, \\
+            x_2 &= \rho \sin\varphi, \\
+            x_3 &= z.
+            \end{aligned}
+            \]
+
+            Коэффициенты Ламе примут вид
+            \[
+            H_1 = 1, \qquad H_2 = \rho, \qquad H_3 = 1.
+            \]
+
+            Выражение для оператора Лапласа:
+            \[
+            \Delta u
+            = \frac{1}{\rho} \pd{}{\rho} \paren{ \rho \pd{u}{\rho} }
+            + \frac{1}{\rho^2} \pdv2{u}{\varphi}
+            + \pdv2{u}{z}.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Преобразования, не меняющие вида уравнения Лапласа
+        </div>
+        <div class="content">
+          <ol>
+            <li>
+              <div class="proposition">
+                На двумерной плоскости конформное преобразование не нарушает
+                гармоничности функции.
+
+                <div class="proof">
+                  Пусть $\Omega$ &mdash; область комплексной
+                  плоскости $z = x + iy$, а $D$ &mdash; область комплексной
+                  плоскости $\zeta = \xi + i \eta$. Рассмотрим голоморфную
+                  (однозначную аналитическую) функцию
+                  \[
+                  z = z(\zeta) = x(\xi,\eta) + i y(\xi,\eta),
+                  \]
+                  конформно отображающую $D$ на $\Omega$.
+
+                  <p>
+                  Пусть $u(x,y)$ &mdash; гармоническая функция в $\Omega$, то
+                  есть
+                  \[
+                  \Delta_z u = \pdv2{u}{x} + \pdv2{u}{y} = 0
+                  \]
+                  и выполнены условия гармоничности. Рассмотрим функцию
+                  \[
+                  \widetilde{u}(\xi,\eta) = u(x(\xi,\eta), y(\xi,\eta)).
+                  \]
+                  Так как
+                  \[
+                  \begin{aligned}
+                  x &= \frac{z + \overline{z}}{2},
+                  & y &= \frac{z - \overline{z}}{2i}, \\
+                  \xi &= \frac{\zeta + \overline{\zeta}}{2},
+                  & \eta &= \frac{\zeta - \overline{\zeta}}{2i},
+                  \end{aligned}
+                  \]
+                  то
+                  \[
+                  \begin{aligned}
+                  \pd{}{z} &= \frac{1}{2} \paren{
+                  \pd{}{x} - i \pd{}{y}
+                  },
+                  &
+                  \pd{}{\overline{z}} &= \frac{1}{2} \paren{
+                  \pd{}{x} + i \pd{}{y}
+                  }. \\
+                  \pd{}{\zeta} &= \frac{1}{2} \paren{
+                  \pd{}{\xi} - i \pd{}{\eta}
+                  },
+                  &
+                  \pd{}{\overline{\zeta}} &= \frac{1}{2} \paren{
+                  \pd{}{\xi} + i \pd{}{\eta}
+                  }.
+                  \end{aligned}
+                  \]
+                  </p>
+
+                  <div class="derivation">
+                    Пусть $u = u\paren{ x(z,\overline{z}), y(z,\overline{z}) }$.
+                    Тогда
+                    \[
+                    \begin{aligned}
+                    \pd{u}{z}
+                    &= \pd{u}{x} \pd{x}{z} + \pd{u}{y} \pd{y}{z} = \\
+                    &= \pd{u}{x} \cdot \frac{1}{2}
+                    + \pd{u}{y} \cdot \frac{1}{2i} = \\
+                    &= \frac{1}{2} \paren{ \pd{u}{x}
+                    + \pd{u}{y} \cdot \frac{1}{i} } = \\
+                    &= \frac{1}{2} \paren{ \pd{u}{x}
+                    - i \pd{u}{y} }.
+                    \end{aligned}
+                    \]
+                    Аналогично можно показать, что
+                    \[
+                    \pd{u}{\overline{z}} = \frac{1}{2} \paren{ \pd{u}{x}
+                    + i \pd{u}{y} }.
+                    \]
+                  </div>
+
+                  <p>
+                  Используя эти выражения, нетрудно показать, что
+                  \[
+                  \Delta_z u = 4 \ppdv{u}{z}{\overline{z}}.
+                  \]
+
+                  Используя аналогичные рассуждения, и пользуясь тем фактом, что
+                  $z(\zeta)$ &mdash; голоморфна, поэтому ${\displaystyle
+                  \pd{z}{\overline{\zeta}} = 0}$, приходим к выражению:
+                  \[
+                  \begin{aligned}
+                  \Delta_\zeta \widetilde{u}
+                  &= 4 \ppdv{\widetilde{u}}{\zeta}{\overline{\zeta}} = \\
+                  &= 4 \pd{}{\zeta} \left[
+                  \pd{\widetilde{u}}{z} \cancel{\pd{z}{\overline{\zeta}}} +
+                  \pd{\widetilde{u}}{\overline{z}}
+                  \pd{\overline{z}}{\overline{\zeta}}
+                  \right] = \\
+                  &= 4 \pd{}{\zeta} \paren{
+                  \pd{\widetilde{u}}{\overline{z}}
+                  \pd{\overline{z}}{\overline{\zeta}}
+                  } = \\
+                  &= 4 \ppdv{\widetilde{u}}{z}{\overline{z}} \pd{z}{\zeta}
+                  \pd{\overline{z}}{\overline{\zeta}}
+                  + 4 \pdv2{\widetilde{u}}{\overline{z}}
+                  \cancel{\pd{\overline{z}}{\zeta}}
+                  \pd{\overline{z}}{\overline{\zeta}}
+                  + 4 \pd{\widetilde{u}}{\overline{z}}
+                  \cancel{\ppdv{\overline{z}}{\overline{\zeta}}{\zeta}} = \\
+                  &= 4 \ppdv{\widetilde{u}}{z}{\overline{z}} \pd{z}{\zeta}
+                  \pd{\overline{z}}{\overline{\zeta}}.
+                  \end{aligned}
+                  \]
+
+                  Заметим, что
+                  \[
+                  \ppdv{\widetilde{u}}{z}{\overline{z}} = 
+                  \ppdv{u}{z}{\overline{z}},
+                  \]
+                  поэтому
+                  \[
+                  \Delta_\zeta \widetilde{u}
+                  = \Delta_z u \pd{z}{\zeta}
+                  \pd{\overline{z}}{\overline{\zeta}}.
+                  \]
+
+                  В силу голоморфности функции
+                  \[
+                  u \pd{z}{\zeta} = \pd{\overline{z}}{\overline{\zeta}},
+                  \]
+                  поэтому можно переписать равенство в следующем виде:
+                  \[
+                  \Delta_\zeta \widetilde{u}
+                  = \abs{\pd{z}{\zeta}}^2 \Delta_z u.
+                  \]
+                  </p>
+
+                  <p>
+                  Так как отображение конформно, то
+                  \[
+                  \pd{z}{\zeta} \neq 0,
+                  \]
+                  и, следовательно,
+                  \[
+                  \Delta_z = 0 \implies \Delta_\zeta \widetilde{u} = 0,
+                  \]
+                  что и означает, что $\widetilde{u}$ &mdash; гармоническая в
+                  $D$ функция.
+                  </p>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              Рассмотрим преобразование инверсии
+              \[
+              y = \frac{R^2}{\abs{x}^2} x, \qquad
+              x = \frac{R^2}{\abs{y}^2} y.
+              \]
+              Точки $x,y$ называют <i>симметричными относительно сферы
+                $S_R$</i>. Они удовлетворяют соотношению
+              \[
+              \abs{x} \abs{y} = R^2.
+              \]
+
+              <p>
+              Отметим, что преобразование инверсии взаимно-однозначно
+              преобразует внешность шара $B_R$ на $B_R \setminus \set{ 0 }$.
+              </p>
+
+              <div class="definition">
+                Пусть функция $u(x)$ &mdash; гармоническая вне шара $B_R$, тогда
+                функция
+                \[
+                \widetilde{u}(y) = \frac{R^{m-2}}{\abs{y}^{m-2}} u \paren{
+                \frac{R^2}{\abs{y}^2} y
+                }
+                \]
+                называется <i>преобразованием Кельвина</i> функции $u(x)$.
+              </div>
+
+              <div class="proposition">
+                Преобразование Кельвина не нарушает гармоничности функции.
+
+                <div class="proof">
+                  Рассмотрим случай $m=3$. Перейдём к сферическим координатам
+                  \[
+                  x = (r,\theta,\psi),
+                  \qquad \theta \in [0;\pi],
+                  \qquad \psi \in [0; 2\pi].
+                  \]
+
+                  Пусть $u(x) = v(r, \theta, \psi)$. Перейдём к новым
+                  координатам
+                  \[
+                  y = (\rho, \theta, \psi), \qquad \rho = \frac{R^2}{r}.
+                  \]
+                  Из определения преобразования Кельвина следует, что
+                  \[
+                  \widetilde{u}(y) = \widetilde{v}(\rho, \theta, \psi)
+                  = \frac{R}{\rho} v \paren{ \frac{R^2}{\rho}, \theta, \psi }.
+                  \]
+
+                  Тогда
+                  \[
+                  \Delta \widetilde{u}(y)
+                  = \frac{1}{\rho^2} \pd{}{\rho} \paren{
+                  \rho^2 \pd{\widetilde{v}}{\rho}
+                  }
+                  + \frac{1}{\rho^2 \sin\theta} \pd{}{\theta} \paren{
+                  \sin\theta \pd{\widetilde{v}}{\theta}
+                  }
+                  + \frac{1}{\rho^2 \sin^2\theta} \pdv2{\widetilde{v}}{\psi}.
+                  \]
+
+                  <div class="proposition">
+                    Справедливо равенство
+                    \[
+                    \frac{1}{\rho^2} \pd{}{\rho} \paren{
+                    \rho^2 \pd{\widetilde{v}}{\rho}
+                    } = \frac{r^5}{R^5} \left[
+                    \pdv2{v}{r} + \frac{2}{r} \pd{v}{r}
+                    \right].
+                    \]
+
+                    <div class="proof">
+                      Так как
+                      \[
+                      \pd{}{\rho} = \pd{}{r} \dv{r}{\rho}
+                      = - \frac{R^2}{\rho^2} \pd{}{r}
+                      = - \frac{r^2}{R^2} \pd{}{r},
+                      \]
+                      то
+                      \[
+                      \begin{aligned}
+                      \frac{1}{\rho^2} \pd{}{\rho} \paren{
+                      \rho^2 \pd{\widetilde{v}}{\rho}
+                      }
+                      &=
+                      \frac{r^2}{R^4} \paren{
+                      -\frac{r^2}{R^2} \pd{}{r}
+                      }
+                      \left[
+                      \frac{R^4}{r^2} \paren{
+                      -\frac{r^2}{R^2} \pd{}{r} \paren{ \frac{R}{\rho} v }
+                      }
+                      \right] = \\
+                      &= \frac{r^4}{R^4} \left[
+                      \pdv2{}{r} \paren{ \frac{R}{\rho} v }
+                      \right] = \\
+                      &= \frac{r^4}{R^4} \left[
+                      \pdv2{}{r} \paren{ \frac{r}{R} v }
+                      \right] = \\
+                      &= \frac{r^5}{R^5} \left[
+                      \pdv2{v}{r} + \frac{2}{r} \pd{v}{r}
+                      \right].
+                      \end{aligned}
+                      \]
+                    </div>
+                  </div>
+
+                  Пользуясь доказанным утверждением, перепишем уравнение:
+                  \[
+                  \begin{aligned}
+                  \Delta \widetilde{u}(y)
+                  &= \frac{1}{\rho^2} \pd{}{\rho} \paren{
+                  \rho^2 \pd{\widetilde{v}}{\rho}
+                  }
+                  + \frac{1}{\rho^2 \sin\theta} \pd{}{\theta} \paren{
+                  \sin\theta \pd{\widetilde{v}}{\theta}
+                  }
+                  + \frac{1}{\rho^2 \sin^2\theta} \pdv2{\widetilde{v}}{\psi}
+                  = \\
+                  &=
+                  \frac{r^5}{R^5} \left[
+                  \pdv2{v}{r}
+                  + \frac{2}{r} \pd{v}{r}
+                  + \frac{1}{r^2 \sin\theta} \pd{}{\theta} \paren{
+                  \sin\theta \pd{v}{\theta}
+                  }
+                  + \frac{1}{r^2 \sin^2\theta} \pdv2{v}{\psi}
+                  \right] = \\
+                  &= \frac{r^5}{R^5} \Delta u(x).
+                  \end{aligned}
+                  \]
+
+                  <div class="todo">
+                    Проверить выкладки.
+                  </div>
+
+                  Так как $\dfrac{r^5}{R^5} \neq 0$, то
+                  \[
+                  \Delta u(x) = 0 \implies
+                  \Delta \widetilde{u}(y) = 0,
+                  \]
+                  откуда следует, что $\Delta \widetilde{u}(y)$ &mdash;
+                  гармоническая.
+                </div>
+              </div>
+
+              <div class="remark">
+                В общем случае
+                \[
+                \Delta_y \widetilde{u}(y)
+                = \frac{r^{m+2}}{R^{m+2}} \Delta_x u(x).
+                \]
+              </div>
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: преобразование Кельвина функции $u(x)$
+        </div>
+        <div class="content">
+          <div class="definition">
+            Пусть функция $u(x)$ &mdash; гармоническая вне шара $B_R$, тогда
+            функция
+            \[
+            \widetilde{u}(y) = \frac{R^{m-2}}{\abs{y}^{m-2}} u \paren{
+            \frac{R^2}{\abs{y}^2} y
+            }
+            \]
+            называется <i>преобразованием Кельвина</i> функции $u(x)$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Свойства гармонических функций. Интегральное представление
+          гармонической функции
+        </div>
+        <div class="content">
+          Пусть $\Omega \subset \mathbb{R}^n$ &mdash; область с кусочно-гладкой
+          поверхностью $\Gamma = \partial \Omega$.
+
+          <p>
+          Рассмотрим гармонические в $\Omega$ функции $u(x), v(x) \in
+          C(\overline{\Omega})$. Согласно первой и второй формулам Грина для
+          оператора Лапласа получаем равенства
+          \[
+          \begin{gathered}
+          \int\limits_\Gamma v \pd{u}{\vec{n}} d\Gamma
+          = \int\limits_\Omega \pd{v}{x_\alpha} \pd{u}{x_\alpha} d\Omega,
+          \quad \alpha = \overline{1,n}, \\
+          \int\limits_\Gamma \paren{
+          v \pd{u}{\vec{n}} - u \pd{v}{\vec{n}}
+          } d\Gamma = 0.
+          \end{gathered}
+          \]
+          </p>
+
+          <p>
+          Если $\Omega$ неограничена, то дополнительно потребуем абсолютной
+          интегрируемости (или абсолютной суммируемости, если интегралы
+          понимаются в смысле Лебега) от подынтегральных выражений.
+          </p>
+
+          <ol>
+            <li>
+              <div class="proposition">
+                Если гармоническая функция $u(x)$ непрерывна в $\Omega \cup
+                \Gamma$ вместе со своими первыми производными и $u(x) = 0$ для
+                всех $x \in \Gamma$, то
+                \[
+                u(x) \equiv 0 \qquad \forall x \in \Omega.
+                \]
+
+                <div class="proof">
+                  Полагая $v = u$ в формуле
+                  \[
+                  \int\limits_\Gamma v \pd{u}{\vec{n}} d\Gamma
+                  = \int\limits_\Omega
+                  \pd{v}{x_\alpha} \pd{u}{x_\alpha} d\Omega,
+                  \quad \alpha = \overline{1,n},
+                  \]
+                  получим
+                  \[
+                  \int\limits_\Omega
+                  \sum_{k=1}^n \paren{ \pd{u}{x_k} }^2 d\Omega = 0,
+                  \implies
+                  \sum_{k=1}^n \paren{ \pd{u}{x_k} }^2 = 0,
+                  \implies u = \const.
+                  \]
+
+                  Так как $u(x) = 0$ на границе, то $u(x) \equiv 0$.
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="proposition">
+                Если для гармонической в $\Omega$ функции $u(x)$, непрерывной в
+                $\overline{\Omega}$ вместе со своими первыми производными,
+                выполнено равенство
+                \[
+                \at{\pd{u}{\vec{n}}}{\Gamma} = 0,
+                \]
+                то
+                \[
+                u(x) = \const \qquad \forall x \in \Omega.
+                \]
+
+                <div class="proof">
+                  Доказывается аналогично первому свойству.
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="proposition">
+                Если гармоническая в $\Omega$ функция $u(x)$ непрерывна в
+                $\overline{\Omega}$ вместе со своими первыми производными, то
+                \[
+                \int\limits_\Gamma \pd{u}{\vec{n}} d\Gamma = 0.
+                \]
+
+                <div class="proof">
+                  Это равенство напрямую следует из формулы
+                  \[
+                  \int\limits_\Gamma v \pd{u}{\vec{n}} d\Gamma
+                  = \int\limits_\Omega
+                  \pd{v}{x_\alpha} \pd{u}{x_\alpha} d\Omega,
+                  \quad \alpha = \overline{1,n},
+                  \]
+                  если положить в ней $v \equiv 1$.
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="theorem">
+                <i>(интегральное представление гармонической функции)</i>.
+                <p>
+                Для гармонической в $\Omega$ функции $u(x)$, непрерывной в
+                $\overline{\Omega}$ вместе со своими первыми производными,
+                справедлива формула
+                \[
+                u(x) =
+                \frac{1}{\abs{S_1}}
+                \int\limits_\Gamma E(x,\xi) \pd{u}{\nu} d\Gamma
+                -
+                \frac{1}{\abs{S_1}}
+                \int\limits_\Gamma u(\xi) \pd{E(x,\xi)}{\nu} d\Gamma,
+                \]
+                где
+                </p>
+
+                <ul>
+                  <li>
+                    $E(x,\xi)$ &mdash; фундаментальное решение уравнения
+                    Лапласа;
+                  </li>
+
+                  <li>
+                    $\abs{S_1} = \dfrac{2\pi^{n/2}}{\Gamma(n/2)}$ &mdash;
+                    площадь единичной сферы в $\mathbb{R}^n$;
+                  </li>
+
+                  <li>
+                    ${\displaystyle
+                    \Gamma(x) = \int\limits_0^{+\infty} t^{z-1} e^{-t} dt
+                    }$ &mdash; гамма-функция Эйлера.
+                  </li>
+                </ul>
+
+                <div class="proof">
+                  Рассмотрим область
+                  \[
+                  \Omega_\varepsilon = \Omega \setminus \set{
+                  \xi: \abs{\xi - x} \leqslant \varepsilon
+                  }
+                  \]
+                  с границей
+                  \[
+                  \partial \Omega_\varepsilon
+                  = \partial \Omega \cup \set{\abs{\xi - x} = \varepsilon}
+                  = \Gamma \cup \Gamma_\varepsilon.
+                  \]
+
+                  Применим к этой области формулу
+                  \[
+                  \int\limits_\Gamma \paren{
+                  v \pd{u}{\vec{n}} - u \pd{v}{\vec{n}}
+                  } d\Gamma = 0,
+                  \]
+                  полагая $v(\xi) := E(x, \xi)$. Тогда
+                  \[
+                  \begin{gathered}
+                  \int\limits_{\Gamma \cup \Gamma_\varepsilon}
+                  \paren{
+                  E(x,\xi) \pd{u}{\vec{n}_0} - u \pd{E(x,\xi)}{\vec{n}_0}
+                  } d\paren{\Gamma \cup \Gamma_\varepsilon}
+                  = 0, \\
+                  \implies
+                  \int\limits_{\Gamma}
+                  \paren{
+                  E(x,\xi) \pd{u}{\vec{n}} - u \pd{E(x,\xi)}{\vec{n}}
+                  } d\Gamma
+                  =
+                  -\int\limits_{\Gamma_\varepsilon}
+                  \paren{
+                  E(x,\xi) \pd{u}{\vec{\nu}_0} - u \pd{E(x,\xi)}{\vec{\nu}_0}
+                  } d\Gamma_\varepsilon.
+                  \end{gathered}
+                  \]
+                  где 
+                  <ul>
+                    <li>
+                      $\vec{n}_0$ &mdash; внешняя нормаль к границе $\Gamma \cup
+                      \Gamma_\varepsilon$;
+                    </li>
+
+                    <li>
+                      $\vec{\nu}_0$ &mdash; внутрення нормаль к границе
+                      $\Gamma_\varepsilon$;
+                    </li>
+                  </ul>
+
+                  <p>
+                  Обозначим за $\vec{\nu} = -\vec{\nu}_0$ внешнюю нормаль к
+                  границе $\Gamma_\varepsilon$ и рассмотрим выражение
+                  \[
+                  \int\limits_{\Gamma_\varepsilon}
+                  \paren{
+                  E(x,\xi) \pd{u}{\vec{\nu}} - u \pd{E(x,\xi)}{\vec{\nu}}
+                  } d\Gamma_\varepsilon
+                  \]
+                  </p>
+
+                  <p>
+                  Прибавим и вычтем из него величину
+                  \[
+                  \int\limits_{\abs{\xi - x} = \varepsilon}
+                  u(x) \pd{E(x,\xi)}{\vec{\nu}}
+                  d\Gamma_\varepsilon,
+                  \]
+                  после приведения подобных слагаемых получим
+                  \[
+                  \int\limits_{\abs{\xi - x} = \varepsilon}
+                  E(x,\xi) \pd{u(\xi)}{\vec{\nu}}
+                  d\Gamma_\varepsilon
+                  -
+                  \int\limits_{\abs{\xi - x} = \varepsilon}
+                  \left[ u(\xi) - u(x) \right]
+                  \pd{E(x,\xi)}{\vec{\nu}}
+                  d\Gamma_\varepsilon
+                  - u(x)
+                  \int\limits_{\abs{\xi - x} = \varepsilon}
+                  \pd{E(x,\xi)}{\vec{\nu}}
+                  d\Gamma_\varepsilon.
+                  \]
+                  </p>
+
+                  <ol>
+                    <li>
+                      Рассмотрим первое слагаемое:
+                      \[
+                      \int\limits_{\abs{\xi - x} = \varepsilon}
+                      E(x,\xi) \pd{u(\xi)}{\vec{\nu}}
+                      d\Gamma_\varepsilon.
+                      \]
+
+                      Отметим, что $E(x,\xi)$ постоянна на границе
+                      $\Gamma_\varepsilon$, т.к. расстояние $\abs{\xi - x}$ не
+                      изменяется, поэтому
+                      \[
+                      \int\limits_{\abs{\xi - x} = \varepsilon}
+                      E(x,\xi) \pd{u(\xi)}{\vec{\nu}}
+                      d\Gamma_\varepsilon =
+                      E(x,\xi) 
+                      \int\limits_{\abs{\xi - x} = \varepsilon}
+                      \pd{u(\xi)}{\vec{\nu}}
+                      d\Gamma_\varepsilon.
+                      \]
+
+                      Теперь, пользуясь свойством гармонических функций
+                      \[
+                      \int\limits_\Gamma
+                      \pd{u(\xi)}{\vec{n}}
+                      d\Gamma = 0,
+                      \]
+                      заключаем, что первое слагаемое равно нулю.
+                    </li>
+
+                    <li>
+                      <p>
+                      На сфере $\Gamma_\varepsilon$ фундаментальное решение
+                      $E(x,\xi)$ принимает вид
+                      \[
+                      E(x,\xi) =
+                      \left\{
+                      \begin{aligned}
+                      & \frac{1}{(n-2) \varepsilon^{n-2}}, & n &\gt 2, \\
+                      & -\ln \varepsilon, & n &= 2,
+                      \end{aligned}
+                      \right.
+                      \]
+                      но в таком случае
+                      \[
+                      \at{
+                      \pd{E(x,\xi)}{\vec{\nu}}
+                      }{\Gamma_\varepsilon}
+                      =
+                      \at{
+                      \pd{E(x,\xi)}{r}
+                      }{\Gamma_\varepsilon}
+                      =
+                      \pd{E(x,\xi)}{\varepsilon}
+                      = \frac{-1}{\varepsilon^{n-1}}, \qquad n \geqslant 2.
+                      \]
+                      </p>
+
+                      <div class="reminder">
+                        Формула для площади поверхности гиперсферы:
+                        \[
+                        \int\limits_{\abs{\xi - x} = \varepsilon}
+                        d\Gamma_\varepsilon
+                        =
+                        \frac{2\pi^{n/2}}{\Gamma(n/2)} \cdot \varepsilon^{n-1}.
+                        \]
+                        Если ввести обозначение для площади поверхности
+                        единичной гиперсферы
+                        \[
+                        \abs{S_1} := \frac{2\pi^{n/2}}{\Gamma(n/2)},
+                        \]
+                        то формулу можно переписать в виде
+                        \[
+                        \int\limits_{\abs{\xi - x} = \varepsilon}
+                        d\Gamma_\varepsilon
+                        =
+                        \abs{S_1} \varepsilon^{n-1}.
+                        \]
+                      </div>
+
+                      <p>
+                      Гармоническая функция $u(x)$ непрерывна, поэтому для
+                      любого $\delta \gt 0$ существует $\varepsilon_1 \gt 0$
+                      такой, что если $\abs{\xi - x} \lt \varepsilon_1$, то
+                      \[
+                      \abs{u(\xi) - u(x)} \lt \delta.
+                      \]
+                      Используя этот факт, получим, что второе слагаемое
+                      принимает вид
+                      \[
+                      \begin{aligned}
+                      0 &\leqslant
+                      \int\limits_{\abs{\xi - x} = \varepsilon}
+                      \left[ u(\xi) - u(x) \right]
+                      \pd{E(x,\xi)}{\vec{\nu}}
+                      d\Gamma_\varepsilon \lt \\
+                      &\lt
+                      \int\limits_{\abs{\xi - x} = \varepsilon}
+                      \delta \frac{d\Gamma_\varepsilon}{\varepsilon^{n-1}} =
+                      \delta \abs{S_1} \limto{\delta \to 0} 0.
+                      \end{aligned}
+                      \]
+                      </p>
+                    </li>
+
+                    <li>
+                      Третье слагаемое примет вид:
+                      \[
+                      \begin{aligned}
+                      -u(x) \int\limits_{\abs{\xi - x} = \varepsilon}
+                      \pd{E(x,\xi)}{\vec{\nu}}
+                      d\Gamma_\varepsilon
+                      &=
+                      u(x) \int\limits_{\abs{\xi - x} = \varepsilon}
+                      \frac{d\Gamma_\varepsilon}{\varepsilon^{n-1}} = \\
+                      &= u(x) \abs{S_1}.
+                      \end{aligned}
+                      \]
+                    </li>
+                  </ol>
+
+                  Таким образом, исходное выражение примет вид
+                  \[
+                  \abs{S_1} u(x) = 
+                  \int\limits_{\Gamma}
+                  \paren{
+                  E(x,\xi) \pd{u}{\vec{n}} - u \pd{E(x,\xi)}{\vec{n}}
+                  } d\Gamma
+                  \]
+                  или
+                  \[
+                  u(x) = 
+                  \frac{1}{\abs{S_1}}
+                  \int\limits_{\Gamma}
+                  \paren{
+                  E(x,\xi) \pd{u}{\vec{n}} - u \pd{E(x,\xi)}{\vec{n}}
+                  } d\Gamma.
+                  \]
+                </div>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Формулы о среднем арифметическом гармонической функции
+        </div>
+        <div class="content">
+          <div class="proposition">
+            Рассмотрим шар $\abs{\xi - x} \leqslant R \subset \Omega$. Если
+            $u(x)$ &mdash; гармоническая в $\Omega$ функция, то значение $u(x)$
+            в центре шара равно среднему арифметическому её значений в шаре и на
+            его границе.
+
+            <div class="proof">
+              Рассмотрим интегральное представление гармонической функции
+              $u(x)$:
+              \[
+              u(x) = 
+              \frac{1}{\abs{S_1}}
+              \int\limits_{\Gamma}
+              \paren{
+              E(x,\xi) \pd{u}{\vec{n}} - u \pd{E(x,\xi)}{\vec{n}}
+              } d\Gamma.
+              \]
+
+              Применим его к шару:
+              \[
+              u(x) = 
+              \frac{1}{\abs{S_1}}
+              \int\limits_{\abs{\xi - x} = R}
+              \paren{
+              E(x,\xi) \pd{u}{\vec{n}} - u \pd{E(x,\xi)}{\vec{n}}
+              } d\Gamma_R.
+              \]
+
+              <p>
+              Рассмотрим первое слагаемое:
+              \[
+              \frac{1}{\abs{S_1}}
+              \int\limits_{\abs{\xi - x} = R}
+              E(x,\xi) \pd{u}{\vec{n}} d\Gamma_R.
+              \]
+              Так как на $\Gamma$ фундаментальное решение задачи Лапласа
+              $E(x,\xi)$ постоянно, вынесем его за скобки и воспользуемся
+              свойством гармонических функций:
+              \[
+              \begin{gathered}
+              \int\limits_{\Gamma_R}
+              \pd{u}{\vec{n}} d\Gamma_R = 0, \implies \\
+              \implies
+              \frac{1}{\abs{S_1}}
+              \int\limits_{\abs{\xi - x} = R}
+              E(x,\xi) \pd{u}{\vec{n}} d\Gamma_R
+              =
+              \frac{E(x,\xi)}{\abs{S_1}}
+              \int\limits_{\abs{\xi - x} = R}
+              \pd{u}{\vec{n}} d\Gamma_R = 0.
+              \end{gathered}
+              \]
+              </p>
+
+              <p>
+              Рассмотрим теперь второе слагаемое. Пользуясь тем, что на
+              $\Gamma_R$
+              \[
+              \at{
+              \pd{E(x,\xi)}{\vec{\nu}}
+              }{\Gamma_R}
+              =
+              \at{
+              \pd{E(x,\xi)}{r}
+              }{\Gamma_R}
+              =
+              \pd{E(x,\xi)}{R}
+              = \frac{-1}{R^{n-1}}, \qquad n \geqslant 2,
+              \]
+              запишем его в виде
+              \[
+              -\frac{1}{\abs{S_1}}
+              \int\limits_{\abs{\xi - x} = R}
+              u \pd{E(x,\xi)}{\vec{n}} d\Gamma_R
+              =
+              \frac{1}{\abs{S_1} R^{n-1}}
+              \int\limits_{\abs{\xi - x} = R} u(\xi) d\Gamma_R.
+              \]
+              </p>
+
+              <p>
+              Итак,
+              \[
+              u(x)
+              =
+              \frac{1}{\abs{S_1} R^{n-1}}
+              \int\limits_{\abs{\xi - x} = R} u(\xi) d\Gamma_R.
+              \]
+
+              Рассматривая некоторую границу $\abs{\xi - x} = \rho \leqslant R$,
+              эта формула предстанет в виде
+              \[
+              u(x)
+              =
+              \frac{1}{\abs{S_1} \rho^{n-1}}
+              \int\limits_{\abs{\xi - x} = \rho} u(\xi) d\Gamma_\rho,
+              \]
+              или
+              \[
+              \rho^{n-1} u(x)
+              =
+              \frac{1}{\abs{S_1}}
+              \int\limits_{\abs{\xi - x} = \rho} u(\xi) d\Gamma_\rho.
+              \]
+
+              Домножая на $d\rho$ и интегрируя в промежутке
+              $0 \leqslant \rho \leqslant R$, приходим к равенству
+              \[
+              \int\limits_0^R u(x) \rho^{n-1} d\rho
+              =
+              \frac{1}{\abs{S_1}}
+              \int\limits_0^R
+              \int\limits_{\abs{\xi - x} = \rho} u(\xi) d\Gamma_\rho d\rho,
+              \]
+              откуда
+              \[
+              u(x) \frac{R^n}{n}
+              =
+              \frac{1}{\abs{S_1}}
+              \int\limits_{\abs{\xi - x} \leqslant R} u(\xi) dV,
+              \]
+              или
+              \[
+              \begin{aligned}
+              u(x)
+              &=
+              \frac{n}{\abs{S_1} R^n}
+              \int\limits_{\abs{\xi - x} \leqslant R} u(\xi) dV = \\
+              &=
+              \frac{1}{V_R}
+              \int\limits_{\abs{\xi - x} \leqslant R} u(\xi) dV,
+              \end{aligned}
+              \]
+              где
+              </p>
+              <ul>
+                <li>
+                  $V_R = \dfrac{\abs{S_1} R^n}{n}$ &mdash; объём шара;
+                </li>
+
+                <li>
+                  $dV$ &mdash; элемент объёма.
+                </li>
+              </ul>
+
+              <p>
+              Таким образом, формула
+              \[
+              u(x)
+              =
+              \frac{1}{\abs{S_1} R^{n-1}}
+              \int\limits_{\abs{\xi - x} = R} u(\xi) d\Gamma_R
+              \]
+              является формулой о среднем арифметическом для гармонической
+              функции по поверхности шара, а формула
+              \[
+              u(x)
+              =
+              \frac{1}{V_R}
+              \int\limits_{\abs{\xi - x} \leqslant R} u(\xi) dV
+              \]
+              &mdash; формулой о среднем арифметическом для гармонической
+              функции по объёму шара.
+              </p>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Принцип экстремума гармонической функции
+        </div>
+        <div class="content">
+          <div class="proposition">
+            Если гармоническая в $\Omega$ функция $u(x)$ не равна тождественно
+            некоторой постоянной (т.е. $u(x) \not\equiv \const$), то ни в одной
+            точке $x \in \Omega$ она не может принимать значения ни своей
+            верхней, ни своей нижней границы.
+
+            <div class="proof">
+              <p>
+              Введём обозначения:
+              \[
+              M := \sup_{x \in \Omega} u(x),
+              \qquad
+              m := \inf_{x \in \Omega} u(x),
+              \]
+              </p>
+
+              <p>
+              Если $M = +\infty$ или $m = -\infty$, то утверждение очевидно, так
+              как в каждой точке $x \in \Omega$ функция $u(x)$ конечна.
+              </p>
+
+              <p>
+              Пусть $M \neq +\infty$. Предположим, что существует точка
+              $x_0 \in \Omega$ такая, что $u(x_0) = M$. Рассмотрим шар
+              $B_\varepsilon(x_0) \subset \Omega$ с центром в точке $x_0$
+              радиуса $\varepsilon \gt 0$.
+              </p>
+
+              <div class="remark">
+                Такой шар всегда можно выбрать, т.к. множество $\Omega$ открыто
+                (по определению области).
+              </div>
+
+              <p>
+              Если в этом шаре найдётся точка $x_1$ такая, что $u(x_1) \neq M$,
+              то из формулы о среднем арифметическом по объёму
+              \[
+              u(x_0)
+              =
+              \frac{1}{V_R}
+              \int\limits_{\abs{\xi - x_0} \leqslant R} u(\xi) dV
+              \]
+              следовало бы, что $u(x_0) = M \lt M$, что невозможно.
+              Следовательно, для всех точек из шара $B_\varepsilon(x_0)$
+              выполнено равенство $u(x_0) = M$.
+              </p>
+
+              <p>
+              Рассмотрим теперь произвольную точку $x \in \Omega$. Соединим её с
+              точкой $x_0$ некоторой непрерывной кривой $l$ (это всегда можно
+              сделать, т.к. область $\Omega$ односвязна по определению). Теперь,
+              пользуясь аналогичными рассуждениями, будем передвигать шар
+              $B_\varepsilon(x)$ вдоль этой кривой до тех пор, пока точка $x$ не
+              будет принадлежать некоторому шару.
+              </p>
+
+              <div class="remark">
+                В качестве $\varepsilon$ для каждого шара $B_\varepsilon(x)$
+                вдоль кривой $l$ будем брать расстояние, меньшее, чем
+                расстояние от $l$ до границы $\Gamma$.
+              </div>
+
+              <p>
+              В силу произвольности точки $x \in \Omega$ следует, что
+              \[
+              u(x) \equiv M = \const \qquad \forall x \in \Omega,
+              \]
+              что противоречит предположению о том, что $u(x) \not\equiv
+              \const$. Следовательно, теорема доказана.
+              </p>
+
+              <p>
+              Доказательство для $m = \inf_{x \in \Omega} u(x) \neq -\infty$
+              очевидным образом выполняется, если рассмотреть гармоническую в
+              $\Omega$ функцию $v(x) := -u(x)$, для которой
+              \[
+              \sup_{x \in \Omega} v(x) = \inf_{x \in \Omega} u(x).
+              \]
+              </p>
+            </div>
+          </div>
+
+          <div class="corollary">
+            Если $u(x)$ &mdash; гармоническая в $\Omega$ и непрерывная в
+            $\overline{\Omega}$, то точки экстремумов $u(x)$ лежат на границе
+            $\Gamma$.
+
+            <div class="proof">
+              Действительно, если бы нашлась точка экстремума $x_0 \in \Omega$,
+              то, рассмотрев в качестве $\Omega$ некоторую её окрестность
+              (например, шар $B_\varepsilon(x_0)$), пришли бы к противоречию с
+              принципом экстремума гармонической функции.
+            </div>
+          </div>
+
+          <div class="corollary">
+            Если $u(x), v(x)$ &mdash; функции, гармонические в $\Omega$ и
+            непрерывные в $\overline{\Omega}$, причём
+            \[
+            u(x) \leqslant v(x) \qquad \forall x \in \Gamma,
+            \]
+            то
+            \[
+            u(x) \leqslant v(x) \qquad \forall x \in \Omega.
+            \]
+          </div>
+
+          <div class="corollary">
+            Если $u(x), v(x)$ &mdash; функции, гармонические в $\Omega$ и
+            непрерывные в $\overline{\Omega}$, причём
+            \[
+            \abs{u(x)} \leqslant v(x) \qquad \forall x \in \Gamma,
+            \]
+            то
+            \[
+            \abs{u(x)} \leqslant v(x) \qquad \forall x \in \Omega.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: внутренняя и внешняя краевые задачи
+        </div>
+        <div class="content">
+          <div class="definition">
+            Краевая задача для эллиптического уравнения называется
+            <i>внутренней</i>, если искомая функция должна быть определена в
+            конечной области, и <i>внешней</i> &mdash; если в бесконечной.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: внутренняя и внешняя задачи Дирихле для эллиптического
+          уравнения
+        </div>
+        <div class="content">
+          <div class="problem">
+            <i class="important">(Дирихле, внутренняя)</i>.
+            <p>
+            Пусть $\Omega$ &mdash; конечная область с кусочно-гладкой границей
+            $\Gamma$, а $\varphi(x)$ &mdash; заданная и непрерывная на $\Gamma$
+            функция. Требуется найти функцию
+            \[
+            u(x) \in C^2(\Omega) \cap C(\overline{\Omega}),
+            \]
+            удовлетворяющую эллиптическому уравнению
+            \[
+            A_{\alpha \beta} \ppdv{u}{x_\alpha}{x_\beta}
+            + A_\alpha \pd{u}{x_\alpha} + A_0 u = F(x),
+            \qquad \alpha = \overline{1,m}, \quad x \in \mathbb{R}^n
+            \]
+            и условию
+            \[
+            u(x) = \varphi(x), \qquad x \in \Gamma,
+            \]
+            которое следует рассматривать в точках непрерывности.
+            </p>
+          </div>
+
+          <div class="remark">
+            Внешняя задача формулируется так же, только добавляется условие
+            поведения функции $u(x)$ на бесконечности:
+            \[
+            \abs{u(x)} = O\paren{ x^{2-m} }, \qquad x \to \infty.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: внутренняя и внешняя задачи Неймана для эллиптического
+          уравнения
+        </div>
+        <div class="content">
+          <div class="problem">
+            <i class="important">(Неймана, внутренняя)</i>.
+            <p>
+            Пусть $\Omega$ &mdash; конечная область с кусочно-гладкой границей
+            $\Gamma$, а $\psi(x)$ &mdash; заданная на $\Gamma$ функция.
+            Требуется найти функцию
+            \[
+            u(x) \in C^2(\Omega) \cap C(\overline{\Omega}),
+            \]
+            удовлетворяющую эллиптическому уравнению
+            \[
+            A_{\alpha \beta} \ppdv{u}{x_\alpha}{x_\beta}
+            + A_\alpha \pd{u}{x_\alpha} + A_0 u = F(x),
+            \qquad \alpha = \overline{1,m}, \quad x \in \mathbb{R}^n
+            \]
+            и условию
+            \[
+            \lim_{x' \to x}
+            A_{\alpha \beta}(x') \pd{u(x')}{x_\alpha'}
+            \cos(\vec{n}, x_\beta) = \psi(x)
+            \]
+            на множестве точек $x \in \Gamma$, в которых существует нормаль к
+            $\Gamma$, где $x' \in \Omega$ лежит на этой нормали.
+            </p>
+          </div>
+
+          <div class="remark">
+            Если $u(x) \in C^1(\overline{\Omega})$, то условие
+            \[
+            \lim_{x' \to x}
+            A_{\alpha \beta}(x') \pd{u(x')}{x_\alpha'}
+            \cos(\vec{n}, x_\beta) = \psi(x)
+            \]
+            можно записать в виде
+            \[
+            \at{
+            \paren{
+            A_{\alpha \beta} \pd{u}{x_\alpha} \cos(\vec{n}, x_\beta)
+            }
+            }{\Gamma} = \psi(x).
+            \]
+
+            <p>
+            Если к тому же $A_{\alpha \beta}(x) = \delta_{\alpha \beta}$, то
+            эллиптическое уравнение принимает вид
+            \[
+            \Delta u + A_\alpha \pd{u}{x_\alpha} + A_0 u = F(x),
+            \]
+            а граничное условие &mdash; вид
+            \[
+            \at{
+            \pd{u}{\vec{n}}
+            }{\Gamma} = \psi(x).
+            \]
+            </p>
+          </div>
+
+          <div class="remark">
+            Внешняя задача формулируется так же, только добавляется условие
+            поведения функции $u(x)$ на бесконечности:
+            \[
+            \abs{u(x)} = O\paren{ x^{2-m} }, \qquad x \to \infty.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Единственность решения задачи Дирихле для уравнений эллиптического
+          типа
+        </div>
+        <div class="content">
+          <div class="proposition">
+            Решение задачи Дирихле для уравнений эллиптического типа
+            единственно.
+
+            <div class="proof">
+              Пусть $u(x)$ и $v(x)$ &mdash; решения этой задачи. Рассмотрим
+              функцию $w(x) = u(x) - v(x)$. Из граничного условия следует, что
+              \[
+              w(x) = 0 \qquad \forall x \in \Gamma,
+              \]
+              но тогда из следствия из принципа экстремума следует, что
+              \[
+              w(x) = 0 \qquad \forall x \in \overline{\Omega}.
+              \]
+            </div>
+          </div>
+
+          <div class="remark">
+            Аналогичным образом доказывается устойчивость решения задачи
+            Дирихле, то есть её непрерывность от начальных данных: из условия
+            выполнения неравенства
+            \[
+            \abs{u(x) - v(x)} \lt \varepsilon, \qquad x \in \Gamma
+            \]
+            следует выполнение
+            \[
+            \abs{u(x) - v(x)} \lt \varepsilon, \qquad x \in \overline{\Omega}.
+            \]
+          </div>
+
+          <div class="remark">
+            Единственность решения задачи Дирихле имеет место также и в случае
+            кусочно-непрерывной функции $\varphi(x)$ на $\Gamma$, если искать
+            решение $u(x)$, непрерывное почти всюду в $\overline{\Omega}$ (за
+            исключением точек разрыва функции $\varphi(x)$, где $u(x)$ должна
+            быть ограничена).
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Разрешимость задачи Неймана для эллиптического уравнения
+        </div>
+        <div class="content">
+          <p>
+          Можно показать, что внутренняя задача Неймана не всегда разрешима для
+          уравнения Пуассона
+          \[
+          \Delta u = F(x),
+          \]
+          так как для существования решения необходимо выполнение равенства
+          \[
+          \int\limits_\Omega F(x) d\Omega = \int\limits_\Gamma \psi(x) d\Gamma.
+          \]
+          </p>
+
+          <p>
+          Задача Неймана <i>для изолированной границы</i>, то есть при
+          $\psi(x) = 0$:
+          \[
+          \int\limits_\Omega F(x) d\Omega = 0
+          \implies
+          \int\limits_\Omega \Delta u d\Omega = 0.
+          \]
+          </p>
+
+          <p>
+          Задача Неймана <i>при отсутствии источников</i>, то есть при
+          $F(x) = 0$:
+          \[
+          \int\limits_\Gamma \pd{u}{\vec{n}} d\Gamma = 0
+          \implies
+          \int\limits_\Gamma \psi(x) d\Gamma = 0.
+          \]
+          </p>
+
+          <div class="proposition">
+            Решение внутренней задачи Неймана для уравнения Лапласа определяется
+            с точностью до постоянной, а внешней &mdash; единственно.
+
+            <div class="todo">
+              Почему?
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: функция Грина задачи Дирихле для уравнения Лапласа
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Функцией Грина задачи Дирихле</i> для уравнения Лапласа в области
+            $\Omega$ называется функция $G(x,\xi)$ для двух точек
+            $x,\xi \in \overline{\Omega}$, обладающая свойствами:
+            <ol>
+              <li>
+                выполнено равенство
+                \[
+                G(x,\xi) = E(x,\xi) + g(x,\xi),
+                \qquad
+                x,\xi \in \overline{\Omega},
+                \]
+                где $E(x,\xi)$ &mdash; фундаментальное решение уравнения
+                Лапласа, $g(x,\xi)$ &mdash; гармоническая по $x,\xi \in \Omega$;
+              </li>
+
+              <li>
+                если $x \in \Gamma$ или $y \in \Gamma$, то
+                \[
+                G(x,\xi) = 0.
+                \]
+              </li>
+            </ol>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Свойства функции Грина задачи Дирихле для уравнения Лапласа
+        </div>
+        <div class="content">
+          <ol>
+            <li>
+              <div class="proposition">
+                Функция Грина неотрицательна:
+                \[
+                G(x,\xi) \geqslant 0
+                \qquad \forall x,\xi \in \overline{\Omega}.
+                \]
+
+                <div class="proof">
+                  Для произвольной точки $x \in \Omega$ рассмотрим область
+                  \[
+                  \Omega_\delta = \Omega \setminus \set{
+                  \xi \in \Omega: \abs{\xi - x} \leqslant \delta
+                  }.
+                  \]
+
+                  Прежде всего, из определения фундаментального решения Лапласа
+                  следует, что справедливо равенство
+                  \[
+                  \lim_{\xi \to x} G(x,\xi) = +\infty,
+                  \]
+                  то есть
+                  \[
+                  \exists \delta \gt 0: \quad G(x,\xi) \gt 0
+                  \quad \mbox{ при } \quad \abs{\xi - x} \leqslant \delta,
+                  \]
+                  причём
+                  \[
+                  G(x,\xi) \geqslant 0,
+                  \qquad \xi \in \Gamma \cup \Gamma_\delta.
+                  \]
+
+                  В силу произвольности точки $x$ заключаем, что
+                  \[
+                  G(x,\xi) \geqslant 0
+                  \qquad \forall x,\xi \in \overline{\Omega}.
+                  \]
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="proposition">
+                Функция Грина $G(x,y)$ симметрична относительно точек $x$ и $y$.
+
+                <div class="proof">
+                  <div class="todo">
+                    ПЕРЕПИСАТЬ.
+                  </div>
+
+                  Введём обозначения
+                  \[
+                  \begin{aligned}
+                  b_1 &= \set{ z \in \Omega: \abs{z - x} \leqslant \delta }, \\
+                  b_2 &= \set{ z \in \Omega: \abs{z - y} \leqslant \delta },
+                  \end{aligned}
+                  \]
+                  где $x,y \in \Omega$ &mdash; произвольные точки, и рассмотрим
+                  область
+                  \[
+                  \Omega_\delta = \Omega \setminus (b_1 \cup b_2).
+                  \]
+
+                  <p>
+                  Функции $u_1 = G(z,x)$ и $u_2 = G(z,y)$ гармоничны в
+                  $\Omega \setminus b_1$ и $\Omega \setminus b_2$
+                  соответственно.
+                  </p>
+
+                  <p>
+                  Применим вторую формулу Грина для функций $u_1$ и $u_2$ на
+                  $\Omega_\delta$:
+                  \[
+                  \int\limits_{\Gamma_\delta} \paren{
+                  G(z,y) \pd{G(z,x)}{\vec{n}} - G(z,x) \pd{G(z,y)}{\vec{n}}
+                  } d{\Gamma_\delta}
+                  =
+                  \int\limits_{\Gamma} \left[ \dots \right] d{\Gamma}
+                  +
+                  \int\limits_{\Gamma_1} \left[ \dots \right] d{\Gamma_1}
+                  +
+                  \int\limits_{\Gamma_2} \left[ \dots \right] d{\Gamma_2}
+                  = 0.
+                  \]
+                  </p>
+
+                  <p>
+                  Так как $G(z,x) = G(z,y) = 0$ при $z \in \Gamma$, то
+                  \[
+                  \int\limits_{\Gamma} \paren{
+                  G(z,y) \pd{G(z,x)}{\vec{n}} - G(z,x) \pd{G(z,y)}{\vec{n}}
+                  } d{\Gamma} = 0,
+                  \]
+                  поэтому можно записать, что
+                  \[
+                  \int\limits_{\Gamma_1} \paren{
+                  G(z,y) \pd{G(z,x)}{\vec{n}} - G(z,x) \pd{G(z,y)}{\vec{n}}
+                  } d{\Gamma_1}
+                  =
+                  \int\limits_{\Gamma_2} \paren{
+                  G(z,x) \pd{G(z,y)}{\vec{n}} - G(z,y) \pd{G(z,x)}{\vec{n}}
+                  } d{\Gamma_2}.
+                  \]
+                  </p>
+
+                  <p>
+                  Преобразуем интеграл в левой части: добавим и вычтем из него
+                  \[
+                  \int\limits_{\Gamma_1}
+                  G(x,y) \pd{G(z,x)}{\vec{n}_z} d\Gamma_1;
+                  \]
+                  получим
+                  \[
+                  \begin{gathered}
+                  \int\limits_{\Gamma_1} \paren{
+                  G(z,y) \pd{G(z,x)}{\vec{n}} - G(z,x) \pd{G(z,y)}{\vec{n}}
+                  } d{\Gamma_1} = \\
+                  =
+                  \underbrace{
+                  \int\limits_{\Gamma_1}
+                  \left[ G(z,y) - G(x,y) \right] \pd{G(z,x)}{\vec{n}}
+                  d{\Gamma_1}
+                  }_{I_1}
+                  +
+                  \underbrace{
+                  \int\limits_{\Gamma_1}
+                  G(x,y) \pd{G(z,x)}{\vec{n}}
+                  d{\Gamma_1}
+                  }_{I_2}
+                  -
+                  \underbrace{
+                  \int\limits_{\Gamma_1}
+                  G(z,x) \pd{G(z,y)}{\vec{n}}
+                  d{\Gamma_1}
+                  }_{I_3}.
+                  \end{gathered}
+                  \]
+
+                  Рассмотрим слагаемые отдельно.
+                  </p>
+
+                  <ol>
+                    <li>
+                      так как $G(z,y)$ &mdash; гармоническая функция вне
+                      $\Gamma_2$, то
+                      \[
+                      G(z,y) \limto{\abs{z-x} \to 0} G(x,y)
+                      \]
+                      равномерно по $y$, поэтому
+                      \[
+                      \forall \delta_1 \gt 0 \quad \exists \varepsilon_1 \gt 0:
+                      \quad \abs{G(z,y) - G(z,x)} \lt \delta_1,
+                      \quad \mbox{ если } \abs{z - x} \lt \varepsilon_1,
+                      \]
+                      поэтому
+                      \[
+                      \int\limits_{\Gamma_1}
+                      \left[ G(z,y) - G(x,y) \right] \pd{G(z,x)}{\vec{n}}
+                      d{\Gamma_1}
+                      \lt
+                      \int\limits_{\Gamma_1}
+                      \delta_1 \pd{G(z,x)}{\vec{n}}
+                      d{\Gamma_1},
+                      \]
+                      но
+                      \[
+                      \begin{aligned}
+                      \pd{G(z,x)}{\vec{n}_z}
+                      &=
+                      \pd{E(z,x)}{\vec{n}_z}
+                      +
+                      \pd{g(z,x)}{\vec{n}_z} = \\
+                      &=
+                      -\frac{1}{\delta^{m-1}}
+                      + \pd{g(z,x)}{\vec{n}_z},
+                      \end{aligned}
+                      \]
+                      причём $g(z,x)$ &mdash; гармоническая и, следовательно,
+                      \[
+                      \int\limits_{\Gamma_1} 
+                      \pd{g(z,x)}{\vec{n}_z} d\Gamma_1 = 0,
+                      \]
+                      поэтому окончательно имеем
+                      \[
+                      \int\limits_{\Gamma_1}
+                      \left[ G(z,y) - G(x,y) \right] \pd{G(z,x)}{\vec{n}}
+                      d{\Gamma_1}
+                      \lt \delta_1 \abs{S_1} \limto{\delta_1 \to 0} 0,
+                      \]
+                      где
+                      \[
+                      \abs{S_1} = \frac{2 \pi^{n/2}}{\Gamma(n/2)}.
+                      \]
+                    </li>
+
+                    <li>
+                      Рассмотрим второе слагаемое: вынесем $G(x,y)$, так как
+                      этот множитель не зависит от $z$:
+                      \[
+                      \begin{aligned}
+                      I_2 &=
+                      \int\limits_{\Gamma_1}
+                      G(x,y) \pd{G(z,x)}{\vec{n}}
+                      d{\Gamma_1} = \\
+                      &=
+                      G(x,y) 
+                      \int\limits_{\Gamma_1}
+                      \pd{G(z,x)}{\vec{n}}
+                      d{\Gamma_1} = \\
+                      &= -G(x,y) \abs{S_1}.
+                      \end{aligned}
+                      \]
+                    </li>
+
+                    <li>
+                      Рассмотрим третье слагаемое, учитывая, что
+                      $\Gamma_1 = \set{ z: \abs{z - x} = \delta }$:
+                      \[
+                      \begin{aligned}
+                      I_3
+                      &= \int\limits_{\Gamma_1}
+                      G(z,x) \pd{G(z,y)}{\vec{n}}
+                      d{\Gamma_1} = \\
+                      &= \int\limits_{\Gamma_1}
+                      \paren{ E(z,x) + g(z,x) } \pd{G(z,y)}{\vec{n}}
+                      d{\Gamma_1} = \\
+                      &= \int\limits_{\Gamma_1}
+                      \left[
+                      \frac{1}{(m-2) \delta^{m-2}} + g(z,x)
+                      \right]
+                      \left[
+                      -\frac{1}{\delta^{m-1}}
+                      + \pd{g(z,y)}{\vec{n}_z}
+                      \right]
+                      d{\Gamma_1} = \\
+                      &= \underbrace{
+                      \int\limits_{\Gamma_1}
+                      \frac{1}{(m-2) \delta^{m-2}} \pd{G(z,y)}{\vec{n}}
+                      d{\Gamma_1}
+                      }_{=0}
+                      + \int\limits_{\Gamma_1}
+                      g(z,x) \pd{G(z,y)}{\vec{n}}
+                      d{\Gamma_1}
+                      \end{aligned}
+                      \]
+                    </li>
+                  </ol>
+                </div>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Решение задачи Дирихле для шара
+        </div>
+        <div class="content">
+          <p>
+          Построим функцию Грина для случая, когда $\Omega$ &mdash; шар, и
+          покажем, что гармоническая функция $u(x)$, представленная формулой
+          \[
+          u(x) = - \frac{1}{S_1}
+          \int\limits_\Gamma \pd{G(x,\xi)}{\vec{n}} \varphi(\xi) d\Gamma,
+          \qquad x \in \Omega,
+          \]
+          удовлетворяет условию
+          \[
+          \lim_{x \to \xi} u(x) = \varphi(\xi),
+          \qquad x \in \Omega, \quad \xi \in \Gamma.
+          \]
+          </p>
+
+          <p>
+          Пусть $\Omega = \set{ x \in \mathbb{R}^n: \abs{x} \lt 1 }$ и
+          $x,\xi \in \Omega$. Точка
+          \[
+          \xi' = \frac{\xi}{\abs{\xi}^2}
+          \]
+          симметрична точке $\xi$ относительно сферы $\abs{x} = 1$.
+          </p>
+
+          <div class="proposition">
+            Для шара $\abs{x} \lt 1$ справедлива формула:
+            \[
+            G(x,\xi) = E(x,\xi) - E\paren{ \abs{x}\xi, \frac{x}{\abs{x}} }.
+            \]
+
+            <div class="proof">
+              Действительно, имеем
+              \[
+              \begin{aligned}
+              \abs{ \abs{x}\xi - \frac{x}{\abs{x}} }
+              &=
+              \left[
+              \abs{x}^2 \abs{\xi}^2 - 2 \xi x + 1
+              \right]^{1/2} = \\
+              &= \abs{ \abs{\xi} x - \frac{\xi}{\abs{\xi}} } = \\
+              &= \abs{\xi} \abs{ x - \frac{\xi}{\abs{\xi}^2} } = \\
+              &= \abs{x} \abs{ \xi - \frac{x}{\abs{x}^2} }.
+              \end{aligned}
+              \]
+
+              В силу того, что
+              \[
+              \abs{ \frac{\xi}{\abs{\xi}^2} } \gt 1, \qquad x \neq
+              \frac{\xi}{\abs{\xi}^2},
+              \]
+              выполняется условие
+              \[
+              \abs{x} \xi - \frac{x}{\abs{x}} \neq 0,
+              \qquad
+              \abs{x} \lt 1, \quad \abs{\xi} \lt 1.
+              \]
+
+              <p>
+              Функция
+              \[
+              g(x,\xi) = -E\paren{ \abs{x}\xi, \frac{x}{\abs{x}} }
+              \]
+              является гармонической при $\abs{x} \lt 1$ и $\abs{\xi} \lt 1$ как
+              по $x$, так и по $\xi$. При $\abs{\xi} = 1$ имеем
+              \[
+              \begin{aligned}
+              \abs{x - \xi}
+              &= \paren{ x^2 - 2 x \xi + 1 }^{1/2} = \\
+              &= \abs{ \abs{\xi} x - \frac{\xi}{\abs{\xi}} } = \\
+              &= \abs{ \abs{x} \xi - \frac{x}{\abs{x}} }.
+              \end{aligned}
+              \]
+
+              Тогда $G(x,\xi) = 0$ на $\partial \Omega$.
+              </p>
+            </div>
+          </div>
+
+          <p>
+          При $\abs{\xi} = 1, \abs{x} \lt 1$ имеем
+          \[
+          \at{
+          \pd{G(x,\xi)}{n}
+          }{\abs{\xi}=1}
+          =
+          -\sum_{j=1}^m
+          \at{
+          \left[
+          \frac{\xi_j (\xi_j - x_j)}{\abs{\xi - x}^m}
+          -
+          \abs{x} \frac{
+          \xi_j \paren{ \abs{x} \xi_j - \frac{x_j}{\abs{x_j}} }
+          }{
+          \abs{ \abs{x} \xi - \frac{x}{\abs{x}} }^m
+          }
+          \right]
+          }{\abs{\xi} = 1}
+          = - \frac{1 - \abs{x}^2}{\abs{\xi - x}^m}.
+          \]
+          В этом случае формула
+          \[
+          u(x) = - \frac{1}{S_1}
+          \int\limits_\Gamma \pd{G(x,\xi)}{\vec{n}} \varphi(\xi) d\Gamma,
+          \qquad x \in \Omega
+          \]
+          принимает вид
+          \[
+          u(x) = \frac{1}{S_1}
+          \int\limits_{\abs{\xi}=1}
+          \frac{1 - \abs{x}^2}{\abs{\xi - x}^m}
+          \varphi(\xi) d\Gamma.
+          \]
+          </p>
+
+          <div class="definition">
+            Формулу
+            \[
+            u(x) = \frac{1}{S_1}
+            \int\limits_{\abs{\xi}=1}
+            \frac{1 - \abs{x}^2}{\abs{\xi - x}^m}
+            \varphi(\xi) d\Gamma
+            \]
+            называют <i>формулой Пуассона</i>.
+          </div>
+
+          <div class="remark">
+            Если $u(x)$ гармонична в шаре $\abs{x} \lt R$, непрерывна в
+            $\abs{x} \leqslant R$ и удовлетворяет краевому условию
+            \[
+            \lim_{x \to \xi} u(x) = \varphi(\xi),
+            \quad \abs{x} \lt R, \quad \abs{\xi} = R.
+            \]
+
+            Проведём замену:
+            \[
+            x = Ry, \quad \xi = Rt, \quad \abs{y} \lt 1, \quad \abs{t} \lt 1;
+            \]
+            функция
+            \[
+            v(y) = u(Ry)
+            \]
+            гармонична в $\abs{y} \lt 1$, непрерывна в $\abs{y} \leqslant 1$ и
+            удовлетворяет краевому условию
+            \[
+            \lim_{y \to t} v(y) = \varphi(Rt),
+            \quad \abs{y} \lt 1, \quad \abs{t} = 1.
+            \]
+            Следовательно, формула Пуассона примет вид
+            \[
+            v(y) = \frac{1}{\abs{S_1}}
+            \int\limits_{\abs{t}=1} \frac{1 - \abs{y}^2}{\abs{t - y}^m}
+            \varphi(t) d\Gamma_t.
+            \]
+
+            <p>
+            Таким образом,
+            \[
+            u(x) = v\paren{ \frac{x}{R} } =
+            \frac{1}{\abs{S_1} R}
+            \int\limits_{\abs{\xi}=R} \frac{R^2 - \abs{x}^2}{\abs{\xi - x}^m}
+            \varphi(\xi) d\Gamma_\xi.
+            \]
+            </p>
+          </div>
+
+          <div class="remark">
+            Пусть $u(x)$ гармонична в шаре $\abs{x - x_0} \lt R$, непрерывна в
+            $\abs{x - x_0} \leqslant R$ и удовлетворяет краевому условию:
+            \[
+            \lim_{x \to \xi} u(x) = \varphi(\xi),
+            \quad \abs{x - x_0} \lt R, \quad \abs{\xi - x_0} = R.
+            \]
+            Проведём замену:
+            \[
+            x = y + x_0, \quad \xi = t + x_0.
+            \]
+
+            Функция
+            \[
+            w(y) = u(y + x_0)
+            \]
+            гармонична в $\abs{y} \lt R$, непрерывна в $\abs{y} \leqslant R$ и
+            \[
+            \lim_{y \to t} w(y) = \varphi(t + x_0),
+            \quad \abs{y} \lt R, \quad \abs{t} = R,
+            \]
+            поэтому
+            \[
+            w(y) =
+            \frac{1}{\abs{S_1} R}
+            \int\limits_{\abs{t}=R} \frac{R^2 - \abs{y}^2}{\abs{t - y}^m}
+            \varphi(t + x_0) d\Gamma_t,
+            \]
+            откуда обратной заменой $y + x_0 = x$ получаем формулу
+            \[
+            u(x) = w(x - x_0) =
+            \frac{1}{\abs{S_1} R}
+            \int\limits_{\abs{\xi - x_0}=R}
+            \frac{R^2 - \abs{x - x_0}^2}{\abs{\xi - x}^m}
+            \varphi(\xi) d\Gamma_\xi.
+            \]
+
+            Заметим, что при $x = x_0$ формула определяет значение $u(x_0)$ как
+            среднее арифметическое значение $u$ на поверхности шара.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Обоснование формулы Пуассона
+        </div>
+        <div class="content">
+          <p>
+          Покажем, что $u(x)$, определённая по формуле Пуассона
+          \[
+          u(x) = \frac{1}{S_1}
+          \int\limits_{\abs{\xi}=1}
+          \frac{1 - \abs{x}^2}{\abs{\xi - x}^m}
+          \varphi(\xi) d\Gamma,
+          \]
+          удовлетворяет краевому условию
+          \[
+          \lim_{x \to \xi} u(x) = \varphi(\xi),
+          \qquad x \in \Omega, \quad \xi \in \Gamma,
+          \]
+          то есть является решением задачи Дирихле для шара.
+          </p>
+
+          <p>
+          Рассмотрим случай $m=2$. Так как $u(x) = 1$ &mdash; гармоническая
+          функция, удовлетворяющая условию
+          \[
+          \lim_{x \to \xi} u(x) = 1,
+          \qquad \abs{x} \lt 1, \quad \abs{\xi} = 1,
+          \]
+          то
+          \[
+          \frac{1}{2\pi} \int\limits_0^{2 \pi}
+          \frac{1 - \abs{x}^2}{\abs{\xi - x}^2} d\psi = 1,
+          \qquad \xi_1 = \cos\psi, \quad \xi_2 = \sin\psi.
+          \]
+
+          Домножим эту формулу на $\varphi(\xi_0)$ и вычтем из формулы Пуассона:
+          \[
+          u(x) - \varphi(\xi_0) =
+          \frac{1}{2\pi} \int\limits_0^{2 \pi}
+          \frac{1 - \abs{x}^2}{\abs{\xi - x}^2} \left[
+          \varphi(\xi) - \varphi(\xi_0)
+          \right]
+          d\psi, \qquad \abs{x} \lt 1.
+          \]
+          </p>
+
+          <p>
+          Непрерывная функция $\varphi(\xi)$ на окружности $\abs{\xi} = 1$ как
+          на замкнутом множестве равномерно непрерывна, то есть
+          для любого $\varepsilon \gt 0$ существуе $\delta(\varepsilon) \gt 0$
+          такой, что
+          \[
+          \forall \psi,\psi_0: \quad \abs{\psi - \psi_0} \lt \delta
+          \implies \abs{\varphi(\xi) - \varphi(\xi_0)} \lt \varepsilon,
+          \]
+          где
+          \[
+          \begin{aligned}
+          \xi_1 &= \cos\psi, & \xi_2 &= \sin\psi, \\
+          \xi_{10} &= \cos\psi_0, & \xi_{20} &= \sin\psi_0.
+          \end{aligned}
+          \]
+          </p>
+
+          <p>
+          Введём обозначения:
+          \[
+          D_1 = \frac{1 - \abs{x}^2}{\abs{\xi - x}^2},
+          \qquad D = D_1 \left[ \varphi(\xi) - \varphi(\xi_0) \right].
+          \]
+          Тогда
+          \[
+          u(x) - \varphi(\xi_0) = I_1 + I_2,
+          \]
+          где
+          \[
+          \begin{aligned}
+          I_1 &= \frac{1}{2 \pi}
+          \int\limits_{\psi_0 - \delta}^{\psi_0 + \delta} D d\psi, \\
+          I_2 &= \frac{1}{2 \pi}
+          \left[
+          \int\limits_0^{\psi_0 - \delta} D d\psi
+          +
+          \int\limits_{\psi_0 + \delta}^{2\pi} D d\psi
+          \right].
+          \end{aligned}
+          \]
+          </p>
+
+          <p>
+          Из равномерной непрерывности функции $\varphi(\xi)$ и равенства
+          \[
+          \frac{1}{2\pi} \int\limits_0^{2 \pi}
+          \frac{1 - \abs{x}^2}{\abs{\xi - x}^2} d\psi = 1,
+          \qquad \xi_1 = \cos\psi, \quad \xi_2 = \sin\psi
+          \]
+          следует, что
+          \[
+          \abs{I_1} \lt \varepsilon.
+          \]
+          </p>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Решение задачи Дирихле для полупространства
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Следствия из формулы Пуассона для шара (теоремы Лиувилля и Гарнака)
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Объёмный потенциал. Вывод уравнения Пуассона для объёмного потенциала
+          (без док-ва существования 1-х и 2-х производных)
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Решение задачи Дирихле для уравнения Пуассона при помощи функции Грина
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Интеграл Гаусса. Формула Гаусса
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Потенциал двойного слоя. Физическое истолкование. Разрыв потенциала
+          двойного слоя на поверхности интегрирования
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Непрерывность потенциала простого слоя и скачок его нормальной
+          производной
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Интегральные уравнения теории потенциала. Особенность решения внешней
+          задачи Дирихле
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Интегральное уравнение Фредгольма 2-го рода. Решение методом
+          проследовательных приближений
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теоремы Фредгольма для интегральных уравнений с вырожденными ядрами
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Итерированное ядро и резольвента уравнения Фредгольма
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Альтернатива Фредгольма
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Понятие спектра ядра Фредгольма
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Применение теории Фредгольма к внутренней задаче Дирихле
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Применение теории Фредгольма к внутренней задаче Неймана
+        </div>
+        <div class="content">
+        </div>
+      </li>
+    </ol>
+
+    <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+    <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+    <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+    <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+  </body>
+</html>
