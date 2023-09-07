@@ -371,7 +371,7 @@
           Рассмотрим равенство
           \[
           \sum_{j=1}^N \paren{
-          m_j \pd{\bvec{v}_j}{dt} - \bvec{F}_j - \bvec{R}_j
+          m_j \dv{\bvec{v}_j}{t} - \bvec{F}_j - \bvec{R}_j
           } \delta \bvec{r}_j = 0.
           \]
 
@@ -384,7 +384,7 @@
             общему уравнению механики</i>:
           \[
           \sum_{j=1}^N \paren{
-          m_j \pd{\bvec{v_j}}{t} - \bvec{F}_j
+          m_j \dv{\bvec{v_j}}{t} - \bvec{F}_j
           } \delta \bvec{r}_j = 0,
           \]
           которое также называют <i class="important">
@@ -440,17 +440,17 @@
                 то общее уравнение механики
                 \[
                 \sum_{j=1}^N \paren{
-                m_j \pd{\bvec{v_j}}{t} - \bvec{F}_j
+                m_j \dv{\bvec{v_j}}{t} - \bvec{F}_j
                 } \delta \bvec{r}_j = 0
                 \]
                 примет вид
                 \[
-                \sum_{j=1}^N \pd{\bvec{v_j}}{t} \cdot \delta \bvec{r}_j = 0,
+                \sum_{j=1}^N \dv{\bvec{v_j}}{t} \cdot \delta \bvec{r}_j = 0,
                 \]
                 откуда (в силу произвольности перемещения $\delta \bvec{r}_j$)
                 следует, что
                 \[
-                \pd{\bvec{v_j}}{t} = 0 \qquad \forall j = \overline{1,N},
+                \dv{\bvec{v_j}}{t} = 0 \qquad \forall j = \overline{1,N},
                 \]
                 то есть равнодействующая активных и реактивных сил, приложенных
                 к каждой точке, равна нулю.
@@ -517,7 +517,7 @@
           Связи удерживающие, поэтому они накладывают на вариации следующие
           ограничения:
           \[
-          \sum_{\nu=1}^{3N} \pd{f_i}{x_\nu} \delta x_\nu,
+          \sum_{\nu=1}^{3N} \pd{f_i}{x_\nu} \delta x_\nu = 0,
           \qquad i = \overline{1,k}.
           \]
           Умножим обе части уравнений неголономных связей на $dt$:
@@ -639,15 +639,70 @@
             Если координаты $q = (q_1, \dots, q_s) \in D$ удовлетворяют условиям
             <ol type="a">
               <li>
-                $x(q,t) \in M$, если $q \in D, t \in (t_1, t_2)$;
+                $x(q,t) \in M$;
               </li>
 
               <li>
-                $f_i(x(q,t),t) = 0$ при $q \in D, t \in (t_1, t_2)$;
+                $f_i(x(q,t),t) = 0$, где $i = \overline{1,m}$,
               </li>
             </ol>
-            то их называют <i>обобщёнными (лагранжевыми) координатами</i>.
+            причём $t \in (t_1, t_2)$, то их называют <i>обобщёнными
+              (лагранжевыми) координатами</i>.
           </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div id="implicit-functions" class="name">
+          Теорема о неявных функциях (без док-ва)
+        </div>
+        <div class="content">
+          <div class="theorem">
+            Если функции
+            \[
+            F_i(x_1, \dots, x_n, y_1, \dots, y_m), \quad i = \overline{1,m}
+            \]
+            непрерывно дифференцируемы в некоторой окрестности точки
+            \[
+            (x^0, y^0) = (x_1^0, \dots, x_n^0, y_1^0, \dots, y_m^0)
+            \]
+            и
+            \[
+            \begin{gathered}
+            F_i(x_1^0, \dots, x_n^0, y_1^0, \dots, y_m^0) = 0,
+            \quad i = \overline{1,m}, \\
+            \at
+            { \pd{ \paren{F_1, \dots, F_m} }{ \paren{y_1, \dots, y_m} } }
+            { \paren{x^0, y^0} } \neq 0,
+            \end{gathered}
+            \]
+            то существуют окрестности $U_x \subset \mathbb{R}^n$
+            и $U_y \subset \mathbb{R}^m$ точек $x^0$ и $y^0$ такие, что система
+            уравнений
+            \[
+            F_i(x_1, \dots, x_n, y_1, \dots, y_m) = 0, \quad i = \overline{1,m}
+            \]
+            однозначно разрешима в окрестности $U_x \times U_y$ точки
+            $(x^0, y^0)$ относительно переменных $y_1, \dots, y_m$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Доказать, что обобщённые координаты можно выразить через декартовы
+        </div>
+        <div class="content">
+          Рассмотрим систему $N$ точек, стеснённую только голономными связями
+          \[
+          f_i(x, t) = 0, \qquad i = \overline{1,m}.
+          \]
+          Связи считаем линейно независимыми, то есть
+          \[
+          \rank \paren{ \pd{f_i}{x_k} } = m.
+          \]
+          В этом случае число степеней свободы данной системы равно
+          $s = 3N - m$.
 
           <div class="statement">
             Если $(q,t) \in D \times (t_1, t_2)$, то
@@ -658,17 +713,32 @@
             \]
 
             <div class="proof">
-              Эта матрица имеет размеры $(3N - m) \times 3N$, следовательно,
-              $k \leqslant 3N - m$. С другой стороны, по теореме о неявных
-              функциях $x_1,\dots,x_{3N}$ должны удовлетворять $3N - k$
-              независимым уравнениям. Так как рассматриваемая система стестена
-              только $m$ связями, то
+              Пусть
+              \[
+              \rank \paren{ \pd{x_\nu}{q_i} } = k \leqslant s.
+              \]
+              Тогда количество зависимых координат равно $3N - k$. Так как
+              система стеснена только $m$ связями, то количество зависимых
+              координат не может превышать $m$, то есть
               \[
               3N - k \leqslant m, \implies k \geqslant 3N - m \bydef= s,
               \]
-              то есть получили противоречие.
+              откуда следует, что $k = s$.
             </div>
           </div>
+
+          Итак, в области $D \times (t_1, t_2)$
+          \[
+          \rank \paren{
+          \pd{x_\nu}{q_i}
+          } = s \neq 0,
+          \]
+          поэтому (<a href="#implicit-functions">по теореме о неявных
+            функциях</a>) обобщённые координаты разрешимы относительно
+          декартовых, то есть
+          \[
+          q_k = q_k(x,t), \qquad k = \overline{1,s}.
+          \]
         </div>
       </li>
 
@@ -680,7 +750,8 @@
         <div class="content">
           Рассмотрим несвободную систему $N$ точек, подчинённую идеальным
           голономным удерживающим связям. Обозначим за
-          $\bvec{r} = \bvec{r}(q,t)$ радиус-вектор $j$-ой точки системы. Тогда
+          $\bvec{r}_j = \bvec{r}_j(q,t)$ радиус-вектор $j$-ой точки системы.
+          Тогда
           \[
           \left\{
           \begin{aligned}
@@ -720,7 +791,7 @@
           системы $N$ точек, подчинённой идеальным связям:
           \[
           \sum_{j=1}^N \paren{
-          m_j \pd{\bvec{v}_j}{t} - \bvec{F}_j
+          m_j \dv{\bvec{v}_j}{t} - \bvec{F}_j
           } \delta \bvec{r}_j = 0.
           \]
           Так как
@@ -731,7 +802,7 @@
           то
           \[
           \sum_{j=1}^N \paren{
-          m_j \pd{\bvec{v}_j}{t} - \bvec{F}_j
+          m_j \dv{\bvec{v}_j}{t} - \bvec{F}_j
           } \sum_{i=1}^s \pd{\bvec{r}_j}{q_i} \delta q_i = 0.
           \]
 
@@ -757,13 +828,13 @@
             </div>
           </div>
 
-          Из уравнений
+          Взяв от уравнений
           \[
           \bvec{v}_j =
           \sum_{i=1}^s \pd{\bvec{r}_j}{q_i} \dot{q}_i + \pd{\bvec{r}_j}{t},
           \qquad j=\overline{1,N},
           \]
-          следует, что
+          частную производную по $\dot{q}_i$, получим, что
           \[
           \pd{\bvec{r}_j}{q_i} = \pd{\bvec{v}_j}{\dot{q}_i}.
           \]
@@ -827,6 +898,35 @@
           =
           \dv{}{t} \pd{T}{\dot{q}_i} - \pd{T}{q_i}.
           \]
+
+          <div class="derivation">
+            Действительно, рассмотрим следующие частные производные:
+            \[
+            \begin{aligned}
+            \pd{T}{\dot{q}_i}
+            &= \frac{1}{2} \sum_{j=1}^N m_j
+              \pd{}{\dot{q}_i} \paren{ \dp{\bvec{v}_j}{\bvec{v}_j} } = \\
+            &= \sum_{j=1}^N m_j
+            \paren{ \dp{\bvec{v}_j}{\pd{\bvec{v}_j}{\dot{q}_i}} } = \\
+            &= \sum_{j=1}^N m_j
+            \paren{ \dp{\bvec{v}_j}{\pd{\bvec{r}_j}{q_i}} }.
+            \end{aligned}
+            \]
+
+            Аналогично
+            \[
+            \begin{aligned}
+            \pd{T}{q_i}
+            &= \frac{1}{2} \sum_{j=1}^N m_j
+              \pd{}{q_i} \paren{ \dp{\bvec{v}_j}{\bvec{v}_j} } = \\
+            &= \sum_{j=1}^N m_j
+            \paren{ \dp{\bvec{v}_j}{\pd{\bvec{v}_j}{q_i}} } = \\
+            &= \sum_{j=1}^N m_j
+            \paren{ \dp{\bvec{v}_j}{ \dv{}{t} \pd{\bvec{r}_j}{q_i} } }.
+            \end{aligned}
+            \]
+          </div>
+
           Также рассмотрим <i class="important">обобщённую силу</i>
           \[
           Q_i = \sum_{j=1}^N \bvec{F}_j \pd{\bvec{r}_j}{q_i}.
@@ -840,7 +940,7 @@
             где $\Pi$ &mdash; потенциальная энергия системы.
           </div>
 
-          Расскрыв скобки в уравнении
+          Раскрыв скобки в уравнении
           \[
           \sum_{j=1}^N \paren{
           m_j \pd{\bvec{v}_j}{t} - \bvec{F}_j
@@ -856,7 +956,7 @@
           \]
           которое можно записать в виде
           \[
-          \sum_{j=1}^N \paren{
+          \sum_{i=1}^s \paren{
           \dv{}{t} \pd{T}{\dot{q}_i} - \pd{T}{q_i} - Q_i
           } \delta q_i = 0.
           \]
@@ -878,7 +978,7 @@
           В силу независимости вариаций обобщённых координат из общего уравнения
           механики
           \[
-          \sum_{j=1}^N \paren{
+          \sum_{i=1}^s \paren{
           \dv{}{t} \pd{T}{\dot{q}_i} - \pd{T}{q_i} - Q_i
           } \delta q_i = 0
           \]
@@ -924,7 +1024,7 @@
               </li>
 
               <li>
-                В них не входят заранее неизвестные реакции идеальных связей.
+                В них не входят заранее не известные реакции идеальных связей.
               </li>
             </ol>
           </div>
@@ -962,7 +1062,7 @@
       </li>
 
       <li class="question">
-        <div class="name">
+        <div id="lagrange_ii" class="name">
           Разрешимость уравнений Лагранжа II рода относительно старших
           производных
         </div>
@@ -982,10 +1082,10 @@
           \begin{aligned}
           T &= \frac{1}{2} \sum_{j=1}^N m_j
           \paren{
-          \sum_{i=1}^s \pd{\bvec{r}_j}{q_i} \dot{q}_i + \pd{\bvec{r}_j}{t},
+          \sum_{i=1}^s \pd{\bvec{r}_j}{q_i} \dot{q}_i + \pd{\bvec{r}_j}{t}
           }
           \paren{
-          \sum_{i=1}^s \pd{\bvec{r}_j}{q_i} \dot{q}_i + \pd{\bvec{r}_j}{t},
+          \sum_{i=1}^s \pd{\bvec{r}_j}{q_i} \dot{q}_i + \pd{\bvec{r}_j}{t}
           } \\
           &= T_2 + T_1 + T_0,
           \end{aligned}
@@ -1074,7 +1174,7 @@
           = 0,
           \]
           откуда следует линейная зависимость столбцов якобиана
-          $\dfrac{D(x)}{D(q)}$, то есть $\rank \dfrac{D(x)}{D(q)} \lt s$, то
+          $\dfrac{D(x)}{D(q)}$, то есть $\rank \dfrac{D(x)}{D(q)} \lt s$, но
           известно, что $\rank \dfrac{D(x)}{D(q)} = s$ &mdash; получили
           противоречие.
         </div>
@@ -1082,7 +1182,7 @@
 
       <li class="question">
         <div class="name">
-          Вывод канонических уравнений
+          Определение: обобщённые импульсы
         </div>
         <div class="content">
           Рассмотрим голономную механическую систему с идеальными связями. Пусть
@@ -1099,6 +1199,20 @@
             \]
             называют <i>обобщёнными импульсами</i>.
           </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div id="canon-derivation" class="name">
+          Вывод канонических уравнений
+        </div>
+        <div class="content">
+          Рассмотрим голономную механическую систему с идеальными связями. Пусть
+          активные силы консервативны, то есть $L = T - \Pi$ и
+          \[
+          \dv{}{t} \pd{L}{\dot{q}_i} - \pd{L}{q_i} = 0,
+          \qquad i=\overline{1,s}.
+          \]
 
           Потенциальная энергия не зависит от обобщённых скоростей, поэтому
           \[
@@ -1106,16 +1220,19 @@
           =
           \ppdv{T}{\dot{q}_i}{\dot{q}_k}, \qquad i,k=\overline{1,s}.
           \]
-          Так как
+          <a href="#lagrange_ii">Так как</a>
           \[
           \det 
           \left. \paren{
           \ppdv{T}{\dot{q}_i}{\dot{q}_k}
           }
-          \right|_{i,k=1}^s,
+          \right|_{i,k=1}^s \neq 0,
           \]
-          то уравнения импульсов разрешимы относительно обобщённых скоростей, то
-          есть
+          то уравнения импульсов
+          \[
+          p_i = \pd{L}{\dot{q}_i}, \qquad i = \overline{1,s}
+          \]
+          разрешимы относительно обобщённых скоростей, то есть
           \[
           \dot{q}_i = \dot{q}_i(q, p, t), \qquad i = \overline{1,s}.
           \]
@@ -1168,6 +1285,25 @@
           \]
           <div class="definition">
             Переменные $(q,p)$ называют <i>каноническими</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: первый интеграл динамической системы
+        </div>
+        <div class="content">
+          <div class="definition">
+            Функцию $f(x)$ называют <i>первым интегралом системы</i>, если её
+            производная в силу этой системы равна нулю:
+            \[
+            \dv{f}{t} = 0.
+            \]
+            Другими словами, вдоль решений системы
+            \[
+            f(x) = C = \const.
+            \]
           </div>
         </div>
       </li>
@@ -1232,7 +1368,7 @@
           \[
           L = T - \Pi = T_2 + T_1 + T_0 - \Pi,
           \]
-          а
+          где
           \[
           \begin{aligned}
           T_2 &= \frac{1}{2} \sum_{i,k=1}^s a_{ik} \dot{q}_i \dot{q}_k, \\
@@ -1244,13 +1380,56 @@
           \]
           то
           \[
-          \sum_{k=1}^s \pd{L}{\dot{q}_k} \dot{q}_k = 2T_2 + T_1,
-          \]
-          поэтому
-          \[
-          H = T_2 - T_0 + \Pi = h.
+          \sum_{k=1}^s \pd{L}{\dot{q}_k} \dot{q}_k = 2T_2 + T_1.
           \]
           </p>
+
+          <div class="derivation">
+            Так как
+            \[
+            \pd{T_0}{\dot{q}_i} = 0, \qquad
+            \pd{\Pi}{\dot{q}_i} = 0,
+            \]
+            то
+            \[
+            \sum_{k=1}^s \pd{L}{\dot{q}_k} \dot{q}_k =
+            \sum_{k=1}^s \pd{T_2}{\dot{q}_k} \dot{q}_k +
+            \sum_{k=1}^s \pd{T_1}{\dot{q}_k} \dot{q}_k.
+            \]
+
+            Очевидно, что
+            \[
+            \pd{T_1}{\dot{q}_k} \dot{q}_k = a_k \dot{q}_k, \implies
+            \sum_{k=1}^s \pd{T_1}{\dot{q}_k} \dot{q}_k = T_1.
+            \]
+
+            Остаётся разобраться с первым слагаемым
+            \[
+            \sum_{k=1}^s \pd{T_2}{\dot{q}_k} \dot{q}_k.
+            \]
+
+            Прежде всего, заметим, что
+            \[
+            \pd{T_2}{\dot{q}_k} \dot{q}_k = 2 a_{kk} \dot{q}_k^2
+            + \sum_{j = 1, j \neq k}^s a_{kj} \dot{q}_j \dot{q}_k,
+            \]
+            причём слагаемого с коэффициентом $a_{kk}$ в других частных
+            производных не будет, а слагаемое с коэффициентом $a_{kj}$
+            встретится в частной производной
+            \[
+            \pd{T_2}{\dot{q}_j} \dot{q}_j.
+            \]
+
+            Отсюда можно сделать вывод, что
+            \[
+            \sum_{k=1}^s \pd{T_2}{\dot{q}_k} \dot{q}_k = 2 T_2.
+            \]
+
+            Окончательно получаем, что
+            \[
+            \sum_{k=1}^s \pd{L}{\dot{q}_k} \dot{q}_k = 2T_2 + T_1.
+            \]
+          </div>
 
           <div class="definition">
             Функция
@@ -1270,6 +1449,30 @@
 
       <li class="question">
         <div class="name">
+          Определение: функция Гамильтона в форме Якоби-Остроградского
+        </div>
+        <div class="content">
+          <div class="definition">
+            Функция
+            \[
+            H = T_2 - T_0 + \Pi = h,
+            \]
+            где
+            \[
+            \begin{aligned}
+            T_2 &= \frac{1}{2} \sum_{i,k=1}^s a_{ik} \dot{q}_i \dot{q}_k, \\
+            T_0 &= \frac{1}{2} \sum_{j=1}^N m_j \paren{
+            \pd{\bvec{r}_j}{t}
+            }^2,
+            \end{aligned}
+            \]
+            называется <i>функцией Гамильтона в форме Якоби-Остроградского</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
           Циклические координаты
         </div>
         <div class="content">
@@ -1278,13 +1481,13 @@
           <div class="definition">
             Обобщённые координаты координат $q_1, \dots, q_\sigma$ (где $\sigma
             \lt s$), от которых функция Лагранжа $L = L(q, p, t)$ явно не
-            зависит, называют <i>обобщёнными</i>. Остальные координаты называют
+            зависит, называют <i>циклическими</i>. Остальные координаты называют
             <i>позиционными</i>.
           </div>
 
           Из канонических уравнений известно, что
           \[
-          \pd{H}{q_i} = -\dot{p}_i \bydef= -\pd{L}{q_i} = 0,
+          -\dot{p}_i = \pd{H}{q_i} \bydef= -\pd{L}{q_i} = 0,
           \qquad i = \overline{1,\sigma},
           \]
           поэтому
@@ -1296,19 +1499,23 @@
 
           <div class="remark">
             Каждая циклическая координата снижает порядок системы на 2.
+
+            <div class="idea">
+              Так как $L$ не зависит от циклической координаты $q_\sigma$, то от
+              неё не зависит и гамильтониан $H$ (по построению). Выходит, что в
+              канонической системе уже не участвует координата $q_\sigma$, то
+              есть её порядок понижен на 1.
+
+              <p>
+              Теперь заметим, что, подставив $p_i = C_i = \const$, в
+              гамильтониан, мы также избавим каноническую систему от переменной
+              импульса $p_i$, то есть снова понизим её размерность на 1.
+              </p>
+            </div>
           </div>
 
-          Так как
-          \[
-          p_i \bydef= \pd{L(q, \dot{q}(q, p, t), t)}{\dot{q}_i},
-          \]
-          а
-          \[
-          \det \paren{
-          \ppdv{L}{\dot{q}_i}{\dot{q}_k}
-          } \neq 0,
-          \]
-          то по теореме о неявных функциях
+          Используя <a href="#canon-derivation">тот факт, что обобщённые
+            скорости можно выразить через $q$ и $p$</a>, можно записать, что
           \[
           \dot{q}_i = \dot{q}_i(
           q_{\sigma+1}, \dots, q_s, C_1, \dots, C_\sigma, p_{\sigma+1}, \dots,
@@ -1451,16 +1658,16 @@
           Эти уравнения могут рассматриваться как уравнения характеристик для
           ДУЧП 1-го порядка
           \[
-          \pd{s}{t} + H(q_1, \dots, q_n, \pd{s}{q_1}, \dots, \pd{s}{q_n}, t)
+          \pd{S}{t} + H(q_1, \dots, q_n, \pd{S}{q_1}, \dots, \pd{S}{q_n}, t)
           = 0,
           \]
           которое называют <i class="important">уравнением Гамильтона-Якоби</i>.
 
           <p>
-          Так как левая часть уравнения Гамильтона-Якоби не зависит от $s$, то
+          Так как левая часть уравнения Гамильтона-Якоби не зависит от $S$, то
           полный интеграл этого ДУЧП представим в виде
           \[
-          s = s(t, q_1, \dots, q_n, a_1, \dots, a_n) + a_{n+1},
+          S = S(t, q_1, \dots, q_n, a_1, \dots, a_n) + a_{n+1},
           \]
           которое называют <i class="important">главной функцией Гамильтона</i>.
           </p>
@@ -1488,7 +1695,7 @@
             удовлетворяющий условию
             \[
             \det \paren{
-            \ppdv{s}{q_i}{a_k}
+            \ppdv{S}{q_i}{a_k}
             } \neq 0,
             \qquad (t,q,a) \in D,
             \]
@@ -1527,11 +1734,12 @@
               то из условия
               \[
               \det \paren{
-              \ppdv{s}{q_i}{a_k}
+              \ppdv{S}{q_i}{a_k}
               } \neq 0
               \]
-              по теореме о неявных функциях следует, что в некоторой окрестности
-              точки $(t_0, q_0, a_0, b_0)$ равенства
+              по <a href="#implicit-functions">теореме о неявных функциях</a>
+              следует, что в некоторой окрестности точки $(t_0, q_0, a_0, b_0)$
+              равенства
               \[
               \left\{
               \begin{aligned}
@@ -1579,13 +1787,13 @@
               Так как
               \[
               \det \paren{
-              \ppdv{s}{q_i}{a_k}
+              \ppdv{S}{q_i}{a_k}
               } \neq 0,
               \qquad (t,q,a) \in D,
               \]
               то
               \[
-              \dot{q}_k = \pd{H}{p_k}, \qquad i = \overline{1,n}.
+              \dot{q}_i = \pd{H}{p_i}, \qquad i = \overline{1,n}.
               \]
               Аналогичным образом, подставляя полученную функцию $q$ в равенства
               \[
@@ -1739,7 +1947,7 @@
           Свойства скобок Пуассона
         </div>
         <div class="content">
-          <ol type="a" class="big-height">
+          <ol class="big-height">
             <li>
               $\pois{f,g} = -\pois{g,f}$; $\pois{f,f} = 0$.
             </li>
@@ -1982,8 +2190,8 @@
           \[
           \delta \bvec{v}_j
           = \sum_{i=1}^s \ppdv{\bvec{r}_j}{q_i}{t} \delta q_i
-          + \sum_{i=1}^s \pd{\bvec{r}_j}{q_i} \delta \dot{q}_i
-          + \sum_{i,k=1}^s \ppdv{\bvec{r}_j}{q_i}{q_k} \dot{q}_k \delta q_i.
+          + \sum_{i,k=1}^s \ppdv{\bvec{r}_j}{q_i}{q_k} \dot{q}_k \delta q_i
+          + \sum_{i=1}^s \pd{\bvec{r}_j}{q_i} \delta \dot{q}_i.
           \]
           Продифференцируем равенство
           \[
@@ -2227,7 +2435,7 @@
             при
             <ul>
               <li>
-                $Delta t \to 0$;
+                $\Delta t \to 0$;
               </li>
 
               <li>
@@ -2273,7 +2481,7 @@
           \begin{aligned}
           \left. \delta q \right|_{t + \Delta t}
           &= \left. \delta q \right|_t
-          + \Delta t \dv{}{t} \left. \delta q \right|_t = \\
+          + \Delta t \at{\dv{}{t} \delta q}{t} = \\
           &= \left. \delta q \right|_t
           + \Delta t \left. \delta \dot{q} \right|_t.
           \end{aligned}
@@ -2389,7 +2597,32 @@
           L(q', \dot{q}', t) dt
           +
           \int\limits_{t_2}^{t_2 + \Delta t_2}
-          L(q', \dot{q}', t) dt = \\
+          L(q', \dot{q}', t) dt.
+          \end{aligned}
+          \]
+
+          Пусть $G(q', \dot{q}', t)$ &mdash; первообразная функции
+          $L(q', \dot{q}', t)$. Тогда, учитывая, что $\Delta t_1 \to 0$,
+          и пользуясь определением производной, получаем, что
+          \[
+          \begin{aligned}
+          \int\limits_{t_1}^{t_1 + \Delta t_1} L(q', \dot{q}', t) dt
+          &= \left. G(q', \dot{q}', t) \right|_{t_1}^{t_1 + \Delta t_1} = \\
+          &= G'( q'(t_1), \dot{q}'(t_1), t_1 ) \Delta t_1 = \\
+          &= L( q'(t_1), \dot{q}'(t_1), t_1 ) \Delta t_1.
+          \end{aligned}
+          \]
+
+          Аналогично
+          \[
+          \int\limits_{t_2}^{t_2 + \Delta t_2} L(q', \dot{q}', t) dt
+          = L( q'(t_2), \dot{q}'(t_2), t_2 ) \Delta t_2,
+          \]
+
+          поэтому
+          \[
+          \begin{aligned}
+          \Delta \int\limits_{t_1}^{t_2} L dt
           &=
           \int\limits_{t_1}^{t_2} \delta L dt
           -
@@ -2465,7 +2698,7 @@
           \]
           </p>
 
-          <div class="statement">
+          <div id="hamilton-ostrogradskiy" class="statement">
             <i>(принцип Гамильтона-Остроградского)</i>.
             <br>
             
@@ -2484,18 +2717,17 @@
             \]
           </div>
 
-          <p>
           Другими словами: действие на истинном движении имеет стационарное
           значение по Гамильтону.
-          </p>
+        </div>
+      </li>
 
-          <p>
-          Чтобы сформулированное утверждение можно было считать принципом,
-          покажем, что его можно положить в основу некоторого раздела механики
-          (в данном случае &mdash; механики голономных систем с идеальными
-          связями и потенциальными активными силами). Покажем, что из принципа
-          Гамильтона-Остроградского следуют уравнения Лагранжа II рода. Так как
-          операторы варьирования и дифференцирования перестановочны и
+      <li class="question">
+        <div class="name">
+          Вывод уравнений Лагранжа II рода из принципа Гамильтона-Остроградского
+        </div>
+        <div class="content">
+          Так как операторы варьирования и дифференцирования перестановочны и
           \[
           \begin{aligned}
           \delta L
@@ -2525,7 +2757,8 @@
           \left. \delta q_i \right|_{t_1} = 
           \left. \delta q_i \right|_{t_2} = 0, \quad i = \overline{1,s},
           \]
-          в силу принципа Гамильтона-Остроградского получаем, что
+          в силу <a href="#hamilton-ostrogradskiy">принципа
+            Гамильтона-Остроградского</a> получаем, что
           \[
           \int\limits_{t_1}^{t_2} \left[
           \paren{
@@ -2539,7 +2772,6 @@
           \dv{}{t} \pd{L}{\dot{q}} - \pd{L}{\dot{q}}
           } \delta q = 0.
           \]
-          </p>
 
           <div class="todo">
             Доказать от противного (см. Бабаджанянц, стр. 183).
@@ -2661,12 +2893,23 @@
           чтобы выполнялось предыдущее уравнение.
           </p>
 
+          <div class="remark">
+            Кинетическая энергия
+            \[
+            T(q, \dot q, t) = h - \Pi(q, t)
+            \]
+            зависит от того, в какой точке находится объект. Соответственно,
+            скорость объекта также зависит от пути &mdash; значит, выбирая
+            разные траектории, объект на перемещение затратит, вообще говоря,
+            разное время. Именно поэтому следует рассматривать полную вариацию.
+          </div>
+
           <p>
           Из формул
           \[
           \begin{aligned}
-          \Delta q &= \delta q - \dot q \Delta t, \\
-          \Delta \dot q &= \delta \dot q - \ddot q \Delta t
+          \Delta q &= \delta q + \dot q \Delta t, \\
+          \Delta \dot q &= \delta \dot q + \ddot q \Delta t
           \end{aligned}
           \]
           следует
@@ -2744,6 +2987,14 @@
               $\Delta t$ в точке $t = t_1$).
             </li>
           </ul>
+
+          Учитывая, что $\Delta t_1 = 0$, получаем, что
+          \[
+          \Delta t_2
+          = \int\limits_{t_1}^{t_2} \frac{1}{2T} \paren{
+          \pd{h}{\dot{q}} \dv{}{t} \Delta q + \pd{h}{q} \Delta q
+          } dt.
+          \]
           </p>
 
           <p>
@@ -2752,7 +3003,7 @@
           \Delta \int\limits_{t_1}^{t_2} L dt
           = \left. \paren{ p \Delta q - H \Delta t } \right|_{t_1}^{t_2}.
           \]
-          Учитвая условия
+          Учитывая условия
           \[
           \Delta t_1 = 0, \quad \left. \Delta q \right|_{t_1, t_2} = 0,
           \]
@@ -2801,7 +3052,7 @@
             с учётом того, что
             \[
             \Delta t_2
-            = \int\limits_{t_1}^t \frac{1}{2T} \paren{
+            = \int\limits_{t_1}^{t_2} \frac{1}{2T} \paren{
             \pd{h}{\dot{q}} \dv{}{t} \Delta q + \pd{h}{q} \Delta q
             } dt,
             \]
@@ -3363,7 +3614,7 @@
 
             <li>
               $\varphi$ &mdash; угол <i class="important">чистого вращения</i>
-              &mdash; угол между $\Ox$ и $ON$.
+              &mdash; угол между $Ox$ и $ON$.
             </li>
           </ul>
 
@@ -3582,11 +3833,11 @@
         </div>
         <div class="content">
           <div class="images">
-            <img src="images/32-1.png" alt="">
-            <img src="images/32-2.png" alt="">
-            <img src="images/32-3.png" alt="">
-            <img src="images/32-4.png" alt="">
-            <img src="images/32-5.png" alt="">
+            <img src="images/33-1.png" alt="">
+            <img src="images/33-2.png" alt="">
+            <img src="images/33-3.png" alt="">
+            <img src="images/33-4.png" alt="">
+            <img src="images/33-5.png" alt="">
           </div>
         </div>
       </li>
