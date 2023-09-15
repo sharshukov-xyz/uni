@@ -1694,10 +1694,6 @@
           \]
           </p>
 
-          <div class="remark">
-            Насколько я понял, вместо нуля может стоять любое число.
-          </div>
-
           Подставив выражение в $\Psi_n(t)$, получим, что
           \[
           -C_n'(t) \sin(\sqrt{\lambda_n} t) + D_n'(t) \cos(\sqrt{\lambda_n} t)
@@ -2205,7 +2201,7 @@
               &= - \int\limits_0^t
               \int\limits_\Omega v \rho v_t d\Omega d\tau = \\
               &= - \frac{1}{2} \int\limits_0^t
-              \int\limits_\Omega \rho \pd{}{t} \paren{ v^2 } d\Omega d\tau.
+              \int\limits_\Omega \rho \pd{}{\tau} \paren{ v^2 } d\Omega d\tau.
               \end{aligned}
               \]
               Так как
@@ -2338,7 +2334,7 @@
           <p>
           Рассмотрим теперь слабый предел функции $f_\varepsilon(x)$ при
           $\varepsilon \to 0$, то есть для любой функции
-          $f(x) \in C(\mathbb{R}^3)$ найдём предел
+          $\varphi(x) \in C(\mathbb{R}^3)$ найдём предел
           \[
           \lim_{\varepsilon \to 0} \int\limits_V f_\varepsilon(x) \varphi(x) dx.
           \]
