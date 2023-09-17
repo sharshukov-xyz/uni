@@ -100,6 +100,7 @@ h4.subtitle {
 }
 
 .important,
+.theorem > i,
 .definition i {
   border-bottom: 3px double lightgreen;
 }
@@ -459,18 +460,20 @@ a:visited {
 
 div.break {
     width: 60px;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid var(--text-color);
     margin: 24px auto;
 }
 
-/* @media (prefers-color-scheme: dark) { */
-  /* :root { */
-  /*   --background-color: #1c1c1c; */
-  /*   --text-color: white; */
-  /*   --border-color: white; */
+/*
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #1c1c1c;
+    --text-color: white;
+    --border-color: white;
 
-  /*   --blue-color: rgb(113, 170, 235); */
-  /*   --red-color: lightpink; */
-  /* } */
-/* } */
+    --blue-color: rgb(113, 170, 235);
+    --red-color: lightpink;
+  }
+}
+*/
 
