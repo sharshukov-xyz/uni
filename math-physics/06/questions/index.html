@@ -370,7 +370,7 @@
 
       <li class="question">
         <div class="name">
-          Теорема Стеклова о разложимости
+          Теорема Стеклова о разложимости (без док-ва)
         </div>
         <div class="content">
           <p>
@@ -663,8 +663,13 @@
               функция $u(x,t)$ непрерывна в $\overline{\Omega}$ и удовлетворяет
               краевым условиям
               \[
+              \at{
+              \paren{
               \gamma_1 A_{\alpha \beta} \pd{u}{x_\beta} \cos(\vec{n}, x_\alpha)
-              + \gamma_2 \at{u}{\Gamma} = 0,
+              + \gamma_2 u
+              }
+              }{\Gamma}
+              = 0,
               \]
               то $u \in A$. Значит &mdash; по теореме Стеклова &mdash; функцию
               $u(x,t)$ можно представить в виде ряда Фурье
@@ -1127,7 +1132,7 @@
                   <p>
                   Пусть $\lambda_1 = \inf \set{ \lambda_n }$ для задачи
                   Штурма-Лиувилля с областью определения $\Omega$. Предположим,
-                  что области $\Omega$ соответствует класс $A'$, а области
+                  что области $\Omega$ соответствует класс $A$, а области
                   $\Omega'$ &mdash; класс $A'$.
                   </p>
 
@@ -1626,9 +1631,7 @@
 
           Вспоминая, что
           \[
-          L[u] \bydef= \pd{}{x_\alpha} \paren{
-          A_{\alpha \beta} \pd{u}{x_\beta}
-          } - Au,
+          L[u] = \rho(x) \pdv2{u}{t} - f(x,t),
           \]
           получаем, что
           \[
@@ -3119,7 +3122,7 @@
             \]
             причём
             \[
-            \int\limits_\Omega \delta(x - \xi) =
+            \int\limits_\Omega \delta(x - \xi) d\Omega =
             \begin{cases}
             0, & \xi \not\in \Omega, \\
             1, & \xi \in \Omega.
@@ -3201,7 +3204,7 @@
           можно записать <i class="important">вторую формулу Грина</i>:
           \[
           \begin{aligned}
-          \iint\limits_\Omega \left[ v \op{L} u - u \op{M} v \right] d\Omega
+          \int\limits_\Omega \left[ v \op{L} u - u \op{M} v \right] d\Omega
           &= \int\limits_\Gamma \left[
           A_{\alpha \beta} \paren{
           v \pd{u}{x_\alpha} - u \pd{v}{x_\alpha}
@@ -3228,32 +3231,57 @@
 
           Рассмотрим некоторую финитную функцию $\eta$ с носителем $\Omega$
           такую, что $\eta \in C^\infty(\Omega)$. Домножим на неё уравнение
-          Пуассона и проинтегрируем обе части по всему пространству $\Omega$.
-          Так как $\at{\eta}{\Gamma} = 0$, то первая формула Грина
+          Пуассона и проинтегрируем обе части по всему пространству $\Omega$:
           \[
-          \int\limits_\Omega v \op{L} u d\Omega
-          = - \int\limits_\Omega A_{\alpha \beta}
-          \pd{v}{x_\alpha} \pd{u}{x_\beta} d\Omega
-          + \int\limits_\Omega v \left[ B_\alpha
-          \pd{u}{x_\alpha} + C u \right] d\Omega
-          + \int\limits_\Gamma v A_{\alpha \beta}
-          \pd{u}{x_\beta} \cos(\vb{n}, x_\alpha) d\Gamma
+          \int\limits_\Omega \eta(x) \Delta u d\Omega
+          = - \int\limits_\Omega \eta(x) f(x) d\Omega.
           \]
-          принимает вид
+          Так как в данном случае
           \[
-          \iint\limits_\Omega \paren{
+          L[u] = \Delta u = \sum_{\alpha=1}^n \pdv2{u}{x_\alpha},
+          \]
+          то есть
+          \[
+          A_{\alpha \beta} = I_n, \quad B_\alpha = 0, \quad C = 0,
+          \]
+          то, используя первую формулу Грина, получаем. что
+          \[
+          \begin{aligned}
+          \int\limits_\Omega \eta L[u] d\Omega
+          &=
+          - \int\limits_\Omega A_{\alpha \beta}
+          \pd{\eta}{x_\alpha} \pd{u}{x_\beta} d\Omega
+          + \int\limits_\Omega \eta \left[ B_\alpha
+          \pd{u}{x_\alpha} + C u \right] d\Omega
+          + \int\limits_\Gamma \eta A_{\alpha \beta}
+          \pd{u}{x_\beta} \cos(\vb{n}, x_\alpha) d\Gamma = \\
+          &=
+          - \int\limits_\Omega
+          \pd{\eta}{x_\alpha} \pd{u}{x_\alpha} d\Omega
+          + \int\limits_\Gamma \eta
+          \pd{u}{x_\alpha} \cos(\vb{n}, x_\alpha) d\Gamma
+          \end{aligned}
+          \]
+
+          Функция $\eta(x)$ финитна, поэтому $\at{\eta}{\Gamma} = 0$,
+          и, следовательно,
+          \[
+          \begin{gathered}
+          \int\limits_\Omega \eta L[u] d\Omega
+          =
+          - \int\limits_\Omega
+          \pd{\eta}{x_\alpha} \pd{u}{x_\alpha} d\Omega
+          = - \int\limits_\Omega \eta(x) f(x) d\Omega,
+          \end{gathered}
+          \]
+          или
+          \[
+          \int\limits_\Omega \paren{
           \pd{u}{x_\alpha} \pd{\eta}{x_\alpha} - f \eta
           } d\Omega = 0, \qquad \alpha = \overline{1,n}.
           \]
 
-          <div class="derivation">
-            <div class="idea">
-              В данном случае
-              \[
-              L[u] = \sum_{\alpha=1}^n \pdv2{u}{x_\alpha}.
-              \]
-            </div>
-          </div>
+          В связи с этим можно сделать следующее
 
           <div class="proposition">
             Уравнения
@@ -3262,35 +3290,11 @@
             \]
             и
             \[
-            \iint\limits_\Omega \paren{
+            \int\limits_\Omega \paren{
             \pd{u}{x_\alpha} \pd{\eta}{x_\alpha} - f \eta
             } d\Omega = 0, \qquad \alpha = \overline{1,n}
             \]
             равносильны.
-
-            <div class="proof">
-              Так как
-              \[
-              L[u] = \sum_{\alpha=1}^n \pdv2{u}{x_\alpha},
-              \]
-              то есть
-              \[
-              A_{\alpha \beta} = I_n, \quad B_\alpha = 0, \quad C = 0,
-              \]
-              то первая формула Грина принимает вид
-              \[
-              \iint\limits_\Omega \eta \Delta u d\Omega
-              =
-              - \iint\limits_\Omega \pd{\eta}{x_\alpha} \pd{u}{x_\beta} d\Omega
-              + \int\limits_\Gamma \eta \pd{u}{\vec{n}} d\Gamma,
-              \]
-              но $\at{\eta}{\Gamma} = 0$, поэтому приходим к равенству
-              \[
-              \iint\limits_\Omega \eta \Delta u d\Omega
-              =
-              - \iint\limits_\Omega \pd{\eta}{x_\alpha} \pd{u}{x_\beta} d\Omega.
-              \]
-            </div>
           </div>
 
           <p>
@@ -3332,7 +3336,7 @@
           $(\nabla u)^2$, преобразованном к новым переменным. В новых переменных
           $z_k$ уравнение
           \[
-          \iint\limits_\Omega \paren{
+          \int\limits_\Omega \paren{
           \pd{u}{x_\alpha} \pd{\eta}{x_\alpha} - f \eta
           } d\Omega = 0, \qquad \alpha = \overline{1,n}
           \]
@@ -3725,7 +3729,7 @@
                   \]
                   и, следовательно,
                   \[
-                  \Delta_z = 0 \implies \Delta_\zeta \widetilde{u} = 0,
+                  \Delta_z u = 0 \implies \Delta_\zeta \widetilde{u} = 0,
                   \]
                   что и означает, что $\widetilde{u}$ &mdash; гармоническая в
                   $D$ функция.
@@ -4887,19 +4891,15 @@
                 Функция Грина $G(x,y)$ симметрична относительно точек $x$ и $y$.
 
                 <div class="proof">
-                  <div class="todo">
-                    ПЕРЕПИСАТЬ.
-                  </div>
-
-                  Введём обозначения
+                  Удалим лежащие в области $\Omega$ точки $x$ и $y$ вместе с
+                  замкнутыми шарами
                   \[
                   \begin{aligned}
                   b_1 &= \set{ z \in \Omega: \abs{z - x} \leqslant \delta }, \\
                   b_2 &= \set{ z \in \Omega: \abs{z - y} \leqslant \delta },
                   \end{aligned}
                   \]
-                  где $x,y \in \Omega$ &mdash; произвольные точки, и рассмотрим
-                  область
+                  достаточно малого радиуса $\delta$ и рассмотрим область
                   \[
                   \Omega_\delta = \Omega \setminus (b_1 \cup b_2).
                   \]
@@ -4992,7 +4992,7 @@
                       равномерно по $y$, поэтому
                       \[
                       \forall \delta_1 \gt 0 \quad \exists \varepsilon_1 \gt 0:
-                      \quad \abs{G(z,y) - G(z,x)} \lt \delta_1,
+                      \quad \abs{G(z,y) - G(x,y)} \lt \delta_1,
                       \quad \mbox{ если } \abs{z - x} \lt \varepsilon_1,
                       \]
                       поэтому
@@ -5071,21 +5071,16 @@
                       \left[
                       \frac{1}{(m-2) \delta^{m-2}} + g(z,x)
                       \right]
-                      \left[
-                      -\frac{1}{\delta^{m-1}}
-                      + \pd{g(z,y)}{\vec{n}_z}
-                      \right]
-                      d{\Gamma_1} = \\
-                      &= \underbrace{
-                      \int\limits_{\Gamma_1}
-                      \frac{1}{(m-2) \delta^{m-2}} \pd{G(z,y)}{\vec{n}}
-                      d{\Gamma_1}
-                      }_{=0}
-                      + \int\limits_{\Gamma_1}
-                      g(z,x) \pd{G(z,y)}{\vec{n}}
-                      d{\Gamma_1}
+                      \pd{G(z,y)}{\vec{n}}
+                      d{\Gamma_1}.
                       \end{aligned}
                       \]
+
+                      Так как $g(z,x)$ гармонична в $\Omega$, то
+                      \[
+                      \abs{g(z,x)} \lt M_1, \quad z \in \Omega.
+                      \]
+                      Отсюда следует, что
                     </li>
                   </ol>
                 </div>
@@ -5104,7 +5099,7 @@
           Построим функцию Грина для случая, когда $\Omega$ &mdash; шар, и
           покажем, что гармоническая функция $u(x)$, представленная формулой
           \[
-          u(x) = - \frac{1}{S_1}
+          u(x) = - \frac{1}{\abs{S_1}}
           \int\limits_\Gamma \pd{G(x,\xi)}{\vec{n}} \varphi(\xi) d\Gamma,
           \qquad x \in \Omega,
           \]
@@ -5201,13 +5196,13 @@
           \]
           В этом случае формула
           \[
-          u(x) = - \frac{1}{S_1}
+          u(x) = - \frac{1}{\abs{S_1}}
           \int\limits_\Gamma \pd{G(x,\xi)}{\vec{n}} \varphi(\xi) d\Gamma,
           \qquad x \in \Omega
           \]
           принимает вид
           \[
-          u(x) = \frac{1}{S_1}
+          u(x) = \frac{1}{\abs{S_1}}
           \int\limits_{\abs{\xi}=1}
           \frac{1 - \abs{x}^2}{\abs{\xi - x}^m}
           \varphi(\xi) d\Gamma.
@@ -5217,7 +5212,7 @@
           <div class="definition">
             Формулу
             \[
-            u(x) = \frac{1}{S_1}
+            u(x) = \frac{1}{\abs{S_1}}
             \int\limits_{\abs{\xi}=1}
             \frac{1 - \abs{x}^2}{\abs{\xi - x}^m}
             \varphi(\xi) d\Gamma
@@ -5310,13 +5305,33 @@
 
       <li class="question">
         <div class="name">
+          Определение: формула Пуассона
+        </div>
+        <div class="content">
+          <div class="definition">
+            Формулу
+            \[
+            u(x) = \frac{1}{\abs{S_1}}
+            \int\limits_{\abs{\xi}=1}
+            \frac{1 - \abs{x}^2}{\abs{\xi - x}^m}
+            \varphi(\xi) d\Gamma
+            \]
+            называют <i>формулой Пуассона</i>.
+
+            <div class="todo">расписать, что есть что</div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
           Обоснование формулы Пуассона
         </div>
         <div class="content">
           <p>
           Покажем, что $u(x)$, определённая по формуле Пуассона
           \[
-          u(x) = \frac{1}{S_1}
+          u(x) = \frac{1}{\abs{S_1}}
           \int\limits_{\abs{\xi}=1}
           \frac{1 - \abs{x}^2}{\abs{\xi - x}^m}
           \varphi(\xi) d\Gamma,
@@ -5417,6 +5432,129 @@
           Решение задачи Дирихле для полупространства
         </div>
         <div class="content">
+          Пусть область $\Omega$ представляет собой полупространство
+          \[
+          \Omega = \set{ x: x_m \gt 0 },
+          \]
+          а от искомого решения задачи Дирихле потребуем, чтобы оно было
+          ограничено.
+
+          <p>
+          Пусть $x$ и $\xi$ &mdash; точки этого полупространства, а
+          $\xi' = \paren{ \xi_1, \xi_2, \dots, \xi_{m-1}, -\xi_m }$
+          &mdash; точка, симметричная точке $\xi$ относительно плоскости
+          $\xi_m = 0$.
+          </p>
+
+          <p>
+          Так как функция $g(x,\xi) = -E(x, \xi')$ при $x_m \gt 0, \xi_m \gt 0$
+          является гармонической как по $x$, так и по $\xi$ и, кроме того,
+          \[
+          E(x,\xi) - E(x, \xi') = 0 \quad \text{при} \quad \xi_m = 0,
+          \]
+          то
+          \[
+          G(x, \xi) = E(x, \xi) - E(x, \xi')
+          \]
+          является функцией Грина для рассматриваемого полупространства.
+          </p>
+
+          <p>
+          Будем предполагать, что для искомого решения $u(x)$ задачи Дирихле в
+          рассматриваемом случае справедлива формула
+          \[
+          u(x) = - \frac{1}{\abs{S_1}}
+          \int\limits_\Gamma \pd{G(x,\xi)}{\vec{n}} \varphi(\xi) d\Gamma,
+          \qquad x \in \Omega.
+          \]
+          Это заведомо так, если для всех $x \in \Omega$ при
+          $\abs{x} \to \infty$
+          \[
+          \abs{u(x)} \leqslant \frac{A}{\abs{x}^h},
+          \quad
+          \abs{\pd{u}{x_i}} \leqslant \frac{A}{\abs{x}^{h+1}},
+          \quad
+          i = 1, \dots, m,
+          \]
+          где $A \gt 0, h = m - 2 \gt 0$ &mdash; постоянные. В соответствии с
+          этим при больших
+          \[
+          \delta = \paren{ \sum_{i=1}^{m-1} y_i^2 }^{1/2}
+          \]
+          и заданная на плоскости $y_m = 0$ функция
+          $\varphi(y_1, \dots, y_{m-1})$ должна удовлетворять условию
+          \[
+          \abs{\varphi} \lt \frac{A}{\delta^h}.
+          \]
+          Подставляя выражение
+          \[
+          G(x, \xi) = E(x, \xi) - E(x, \xi')
+          \]
+          в правую часть формулы
+          \[
+          u(x) = - \frac{1}{\abs{S_1}}
+          \int\limits_\Gamma \pd{G(x,\xi)}{\vec{n}} \varphi(\xi) d\Gamma,
+          \qquad x \in \Omega
+          \]
+          и учитывая, что при $\xi_m = $
+          \[
+          \begin{aligned}
+          \pd{G(x, \xi)}{\vec{n}}
+          &= - \pd{G(x, \xi)}{\xi_m} = \\
+          &= \frac{\xi_m - x_m}{\abs{\xi - x}^m}
+          - \frac{\xi_m + x_m}{\abs{\xi' - x}^m} = \\
+          &= - \frac{2x_m}{
+          \left[
+          \sum_{i=1}^{m-1} (\xi_i - x_i)^2 + x_m^2
+          \right]^{m/2}
+          },
+          \end{aligned}
+          \]
+          получаем формулу
+          \[
+          u(x) = \frac{2 x_m}{\abs{S_1}} \int\limits_{\xi_m = 0}
+          \frac{\varphi(\xi_1, \dots, \xi_{m-1})}{
+          \left[
+          \sum_{i=1}^{m-1} (\xi_i - x_i)^2 + x_m^2
+          \right]^{m/2}
+          }
+          d\xi_1 \dots d\xi_{m-1},
+          \]
+          дающая решение задачи Дирихле с краевым условием
+          \[
+          \lim_{x \to y} u(x) = \varphi(y_1, \dots, y_{m-1}),
+          \quad x_m \gt 0, y_m = 0
+          \]
+          для полупространства $x_m \gt 0$ и носящую также название
+          <i class="important">формулы Пуассона</i>.
+          </p>
+
+          <div class="remark">
+            Доказательство того, что формула Пуассона удовлетворяет краевому
+            условию, аналогично доказательству для шара.
+          </div>
+
+          <div class="remark">
+            Решение задачи Дирихле для полупространства
+            \[
+            \sum_{k=1}^m a_k x_k - b \gt 0
+            \]
+            редуцируется к рассмотренному случаю, если учесть, что наряду с
+            $u(x)$ гармонической является и функция $u(\lambda C x + h)$, где
+            <ul>
+              <li>
+                $\lambda$ &mdash; скалярная постоянная,
+              </li>
+
+              <li>
+                $C$ &mdash; постоянная ортогональная матрица,
+              </li>
+
+              <li>
+                $h$ &mdash; постоянный вектор.
+              </li>
+            </ul>
+          </div>
         </div>
       </li>
 
@@ -5425,6 +5563,221 @@
           Следствия из формулы Пуассона для шара (теоремы Лиувилля и Гарнака)
         </div>
         <div class="content">
+          <div class="proposition">
+            Если гармоническая в пространстве $E_m$ функция $u(x)$ всюду
+            неотрицательна (неположительна), то она постоянна.
+
+            <div class="proof">
+              Действительно, так как при $\abs{x} \lt R, \abs{y} = R$ имеют
+              место неравенства
+              \[
+              R - \abs{x} \leqslant \abs{y - x} \lt R + \abs{x}
+              \]
+              и по условию $u(x) \geqslant 0$, то из формулы
+              \[
+              u(x) =
+              \frac{1}{\abs{S_1} R}
+              \int\limits_{\abs{\xi}=R} \frac{R^2 - \abs{x}^2}{\abs{\xi - x}^m}
+              \varphi(\xi) d\Gamma_\xi
+              \]
+              имеем
+              \[
+              \frac{1}{\abs{S_1} R}
+              \int\limits_{\abs{\xi}=R} \frac{R^2 - \abs{x}^2}{(R + \abs{x})^m}
+              \varphi(\xi) d\Gamma_\xi
+              \leqslant
+              u(x)
+              \leqslant
+              \frac{1}{\abs{S_1} R}
+              \int\limits_{\abs{\xi}=R} \frac{R^2 - \abs{x}^2}{(R + \abs{x})^m}
+              \varphi(\xi) d\Gamma_\xi.
+              \]
+              Так как по свойству среднего арифметического
+              \[
+              u(0) =
+              \frac{1}{\abs{S_1} R^{m-1}} \int\limits_{\abs{\xi - x} = R} u(\xi)
+              d\Gamma_R
+              \]
+              получаем, что
+              \[
+              R^{m-2} \frac{R - \abs{x}}{(R + \abs{x})^{m-1}} u(0)
+              \leqslant
+              u(x)
+              \leqslant
+              R^{m-2} \frac{R + \abs{x}}{(R - \abs{x})^{m-1}} u(0)
+              \]
+              для любого $R \gt 0$.
+
+              <p>
+              Тогда для любого фиксированного $x \in \mathbb{R}^m$ при
+              $R \to \infty$ получаем, что
+              \[
+              u(x) = u(0).
+              \]
+              </p>
+            </div>
+          </div>
+
+          <div class="theorem">
+            <i>(Лиувилля)</i>
+            <p>
+            Если гармоническая в $\mathbb{R}^m$ функция $u(x)$ ограничена
+            сверху (снизу), то она постоянна.
+            </p>
+
+            <div class="proof">
+              В самом деле, пусть $u(x) \leqslant M = \const$ для всех
+              $x \in \mathbb{R}^m$. Так как функция $M - u(x)$ гармонична в
+              $\mathbb{R}^m$ и <i>неотрицательна</i>, то
+              \[
+              M - u(x) = M - u(0),
+              \]
+              то есть $u(x) = u(0)$.
+            </div>
+          </div>
+
+          <div class="corollary">
+            Рассматриваемая задача Дирихле для полупространства $x_m \gt 0$ в
+            классе ограниченных функций не может иметь более одного решения.
+
+            <div class="proof">
+              Действительно, разность $v(x) = u_1(x) - u_2(x)$ любых двух
+              решений $u_1(x)$ и $u_2(x)$ этой задачи удовлетворяет краевому
+              условию $v(x) = 0$ при $x_n = 0$. Рассмотрим функцию
+              \[
+              w(x) =
+              \left\{
+              \begin{aligned}
+              \phantom{-} v(x_1, \dots, x_m), && x_m \geqslant 0, \\
+              - v(x_1, \dots, -x_m), && x_m \leqslant 0.
+              \end{aligned}
+              \right.
+              \]
+              Она гармонична как при $x_m \gt 0$, так и при $x_m \lt 0$. Более
+              того, функция $w(x)$ гармонична во всём пространстве
+              $\mathbb{R}^m$, ибо в шаре $\abs{x} \lt R$ при любом $R \gt 0$ она
+              совпадает с гармонической функцией $w^*(x)$, удовлетворяющей
+              краевому условию $w^*(x) = w(x)$ при $\abs{x} = R$. Так как по
+              условию $w(x)$ ограничена, то в силу теоремы Лиувилля она
+              постоянна. Но $w(x) = 0$ при $x_m = 0$, т.е. $w(x) = 0$ всюду в
+              $\mathbb{R}^m$ и, стало быть, $u_1(x) \equiv u_2(x)$.
+            </div>
+          </div>
+
+          <div class="theorem">
+            <i>(Гарнака)</i>.
+            <p>
+            Если ряд $\sum_{k=1}^\infty u_k(x)$ гармонических в $\Omega$ функций
+            $u_k(x)$, непрерывных в $\Omega \cup \Gamma$, равномерно сходится на
+            границе $\Gamma$ области $\Omega$, то этот ряд равномерно сходится в
+            $\Omega \cup \Gamma$ и его сумма $u(x)$ гармонична в $\Omega$.
+            </p>
+
+            <div class="proof">
+              Действительно, из равномерной сходимости ряда
+              \[
+              \sum_{k=1}^\infty u_k(\xi), \quad \xi \in \Gamma
+              \]
+              следует, что для любого $\varepsilon \gt 0$ существует такой номер
+              $N(\varepsilon)$, то $\forall n \gt N$ имеет место
+              неравенство
+              \[
+              \abs{\sum_{k=N}^n u_k(\xi)} \lt \varepsilon, \quad 
+              \xi \in \Gamma.
+              \]
+              Отсюда, так как конечная сумма $\sum\limits_{k=N}^n u_k(\xi)$
+              гармонична в $\Omega$ и непрерывна в $\Omega \cup \Gamma$, в силу
+              принципа экстремума заключаем, что
+              \[
+              \abs{\sum_{k=N}^n u_k(\xi)} \lt \varepsilon, \quad 
+              \xi \in \Omega \cup \Gamma.
+              \]
+              Это неравенство, как известно из курса мат. анализа, является
+              необходимым и достаточным условием для равномерной сходимости ряда
+              $\sum\limits_{k=1}^\infty u_k(x)$ в $\Omega \cup \Gamma$.
+
+              <p>
+              Пусть $x_0$ &mdash; произвольная точка области $\Omega$, а шар
+              $\abs{x - x_0} \lt R \subset \Omega$. Тогда каждую гармоническую
+              функцию $u_k(x)$ в этом шаре можно представить формулой Пуассона
+              для шара
+              \[
+              u_k(x) = \frac{1}{\abs{S_1} R}
+              \int\limits_{\abs{\xi - x_0} = R}
+              \frac{R^2 - \abs{x - x_0}^2}{\abs{\xi - x}^m} u_k(\xi)
+              d\Gamma_\xi.
+              \]
+              Следовательно, так как равномерно сходящийся ряд можно почленно
+              интегрировать, имеем
+              \[
+              \begin{aligned}
+              u(x)
+              &=
+              \sum_{k=1}^\infty
+              \frac{1}{\abs{S_1} R}
+              \int\limits_{\abs{\xi - x_0} = R}
+              \frac{R^2 - \abs{x - x_0}^2}{\abs{\xi - x}^m} u_k(\xi)
+              d\Gamma_\xi = \\
+              &=
+              \frac{1}{\abs{S_1} R}
+              \int\limits_{\abs{\xi - x_0} = R}
+              \frac{R^2 - \abs{x - x_0}^2}{\abs{\xi - x}^m} u(\xi)
+              d\Gamma_\xi,
+              \end{aligned}
+              \]
+              откуда следует гармоничность $u(x)$ в шаре $\abs{x - x_0} \lt R$.
+              Так как $x_0$ &mdash; произвольная точка области $\Omega$, то
+              $u(x)$ гармонична всюду в $\Omega$.
+              </p>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: потенциал простого слоя
+        </div>
+        <div class="content">
+          <div class="definition">
+            Интеграл
+            \[
+            \int\limits_\Gamma E(x, \xi) \mu(\xi) d\Gamma_\xi
+            \]
+            в случае сходимости называют <i>потенциалом простого слоя</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: потенциал двойного слоя
+        </div>
+        <div class="content">
+          <div class="definition">
+            Интеграл
+            \[
+            \int\limits_\Gamma \pd{}{\vec{n}} E(x, \xi) \sigma(\xi) d\Gamma_\xi
+            \]
+            в случае сходимости называют <i>потенциалом двойного слоя</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: потенциал объёмных масс, распределённых по области
+          $\Omega$ с плотностью $\rho(\xi)$
+        </div>
+        <div class="content">
+          <div class="definition">
+            Интеграл
+            \[
+            \int\limits_\Omega E(x, \xi) \rho(\xi) d\Omega
+            \]
+            в случае сходимости называют <i>потенциалом объёмных масс,
+              распределённых по области $\Omega$ с плотностью $\rho(\xi)$</i>.
+          </div>
         </div>
       </li>
 
@@ -5434,6 +5787,329 @@
           (без док-ва существования 1-х и 2-х производных)
         </div>
         <div class="content">
+          Так как функция $E(x, \xi)$ &mdash; гармоническая при $x \neq \xi$, то
+          объёмный потенциал
+          \[
+          u(x) = \int\limits_\Omega E(x, \xi) \rho(\xi) d\Omega
+          \]
+          является гармонической функцией для любого $x \in \mathbb{R}^m
+          \setminus \paren{ \Omega \cup \Gamma }$ и при $m \gt 2$
+          \[
+          u(x) \limto{x \to \infty} 0.
+          \]
+
+          <div class="proposition">
+            Если функция $\rho(\xi)$ ограничена и непрерывна в $\Omega$, то
+            \[
+            u(x) = \int\limits_\Omega E(x, \xi) \rho(\xi) d\Omega
+            \]
+            непрерывна и имеет непрерывные производные первого порядка в
+            $\mathbb{R}^m$, причём
+            \[
+            \pd{u}{x_k} =
+            \int\limits_\Omega \pd{}{x_k} E(x, \xi) \rho(\xi) d\Omega,
+            \quad k = \overline{1,m}.
+            \]
+
+            <div class="proof">
+              Пусть $\varepsilon$ &mdash; наперёд заданное достаточно малое
+              положительное число. Рассмотрим функцию
+              \[
+              u_\varepsilon(x) = \int\limits_\Omega E_\varepsilon(x, \xi)
+              \rho(\xi) d\Omega,
+              \]
+              где $E_\varepsilon(x, \xi)$ &mdash; непрерывно дифференцируемая в
+              $\mathbb{R}^m$ функция, которая вне замкнутого шара
+              $\abs{\xi - x} \leqslant \varepsilon$ совпадает с $E(x, \xi)$. В
+              качестве $E_\varepsilon(x, \xi)$ в шаре
+              $\abs{\xi - x} \lt \varepsilon$ можно брать при $m \gt 2$,
+              например, функцию
+              \[
+              E_\varepsilon(x, \xi) = \frac{1}{2 (m - 2) \varepsilon^{m-2}}
+              \left[
+              m - (m - 2) \frac{\abs{\xi - x}^2}{\varepsilon^2}
+              \right].
+              \]
+              Очевидно, что определённая так функция $u_\varepsilon(x)$
+              непрерывно дифференцируема всюду в $\mathbb{R}^m$. Оценим
+              разность:
+              \[
+              \begin{aligned}
+              \abs{u_\varepsilon(x) - u(x)}
+              &=
+              \abs{
+              \int\limits_\Omega
+              \left[ E_\varepsilon(x, \xi) - E(x, \xi) \right]
+              \rho(\xi) d\Omega
+              }.
+              \end{aligned}
+              \]
+              Пусть $M = \sup\limits_{\xi \in \Omega} \abs{\rho(\xi)}$.
+              Так как $E(x, \xi)$ и $E_\varepsilon(x, \xi)$ зависят только от
+              $r$, а
+              \[
+              d\Omega = dB_\varepsilon = d\Gamma_r dr,
+              \quad \int\limits_{\Gamma_r} d\Gamma_r = \abs{S_1} r^{m-1},
+              \]
+              в итоге получаем, что
+              \[
+              \begin{aligned}
+              \abs{u_\varepsilon(x) - u(x)}
+              &\lt
+              M
+              \abs{
+              \int\limits_\Omega
+              \left[ E_\varepsilon(x, \xi) - E(x, \xi) \right]
+              d\Omega
+              } = \\
+              &=
+              M \abs{S_1} \int\limits_0^\varepsilon
+              \left[ E_\varepsilon(x, \xi) - E(x, \xi) \right]
+              r^{m-1} dr = \\
+              &=
+              \frac{\abs{S_1} M}{2 (m - 2) \varepsilon^{m-2}}
+              \left.
+              \paren{
+              r^m - \frac{m - 2}{\varepsilon^2 (m + 2)} r^{m+2} + r^2
+              \varepsilon^{m-2}
+              }
+              \right|_0^\varepsilon = \\
+              &=
+              \abs{S_1} M \frac{m+6}{2 (m^2 - 4)} \varepsilon^2.
+              \end{aligned}
+              \]
+
+              Таким образом, при $\varepsilon \to 0$ функция $u_\varepsilon(x)$
+              стремится к $u(x)$ равномерно по $x$. Отсюда следует, что $u(x)$
+              непрерывна в $\mathbb{R}^m$.
+
+              <p>
+              Далее, так как функция
+              \[
+              \pd{E_\varepsilon}{x_k} \rho(\xi)
+              \]
+              непрерывна и ограничена в $\Omega$, то интеграл
+              \[
+              \int\limits_\Omega \pd{E_\varepsilon(x,\xi)}{x_i} \rho(\xi)
+              d\Omega, \quad k = \overline{1,m}
+              \]
+              существует и непрерывен, поэтому
+              \[
+              \pd{u_\varepsilon(x)}{x_i} =
+              \int\limits_\Omega \pd{E_\varepsilon(x,\xi)}{x_i} \rho(\xi)
+              d\Omega, \quad i = \overline{1,m}.
+              \]
+              </p>
+
+              <p>
+              Проверим несобственный интеграл
+              \[
+              v_k = \int\limits_\Omega \pd{E(x, \xi)}{x_k} \rho(\xi) d\Omega
+              \]
+              на равномерную сходимость. Рассмотрим сумму
+              \[
+              \int\limits_\Omega \pd{E(x, \xi)}{x_k} \rho(\xi) d\Omega
+              =
+              \int\limits_{\Omega_\delta} \pd{E(x, \xi)}{x_k} \rho(\xi)
+              d\Omega_\delta
+              +
+              \int\limits_{\abs{\xi - x} \leqslant \delta}
+              \pd{E(x, \xi)}{x_k} \rho(\xi) d\Omega_\xi.
+              \]
+              Оценим второе слагаемое:
+              \[
+              \begin{aligned}
+              \abs{
+              \int\limits_{\abs{\xi - x} \leqslant \delta}
+              \pd{E(x, \xi)}{x_k} \rho(\xi) d\Omega_\xi
+              }
+              &=
+              \abs{
+              \int\limits_{\abs{\xi - x} \leqslant \delta}
+              \pd{E(x, \xi)}{\xi_k} \rho(\xi) d\Omega_\xi
+              } \lt \\
+              &\lt
+              M
+              \abs{
+              \int\limits_{\abs{\xi - x} \leqslant \delta}
+              \pd{E(x, \xi)}{\xi_k} d\Omega_\xi
+              } = \\
+              &=
+              M
+              \abs{
+              \int\limits_{\abs{\xi - x} = \delta}
+              E(x, \xi) \cos(\vec{n}, \xi_k) d\Gamma_\xi
+              } \leqslant \\
+              &\leqslant
+              \frac{M}{m-2}
+              \int\limits_{\abs{\xi - x} = \delta}
+              \frac{d\Gamma}{\delta^{m-2}} = \\
+              &= \frac{M \abs{S_1}}{m-2} \delta \limto{\delta \to 0} 0.
+              \end{aligned}
+              \]
+
+              Тогда для разности
+              \[
+              \pd{u_\varepsilon(x)}{x_k} - v_k(x)
+              =
+              \int\limits_\Omega \pd{}{x_k} \left[
+              E_\varepsilon(x, \xi) - E(x, \xi) \rho(\xi) d\Omega
+              \right]
+              \]
+              пользуясь неравенством
+              \[
+              \abs{\xi_k - x_k} \leqslant \abs{\xi - x} = r,
+              \]
+              получаем равномерную относительно $x$ оценку
+              \[
+              \abs{
+              \pd{u_\varepsilon(x)}{x_k} - v_k(x)
+              }
+              \leqslant
+              \abs{S_1} M \int\limits_0^\varepsilon \left[
+              \frac{r}{\varepsilon^m} + \frac{1}{r^{m-1}}
+              \right] r^{m-1} dr
+              =
+              \abs{S_1} M \frac{m + 2}{m + 1} \varepsilon.
+              \]
+
+              Таким образом, учитывая непрерывность функции
+              $\pd{}{x_k} u_\varepsilon(x,\xi)$, заключаем, что функция $u(x)$
+              имеет непрерывные частные производные первого порядка для всех
+              $x \in \mathbb{R}^m$, которые могут быть вычислены по формуле
+              \[
+              \pd{u}{x_k} =
+              \int\limits_\Omega \pd{}{x_k} E(x, \xi) \rho(\xi) d\Omega,
+              \quad k = \overline{1,m}.
+              \]
+              </p>
+            </div>
+          </div>
+
+          <div class="theorem">
+            (без док-ва).
+            <p>
+            Если плотность $\rho(\xi)$ имеет непрерывные частные производные
+            первого порядка, ограниченные в $\Omega$, то потенциал
+            \[
+            u(x) = \int\limits_\Omega E(x, \xi) \rho(\xi) d\Omega
+            \]
+            имеет частные производные второго порядка в $\Omega$,
+            причём при $x \in \Omega$
+            \[
+            \pdv2{u}{x_k} =
+            \int\limits_\Gamma \pd{E(x, \xi)}{\xi_k} \rho(\xi)
+            \cos(\vec{n}, \xi_k) d\Gamma
+            -
+            \int\limits_\Omega \pd{\rho}{\xi_k} \pd{E(x, \xi)}{\xi_k} d\Omega.
+            \]
+            </p>
+          </div>
+
+          Пользуясь этим фактом, получим, что
+          \[
+          \begin{aligned}
+          \Delta u
+          &=
+          \int\limits_\Gamma
+          \sum_{k=1}^m
+          \pd{E(x, \xi)}{\xi_k} \rho(\xi)
+          \cos(\vec{n}, \xi_k) d\Gamma
+          -
+          \int\limits_\Omega
+          \sum_{k=1}^m
+          \pd{\rho}{\xi_k} \pd{E(x, \xi)}{\xi_k} d\Omega = \\
+          &=
+          \int\limits_\Gamma \pd{E}{\vec{n}} \rho(\xi) d\Gamma
+          -
+          \lim_{\varepsilon \to 0}
+          \int\limits_{\Omega_\varepsilon}
+          \sum_{k=1}^m
+          \pd{\rho}{\xi_k} \pd{E(x, \xi)}{\xi_k} d\Omega_\varepsilon.
+          \end{aligned}
+          \]
+
+          Так как в $\Omega_\varepsilon$
+          \[
+          \Delta_\xi E = \sum_{k=1}^m \pdv2{E}{\xi_k} = 0,
+          \]
+          а при $\xi \neq x$
+          \[
+          \sum_{k=1}^m
+          \pd{\rho}{\xi_k} \pd{E(x, \xi)}{\xi_k}
+          =
+          \sum_{k=1}^m \pd{}{\xi_k} \paren{ \rho \pd{E}{\xi_k} },
+          \]
+          то, интегрируя по частям и применяя формулу Гаусса-Остроградского,
+          находим
+          \[
+          \int\limits_{\Omega_\varepsilon} 
+          \sum_{k=1}^m
+          \pd{\rho}{\xi_k} \pd{E(x, \xi)}{\xi_k} d\Omega_\varepsilon
+          =
+          \int\limits_{\Omega_\varepsilon} 
+          \sum_{k=1}^m \pd{}{\xi_k} \paren{ \rho \pd{E}{\xi_k} }
+          d\Omega_\varepsilon
+          =
+          \int\limits_\Gamma \rho(\xi) \pd{E(x, \xi)}{\vec{n}} d\Gamma
+          -
+          \int\limits_{\abs{\xi - x} = \varepsilon}
+          \rho(\xi) \pd{E(x, \xi)}{\vec{n}} d\Gamma
+          \]
+
+          Окончательно имеем
+          \[
+          \begin{aligned}
+          \Delta u
+          &=
+          \lim_{\varepsilon \to 0}
+          \int\limits_{\abs{\xi - x} = \varepsilon}
+          \rho(\xi) \pd{E(x, \xi)}{\vec{n}} d\Gamma = \\
+          &=
+          - \lim_{\varepsilon \to 0}
+          \int\limits_{\abs{\xi - x} = \varepsilon}
+          \frac{\rho(\xi) d\Gamma}{\abs{\xi - x}^{m-1}} = \\
+          &=
+          - \lim_{\varepsilon \to 0}
+          \int\limits_{\abs{\xi - x} = \varepsilon}
+          \frac{\rho(\xi) - \rho(x)}{\varepsilon^{m-1}} d\Gamma
+          -
+          \rho(x)
+          - \lim_{\varepsilon \to 0}
+          \int\limits_{\abs{\xi - x} = \varepsilon}
+          \frac{d\Gamma}{\varepsilon^{m-1}} = \\
+          &= - \abs{S_1} \rho(x),
+          \end{aligned}
+          \]
+          так как
+          \[
+          \forall \delta \gt 0 \quad \exists \varepsilon \gt 0:
+          \quad
+          \abs{\xi - x} \leqslant \varepsilon
+          \implies \abs{\rho(\xi) - \rho(x)} \lt \delta.
+          \]
+
+          <p>
+          Таким образом, объёмный потенциал удовлетворяет
+          <i class="important">уравнению Пуассона</i>
+          \[
+          \Delta u = - \abs{S_1} \rho(x).
+          \]
+          </p>
+
+          <div class="remark">
+            Использование формулы Гаусса-Остроградского предполагает, что
+            граница $\Gamma$ области $\Omega$ является гладкой. От этого
+            требования можно отказаться, так как функцию $u(x)$ можно
+            представить в виде
+            \[
+            u(x) = \int\limits_{\Omega_R} E(x, \xi) \rho(\xi) d\Omega_R
+            + \int\limits_{\abs{\xi - x} \leqslant R} E(x, \xi) \rho(\xi)
+            dB_R.
+            \]
+            Первое слагаемое &mdash; гармоническая функция, а для второго
+            годится приведённое выше рассуждение.
+          </div>
         </div>
       </li>
 
@@ -5442,6 +6118,74 @@
           Решение задачи Дирихле для уравнения Пуассона при помощи функции Грина
         </div>
         <div class="content">
+          На основании формулы
+          \[
+          \Delta u = - \abs{S_1} \rho(x)
+          \]
+          заключаем, что функция $u(x)$, определённая формулой
+          \[
+          u(x)
+          = - \frac{1}{\abs{S_1}} \int\limits_\Omega G(x, \xi) f(\xi) d\Omega,
+          \]
+          где
+          <ul>
+            <li>
+              $G(x, \xi)$ &mdash; функция Грина задачи Дирихле для гармонических
+              функций в области $\Omega$,
+            </li>
+
+            <li>
+              $f(\xi)$ ограничена и имеет первые производные, ограниченные в
+              $\Omega$,
+            </li>
+          </ul>
+
+          является регулярным решением уравнения Пуассона
+          \[
+          \Delta u = f(x), \quad x \in \Omega.
+          \]
+
+          Можно показать, что функция $u(x)$ удовлетворяет краевому условию
+          \[
+          \lim_{x \to x_0} u(x) = 0, \quad x \in \Omega, x_0 \in \Gamma.
+          \]
+
+          Таким образом, при известной функции Грина $G(x, \xi)$ объёмный
+          потенциал
+          \[
+          u(x)
+          = - \frac{1}{\abs{S_1}} \int\limits_\Omega G(x, \xi) f(\xi) d\Omega
+          \]
+          даёт решение однородной задачи Дирихле для уравнения Пуассона.
+
+          <p>
+          Решение неоднородной задачи Дирихле для уравнения Пуассона
+          \[
+          \begin{gathered}
+          \Delta u = f(x), \\
+          \lim_{x \to x_0} u(x) = \varphi(x_0)
+          \end{gathered}
+          \]
+          при тех же условиях, что и в однородной задаче, сводится к нахождению
+          решения соответствующей однородной задачи следующим образом.
+          </p>
+
+          <p>
+          Пусть $v(x)$ &mdash; гармоническая в $\Omega$ функция и
+          \[
+          \lim_{x \to x_0} v(x) = \varphi(x_0),
+          \quad x \in \Omega, x_0 \in \Gamma,
+          \]
+          а $u(x)$ &mdash; искомое решение неоднородной задачи Дирихле. Тогда
+          функция $w(x) = u(x) - v(x)$ будет регулярным решением однородной
+          задачи Дирихле для уравнения Пуассона, то есть
+          \[
+          \begin{gathered}
+          \Delta w = f(x), \\
+          \lim_{x \to x_0} w(x) = 0.
+          \end{gathered}
+          \]
+          </p>
         </div>
       </li>
 
