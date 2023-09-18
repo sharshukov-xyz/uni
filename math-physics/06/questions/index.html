@@ -6191,9 +6191,322 @@
 
       <li class="question">
         <div class="name">
-          Интеграл Гаусса. Формула Гаусса
+          Определение: поверхность Ляпунова
         </div>
         <div class="content">
+          <div class="definition">
+            $\Gamma$ называют <i>поверхностью Ляпунова</i> в $\mathbb{R}^m$,
+            если:
+            <ol>
+              <li>
+                для любого $x \in \Gamma$ существует нормаль $\vec{n}$ к
+                $\Gamma$;
+              </li>
+
+              <li>
+                для любой точки $x_0 \in \Gamma$ можно ввести местную систему
+                координат $\xi_1, \dots, \xi_m$ с началом в точке $x_0$ и осью
+                $\xi_m$, направленной по нормали $\vec{n}$ к $\Gamma$ в точке
+                $x_0$, так, что существует $d \gt 0$, для которого часть
+                $\Gamma_d$ поверхности $\Gamma$, лежащая внутри <i>сферы
+                  Ляпунова</i> $S_d$ радиуса $d$ с центром в точке $x_0$,
+                определяется уравнением
+                \[
+                \xi_m = f(\xi'),
+                \]
+                где $\xi' = (\xi_1, \dots, \xi_{m-1})$ &mdash; точка поверхности
+                $\xi_m = 0$;
+              </li>
+
+              <li>
+                функция $f(\xi')$ имеет непрерывные первые производные и
+                выполнены условия Липшица для ${\displaystyle \pd{f}{t}}$, где
+                $t$ &mdash; любое направление в плоскости $\xi_m = 0$:
+                \[
+                \abs{
+                \pd{f(\xi')}{t} - \pd{f(\eta')}{t}
+                }
+                \leqslant
+                A \abs{\xi' - \eta'}^\alpha,
+                \]
+                где
+                <ul>
+                  <li>
+                    $A \gt 0$;
+                  </li>
+
+                  <li>
+                    $0 \lt \alpha \leqslant 1$;
+                  </li>
+
+                  <li>
+                    $\xi', \eta'$ лежат в плоскости $\xi_m = 0$.
+                  </li>
+                </ul>
+              </li>
+            </ol>
+          </div>
+
+          <div class="remark">
+            При $\alpha \gt 1$ будет ${\displaystyle \pd{f}{t} \equiv \const}$,
+            так как ${\displaystyle \pdv2{f}{t} = 0}$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Интеграл Гаусса
+        </div>
+        <div class="content">
+          <div class="definition">
+            Интеграл
+            \[
+            w_0(x) = \int\limits_\Gamma \pd{}{\vec{\nu}} E(x,\xi) d\Gamma
+            \]
+            называют <i>интегралом Гаусса</i>.
+          </div>
+
+          <div class="theorem">
+            Пусть конечная область $\Omega \subset \mathbb{R}^m$ ограничена
+            поверхностью Ляпунова $\Gamma$. Тогда справедлива следующая формула:
+            \[
+            w_0(x) = \int\limits_\Gamma \pd{}{\vec{\nu}} E(x,\xi) d\Gamma
+            =
+            \begin{cases}
+            -\abs{S_1} = - \dfrac{2 \pi^{m/2}}{\Gamma(m/2)}, & x \in \Omega \\
+            0, & x \in \mathbb{R}^m \setminus \overline{\Omega}, \\
+            - \dfrac{1}{2} \abs{S_1} = - \dfrac{\pi^{m/2}}{\Gamma(m/2)}, & x \in
+            \Omega,
+            \end{cases}
+            \]
+            где $\vec{\nu}$ &mdash; нормаль к $\Gamma$ в точке $\xi$.
+
+            <div class="proof">
+              Заметим, что первые два равенства справедливы для кусочно-гладких
+              поверхностей.
+
+              <p>
+              Второе равенство вытекает из свойств гармонических функций, так
+              как $E(x,\xi)$ при $\xi \in \Omega, x \in \mathbb{R}^m \setminus
+              \overline{\Omega}$ &mdash; гармоническая функция в $\Omega$ по
+              $\xi$, непрерывная в $\overline{\Omega}$.
+              </p>
+
+              Пусть $x \in \Omega \cup \Gamma$. Построим в точке $x$ шар
+              $B_\varepsilon$ радиуса $\varepsilon$. Введём обозначения:
+
+              <ul>
+                <li>
+                  $B_\varepsilon' = \Omega \cap B_\varepsilon = \set{
+                  \xi: \abs{\xi - x} \lt \varepsilon,
+                  \quad \xi \in \Omega,
+                  \quad x \in \Omega \cup \Gamma
+                  }$,
+                </li>
+
+                <li>
+                  $\Gamma = \partial \Omega$,
+                </li>
+
+                <li>
+                  $\Gamma_1 = \Gamma \setminus B_\varepsilon$ &mdash; часть
+                  границы $\Gamma$ вне шара $B_\varepsilon$,
+                </li>
+
+                <li>
+                  $\Gamma_2 = \partial B_\varepsilon \cap \Omega$ &mdash;
+                  граница сферы, лежащая в $\Omega$.
+                </li>
+              </ul>
+
+              Рассмотрим множество
+              \[
+              \Omega_\varepsilon = \Omega \setminus \paren{
+              B_\varepsilon' \cup \Gamma_2
+              },
+              \]
+              При достаточно малом $\varepsilon \gt 0$ граница области
+              $\Omega_\varepsilon$
+              \[
+              \Gamma_\varepsilon =
+              \begin{cases}
+              \Gamma \cup \Gamma_2, & x \in \Omega, \\
+              \Gamma_1 \cup \Gamma_2, & x \in \Gamma.
+              \end{cases}
+              \]
+
+              Так как $E(x, \xi)$ гармонична при $x \neq \xi$ (то есть в
+              $\Omega_\varepsilon$), то
+              \[
+              \int\limits_{\Gamma_\varepsilon}
+              \pd{E(x, \xi)}{\vec{\nu}} d\Gamma_\varepsilon = 0,
+              \]
+              то есть
+              \[
+              \begin{aligned}
+              &\int\limits_\Gamma
+              \pd{E(x, \xi)}{\vec{\nu}} d\Gamma
+              -
+              \int\limits_{\abs{\xi - x} = \varepsilon}
+              \pd{E}{r} d\Gamma_2 = 0, &
+              x &\in \Omega, \\
+              &\int\limits_{\Gamma_1}
+              \pd{E(x, \xi)}{\vec{\nu}} d\Gamma_1
+              -
+              \int\limits_{\Gamma_2}
+              \pd{E}{r} d\Gamma_2 = 0, &
+              x &\in \Gamma.
+              \end{aligned}
+              \]
+
+              <div class="remark">
+                Минусы перед вторыми интегралами появляются из-за изменения
+                направления внешней нормали $\Gamma_2$ на противоположное.
+              </div>
+
+              Эти соотношения равносильны следующим:
+              \[
+              \begin{aligned}
+              \int\limits_\Gamma
+              \pd{E(x, \xi)}{\vec{\nu}} d\Gamma
+              &= -
+              \int\limits_{\abs{\xi - x} = \varepsilon}
+              \frac{d\Gamma_2}{\varepsilon^{m-1}} = - \abs{S_1}, &
+              x &\in \Omega, \\
+              \int\limits_{\Gamma_1}
+              \pd{E(x, \xi)}{\vec{\nu}} d\Gamma_1
+              &= -
+              \int\limits_{\Gamma_2}
+              \frac{d\Gamma_2}{\varepsilon^{m-1}}, &
+              x &\in \Gamma.
+              \end{aligned}
+              \]
+
+              Первое равенство подтверждает первую формулу в формулировке
+              теоремы.
+
+              <p>
+              Чтобы получить третье равенство, необходимо ужесточить требование
+              к гладкости поверхности $\Gamma$ &mdash; потребуем, чтобы
+              $\Gamma$ была поверхностью Ляпунова. Тогда для всех точек $x \in
+              \Gamma$ существует касательная плоскость к $\Gamma$, то есть
+              существует нормаль к $\Gamma$ в точке $x$, а $\Gamma_2$ стремится
+              к полусфере при $\varepsilon \to 0$. Тогда
+              \[
+              \lim_{\varepsilon \to 0}
+              \frac{1}{\varepsilon^{m-1}}
+              \int\limits_{\Gamma_2} d\Gamma_2
+              =
+              \lim_{\varepsilon \to 0}
+              \frac{\abs{S_1} \varepsilon^{m-1}}{2 \varepsilon^{m-1}}
+              = \frac{1}{2} \abs{S_1}.
+              \]
+              </p>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Формула Гаусса
+        </div>
+        <div class="content">
+          <div class="proposition">
+            Из формулы
+            \[
+            w_0(x) = \int\limits_\Gamma \pd{}{\vec{\nu}} E(x,\xi) d\Gamma
+            =
+            \begin{cases}
+            -\abs{S_1} = - \dfrac{2 \pi^{m/2}}{\Gamma(m/2)}, & x \in \Omega \\
+            0, & x \in \mathbb{R}^m \setminus \overline{\Omega}, \\
+            - \dfrac{1}{2} \abs{S_1} = - \dfrac{\pi^{m/2}}{\Gamma(m/2)}, & x \in
+            \Omega
+            \end{cases}
+            \]
+            для интеграла Гаусса для объёмного потенциала
+            \[
+            u(x) = \int\limits_\Omega E(x, \xi) \rho(\xi) d\Omega
+            \]
+            вытекает <i>формула Гаусса</i>
+            \[
+            \int\limits_{\gamma} \pd{u(x)}{\vec{n}} d\gamma
+            =
+            - \abs{S_1} \int\limits_{\Omega \cap D} \rho(\xi) d\xi,
+            \]
+            где
+            <ul>
+              <li>
+                $D \subset \mathbb{R}^m$ &mdash; произвольная область с
+                поверхностью $\gamma$ Ляпунова;
+              </li>
+
+              <li>
+                $\vec{n}$ &mdash; нормаль в точке $x \in \gamma$.
+              </li>
+            </ul>
+
+            <div class="images">
+              <img src="images/20-gauss.png">
+            </div>
+
+            <div class="proof">
+              Действительно, имеем
+              \[
+              \pd{u(x)}{\vec{n}_x}
+              =
+              \int\limits_\Omega \rho(\xi) \pd{E(x, \xi)}{\vec{n}_x} d\xi,
+              \quad x \in \gamma.
+              \]
+              Тогда, обозначив $\Omega_1 = \Omega \setminus (\Omega \cap D)$,
+              получим
+              \[
+              \begin{aligned}
+              \int\limits_\gamma
+              \pd{u(x)}{\vec{n}_x}
+              d\gamma
+              &=
+              \int\limits_\gamma d\gamma
+              \int\limits_\Omega
+              \rho(\xi) \pd{E(x, \xi)}{\vec{n}_x} d\xi
+              = \\
+              &=
+              \int\limits_\Omega \rho(\xi) d\xi
+              \int\limits_\gamma
+              \pd{E(x, \xi)}{\vec{n}_x} d\gamma = \\
+              &=
+              \int\limits_{\Omega \cap D}
+              \rho(\xi) d\xi
+              \int\limits_\gamma
+              \pd{E(x, \xi)}{\vec{n}_x} d\gamma
+              +
+              \underbrace{
+              \int\limits_{\Omega_1}
+              \rho(\xi) d\xi
+              \int\limits_\gamma
+              \pd{E(x, \xi)}{\vec{n}_x} d\gamma
+              }_{=0} = \\
+              &=
+              - \abs{S_1}
+              \int\limits_{\Omega \cap D}
+              \rho(\xi) d\xi.
+              \end{aligned}
+              \]
+
+              <div class="remark">
+                \[
+                \int\limits_{\Omega_1}
+                \rho(\xi) d\xi
+                \int\limits_\gamma
+                \pd{E(x, \xi)}{\vec{n}_x} d\gamma
+                = 0
+                \]
+                в силу формулы для интеграла Гаусса, т.к. $x \in \mathbb{R}^m
+                \setminus \overline{D}$.
+              </div>
+            </div>
+          </div>
         </div>
       </li>
 
@@ -6203,6 +6516,189 @@
           двойного слоя на поверхности интегрирования
         </div>
         <div class="content">
+          Пусть $\Omega \subset \mathbb{R}^m$ &mdash; конечная область с
+          достаточно гладкой границей $\Gamma$, а $\sigma(\xi)$ &mdash; заданная
+          на $\Gamma$ вещественная непрерывная суммируемая функция.
+
+          <p>
+          Рассмотрим потенциал двойного слоя
+          \[
+          u(x) = \frac{1}{\abs{S_1}}
+          \int\limits_\Gamma \sigma(\xi) \pd{E(x, \xi)}{\vec{\nu}} d\Gamma.
+          \]
+          Так как $E(x, \xi)$ &mdash; гармоническая функция при $x \neq \xi$ и
+          \[
+          \pd{E}{\vec{\nu}} \limto{x \to \infty} 0,
+          \]
+          то $u(x)$ также является гармонической функцией для всех $x \in
+          \mathbb{R}^m$ таких, что $x \not\in \Gamma$.
+          </p>
+
+          <div class="todo">проверить порядок в пределе.</div>
+
+          <p>
+          Введём обозначения:
+          \[
+          \Omega^+ = \Omega,
+          \qquad
+          \Omega^- = \mathbb{R}^m \setminus (\Omega \cup \Gamma).
+          \]
+          </p>
+
+          <p>
+          При $m = 3$ выражение
+          \[
+          \sigma(\xi) \pd{E(x, \xi)}{\vec{\nu}}
+          \]
+          имеет простой физический смысл. Пусть $\xi' \in \Omega^+,
+          \xi'' \in \Omega^-$ &mdash; две симметричные относительно $\xi \in
+          \Gamma$ точки, лежащие на нормали $\vec{\nu}$ к $\Gamma$ в точке
+          $\xi$.
+          </p>
+
+          <p>
+          Пусть в точках $\xi', \xi''$ сосредоточены электрические заряды
+          соответственно $-\sigma_0$ и $+\sigma_0$ такие, что
+          \[
+          \sigma_0 \abs{\xi' - \xi''}
+          \limto{\abs{\xi' - \xi''} \to 0} \sigma(\xi), \qquad \sigma_0 \gt 0.
+          \]
+          Потенциал поля, созданного этими зарядами, в любой точке $x \neq \xi$
+          равен
+          \[
+          \frac{\sigma_0}{\abs{\xi'' - x}} - 
+          \frac{\sigma_0}{\abs{\xi' - x}}
+          = \sigma_0 \left[
+          E(x, \xi'') - E(x, \xi')
+          \right].
+          \]
+          </p>
+
+          <div class="definition">
+            Предельное расположение зарядов при $\abs{\xi'' - \xi'} \to 0$
+            называется <i>диполем</i>, а величины $\sigma(\xi)$ и $\vec{\nu}$
+            &mdash; его <i>моментом</i> и <i>осью</i> соответственно.
+          </div>
+
+          <p>
+          По определению производной по направлению очевидно, что
+          \[
+          \begin{aligned}
+          \lim_{\abs{\xi'' - \xi'} \to 0} \sigma_0 \left[
+          E(x, \xi'') - E(x, \xi')
+          \right]
+          &=
+          \sigma(\xi)
+          \lim_{\abs{\xi'' - \xi'} \to 0} \frac{
+          E(x, \xi'') - E(x, \xi')
+          }{\abs{\xi'' - \xi'}} = \\
+          &= \sigma(\xi) \pd{E(x, \xi)}{\vec{\nu}}.
+          \end{aligned}
+          \]
+          </p>
+
+          <p>
+          Будучи гармонической функцией вне $\Gamma$, потениал двойного слоя
+          $u(x)$ имеет смысл и на самой $\Gamma$.
+          </p>
+
+          <div class="theorem">
+            Если $\Gamma$ &mdash; замкнутая ляпуновская поверхность, а плотность
+            $\sigma(\xi)$ непрерывна на $\Gamma$, то потенциал двойного слоя
+            имеет вполне определённое значение в любой точке $x_0 \in \Gamma$ и
+            является непрерывной функцией точки $x_0 \in \Gamma$.
+          </div>
+
+          <div class="definition">
+            Значение потенциала двойного слоя на $\Gamma$ называется <i>прямым
+              значением</i> этого потенциала.
+          </div>
+
+          <div class="remark">
+            При $\sigma(\xi) \equiv 1$ потенциал двойного слоя с точностью до
+            множителя является интегралом Гаусса:
+            \[
+            u(x) = \frac{1}{\abs{S_1}} w_0(x),
+            \]
+            где
+            \[
+            w_0(x) = \int\limits_\Gamma \pd{E(x, \xi)}{\vec{\nu}} d\Gamma,
+            \]
+            который, как показано ранее, равен
+            \[
+            w_0(x) = - \frac{1}{2} \abs{S_1}, \quad x \in \Gamma.
+            \]
+          </div>
+
+          <p>
+          На примере интеграла Гаусса видно, что потенциал двойного слоя, вообще
+          говоря, терпит разрыв при переходе через $\Gamma$.
+          </p>
+
+          <p>
+          Введём обозначение для предельных значений $u(x)$:
+          \[
+          u^\pm(x_0) = \lim_{x \to x_0} u(x), \qquad x \in \Omega^\pm.
+          \]
+          </p>
+
+          <div class="theorem">
+            Если $\Gamma$ &mdash; замкнутая ляпуновская поверхность, а
+            $\sigma(\xi)$ &mdash; плотность, непрерывная на $\Gamma$, то для
+            потенциала двойного слоя справедливы предельные соотношения
+            \[
+            \begin{aligned}
+            u^+(x_0) &= - \frac{1}{2} \sigma(x_0) + u(x_0), \\
+            u^-(x_0) &= \phantom{-} \frac{1}{2} \sigma(x_0) + u(x_0),
+            & x_0 \in \Gamma.
+            \end{aligned}
+            \]
+          </div>
+
+          Из этой теоремы следует, что при переходе через $\Gamma$ потенциал
+          двойного слоя терпит скачок
+          \[
+          u^+(x_0) - u^-(x_0) = -\sigma(x_0), \qquad x_0 \in \Gamma.
+          \]
+
+          <div class="theorem">
+            Если $\Gamma$ &mdash; замкнутая ляпуновская поверхность, а
+            $\sigma(\xi)$ &mdash; плотность, непрерывная на $\Gamma$, то
+            \[
+            u(x) \rightrightarrows u^\pm(x_0).
+            \]
+          </div>
+
+          <div class="remark">
+            Если $\sigma(\xi)$ не является непрерывной, но остаётся суммируемой
+            на $\Gamma$, то $u^\pm(x_0)$ существует почти всюду и выражается
+            формулами
+            \[
+            \begin{aligned}
+            u^+(x_0) &= - \frac{1}{2} \sigma(x_0) + u(x_0), \\
+            u^-(x_0) &= \phantom{-} \frac{1}{2} \sigma(x_0) + u(x_0),
+            & x_0 \in \Gamma.
+            \end{aligned}
+            \]
+          </div>
+
+          <div class="theorem">
+            <i>(Ляпунова).</i>
+            <p>
+            Если $\Gamma$ &mdash; замкнутая ляпуновская поверхность,
+            $\sigma(\xi)$ &mdash; плотность, непрерывная на $\Gamma$, и
+            существует
+            \[
+            \lim_{x \to x_0} \pd{u}{\vec{n}} = \paren{\pd{u}{\vec{n}}}^\pm,
+            \qquad x \in \Omega^\pm,
+            \]
+            то в точке $x_0 \in \Gamma$
+            \[
+            \paren{\pd{u}{\vec{n}}}^+ =
+            \paren{\pd{u}{\vec{n}}}^-.
+            \]
+            </p>
+          </div>
         </div>
       </li>
 
@@ -6212,6 +6708,50 @@
           производной
         </div>
         <div class="content">
+          Рассмотрим потенциал простого слоя
+          \[
+          u(x) = \frac{1}{\abs{S_1}}
+          \int\limits_\Gamma E(x, \xi) \mu(\xi) d\Gamma.
+          \]
+
+          <div class="theorem">
+            Если $\Gamma$ &mdash; замкнутая ляпуновская поверхность, а
+            $\mu(\xi)$ измерима и ограничена, то потенциал простого слоя
+            непрерывен в $\mathbb{R}^m$ (включая $\Gamma$).
+          </div>
+
+          <div class="theorem">
+            Если $\Gamma$ &mdash; замкнутая ляпуновская поверхность, а
+            $\mu(\xi)$ непрерывна на $\Gamma$, то на $\Gamma$ существуют
+            равномерные пределы нормальных производных потенциала простого слоя
+            как изнутри, так и извне $\Gamma$.
+          </div>
+
+          Справедливы формулы
+          \[
+          \pd{u^\pm(x_0)}{\vec{n}} = \pm \frac{1}{2} \mu(x_0) +
+          \pd{u(x_0)}{\vec{n}}, \qquad x_0 \in \Gamma,
+          \]
+          где
+          \[
+          \pd{u(x_0)}{\vec{n}} = \frac{1}{\abs{S_1}}
+          \int\limits_\Gamma \pd{E(x_0, \xi)}{\vec{n}} \mu(\xi) d\Gamma,
+          \]
+          и прямое значение нормальной производной потенциала простого слоя
+          равно
+          \[
+          \pd{u^\pm(x_0)}{\vec{n}} =
+          \lim_{x \to x_0} \pd{u(x)}{\vec{n}}, \qquad x \in \Omega^\pm.
+          \]
+
+          <p>
+          Скачок нормальной производной потенциала простого слоя определяется
+          формулой
+          \[
+          \pd{u^+(x_0)}{\vec{\nu}} - \pd{u^-(x_0)}{\vec{\nu}} = \mu(x_0),
+          \qquad x_0 \in \Gamma.
+          \]
+          </p>
         </div>
       </li>
 
@@ -6221,6 +6761,210 @@
           задачи Дирихле
         </div>
         <div class="content">
+          Рассмотрим замкнутую ляпуновскую поверхность $\Gamma$, ограничивающую
+          две области: внутреннюю $\Omega^+$ и внешнюю $\Omega^-$.
+
+          <div class="problem">
+            Найти функцию $u(x)$, гармоническую в $\Omega^+$ или в $\Omega^-$ и
+            удовлетворяющую либо условию задачи Дирихле
+            \[
+            \at{u}{\Gamma} = \varphi(x),
+            \]
+            либо условию задачи Неймана
+            \[
+            \at{\pd{u}{\vec{n}}}{\Gamma} = \psi(x),
+            \]
+            причём $\varphi(x), \psi(x)$ &mdash; непрерывные функции.
+          </div>
+
+          <p>
+          Введём обозначения: $D^+ (D^-)$ &mdash; внутренняя (внешняя) задача
+          Дирихле, $N^+ (N^-)$ &mdash; внутренняя (внешняя) задача Неймана.
+          </p>
+
+          <p>
+          Решение задачи Дирихле будем искать в виде потенциала двойного слоя
+          \[
+          u(x) = \frac{1}{\abs{S_1}}
+          \int\limits_\Gamma
+          \sigma(\xi) \pd{E(x, \xi)}{\vec{\nu}} d\Gamma,
+          \]
+          а решение задачи Неймана &mdash; в виде потенциала простого слоя
+          \[
+          u(x) = \frac{1}{\abs{S_1}}
+          \int\limits_\Gamma
+          \mu(\xi) E(x, \xi) d\Gamma.
+          \]
+          Дополнительно потребуем, чтобы плотности $\sigma(\xi)$ и $\mu(\xi)$
+          были непрерывны на $\Gamma$.
+          </p>
+
+          <p>
+          Заметим, что эти представления являются гармоническими функциями как в
+          $\Omega^+$, так и в $\Omega^-$, и, следовательно, осталось только
+          удовлетворить краевым условиям.
+          </p>
+
+          <div class="remark">
+            Особый случай: задача $D^-$, решение которой на бесконечности может
+            иметь порядок $O(\abs{x}^{2-m})$, в то время как потенциал двойного
+            слоя убывает быстрее и имеет порядок $O(\abs{x}^{1-m})$. Отсюда
+            следует, что не всякую гармоническую в $\Omega^-$ функцию можно
+            представить в виде потенциала двойного слоя.
+          </div>
+
+          <p>
+          Рассмотрим, например, задачу $D^+$. Условие
+          \[
+          \at{u}{\Gamma} = \varphi(x)
+          \]
+          следует понимать как
+          \[
+          \lim_{x \to x_0} u(x) = \varphi(x_0), \qquad
+          x \in \Omega^+, \quad x_0 \in \Gamma.
+          \]
+          Так как $u(x)$ &mdash; потенциал двойного слоя, то
+          \[
+          \lim_{x \to x_0} u(x) =
+          - \frac{1}{2} \sigma(x_0)
+          + \frac{1}{\abs{S_1}}
+          \int\limits_\Gamma
+          \sigma(\xi) \pd{E(x, \xi)}{\vec{\nu}} d\Gamma,
+          \qquad 
+          x \in \Omega^+, \quad x_0 \in \Gamma.
+          \]
+          Подставив это представление предела в условие задачи Дирихле и
+          учитывая, что $x_0$ &mdash; произвольная точка $\Gamma$, получаем
+          интегральное уравнение относительно неизвестной функции $\sigma(\xi)$:
+          \[
+          D^+:
+          \qquad
+          \sigma(x) - \frac{2}{\abs{S_1}}
+          \int\limits_\Gamma
+          \sigma(\xi) \pd{E(x, \xi)}{\vec{\nu}} d\Gamma
+          = - 2 \varphi(x), \quad x \in \Gamma.
+          \]
+          Аналогично получаются уравнения для остальных задач:
+          \[
+          \begin{aligned}
+          D^-:
+          \qquad
+          \sigma(x) + \frac{2}{\abs{S_1}}
+          \int\limits_\Gamma
+          \sigma(\xi) \pd{E(x, \xi)}{\vec{\nu}} d\Gamma
+          &= 2 \varphi(x), \quad x \in \Gamma, \\
+          N^+:
+          \qquad
+          \mu(x) + \frac{2}{\abs{S_1}}
+          \int\limits_\Gamma
+          \mu(\xi) \pd{E(x, \xi)}{\vec{n}} d\Gamma
+          &= 2 \psi(x), \quad x \in \Gamma, \\
+          N^-:
+          \qquad
+          \mu(x) - \frac{2}{\abs{S_1}}
+          \int\limits_\Gamma
+          \mu(\xi) \pd{E(x, \xi)}{\vec{n}} d\Gamma
+          &= -2 \psi(x), \quad x \in \Gamma.
+          \end{aligned}
+          \]
+          </p>
+
+          Рассмотрим свойства этих уравнений.
+          <ol>
+            <li>
+              Справедливы равенства:
+              \[
+              \begin{aligned}
+              \pd{E}{\vec{n}}
+              &= \pd{E}{r} \cos(\vec{n}, r)
+              &= -\frac{\cos(\vec{n}, r)}{r^{m-1}}, \\
+              \pd{E}{\vec{\nu}}
+              &
+              &= -\frac{\cos(\vec{\nu}, r)}{r^{m-1}}.
+              \end{aligned}
+              \]
+
+              Можно показать, что имеет место оценка для поверхности Ляпунова
+              $\Gamma$:
+              \[
+              \abs{\cos(\vec{n}, x)} \leqslant C r^\alpha,
+              \]
+              где $C = \const$, а $\alpha \in (0; 1]$ &mdash; показатель
+              Липшица. В пределе
+              \[
+              \cos(\vec{n}, r) \limto{r \to 0} 0.
+              \]
+              Аналогично для $\cos(\vec{\nu}, r)$. Таким образом, полученные
+              интегральные уравнения имеют слабую особенность, то есть
+              особенность имеет порядок $O\paren{\dfrac{1}{r^{m-1-\alpha}}}$,
+              меньший размерности поверхности $\Gamma$, а, следовательно, эта
+              особенность интегрируема.
+            </li>
+
+            <li>
+              Ядра ${\displaystyle \pd{E(x, \xi)}{\vec{\nu}}}$ и
+              ${\displaystyle \pd{E(x, \xi)}{\vec{n}}}$ получаются одно из
+              другого перестановкой точек $x$ и $\xi$, а так как эти ядра
+              вещественны, то они <i class="important">сопряжённые</i>. Отсюда
+              следует, что уравнения $D^+$ и $N^-$, а также $D^-$ и $N^+$
+              &mdash; попарно сопряжённые.
+            </li>
+          </ol>
+
+          <div class="definition">
+            <ol>
+              <li>
+                Ядра $K(x, \xi)$ и $K^*(x, \xi) = \overline{K(\xi, x)}$
+                называются <i>сопряжёнными</i>;
+              </li>
+
+              <li>
+                Ядра $K(x, \xi)$ и $K(\xi, x)$ &mdash; <i>союзные</i>, или
+                <i>транспонированные</i>.
+              </li>
+            </ol>
+          </div>
+
+          <p>
+          Нетрудно видеть, что если $K(x, \xi)$ &mdash; вещественная функция, то
+          \[
+          K^*(x, \xi) = \overline{K(\xi, x)} = K(\xi, x).
+          \]
+          </p>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: интегральное уравнение Фредгольма 2-го рода
+        </div>
+        <div class="content">
+          <div class="definition">
+            Пусть $\Omega \subset \mathbb{R}^m$ &mdash; конечная область с
+            границей $\Gamma$, функции $K(x,y)$ и $f(x)$ &mdash; вещественные,
+            $\lambda \in \mathbb{R}$. Тогда уравнение
+            \[
+            \varphi(x) - \lambda \int\limits_\Gamma K(x,y) \varphi(y) dy = f(x),
+            \qquad x \in \Gamma
+            \]
+            называют <i>уравнением Фредгольма 2-го рода</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: уравнение Вольтерра 2-го рода
+        </div>
+        <div class="content">
+          <div class="definition">
+            Уравнение
+            \[
+            \varphi(x) - \lambda \int\limits_a^x K(x,y) \varphi(y) dy = f(x),
+            \quad x \gt a
+            \]
+            называют <i>уравнением Вольтерра 2-го рода</i>.
+          </div>
         </div>
       </li>
 
@@ -6230,6 +6974,225 @@
           проследовательных приближений
         </div>
         <div class="content">
+          Рассмотрим одномерное интегральное уравнение Фредльгома 2-го рода:
+          \[
+          \varphi(x) - \lambda \int\limits_a^b K(x,y) \varphi(y) dy = f(x).
+          \]
+          В силу линейности интегрального оператора видно, что если существует
+          общее решение этого уравнения, то оно имеет вид
+          \[
+          \Phi(x) = \varphi_0(x) + \varphi(x),
+          \]
+          где $\varphi_0(x)$ &mdash; общее решение однородного уравнения
+          \[
+          \varphi(x) - \lambda \int\limits_a^b K(x,y) \varphi(y) dy = 0,
+          \]
+          а $\varphi(x)$ &mdash; частное решение неоднородного уравнения.
+
+          <p>
+          Если параметр $\lambda$ удовлетворяет условию
+          \[
+          \abs{\lambda} \lt \frac{1}{M},
+          \]
+          где $M \gt 0$ такое, что
+          \[
+          \int\limits_a^b \abs{K(x,y)} dy \leqslant M,
+          \qquad a \leqslant x \leqslant b
+          \]
+          то решение $\varphi(x)$ уравнения существует, причём его можно
+          построить методом последовательных приближений.
+          </p>
+
+          <p>
+          Решение $\varphi(x)$ ищем в виде предела последовательности
+          \[
+          \varphi(x) = \lim_{n \to \infty} \varphi_n(x),
+          \]
+          где
+          \[
+          \begin{aligned}
+          \varphi_0(x) &= f(x), \\
+          \varphi_n(x) &= f(x) + \int\limits_a^b K(x,y) \varphi_{n-1}(y) dy,
+          & n \in \mathbb{N}.
+          \end{aligned}
+          \]
+          Известно, что сходимость последовательности $\set{ \varphi_n(x) }$
+          равносильна сходимости ряда
+          \[
+          \varphi_0(x) + \sum_{n=1}^\infty \left[
+          \varphi_n(x) - \varphi_{n-1}(x)
+          \right],
+          \]
+          так как частичная сумма $S_n = \varphi_n$ и, следовательно,
+          $S_n \to S$.
+          </p>
+
+          <div class="proposition">
+            Если
+            \[
+            \abs{\lambda} \lt \frac{1}{M},
+            \]
+            где $M \gt 0$ такое, что
+            \[
+            \int\limits_a^b \abs{K(x,y)} dy \leqslant M,
+            \qquad a \leqslant x \leqslant b,
+            \]
+            то справедливы оценки
+            \[
+            \abs{\varphi_0(x)} \leqslant m,
+            \qquad
+            \abs{\varphi_n(x) - \varphi_{n-1}(x)}
+            \leqslant m \abs{\lambda}^n M^n,
+            \]
+            где $m = \max_{x \in [a,b]} \abs{f(x)}$.
+
+            <div class="proof">
+              Доказательство будем вести методом мат. индукции. Пусть
+              \[
+              \abs{\varphi_n(x) - \varphi_{n-1}(x)}
+              \leqslant m \abs{\lambda}^n M^n.
+              \]
+              Тогда
+              \[
+              \begin{aligned}
+              \abs{\varphi_{n+1}(x) - \varphi_n(x)}
+              &=
+              \abs{\lambda} \abs{
+              \int\limits_a^b K(x,y) \varphi_n(y) dy
+              -
+              \int\limits_a^b K(x,y) \varphi_{n-1}(y) dy
+              } \leqslant \\
+              &\leqslant
+              \abs{\lambda} m \abs{\lambda}^n M^n
+              \abs{
+              \int\limits_a^b K(x,y) dx
+              } \leqslant \\
+              &\leqslant
+              m \abs{\lambda}^{n+1} M^{n+1}.
+              \end{aligned}
+              \]
+            </div>
+          </div>
+
+          <p>
+          Таким образом, любой член ряда
+          \[
+          \varphi_0(x) + \sum_{n=1}^\infty \left[
+          \varphi_n(x) - \varphi_{n-1}(x)
+          \right]
+          \]
+          мажорируется рядом
+          \[
+          \sum_{n=0}^\infty m \abs{\lambda}^n M^n,
+          \]
+          который сходится в силу того, что
+          \[
+          \abs{\lambda} \lt \frac{1}{M}.
+          \]
+          Отсюда следует, что ряд
+          \[
+          \varphi_0(x) + \sum_{n=1}^\infty \left[
+          \varphi_n(x) - \varphi_{n-1}(x)
+          \right],
+          \]
+          равно как и последовательность $\varphi_n(x)$, сходится
+          <i>абсолютно</i> и <i>равномерно</i> к непрерывной функции
+          $\varphi(x)$, то есть
+          \[
+          \varphi(x)
+          = \lim_{n \to \infty} \varphi_n(x)
+          = \varphi_0(x) + \sum_{n=1}^\infty \left[
+          \varphi_n(x) - \varphi_{n-1}(x)
+          \right].
+          \]
+          </p>
+
+          <p>
+          Переходя к пределу в равенстве
+          \[
+          \varphi_n(x) = f(x) + \int\limits_a^b K(x,y) \varphi_{n-1}(y) dy,
+          \quad n \in \mathbb{N},
+          \]
+          выясняем, что выполняется
+          \[
+          \varphi(x) - \lambda \int\limits_a^b K(x,y) \varphi(y) dy = f(x),
+          \]
+          откуда следует, что $\varphi(x)$ является решением этого уравнения.
+          </p>
+
+          <p>
+          Покажем единственность этого решения. Пусть $\varphi(x)$ и $\psi(x)$
+          &mdash; некоторые различные решения этого уравнения, тогда их разность
+          \[
+          \theta(x) = \varphi(x) - \psi(x)
+          \]
+          является решением соответствующего однородного уравнения
+          \[
+          \theta(x) - \lambda \int\limits_a^b K(x,y) \theta(y) dy = 0,
+          \]
+          то есть
+          \[
+          \theta(x) = \lambda \int\limits_a^b K(x,y) \theta(y) dy,
+          \]
+          откуда находим, что
+          \[
+          \theta_0 \leqslant \abs{\lambda} M \theta_0,
+          \qquad
+          \theta_0 = \max_{x \in [a,b]} \abs{\theta(x)},
+          \]
+          а, значит, если $\theta_0 \neq 0$, то
+          \[
+          \abs{\lambda} \geqslant \frac{1}{M},
+          \]
+          что противоречит неравенству
+          \[
+          \abs{\lambda} \lt \frac{1}{M}.
+          \]
+          Тогда пусть $\theta_0 = 0$, но отсюда следует, что
+          $\theta(x) \equiv 0$, то есть $\varphi(x) \equiv \psi(x)$.
+          </p>
+
+          <div class="remark">
+            Аналогичные рассуждения позволяют построить решение уравнения
+            Вольтерра 2-го рода в виде
+            \[
+            \begin{gathered}
+            \varphi_0(x) = f(x),
+            \qquad
+            \varphi_n(x) = f(x)
+            + \lambda \int\limits_a^x K(x,y) \varphi_{n-1}(y) dy, \\
+            \varphi(x) = \lim_{n \to \infty} \varphi_n(x).
+            \end{gathered}
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: вырожденное ядро уравнения Фредльгома 2-го рода
+        </div>
+        <div class="content">
+          <div class="definition">
+            Ядро $K(x,y)$ уравнения
+            \[
+            \varphi(x) - \lambda \int\limits_\Gamma K(x,y) \varphi(y) dy = f(x),
+            \qquad x \in \Gamma
+            \]
+            называется <i>вырожденным</i>, если оно имеет вид
+            \[
+            K(x,y) = \sum_{j=1}^N p_j(x) q_j(y),
+            \qquad
+            x \in [a,b], \quad y \in [a,b],
+            \]
+            где $p_j(x), q_j(y)$ &mdash; заданные вещественные неперрывные
+            функции.
+          </div>
+
+          <div class="remark">
+            Без ограничения общности можно считать, что каждая из систем
+            $\set{p_j(x)}, \set{q_j(y)}$ линейно независимая.
+          </div>
         </div>
       </li>
 
@@ -6238,6 +7201,262 @@
           Теоремы Фредгольма для интегральных уравнений с вырожденными ядрами
         </div>
         <div class="content">
+          Рассмотрим интегральное уравнение Фредгольма 2-го рода с вырожденным
+          ядром:
+          \[
+          \varphi(x) - \lambda
+          \sum_{j=1}^N \int\limits_\Gamma p_j(x) q_j(y) \varphi(y) dy = f(x),
+          \qquad x \in \Gamma.
+          \]
+          Его можно записать в виде разложения функции $\varphi(x)$ по системе
+          функций $p_k(x)$:
+          \[
+          \varphi(x) = f(x) + \lambda \sum_{k=1}^N c_k p_k(x),
+          \]
+          где
+          \[
+          c_k = \int\limits_a^b q_k(y) \varphi(y) dy, \qquad k = \overline{1,N}.
+          \]
+
+          <p>
+          Найдём $c_k$ так, чтобы функция
+          \[
+          \varphi(x) = f(x) + \lambda \sum_{k=1}^N c_k p_k(x),
+          \]
+          являлась решением
+          уравнения Фредгольма 2-го рода. Для этого подставим его в исходное
+          уравнение:
+          \[
+          \begin{gathered}
+          \lambda \sum_{k=1}^N c_k p_k(x) - \lambda
+          \left[
+          \sum_{j=1}^N \paren{
+          \sum_{k=1}^N \int\limits_a^b p_j(x) q_j(y) \lambda c_k p_k(y) dy
+          + \int\limits_a^b p_j(x) q_j(y) f(y) dy
+          }
+          \right] = 0, \\
+          \sum_{j=1}^N p_j(x)
+          \left[
+          c_j - \lambda \sum_{k=1}^N \int\limits_a^b q_j(y) c_k p_k(y) dy
+          - \int\limits_a^b q_j(y) f(y) dy
+          \right] = 0,
+          \end{gathered}
+          \]
+          откуда из линейной независимости функций $p_k(x)$ следует, что
+          \[
+          c_j - \lambda \sum_{k=1}^N \int\limits_a^b q_j(y) c_k p_k(y) dy
+          - \int\limits_a^b q_j(y) f(y) dy = 0,
+          \]
+          или
+          \[
+          c_j - \lambda \sum_{k=1}^N \alpha_{jk} c_k = \gamma_j,
+          \qquad j = \overline{1,N},
+          \]
+          где
+          \[
+          \alpha_{jk} = \int\limits_a^b q_j(y) p_k(y) dy,
+          \qquad
+          \gamma_j = \int\limits_a^b q_j(y) f(y) dy.
+          \]
+          Таким образом, задача отыскания решения $\varphi(x)$ интегрального
+          уравнения Фредгольма 2-го рода с вырожденным ядром редуцирована к
+          решению неоднородных алгебраических уравнений.
+          </p>
+
+          <div class="remark">
+            Точно так же соответствующее однородное уравнение
+            \[
+            \varphi^0(x) - \lambda
+            \int\limits_a^b \sum_{j=1}^N p_j(x) q_j(y) \varphi^0(y) dy
+            \]
+            сводится равенством
+            \[
+            \varphi^0(x) = \lambda \sum_{k=1}^N c_k^0 p_k(x)
+            \]
+            к однородной линейной алгебраической системе
+            \[
+            c_j^0 - \lambda \sum_{k=1}^N \alpha_{jk} c_k^0 = 0,
+            \qquad j = \overline{1,N}.
+            \]
+          </div>
+
+          <p>
+          Как известно, система имеет единственное решение при любой правой
+          части, если выполнено
+          \[
+          \det M(\lambda) \neq 0,
+          \]
+          где
+          \[
+          M = \begin{pmatrix}
+          1 - \lambda \alpha_{11} & -\lambda \alpha_{12} & \dots
+          & - \lambda \alpha_{1N} \\
+          -\lambda \alpha_{21} & 1 - \lambda \alpha_{22} & \dots
+          & - \lambda \alpha{2N} \\
+          \vdots & \vdots & \ddots & \vdots \\
+          -\lambda \alpha_{N1} & -\lambda \alpha_{N2} & \dots
+          & 1 - \lambda \alpha_{NN}
+          \end{pmatrix}.
+          \]
+
+          Так как $\det M(\lambda)$ &mdash; полином степени $N$, то существует
+          конечное число $m \leqslant N$ нулей этого полинома $\lambda_1, \dots,
+          \lambda_m$.
+          </p>
+
+          <div class="definition">
+            $\lambda_1, \dots, \lambda_m$ называются <i>собственными значениями
+              ядра $K(x,y)$</i>, все остальные $\lambda$ &mdash;
+            <i>правильные</i>.
+          </div>
+
+          <p>
+          Таким образом, для любого $\lambda \lt \infty, \lambda \neq \lambda_i,
+          \quad i = \overline{1,m}$ система имеет единственное решение
+          $c_1, \dots, c_N$. Итак, доказана
+          </p>
+
+          <div class="theorem">
+            <i>(Фредгольма, первая)</i>.
+            <p>
+            Если $\lambda$ не является собственным числом ядра $K(x,y)$, то
+            интегральное уравнение Фредгольма 2-го рода с вырожденным ядром при
+            любой непрерывной правой части $f(x)$ имеет (и притом единственное)
+            решение.
+            </p>
+          </div>
+
+          <p>
+          Рассмотрим союзное с однородным уравнением интегральное уравнение:
+          \[
+          \psi^0(x) - \lambda \sum_{j=1}^N
+          \int\limits_a^b p_j(y) q_j(x) \psi^0(y) dy = 0,
+          \quad x \in [a,b].
+          \]
+          Так как
+          \[
+          \psi^0(x) = \lambda \sum_{k=1}^N d_k^0 q_k(x),
+          \]
+          то союзное уравнение равносильно союзной однородной системе
+          \[
+          d_j^0 - \lambda \sum_{k=1}^N \beta_{jk} d_k^0 = 0,
+          \]
+          где
+          \[
+          d_j^0 = \int\limits_a^b p_k(y) \psi^0(y) dy, \qquad
+          \beta_{jk} = \int\limits_a^b p_j(y) q_k(y) dy \bydef= \alpha_{jk},
+          \]
+          или
+          \[
+          d_j^0 - \lambda \sum_{k=1}^N \alpha{jk} d_k^0 = 0.
+          \]
+
+          Рассмотрим представление $M = I - \lambda A$, где
+          $A = \set{\alpha_{jk}}$. Из линейной алгебры известно, что
+          \[
+          \begin{aligned}
+          \det \paren{I - \lambda A} &= 
+          \det \paren{I - \lambda A}^T, \\
+          \rank \paren{I - \lambda A} &= 
+          \rank \paren{I - \lambda A}^T.
+          \end{aligned}
+          \]
+          Если $\lambda = \lambda_i, \quad i = \overline{1,m}$, и $\rank M = r$,
+          то однородная система и союзная с ней имеют по $N - r$ линейно
+          независимых решений
+          \[
+          \set{c_{l1}^{0i}, \dots, c_{lN}^{0i}}
+          \quad \text{и} \quad
+          \set{d_{l1}^{0i}, \dots, d_{lN}^{0i}},
+          \qquad l = \overline{1, N-r}.
+          \]
+          Подставив эти решения в правые части формул
+          \[
+          \begin{aligned}
+          \varphi_l^{0i}(x) &= \lambda_i \sum_{j=1}^N c_{lj}^{0i} p_j(x), \\
+          \psi^{0i}(x) &= \lambda_i \sum_{j=1}^N d_{lj}^{0i} q_j(x), &
+          i = \overline{1,m}, \; l = \overline{1, N - r},
+          \end{aligned}
+          \]
+          получаем по $N - r$ линейно независимых решений однородного
+          интегрального и союзного с ним уравнений для каждого собственного
+          числа $\lambda_i$.
+          </p>
+
+          <div class="definition">
+            Функции $\varphi_l^{0i}(x)$ называются <i>собственными функциями
+              ядра $K(x,y)$</i>, сответствующими собственному числу $\lambda_i$.
+          </div>
+
+          <div class="theorem">
+            <i>(Фредгольма, вторая)</i>.
+            <p>
+            Однородное интегральное уравнение и союзное с ним имеют ровно
+            $N - r$ линейно-независимых решений при любом $\lambda = \lambda_i$,
+            где $r$ &mdash; ранг матрицы $M(\lambda_i)$.
+            </p>
+          </div>
+
+          <p>
+          Рассмотрим решение неоднородного уравнения
+          \[
+          \varphi(x) - \lambda
+          \sum_{j=1}^N \int\limits_\Gamma p_j(x) q_j(y) \varphi(y) dy = f(x),
+          \qquad x \in \Gamma.
+          \]
+          Соответствующая система
+          \[
+          c_j - \lambda \sum_{k=1}^N \alpha_{jk} c_k = \gamma_j,
+          \qquad j = \overline{1,N}
+          \]
+          относительно коэффициентов разложения функции $\varphi(x)$ имеет
+          решение не для любых правых частей, то есть не для любого вектора
+          $\gamma = (\gamma_1, \dots, \gamma_N)$, если $\lambda = \lambda_i$.
+          </p>
+
+          <p>
+          Для разрешимости линейной алгебраической системы необходимо и
+          достаточно, чтобы вектор $\gamma$ был ортогонален решению
+          $\set{ d_{1l}^{0i}, \dots, d_{Nl}^{0i} }$ союзной системы уравнений
+          \[
+          d_j^0 - \lambda \sum_{k=1}^N \alpha{jk} d_k^0 = 0,
+          \]
+          то есть
+          \[
+          \sum_{k=1}^N \gamma_k d_{kl}^{0i} = 0,
+          \qquad l = \overline{1, N - r}, \quad i = \overline{1,m},
+          \]
+          где
+          \[
+          \gamma_k = \int\limits_a^b f(y) q_k(y) dy.
+          \]
+          Отсюда следует, что
+          \[
+          \begin{aligned}
+          0 = \lambda_i \sum_{j=1}^N d_{jl}^{0i} \gamma_j
+          &=
+          \lambda_i \sum_{j=1}^N d_{jl}^{0i} \int\limits_a^b f(y) q_k(y) dy = \\
+          &=
+          \int\limits_a^b
+          \left[
+          \lambda_i \sum_{j=1}^N d_{jl}^{0i} q_k(y)
+          \right] f(y) dy = \\
+          &= \int\limits_a^b f(x) \psi_{l}^{0i}(x) dx = 0,
+          \end{aligned}
+          \]
+          то есть функции $f(x)$ и $\psi_{l}^{0i}(x)$ ортогональны.
+          </p>
+
+          <div class="theorem">
+            <i>(Фредгольма, третья)</i>.
+            <p>
+            При значениях $\lambda = \lambda_i, \quad i = \overline{1,m}$ для
+            разрешимости интегрального уравнения необходимо и достаточно, чтобы
+            правая его часть $f(x)$ была ортогональна ко всем решениям
+            $\psi_l^{0i}(x), \quad l = \overline{1, N - r}$ союзного однородного
+            уравнения.
+            </p>
+          </div>
         </div>
       </li>
 
@@ -6246,6 +7465,100 @@
           Итерированное ядро и резольвента уравнения Фредгольма
         </div>
         <div class="content">
+          Рассмотрим уравнение Фредгольма 2-го рода
+          \[
+          \varphi(x) - \lambda \int\limits_a^b K(x,y) \varphi(y) dy = f(x).
+          \]
+          Предположим, что $K(x,y)$ и $f(x)$ непрерывны, а также
+          \[
+          \abs{\lambda} \lt \frac{1}{M},
+          \quad
+          \int\limits_a^b \abs{K(x,y)} dy \leqslant M.
+          \]
+          Известно, что в этом случае решение уравнения можно получить методом
+          последовательных приближений
+          \[
+          \varphi_n(x) = f(x) \lambda\int\limits_a^b K(x,y) \varphi_{n-1}(y) dy.
+          \]
+
+          Подставив последовательно каждую итерацию в эту формулу, получим, что
+          \[
+          \varphi_n(x) = f(x) + \lambda
+          \int\limits_a^b \sum_{j=1}^n \lambda^{j-1} K_j(x,y) f(y) dy,
+          \]
+          где
+          \[
+          \begin{aligned}
+          K_1(x,y) &= K(x,y), \\
+          K_j(x,y) &= \int\limits_a^b K(x,y_1) K_{j-1} (y_1, y) dy_1,
+          & j = 2, 3, \dots
+          \end{aligned}
+          \]
+
+          <div class="definition">
+            Ядро $K_j(x,y)$ называют <i>итерированным</i> (<i>повторным</i>).
+          </div>
+
+          <div class="remark">
+            \[
+            \abs{K_j} \leqslant M^{j-1} \max \abs{K}.
+            \]
+          </div>
+
+          <p>
+          Повторяя рассуждения, применённые при доказательстве сходимости
+          последовательности
+          \[
+          \varphi_n(x) = f(x) \lambda\int\limits_a^b K(x,y) \varphi_{n-1}(y) dy,
+          \]
+          можно получить, что ряд
+          \[
+          \sum_{j=1}^\infty \lambda^{j-1} K_j(x,y)
+          \]
+          при условии
+          \[
+          \abs{\lambda} \lt \frac{1}{M}
+          \]
+          сходится равномерно в квадрате $a \leqslant x \leqslant b,
+          \quad a \leqslant y \leqslant b$.
+          </p>
+
+          <div class="definition">
+            Сумма
+            \[
+            R(x,y,\lambda) = \sum_{j=1}^\infty \lambda^{j-1} K_j(x,y)
+            \]
+            называется <i>резольвентой</i> или <i>разрешающим ядром</i> ядра
+            $K(x,y)$ или интегрального уравнения Фредгольма 2-го рода
+            \[
+            \varphi(x) - \lambda \int\limits_a^b K(x,y) \varphi(y) dy = f(x).
+            \]
+          </div>
+
+          <p>
+          Так как
+          \[
+          \varphi(x) = \lim_{n \to \infty} \varphi_n(x),
+          \]
+          то, переходя к пределу в формуле
+          \[
+          \varphi_n(x) = f(x) + \lambda
+          \int\limits_a^b \sum_{j=1}^n \lambda^{j-1} K_j(x,y) f(y) dy,
+          \]
+          получим, что
+          \[
+          \varphi(x) = f(x) + \lambda
+          \int\limits_a^b R(x, y, \lambda) f(y) dy.
+          \]
+
+          Заметим, что $R(x,y,\lambda)$ &mdash; непрерывная функция относительно
+          $x,y$ в квадрате $[a,b] \times [a,b]$ (вследствие равномерной
+          сходимости ряда), а также является аналитичной (то есть разложимой в
+          ряд) по $\lambda$ как для вещественных, так и для комплексных значений
+          $\lambda$ в круге $\abs{\lambda} \lt \dfrac{1}{M}$. Отсюда следует,
+          что (в силу непрерывности функции $f(x)$) непрерывным является и
+          решение $\varphi(x)$.
+          </p>
         </div>
       </li>
 
@@ -6254,6 +7567,271 @@
           Альтернатива Фредгольма
         </div>
         <div class="content">
+          Рассмотрим уравнение Фредгольма 2-го рода
+          \[
+          \varphi(x) - \lambda \int\limits_a^b K(x,y) \varphi(y) dy = f(x).
+          \]
+          Предположим, что параметр $\lambda$ не обязательно удовлетворяет
+          условию
+          \[
+          \abs{\lambda} \lt \frac{1}{M}.
+          \]
+
+          <p>
+          Известно, что для непрерывной в квадрате $[a,b] \times [a,b]$ функции
+          $K(x,y)$ для любого $\varepsilon \lt 0$ существуют такие
+          линейно-независимые системы непрерывных функций
+          \[
+          \set{p_j(x)}, \set{q_j(y)},
+          \quad x,y \in [a,b],
+          \quad j = \overline{1,N},
+          \]
+          что
+          \[
+          K(x,y) = \sum_{j=1}^N p_j(x) q_j(y) + K_\varepsilon(x,y),
+          \]
+          где непрерывная функция $K_\varepsilon(x,y)$ удовлетворяет условию
+          \[
+          (b - a) \abs{K(x,y)} \lt \varepsilon,
+          \qquad x,y \in [a,b].
+          \]
+
+          В качестве таких функций могут служить, например, полиномы (это
+          известно из теоремы Вейерштрасса). Поставив это представление в
+          исходное уравнение, получим, что
+          \[
+          \varphi(x) - \lambda \int\limits_a^b K_\varepsilon(x,y) \varphi(y) dy
+          = F(x),
+          \]
+          где
+          \[
+          F(x) = f(x) + \lambda
+          \int\limits_a^b \sum_{j=1}^N p_j(x) q_j(y) \varphi(y) dy.
+          \]
+          </p>
+
+          <p>
+          Заметим, что для любого фиксированного $\lambda$ такого, что
+          $\abs{\lambda} \lt \infty$, можно взять такое $\varepsilon \gt 0$, что
+          \[
+          \abs{\lambda} \lt \frac{1}{\varepsilon}.
+          \]
+          В этом случае для уравнения
+          \[
+          \varphi(x) - \lambda \int\limits_a^b K_\varepsilon(x,y) \varphi(y) dy
+          = F(x)
+          \]
+          выполняется условие
+          \[
+          \abs{\lambda} \lt \frac{1}{\varepsilon},
+          \qquad
+          \int\limits_a^b \abs{K_\varepsilon(x,y)} \lt \varepsilon,
+          \]
+          то есть оно однозначно обращается.
+          </p>
+
+          <p>
+          Обозначив через $R_\varepsilon(x,y,\lambda)$ резольвенту ядра
+          $K_\varepsilon(x,y)$, можно записать, что
+          \[
+          \begin{aligned}
+          \varepsilon(x)
+          &= F(x) + \lambda
+          \int\limits_a^b R_\varepsilon(x,y,\lambda) F(y) dy = \\
+          &= f(x) + \lambda
+          \int\limits_a^b \sum_{j=1}^N p_j(x) q_j(y) \varphi(y) dy
+          + \lambda
+          \int\limits_a^b R_\varepsilon(x,y,\lambda) f(y) dy + \\
+          &\phantom{= f(x)}
+          + \lambda
+          \int\limits_a^b R_\varepsilon(x,t,\lambda) \cdot
+          \lambda
+          \int\limits_a^b \sum_{j=1}^N p_j(x) q_j(y) \varphi(y) dy dt.
+          \end{aligned}
+          \]
+
+          Введя обозначения
+          \[
+          \begin{aligned}
+          r_j(x) &= p_j(x) + \lambda
+          \int\limits_a^b R_\varepsilon(x, t, \lambda) p_j(t) dt, \\
+          g(x) &= f(x) + \lambda
+          \int\limits_a^b R_\varepsilon(x, t, \lambda) f(t) dt,
+          \end{aligned}
+          \]
+          можно записать, что
+          \[
+          \varphi(x) - \lambda
+          \int\limits_a^b \sum_{j=1}^N r_j(x) q_j(y) \varphi(y) dy = g(x).
+          \]
+          Таким образом, для любого конечного фиксированного $\lambda$
+          интегральное уравнение эквивалентно интегральному уравнению Фредгольма
+          2-го рода с вырожденным ядром.
+          </p>
+
+          <p>
+          Используя три теоремы Фредгольма, приходим к следующему результату.
+          </p>
+
+          <div class="theorem">
+            <i>(Альтернатива Фредгольма)</i>.
+            <p>
+            Рассмотрим уравнение Фредгольма 2-го рода
+            \[
+            \varphi(x) - \lambda \int\limits_a^b K(x,y) \varphi(y) dy = f(x).
+            \]
+            Для любого фиксированного конечного $\lambda$:
+            </p>
+            <ol>
+              <li>
+                либо соответствующее однородное уравнение не имеет
+                нетривиального решения, и тогда исходное неоднородное уравнение
+                всегда имеет (и притом единственное) решение при любой правой
+                части $f(x)$;
+              </li>
+
+              <li>
+                либо однородное уравнение имеет нетривиальные решения, и тогда
+                как однородное уравнение Фредгольма 2-го рода, так и союзное с
+                ним уравнение имеют одинаковое конечное число
+                линейно-независимых решений. В этом случае для разрешимости
+                исходного неоднородного уравнения необходимо и достаточно, чтобы
+                его правая часть $f(x)$ была ортогональна ко всем решениям
+                союзного с однородным уравнением, то есть
+                \[
+                \int\limits_a^b f(x) \psi_l^0(x) dx = 0,
+                \quad l = \overline{1, L}.
+                \]
+              </li>
+            </ol>
+          </div>
+
+          <div class="definition">
+            Значение $\lambda$, для которого однородное уравнение Фредгольма
+            2-го рода с любым непрерывным ядром имеет нетривиальные решения
+            $\varphi_l^0(x), \quad l = \overline{1,L}$, называется
+            <i>собственным числом ядра $K(x,y)$</i>, а функции $\varphi_l^0(x)$
+            &mdash; <i>собственными функциями</i>, соответствующими собственному
+            числу $\lambda$.
+          </div>
+
+          <p>
+            Записав уравнение Фредгольма 2-го рода в виде
+            \[
+            \varphi(y) - \lambda \int\limits_a^b K(y,t) \varphi(t) dt = f(y)
+            \]
+            и умножив его на $\lambda K(x,y)$, после интегрирования получим.,
+            что
+            \[
+            \varphi(x) - \lambda^2 \int\limits_a^b K_2(x,t) \varphi(t) dt
+            = f_2(x),
+            \]
+            где
+            \[
+            f_2(x) = f(x) + \lambda \int\limits_a^b K(x,y) f(y) dy.
+            \]
+
+            Продолжая процесс, получаем
+            \[
+            \varphi(x) - \lambda^m \int\limits_a^b K_m(x,t) \varphi(t) dt
+            = f_m(x),
+            \]
+            где
+            \[
+            \begin{gathered}
+            f_1(x) = f(x), \qquad f_m(x) = f_{m-1}(x) + \lambda
+            \int\limits_a^b K(x,t) f_{m-1}(t) dt, \\
+            K_1(x,y) = K(x,y), \quad
+            K_m(x,y) = \int\limits_a^b K(x,t) K_{m-1}(t,y) dt.
+            \end{gathered}
+            \]
+            Отсюда следует
+          </p>
+
+          <div class="proposition">
+            Если $\lambda$ и $\varphi(x)$ &mdash; собственное число и
+            соответствующая ему собственная функция ядра $K(x,y)$, то
+            $\lambda^m$ и $\varphi(x)$ &mdash; собственное число и
+            соответствующая ему собственная функция итерированного ядра
+            $K_m(x,y)$.
+
+            <div class="remark">
+              Можно доказать, что верно и обратное утверждение.
+            </div>
+          </div>
+
+          <div class="remark">
+            Всё изложенное относительно одномерного интегрального уравнения
+            Фредгольма 2-го рода справедливо и в случае $m$-мерного уравнения
+            с непрерывным ядром $K(x,y)$ и непрерывной правой частью $f(x)$.
+          </div>
+
+          <div class="remark">
+            Более широким классом функций, для которых справедлива теория
+            Фредгольма, является множество функций, суммируемых с квадратом на
+            рассматриваемом измеримом множестве $\Omega$. В случае лебеговой
+            меры для уравнения Фредгольма 2-го рода
+            \[
+            u(x) - \lambda \int\limits_\Omega K(x,y) u(y) dy = f(x)
+            \]
+            предполагается, что
+            \[
+            \int\limits_\Omega \int\limits_\Omega \abs{K(x,y)}^2 dx dy
+            \lt \infty,
+            \qquad
+            \int\limits_\Omega \abs{f(x)}^2 dx \lt \infty.
+            \]
+            Тогда всё сказанное относительно непрерывного решения уравнения
+            Фредгольма 2-го рода справедливо в отношении уравнения,
+            принадлежащего классу функций $L_2(\Omega)$:
+            \[
+            \int\limits_\Omega \abs{u(x)}^2 dx \lt \infty,
+            \]
+            то есть $u(x)$ &mdash; квадратично суммируемая функция.
+          </div>
+
+          <div class="remark">
+            Альтернатива Фредгольма верна и в случае ядер со слабой
+            особенностью, то есть ядер вида
+            \[
+            K(x,y) = \frac{K^*(x,y)}{\abs{x-y}^\alpha},
+            \quad 0 \lt \alpha \lt m_0,
+            \]
+            где $K^*(x,y)$ &mdash; непрерывная функция по $x$ и $y$, а $m_0$
+            &mdash; размерность области $\Omega$ (или её границы).
+
+            <div class="proof">
+              Справедливость этого вытекает из того факта, что итерированное
+              ядро уравнения
+              \[
+              \varphi(x) - \lambda^m \int\limits_a^b K_m(x,t) \varphi(t) dt
+              = f_m(x)
+              \]
+              при достаточно большом $m$ представляет собой непрерывную функцию
+              переменных $x$ и $y$.
+
+              <p>
+              В частности, если $\alpha \lt m_0 / 2$, то
+              \[
+              K(x,y) = \frac{K^*(x,y)}{\abs{x-y}^\alpha},
+              \quad 0 \lt \alpha \lt m_0
+              \]
+              &mdash; ядро Фредгольма, удовлетворяющее
+              \[
+              \int\limits_\Omega \int\limits_\Omega \abs{K(x,y)}^2 dx dy
+              \lt \infty.
+              \]
+              </p>
+            </div>
+          </div>
+
+          <div class="remark">
+            Частным случаем уравнения Фредгольма 2-го рода, когда $K(x,y) = 0$
+            при $y \gt x$, является уравнение Вольтерра 2-го рода
+            \[
+            u(x) - \lambda \int\limits_a^x K(x,y) u(y) dy = f(x).
+            \]
+          </div>
         </div>
       </li>
 
@@ -6262,6 +7840,98 @@
           Понятие спектра ядра Фредгольма
         </div>
         <div class="content">
+          <div class="definition">
+            Множество всех собственных чисел ядра $K(x,y)$ называется
+            <i>спектром</i> этого ядра.
+          </div>
+
+          <div class="remark">
+            Спектр вырожденного ядра уравнения Фредгольма 2-го рода состоит из
+            конечного числа элементов, а спектр ядра уравнения Вольтерра 2-го
+            рода является пустым. Отсюда следует тот факт, что уравнение
+            Вольтерра 2-го рода всегда разрешимо, а соответствующее ему
+            однородное уравнение имеет только тривиальное решение.
+          </div>
+
+          <div class="definition">
+            Ядро $K(x,y)$ называется <i>симметричным</i>, если для любых
+            $x,y \in \Omega$ выполнено
+            \[
+            K(x,y) = K(y,x).
+            \]
+          </div>
+
+          <div class="proposition">
+            Если $\varphi_1(x), \varphi_2(x)$ &mdash; собственные функции
+            симметричного ядра, соответствующие отличным друг от друга
+            собственным числам $\lambda_1, \lambda_2$, то
+            \[
+            \int\limits_a^b \varphi_1(x) \varphi_2(x) dx = 0.
+            \]
+
+            <div class="proof">
+              Действительно,
+              \[
+              \begin{aligned}
+              \varphi_1(x) - \lambda_1
+              \int\limits_a^b K(x,y) \varphi_1(y) dy &= 0, \\
+              \varphi_2(x) - \lambda_2
+              \int\limits_a^b K(x,y) \varphi_2(y) dy &= 0.
+              \end{aligned}
+              \]
+              Домножим первое уравнение на $\lambda_2 \varphi_2(x)$, а второе
+              &mdash; на $\lambda_1 \varphi_1(x)$, затем вычтем из первого
+              второе и проинтегрируем по $dx$:
+              \[
+              \begin{aligned}
+              (\lambda_2 - \lambda_1)
+              \int\limits_a^b \varphi_1(x) \varphi_2(x) dx
+              &=
+              \lambda_1 \lambda_2 \int\limits_a^b \varphi_2(x) dx
+              \int\limits_a^b K(x,y) \varphi_1(y) dy - \\
+              &\phantom{=}
+              -
+              \lambda_1 \lambda_2 \int\limits_a^b \varphi_1(x) dx
+              \int\limits_a^b K(x,y) \varphi_2(y) dy = \\
+              &=
+              \lambda_1 \lambda_2
+              \int\limits_a^b \varphi_2(x) dx
+              \int\limits_a^b \left[ K(x,y) - K(y,x) \right] \varphi_1(y) dy
+              = 0,
+              \end{aligned}
+              \]
+              что и требовалось доказать.
+            </div>
+          </div>
+
+          <div class="remark">
+            Из доказанного факта следует, что собственные числа симметричного
+            ядра не могут быть комплексными.
+
+            <div class="proof">
+              Действительно, если собственное число $\lambda$ и соответствующая
+              ему собственная функция $\varphi(x)$ &mdash; комплексные, то есть
+              \[
+              \lambda = \lambda_1 + i\lambda_2,
+              \qquad
+              \varphi(x) = \varphi_1(x) + i \varphi_2(x),
+              \]
+              то $\overline{\lambda}$ и $\overline{\varphi(x)}$ &mdash; тоже
+              собственное число и собственная функция соответственно.
+
+              <p>
+              Если же $\lambda_2 \neq 0$, то есть
+              $\lambda \neq \overline{\lambda}$, то
+              \[
+              \int\limits_a^b \varphi(x) \overline{\varphi(x)} dx
+              =
+              \int\limits_a^b \abs{\varphi(x)}^2 dx = 0,
+              \]
+              откуда следует, что $\varphi(x) \equiv 0$, что невозможно в силу
+              определения собственной функции &mdash; получили противоречие.
+              </p>
+            </div>
+          </div>
         </div>
       </li>
 
@@ -6270,6 +7940,136 @@
           Применение теории Фредгольма к внутренней задаче Дирихле
         </div>
         <div class="content">
+          Рассмотрим внутреннюю задачу Дирихле. Её решение ищется в виде
+          потенциала двойного слоя
+          \[
+          u(x) = \frac{1}{\abs{S_1}}
+          \int\limits_\Gamma \sigma(\xi) \pd{E(x,\xi)}{\vec{n}_\xi} d\Gamma.
+          \]
+          Интегральное уравнение для внутренней задачи Дирихле запишется в виде
+          \[
+          \sigma(x) - \lambda \int\limits_\Gamma K(x, \xi) \sigma(\xi) d\Gamma
+          = -2 \varphi(x),
+          \]
+          где
+          \[
+          K(x,\xi) = - \frac{2}{\abs{S_1}} \pd{E(x,\xi)}{\vec{\nu}},
+          \quad x,\xi \in \Gamma, \quad \lambda = -1,
+          \]
+          или
+          \[
+          K(x,\xi) = \frac{2}{\abs{S_1}} \frac{\cos(\vec{\nu}, r)}{r^{m-1}},
+          \quad r = \abs{\xi - x}.
+          \]
+
+          <div class="remark">
+            <p>
+            Заметим, что в двумерном случае при $m = 2$
+            \[
+            \begin{aligned}
+            K(x, \xi)
+            &=
+            \frac{1}{\pi} \pd{}{\vec{\nu}} \ln \abs{\xi - x} = \\
+            &= \frac{1}{\pi \abs{\xi - x}^2}
+            \sum_{k=1}^2 \paren{ \xi_k - x_k } \pd{\xi_k}{\vec{\nu}} = \\
+            &= \frac{\cos\varphi}{\pi \abs{\xi - x}},
+            \end{aligned}
+            \]
+            где
+            \[
+            \cos\varphi = \cos \left[ (\xi - x), \vec{\nu} \right]
+            = \frac{(\xi - x) \vec{\nu}}{\abs{\xi - x}}.
+            \]
+            Очевидно, что
+            \[
+            \begin{aligned}
+            \pd{}{\vec{\nu}} \ln r
+            &=
+            \frac{1}{2} \pd{}{\vec{\nu}} \ln r^2 = \\
+            &=
+            \frac{1}{2 r^2} \pd{}{\vec{\nu}} \paren{r^2} = \\
+            &= \frac{1}{r^2} (\xi_\alpha - x_\alpha) \nu_\alpha.
+            \end{aligned}
+            \]
+            </p>
+
+            <p>
+            При этом, если $\Gamma$ &mdash; гладкая замкнутая кривая Жордана с
+            непрерывной кривизной, а $\sigma(\xi) \in C^2(\Gamma)$, то,
+            используя параметрическую запись уравнений кривой $\Gamma$
+            \[
+            y_k = y_k(z), \quad z \in [0, l],
+            \]
+            где $l$ &mdash; длина дуги, можно в уравнении
+            \[
+            \sigma(x) - \lambda \int\limits_\Gamma K(x, \xi) \sigma(\xi) d\Gamma
+            = -2 \varphi(x)
+            \]
+            перейти к дуговым координатам $s$ и $t$, отсчитываемым от некоторой
+            фиксированной точки на $\Gamma$ против часовой стрелки, и
+            соответствующим точкам $x,\xi \in \Gamma$:
+            \[
+            \sigma(s) - \lambda \int\limits_0^l K^*(s, t) \sigma(t) dt
+            = -2 \varphi(s), \qquad \lambda = -1, \quad s \in [0;l].
+            \]
+            Для такой кривой $\Gamma$ функция $K^*(s,t)$ &mdash; непрерывная
+            функция переменных $s$ и $t$, и, следовательно, имеем уравнение
+            Фредгольма 2-го рода, где $K^*(s,t) = K(x(s), \xi(t))$.
+            </p>
+          </div>
+
+          <p>
+          Проверим, является ли $\lambda = -1$ собственным числом ядра
+          $K(x, \xi)$, то есть имеет ли уравнение
+          \[
+          \sigma_0(x) - \lambda
+          \int\limits_\Gamma K(x, \xi) \sigma_0(\xi) d\Gamma = 0,
+          \qquad x \in \Gamma
+          \]
+          при $\lambda = -1$ нетривиальные решения.
+          </p>
+
+          <p>
+          Пусть $\sigma_0(x)$ &mdash; решение этого однородного уравнения, тогда
+          для потенциала двойного слоя $u_0(x)$ с плотностью $\sigma_0(\xi)$
+          имеем
+          \[
+          u_0^+(x_0) = \lim_{x \to x_0} u_0(x) = 0,
+          \qquad x_0 \in \Gamma, \quad x \in \Omega^+.
+          \]
+          Из свойства единственности гармонических функций следует, что
+          \[
+          u_0(x) \equiv 0, \quad x \in \Omega^+,
+          \]
+          а поэтому
+          \[
+          \paren{ \pd{u_0}{\vec{\nu}} }^+ = 0, \qquad x \in \Gamma.
+          \]
+          Так как для потенциала двойного слоя
+          \[
+          \paren{ \pd{u_0}{\vec{\nu}} }^+ =
+          \paren{ \pd{u_0}{\vec{\nu}} }^-,
+          \]
+          то для гармонической в $\Omega^-$ функции $u_0(x)$ имеем
+          \[
+          \paren{ \pd{u_0}{\vec{\nu}} }^- = 0.
+          \]
+          Тогда в силу второго свойства гармонической функции
+          \[
+          u_0(x) = \const, \qquad x \in \Omega^-,
+          \]
+          а так как ${\displaystyle \lim_{x \to \infty} u_0(x) = 0}$, то
+          \[
+          u_0(x) \equiv 0, \quad x \in \Omega^-,
+          \]
+          и из непрерывности следует, что $u_0^-(x_0) = 0, \quad x_0 \in
+          \Gamma$. Но тогда
+          \[
+          - \sigma_0(x_0) = u_0^+(x_0) - u_0^-(x_0) = 0
+          \]
+          и, следовательно, $\lambda = -1$ не является собственным числом ядра
+          $K(x,\xi)$.
+          </p>
         </div>
       </li>
 
@@ -6278,13 +8078,137 @@
           Применение теории Фредгольма к внутренней задаче Неймана
         </div>
         <div class="content">
+          Решение задачи $H^+$ ищется в виде потенциала простого слоя
+          \[
+          u(x) = \frac{1}{\abs{S_1}} \int\limits_\Gamma \mu(\xi) E(x, \xi)
+          d\Gamma,
+          \]
+          что приводит к уравнению вида
+          \[
+          \mu(x) + \frac{2}{\abs{S_1}}
+          \int\limits_\Gamma \mu(\xi) \pd{E(x, \xi)}{\vec{n}} d\Gamma
+          = 2 \psi(x).
+          \]
+          Перепишем его в другом виде:
+          \[
+          \mu(x) - \lambda \int\limits_\Gamma K(x, \xi) \mu(\xi) d\Gamma
+          = 2 \psi(x),
+          \]
+          где
+          \[
+          \lambda = -1, \qquad
+          K(x, \xi)
+          = -\frac{2}{\abs{S_1}} \pd{E(x, \xi)}{\vec{n}}
+          = \frac{2}{\abs{S_1}} \frac{\cos(\vec{n}, r)}{r^{m-1}}.
+          \]
+
+          <p>
+          Проверим, является ли $\lambda = -1$ собственным числом ядра
+          $K(x,\xi)$. Рассмотрим уравнение, союзное с однородным уравнением:
+          \[
+          \gamma_0(x) + \frac{2}{\abs{S_1}}
+          \int\limits_\Gamma \gamma_0(\xi) \pd{E(x, \xi)}{\vec{\nu}} d\Gamma
+          = 0.
+          \]
+          Так как
+          \[
+          \int\limits_\Gamma \pd{E(x,\xi)}{\vec{\nu}} d\Gamma
+          =
+          - \frac{\abs{S_1}}{2}, \qquad x \in \Gamma,
+          \]
+          то $\gamma_0 = \const \neq 0$ &mdash; решение этого уравнения.
+          Следовательно, $\lambda = -1$ &mdash; собственное число ядра
+          $K(x,\xi)$.
+          </p>
+
+          <p>
+          Тогда должно выполняться равенство
+          \[
+          \int\limits_\Gamma \psi(\xi) d\Gamma = 0,
+          \]
+          которое в силу альтернативы Фредгольма обеспечивает разрешимость
+          уравнения. Это условие вытекает из свойств гармонической функции
+          $u(x)$:
+          \[
+          \int\limits_\Gamma \paren{ \pd{u}{\vec{n}} }^+ d\Gamma = 0
+          \]
+          и является <i>необходимым</i> условием разрешимости задачи Неймана.
+          </p>
+
+          <p>
+          Чтобы установить, является ли условие
+          \[
+          \int\limits_\Gamma \psi(\xi) d\Gamma = 0
+          \]
+          достаточным для разрешимости задачи Неймана, необходимо показать, что
+          других нетривиальных линейно независимых решений однородного уравнения
+          и союзного с ним нет.
+          </p>
+
+          <div class="remark">
+            В двумерном случае достаточность этого условия установить можно
+            более простым путём.
+
+            <p>
+            Пусть $u(x_1, x_2)$ &mdash; искомое решение задачи Неймана в
+            $\Omega^+$. Обозначим за $v(x_1, x_2)$ функцию, гармонически
+            сопряжённую с $u(x_1, x_2)$. Так как ${\displaystyle \pd{u}{x}}$ и
+            ${\displaystyle \pd{u}{y}}$ непрерывны в $\Omega^+ \cup \Gamma$, то
+            в силу условий Коши-Римана имеем
+            \[
+            \begin{aligned}
+            \at{\dv{v}{s}}{\Gamma}
+            &=
+            \pd{v}{x} \dv{x}{s} + \pd{v}{y} \dv{y}{s} = \\
+            &= -\pd{u}{y} \dv{x}{s} + \pd{u}{x} \dv{y}{s} = \\
+            &= \pd{u}{y} \dv{y}{n} + \pd{u}{x} \dv{x}{n} = \\
+            &= \at{\pd{u}{\vec{n}}}{\Gamma} = \psi(x),
+            \end{aligned}
+            \]
+            откуда
+            \[
+            v(s) = \int\limits_0^s \psi(t) dt + C, \qquad s \in [0;l],
+            \]
+            где $l$ &mdash; длина кривой $\Gamma$.
+            </p>
+
+            <p>
+            Так как
+            \[
+            v(0) = C, \qquad v(l) = \int\limits_0^l \psi(t) dt + C,
+            \]
+            то для непрерывности функции $v(s)$ при $s = 0$, $s = l$, то есть
+            для выполнения равенства
+            \[
+            v(0) = v(l)
+            \]
+            должно выполняться условие
+            \[
+            \int\limits_0^l \psi(t) dt = 0,
+            \]
+            что совпадает с нужным условием.
+            </p>
+
+            <p>
+            Но существование в $\Omega^+$ гармонической функции $v(x_1, x_2)$,
+            удовлетворяющей краевому условию
+            \[
+            \at{v}{\Gamma} = \int\limits_0^s \psi(t) dt + C,
+            \]
+            нами уже доказано, так как $v(x_1, x_2)$ &mdash; решение задачи
+            $D^+$. Но тогда с точностью до константы легко восстанавливается
+            гармонически сопряжённая с $v$ функция $u(x_1, x_2)$, то есть
+            решение задачи $H^+$. Следовательно, условие
+            \[
+            \int\limits_\Gamma \psi(\xi) d\Gamma = 0
+            \]
+            является достаточным для разрешимости $H^+$.
+            </p>
+          </div>
         </div>
       </li>
     </ol>
 
-    <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
-    <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
-    <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
-    <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+    <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
   </body>
 </html>
