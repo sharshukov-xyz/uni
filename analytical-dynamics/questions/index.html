@@ -2745,7 +2745,7 @@
           \delta W
           = \delta \int\limits_{t_1}^{t_2} L dt
           = \int\limits_{t_1}^{t_2} \paren{
-          \pd{L}{\dot{q}} - \dv{}{t} \pd{L}{\dot{q}}
+          \pd{L}{q} - \dv{}{t} \pd{L}{\dot{q}}
           } \delta q dt
           + \left. \paren{
           \pd{L}{\dot{q}} \delta q
@@ -2762,14 +2762,14 @@
           \[
           \int\limits_{t_1}^{t_2} \left[
           \paren{
-          \dv{}{t} \pd{L}{\dot{q}} - \pd{L}{\dot{q}}
+          \dv{}{t} \pd{L}{\dot{q}} - \pd{L}{q}
           } \delta q
           \right] dt = 0,
           \]
           откуда следует, что
           \[
           \paren{
-          \dv{}{t} \pd{L}{\dot{q}} - \pd{L}{\dot{q}}
+          \dv{}{t} \pd{L}{\dot{q}} - \pd{L}{q}
           } \delta q = 0.
           \]
 
@@ -2780,7 +2780,7 @@
           В силу независимости вариаций $\delta q$ следуют уравнения Лагранжа II
           рода:
           \[
-          \dv{}{t} \pd{L}{\dot{q}} - \pd{L}{\dot{q}} = 0.
+          \dv{}{t} \pd{L}{\dot{q}} - \pd{L}{q} = 0.
           \]
         </div>
       </li>
