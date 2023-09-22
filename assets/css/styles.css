@@ -101,6 +101,7 @@ h4.subtitle {
 
 .important,
 .theorem > i,
+.lemma > i,
 .definition i {
   border-bottom: 3px double lightgreen;
 }
