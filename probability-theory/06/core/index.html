@@ -1,0 +1,4368 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>ТВиМС &mdash; 06 &mdash; Основные понятия</title>
+
+    <link href="/assets/css/styles.css" rel="stylesheet">
+    <script defer src="/assets/js/core.js"></script>
+    <script defer src="/assets/js/questions.js"></script>
+    <script defer src="/assets/js/controls.js"></script>
+
+    <link rel="stylesheet" href="/assets/katex/katex.min.css">
+    <script defer src="/assets/katex/katex.min.js"></script>
+    <script defer src="/assets/katex/auto-render.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false },
+            { left: '\\(', right: '\\)', display: false },
+            { left: '\\[', right: '\\]', display: true }
+          ],
+          // • rendering keys, e.g.:
+          throwOnError: false
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1 id="title">ТВиМС &mdash; 06 &mdash; Основные понятия</h1>
+    <nav>
+      <a href="/">Домой</a>
+      <a href="/probability-theory">ТВиМС</a>
+      <a href="/links">Ссылки</a>
+      <a href="/about">Контакты</a>
+    </nav>
+
+    <div class="controls">
+      <button onclick="HideQuestions()">Скрыть вопросы</button>
+      <button onclick="ShowQuestions()">Показать вопросы</button>
+      <button onclick="HideAnswers()">Скрыть ответы</button>
+      <button onclick="ShowAnswers()">Показать ответы</button>
+      <button onclick="HideExamples()">Скрыть примеры</button>
+      <button onclick="ShowExamples()">Показать примеры</button>
+      <button onclick="HideProofs()">Скрыть доказательства</button>
+      <button onclick="ShowProofs()">Показать доказательства</button>
+      <button onclick="ShowRandomElement(HideQuestions)">
+        Показать случайный вопрос
+      </button>
+    </div>
+
+    <div class="proof-type">
+      Показывать
+      <select id="select-proof-type" name="select-proof-type">
+        <option value="proofs">доказательства полностью</option>
+        <option value="ideas">только идеи доказательств</option>
+      </select>
+    </div>
+
+    <div style="display:none">
+      $\global\def\at#1#2{\left. #1 \right\rvert_{#2}}$
+      $\global\def\abs#1{\left\lvert #1 \right\rvert}$
+      $\global\def\norm#1{\left\lVert #1 \right\rVert}$
+      $\global\def\bvec#1{\mathbf{#1}}$
+      $\global\def\floor#1{\left\lfloor #1 \right\rfloor}$
+
+      $\global\def\limto#1{\underset{#1}{\longrightarrow}}$
+      $\global\def\prob#1{\mathbb{P} \left\{ #1 \right\}}$
+      $\global\def\mean#1{\mathbb{E} \left[ #1 \right]}$
+      $\global\def\disp#1{D \left[ #1 \right]}$
+
+      $\global\def\dp#1#2{#1 \cdot #2\,}$
+      $\global\def\vp#1#2{#1 \times #2\,}$
+
+      $\global\def\dv#1#2{\frac{d #1}{d #2}}$
+      $\global\def\rdv#1#2{\frac{d' #1}{d #2}}$ <!-- относительная производная -->
+      $\global\def\pd#1#2{\frac{\partial #1}{\partial #2}}$
+      $\global\def\pdv2#1#2{\frac{\partial^2 #1}{\partial #2^2}}$
+      $\global\def\pdvk#1#2#3{\frac{\partial^#1 #2}{\partial #3^#1}}$
+      $\global\def\ppdv#1#2#3{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
+
+      $\global\def\pois#1{\left\{ #1 \right\}}$
+      $\global\def\paren#1{\left( #1 \right)}$
+      $\global\def\bydef#1{\overset{\mathrm{def}}{#1}}$
+
+      $\global\def\mbox#1{\text{#1}}$
+
+      $\global\def\div{\text{div}\,}$
+      $\global\def\dsum{\displaystyle\sum\,}$
+      $\global\def\grad{\text{grad}\,}$
+      $\global\def\rot{\text{rot}\,}$
+
+      $\global\def\vb#1{\textbf{#1}}$
+
+      $\global\def\op#1{\mathrm{#1}\,}$
+
+      $\global\def\Im{\text{Im}\,}$
+      $\global\def\Res{\text{Res}\,}$
+      $\global\def\Re{\text{Re}\,}$
+      $\global\def\argtg{\text{argtg}\,}$
+      $\global\def\ch{\text{ch}\,}$
+      $\global\def\const{\text{const}\,}$
+      $\global\def\degree{\text{degree}\,}$
+      $\global\def\proj{\mathrm{proj}}$
+      $\global\def\rank{\mathrm{rank}}$
+      $\global\def\cov{\mathrm{cov}}$
+      $\global\def\Arg{\mathrm{Arg}}$
+      $\global\def\res{\text{res}\,}$
+      $\global\def\sh{\text{sh}\,}$
+      $\global\def\sign{\text{sign}\,}$
+      $\global\def\tg{\mathrm{tg}\,}$
+    </div>
+
+    <ol id="questions">
+      <li class="question">
+        <div class="name">
+          Элементарное событие, событие. Невозможное, достоверное события.
+          Пространство элементарных событий
+        </div>
+        <div class="content">
+          Пусть проводится некоторый эксперимент, в результате которого может
+          произойти одно из элементарных событий.
+
+          <div class="definition">
+            Под <i>элементарными событиями</i> понимают события (исходы),
+            которые нельзя разделить на составные части, также являющиеся
+            событиями. Объединение элементарных событий образует
+            <i>пространство элементарных событий $\Omega$</i>.
+          </div>
+
+          <p>
+          Любое событие $A$ является совокупностью элементарных событий, то есть
+          $A \subset \Omega$.
+          </p>
+
+          <div class="definition">
+            Говорят, что <i>событие $A$ произошло</i>, если произошло некоторое
+            элементарное событие $\omega \in A$.
+          </div>
+
+          <ul>
+            <li>
+              Событие, заключающееся в том, что произошло хотя бы одно из
+              событий $A$ или $B$, обозначают через $A \cup B$.
+            </li>
+
+            <li>
+              Событие, которое происходит, когда происходят одновременно и
+              событие $A$, и событие $B$, обозначают как $A \cap B$.
+            </li>
+          </ul>
+
+          <div class="definition">
+            Если $A \cap B = \varnothing$, то события $A$ и $B$ называют
+            <i>несовместными</i>.
+          </div>
+
+          <div class="definition">
+            Пустое множество $\varnothing$ принято называть <i>невозможным
+              событием</i>, а множество $\Omega$ &mdash; <i>достоверным
+              событием</i>.
+          </div>
+
+          <div class="definition">
+            <i>Дополнение</i> события $A$ принято обозначать как
+            \[
+            \overline{A} = \Omega \setminus A
+            = \set{ \omega: \omega \not\in A }.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Разбиение множества $\Omega$
+        </div>
+        <div class="content">
+          Рассмотрим множества $A_1, \dots, A_m$ такие, что выполнены условия:
+          <ol>
+            <li>
+              Пересечение любых двух различных множеств является пустым:
+              \[
+              A_i \cap A_j = \varnothing, \quad i \neq j.
+              \]
+            </li>
+
+            <li>
+              Объединение всех множеств совпадает с пространством элементарных
+              событий:
+              \[
+              \bigcup_{i=1}^m A_i = \Omega.
+              \]
+            </li>
+          </ol>
+
+          <div class="definition">
+            Система множеств $\set{A_i}_{i=1}^m$, удовлетворяющая условиям 1 и
+            2, называется <i>разбиением множества $\Omega$</i> или <i>полной
+            группой событий</i>.
+          </div>
+
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Алгебра множеств
+        </div>
+        <div class="content">
+          <div class="definition">
+            Совокупность $\mathcal{A} \subset 2^\Omega$ называется
+            <i>алгеброй</i>, если выполнены следующие условия:
+            <ol>
+              <li>
+                $\Omega \in \mathcal{A}$.
+              </li>
+
+              <li>
+                Если $A \in \mathcal{A}$ и $B \in \mathcal{A}$, то
+                $A \cup B \in \mathcal{A}$.
+              </li>
+
+              <li>
+                $\forall A \in \mathcal{A} \quad \overline{A} \in \mathcal{A}$.
+              </li>
+            </ol>
+
+            Множества, входящие в алгебру, будем называть <i>событиями</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          $\sigma$-алгебра
+        </div>
+        <div class="content">
+          <div class="definition">
+            Алгебра $\mathcal{F}$ подмножеств множества $\Omega$ называется
+            <i>$\sigma$-алгеброй</i>, если она замкнута относительно объединения
+            счётной совокупности множеств:
+            \[
+            \set{ A_n }_{n=1}^\infty, \quad A_n \in \mathcal{F},
+            n \in \mathbb{N}
+            \implies
+            \bigcup_{n=1}^\infty A_n \in \mathcal{F}.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Алгебра, порождённая множеством $B$
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Алгеброй, порождённой множеством $B \subset \Omega$</i>,
+            называется система подмножеств
+            \[
+            \alpha(B) = \set{ B, \overline{B}, \varnothing, \Omega }.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Конечно-аддитивная вероятностная мера
+        </div>
+        <div class="content">
+          <div class="definition">
+            Пусть $\mathcal{A}$ &mdash; алгебра подмножеств множества $\Omega$.
+            Числовая функция $\mu(\cdot)$, заданная на алгебре $\mathcal{A}$,
+            называется <i>конечно-аддитивной мерой</i>, если выполнены следующие
+            условия:
+            <ol>
+              <li>
+                для любого множества $A \in \mathcal{A}$ выполнено
+                $\mu(A) \geqslant 0$;
+              </li>
+
+              <li>
+                для любых множеств $A_1, A_2 \in \mathcal{A}$ таких, что
+                $A_1 \cap A_2 = \varnothing$, имеет место равенство
+                \[
+                \mu(A_1 \cup A_2) = \mu(A_1) + \mu(A_2);
+                \]
+              </li>
+
+              <li>
+                $\mu(\varnothing) = 0$.
+              </li>
+            </ol>
+          </div>
+
+          <div class="definition">
+            Конечно-аддитивная мера $\mu(\cdot)$ называется <i>конечной</i>,
+            если $\mu(\Omega)$ конечно.
+          </div>
+
+          <div class="definition">
+            Если $\mu(\Omega) = 1$, то конечно-аддитивная мера $\mu(\cdot)$
+            называется <i>конечно-аддитивной вероятностной мерой</i> и
+            обозначается через $P$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Счётно-аддитивная вероятностная мера
+        </div>
+        <div class="content">
+          <div class="definition">
+            Пусть $\mathcal{A}$ &mdash; алгебра подмножеств множества $\Omega$.
+            Конечно-аддитивная мера $\mu(\cdot)$, заданная на алгебре
+            $\mathcal{A}$, называется <i>счётно-аддитивной</i>
+            (<i>$\sigma$-аддитивной</i>) мерой, если выполнено следующее
+            условие:
+
+            <p>
+            если имеется счётная совокупность событий $\set{A_i}_{i=1}^\infty$,
+            где $A_i \in \mathcal{A}$, такая, что
+            \[
+            \bigcup_{i=1}^\infty A_i \in \mathcal{A},
+            \qquad
+            A_i \cap A_j = \varnothing, \quad i \neq j,
+            \]
+            то имеет место равенство
+            \[
+            \mu \paren{
+            \bigcup_{i=1}^\infty A_i
+            } = \sum_{i=1}^\infty \mu(A_i).
+            \]
+            </p>
+          </div>
+
+          <div class="definition">
+            Счётно-аддитивная мера $\mu$ называется <i>$\sigma$-конечной</i>,
+            если существует счётное разбиение множества
+            \[
+            \Omega = \bigcup_{i=1}^\infty D_i,
+            \]
+            причём
+            \[
+            D_i \in \mathcal{A}, \qquad D_i \cap D_j = \varnothing,
+            \quad i \neq j,
+            \]
+            такое, что $\mu(D_i) \lt \infty$.
+          </div>
+
+          <div class="definition">
+            Счётно-аддитивная мера $\mu$ называется <i>конечной</i>, если
+            $\mu(\Omega) \lt \infty$. Если $\mu(\Omega) = 1$, то
+            счётно-аддитивная мера $\mu$ называется <i>счётно-аддитивной
+              вероятностной мерой</i> (или <i>вероятностью</i>)
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Статистический подход к определению вероятности
+        </div>
+        <div class="content">
+          Рассмотрим некоторое событие $A \in \mathcal{A}$. Проведём
+          статистический эксперимент $N$ раз. В этом эксперименте событие $A$
+          произошло $N(A)$ раз. Тогда отношение $N(A) / N$ &mdash; относительная
+          частота появления события $A$. При $N \to \infty$ относительная
+          частота стабилизируется, но о сходимости говорить нельзя. Можно
+          говорить о &laquo;статистической устойчивости&raquo; относительных
+          частот. Вероятность появления события $A$, которую обозначим через
+          $p$, приближённо равна $N(A)/N$.
+
+          <div class="remark">
+            Теория вероятности может применяться только к тем экспериментам, в
+            которых наблюдается &laquo;статистическая устойчивость&raquo;
+            относительных частот.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Аксиоматическое определение вероятности
+        </div>
+        <div class="content">
+          <div class="definition">
+            Счётно-аддитивная вероятностная мера $P$ (вероятность), определённая
+            на алгебре $\mathcal{A}$ подмножеств множества $\Omega$, обладает
+            следующими свойствами:
+            <ol>
+              <li>
+                Вероятность любого события неотрицательна:
+                \[
+                \forall A \in \mathcal{A} \quad P(A) \geqslant 0.
+                \]
+              </li>
+
+              <li>
+                $P(\Omega) = 1$.
+              </li>
+
+              <li>
+                Для любых двух множеств $A_1, A_2 \in \mathcal{A}$
+                \[
+                A_1 \cap A_2 = \varnothing
+                \implies P(A_1 \cup A_2) = P(A_1) + P(A_2).
+                \]
+              </li>
+
+              <li>
+                Если $\set{A_i}_{i=1}^\infty$ &mdash; последовательность
+                событий такая, что
+                \[
+                A_i \in \mathcal{A},
+                \qquad
+                A_i \cap A_j = \varnothing, \quad i \neq j,
+                \qquad
+                \bigcup_{i=1}^\infty A_i = \mathcal{A},
+                \]
+                то справедливо равенство
+                \[
+                P \paren{
+                \bigcup_{i=1}^\infty A_i
+                } = \sum_{i=1}^\infty P(A_i).
+                \]
+              </li>
+            </ol>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Классическое определение вероятности
+        </div>
+        <div class="content">
+          Пусть множество $\Omega$ конечное.
+
+          <div class="definition">
+            Формулу
+            \[
+            P(A) = \frac{\abs{A}}{\abs{\Omega}}
+            \]
+            называют <i>классическим определением вероятности</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Свойства вероятности
+        </div>
+        <div class="content">
+          <ol>
+            <li>
+              Вероятность невозможного события равна нулю: $P(\varnothing) = 0$.
+            </li>
+
+            <li>
+              Для любого события $A \in \mathcal{A}$ выполнено
+              $P(A) = 1 - P(\overline{A})$.
+            </li>
+
+            <li>
+              Для событий $A,B \in \mathcal{A}$ таких, что $A \subset B$,
+              справедливо неравенство: $P(A) \leqslant P(B)$.
+            </li>
+
+            <li>
+              <i>Формула сложения вероятностей</i>: для любых событий
+              $A,B \in \mathcal{A}$ справедливо равенство
+              \[
+              P(A \cup B) = P(A) + P(B) - P(A \cap B).
+              \]
+            </li>
+
+            <li>
+              Для любых событий $A_1, \dots, A_m \in \mathcal{A}$ выполняется
+              неравенство
+              \[
+              P \paren{
+              \bigcup_{i=1}^m A_i
+              } \leqslant \sum_{i=1}^m P(A_i).
+              \]
+            </li>
+
+            <li>
+              Для любых событий $A_1, \dots, A_m \in \mathcal{A}$ справедливо
+              равенство
+              \[
+              \begin{aligned}
+              P \paren{
+              \bigcup_{i=1}^m A_i
+              }
+              &=
+              \sum_{i=1}^m P(A_i)
+              -
+              \sum_{1 \leqslant i_1 \lt i_2 \leqslant m}
+              P(A_{i_1} \cap A_{i_2}) + \\
+              &\phantom{=}+
+              \sum_{1 \leqslant i_1 \lt i_2 \lt i_3 \leqslant m}
+              P(A_{i_1} \cap A_{i_2} \cap A_{i_3})
+              + \cdots \\
+              &\phantom{=}+ (-1)^{m-1}
+              P(A_1 \cap \cdots \cap A_m).
+              \end{aligned}
+              \]
+            </li>
+
+            <li>
+              Пусть $\set{A_i}_{i=1}^\infty$ &mdash; последовательность событий
+              такая, что
+              \[
+              A_i \in \mathcal{A}, \qquad
+              \bigcup_{i=1}^\infty A_i \in \mathcal{A},
+              \]
+              тогда имеет место следующее неравенство
+              \[
+              P \paren{
+              \bigcup_{i=1}^\infty A_i
+              } \leqslant \sum_{i=1}^\infty P(A_i).
+              \]
+            </li>
+          </ol>
+
+          <div class="remark">
+            Свойства 1-6 справедливы для любой конечно-аддитивной вероятностной
+            меры. Свойство 7 предполагает счётную аддитивность вероятностной
+            меры.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема о непрерывности вероятностной меры (формулировка)
+        </div>
+        <div class="content">
+          <div class="theorem">
+            <i>(о непрерывности вероятностной меры)</i>.
+            <p>
+            Пусть $\mathcal{A}$ &mdash; алгебра подмножеств множества $\Omega$,
+            $P$ &mdash; конечно-аддитивная вероятностная мера, заданная на
+            алгебре $\mathcal{A}$. Следующие утверждения эквивалентны:
+            </p>
+
+            <ol>
+              <li>
+                Вероятностная мера $P$ &mdash; счётно-аддитивная.
+              </li>
+
+              <li>
+                Конечно-аддитивная вероятностная мера $P$ непрерывна
+                &laquo;сверху&raquo;, то есть для любой последовательности
+                множеств $\set{ A_n }_{n=1}^\infty$ такой, что
+                \[
+                A_n \in \mathcal{A},
+                \qquad \bigcup_{i=1}^\infty A_i \in \mathcal{A},
+                \qquad A_n \subset A_{n+1},
+                \]
+                выполняется
+                \[
+                P(A_n) \limto{n \to \infty} P \paren{
+                \bigcup_{m=1}^\infty A_m
+                }.
+                \]
+              </li>
+
+              <li>
+                Конечно-аддитивная вероятностная мера $P$ непрерывна
+                &laquo;снизу&raquo;, то есть для любой последовательности
+                множеств $\set{ A_n }_{n=1}^\infty$ такой, что
+                \[
+                A_n \in \mathcal{A},
+                \qquad \bigcap_{i=1}^\infty A_i \in \mathcal{A},
+                \qquad A_n \supset A_{n+1},
+                \]
+                выполняется
+                \[
+                P(A_n) \limto{n \to \infty} P \paren{
+                \bigcap_{m=1}^\infty A_m
+                }.
+                \]
+              </li>
+
+              <li>
+                Конечно-аддитивная вероятностная мера $P$ &laquo;непрерывна
+                в нуле&raquo;, то есть для любой последовательности
+                множеств $\set{ A_n }_{n=1}^\infty$ такой, что
+                \[
+                A_n \in \mathcal{A},
+                \qquad \bigcap_{i=1}^\infty A_i = \varnothing,
+                \qquad A_n \supset A_{n+1},
+                \]
+                выполняется
+                \[
+                P(A_n) \limto{n \to \infty} 0.
+                \]
+              </li>
+            </ol>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Урновые схемы
+        </div>
+        <div class="content">
+          <div class="theorem">
+            <i>(правило умножения в комбинаторике)</i>.
+            <p>
+            Пусть имеется $r$ групп различных объектов. В первую группу входит
+            $n_1$ объектов, во вторую &mdash; $n_2$ объектов и так далее. Будем
+            составлять различные комбинации этих объектов следующим образом:
+            последовательно из групп будем выбирать по одному объекту и
+            располагать их в порядке появления. Тогда всего возможно
+            $n_1 n_2 \cdots n_r$ различных комбинаций.
+            </p>
+          </div>
+
+          <ol>
+            <li>
+              <i>Упорядоченный выбор с возвращением</i>
+
+              <p>
+              Пусть имеется урна с $n$ шарами. Каждый шар имеет свой номер от
+              $1$ до $n$. Произведём из них последовательный случайный выбор $r$
+              шаров, при этом возвращая каждый вынутый шар обратно. Тогда
+              элементарным событием будет вектор $\omega = (a_1, \dots, a_r)$,
+              где $a_1 = 1, \dots, n$, к тому же шары могут совпадать. Мощность
+              пространства элементарных событий $\Omega$ в данном случае равна
+              $n^r$. В качестве вероятностной меры возьмём отношение
+              $1/\abs{\Omega}$, или $P(\omega) = 1/n^r$.
+              </p>
+            </li>
+
+            <li>
+              <i>Упорядоченный выбор без возвращения</i>
+
+              <p>
+              В этом случае вынутые на каждом шаге шары не возвращаются в урну.
+              Пространство элементарных событий может быть определено следующим
+              образом:
+              \[
+              \Omega = \set{
+              (a_1, \dots, a_r): a_i = 1,\dots,n, \; a_i \neq a_j, i \neq j
+              }.
+              \]
+              Мощность этого множества равна
+              \[
+              A_n^r = n (n-1) \cdots (n - r + 1),
+              \]
+              где $A_n^r$ &mdash; <i>число размещений из $n$ по $r$</i>.
+              Вероятность: $P(\omega) = 1 / A_n^r$.
+              </p>
+            </li>
+
+            <li>
+              <i>Неупорядоченный выбор без возвращения</i>
+
+              <p>
+              Пространство элементарных событий может быть определено следующим
+              образом:
+              \[
+              \Omega = \set{
+              [a_1, \dots, a_r]: a_i = 1,\dots,n, \; a_i \neq a_j, i \neq j
+              }.
+              \]
+              Квадратные скобки означают, что порядок появления шаров
+              неизвестен. Мощность этого множества называют <i>числом сочетаний
+                из $n$ по $r$</i> и обозначают через $C_n^r$. Имеет место
+              равенство
+              \[
+              A_n^r = C_n^r \cdot r!,
+              \]
+              поэтому
+              \[
+              \abs{\Omega} = C_n^r = \frac{n!}{r!(n-r)!}.
+              \]
+              Вероятность: $P(\omega) = 1/C_n^r$.
+              </p>
+            </li>
+
+            <li>
+              <i>Неупорядоченный выбор с возвращением</i>
+
+              <p>
+              Пространство элементарных событий:
+              \[
+              \Omega = \set{
+              [a_1, \dots, a_r]: a_i = 1,\dots,n
+              }.
+              \]
+              Порядок появления шаров неизвестен. Так как
+              $\abs{\Omega} \lt \infty$, а все элементарные события
+              равновероятны, то $P(\omega) = 1 / \abs{\Omega}$.
+              </p>
+
+              <p>
+              Пусть $r_1 \geqslant 0$ &mdash; число появлений в выборке шара
+              $a_1$, $r_2 \geqslant 0$ &mdash; шара $a_2$, и так далее, при этом
+              \[
+              \sum_{i=1}^n r_i = r, \qquad r \in \set{0, \dots, r}.
+              \]
+              Найдём количество решений этого уравнения. Прибавим к обеим частям
+              уравнения по $n$:
+              \[
+              (r_1 + 1) + (r_2 + 1) + \dots + (r_n + 1) = r + n.
+              \]
+              Число решений этого уравнения совпадает с числом разбиений отрезка
+              $[0,r+n]$ на $n$ частей. Необходимо выбрать $n-1$ точку дробления,
+              такие точки можно выбрать $C_{r+n-1}^{n-1}$ способами, но
+              \[
+              C_k^l = C_k^{k-l}, \implies
+              C_{r+n-1}^{n-1} = C_{r+n-1}^r = \abs{\Omega},
+              \]
+              поэтому $P(\omega) = 1 / C_{r+n-1}^{n-1}$.
+              </p>
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Геометрическое определение вероятности
+        </div>
+        <div class="content">
+          В качестве множества элементарных событий рассмотрим некоторую
+          измеримую по Лебегу область $\Omega \subset \mathbb{R}^k$. Обозначим
+          через $\mu(\Omega)$ меру Лебега в $\mathbb{R}^k$ множества $\Omega$.
+          Тогда можно определить вероятностную меру для любого измеримого по
+          Лебегу множества $A \subset \Omega$:
+          \[
+          P(A) = \frac{\mu(A)}{\mu(\Omega)}.
+          \]
+          Это равенство принято называть <i class="important">определением
+            геометрической вероятности</i>.
+
+          <div class="remark">
+            В качестве $\sigma$-алгебры нельзя рассматривать множество всех
+            подмножеств множества $\Omega$, так как не все подмножества $\Omega$
+            измеримы по Лебегу.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Условная вероятность
+        </div>
+        <div class="content">
+          Рассмотрим вероятностное пространство $(\Omega, \mathcal{F}, P)$.
+          Выберем некоторое событие $B \in \mathcal{F}$ такое, что $P(B) \gt 0$.
+
+          <div class="definition">
+            Если вероятность события $B$ отлично от нуля, то <i>условная
+              вероятность события $A$ при условии, что произошло событие
+              $B$</i>, определяется формулой
+            \[
+            P(A | B) = \frac{P(A \cap B)}{P(B)}.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Формула умножения вероятностей
+        </div>
+        <div class="content">
+          Из определения условной вероятности следует <i
+            class="important">формула умножения вероятностей</i>:
+          \[
+          P(A \cap B) = P(B) P(A | B).
+          \]
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Независимость событий (попарная, в совокупности)
+        </div>
+        <div class="content">
+          <div class="definition">
+            События $A$ и $B$ <i>независимы</i>, если справедливо следующее
+            равенство:
+            \[
+            P(A \cap B) = P(A) P(B).
+            \]
+          </div>
+
+          <div class="remark">
+            Если предположить, что $A$ и $B$ несовместны
+            ($A \cap B = \varnothing$), но $P(A) \gt 0, P(B) \gt 0$, тогда $A$ и
+            $B$ &mdash; зависимые события.
+          </div>
+
+          <div class="definition">
+            События $A_1, \dots, A_n$ называются <i>независимыми в
+              совокупности</i>, если для любых $m$ событий
+            $A_{i_1}, \dots, A_{i_m}$ выполнено
+            \[
+            P(A_{i_1} \cap A_{i_2} \cap \dots \cap A_{i_m})
+            =
+            \prod_{k=1}^m P(A_{i_k}).
+            \]
+          </div>
+
+          <div class="remark">
+            Если события независимы в совокупности, то они независимы попарно.
+            Обратное не верно: из попарной независимости не следует
+            независимость в совокупности.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Алгебры, не зависимые в совокупности
+        </div>
+        <div class="content">
+          Рассмотрим $(\Omega, \mathcal{F}, P)$, пусть алгебры
+          $\mathcal{A}_1, \dots, \mathcal{A}_n$ являются подалгебрами
+          $\sigma$-алгебры $\mathcal{F}$.
+
+          <div class="definition">
+            Говорят, что алгебры $\mathcal{A}_1, \dots, \mathcal{A}_n$
+            <i>независимы в совокупности</i>, если для любых событий
+            $A_1 \in \mathcal{A}_1, \dots, A_n \in \mathcal{A}_n$ имеет место
+            равенство
+            \[
+            P(A_1 \cap \dots \cap A_n) = \prod_{i=1}^n P(A_i).
+            \]
+          </div>
+
+          <div class="remark">
+            Это определение относится и к $\sigma$-алгебрам, так как они
+            являются частным случаем алгебры.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Формула полной вероятности
+        </div>
+        <div class="content">
+          Рассмотрим $(\Omega, \mathcal{F}, P)$. Пусть задано разбиение
+          множества $\Omega$: $\set{B_i}_{i=1}^m$.
+
+          <div class="definition">
+            Формула
+            \[
+            P(A) = \sum_{i=1}^m P(B_i) P(A | B_i)
+            \]
+            называется <i>формулой полной вероятности</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Формулы Байеса
+        </div>
+        <div class="content">
+          Рассмотрим $(\Omega, \mathcal{F}, P)$. Пусть задано разбиение
+          множества $\Omega$: $\set{B_i}_{i=1}^m$.
+
+          <p>
+          Рассмотрим некоторое событие $A \in \mathcal{F}$. Пусть $P(A) \gt 0$.
+          Тогда
+          \[
+          P(B_j | A) = \frac{P(B_j \cap A)}{P(A)} =
+          \frac{P(B_j) P(A|B_j)}{\sum_{i=1}^m P(B_i) P(A|B_i)}.
+          \]
+          </p>
+
+          <div class="definition">
+            Формулы
+            \[
+            P(B_j | A) = \frac{P(B_j) P(A|B_j)}{\sum_{i=1}^m P(B_i) P(A|B_i)}
+            \]
+            называются <i>формулами Байеса</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Априорные и апостериорные вероятности
+        </div>
+        <div class="content">
+          Рассмотрим $(\Omega, \mathcal{F}, P)$. Пусть задано разбиение
+          множества $\Omega$: $\set{B_i}_{i=1}^m$.
+
+          <div class="definition">
+            Вероятности $P(B_i)$ называются <i>априорными вероятностями</i>.
+          </div>
+
+          <div class="definition">
+            Вероятности $P(B_i | A)$ называются <i>апостериорными
+              вероятностями</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение случайной величины в случае конечного множества
+          элементарных событий
+        </div>
+        <div class="content">
+          <div class="definition">
+            Если множество элементарных событий конечно, то <i>случайной
+              величиной</i> называется любая числовая функция
+            \[
+            \xi: \Omega \to \mathbb{R}.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Схема Бернулли
+        </div>
+        <div class="content">
+          Пусть проводится $n$ независимых испытаний, причём в каждом испытании
+          возможно ровно два исхода &mdash; успех (1) и неудача (0). Обозначим
+          через $p$ вероятность успеха, через $q = 1 - p$ &mdash; вероятность
+          неудачи.
+
+          <p>
+          Пространство элементарных событий:
+          \[
+          \Omega = \set{ (a_1, \dots, a_n): a_i \in \set{ 0, 1 } }.
+          \]
+          Тогда $\abs{\Omega} = 2^n$. В качестве $\sigma$-алгебры событий
+          возьмём $\mathcal{F} = 2^\Omega$. Вероятность элементарного события:
+          \[
+          P(\omega) = p^{\sum_{i=1}^n a_i} q^{n - \sum_{i=1}^n a_i}.
+          \]
+          </p>
+
+          <p>
+          Пусть $\mu(\omega) = \sum_{i=1}^n a_i$ &mdash; количество успехов в
+          серии из $n$ независимых испытаний. Найдём вероятность события
+          $\mu = m$:
+          \[
+          \begin{aligned}
+          P \set{ \mu = m }
+          &=
+          \sum_{\omega: \mu(\omega) = m} P(\omega) = \\
+          &=
+          \sum_{\omega: \sum_{i=1}^n a_i = m}
+          p^{\sum_{i=1}^n a_i} q^{n - \sum_{i=1}^n a_i} = \\
+          &=
+          p^m q^{n-m} \sum_{\omega: \sum_{i=1}^n a_i = m} 1 = \\
+          &=
+          C_n^m p^m q^{n-m}.
+          \end{aligned}
+          \]
+          </p>
+
+          <div class="remark">
+            \[
+            \sum_{m=0}^n P \set{ \mu = m }
+            = \sum_{m=0}^n C_n^m p^m q^{n-m} = (p + q)^n = 1.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Дискретное распределение случайной величины
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Дискретное распределение случайной величины</i> &mdash; набор
+            (конечный или бесконечный) вероятностей несовместных событий,
+            которые в сумме дают 1.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Биномиальное распределение
+        </div>
+        <div class="content">
+          <div class="definition">
+            Распределение случайной величины $\mu$, равной количеству успехов в
+            серии из $n$ независимых испытаний, называется <i>биномиальным
+              распределением</i>.
+          </div>
+
+          <div class="remark">
+            \[
+            P \set{ \mu = m } = C_n^m p^m q^{n-m}, \quad m = 0, \dots, n.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Полиномиальное распределение
+        </div>
+        <div class="content">
+          Рассмотрим следующую схему. Пусть производится $n$ независимых
+          испытаний, каждое из которых может закончится одним из $r$ исходов из
+          множества $\set{1, \dots, r}$. Исходу $i$ соответствует вероятность
+          $p_i$, при этом
+          \[
+          \sum_{i=1}^r p_i = 1.
+          \]
+
+          Пусть набор $(a_1, \dots, a_r)$ &mdash; упорядоченный набор чисел из
+          $\set{1, \dots, r}$. Введём вероятностное пространство:
+          \[
+          \begin{gathered}
+          \Omega = \set{ (a_1, \dots, a_n): a_i = 1,\dots,r }, \\
+          \mathcal{F} = 2^\Omega, \qquad P(\omega) = p_1^{m_1} \cdots p_r^{m_r},
+          \end{gathered}
+          \]
+          где $m_i$ &mdash; количество исходов $i$ в $\omega$, причём
+          $m_1 + \dots + m_r = n$.
+
+          <p>
+          Найдём вероятность следующего события: в $n$ независимых испытаниях
+          $m_1$ раз выпал исход 1, $m_2$ раз выпал исход $2$ и так далее.
+          Обозначим вероятность этого события как $P_n(m_1, \dots, m_r)$. Ясно,
+          что
+          \[
+          P_n(m_1, \dots, m_r) = D_{m_1, \dots, m_r} p_1^{m_1} \cdots p_r^{m_r},
+          \]
+          где
+          \[
+          D_{m_1, \dots, m_r} = C_n^{m_1} C_{n - m_1}^{m_2}
+          \cdots C_{n-m_1-\dots-m_{r_1}}^{m_r}
+          = \frac{n!}{m_1! m_2! \cdots m_r!}.
+          \]
+          </p>
+
+          <div class="definition">
+            Распределение, определяемое формулой
+            \[
+            P_n(m_1, \dots, m_r) = \frac{n!}{m_1! m_2! \cdots m_r!}
+            p_1^{m_1} \cdots p_r^{m_r},
+            \]
+            называется <i>полиномиальным распределением</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема Пуассона. Распределение Пуассона
+        </div>
+        <div class="content">
+          Рассмотрим схему Бернулли с $n$ независимыми испытаниями. Вероятность
+          успеха &mdash; $p$, неуспеха &mdash; $q = 1 - p$. Введём случайную
+          величину $\mu$, равную количеству успехов в $n$ испытаниях.
+
+          <div class="theorem">
+            <i>(Пуассона)</i>.
+            <p>
+            Пусть в схеме Бернулли число испытаний $n \to \infty$ и при этом
+            \[
+            np \limto{n \to \infty} \lambda \gt 0.
+            \]
+            Тогда для любого $m = 0, 1, 2, \dots$ выполнено
+            \[
+            P \set{ \mu = m } = C_n^m p^m q^{n-m}
+            \limto{n \to \infty} \frac{\lambda^m}{m!} e^{-\lambda}.
+            \]
+            </p>
+          </div>
+
+          <div class="remark">
+            Заметим, что
+            \[
+            \sum_{m=0}^\infty \frac{\lambda^m}{m!} e^{-\lambda}
+            = e^{-\lambda} e^\lambda = 1.
+            \]
+            Таким образом, выражение
+            \[
+            \frac{\lambda^m}{m!} e^{-\lambda}
+            \]
+            определяет некоторое распределение, которое называют
+            <i class="important">распределением Пуассона</i>. Оно зависит от
+            $\lambda \gt 0$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Локальная теорема Муавра-Лапласа
+        </div>
+        <div class="content">
+          Рассмотрим схему Бернулли с $n$ независимыми испытаниями. Вероятность
+          успеха &mdash; $p$, неуспеха &mdash; $q = 1 - p$. Введём случайную
+          величину $\mu$, равную количеству успехов в $n$ испытаниях.
+
+          <div class="theorem">
+            <i>(локальная предельная теорема Муавра-Лапласа)</i>.
+            <p>
+            Пусть
+            \[
+            \sigma = \sqrt{npq} \limto{n \to \infty} \infty,
+            \]
+            тогда для любой константы $c \gt 0$ равномерно по
+            \[
+            x = \frac{m - np}{\sigma}, \quad \abs{x} \leqslant c,
+            \]
+            выполняется
+            \[
+            P \set{ \mu = m } = C_n^m p^m q^{n-m}
+            = \frac{1}{\sqrt{2\pi} \sigma} e^{-\frac{x^2}{2}} \paren{
+            1 + o(1)
+            },
+            \]
+            где $o(1) \limto{n \to \infty} 0$.
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Интегральная теорема Муавра-Лапласа
+        </div>
+        <div class="content">
+          Рассмотрим схему Бернулли с $n$ независимыми испытаниями. Вероятность
+          успеха &mdash; $p$, неуспеха &mdash; $q = 1 - p$. Введём случайную
+          величину $\mu$, равную количеству успехов в $n$ испытаниях.
+
+          <div class="theorem">
+            <i>(интегральная предельная теорема Муавра-Лапласа)</i>.
+            <p>
+            Пусть
+            \[
+            \sigma = \sqrt{npq} \limto{n \to \infty} \infty,
+            \]
+            тогда при $n \to \infty$ равномерно по парам $(a, b)$ имеет место
+            сходимость
+            \[
+            P \left\{
+            a \leqslant \frac{\mu - np}{\sqrt{npq}} \leqslant b
+            \right\}
+            \limto{n \to \infty}
+            \frac{1}{\sqrt{2 \pi}} \int\limits_a^b e^{-\frac{x^2}{2}} dx.
+            \]
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Плотность распределения
+        </div>
+        <div class="content">
+          <div class="definition">
+            Функция $\varphi(x)$, обладающая свойствами
+            <ol>
+              <li>
+                $\varphi(x) \geqslant 0$ для всех $x \in \mathbb{R}$,
+              </li>
+
+              <li>
+                ${\displaystyle
+                \int\limits_{-\infty}^\infty \varphi(x) dx = 1,
+                }$
+              </li>
+            </ol>
+            называется <i>плотностью распределения</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Плотность стандартного нормального распределения
+        </div>
+        <div class="content">
+          <div class="definition">
+            Функция
+            \[
+            \varphi(x) = \frac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}}
+            \]
+            называется <i>плотностью стандартного нормального распределения</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          ЗБЧ для схемы Бернулли
+        </div>
+        <div class="content">
+          Рассмотрим схему Бернулли с $n$ независимыми испытаниями. Вероятность
+          успеха &mdash; $p$, неуспеха &mdash; $q = 1 - p$. Введём случайную
+          величину $\mu$, равную количеству успехов в $n$ испытаниях.
+
+          <div class="theorem">
+            <i>(закон больших чисел для схемы Бернулли)</i>.
+            <p>
+            Пусть число испытаний в схеме Бернулли $n \to \infty$. Тогда для
+            любого $\varepsilon \gt 0$ имеет место следующая сходимость:
+            \[
+            P \left\{ \abs{\frac{\mu}{n} - p} \gt \varepsilon \right\}
+            \limto{n \to \infty} 0.
+            \]
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Алгебра, порождённая совокупностью
+        </div>
+        <div class="content">
+          Рассмотрим совокупность подмножеств $\mathcal{M} = \set{ M_\alpha }$.
+
+          <div class="definition">
+            Будем говорить, что алгебра $\mathcal{A}$
+            <i>порождена совокупностью $\mathcal{M}$</i> (и записывать
+            $\mathcal{A} = \alpha(\mathcal{M})$), если
+            <ol>
+              <li>
+                $\mathcal{M} \subset \mathcal{A}$,
+              </li>
+
+              <li>
+                если $D$ &mdash; некоторая алгебра такая, что
+                $\mathcal{M} \subset D$, тогда $\mathcal{A} \subset D$.
+              </li>
+            </ol>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Цепь Маркова
+        </div>
+        <div class="content">
+          Частица переходит из одного состояния в другое. Если предположить, что
+          время дискретно, а наблюдения за частицей происходят в промежутке
+          времени $[0,T]$, тогда траектория движения частицы соответствует
+          элементарному событию $\omega = (a_1, \dots, a_T)$.
+
+          <p>
+          Выделим следующие события:
+          \[
+          \begin{aligned}
+          A_0^{(1)} &= \set{ \omega: a_0 = 1 }, \\
+          A_0^{(2)} &= \set{ \omega: a_0 = 2 }, \\
+                    &\phantom{=} \dots \\
+          A_0^{(r)} &= \set{ \omega: a_0 = r }.
+          \end{aligned}
+          \]
+          Множества $\set{ A_0^{(i)} }$ образуют конечное разбиение множества
+          $\Omega$.
+          </p>
+
+          <p>
+          Определим алгебру
+          $\mathcal{A}_0 = \alpha(A_0^{(1)}, \dots, A_0^{(r)})$. В эту алгебру
+          входят все события, характеризующие начальное положение частицы.
+          </p>
+
+          <p>
+          Аналогичным обоазом можно построить последовательность алгебр
+          $\mathcal{A}_0, \mathcal{A}_1, \dots, \mathcal{A}_T$. Очевидно, что
+          $\mathcal{A}_t \subset 2^\Omega$.
+          </p>
+
+          <p>
+          Предположим, что существует вероятностная мера $P(\cdot)$, заданная на
+          $2^\Omega$, такая, что $P(\omega) \gt 0$ для всех $\omega \in \Omega$.
+          Введём также алгебры
+          \[
+          \begin{aligned}
+          \mathcal{A}_0^{t-1} &= \alpha(\mathcal{A}_0, \dots,
+          \mathcal{A}_{t-1}), \\
+          \mathcal{A}_{t+1}^T &= \alpha(\mathcal{A}_{t+1}, \dots,
+          \mathcal{A}_T).
+          \end{aligned}
+          \]
+          </p>
+
+          <div class="definition">
+            Говорят, что последовательность испытаний
+            $\mathcal{A}_0, \dots, \mathcal{A}_T$ образует <i>цепь Маркова</i>,
+            если для любого целочисленного момента времени $t \in [1, T-1]$,
+            любого события $A \in \mathcal{A}_0^{t-1}$, любого события $B \in
+            \mathcal{A}_{t+1}^T$ и для любого исхода $k$ выполняется условие
+            \[
+            P(A \cap B | \set{ a_t = k })
+            =
+            P(A | \set{ a_t = k })
+            P(B | \set{ a_k = k }).
+            \]
+          </div>
+
+          <div class="lemma">
+            Последовательность испытаний образует цепь Маркова тогда и только
+            тогда, когда для любого момента времени $t = 1, \dots, T - 1$,
+            любого исхода $k \in \set{ 1, \dots, r }$, любого события $A \in
+            \mathcal{A}_0^{t-1}$ и любого события $B \in \mathcal{A}_{t+1}^T$
+            выполняется условие
+            \[
+            P(B | A \cap \set{ a_t = k }) = P(B | \set{ a_t = k }).
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Однородная цепь Маркова
+        </div>
+        <div class="content">
+          Рассмотрим некоторую тракеторию $\omega = (i_0, \dots, i_T)$ движения
+          частицы по состояниям. Найдём вероятность осуществления траектории
+          $\omega$, используя формулу умножения вероятностей:
+          \[
+          \begin{aligned}
+          P(\omega)
+          &=
+          P(\set{ i_0, \dots, i_T }) = \\
+          &=
+          P\paren{ A_0^{(i_0)} \cap \dots \cap A_T^{(i_T)} } = \\
+          &=
+          P\paren{ A_0^{(i_0)} }
+          P\paren{ A_1^{(i_1)} | A_0^{(i_0)} }
+          P\paren{ A_2^{(i_2)} | A_1^{(i_1)} }
+          \cdots
+          P\paren{ A_T^{(i_T)} | A_{T-1}^{(i_{T-1})} }.
+          \end{aligned}
+          \]
+
+          Вероятность любого элементарного события полностью определяется
+          начальными вероятностями $P(A_0^i)$, где $i = 1,\dots,r$, и условными
+          вероятностями $P(A_{t+1}^j | A_t^i)$.
+
+          <div class="definition">
+            Вероятности $P(A_{t+1}^j | A_t^i)$ называются <i>переходными
+              вероятностями за один шаг</i>.
+          </div>
+
+          <p>
+          Зафиксируем момент времени $t$ и сформируем матрицу переходных
+          вероятностей
+          \[
+          P_t = \left\{
+          P\paren{ A_{t+1}^{(j)} | A_t^{(i)} }
+          \right\},
+          \]
+          где $i$ &mdash; номер строки, $j$ &mdash; номер столбца. Зафиксируем
+          строку $i$ и сложим элементы этой строки:
+          \[
+          P(A_{t+1}^{(1)} | A_t^{(i)})
+          +
+          P(A_{t+1}^{(2)} | A_t^{(i)})
+          + \dots
+          +
+          P(A_{t+1}^{(r)} | A_t^{(i)})
+          = 1.
+          \]
+          </p>
+
+          <div class="definition">
+            Цепь Маркова называется <i>однородной</i>, если переходные
+            вероятности за один шаг не зависят от номера испытания (момента
+            времени $t$), то есть
+            \[
+            P(A_{t+1}^{(j)} | A_t^{(i)}) = p_{ij}.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Уравнение Чепмена-Колмогорова
+        </div>
+        <div class="content">
+          Рассмотрим однородную марковскую цепь. Обозначим через
+          \[
+          p_{ij}(k) = P(A_{t+k}^{(j)} | A_t^{(i)}) = p_{ij}
+          \]
+          вероятность перехода частицы из состояния $i$ в состояние $j$ за $k$
+          шагов. Очевидно, что
+          \[
+          P(A_{t+1}^{(j)} | A_t^{(i)}) = p_{ij} = p_{ij}(1).
+          \]
+
+          <div class="lemma">
+            <i>(уравнение Чепмена-Колмогорова)</i>.
+            <p>
+            Для однородной цепи Маркова для любого момента времени
+            $t \geqslant 1$ и любого $s \geqslant 1$ переходную вероятность из
+            состояния $i$ в состояние $j$ за $t + s$ шагов можно найти по
+            формуле
+            \[
+            p_{ij}(t + s) = \sum_{k=1}^r p_{ik}(t) p_{kj}(s).
+            \]
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Стохастическая матрица
+        </div>
+        <div class="content">
+          <div class="definition">
+            Квадратная матрица с неотрицательными элементами, у которой сумма
+            элементов в любой строке равна единице, называется
+            <i>стохастической</i>.
+          </div>
+
+          <div class="example">
+            Стохастической матрицей является матрица переходных вероятностей
+            цепи Маркова в зафиксированный момент времени $t$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема о предельных вероятностях для цепей Маркова
+        </div>
+        <div class="content">
+          <div class="theorem">
+            Пусть задана однородная цепь Маркова и существует момент времени
+            $t_0$ такой, что $p_{ij}(t_0) \gt 0$ для любых $i,j = 1,\dots,r$.
+            Тогда существуют
+            \[
+            \lim_{t \to \infty} p_{ij}(t) = p_j, \quad j = 1,\dots,r,
+            \]
+            причём пределы не зависят от начального состояния.
+
+            <p>
+            Предельные вероятности $p_1, \dots, p_r$ являются единственным
+            решением системы
+            \[
+            \sum_{j=1}^r x_j = 1,
+            \qquad
+            x_j = \sum_{k=1}^r x_k p_{kj}, \quad j = \overline{1,r}.
+            \]
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Полуалгебра
+        </div>
+        <div class="content">
+          <div class="definition">
+            Систему подмножеств $\mathcal{S}$ множества $\Omega$ будем называть
+            <i>полуалгеброй</i>, если выполнены условия:
+            <ol>
+              <li>
+                $\Omega \in \mathcal{S}$,
+              </li>
+
+              <li>
+                $A \in \mathcal{S}, B \in \mathcal{S} \implies A \cap B \in
+                \mathcal{S}$.
+              </li>
+
+              <li>
+                Если $A \in \mathcal{S}$, то множество $\overline{A}$ можно
+                представить в виде
+                \[
+                \overline{A} = \sum_{k=1}^m B_k,
+                \]
+                где $B_k \in \mathcal{S}$, причём $B_i \cap B_j = \varnothing,
+                \quad i \neq j$.
+              </li>
+            </ol>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Конечно-аддитивная вероятностная мера на полуалгебре
+        </div>
+        <div class="content">
+          <div class="definition">
+            Неотрицательная числовая функция
+            \[
+            \mu: \mathcal{S} \to [0,\infty]
+            \]
+            называется <i>конечно-аддитивной мерой на полуалгебре
+              $\mathcal{S}$</i>, если выполняются условия:
+            <ol>
+              <li>
+                $\mu(\varnothing) = 0$,
+              </li>
+
+              <li>
+                Для всех дизъюнктных множеств $B_1, \dots, B_k \in \mathcal{S}$
+                таких, что
+                \[
+                \sum_{i=1}^k B_i \in \mathcal{S},
+                \]
+                выполнено
+                \[
+                \mu \paren{
+                \sum_{i=1}^k B_i
+                } = \sum_{i=1}^k \mu(B_i).
+                \]
+              </li>
+            </ol>
+          </div>
+
+          <div class="definition">
+            Если $\mu(\Omega) = 1$, то конечно-аддитивная мера $\mu$ называется
+            <i>конечно-аддитивной вероятностной мерой</i> и обозначается $P$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема о продолжении конечно-аддитивной меры с полуалгебры на алгебру
+        </div>
+        <div class="content">
+          <div class="theorem">
+            Пусть $\mathcal{S}$ &mdash; полуалгебра подмножеств множества
+            $\Omega$. Семейство $\mathcal{A}$, состоящее из всевозможных
+            конечных объединений непересекающихся элементов полуалгебры
+            $\mathcal{S}$, представляет собой алгебру, порождённую полуалгеброй
+            $\mathcal{S}$, то есть $\mathcal{A} = \alpha(\mathcal{S})$.
+          </div>
+
+          <div class="theorem">
+            Пусть $\mathcal{S}$ &mdash; полуалгебра подмножеств множества
+            $\Omega$. Пусть на $\mathcal{S}$ задана конечно-аддитивная мера
+            $\mu$, тогда существует и единственна конечно-аддитивная мера $\nu$,
+            определённая на $\alpha(\mathcal{S})$, такая, что
+            \[
+            \forall E \in \mathcal{S}: \quad \nu(E) = \mu(E).
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Борелевская $\sigma$-алгебра
+        </div>
+        <div class="content">
+          Пусть $\Omega = \mathbb{R}$. Рассмотрим семейство множество
+          \[
+          \mathcal{I}_1 = \set{
+          (-\infty, +\infty),
+          (-\infty, a],
+          (a, b],
+          (b, +\infty)
+          },
+          \]
+          где $a,b \in \mathbb{R}$. Нетрудно проверить, что $\mathcal{I}_1$
+          &mdash; полуалгебра.
+
+          <div class="definition">
+            Алгебру $\sigma(\alpha(\mathcal{I}_1)) = \sigma(\mathcal{I}_1) =
+            \mathcal{B}(\mathbb{R})$ называют <i>борелевской $\sigma$-алгеброй
+              на числовой прямой</i>.
+          </div>
+
+          <div class="remark">
+            Справедливо равенство:
+            \[
+            (a,b) = \bigcup_{n=1}^\infty \left( a, b - \frac{1}{n} \right]
+            \in \mathcal{B}(\mathbb{R}).
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Функция распределения и её свойства
+        </div>
+        <div class="content">
+          Пусть вероятностная мера $P$ задана на борелевской $\sigma$-алгебре
+          $\mathcal{B}(\mathbb{R})$. Рассмотрим событие
+          \[
+          B = (-\infty, x], \qquad x \in \mathbb{R}.
+          \]
+
+          Определим <i class="important">функцию распределения</i> $F(x)$
+          следующим образом:
+          \[
+          F(x) = P(B) = P(-\infty,x].
+          \]
+
+          Она обладает следующими свойствами:
+          <ol>
+            <li>
+              Пусть $x_1 \lt x_2$, тогда $F(x_1) \leqslant F(x_2)$, то есть
+              функция $F(x)$ монотонно неубывающая.
+            </li>
+
+            <li>
+              В любой точке $y \in \mathbb{R}$ выполняется равенство:
+              \[
+              F(y + 0) = F(y),
+              \]
+              функция непрерывна справа:
+              \[
+              \lim_{x \to y + 0} F(x) = F(y),
+              \]
+              и существует предел слева $\lim\limits_{x \to y - 0} F(x)$,
+              который может не совпасть с $F(y)$.
+            </li>
+
+            <li>
+              Справедливы следующие равенства:
+              \[
+              \begin{aligned}
+              \lim_{x \to \infty} F(x) &= F(\infty) = 1, \\
+              \lim_{x \to -\infty} F(x) &= F(-\infty) = 0.
+              \end{aligned}
+              \]
+            </li>
+          </ol>
+
+          <div class="theorem">
+            Пусть $F(x)$ &mdash; некоторая произвольно выбранная функция
+            распределения, тогда существует и единственна вероятностная мера
+            $P$, заданная на $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$, такая, что
+            для любых $a,b, a \lt b$ имеет место равенство
+            \[
+            P(a, b] = F(b) - F(a).
+            \]
+          </div>
+
+          <div class="remark">
+            Каждой вероятностной мере $P$ на $(\mathbb{R},
+            \mathcal{B}(\mathbb{R}))$ соответствует единственная функция
+            распределения $F$ и наоборот.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Дискретная вероятностная мера
+        </div>
+        <div class="content">
+          <div class="definition">
+            Будем говорить, что мера $P$, заданная на числовой оси,
+            <i>дискретна</i>, если существует не более чем счётная совокупность
+            точек $\set{ a_i }$ таких, что $P\set{ a_i } \gt 0$, причём
+            \[
+            \sum_i P\set{ a_i } = 1.
+            \]
+
+            Точки $\set{ a_i }$ называются <i>носителями меры</i>.
+          </div>
+
+          <div class="remark">
+            Так как
+            \[
+            P\set{ a_i } = F(a_i) - F(a_i - 0) \gt 0,
+            \]
+            то
+            \[
+            \sum_i \left[
+            F(a_i) - F(a_i - 0)
+            \right] = 1,
+            \]
+            тогда функция $F(x)$ может быть только кусочно-постоянной.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Абсолютно непрерывная вероятностная мера
+        </div>
+        <div class="content">
+          <div class="definition">
+            Будем говорить, что вероятностная мера, заданная на
+            $(\mathbb{R},\mathcal{B}(\mathbb{R}))$, <i>абсолютно непрерывна</i>
+            относительно меры Лебега, если существует функция $f(x) \geqslant 0$
+            такая, что для любого борелевского множества $B \in
+            \mathcal{B}(\mathbb{R})$ выполнено
+            \[
+            P(B) = \int\limits_B f(x) dx.
+            \]
+
+            Функцию $f(x)$ называют <i>плотностью вероятностной меры $P$</i>
+            относительно меры Лебега.
+          </div>
+
+          <div class="remark">
+            Если $B = (-\infty, x]$, то $P(B) = F(x)$, откуда
+            \[
+            F(x) = \int\limits_{-\infty}^x f(t) dt.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Сингулярная вероятностная мера
+        </div>
+        <div class="content">
+          <div class="definition">
+            Пусть $F(x)$ &mdash; некоторая произвольная функция распределения на
+            $\mathbb{R}$. Будем говорить, что $z$ &mdash; <i>точка роста функции
+              $F$</i>, если
+            \[
+            \forall \varepsilon \gt 0
+            \qquad F(z + \varepsilon) - F(z - \varepsilon) \gt 0.
+            \]
+          </div>
+
+          <div class="definition">
+            Будем говорить, что непрерывная функция распределения $F(x)$
+            <i>сингулярна</i>, если множество точек роста имеет меру Лебега,
+            равную нулю.
+
+            <p>
+            Вероятностная мера, взаимно однозначно соответствующая сингулярной
+            функции распределения, называется <i>сингулярной</i>.
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема Лебега
+        </div>
+        <div class="content">
+          <div class="theorem">
+            <i>(Лебега)</i>.
+            <p>
+            Любая функция распределения $F(x)$ на числовой прямой представима в
+            следующем виде:
+            \[
+            F(x) = p_1 F_1(x) + p_2 F_2(x) + p_3 F_3(x),
+            \]
+            где
+            </p>
+            <ul>
+              <li>
+                $p_1, p_2, p_3 \geqslant 0, \qquad p_1 + p_2 + p_3 = 1$,
+              </li>
+
+              <li>
+                $F_1(x)$ &mdash; кусочно-постоянная функция распределения,
+              </li>
+
+              <li>
+                $F_2(x)$ &mdash; абсолютно-непрерывная функция распределения,
+              </li>
+
+              <li>
+                $F_3(x)$ &mdash; сингулярная функция распределения.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Случайная величина
+        </div>
+        <div class="content">
+          <div class="definition">
+            Случайной величиной, заданной на вероятностном пространстве
+            $(\Omega,\mathcal{F},P)$, или $\mathcal{F}$-измеримой числовой
+            функцией называется функция
+            \[
+            \xi: \Omega \to \mathbb{R}
+            \]
+            такая, что
+            \[
+            \forall B \in \mathcal{B}(\mathbb{R})
+            \qquad
+            \xi^{-1}(B) = \set{ \omega: \xi(\omega) \in B }
+            \in \mathcal{F},
+            \]
+            то есть полный прообраз любого борелевского множества содержится в
+            $\sigma$-алгебре $\mathcal{F}$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Вероятностное распределение случайной величины
+        </div>
+        <div class="content">
+          <div class="definition">
+            Функция $P_\xi$, определённая равенством
+            \[
+            P_\xi(B) = P(\xi^{-1}(B)) = P\set{ \xi \in B }
+            \]
+            на $\sigma$-алгебре борелевских множеств, называется
+            <i>вероятностным распределением случайной величины $\xi$</i>.
+          </div>
+
+          <div class="remark">
+            $P_\xi(\cdot)$ представляет собой вероятностную меру на борелевской
+            прямой $(\mathbb{R},\mathcal{B}(\mathbb{R}))$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Функция распределения случайной величины
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Функцией распределения случайной величины $\xi$</i> будем
+            называть функцию
+            \[
+            F_\xi(x) = P\set{ \xi \leqslant x }.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Как перейти от вероятностного распределения к функции распределения
+          случайной величины?
+        </div>
+        <div class="content">
+          По определению
+          \[
+          P_\xi(B) = P\set{ \xi \in B },
+          \qquad
+          F_\xi(x) = P\set{ \xi \leqslant x },
+          \]
+          поэтому, рассмотрев $B = (-\infty, x]$, получим, что
+          \[
+          P_\xi(B)
+          = P\set{ \xi \in (-\infty, x] }
+          = P\set{ \xi \leqslant x }
+          \bydef= F_\xi(x).
+          \]
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Плотность распределения случайной величины
+        </div>
+        <div class="content">
+          <div class="definition">
+            Будем говорить, что распределение $P_\xi(\cdot)$ случайной величины
+            $\xi$ <i>абсолютно непрерывно относительно меры Лебега</i>, если
+            существует функция $f_\xi(x)$, заданная на всей числовой прямой,
+            такая, что $f_\xi(x) \geqslant 0$ для всех $x \in \mathbb{R}$, а
+            также
+            \[
+            \forall B \in \mathcal{B}(\mathbb{R})
+            \qquad
+            P_\xi(B) = \int\limits_B f_\xi(x) dx.
+            \]
+          </div>
+
+          <div class="definition">
+            Функцию $f_\xi(x)$ называют <i>плотностью распределения случайной
+              величины $\xi$ относительно меры Лебега</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Распределение Бернулли
+        </div>
+        <div class="content">
+          Случайная величина принимает значения 0 или 1:
+          \[
+          \xi = 0 \cdot I(\overline{A}) + 1 \cdot I(A) = I(A),
+          \]
+          где вероятность
+          \[
+          P_\xi(1) = p, \qquad P_\xi(0) = 1 - p = q.
+          \]
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Стандартное нормальное распределение
+        </div>
+        <div class="content">
+          Обозначение: $N(0,1)$.
+          Плотность распределения:
+          \[
+          f_\xi(x) = \frac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}},
+          \qquad x \in \mathbb{R}.
+          \]
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Нормальное распределение
+        </div>
+        <div class="content">
+          Обозначение: $N(a,\sigma^2)$.
+          Плотность распределения:
+          \[
+          f_\xi(x) = \frac{1}{\sqrt{2\pi} \sigma}
+          e^{-\frac{(x - a)^2}{2 \sigma^2}},
+          \qquad x \in \mathbb{R}.
+          \]
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Экспоненциальное распределение
+        </div>
+        <div class="content">
+          Плотность распределения:
+          \[
+          f_\xi(x) =
+          \begin{cases}
+          \lambda e^{-\lambda x}, & x \gt 0, \\
+          0, & x \leqslant 0.
+          \end{cases}
+          \]
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Независимые случайные величины
+        </div>
+        <div class="content">
+          Пусть на вероятностном пространстве $(\Omega, \mathcal{F}, P)$ задан
+          случайный вектор
+          $\xi(\omega) = (\xi_1(\omega), \dots, \xi_k(\omega))$.
+
+          <div class="definition">
+            Случайные величины $\xi_1, \dots, \xi_k$ <i>взаимно независимы</i>,
+            если для любых борелевских множеств
+            $B_1, \dots, B_k \in \mathcal{B}(\mathbb{R})$ выполняется
+            \[
+            P \set{
+            \xi_1 \in B_1, \dots, \xi_k \in B_k
+            }
+            =
+            P\set{ \xi_1 \in B_1 }
+            \cdots
+            P\set{ \xi_k \in B_k }.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Математическое ожидание случайной величины и её основные свойства
+        </div>
+        <div class="content">
+          Рассмотрим вероятностное пространство $(\Omega, \mathcal{F}, P)$ и
+          числовую функцию $\xi(\omega)$. Пусть она действует в расширенную
+          числовую прямую $\overline{\mathbb{R}} = \mathbb{R}
+          \cup \set{ -\infty } \cup \set{ +\infty }$.
+
+          <div class="definition">
+            <i>Математическое ожидание</i> расширенной случайной величины $\xi$
+            представляет собой интеграл Лебега
+            \[
+            E\xi = \int\limits_\Omega \xi(\omega) dP,
+            \]
+            если этот интеграл существует.
+          </div>
+
+          Свойства:
+          <ol>
+            <li>
+              <i>Линейность</i> (предполагаем, что все интегралы существуют):
+              \[
+              \begin{gathered}
+              \int\limits_\Omega c \xi(\omega) dP
+              = c \int\limits_\Omega \xi(\omega) dP, \\
+              \int\limits_\Omega \left[
+              \xi(\omega) + \eta(\omega)
+              \right] dP
+              = \int\limits_\Omega \xi(\omega) dP
+              + \int\limits_\Omega \eta(\omega) dP.
+              \end{gathered}
+              \]
+            </li>
+
+            <li>
+              <i>Положительность</i>:
+              <ol>
+                <li>
+                  ${
+                  \displaystyle
+                  \xi(\omega) \geqslant 0 \implies \int\limits_\Omega
+                  \xi(\omega) dP \geqslant 0
+                  }$.
+                </li>
+
+                <li>
+                  Пусть $\xi(\omega) \leqslant \eta(\omega)$ и существует
+                  ${
+                  \displaystyle
+                  \int\limits_\Omega \xi(\omega) dP \gt -\infty,
+                  }$
+                  тогда существует
+                  ${
+                  \displaystyle
+                  \int\limits_\Omega \eta(\omega) dP \geqslant
+                  \int\limits_\Omega \xi(\omega) dP
+                  }$.
+                </li>
+
+                <li>
+                  Пусть $\xi(\omega) \leqslant \eta(\omega)$ и существует
+                  ${
+                  \displaystyle
+                  \int\limits_\Omega \eta(\omega) dP \lt \infty,
+                  }$
+                  тогда существует
+                  ${
+                  \displaystyle
+                  \int\limits_\Omega \xi(\omega) dP \leqslant
+                  \int\limits_\Omega \eta(\omega) dP
+                  }$.
+                </li>
+              </ol>
+            </li>
+
+            <li>
+              <i>Конечность</i>:
+              \[
+              \abs{\int\limits_\Omega \xi(\omega) dP} \lt \infty
+              \iff
+              \int\limits_\Omega \abs{\xi(\omega)} dP \lt \infty.
+              \]
+            </li>
+
+            <li>
+              Справедливо неравенство
+              \[
+              \abs{\int\limits_\Omega \xi(\omega) dP}
+              \leqslant
+              \int\limits_\Omega \abs{\xi(\omega)} dP.
+              \]
+            </li>
+
+            <li>
+              <i>Мультипликативность</i>
+
+              <ol>
+                <li>
+                  Если случайные величины $\xi(\omega) \geqslant 0$ и
+                  $\eta(\omega) \geqslant 0$ независимы, то
+                  \[
+                  E(\xi \eta) = E\xi E\eta.
+                  \]
+                </li>
+
+                <li>
+                  Пусть случайные величины $\xi(\omega)$ и $\eta(\omega)$
+                  независимы. Пусть у них существуют и конечны
+                  $E\xi, E\eta \in \mathbb{R}$, тогда
+                  \[
+                  E(\xi \eta) = E\xi E\eta.
+                  \]
+                </li>
+              </ol>
+            </li>
+
+            <li>
+              Пусть существует
+              ${
+              \displaystyle
+              \int\limits_\Omega \xi(\omega) dP
+              }$.
+              Тогда для любого $A \in \mathcal{F}$ существует
+              ${
+              \displaystyle
+              \int\limits_\Omega \xi(\omega) I\set{ \omega \in A } dP
+              }$.
+            </li>
+
+            <li>
+              Пусть $\xi(\omega) \overset{\text{п.н.}}{=} 0$, тогда
+              ${
+              \displaystyle
+              \int\limits_\Omega \xi(\omega) dP = 0.
+              }$
+            </li>
+
+            <li>
+              Пусть существует конечный интеграл
+              ${
+              \displaystyle
+              \int\limits_\Omega \xi(\omega) dP \in \mathbb{R}.
+              }$
+              Тогда
+              $P\set{ \omega: \abs{\xi(\omega)} = \infty } = 0$.
+            </li>
+
+            <li>
+              Пусть $\xi(\omega) \geqslant 0$ и
+              ${
+              \displaystyle
+              \int\limits_\Omega \xi(\omega) dP = 0,
+              }$
+              тогда $\xi(\omega) \overset{\text{п.н.}}{=} 0$.
+            </li>
+
+            <li>
+              Пусть
+              $\xi(\omega) \overset{\text{п.н.}}{=} \eta(\omega)$, причём
+              существует
+              ${
+              \displaystyle
+              \int\limits_\Omega \xi(\omega) dP,
+              }$
+              тогда существует
+              ${
+              \displaystyle
+              \int\limits_\Omega \eta(\omega) dP = 
+              \int\limits_\Omega \xi(\omega) dP.
+              }$
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Формулы для вычисления математического ожидания
+        </div>
+        <div class="content">
+          <ol>
+            <li>
+              Пусть $\xi(\omega) \geqslant 0$ &mdash; простая случайная
+              величина, то есть
+              \[
+              \xi(\omega) = \sum_{i=1}^m a_i I \set{ \omega \in A_i }.
+              \]
+              Тогда
+              \[
+              E \xi = \sum_{i=1}^m a_i P(A_i).
+              \]
+
+              Всегда можно добиться, чтобы все значения $a_i$ были различны.
+              Тогда $A_i = \xi^{-1}(a_i)$, поэтому
+              \[
+              E \xi = \sum_{i=1}^m a_i P\set{ \xi = a_i }.
+              \]
+            </li>
+
+            <li>
+              Пусть $\xi(\omega)$ &mdash; простая случайная величина:
+              \[
+              \xi(\omega) = \sum_{i=1}^m b_i I \set{ \omega \in B_i }.
+              \]
+              Её можно представить в виде
+              \[
+              \xi(\omega) = \xi^+(\omega) - \xi^-(\omega),
+              \]
+              где
+              \[
+              \begin{aligned}
+              \xi^+(\omega) &= \sum_{i=1}^m b_i^+ I\set{ \omega \in B_i }, \\
+              \xi^-(\omega) &= \sum_{i=1}^m b_i^- I\set{ \omega \in B_i }.
+              \end{aligned}
+              \]
+              Тогда
+              \[
+              \begin{aligned}
+              E\xi &= E\xi^+ - E\xi^- = \\
+              &=
+              \sum_{i=1}^m b_i^+ P(B_i) -
+              \sum_{i=1}^m b_i^- P(B_i) = \\
+              &=
+              \sum_{i=1}^m b_i P(B_i).
+              \end{aligned}
+              \]
+              Если $b_i$ &mdash; различны, то
+              \[
+              E \xi
+              =
+              \sum_{i=1}^m b_i P\set{ \xi = b_i }.
+              \]
+            </li>
+
+            <li>
+              Пусть $\xi(\omega)$ &mdash; дискретная случайная величина,
+              $\xi \in \set{ b_i, i \in \mathbb{N} }$, то есть множество
+              значений случайной величины счётно:
+              \[
+              \xi(\omega) = \sum_{i=1}^\infty b_i I\set{ \omega \in B_i },
+              \]
+              где
+              \[
+              B_i \cap B_j = \varnothing,
+              \qquad
+              \bigcup_{i=1}^\infty B_i = \Omega.
+              \]
+              Всегда можно добиться того, чтобы $b_i \neq b_j$, тогда
+              $B_i = \xi^{-1}(b_i)$. Выделим положительную и отрицательную
+              части:
+              \[
+              \xi(\omega) = \xi^+(\omega) - \xi^-(\omega),
+              \]
+              где
+              \[
+              \begin{aligned}
+              \xi^+(\omega)
+              &= \sum_{i=1}^\infty b_i^+ I \set{ \omega \in B_i }, \\
+              \xi^-(\omega)
+              &= \sum_{i=1}^\infty b_i^- I \set{ \omega \in B_i }.
+              \end{aligned}
+              \]
+              Тогда
+              \[
+              \begin{aligned}
+              \xi_n^+(\omega) &\leqslant \xi_{n+1}^+(\omega),
+              &
+              0 \leqslant \xi_n^+(\omega)
+              &=
+              \sum_{i=1}^n b_i^+ I \set{ \omega \in B_i }
+              \limto{k \to \infty}
+              \xi^+(\omega), \\
+              \xi_n^-(\omega) &\leqslant \xi_{n+1}^-(\omega),
+              &
+              0 \leqslant \xi_n^-(\omega)
+              &=
+              \sum_{i=1}^n b_i^- I \set{ \omega \in B_i }
+              \limto{k \to \infty}
+              \xi^-(\omega).
+              \end{aligned}
+              \]
+              Отсюда следует, что
+              \[
+              \begin{aligned}
+              E\xi^+
+              &= \lim_{n \to \infty} E\xi_n^+
+              = \lim_{n \to \infty} \sum_{i=1}^n b_i^+ P(B_i)
+              = \sum_{i=1}^\infty b_i^+ P(B_i), \\
+              E\xi^-
+              &= \lim_{n \to \infty} E\xi_n^-
+              = \lim_{n \to \infty} \sum_{i=1}^n b_i^- P(B_i)
+              = \sum_{i=1}^\infty b_i^- P(B_i).
+              \end{aligned}
+              \]
+              Тогда математическое ожидание случайной величины $\xi(\omega)$
+              можно вычислить следующим образом:
+              \[
+              E \xi = E \xi^+ - E \xi^-
+              =
+              \sum_{i=1}^\infty b_i^+ P(B_i) -
+              \sum_{i=1}^\infty b_i^- P(B_i).
+              \]
+
+              Некоторые возможные варианты:
+              <ul>
+                <li>
+                  Если $E \xi^+ = \infty, E\xi^- \in \mathbb{R}$, то
+                  $E \xi = \infty$.
+                </li>
+
+                <li>
+                  Если $E \xi^+ \in \mathbb{R}, E\xi^- = \infty$, то
+                  $E \xi = -\infty$.
+                </li>
+
+                <li>
+                  Если $E \xi^+ \in \mathbb{R}, E\xi^- \in \mathbb{R}$, то
+                  $E \xi = \sum\limits_{i=1}^\infty b_i P(B_i)$, причём ряд
+                  сходится в абсолютном смысле.
+                </li>
+
+                <li>
+                  Если $E \xi^+ = \infty, E\xi^- = \infty$, то $E \xi$ не
+                  существует.
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              Рассмотрим случайную величину $\xi$, у которой существует
+              плотность распределения $f_\xi(x)$. Математическое ожидание такой
+              случайной величины можно вычислить по формуле
+              \[
+              E \xi = \int\limits_{-\infty}^\infty x f_\xi(x) dx
+              = \int\limits_0^\infty x f_\xi(x) dx
+              - \int\limits_{-\infty}^0 \abs{x} f_\xi(x) dx,
+              \]
+              если интеграл Лебега существует. В общем случае верна формула
+              \[
+              E \xi = \int\limits_{-\infty}^\infty x dF_\xi(x).
+              \]
+              Если же плотность распределения существует, то
+              \[
+              E g(x)
+              = \int\limits_{-\infty}^\infty g(x) dF_\xi(x)
+              = \int\limits_{-\infty}^\infty g(x) f_\xi(x) dx.
+              \]
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Начальный момент порядка $k$ случайной величины
+        </div>
+        <div class="content">
+          Рассмотрим вероятностное пространство $(\Omega, \mathcal{F}, P)$.
+
+          <div class="definition">
+            <i>Начальным моментом порядка $k$</i> случайной величины $\xi$
+            называется интеграл Лебега-Стилтьеса
+            \[
+            a_k = E(\xi^k) = \int\limits_{-\infty}^\infty x^k dF_\xi(x),
+            \]
+            если $E(\xi^k)$ существует и конечно.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Центральный момент порядка $k$ случайной величины
+        </div>
+        <div class="content">
+          Рассмотрим вероятностное пространство $(\Omega, \mathcal{F}, P)$.
+
+          <div class="definition">
+            <i>Центральным моментом порядка $k$</i> случайной величины $\xi$
+            называется интеграл Лебега-Стилтьеса
+            \[
+            a_k^0 = E\paren{ \xi - E \xi }^k
+            = \int\limits_{-\infty}^\infty \paren{ \xi - E \xi }^k dF_\xi(x),
+            \]
+            если интеграл существует и конечен.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Дисперсия и её свойства
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Дисперсией $D \xi$</i> случайной величины $\xi$ называют
+            центральный момент второго порядка
+            \[
+            a_2^0 = E \paren{ \xi - E \xi }^2.
+            \]
+          </div>
+
+          <div class="definition">
+            <i>Среднеквадратичным отклонением</i> случайной величины $\xi$
+            называют число $\sigma_\xi = \sqrt{D \xi}$.
+          </div>
+
+          Свойства дисперсии (предполагаем, что $E(\xi^2) \lt \infty$)
+          <ol>
+            <li>
+              Дисперсия случайной величины $\xi$ удовлетворяет условию
+              \[
+              D\xi \geqslant 0.
+              \]
+              При этом $D\xi = 0$ тогда и только тогда, когда
+              $\xi \overset{\text{п.н.}}{=} \const$, то есть является
+              вырожденной случайной величиной.
+            </li>
+
+            <li>
+              Пусть случайная величина $\eta$ связана со случайной величиной
+              $\xi$ следующим равенством:
+              $\eta \overset{\text{п.н.}}{=} a\xi + b$, тогда
+              \[
+              D\eta = a^2 D\xi.
+              \]
+            </li>
+
+            <li>
+              Пусть случайные величины $\xi$ и $\eta$ независимы, тогда
+              \[
+              D(\xi \pm \eta) = D\xi + D\eta.
+              \]
+            </li>
+
+            <li>
+              Имеет место формула для вычисления дисперсии:
+              \[
+              D\xi = E(\xi^2) - \paren{E \xi}^2.
+              \]
+            </li>
+
+            <li>
+              Справедливо неравенство
+              \[
+              D\xi \leqslant E(\xi - a)^2,
+              \]
+              где $a = \const$, при этом
+              \[
+              D\xi = E(\xi - a)^2 \iff a = E \xi.
+              \]
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Неравенство Чебышёва
+        </div>
+        <div class="content">
+          <div class="lemma">
+            <i>(неравенство Чебышёва)</i>.
+            <p>
+            Пусть $\xi \geqslant 0$. Тогда для любого $\varepsilon \gt 0$
+            справедливо неравенство
+            \[
+            P \set{ \xi \geqslant a } \leqslant \frac{E \xi}{\varepsilon}.
+            \]
+            </p>
+          </div>
+
+          <div class="corollary">
+            Справедливо неравенство
+            \[
+            P\set{ \abs{\xi - E \xi} \geqslant \varepsilon }
+            \leqslant \frac{D \xi}{\varepsilon^2}.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          ЗБЧ для взаимно независимых случайных величин с равномерно
+          ограниченными дисперсиями
+        </div>
+        <div class="content">
+          <div class="theorem">
+            Пусть последовательность взаимно независимых случайных величин
+            $\xi_n(\omega)$ задана на вероятностном пространстве
+            $(\Omega, \mathcal{F}, P)$, причём для любого $n \in \mathbb{N}$
+            выполняется $E \xi_n(\omega) = a \in \mathbb{R}$, а дисперсии
+            равномерно ограничены: $D \xi_n \leqslant c$. Тогда для любого
+            $\varepsilon \gt 0$ имеет место сходимость:
+            \[
+            P \left\{
+            \abs{\frac{\sum_{k=1}^n \xi_k}{n} - a} \geqslant \varepsilon
+            \right\}
+            \limto{n \to \infty} 0.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Неравенство Коши-Шварца-Буняковского
+        </div>
+        <div class="content">
+          <div class="lemma">
+            <i>(неравенство Коши-Шварца-Буняковского)</i>.
+            <p>
+            Пусть $E(\xi^2) \lt \infty, E(\eta^2) \lt \infty$, тогда существует
+            $E(\xi \eta)$, причём
+            \[
+            \abs{E(\xi \eta)} \leqslant \sqrt{E \xi^2} \sqrt{E \eta^2}.
+            \]
+            </p>
+          </div>
+
+          <div class="corollary">
+            Если $E \xi^2 \neq 0, E \eta^2 \neq 0$, то
+            \[
+            \abs{E(\xi \eta)} = \sqrt{E \xi^2} \sqrt{E \eta^2}
+            \iff
+            \eta(\omega) \overset{\text{п.н.}}{=} c \xi(\omega)
+            \]
+            для некоторого $c \in \mathbb{R}$, то есть случайные величины $\xi$
+            и $\eta$ почти наверное пропорциональны.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Ковариация, корреляция и их свойства
+        </div>
+        <div class="content">
+          Пусть заданы случайные величины $\xi, \eta$ на вероятностном
+          пространстве $(\Omega, \mathcal{F}, P)$, существуют конечные
+          математические ожидания $E\xi, E\eta \in \mathbb{R}$, а также
+          $D\xi \gt 0$ и $D\eta \gt 0$. Будем также предполагать, что
+          $E \xi^2 \lt \infty$ и $E \eta^2 \lt \infty$.
+
+          <div class="definition">
+            <i>Ковариацией</i> случайных величин $\xi$ и $\eta$ называют
+            величину
+            \[
+            \cov(\xi,\eta) = E \set{ (\xi - E\xi) (\eta - E \eta) }.
+            \]
+          </div>
+
+          <div class="definition">
+            <i>Коэффициентом корреляции</i> случайных величин $\xi$ и $\eta$
+            называют величину
+            \[
+            \varrho(\xi, \eta)
+            = \frac{ \cov(\xi, \eta) }{\sqrt{D\xi} \sqrt{D \eta}}.
+            \]
+          </div>
+
+          Свойства:
+          <ol>
+            <li>
+              Справедлива формула
+              \[
+              \varrho(\xi,\eta) = E(\xi \eta) - E\xi E\eta.
+              \]
+            </li>
+
+            <li>
+              Пусть $\xi$ и $\eta$ взаимно независимы, тогда
+              \[
+              \cov(\xi,\eta) = 0, \qquad \varrho(\xi,\eta) = 0.
+              \]
+            </li>
+
+            <li>
+              Имеет место неравенство
+              \[
+              \abs{\varrho(\xi,\eta)} \leqslant 1.
+              \]
+              Кроме того, если $\abs{\varrho(\xi,\eta)} = 1$, то существует
+              $c = \const \in \mathbb{R}$ такая, что
+              \[
+              \eta(\omega) \overset{\text{п.н.}}{=} c \xi(\omega) + b.
+              \]
+            </li>
+
+            <li>
+              Пусть $\xi^T = (\xi_1, \dots, \xi_n)$ &mdash; случайный вектор.
+              Введём обозначение
+              \[
+              \begin{aligned}
+              D\xi &= E\set{ (\xi - E\xi) (\xi - E\xi)^T } = \\
+              &=
+              \begin{pmatrix}
+              D\xi_1 & \cov(\xi_1, \xi_2) & \dots & \cov(\xi_1, \xi_n) \\
+              \cov(\xi_2, \xi_1) & D\xi_2 & \dots & \cov(\xi_2, \xi_n) \\
+              \vdots & \vdots & \ddots & \vdots \\
+              \cov(\xi_n, \xi_1) & \cov(\xi_n, \xi_2) & \dots & D \xi_n
+              \end{pmatrix}.
+              \end{aligned}
+              \]
+              Эта матрица называется <i class="important">ковариационной</i>
+              (<i class="important">дисперсионной</i>) матрицей случайного
+              вектора $\xi$. Нетрудно показать, что $D \xi \geqslant 0$ &mdash;
+              неотрицательно определённая матрица.
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Условное математическое ожидание одной случайной величины относительно
+          другой (дискретный случай)
+        </div>
+        <div class="content">
+          Пусть на вероятностном пространстве $(\Omega, \mathcal{F}, P)$ заданы
+          две простые случайные величины:
+          \[
+          \begin{gathered}
+          \xi(\omega) = \sum_{i=1}^n a_i I \set{ \omega \in A_i }, \\
+          a_k \neq a_l, \quad A_k \cap A_l = \varnothing, \quad k \neq l, \\
+          \bigcup_{k=1}^n A_k = \Omega, \qquad A_k = \xi^{-1}(a_k)
+          \end{gathered}
+          \]
+          и
+          \[
+          \begin{gathered}
+          \eta(\omega) = \sum_{i=1}^m b_i I \set{ \omega \in B_i }, \\
+          b_k \neq b_l, \quad B_k \cap B_l = \varnothing, \quad k \neq l, \\
+          \bigcup_{k=1}^m B_k = \Omega, \qquad B_k = \eta^{-1}(b_k).
+          \end{gathered}
+          \]
+
+          <div class="definition">
+            <i>Условное математическое ожидание</i> случайной величины $\eta$
+            при условии, что $\xi = a_i$, определяется равенством
+            \[
+            E(\eta | \xi = a_i)
+            = \sum_{j=1}^m b_j P \set{ \eta = b_j | \xi = a_i }.
+            \]
+          </div>
+
+          <div class="definition">
+            <i>Условное математическое ожидание случайной величины $\eta$
+              относительно случайной величины $\xi$</i> называется случайная
+            величина $E(\eta | \xi)$, распределение которой определяется как
+            \[
+            \begin{array}{c|c|c|c|c}
+            E(\eta | \xi) & E(\eta | \xi = a_1) & E(\eta | \xi = a_2)
+            & \dots & E(\eta | \xi = a_n) \\
+            \hline
+            P & P\set{ \xi = a_1 } & P\set{ \xi = a_2 }
+            & \dots & P\set{ \xi = a_n }
+            \end{array}
+            \]
+
+            Случайная величина $E(\eta | \xi)$ &mdash; <i>математическое
+              ожидание простой случайной величины $\eta$ относительно простой
+              случайной величины $\xi$</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Сходимость почти наверное
+        </div>
+        <div class="content">
+          Будем считать, что в вероятностном пространстве
+          $(\Omega, \mathcal{F}, P)$ сигма-алгебра $\mathcal{F}$ полна
+          относительно меры $P$.
+
+          <div class="definition">
+            Пусть случайная величина $\xi$ и последовательность случайных
+            величин $\set{ \xi_n }$ заданы на вероятностном пространстве
+            $(\Omega, \mathcal{F}, P)$. Будем говорить, что последовательность
+            $\set{ \xi_n }$ <i>сходится почти наверное</i> к случайной величине
+            $\xi$, и записывать
+            \[
+            \xi_n \overset{\text{п.н.}}{\limto{n \to \infty}} \xi,
+            \]
+            если
+            \[
+            P\left\{
+            \omega: \; \xi_n(\omega) \limto{n \to \infty} \xi(\omega)
+            \right\} = 0,
+            \]
+            или
+            \[
+            P\left\{
+            \omega: \; \lim_{n \to \infty} \xi_n(\omega) = \xi(\omega)
+            \right\} = 1,
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Сходимость по вероятности
+        </div>
+        <div class="content">
+          Будем считать, что в вероятностном пространстве
+          $(\Omega, \mathcal{F}, P)$ сигма-алгебра $\mathcal{F}$ полна
+          относительно меры $P$.
+
+          <div class="definition">
+            Пусть случайная величина $\xi$ и последовательность случайных
+            величин $\set{ \xi_n }$ заданы на вероятностном пространстве
+            $(\Omega, \mathcal{F}, P)$. Будем говорить, что последовательность
+            $\set{ \xi_n }$ <i>сходится по вероятности</i> к случайной величине
+            $\xi$, и записывать
+            \[
+            \xi_n \overset{P}{\limto{n \to \infty}} \xi,
+            \]
+            если для любого $\varepsilon \gt 0$ имеет место сходимость
+            \[
+            P\left\{
+            \abs{\xi_n - \xi} \gt \varepsilon
+            \right\} \limto{n \to \infty} 0
+            \]
+            или
+            \[
+            P\left\{
+            \abs{\xi_n - \xi} \leqslant \varepsilon
+            \right\} \limto{n \to \infty} 1.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Сходимость по распределению
+        </div>
+        <div class="content">
+          Будем считать, что в вероятностном пространстве
+          $(\Omega, \mathcal{F}, P)$ сигма-алгебра $\mathcal{F}$ полна
+          относительно меры $P$.
+
+          <div class="definition">
+            Пусть случайная величина $\xi$ и последовательность случайных
+            величин $\set{ \xi_n }$ заданы на вероятностном пространстве
+            $(\Omega, \mathcal{F}, P)$. Будем говорить, что последовательность
+            $\set{ \xi_n }$ <i>сходится по распределению</i> к случайной
+            величине $\xi$, и записывать
+            \[
+            \xi_n \overset{d}{\limto{n \to \infty}} \xi, \qquad r \gt 1,
+            \]
+            если для любой непрерывной и ограниченной функции $g(x)$ выполнено
+            \[
+            E g(\xi_n) \limto{n \to \infty} E g(\xi).
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Сходимость в среднем порядка $r$
+        </div>
+        <div class="content">
+          Будем считать, что в вероятностном пространстве
+          $(\Omega, \mathcal{F}, P)$ сигма-алгебра $\mathcal{F}$ полна
+          относительно меры $P$.
+
+          <div class="definition">
+            Пусть случайная величина $\xi$ и последовательность случайных
+            величин $\set{ \xi_n }$ заданы на вероятностном пространстве
+            $(\Omega, \mathcal{F}, P)$. Будем говорить, что последовательность
+            $\set{ \xi_n }$ <i>сходится в среднем порядка $r$</i> к случайной
+            величине $\xi$, и записывать
+            \[
+            \xi_n \overset{L^r}{\limto{n \to \infty}} \xi, \qquad r \gt 1,
+            \]
+            если
+            \[
+            \begin{gathered}
+            E\abs{\xi_n - \xi}^r \limto{n \to \infty} 0, \\
+            E \xi^r \in \mathbb{R}, \qquad E \xi_n^r \in \mathbb{R},
+            \quad n \in \mathbb{N}.
+            \end{gathered}
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Сходимость в основном
+        </div>
+        <div class="content">
+          Будем считать, что в вероятностном пространстве
+          $(\Omega, \mathcal{F}, P)$ сигма-алгебра $\mathcal{F}$ полна
+          относительно меры $P$.
+
+          <div class="definition">
+            Пусть задана последовательность случайных величин $\set{ \xi_n }$.
+            Пусть $F_\xi(x) = P\set{ \xi \leqslant x }$ &mdash; функция
+            распределения случайной величины $\xi$, а
+            $F_{\xi_n}(x) = P\set{ \xi_n \leqslant x }$ &mdash; функции
+            распределения случайных величин $\xi_n$. Определим множество
+            $C(F_\xi)$ как множество точек $x \in \mathbb{R}$, в которых функция
+            $F_\xi$ непрерывна. Будем говорить, что последовательность функций
+            распределения $\set{ F_{\xi_n}(x) }$ <i>сходится в основном</i> к
+            функции распределения $F_\xi(x)$, и записывать
+            \[
+            F_{\xi_n}(x) \limto{n \to \infty} F_\xi(x),
+            \qquad x \in C(F_\xi),
+            \]
+            если для любой точки $x \in C(F_\xi)$ выполнено
+            \[
+            F_{\xi_n}(x) \limto{n \to \infty} F_\xi(x).
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Иерархия видов сходимости
+        </div>
+        <div class="content">
+          <div class="theorem">
+            <i>(иерархия видов сходимости)</i>.
+            <p>
+            Пусть заданы последовательность случайных величин $\set{ \xi_n }$ и
+            случайная величина $\xi$. Тогда справедливы утверждения:
+            </p>
+            <ol>
+              <li>
+                Если $\xi_n \overset{\text{п.н.}}{\limto{n \to \infty}} \xi$,
+                тогда $\xi_n \overset{P}{\limto{n \to \infty}} \xi$.
+              </li>
+
+              <li>
+                Если $\xi_n \overset{L^r}{\limto{n \to \infty}} \xi$,
+                тогда $\xi_n \overset{P}{\limto{n \to \infty}} \xi$.
+              </li>
+
+              <li>
+                Если $\xi_n \overset{P}{\limto{n \to \infty}} \xi$,
+                тогда $\xi_n \overset{d}{\limto{n \to \infty}} \xi$.
+              </li>
+            </ol>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Комплексная случайная величина
+        </div>
+        <div class="content">
+          Рассмотрим вероятностное пространство $(\Omega, \mathcal{F}, P)$, на
+          котором заданы случайные величины $\xi(\omega)$ и $\eta(\omega)$.
+
+          <div class="definition">
+            <i>Комплексной случайной величиной</i> называют случайную величину
+            \[
+            \zeta(\omega) = \xi(\omega) + i \eta(\omega).
+            \]
+            Её также можно представить в виде
+            \[
+            \zeta(\omega) = \abs{\zeta{\omega}} e^{i \Arg \zeta(\omega)}.
+            \]
+          </div>
+
+          Пусть существуют и конечны математические ожидания случайных величин
+          $\xi$ и $\eta$. Тогда математическое ожидание $\zeta$ определяется
+          следующим образом:
+          \[
+          E\zeta = E\xi + i E\eta.
+          \]
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Независимые комплексные случайные величины
+        </div>
+        <div class="content">
+          Рассмотрим вероятностное пространство $(\Omega, \mathcal{F}, P)$, на
+          котором заданы случайные величины $\xi(\omega)$ и $\eta(\omega)$.
+
+          <div class="definition">
+            Комплексные случайные величины
+            \[
+            \zeta_1(\omega) = \xi_1(\omega) + i\eta_1(\omega)
+            \quad \text{и} \quad
+            \zeta_2(\omega) = \xi_2(\omega) + i\eta_2(\omega)
+            \]
+            называются <i>независимыми</i>, если вектора
+            \[
+            \paren{ \xi_1(\omega), \eta_1(\omega) }^T
+            \quad \text{и} \quad
+            \paren{ \xi_2(\omega), \eta_2(\omega) }^T
+            \]
+            взаимно независимы.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Свойства комплексных случайных величин
+        </div>
+        <div class="content">
+          Рассмотрим вероятностное пространство $(\Omega, \mathcal{F}, P)$, на
+          котором заданы случайные величины $\xi(\omega)$ и $\eta(\omega)$.
+
+          Свойства комплексных случайных величин:
+          <ol>
+            <li>
+              <i>Мультипликативность.</i>
+              <p>
+              Если комплексные случайные величины $\zeta_1$ и $\zeta_2$
+              независимы и существуют математические ожидания $E\zeta_1$ и
+              $E\zeta_2$, то имеет место равенство
+              \[
+              E(\zeta_1 \zeta_2) = E\zeta_1 E\zeta_2.
+              \]
+              </p>
+            </li>
+
+            <li>
+              Пусть $\zeta = \xi + i \eta$ и существует $E\zeta$, тогда
+              \[
+              \abs{E\zeta} \leqslant E\abs{\zeta}.
+              \]
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Характеристическая функция случайной величины
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Характеристической функцией случайной величины $\xi$</i> называют
+            функцию
+            \[
+            \varphi_\xi(t) = E e^{i\xi t}, \qquad t \in \mathbb{R}.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Характеристическая функция случайного вектора
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Характеристической функцией случайного вектора
+              $\xi = (\xi_1, \dots, \xi_m)$</i> называют функцию
+            \[
+            \varphi_\xi(t)
+            = \varphi_{\paren{ \xi_1, \dots, \xi_m }}(t_1, \dots, t_m)
+            = E e^{i \xi^T t}.
+            \]
+          </div>
+
+          <div class="remark">
+            Характеристическую функцию случайного вектора можно найти по формуле
+            \[
+            \varphi_\xi(t) = \int\limits_\Omega E e^{i \xi^T t} dP
+            = \int\limits_{-\infty}^\infty \cdots \int\limits_{-\infty}^\infty
+            e^{i x^T t} d F_\xi(x).
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: обобщённая функция распределения (скалярный случай)
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Обобщённой функцией распределения на числовой прямой</i>
+            называется функция $G(x)$, обладающая свойствами:
+            <ol>
+              <li>
+                для любых точек $x_1 \leqslant x_2$ справедливо неравенство
+                $G(x_1) \leqslant G(x_2)$;
+              </li>
+
+              <li>
+                для любой точки $x \in \mathbb{R}$ имеет место сходимость
+                \[
+                G(y) \limto{y \to x+0} G(x);
+                \]
+              </li>
+
+              <li>
+                выполняются соотношения:
+                \[
+                \lim_{x \to \infty} G(x) = G(\infty) \leqslant 1,
+                \qquad
+                \lim_{x \to -\infty} G(x) \geqslant 0.
+                \]
+              </li>
+            </ol>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема о методе характеристических функций
+        </div>
+        <div class="content">
+          <div class="theorem">
+            <i>(метод характеристических функций)</i>.
+            <ol>
+              <li>
+                Пусть задана последовательность функций распределения
+                $\set{ F_n }$, причём эта последовательность сходится в основном
+                к функции распределения $F$. Пусть
+                \[
+                \begin{aligned}
+                \varphi_n(t)
+                &= \int\limits_{-\infty}^\infty e^{i tx} dF_n(x), \\
+                \varphi(t)
+                &= \int\limits_{-\infty}^\infty e^{i tx} dF(x).
+                \end{aligned}
+                \]
+                Тогда для любой точки $t$ имеет место сходимость
+                \[
+                \lim_{n \to \infty} \varphi_n(t) = \varphi(t).
+                \]
+                Таким образом, из сходимости в основном функций распределения
+                следует поточечная сходимость характеристических функций.
+              </li>
+
+              <li>
+                Рассмотрим характеристическую функцию, соответствующую функции
+                распределения $F_n(x)$:
+                \[
+                \varphi_n(t) = \int\limits_{-\infty}^\infty e^{i tx} dF_n(x).
+                \]
+                Пусть в каждой точке $t$ существует предел
+                \[
+                \lim_{n \to \infty} \varphi_n(t) = \varphi(t).
+                \]
+                Предположим, что функция $\varphi(t)$ непрерывна в точке $0$.
+                Тогда функция $\varphi(t)$ также является характеристической,
+                т.е. существует функция распределения $F(x)$ такая, что
+                $\varphi(t)$ удовлетворяет
+                \[
+                \varphi(t) = \int\limits_{-\infty}^\infty e^{i tx} dF(x),
+                \]
+                и при этом последовательность функций распределения $F_n(x)$
+                сходится в основном к функции распределения $F(x)$.
+              </li>
+            </ol>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: ЗБЧ
+        </div>
+        <div class="content">
+          <div class="definition">
+            Пусть $\set{ \xi_n }$ &mdash; последовательность случайных величин,
+            определённых на $(\Omega, \mathcal{F}, P)$. Будем говорить, что
+            к этой последовательности применим <i>закон больших чисел (ЗБЧ)</i>,
+            если
+            \[
+            \frac{\sum_{k=1}^n \xi_k}{n}
+            -
+            \frac{\sum_{k=1}^n E \xi_k}{n}
+            \overset{P}{\limto{n \to \infty}}
+            0.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: закон больших чисел для сумм независимых одинаково
+          распределённых случайных величин
+        </div>
+        <div class="content">
+          <div class="definition">
+            Пусть $\set{ \xi_n }$ &mdash; последовательность взаимно независимых
+            одинаково распределённых случайных величин. Пусть
+            $E \xi_k = a \in \mathbb{R}$ для всех $k \in \mathbb{N}$, тогда к
+            последовательности $\set{ \xi_k }$ <i>применим закон больших
+              чисел</i>:
+            \[
+            \zeta_n = \frac{1}{n} \sum_{k=1}^n \xi_k
+            \overset{P}{\limto{n \to \infty}}
+            a.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: ЦПТ
+        </div>
+        <div class="content">
+          <div class="definition">
+            Пусть $\set{ \eta_k }$ &mdash; последовательность случайных величин,
+            определённых на $(\Omega, \mathcal{F}, P)$. Будем говорить, что к
+            последовательности $\set{ \eta_k }$ применима <i>центральная
+              предельная теорема (ЦПТ)</i>, если для любого $x \in \mathbb{R}$
+            имеет место сходимость
+            \[
+            P\left\{
+            \frac{\eta_k - E \eta_k}{\sqrt{D \eta_k}} \leqslant x
+            \right\}
+            \limto{k \to \infty}
+            \frac{1}{\sqrt{2 \pi}}
+            \int\limits_{-\infty}^x e^{-\frac{y^2}{2}} dy.
+            \]
+          </div>
+
+          <div class="remark">
+            Предполагается, что все математические ожидания $E\eta_k$ и дисперии
+            $D\eta_k$ существуют и конечны. Обозначим через $\eta$ случайную
+            величину, подчиняющуюся стандартному нормальному распределению.
+            Функция распределения случайной величины $\eta$ будет иметь вид
+            \[
+            F_\eta(x) =
+            \frac{1}{\sqrt{2 \pi}}
+            \int\limits_{-\infty}^x e^{-\frac{y^2}{2}} dy.
+            \]
+            Тогда сходимость
+            \[
+            P\left\{
+            \frac{\eta_k - E \eta_k}{\sqrt{D \eta_k}} \leqslant x
+            \right\}
+            \limto{k \to \infty}
+            \frac{1}{\sqrt{2 \pi}}
+            \int\limits_{-\infty}^x e^{-\frac{y^2}{2}} dy
+            \]
+            можно переписать в виде
+            \[
+            \frac{\eta_k - E\eta_k}{\sqrt{D \eta_k}}
+            \overset{d}{\limto{k \to \infty}}
+            \eta.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Центральная предельная теорема для сумм независимых одинаково
+          распределённых случайных величин
+        </div>
+        <div class="content">
+          <div class="theorem">
+            <i>(ЦПТ для независимых одинаково распределённых случайных
+              величин)</i>.
+            <p>
+            Пусть $\set{ \xi_n }$ &mdash; последовательность взаимно независимых
+            случайно распределённых случайных величин, для которых
+            \[
+            E\xi_k = a, \qquad D\xi_k = \sigma^2 \in (0,\infty).
+            \]
+            Тогда имеет место сходимость
+            \[
+            \zeta_n = \frac{\sum_{k=1}^n (\xi_k - a)}{\sqrt{n}\sigma}
+            \overset{d}{\limto{n \to \infty}}
+            \zeta \sim N(0,1),
+            \]
+            то есть функция распределения сходится равномерно по
+            $x \in \mathbb{R}$:
+            \[
+            F_{\zeta_n}(x) = P\set{ \zeta_n \leqslant x }
+            \limto{n \to \infty}
+            \int\limits_{-\infty}^x
+            \frac{1}{\sqrt{2\pi}} e^{-\frac{y^2}{2}} dy.
+            \]
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Неравенство Колмогорова
+        </div>
+        <div class="content">
+          <div class="lemma">
+            <i>(неравенство Колмогорова)</i>.
+            <p>
+            Пусть $\xi_1, \dots, \xi_n$ &mdash; совокупность взаимно независимых
+            случайных величин, для которых
+            \[
+            E\xi_k = 0, \qquad D_\xi \in \mathbb{R}.
+            \]
+            Рассмотрим случайные величины
+            \[
+            s_m = \sum_{k=1}^m \xi_k, \qquad m = \overline{1, n}.
+            \]
+            Тогда для любого $\varepsilon \gt 0$ имеет место неравенство
+            \[
+            P\left\{
+            \max_{k=\overline{1,n}} \abs{s_k} \geqslant \varepsilon
+            \right\}
+            \leqslant
+            \frac{D s_n}{\varepsilon^2}.
+            \]
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Усиленный закон больших чисел для сумм независимых произвольно
+          распределённых случайных величин
+        </div>
+        <div class="content">
+          <div class="theorem">
+            <i>(усиленный закон больших чисел для независимых произвольно
+              распределённых случайных величин)</i>.
+            <p>
+            Пусть $\set{ \xi_n(\omega) }$ &mdash; последовательность взаимно
+            независимых случайных величин, заданных на
+            $(\Omega, \mathcal{F}, P)$, для которых
+            \[
+            E\xi_k = a_k \in \mathbb{R},
+            \qquad
+            D\xi_k \in \mathbb{R}.
+            \]
+            Рассмотрим произвольную последовательность $\set{ b_n }$ такую, что
+            \[
+            b_n \limto{n \to \infty} \infty,
+            \qquad b_n \gt 0, \quad b_{n+1} \gt b_n.
+            \]
+            Пусть ряд
+            \[
+            \sum_{n=1}^\infty \frac{D\xi_n}{b_n^2}
+            \]
+            сходится. Тогда имеет место сходимость
+            \[
+            \frac{\sum\limits_{k=1}^n (\xi_k - a_k)}{b_n}
+            \overset{\text{п.н.}}{\limto{n \to \infty}}
+            0.
+            \]
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: выборка, генеральная совокупность, выборочное
+          пространство
+        </div>
+        <div class="content">
+          Рассмотрим случайную величину
+          \[
+          \xi(\omega): \Omega \to \mathbb{R}
+          \]
+          и вероятностное пространство значений случайной величины
+          \[
+          (\mathbb{R}, \mathcal{B}(\mathbb{R}), P_\xi),
+          \]
+          где
+          <ul>
+            <li>
+              $\mathcal{B}(\mathbb{R})$ &mdash; $\sigma$-алгебра борелевских
+              множеств числовой прямой;
+            </li>
+
+            <li>
+              $P_\xi$ &mdash; вероятностная мера такая, что
+              \[
+              P_\xi(-\infty, x] = F_\xi(x) = P\set{ \xi \leqslant x }.
+              \]
+            </li>
+          </ul>
+
+          <div class="definition">
+            Совокупность взаимно независимых реализаций случайной величины $\xi$
+            образует <i>выборку</i> $X_{[n]}$ объёма $n$:
+            \[
+            X_{[n]} = (X_1, \dots, X_n),
+            \]
+            где $X_i$ &mdash; числовая реализация случайной величины $\xi$ в
+            $i$-ом эксперименте ($i \in \mathbb{N}$).
+          </div>
+
+          <div class="definition">
+            Случайная величина $\xi$, реализации которой мы наблюдаем,
+            называется <i>генеральной совокупностью</i>.
+          </div>
+
+          <p>
+          Функция распределения выборки строится по функции распределения
+          генеральной совокупности:
+          \[
+          F_{X_{[n]}}(x_1, \dots, x_n) = F_\xi(x_1) \cdots F_\xi(x_n),
+          \]
+          где $x_i$ &mdash; числовая переменная, соответствующая $i$-ой
+          координатной оси.
+          </p>
+
+          <div class="definition">
+            Получили <i>выборочное пространство</i>
+            \[
+            \paren{
+            \mathbb{R}^n, \mathcal{B}(\mathbb{R}^n), P_{X_{[n]}}
+            },
+            \]
+            соответствующее выборкам объёма $n$, где вероятностная мера
+            $P_{X_{[n]}}$ взаимно однозначно соответствует функции распределения
+            $F_{X_{[n]}}$.
+          </div>
+
+          Учитывая необходимость предельного перехода, когда $n \to \infty$,
+          рассмотрим бесконечномерное пространство
+          \[
+          \paren{
+          \mathbb{R}^\infty, \mathcal{B}(\mathbb{R}^\infty), P_{X_{[\infty]}}
+          }.
+          \]
+          Элементарным событием в этом пространстве является бесконечная
+          числовая последовательность (бесконечная выборка). Заметим, что
+          \[
+          \paren{
+          \mathbb{R}^n, \mathcal{B}(\mathbb{R}^n), P_{X_{[n]}}
+          } \subset
+          \paren{
+          \mathbb{R}^\infty, \mathcal{B}(\mathbb{R}^\infty), P_{X_{[\infty]}}
+          }.
+          \]
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: статистика
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Статистикой</i> будем называть любую борелевскую функцию,
+            заданную на выборочном пространстве
+            $\paren{ \mathbb{R}^n, \mathcal{B}(\mathbb{R}^n), P_{X_{[n]}} }$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: эмпирическое распределение, эмпирическая функция
+          распределения
+        </div>
+        <div class="content">
+          Рассмотрим генеральную совокупность $\xi$, представляющую собой
+          случайную величину, и выборку $X_{[n]}$.
+
+          <div class="definition">
+            <i>Эмпирическим распределением</i> называют вероятностную меру,
+            определённую как
+            \[
+            P_n^*(B) = \frac{\nu(B)}{n},
+            \]
+            где $B \in \mathcal{B}(\mathbb{R})$, а $\nu(B)$ &mdash; количество
+            элементов выборки, попавших в $B$.
+          </div>
+
+          <div class="remark">
+            Если фиксированы как $n$, так и элементы выборки $X_{[n]}$, то
+            $P_n^*(\cdot)$ &mdash; вероятностная мера на
+            $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$, поэтому ей соответствует
+            единственная функция распределения.
+          </div>
+
+          <div class="definition">
+            <i>Эмпирической функцией распределения</i> называется функция
+            \[
+            F_n^*(x) = P_n^*(-\infty, x] = \frac{\nu(-\infty; x]}{n},
+            \qquad x \in \mathbb{R}.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: порядковые статистики
+        </div>
+        <div class="content">
+          Рассмотрим генеральную совокупность $\xi$, представляющую собой
+          случайную величину, и выборку $X_{[n]}$.
+
+          <div class="definition">
+            <ol>
+              <li>
+                Величина
+                \[
+                X_{(1)} = \min \set{ X_1, \dots, X_n }
+                \]
+                называется <i>первой порядковой статистикой</i>.
+              </li>
+
+              <li>
+                Величина
+                \[
+                X_{(2)} = \min \left\{
+                \set{ X_1, \dots, X_n } \setminus X_{(1)}
+                \right\}
+                \]
+                называется <i>второй порядковой статистикой</i>.
+              </li>
+
+              <li>
+                Величина
+                \[
+                X_{(n)} = \max \set{ X_1, \dots, X_n }
+                \]
+                называется <i>$n$-ой порядковой статистикой</i>.
+              </li>
+            </ol>
+          </div>
+
+          Очевидно, что
+          \[
+          X_{(1)} \leqslant X_{(2)} \leqslant \dots \leqslant X_{(n)}.
+          \]
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: вариационный ряд
+        </div>
+        <div class="content">
+          Рассмотрим генеральную совокупность $\xi$, представляющую собой
+          случайную величину, и выборку $X_{[n]}$.
+
+          <p>
+          Рассмотрим порядковые статистики:
+          \[
+          X_{(1)} \leqslant X_{(2)} \leqslant \dots \leqslant X_{(n)}.
+          \]
+          </p>
+
+          <div class="definition">
+            Величины $X_{(1)}, \dots, X_{(n)}$ образуют <i>вариационный ряд</i>.
+          </div>
+
+          Если предположить, что все элементы вариационного ряда различны, то
+          есть
+          \[
+          X_{(1)} \lt X_{(2)} \lt \dots \lt X_{(n)},
+          \]
+          то эмпирическую функцию распределения можно определить как
+          \[
+          F_n^*(x) =
+          \begin{cases}
+          0, & x \lt X_{(1)}, \\
+          \dfrac{1}{n}, & X_{(1)} \leqslant x \lt X_{(2)}, \\
+          \vdots \\
+          \dfrac{k}{n}, & X_{(k)} \leqslant x \lt X_{(k+1)}, \\
+          \vdots \\
+          1, & x \geqslant X_{(n)}.
+          \end{cases}
+          \]
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Гистограмма
+        </div>
+        <div class="content">
+          Рассмотрим генеральную совокупность $\xi$, представляющую собой
+          случайную величину, выборку $X_{[n]}$ и вариационный ряд
+          $X_{(1)}, \dots, X_{(n)}$.
+
+          <p>
+          Возьмём интервал $(a,b)$, где $a \lt X_{(1)}$ и $X_{(n)} \lt b$, и
+          разобьём этот интервал на конечную совокупность непересекающихся
+          промежутков:
+          \[
+          a_0 = a \lt a_1 \lt a_2 \lt \dots \lt a_m = b,
+          \qquad (a_{i-1}, a_i], \quad i = \overline{1,m}.
+          \]
+          Пусть $n_i$ &mdash; количество элементов выборки, попавших в
+          полуинтервал $(a_{i-1}, a_i]$, тогда
+          \[
+          n_1 + n_2 + \cdots + n_m = n.
+          \]
+          Введя
+          \[
+          l_i = a_i - a_{i-1}, \qquad h_i = \frac{n_i}{l_i n},
+          \]
+          получим <i class="important">гистограмму</i>:
+          \[
+          f_n^*(x) =
+          \begin{cases}
+          0, & x \leqslant a_0, \\
+          h_1, & a_0 \lt x \leqslant a_1, \\
+          \vdots \\
+          h_m, & a_{m-1} \lt x \leqslant a_m, \\
+          0, & a_m \lt x.
+          \end{cases}
+          \]
+          </p>
+
+          <p>
+          Гистограмма &mdash; эмпирический аналог плотности распределения. Если
+          в знаменателе при вычислении $h_i$ убрать $l_i$, получится гистограмма
+          относительных частот. Если, кроме того, в знаменателе убрать $n$, то
+          получится гистограмма частот $n_i$. Часто при построении гистограммы
+          полагают
+          \[
+          l_i = l = \const.
+          \]
+          </p>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Предельная теорема для эмпирической функции распределения
+        </div>
+        <div class="content">
+          Рассмотрим генеральную совокупность $\xi$, представляющую собой
+          случайную величину, выборку $X_{[n]}$, эмпирическое распределение
+          $P_n^*(B)$ и эмпирическую функцию распределения $F_n^*(x)$.
+
+          <div class="theorem">
+            Для любого $B \in \mathbb{B}(\mathbb{R})$:
+            <ul>
+              <li>
+                выполняется
+                \[
+                P_n^*(B)
+                \overset{\text{п.н.}}{\limto{n \to \infty}}
+                P_\xi(B);
+                \]
+              </li>
+
+              <li>
+                выполняется
+                \[
+                F_n^*(x)
+                \overset{\text{п.н.}}{\limto{n \to \infty}}
+                F_\xi(x)
+                \qquad \forall x \in \mathbb{R}.
+                \]
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема Гливенко-Кантелли
+        </div>
+        <div class="content">
+          <div class="theorem">
+            <i>(Гливенко-Кантелли)</i>.
+            <p>
+            Пусть заданы функция распределения $F_\xi(x)$ и эмпирическая функция
+            распределения $F_n^*(x)$. Тогда
+            \[
+            \sup_{x \in \mathbb{R}} \abs{ F_n^*(x) - F_\xi(x) }
+            \overset{\text{п.н.}}{\limto{n \to \infty}}
+            0.
+            \]
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Частоты, статистический ряд
+        </div>
+        <div class="content">
+          Рассмотрим генеральную совокупность $\xi$, представляющую собой
+          случайную величину и выборку $X_{[n]}$.
+
+          <div class="definition">
+            Если элементы одномерной выборки упорядочить по возрастанию
+            (построить вариационный ряд
+            $X_{(1)} \leqslant \dots \leqslant X_{(n)}$) и отметить
+            повторяемость наблюдений (подсчитать <i>частоту</i>), то получится
+            <i>статистический ряд</i>, построенный по одномерной выборке.
+          </div>
+
+          <div class="definition">
+            Разность между максимальным и минимальным элементами выборки
+            называется <i>размахом</i>:
+            \[
+            R = X_{\max} - X_{\min}.
+            \]
+          </div>
+
+          <p>
+          Разобьём интервал, содержащий все элементы выборки, на $k$
+          непересекающихся интервалов. Обычно разбиение производится на
+          интервалы одинаковой длины $b = R / k$. После этого можно определить
+          частоты &mdash; количества $n_i$ элементов выборки, попавших в $i$-ый
+          интервал.
+          </p>
+
+          <div class="definition">
+            Полученный ряд называют <i>группированным статистическим рядом</i>.
+          </div>
+
+          <div class="definition">
+            Рассмотрим $i$-ый интервал группированного статистического ряда.
+            Введём определения:
+            <ul>
+              <li>
+                <i>накопленные частоты:</i> $\sum\limits_{j=1}^i n_j$,
+              </li>
+
+              <li>
+                <i>относительные частоты:</i> $\dfrac{n_i}{n}$,
+              </li>
+
+              <li>
+                <i>накопленные относительные частоты:</i>
+                $\sum\limits_{j=1}^i \dfrac{n_j}{n}$.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Полигон частот
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Полигоном частот</i> называют ломаную с вершинами в точках
+            $\paren{X_i,\dfrac{n_i}{b}}$, а <i>полигоном относительных
+              частот</i> &mdash; ломаную с вершинами в точках
+            $\paren{X_i,\dfrac{n_i}{nb}}$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Выборочные моменты
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Выборочный начальный момент $r$-го порядка</i> определяется
+            равенством
+            \[
+            a_r^* = \frac{1}{n} \sum_{i=1}^n X_i^r.
+            \]
+            Если выборка представлена статистическим рядом, то
+            \[
+            a_r^* = \frac{1}{n} \sum_{i=1}^k n_i X_i^r,
+            \]
+            где $k$ &mdash; количество интервалов разбиения.
+          </div>
+
+          <div class="definition">
+            <i>Выборочный центральный момент $r$-го порядка</i> определяется
+            равенством
+            \[
+            a_r^{0*} = \frac{1}{n} \sum_{i=1}^n \paren{ X_i - \overline{X} }^r,
+            \]
+            где ${\displaystyle
+            \overline{X} = a_1^* = \frac{1}{n} \sum_{i=1}^n X_i
+            }$ &mdash; выборочное среднее.
+
+            <p>
+            Если выборка представлена статистическим рядом, то
+            \[
+            a_r^{0*} = \frac{1}{n} \sum_{i=1}^n n_i
+            \paren{ X_i - \overline{X} }^r,
+            \]
+            причём
+            \[
+            \overline{X} = \frac{1}{n} \sum_{i=1}^k n_i X_i.
+            \]
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Выборочные квантили. Выборочные квартили
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Выборочная квантиль $x_p$ порядка $p$</i> определяется как
+            элемент вариационного ряда $X_{(1)} \leqslant \dots X_{(n)}$ выборки
+            $X_{[n]}$ с номером $[np] + 1$, где $[a]$ &mdash; целая часть числа
+            $a$.
+          </div>
+
+          <div class="definition">
+            В описательной статистике используют ряд квантилей, имеющих
+            специальные названия:
+            <ol>
+              <li>
+                <i>персентили</i> &mdash; квантили порядков
+                $0{,}01; 0{,}02; \dots; 0{,}99$,
+              </li>
+
+              <li>
+                <i>децили</i> &mdash; квантили порядков
+                $0{,}1; 0{,}2; \dots; 0{,}9$,
+              </li>
+
+              <li>
+                <i>квартили</i> &mdash; квантили порядков
+                $0{,}25; 0{,}5; 0{,}75$.
+              </li>
+            </ol>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Выборочная медиана, выборочное среднее, выборочная мода
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Выборочное среднее</i> &mdash; выборочный начальный момент 1-го
+            порядка:
+            \[
+            \overline{X} = a_1^* = \frac{1}{n} \sum_{i=1}^n X_i.
+            \]
+          </div>
+
+          <div class="definition">
+            <i>Выборочная медиана</i> &mdash; число, которое делит вариационный
+            ряд на две части, содержащие равное количество элементов;
+
+            <ul>
+              <li>
+                если $n = 2k+1$, то медианой выборки называется элемент
+                вариационного ряда $X_{(k+1)}$;
+              </li>
+
+              <li>
+                если $n = 2k$, то медианой выборки называется число
+                ${\displaystyle \frac{X_{(k)} + X_{(k+1)}}{2} }$.
+              </li>
+            </ul>
+          </div>
+
+          <div class="definition">
+            <i>Выборочной модой</i> называется элемент выборки, имеющий
+            наибольшую частоту.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Размах выборки, средний межквартильный размах, выборочная дисперсия,
+          выборочное с.к.о.
+        </div>
+        <div class="content">
+          Рассмотрим популярные меры рассеяния.
+
+          <div class="definition">
+            <i>Размахом</i> называют величину $R = X_{\max} - X_{\min}$.
+          </div>
+
+          <div class="definition">
+            Рассмотрим три квартили $Q_1, Q_2, Q_3$. Они делят вариационный ряд
+            на 4 части с равным числом элементов. Определим <i>средний
+              межквартильный размах</i> как
+            \[
+            \frac{Q_3 - Q_1}{2}.
+            \]
+          </div>
+
+          <div class="definition">
+            По аналогии с межквартильным <i>персентильный размах</i> равен
+            разности персентилей $P_{90} - P_{10}$.
+          </div>
+
+          <div class="definition">
+            <i>Выборочной дисперсией $s^2$</i> называют выборочный центральный
+            момент 2-го порядка: $s^2 = a_2^{0*}$.
+          </div>
+
+          <div class="definition">
+            <i>Исправленной дисперсией</i> называют величину
+            \[
+            \tilde s^2 = \frac{ns^2}{n-1}.
+            \]
+          </div>
+
+          <div class="definition">
+            <i>Выборочным средним квадратичным отклонением</i> называют величину
+            $\tilde s = \sqrt{\tilde s^2}$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Коэффициент вариации
+        </div>
+        <div class="content">
+          <div class="definition">
+            В качестве меры относительного разброса используют <i>коэффициент
+              вариации</i> $v = \dfrac{s}{\overline{X}}$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Коэффициент асимметрии. Коэффициент эксцесса
+        </div>
+        <div class="content">
+          <div class="definition">
+            Для оценки формы распределения используют
+            <i>коэффициент асимметрии</i> $S_{k1} = \dfrac{a_3^{0*}}{s^3}$ и
+            <i>коэффициент эксцесса</i> $K = \dfrac{a_4^{0*}}{s^4} - 3$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Статистики Пирсона
+        </div>
+        <div class="content">
+          Пусть задана генеральная совокупность $\xi$ с функцией распределения
+          $F_\xi$ и выборка $X_{[n]} = (X_1, \dots, X_n)$. Разобьём числовую ось
+          на $r$ непересекающихся интервалов:
+          \[
+          -\infty = a_0 \lt a_1 \lt \dots \lt a_r = \infty.
+          \]
+          Введём обозначения:
+          \[
+          \Delta_1 = (-\infty, a_1],
+          \quad
+          \Delta_2 = (a_1, a_2],
+          \quad
+          \dots,
+          \quad
+          \Delta_r = (a_{r-1}, \infty).
+          \]
+          Пусть $p_i = F_\xi(a_i) - F_\xi(a_{i-1})$ &mdash; вероятность того,
+          что случайная величина попадёт в интервал $\Delta_i$. Заметим, что
+          \[
+          \sum_{i=1}^r p_i = 1.
+          \]
+          Пусть $n_i$ &mdash; количество элементов выборки $X_{[n]}$, попавших в
+          $\Delta_i$.
+
+          <div class="definition">
+            Статистики вида
+            \[
+            \chi^2 = \sum_{i=1}^r \frac{(n_i - n p_i)^2}{n p_i},
+            \]
+            где
+            <ul>
+              <li>
+                $n_i$ &mdash;  частота (кол-во элементов выборки, попавших в
+                $\Delta_i$),
+              </li>
+
+              <li>
+                $np_i$ &mdash; ожидаемое количество наблюдений в интервале
+                $\Delta_i$,
+              </li>
+            </ul>
+            называются <i>статистиками $\chi^2$</i> или <i>статистиками
+              Пирсона</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Распределение $\chi^2$ с $k$ степенями свободы
+        </div>
+        <div class="content">
+          <div class="definition">
+            Пусть $\delta_1, \dots, \delta_k$ &mdash; взаимно независимые
+            одинаково распределённые стандартные гауссовы случайные величины,
+            тогда распределение случайной величины
+            $\delta_1^2 + \cdots + \delta_k^2$ называется
+            <i>распределением $\chi^2$ (Пирсона) с $k$ степенями свободы</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Предельное распределение статистики Пирсона
+        </div>
+        <div class="content">
+          <div class="theorem">
+            Статистика $\chi^2$, определяемая равенством
+            \[
+            \chi^2 = \sum_{i=1}^r \frac{(n_i - n p_i)^2}{n p_i},
+            \]
+            асимптотически распределена по закону $\chi^2$ с $r - 1$ степенью
+            свободы:
+            \[
+            \chi^2
+            \overset{d}{\limto{n \to \infty}} \tau,
+            \]
+            где $\tau$ подчиняется распределению $\chi^2$ с $r-1$ степенью
+            свободы.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Статистическая гипотеза
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Статистической гипотезой</i> называется любое предположение о
+            законе распределения генеральной совокупности.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Простая и сложная гипотеза
+        </div>
+        <div class="content">
+          <div class="definition">
+            Гипотеза называется <i>простой</i>, если в ней единственным образом
+            определяется закон распределения генеральной совокупности. В
+            противном случае гипотеза называется <i>сложной</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Критерии согласия
+        </div>
+        <div class="content">
+          Пусть задана генеральная совокупность $\xi$, функция распределения
+          $F_\xi$ которой взаимно однозначно соответствует распределению
+          генеральной совокупности $P_\xi$, и выборка $X_{[n]}$. Пусть $H_0$
+          &mdash; основная (нулевая) гипотеза.
+
+          <p>
+          Пусть проверяется гипотеза согласия $H_0: F_\xi = F_0$, при этом
+          предполагается, что $F_0(x)$ известна. Очевидно, что данная гипотеза
+          &mdash; простая. Сформулируем альтернативную гипотезу
+          $H_1: F_\xi \neq F_0$. Необходимо решить, принимать гипотезу $H_0$ или
+          не принимать. Решение принимается по имеющейся выборке $X_{[n]}$, т.е.
+          проверяется, насколько &laquo;хорошо&raquo; выборка $X_{[n]}$
+          согласуется с $F_0$.
+          </p>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Критерий $\chi^2$
+        </div>
+        <div class="content">
+          Разобьём числовую ось на $r$ промежутков
+          \[
+          -\infty = a_0 \lt a_1 \lt \dots \lt a_r = \infty.
+          \]
+          Введём обозначения:
+          \[
+          \Delta_1 = (-\infty, a_1],
+          \quad
+          \Delta_2 = (a_1, a_2],
+          \quad
+          \dots,
+          \quad
+          \Delta_r = (a_{r-1}, \infty).
+          \]
+          Построим статистику
+          \[
+          \chi^2\paren{ X_{[n]} }
+          = \sum_{i=1}^r \frac{(n_i - n p_i^{(0)})^2}{n p_i^{(0)}},
+          \]
+          где $p_i^{(0)} = F_0(a_i) - F_0(a_{i-1})$. Если $H_0$ верна, то по
+          теореме о предельном распределении статистики Пирсона
+          \[
+          \chi^2\paren{ X_{[n]} }
+          \overset{d}{\limto{n \to \infty}}
+          \zeta,
+          \]
+          где $\zeta$ подчиняется распределению $\chi^2$ с $r-1$ степенью
+          свободы.
+
+          <p>
+          Поведение статистики $\chi^2$ зависит от того, верна $H_0$ или нет.
+          Если $\chi^2\paren{ X_{[n]} } \geqslant C$, то $H_0$ отклоняется,
+          иначе оснований для отклонения $H_0$ нет.
+          </p>
+
+          <p>
+          Выберем вероятность $\alpha \in (0,1)$. Константу $C(r-1, \alpha)$
+          выберем из условия
+          \[
+          P\set{ \eta \geqslant C } = \alpha,
+          \]
+          где $\eta$ подчиняется распределению $\chi^2$ с $r-1$ степенью
+          свободы.
+          </p>
+
+          <div class="remark">
+            Константа $C(r-1, \alpha)$ представляет собой квантиль уровня
+            $1 - \alpha$ распределения $\chi^2$ с $r-1$ степенью свободы.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: ошибки первого и второго рода, уровень значимости
+          критерия
+        </div>
+        <div class="content">
+          <div class="definition">
+            В результате применения критерия согласия могут возникать следующие
+            ошибки:
+            <ul>
+              <li>
+                <i>ошибка первого рода</i>, если отбросили гипотезу $H_0$, а она
+                на самом деле верна,
+              </li>
+
+              <li>
+                <i>ошибка второго рода</i>, если приняли гипотезу $H_0$, а она
+                на самом деле неверна.
+              </li>
+            </ul>
+
+            Вероятность ошибки первого рода называют <i>уровнем значимости
+              критерия</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: точечная оценка
+        </div>
+        <div class="content">
+          Рассмотрим генеральную совокупность $\xi$ с функцией распределения
+          $F_\xi(x, \theta)$, где $\theta = (\theta_1, \dots, \theta_m)$ &mdash;
+          неизвестные параметры, и выборку $X_{[n]}$. Оценим неизвестные
+          параметры.
+
+          <div class="definition">
+            Пусть $\theta \in \Theta \subset \mathbb{R}^m$. Под <i>оценкой</i>
+            понимается статистика $\hat \theta(X_{[n]})$ такая, что получившееся
+            значение можно рассматривать как точечную оценку параметра $\theta$,
+            то есть
+            \[
+            \hat \theta(X_{[n]}) \sim \theta.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: несмещённая оценка, асимптотически несмещённая оценка
+        </div>
+        <div class="content">
+          Рассмотрим генеральную совокупность $\xi$ с функцией распределения
+          $F_\xi(x, \theta)$, где $\theta = (\theta_1, \dots, \theta_m)$ &mdash;
+          неизвестные параметры, и выборку $X_{[n]}$.
+
+          <div class="definition">
+            Пусть $\theta \in \Theta \subset \mathbb{R}$. Говорят, что оценка
+            $\hat \theta(X_{[n]})$ является <i>несмещённой оценкой параметра
+              $\theta$</i>, если
+            \[
+            E \hat\theta(X_{[n]}) = \theta \qquad \forall \theta \in \Theta.
+            \]
+          </div>
+
+          <div class="definition">
+            Говорят, что оценка $\hat\theta(X_{[n]})$ является <i>асимптотически
+              несмещённой</i> оценкой параметра $\theta$, если
+            \[
+            E \hat\theta(X_{[n]}) \limto{n \to \infty} \theta
+            \qquad \forall \theta \in \Theta.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: состоятельная оценка, сильно состоятельная оценка
+        </div>
+        <div class="content">
+          Рассмотрим генеральную совокупность $\xi$ с функцией распределения
+          $F_\xi(x, \theta)$, где $\theta = (\theta_1, \dots, \theta_m)$ &mdash;
+          неизвестные параметры, и выборку $X_{[n]}$.
+
+          <div class="definition">
+            Пусть параметр $\theta \in \Theta \subset \mathbb{R}$. Говорят, что
+            оценка $\hat \theta(X_{[n]})$ <i>состоятельна</i>, если
+            \[
+            \hat \theta(X_{[n]})
+            \overset{P}{\limto{n \to \infty}}
+            \theta
+            \qquad \forall \theta \in \Theta.
+            \]
+          </div>
+
+          <div class="definition">
+            Оценка $\hat \theta(X_{[n]})$ называется <i>сильно
+              состоятельной</i>, если
+            \[
+            \hat \theta(X_{[n]})
+            \overset{\text{п.н.}}{\limto{n \to \infty}}
+            \theta
+            \qquad \forall \theta \in \Theta.
+            \]
+          </div>
+
+          <div class="remark">
+            В случае, когда $\hat \theta(X_{[n]})$ &mdash; векторная оценка,
+            свойства состоятельности и сильной состоятельности рассматриваются
+            покомпонентно.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: эффективная оценка
+        </div>
+        <div class="content">
+          Рассмотрим генеральную совокупность $\xi$ с функцией распределения
+          $F_\xi(x, \theta)$, где $\theta = (\theta_1, \dots, \theta_m)$ &mdash;
+          неизвестные параметры, и выборку $X_{[n]}$.
+
+          <div class="definition">
+            Говорят, что оценка $\theta^*(X_{[n]}) \in K$ является
+            <i>эффективной оценкой параметра $\theta$ в классе $K$</i>, если для
+            любой другой оценка $\hat\theta \in K$ имеет место неравенство:
+            \[
+            E (\theta^* - \theta)^2
+            \leqslant
+            E (\hat\theta - \theta)^2
+            \qquad \forall \theta \in \Theta.
+            \]
+          </div>
+
+          Обозначим класс несмещённых оценок как
+          \[
+          K_0 = \set{
+          \hat\theta(X_{[n]}): E\hat\theta = \theta,
+          \; \forall \theta \in \Theta
+          }.
+          \]
+
+          <div class="definition">
+            Оценка, эффективная в классе $K_0$, называется <i>эффективной
+              оценкой</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: асимптотически нормальная оценка
+        </div>
+        <div class="content">
+          Рассмотрим генеральную совокупность $\xi$ с функцией распределения
+          $F_\xi(x, \theta)$, где $\theta = (\theta_1, \dots, \theta_m)$ &mdash;
+          неизвестные параметры, и выборку $X_{[n]}$.
+
+          <div class="definition">
+            Оценка $\hat\theta$ называется <i>асимптотически нормальной
+              оценкой</i> параметра $\theta \in \Theta \subset \mathbb{R}$ с
+            коэффициентом рассеяния $\sigma^2(\theta)$, если
+            \[
+            \sqrt{n} (\hat\theta - \theta)
+            \overset{d}{\limto{n \to \infty}}
+            \zeta
+            \sim N(0, \sigma^2(\theta)).
+            \]
+          </div>
+
+          <div class="remark">
+            Из этого определения следует, что для любого $x \in \mathbb{R}$
+            имеет место сходимость:
+            \[
+            P\set{ \sqrt{n} (\hat\theta - \theta) \leqslant x }
+            \limto{n \to \infty}
+            \frac{1}{\sqrt{2\pi} \sigma(\theta)}
+            \int\limits_{-\infty}^x e^{-\frac{y^2}{2\sigma^2(\theta)}} dy.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Метод моментов построения точечных оценок
+        </div>
+        <div class="content">
+          Рассмотрим генеральную совокупность $\xi$ с функцией распределения
+          $F_\xi(x, \theta)$, где $\theta = (\theta_1, \dots, \theta_m)$ &mdash;
+          неизвестные параметры, и выборку $X_{[n]}$. Требуется оценить параметр
+          $\theta$.
+
+          <p>
+          Рассмотрим борелевскую функцию $g(x): \mathbb{R} \to \mathbb{R}$ и
+          определим функцию
+          \[
+          m(\theta) = \int\limits_{-\infty}^\infty g(x) dF_\xi(x; \theta).
+          \]
+          Положим, что
+          \[
+          \int\limits_{-\infty}^\infty g(x) dF_\xi^*(x)\
+          =
+          \frac{1}{n} \sum_{i=1}^n g(X_i)
+          = \overline{g}.
+          \]
+          Составим уравнение
+          \[
+          m(\theta) = \overline{g} = \frac{1}{n} \sum_{i=1}^n g(X_i).
+          \]
+          Предположим, что оно имеет единственное решение $\hat\theta(X_{[n]})$,
+          тогда будем это решение называть <i class="important">оценкой
+            $\hat\theta$, полученной по методу моментов</i>:
+          \[
+          \hat\theta(X_{[n]}) = m^{-1} \paren{\frac{1}{n} \sum_{i=1}^n g(X_i)}.
+          \]
+          </p>
+
+          Свойства оценок, полученных по методу моментов:
+          <ol>
+            <li>
+              Если функция $m^{-1}(y)$ непрерывна на всей области определения,
+              то оценка по методу моментов является сильно состоятельной.
+            </li>
+
+            <li>
+              Если $m'(\theta) \neq 0$ для всех $\theta \in \Theta$, то оценка
+              по методу моментов асимптотически нормальна с коэффициентом
+              рассеяния $\dfrac{D g(\xi)}{(m'(\theta))^2}$, где $\theta$ &mdash;
+              истинное значение параметра.
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Метод максимального правдоподобия построения точечных оценок
+        </div>
+        <div class="content">
+          Рассмотрим генеральную совокупность $\xi$ с функцией распределения
+          $F_\xi(x)$ и плотностью распределения $f_\xi$ (будем предполагать, что
+          плотность существует). Рассмотрим выборку $X_{[n]}$. Совместная
+          плотность распределения выборки имеет вид
+          \[
+          f_{X_{[n]}}(x_1, \dots, x_n) = \prod_{i=1}^n f_\xi(x_i).
+          \]
+          В плотности распределения выборки существует неизвестный параметр
+          $\theta = (\theta_1, \dots, \theta_m) \in \Theta$, поэтому будем
+          рассматривать совместную плотность распределения в виде
+          \[
+          f_{X_{[n]}}(x_1, \dots, x_n | \theta)
+          = \prod_{i=1}^n f_\xi(x_i, \theta)
+          \]
+          или
+          \[
+          f_{X_{[n]}}(X_{[n]} | \theta) = \prod_{i=1}^n f_\xi(X_i, \theta).
+          \]
+
+          <div class="definition">
+            Если генеральная совокупность имеет плотность распределения $f_\xi$,
+            то <i>функцией правдоподобия</i> выборки $X_{[n]}$ называется
+            функция
+            \[
+            L(X_{[n]}, \theta) = \prod_{i=1}^n f_\xi(X_i, \theta).
+            \]
+            Если генеральная совокупность $\xi$ &mdash; дискретная случайная
+            величина с возможными значениями $\set{ z_i }$ и соответствующими
+            вероятностями $f_\xi(z_i, \theta)$, то функцией правдоподобия
+            выборки $X_{[n]}$ будем называть функцию
+            \[
+            L(X_{[n]}, \theta) = \prod_{i=1}^n p_\xi(X_i, \theta).
+            \]
+          </div>
+
+          Будем считать функцию правдоподобия функцией неизвестного параметра
+          $\theta$. Для нахождения оценки параметра $\theta$ решаем задачу
+          \[
+          \max_{\theta \in \Theta} L(X_{[n]}, \theta).
+          \]
+
+          <div class="definition">
+            <i>Оценкой максимального правдоподобия</i> параметра $\theta$
+            называется оценка
+            \[
+            \hat\theta(X_{[n]})
+            = \arg \max_{\theta \in \Theta} L(X_{[n]}, \theta),
+            \]
+            если решение задачи максимизации существует и единственно.
+          </div>
+
+          Свойства оценок максимального правдоподобия:
+          <ol>
+            <li>
+              Пусть существует взаимно однозначное соответствие
+              $\beta: \Theta \leftrightarrow B$. Если решение задачи
+              \[
+              \hat\theta(X_{[n]})
+              = \arg \max_{\theta \in \Theta} L(X_{[n]}, \theta)
+              \]
+              существует и единственно, то существует и
+              единственно решение задачи
+              \[
+              \hat b(X_{[n]})
+              = \arg \max_{b \in B} L(X_{[n]}, \beta^{-1}(b)),
+              \]
+              причём
+              \[
+              \hat \theta = \beta^{-1}(\hat b).
+              \]
+            </li>
+
+            <li>
+              Если функция правдоподобия непрерывно дифференцируема, а также
+              выполнены некоторые условия гладкости, то можно доказать, что
+              оценки метода максимального правдоподобия сильно состоятельны,
+              асимптотически эффективны и асимптотически нормальны.
+            </li>
+          </ol>
+
+          <div class="remark">
+            Часто вместо функции $L(X_{[n]}, \theta)$ рассматривают функцию
+            $\ln L(X_{[n]}, \theta)$, поскольку функция $\ln(t)$ является строго
+            возрастающей функцией аргумента $t$, то есть данный переход
+            правомерен.
+          </div>
+        </div>
+      </li>
+    </ol>
+  </body>
+</html>
+
+
