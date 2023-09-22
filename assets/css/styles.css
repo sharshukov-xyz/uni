@@ -465,7 +465,6 @@ div.break {
     margin: 24px auto;
 }
 
-/*
 @media (prefers-color-scheme: dark) {
   :root {
     --background-color: #1c1c1c;
@@ -476,5 +475,4 @@ div.break {
     --red-color: lightpink;
   }
 }
-*/
 
