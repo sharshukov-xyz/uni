@@ -1,0 +1,11 @@
+{
+  "name": "uni",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:sharshukov-xyz/uni",
+  "author": "Vladislav Sharshukov <vsharshukov@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "live-server": "^1.2.2"
+  }
+}
