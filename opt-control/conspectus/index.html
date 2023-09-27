@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Оптимальное управление &mdash; 07 &mdash; Конспект</title>
+
+    <link href="/assets/css/styles.css" rel="stylesheet">
+    <script defer src="/assets/js/core.js"></script>
+    <script defer src="/assets/js/questions.js"></script>
+    <script defer src="/assets/js/controls.js"></script>
+
+    <link rel="stylesheet" href="/assets/katex/katex.min.css">
+    <script defer src="/assets/katex/katex.min.js"></script>
+    <script defer src="/assets/katex/auto-render.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false },
+            { left: '\\(', right: '\\)', display: false },
+            { left: '\\[', right: '\\]', display: true }
+          ],
+          // • rendering keys, e.g.:
+          throwOnError: false
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1 id="title">Оптимальное управление &mdash; 07 &mdash; Конспект</h1>
+    <nav>
+      <a href="/">Домой</a>
+      <a href="..">Оптимальное управление</a>
+      <a href="/links">Ссылки</a>
+      <a href="/about">Контакты</a>
+    </nav>
+
+    <div style="display:none">
+      $\global\def\at#1#2{\left. #1 \right\rvert_{#2}}$
+      $\global\def\abs#1{\left\lvert #1 \right\rvert}$
+      $\global\def\norm#1{\left\lVert #1 \right\rVert}$
+      $\global\def\bvec#1{\mathbf{#1}}$
+      $\global\def\floor#1{\left\lfloor #1 \right\rfloor}$
+
+      $\global\def\limto#1{\underset{#1}{\longrightarrow}}$
+      $\global\def\prob#1{\mathbb{P} \left\{ #1 \right\}}$
+      $\global\def\mean#1{\mathbb{E} \left[ #1 \right]}$
+      $\global\def\disp#1{D \left[ #1 \right]}$
+
+      $\global\def\dp#1#2{#1 \cdot #2\,}$
+      $\global\def\vp#1#2{#1 \times #2\,}$
+
+      $\global\def\dv#1#2{\frac{d #1}{d #2}}$
+      $\global\def\rdv#1#2{\frac{d' #1}{d #2}}$ <!-- относительная производная -->
+      $\global\def\pd#1#2{\frac{\partial #1}{\partial #2}}$
+      $\global\def\pdv2#1#2{\frac{\partial^2 #1}{\partial #2^2}}$
+      $\global\def\pdvk#1#2#3{\frac{\partial^#1 #2}{\partial #3^#1}}$
+      $\global\def\ppdv#1#2#3{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
+
+      $\global\def\pois#1{\left\{ #1 \right\}}$
+      $\global\def\paren#1{\left( #1 \right)}$
+      $\global\def\bydef#1{\overset{\mathrm{def}}{#1}}$
+
+      $\global\def\mbox#1{\text{#1}}$
+
+      $\global\def\div{\text{div}\,}$
+      $\global\def\dsum{\displaystyle\sum\,}$
+      $\global\def\grad{\text{grad}\,}$
+      $\global\def\rot{\text{rot}\,}$
+
+      $\global\def\vb#1{\textbf{#1}}$
+
+      $\global\def\op#1{\mathrm{#1}\,}$
+
+      $\global\def\Im{\text{Im}\,}$
+      $\global\def\Res{\text{Res}\,}$
+      $\global\def\Re{\text{Re}\,}$
+      $\global\def\argtg{\text{argtg}\,}$
+      $\global\def\ch{\text{ch}\,}$
+      $\global\def\const{\text{const}\,}$
+      $\global\def\degree{\text{degree}\,}$
+      $\global\def\proj{\mathrm{proj}}$
+      $\global\def\rank{\mathrm{rank}}$
+      $\global\def\res{\text{res}\,}$
+      $\global\def\sh{\text{sh}\,}$
+      $\global\def\sign{\text{sign}\,}$
+      $\global\def\tg{\mathrm{tg}\,}$
+    </div>
+
+   <h3>2023-09-28</h3>
+  </body>
+</html>
