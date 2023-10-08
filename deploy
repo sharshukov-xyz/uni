@@ -1,4 +1,4 @@
 #!/bin/sh
 
-rsync -ahv --exclude={'deploy','.git','.gitignore','node_modules','*.mp4','yarn.lock','package.json'} . uni@192.168.1.40:public/
+rsync -ahv --exclude={'deploy','.git','.gitignore','node_modules','*.mp4','yarn.lock','package.json'} . uni@uni.sharshukov.xyz:public/
 
