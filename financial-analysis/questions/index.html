@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Вопросы &mdash; Математические методы финансового анализа</title>
+
+    <link href="/assets/css/styles.css" rel="stylesheet">
+    <script defer src="/assets/js/core.js"></script>
+    <script defer src="/assets/js/questions.js"></script>
+    <script defer src="/assets/js/controls.js"></script>
+
+    <link rel="stylesheet" href="/assets/katex/katex.min.css">
+    <script defer src="/assets/katex/katex.min.js"></script>
+    <script defer src="/assets/katex/auto-render.min.js"></script>
+
+    <script>
+     document.addEventListener("DOMContentLoaded", function () {
+       renderMathInElement(document.body, {
+         // customised options
+         // • auto-render specific keys, e.g.:
+         delimiters: [
+           { left: '$$', right: '$$', display: true },
+           { left: '$', right: '$', display: false },
+           { left: '\\(', right: '\\)', display: false },
+           { left: '\\[', right: '\\]', display: true }
+         ],
+         // • rendering keys, e.g.:
+         throwOnError: false
+       });
+     });
+    </script>
+  </head>
+
+  <body>
+    <h1 id="title">Вопросы &mdash; Математические методы финансового анализа</h1>
+    <nav>
+      <a href="/">Домой</a>
+      <a href="..">Математические методы финансового анализа</a>
+      <a href="/links">Ссылки</a>
+      <a href="/about">Контакты</a>
+    </nav>
+
+    <div class="controls">
+      <button onclick="HideQuestions()">Скрыть вопросы</button>
+      <button onclick="ShowQuestions()">Показать вопросы</button>
+      <button onclick="HideAnswers()">Скрыть ответы</button>
+      <button onclick="ShowAnswers()">Показать ответы</button>
+      <button onclick="HideProofs()">Скрыть доказательства</button>
+      <button onclick="ShowProofs()">Показать доказательства</button>
+      <button onclick="ShowRandomElement(HideQuestions)">
+        Показать случайный вопрос
+      </button>
+    </div>
+
+    <div class="proof-type">
+      Показывать
+      <select id="select-proof-type" name="select-proof-type">
+        <option value="proofs">доказательства полностью</option>
+        <option value="ideas">только идеи доказательств</option>
+      </select>
+    </div>
+
+    <div style="display:none">
+      $\global\def\at#1#2{\left. #1 \right\rvert_{#2}}$
+      $\global\def\abs#1{\left\lvert #1 \right\rvert}$
+      $\global\def\norm#1{\left\lVert #1 \right\rVert}$
+      $\global\def\limto#1{\underset{#1}{\longrightarrow}}$
+
+      $\global\def\dp#1#2{#1 \cdot #2\,}$
+      $\global\def\vp#1#2{#1 \times #2\,}$
+
+      $\global\def\dv#1#2{\frac{d #1}{d #2}}$
+      $\global\def\pd#1#2{\frac{\partial #1}{\partial #2}}$
+      $\global\def\pdv2#1#2{\frac{\partial^2 #1}{\partial #2^2}}$
+      $\global\def\ppdv#1#2#3{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
+
+      $\global\def\paren#1{\left( #1 \right)}$
+
+      $\global\def\mbox#1{\text{#1}}$
+
+      $\global\def\div{\text{div}\,}$
+      $\global\def\dsum{\displaystyle\sum\,}$
+      $\global\def\grad{\text{grad}\,}$
+      $\global\def\rot{\text{rot}\,}$
+
+      $\global\def\bvec#1{\mathbf{#1}}$
+      $\global\def\vb#1{\textbf{#1}}$
+
+      $\global\def\op#1{\mathrm{#1}\,}$
+
+      $\global\def\proj{\mathrm{proj}}$
+      $\global\def\bydef{\mathrm{def}}$
+      $\global\def\const{\text{const}\,}$
+      $\global\def\res{\text{res}\,}$
+      $\global\def\Res{\text{Res}\,}$
+      $\global\def\Re{\text{Re}\,}$
+      $\global\def\Im{\text{Im}\,}$
+      $\global\def\ch{\text{ch}\,}$
+      $\global\def\sh{\text{sh}\,}$
+      $\global\def\tg{\mathrm{tg}\,}$
+      $\global\def\ctg{\mathrm{ctg}\,}$
+      $\global\def\argtg{\text{argtg}\,}$
+    </div>
+
+    <ol id="questions">
+      <li class="question">
+        <div class="name">
+          Время как фактор финансовых операций. Проценты и виды процентных ставок
+        </div>
+        <div class="content">
+          <div class="definition">
+            Под <i>процентными деньгами</i> или <i>процентами</i> (interest) понимают
+            абсолютную величину дохода от предоставления денег в долг в любой форме:
+            <ul>
+              <li>
+                выдача ссуды;
+              </li>
+
+              <li>
+                продажа товара в кредит;
+              </li>
+
+              <li>
+                помещение денег на депозитный счёт;
+              </li>
+
+              <li>
+                учёт векселя;
+              </li>
+
+              <li>
+                покупка облигаций и т.д.
+              </li>
+            </ul>
+          </div>
+
+          <div class="definition">
+            Под <i>процентной ставкой</i> (rate of interest) понимается относительная величина
+            дохода за фиксированный отрезок времени, т.е. отношение дохода (процентов) к сумме
+            долга за единицу времени.
+            <br/>
+            Измеряется в процентах или в десятичных/натуральных дробях.
+          </div>
+
+          <div class="definition">
+            Исходная сумма долга, на которую начисляются проценты по заданной ставке, называется
+            <i>базовой суммой</i> или <i>базой</i> для начисления процентов.
+          </div>
+
+          <div class="definition">
+            Отрезок времени, к которому относится процентная ставка, называют <i>периодом начисления</i>.
+            <br/>
+            Обычно принимают год, полугоде, квартал, месяц или день.
+          </div>
+
+          <p>
+            По договору кредитора и заёмщика проценты могут выплачиваться по мере их поступления
+            или присоединяться к основной сумме долга (<i class="important">капитализация процентов</i>).
+          </p>
+
+          <div class="definition">
+            Процесс увеличения суммы денег в связи с присоединением процентов называют
+            <i>наращением</i> или <i>ростом</i> этой суммы.
+          </div>
+
+          <div class="quick-question">
+            От чего зависит размер процентной ставки?
+
+            <div class="answer">
+              Размер процентной ставки зависит от большого количества объективных и субъективных
+              факторов:
+              <ul>
+                <li>
+                  от общего состояния экономики (в том числе денежно-кредитного рынка);
+                </li>
+
+                <li>
+                  от кратковременных и долгосрочных ожиданий его динамики;
+                </li>
+
+                <li>
+                  от вида конкретной сделки;
+                </li>
+
+                <li>
+                  от вида валюты сделки;
+                </li>
+
+                <li>
+                  от срока кредита;
+                </li>
+
+                <li>
+                  от истории отношений заёмщика и кредитора и т.д.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <p>
+            Существует несколько способов начисления процентов, которым соответствуют
+            различные виды процентных ставок.
+          </p>
+
+          <ol>
+            <li>
+              Ставки различаются по базе для их начисления:
+              <ul>
+                <li>
+                  если базовая сумма постоянна, то проценты и процентная ставка называются
+                  <i class="important">простыми</i>;
+                </li>
+
+                <li>
+                  если база последовательно меняется и на каждом последующем этапе за базу
+                  принимается сумма, полученная на предыдущем этапе, то проценты и процентная
+                  ставка называются <i class="important">сложными</i>.
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              Ставки различаются по принципу расчёта процентов:
+              <ul>
+                <li>
+                  если наращение идёт на сумму долга, то ставки (простые и сложные) называются
+                  <i class="important">ставками наращения</i> (interest base rate);
+                </li>
+
+                <li>
+                  если имеет место процесс скидки с конечной суммы задолженности, то ставка
+                  называется <i class="important">учётной</i> (discount base rate).
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              Процентные ставки могут быть <i class="important">фиксированными</i> или <i
+              class="important">плавающими</i> (floating). В последнем случае фиксируется не сама ставка, а так
+              называемая <i class="important">базовая ставка</i>, к которой в свою очередь добавляется <i
+              class="important">маржа</i>, меняющая своё значение от периода к периоду.
+
+              <div class="example">
+                Примером базовой ставки может служить лондонская межбанковская ставка LIBOR (London
+                interbank offered rate) и её российский аналог MIBOR.
+              </div>
+            </li>
+          </ol>
+
+          <p>
+            Проценты в любой их конкретной форме являются проявлением одной из основных
+            экономических категорий &mdash; <i>ссудного процента</i>.
+          </p>
+
+          <div class="proposition">
+            Ссудный процент является одним из основных генераторов инфляции наряду с тарифами
+            естественных монополий и коррупционными сверхдоходами.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Наращение по простой процентной ставке. Приведение к базовому периоду
+        </div>
+        <div class="content">
+          <div class="defs">
+            <ul>
+              <li>
+                $P$ &mdash; первоначальная сумма ссуды или долга.
+              </li>
+
+              <li>
+                $S$ &mdash; <i class="important">наращенная сумма</i>: первоначальная сумма $P$
+                с начисленными процентами к концу соответствующего периода.
+              </li>
+
+              <li>
+                $r$ &mdash; годовая процентная ставка наращения.
+              </li>
+
+              <li>
+                $n$ &mdash; срок или период ссуды в годах.
+              </li>
+            </ul>
+          </div>
+
+          <p>
+            В данном случае $P$ является постоянной базой для начисления процентов, величина которых
+            в год есть $I_1 = P r$, а за $n$ лет &mdash; $I_n = P n r$.
+          </p>
+
+          <p>
+            Так как $S = P + I_n$, то
+            \[
+            \tag{1}
+            S = P (1 + n r).
+            \]
+          </p>
+
+          <div class="definition">
+            Выражение $(1)$ называют формулой наращения по простым процентам или просто <i>формулой простых
+            процентов</i>, а множитель $\mu = 1 + nr$ &mdash; <i>множителем наращения простых процентов</i>.
+          </div>
+
+          <div class="remark">
+            В формуле $(1)$ любую величину можно считать параметром. Например,
+            \[
+            \tag{2}
+            P = \frac{S}{1 + nr}
+            \]
+            есть решение обратной задачи. Эта формула поволяет рассчитать величину ссуды, которую
+            необходимо выдать на срок $n$ лет по ставке $r$ для получения наперёд заданной наращенной суммы $S$.
+
+            <p>
+              Аналогичным образом можно получить выражение для срока ссуды:
+              \[
+              \tag{3}
+              n = \frac{1}{r} \left( \frac{S}{P} - 1 \right).
+              \]
+            </p>
+          </div>
+
+          <div class="problem">
+            Пусть первоначальная сумма ссуды 20 тыс. руб. выдана на срок 2.5 года по ставке 5% годовых.
+            Требуется определить наращенную сумму долга.
+
+            <div class="solution">
+              По формуле $(1)$
+              \[
+              S = 20 (1 + 2.5 \cdot 0.05) = 22.5 \; \mbox{тыс. руб.}
+              \]
+            </div>
+
+            Выясним теперь, за какой срок сумма долга достигла бы величины в 24 тыс. руб.
+
+            <div class="solution">
+              Пользуясь формулой $(3)$, получаем
+              \[
+              n = \frac{1}{0.05} \left( \frac{24}{20} - 1 \right) = 4 \; \mbox{года}.
+              \]
+            </div>
+          </div>
+
+          <div class="example">
+            Используя данные примера 1, определим, во сколько раз необходимо увеличить срок ссуды, чтобы
+            множитель наращения увеличился в 1.2 раза.
+
+            <div class="solution">
+              При увеличении срока $n$ в $k$ раз множитель наращения будет равен
+              \[
+              \mu = 1 + k n r.
+              \]
+
+              Для определения $k$ получим уравнение:
+              \[
+              \frac{1 + k n r}{1 + nr} = 1.2,
+              \]
+              откуда
+              \[
+              \begin{aligned}
+              k &= \frac{1}{nr} \left( 1.2 \cdot (1 + nr) - 1 \right) = \\
+              &= \frac{1}{0.05 \cdot 2.5} \left( 1.2 \cdot (1 + 0.05 \cdot 2.5) - 1 \right) = \\
+              &= 2.8.
+              \end{aligned}
+              \]
+            </div>
+          </div>
+
+          <div class="remark">
+            Формула простых процентов $(1)$ обычно используется для выдачи краткосрочных ссуд со сроком
+            меньше года.
+          </div>
+
+          Существует некоторая специфика вычисления срока ссуды $n$. Очевидно, что
+          \[
+          n = \frac{t}{K},
+          \]
+          где $t$ &mdash; число дней ссуды, а $K$ &mdash; число дней в году или <i class="important">временная база</i>
+          (time basis).
+
+          <p>
+            Существует два способа задания величин $t$ и $K$.
+          </p>
+
+          <ol>
+            <li>
+              Точный способ: $K = 365$ (или 366) дней. В этом случае проценты называют <i>точными</i> (exact interest).
+            </li>
+
+            <li>
+              Предполагаем, что в каждом месяце 30 дней, а в году 360 дней. Проценты, расчитанные в этом случае,
+              называются <i>обыкновенными</i> или <i>коммерческими</i> (ordinary interest).
+            </li>
+          </ol>
+
+          <p>
+            В результате возможны три варианта расчётов:
+          </p>
+          <ol>
+            <li>
+              точные проценты с точным числом дней ссуды (обозначение: 365/365);
+            </li>
+
+            <li>
+              обыкновенные проценты с точным числом дней ссуды (обозначение: 365/360);
+            </li>
+
+            <li>
+              обыкновенные проценты с приближённым числом дней ссуды (обозначение: 360/360).
+            </li>
+          </ol>
+
+          <div class="remark">
+            Вариант 360/365 в экономической теории и практике считается лишённым смысла и не применяется.
+          </div>
+
+          <p>
+            Рассмотрим ситуацию, когда весь срок $n$ кредитного договора разбит на $m$ периодов продолжительностью
+            $n_1, \dots, n_m$ соответственно. В силу каких-либо причин на каждом из этих отрезков времени может
+            действовать своя ставка простых процентов $r_1, \dots, r_m$. В этом случае формула наращения имеет вид
+            \[
+            \tag{4}
+            S = P \left( 1 + \sum\limits_{i=1}^{m} n_i r_i \right).
+            \]
+          </p>
+
+          <div class="problem">
+            Пусть начальная ставка 5% годовых снижается на 0.25% каждый квартал в течение одного календарного года
+            в рамках схемы 365/360. Требуется определить множитель наращения для кредитного договора.
+
+            <div class="solution">
+              Сначала определим длины периодов:
+              \[
+              n_1 = \frac{90}{360}; \qquad n_2 = \frac{91}{360}; \qquad n_3 = n_4 = \frac{92}{360}.
+              \]
+              Тогда
+              \[
+              \begin{aligned}
+              \mu &= 1 + \frac{1}{4} \left(
+              0.05 + 0.0475 + 0.045 + 0.0425
+              \right) = \\
+              &= 1.04625.
+              \end{aligned}
+              \]
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Простая процентная ставка. Реинвестирование
+        </div>
+        <div class="content">
+          <p>
+            Рассмотрим схему <i>реинвестирования</i> (rollover) процентов, полученных на предыдущих этапах.
+            Она выглядит следующим образом:
+            \[
+            \begin{aligned}
+            S_1 &= P (1 + n_1 r_1), \\
+            S_2 &= S_1 (1 + n_2 r_2), \\
+            &\vdots \\
+            S_m &= S_{m-1} (1 + n_m r_m).
+            \end{aligned}
+            \]
+            В окончательном виде (с учётом $S = S_m$) имеем
+            \[
+            \tag{5}
+            S = P \prod_{i=1}^m (1 + n_i r_i).
+            \]
+          </p>
+
+          <p>
+            В частном случае, когда периоды и ставки процентов постоянны, формула $(5)$ принимает вид
+            \[
+            \tag{6}
+            S = P {\left( 1 + nr \right)}^m.
+            \]
+          </p>
+
+          <div class="example">
+            Примером практического использования схем $(5-6)$ является последовательность банковских депозитов, когда
+            клиент банка не забирает полученные проценты, а добавляет их к первоначальной сумме и вновь размещает на
+            депозит.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Погашение задолженности частями. Актуарный метод
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Погашение задолженности частями. Правило торговца. Выплата процентов в потребительском кредите
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Конверсия валюты и наращение в схеме простых процентов
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Дисконтирование по простым учётным ставкам. Математическое дисконтирование
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Банковский учёт и его сравнение с математическим дисконтированием
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Наращение по учётной ставке. Прямые и обратные задачи. Определение срока ссуды и величины процентной ставки
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Начисление сложных процентов. Формулы наращения
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Начисление при дробном числе лет. Сравнение множителей наращения простых и сложных процентов
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Наращение процентов $m$ раз в году. Номинальная и эффективная ставки
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Дисконтирование по сложной ставке процентов
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Учёт по сложной учётной ставке. Номинальная и эффективная учётная ставка
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Наращение по сложной учётной ставке. Сравнение наращения и дисконтирования по разным видам
+          процентных ставок
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Непрерывное наращение и дисконтирование. Сила роста (постоянная и переменная)
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Конверсия валюты и наращение сложных процентов
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Учёт налогообложения в схемах наращения
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Учёт инфляции в схемах наращения
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Эквивалентность финансовых обязательств
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Консолидирование платежей. Величина консолидированного платежа
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Консолидирование платежей. Срок консолидированного платежа
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Эквивалентность простых и сложных процентных ставок
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Эквивалентность сложных процентных ставок
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Средние ставки
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Системный подход в реализации процессов управления (§13)
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Деньги как управленчески значимая информация (§13)
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Социальный дарвинизм в практике кредитования бизнеса (§13)
+        </div>
+        <div class="content">
+        </div>
+      </li>
+    </ol>
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+  </body>
+
+</html>

@@ -55,6 +55,14 @@
     </button>
   </div>
 
+  <div class="proof-type">
+    Показывать
+    <select id="select-proof-type" name="select-proof-type">
+      <option value="proofs">доказательства полностью</option>
+      <option value="ideas">только идеи доказательств</option>
+    </select>
+  </div>
+
   <div style="display:none">
     $\global\def\at#1#2{\left. #1 \right\rvert_{#2}}$
     $\global\def\abs#1{\left\lvert #1 \right\rvert}$
@@ -186,25 +194,25 @@
           \[
           cx \leqslant by.
           \]
-        </div>
 
-        <div class="proof">
-          $x$ &mdash; допустимое решение ПЗ. поэтому
-          \[
-          xA \leqslant b.
-          \]
+          <div class="proof">
+            $x$ &mdash; допустимое решение ПЗ. поэтому
+            \[
+            xA \leqslant b.
+            \]
 
-          Домножим на $y$ справа. Так как $y$ &mdash; допустимое
-          решение ДвЗ, то $y \geqslant 0$, и знак неравенства
-          не изменится:
-          \[
-          xAy \leqslant by.
-          \]
+            Домножим на $y$ справа. Так как $y$ &mdash; допустимое
+            решение ДвЗ, то $y \geqslant 0$, и знак неравенства
+            не изменится:
+            \[
+            xAy \leqslant by.
+            \]
 
-          Так как $Ay \geqslant c$, окончательно получаем
-          \[
-          xc \leqslant xAy \leqslant by.
-          \]
+            Так как $Ay \geqslant c$, окончательно получаем
+            \[
+            xc \leqslant xAy \leqslant by.
+            \]
+          </div>
         </div>
       </div>
     </li>
@@ -244,38 +252,38 @@
           \exists y = (\eta_1, \dots, \eta_n):
           \quad \dp{a_i}{y} = \alpha_i, \quad i = \overline{1,r}.
           \]
-        </div>
 
-        <div class="proof">
-          <p>
-            Рассмотрим матрицу
-            \[
-            A = \paren{
-            \begin{array}{c}
-            a_1 \\
-            \vdots \\
-            a_r
-            \end{array}
-            }, \quad \dim A = r \times n, \quad \rank A = r.
-            \]
-            По теореме о ранге матрицы у этой матрицы
-            $r$ линейно независимых столбцов. Пусть для определённости
-            это первые $r$ столбцов.
-          </p>
+          <div class="proof">
+            <p>
+              Рассмотрим матрицу
+              \[
+              A = \paren{
+              \begin{array}{c}
+              a_1 \\
+              \vdots \\
+              a_r
+              \end{array}
+              }, \quad \dim A = r \times n, \quad \rank A = r.
+              \]
+              По теореме о ранге матрицы у этой матрицы
+              $r$ линейно независимых столбцов. Пусть для определённости
+              это первые $r$ столбцов.
+            </p>
 
-          <p>
-            Рассмотрим вектор $m = (\alpha_1, \dots, \alpha_r)$.
-            Его можно разложить по столбцовому базису матрицы $A$:
-            \[
-            m
-            = \sum_{j=1}^r \eta_j a^j
-            = \sum_{j=1}^r \eta_j a^j
-            + \sum_{j=r+1}^n 0 \cdot a^j.
-            \]
-            Таким образом, можно построить
-            $y = (\eta_1, \dots, \eta_r, 0, \dots, 0)
-            \in \mathbb{R}^n$.
-          </p>
+            <p>
+              Рассмотрим вектор $m = (\alpha_1, \dots, \alpha_r)$.
+              Его можно разложить по столбцовому базису матрицы $A$:
+              \[
+              m
+              = \sum_{j=1}^r \eta_j a^j
+              = \sum_{j=1}^r \eta_j a^j
+              + \sum_{j=r+1}^n 0 \cdot a^j.
+              \]
+              Таким образом, можно построить
+              $y = (\eta_1, \dots, \eta_r, 0, \dots, 0)
+              \in \mathbb{R}^n$.
+            </p>
+          </div>
         </div>
 
         <div class="definition">
@@ -378,115 +386,115 @@
           \]
           имеет неотрицательное решение, то оно имеет
           базисное неотрицательное решение.
-        </div>
 
-        <div class="proof">
           <div class="idea">
             Индукция по количеству строк матрицы $A$.
           </div>
 
-          <ul>
-            <li>
-              Случай $m = 1$. Система имеет неотрицательное
-              решение:
-              \[
-              \xi_1 a_1 = b, \quad \xi_1 \geqslant 0,
-              \]
-              тогда $\xi_1$ &mdash; базисное решение.
-            </li>
+          <div class="proof">
+            <ul>
+              <li>
+                Случай $m = 1$. Система имеет неотрицательное
+                решение:
+                \[
+                \xi_1 a_1 = b, \quad \xi_1 \geqslant 0,
+                \]
+                тогда $\xi_1$ &mdash; базисное решение.
+              </li>
 
-            <li>
-              Пусть утверждение верно для $m - 1$, то есть
-              любая система вида
-              \[
-              \sum_{i=1}^{m-1} \xi_i a_i = b
-              \]
-              с неотрицательным решением
-              имеет неотрицательное базисное решение.
-            </li>
+              <li>
+                Пусть утверждение верно для $m - 1$, то есть
+                любая система вида
+                \[
+                \sum_{i=1}^{m-1} \xi_i a_i = b
+                \]
+                с неотрицательным решением
+                имеет неотрицательное базисное решение.
+              </li>
 
-            <li>
-              Рассмотрим систему
-              \[
-              \sum_{i=1}^m \xi_i a_i = b
-              \]
-              с неотрицательным решением $x$. Возможны следующие
-              варианты:
-              <ol>
-                <li>
-                  Если хотя бы одна из компонент вектора $x$ равна
-                  нулю, то задача сводится к случаю $m - 1$,
-                  поэтому дальше считаем $\xi_i \gt 0$.
-                </li>
+              <li>
+                Рассмотрим систему
+                \[
+                \sum_{i=1}^m \xi_i a_i = b
+                \]
+                с неотрицательным решением $x$. Возможны следующие
+                варианты:
+                <ol>
+                  <li>
+                    Если хотя бы одна из компонент вектора $x$ равна
+                    нулю, то задача сводится к случаю $m - 1$,
+                    поэтому дальше считаем $\xi_i \gt 0$.
+                  </li>
 
-                <li>
-                  Если $a_i$ &mdash; линейно независимые, то
-                  данное решение $x$ уже базисное.
-                </li>
+                  <li>
+                    Если $a_i$ &mdash; линейно независимые, то
+                    данное решение $x$ уже базисное.
+                  </li>
 
-                <li>
-                  <p>
-                    Пусть $a_i$ линейно зависимы, тогда
-                    \[
-                    \exists \vec{\lambda} \neq \vec{0}: \quad
-                    \sum_{i=1}^m \lambda_i a_i = 0.
-                    \]
-                    Для определённости будем считать, что
-                    $\lambda_1 \gt 0$.
-                  </p>
+                  <li>
+                    <p>
+                      Пусть $a_i$ линейно зависимы, тогда
+                      \[
+                      \exists \vec{\lambda} \neq \vec{0}: \quad
+                      \sum_{i=1}^m \lambda_i a_i = 0.
+                      \]
+                      Для определённости будем считать, что
+                      $\lambda_1 \gt 0$.
+                    </p>
 
-                  <div class="remark">
-                    Если что, можем перенумеровать и/или домножить
-                    на $(-1)$.
-                  </div>
+                    <div class="remark">
+                      Если что, можем перенумеровать и/или домножить
+                      на $(-1)$.
+                    </div>
 
-                  <p>
-                    Обозначим $\Theta = \max\limits_i
-                    \dfrac{\lambda_i}{\xi_i} \gt 0$. Опять для
-                    определённости
-                    $\Theta := \dfrac{\lambda_1}{\xi_1}$.
-                  </p>
+                    <p>
+                      Обозначим $\Theta = \max\limits_i
+                      \dfrac{\lambda_i}{\xi_i} \gt 0$. Опять для
+                      определённости
+                      $\Theta := \dfrac{\lambda_1}{\xi_1}$.
+                    </p>
 
-                  <p>
-                    Проведём следующие преобразования:
-                    \[
-                    \begin{aligned}
-                    \sum_{i=1}^m \xi_i a_i
-                    &= \sum_{i=1}^m \xi_i a_i
-                    - \sum_{i=1}^m \lambda_i a_i \\
-                    &= \frac{1}{\Theta} \sum_{i=1}^m \Theta \xi_i a_i
-                    - \sum_{i=1}^m
-                    \frac{\lambda_i}{\xi_i} \xi_i a_i \\
-                    &= \frac{1}{\Theta} \sum_{i=1}^m
-                    \paren{\Theta - \frac{\lambda_i}{\xi_i}}
-                    \xi_i a_i \\
-                    &= \frac{1}{\Theta} \sum_{i=2}^m
-                    \paren{\Theta - \frac{\lambda_i}{\xi_i}}
-                    \xi_i a_i \\
-                    &= b.
-                    \end{aligned}
-                    \]
+                    <p>
+                      Проведём следующие преобразования:
+                      \[
+                      \begin{aligned}
+                      \sum_{i=1}^m \xi_i a_i
+                      &= \sum_{i=1}^m \xi_i a_i
+                      - \sum_{i=1}^m \lambda_i a_i \\
+                      &= \frac{1}{\Theta} \sum_{i=1}^m \Theta \xi_i a_i
+                      - \sum_{i=1}^m
+                      \frac{\lambda_i}{\xi_i} \xi_i a_i \\
+                      &= \frac{1}{\Theta} \sum_{i=1}^m
+                      \paren{\Theta - \frac{\lambda_i}{\xi_i}}
+                      \xi_i a_i \\
+                      &= \frac{1}{\Theta} \sum_{i=2}^m
+                      \paren{\Theta - \frac{\lambda_i}{\xi_i}}
+                      \xi_i a_i \\
+                      &= b.
+                      \end{aligned}
+                      \]
 
-                    Таким образом, существует неотрицательное решение
-                    \[
-                    \xi_i' := \frac{1}{\Theta}
-                    \paren{\Theta - \frac{\lambda_i}{\xi_i}} \xi_i,
-                    \quad i = \overline{2,m}
-                    \]
-                    для системы
-                    \[
-                    \sum_{i=2}^m \xi_i' a_i = b,
-                    \]
-                    то есть существует неотрицательное базисное
-                    решение $(\bar\xi_2', \dots, \bar\xi_m')$,
-                    откуда следует, что
-                    $(0, \bar\xi_2', \dots, \bar\xi_m')$ также
-                    является базисным неотрицательным решением.
-                  </p>
-                </li>
-              </ol>
-            </li>
-          </ul>
+                      Таким образом, существует неотрицательное решение
+                      \[
+                      \xi_i' := \frac{1}{\Theta}
+                      \paren{\Theta - \frac{\lambda_i}{\xi_i}} \xi_i,
+                      \quad i = \overline{2,m}
+                      \]
+                      для системы
+                      \[
+                      \sum_{i=2}^m \xi_i' a_i = b,
+                      \]
+                      то есть существует неотрицательное базисное
+                      решение $(\bar\xi_2', \dots, \bar\xi_m')$,
+                      откуда следует, что
+                      $(0, \bar\xi_2', \dots, \bar\xi_m')$ также
+                      является базисным неотрицательным решением.
+                    </p>
+                  </li>
+                </ol>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </li>
@@ -524,34 +532,34 @@
           \]
           то $\bar x$ и $\bar y$ &mdash; оптимальные для ПЗ и ДЗ
           соответственно.
-        </div>
 
-        <div class="proof">
-          <p>
-            Воспользуемся свойством допустимых решений:
-            для любых допустимых решений $x$ и $y$ ПЗ и ДЗ
-            соответственно справедливо неравенство
-            \[
-            cx \leqslant by.
-            \]
-          </p>
+          <div class="proof">
+            <p>
+              Воспользуемся свойством допустимых решений:
+              для любых допустимых решений $x$ и $y$ ПЗ и ДЗ
+              соответственно справедливо неравенство
+              \[
+              cx \leqslant by.
+              \]
+            </p>
 
-          <p>
-            Тогда
-            \[
-            cx \leqslant b \bar y = c \bar x,
-            \]
-            то есть для любого допустимого решения $x$ ПЗ
-            выполнено
-            \[
-            cx \leqslant c \bar x,
-            \]
-            поэтому $\bar x$ &mdash; оптимальное решение.
-          </p>
+            <p>
+              Тогда
+              \[
+              cx \leqslant b \bar y = c \bar x,
+              \]
+              то есть для любого допустимого решения $x$ ПЗ
+              выполнено
+              \[
+              cx \leqslant c \bar x,
+              \]
+              поэтому $\bar x$ &mdash; оптимальное решение.
+            </p>
 
-          <p>
-            Аналогично доказывается оптимальность решения $\bar y$.
-          </p>
+            <p>
+              Аналогично доказывается оптимальность решения $\bar y$.
+            </p>
+          </div>
         </div>
       </div>
     </li>
@@ -592,13 +600,13 @@
           \end{gathered}
           \right.
           \]
+        </div>
         
-          <div class="remark">
-            Одновременное выполнение исключено:
-            \[
-            x \overbrace{Ay}^{\geqslant 0} = \overbrace{by}^{\lt 0}.
-            \]
-          </div>
+        <div class="remark">
+          Одновременное выполнение исключено:
+          \[
+          x \overbrace{Ay}^{\geqslant 0} = \overbrace{by}^{\lt 0}.
+          \]
         </div>
 
         <div class="corollary">
@@ -631,10 +639,10 @@
               то двойственная к ней не имеет оптимального.
             </li>
           </ol>
-        </div>
 
-        <div class="proof">
-          <div class="todo">расписать</div>
+          <div class="proof">
+            <div class="todo">расписать</div>
+          </div>
         </div>
       </div>
     </li>
@@ -840,18 +848,18 @@
               </li>
             </ul>
           </div>
+        </div>
 
-          <div class="theorem">
-            <i>(каноническая теорема равновесия)</i>.
-            <p>
-              Допустимые решения $x = (\xi_1, \dots, \xi_m)$ и
-              $y = (\eta_1, \dots, \eta_n)$ ПЗ и ДЗ в канонической
-              форме будут оптимальными тогда и только тогда, когда
-              \[
-              \xi_i = 0, \quad \text{если} \quad a_i y \gt \gamma_i.
-              \]
-            </p>
-          </div>
+        <div class="theorem">
+          <i>(каноническая теорема равновесия)</i>.
+          <p>
+            Допустимые решения $x = (\xi_1, \dots, \xi_m)$ и
+            $y = (\eta_1, \dots, \eta_n)$ ПЗ и ДЗ в канонической
+            форме будут оптимальными тогда и только тогда, когда
+            \[
+            \xi_i = 0, \quad \text{если} \quad a_i y \gt \gamma_i.
+            \]
+          </p>
 
           <div class="proof">
             Рассмотрим
@@ -872,7 +880,7 @@
             \end{gathered}
             }
             \]
-          
+            
             <div class="necessity">
               Пусть $x$ и $y$ &mdash; оптимальные решения. Тогда
               \[
@@ -967,11 +975,11 @@
             Если ПЗ имеет оптимальное решение, то она имеет
             оптимальное базисное решение.
           </p>
-        </div>
 
-        <div class="proof">
-          <div class="todo">
-            Расписать.
+          <div class="proof">
+            <div class="todo">
+              Расписать.
+            </div>
           </div>
         </div>
       </div>
@@ -1050,52 +1058,52 @@
               \]
             </li>
           </ol>
-        </div>
 
-        <div class="proof">
-          <ol>
-            <li>
-              От противного: пусть $\tau_{rs} \neq 0$, но
-              вектора $(a_1, \dots, a_{r-1}, b_s,
-              a_{r+1}, \dots, a_m)$ линейно зависимы.
+          <div class="proof">
+            <ol>
+              <li>
+                От противного: пусть $\tau_{rs} \neq 0$, но
+                вектора $(a_1, \dots, a_{r-1}, b_s,
+                a_{r+1}, \dots, a_m)$ линейно зависимы.
 
-              Тогда
-              \[
-              \exists \lambda, \mu_s \neq 0: \quad
-              \sum_{i \neq r} \lambda_i a_i + \mu_s b_s = 0,
-              \]
-              но
-              \[
-              b_s = \sum_{i=1}^m \tau_{is} a_i,
-              \]
-              поэтому
-              \[
-              \sum_{i \neq r} \paren{\lambda_i + \mu_s \tau_{is}} a_i
-              + \mu_s \tau_{rs} a_r = 0,
-              \]
-              то есть $(a_1, \dots, a_m)$ линейно зависимы &mdash;
-              противоречие.
-            </li>
+                Тогда
+                \[
+                \exists \lambda, \mu_s \neq 0: \quad
+                \sum_{i \neq r} \lambda_i a_i + \mu_s b_s = 0,
+                \]
+                но
+                \[
+                b_s = \sum_{i=1}^m \tau_{is} a_i,
+                \]
+                поэтому
+                \[
+                \sum_{i \neq r} \paren{\lambda_i + \mu_s \tau_{is}} a_i
+                + \mu_s \tau_{rs} a_r = 0,
+                \]
+                то есть $(a_1, \dots, a_m)$ линейно зависимы &mdash;
+                противоречие.
+              </li>
 
-            <li>
-              Проверим формулы:
-              \[
-              \begin{aligned}
-              b_j &= \sum_{i \neq r} \tau_{ij}' a_i
-              + \tau_{sj}' b_s \\
-              &= \sum_{i \neq r} \paren{\tau_{ij}
-              - \frac{\tau_{is}}{\tau_{rs}} \tau_{rj}} a_i
-              + \frac{\tau_{rj}}{\tau_{rs}} b_s \\
-              &= \sum_{i \neq r} \paren{\tau_{ij}
-              - \frac{\tau_{is}}{\tau_{rs}} \tau_{rj}} a_i
-              + \frac{\tau_{rj}}{\tau_{rs}}
-              \sum_{i=1}^m \tau_{is} a_i \\
-              &= \sum_{i \neq r} \tau_{ij} a_i + \tau_{rj} a_r \\
-              &= b_j.
-              \end{aligned}
-              \]
-            </li>
-          </ol>
+              <li>
+                Проверим формулы:
+                \[
+                \begin{aligned}
+                b_j &= \sum_{i \neq r} \tau_{ij}' a_i
+                + \tau_{sj}' b_s \\
+                &= \sum_{i \neq r} \paren{\tau_{ij}
+                - \frac{\tau_{is}}{\tau_{rs}} \tau_{rj}} a_i
+                + \frac{\tau_{rj}}{\tau_{rs}} b_s \\
+                &= \sum_{i \neq r} \paren{\tau_{ij}
+                - \frac{\tau_{is}}{\tau_{rs}} \tau_{rj}} a_i
+                + \frac{\tau_{rj}}{\tau_{rs}}
+                \sum_{i=1}^m \tau_{is} a_i \\
+                &= \sum_{i \neq r} \tau_{ij} a_i + \tau_{rj} a_r \\
+                &= b_j.
+                \end{aligned}
+                \]
+              </li>
+            </ol>
+          </div>
         </div>
       </div>
     </li>
@@ -1296,22 +1304,22 @@
           Если в последней строке симплекс-таблицы нет положительных
           элементов (кроме $\xi_0$), то полученное базисное решение является
           оптимальным.
-        </div>
 
-        <div class="proof">
-          По следствию из теоремы о ранге матрицы
-          \[
-          \exists x: \quad a^i x = \beta_i, \quad i = \overline{i,m}.
-          \]
-          Посчитаем, чему равно выражение $a^i x$ для векторов, не входящих
-          в базис:
-          \[
-          \begin{aligned}
-          a^s x &= \sum_{i=1}^m \tau_{is} a^i x \\
-          &= \sum_{i=1}^m \tau_{is} \beta_i
-          \bydef = \xi_s \leqslant \beta_s, \quad s = \overline{1,n}.
-          \end{aligned}
-          \]
+          <div class="proof">
+            По следствию из теоремы о ранге матрицы
+            \[
+            \exists x: \quad a^i x = \beta_i, \quad i = \overline{i,m}.
+            \]
+            Посчитаем, чему равно выражение $a^i x$ для векторов, не входящих
+            в базис:
+            \[
+            \begin{aligned}
+            a^s x &= \sum_{i=1}^m \tau_{is} a^i x \\
+            &= \sum_{i=1}^m \tau_{is} \beta_i
+            \bydef = \xi_s \leqslant \beta_s, \quad s = \overline{1,n}.
+            \end{aligned}
+            \]
+          </div>
         </div>
       </div>
     </li>
@@ -1444,7 +1452,7 @@
           называют <i>верхним значением игры</i>.
 
           <p>
-            Если инфимум достигается, то $\underline{V}$ называют
+            Если инфимум достигается, то $\overline{V}$ называют
             <i>минимаксом игры</i>.
           </p>
         </div>
@@ -1458,27 +1466,27 @@
         <div class="lemma">
           В антагонистической игре
           $\underline{V} \leqslant \overline{V}$.
-        </div>
 
-        <div class="proof">
-          Так как
-          \[
-          K(x,y) \leqslant \sup_x K(x,y) \quad
-          \forall x \in X, \; \forall y \in Y,
-          \]
-          верно для любого $y$, то
-          \[
-          \inf_y K(x,y) \leqslant
-          \underbrace{\inf_y \sup_x K(x,y)}_{\const} \quad
-          \forall x \in X.
-          \]
-          Неравенство верно для любого $x$, поэтому
-          \[
-          \underline{V} \bydef = \sup_x \inf_y K(x,y)
-          \leqslant
-          \inf_y \sup_x K(x,y)
-          \bydef = \overline{V}.
-          \]
+          <div class="proof">
+            Так как
+            \[
+            K(x,y) \leqslant \sup_x K(x,y) \quad
+            \forall x \in X, \; \forall y \in Y,
+            \]
+            верно для любого $y$, то
+            \[
+            \inf_y K(x,y) \leqslant
+            \underbrace{\inf_y \sup_x K(x,y)}_{\const} \quad
+            \forall x \in X.
+            \]
+            Неравенство верно для любого $x$, поэтому
+            \[
+            \underline{V} \bydef = \sup_x \inf_y K(x,y)
+            \leqslant
+            \inf_y \sup_x K(x,y)
+            \bydef = \overline{V}.
+            \]
+          </div>
         </div>
 
         <div class="definition">
@@ -1517,66 +1525,66 @@
           \[
           \underline{V} = \overline{V} = V.
           \]
-        </div>
 
-        <div class="proof">
-          <div class="necessity">
-            Пусть $(i_0, j_0)$ &mdash; ситуация равновесия, тогда
-            по определению
-            \[
-            \alpha_{ij_0} \leqslant \alpha_{i_0 j_i}
-            \leqslant \alpha_{i_0j} \quad \forall i \in X, j \in Y,
-            \]
-            поэтому
-            \[
-            \max_{i \in X} \alpha_{i j_0} \leqslant \alpha_{i_0 j_0}
-            \leqslant \min_{j \in Y} \alpha_{i_0 j}.
-            \]
+          <div class="proof">
+            <div class="necessity">
+              Пусть $(i_0, j_0)$ &mdash; ситуация равновесия, тогда
+              по определению
+              \[
+              \alpha_{ij_0} \leqslant \alpha_{i_0 j_i}
+              \leqslant \alpha_{i_0j} \quad \forall i \in X, j \in Y,
+              \]
+              поэтому
+              \[
+              \max_{i \in X} \alpha_{i j_0} \leqslant \alpha_{i_0 j_0}
+              \leqslant \min_{j \in Y} \alpha_{i_0 j}.
+              \]
 
-            Так как
-            \[
-            \overline{V} \bydef = \min_{j \in Y} \max_{i \in X}
-            \alpha_{ij} \leqslant \max_{i \in X} \alpha_{i j_0}
-            \]
-            и
-            \[
-            \min_{j \in Y} \alpha_{i_0 j} \leqslant
-            \max_{i \in X} \min_{j \in Y} \alpha_{ij} \bydef
-            = \underline{V},
-            \]
-            то
-            \[
-            \overline{V} \leqslant V \leqslant \underline{V},
-            \]
-            но по лемме $\underline{V} \leqslant \overline{V}$,
-            поэтому $\overline{V} = \underline{V} = V$.
-          </div>
+              Так как
+              \[
+              \overline{V} \bydef = \min_{j \in Y} \max_{i \in X}
+              \alpha_{ij} \leqslant \max_{i \in X} \alpha_{i j_0}
+              \]
+              и
+              \[
+              \min_{j \in Y} \alpha_{i_0 j} \leqslant
+              \max_{i \in X} \min_{j \in Y} \alpha_{ij} \bydef
+              = \underline{V},
+              \]
+              то
+              \[
+              \overline{V} \leqslant V \leqslant \underline{V},
+              \]
+              но по лемме $\underline{V} \leqslant \overline{V}$,
+              поэтому $\overline{V} = \underline{V} = V$.
+            </div>
 
-          <div class="sufficiency">
-            Пусть $\underline{V} = \overline{V} = V$. Тогда
-            \[
-            \underline{V} \bydef = \min_{j \in Y} \alpha_{i_0 j}
-            = V
-            = \max_{i \in X} \alpha_{i j_0} \bydef = \overline{V},
-            \]
-            а, следовательно,
-            \[
-            \alpha_{i_0 j} \geqslant V \geqslant \alpha_{i j_0}
-            \quad \forall i \in X, j \in Y.
-            \]
+            <div class="sufficiency">
+              Пусть $\underline{V} = \overline{V} = V$. Тогда
+              \[
+              \underline{V} \bydef = \min_{j \in Y} \alpha_{i_0 j}
+              = V
+              = \max_{i \in X} \alpha_{i j_0} \bydef = \overline{V},
+              \]
+              а, следовательно,
+              \[
+              \alpha_{i_0 j} \geqslant V \geqslant \alpha_{i j_0}
+              \quad \forall i \in X, j \in Y.
+              \]
 
-            Рассмотрим $i = i_0$ и $j = j_0$:
-            \[
-            \alpha_{i_0 j_0} \geqslant V \geqslant \alpha_{i_0 j_0},
-            \implies V = \alpha_{i_0 j_0}.
-            \]
+              Рассмотрим $i = i_0$ и $j = j_0$:
+              \[
+              \alpha_{i_0 j_0} \geqslant V \geqslant \alpha_{i_0 j_0},
+              \implies V = \alpha_{i_0 j_0}.
+              \]
 
-            Таким образом,
-            \[
-            \alpha_{i j_0} \leqslant \alpha_{i_0 j_0}
-            \leqslant \alpha_{i_0 j} \quad \forall i \in X, j \in Y,
-            \]
-            поэтому $(i_0, j_0)$ является ситуацией равновесия.
+              Таким образом,
+              \[
+              \alpha_{i j_0} \leqslant \alpha_{i_0 j_0}
+              \leqslant \alpha_{i_0 j} \quad \forall i \in X, j \in Y,
+              \]
+              поэтому $(i_0, j_0)$ является ситуацией равновесия.
+            </div>
           </div>
         </div>
       </div>
@@ -1675,7 +1683,7 @@
         Свойства:
         <ol>
           <li>
-            <p>
+            <div class="proposition">
               <i>Единственность в смысле выигрыша</i>:
               для любых двух ситуаций равновесия
               $(x_1^*, y_1^*), (x_2^*, y_2^*) \in Z(\Gamma)$
@@ -1686,28 +1694,28 @@
               K(x_1^*, y_2^*) =
               K(x_2^*, y_1^*) = v.
               \]
-            </p>
 
-            <div class="derivation">
-              <div class="todo">
-                расписать.
+              <div class="proof">
+                <div class="todo">
+                  расписать.
+                </div>
               </div>
             </div>
           </li>
 
           <li>
-            <p>
+            <div class="proposition">
               Для любых двух ситуаций равновесия
               $(x_1^*, y_1^*), (x_2^*, y_2^*) \in Z(\Gamma)$
               справедливо
               \[
               (x_1^*, y_2^*), (x_2^*, y_1^*) \in Z(\Gamma).
               \]
-            </p>
 
-            <div class="derivation">
-              <div class="todo">
-                расписать.
+              <div class="proof">
+                <div class="todo">
+                  расписать.
+                </div>
               </div>
             </div>
           </li>
@@ -1723,10 +1731,10 @@
               Z(\Gamma) = Z(\Gamma') \quad \text{и} \quad
               V' = \alpha V + \beta.
               \]
-            </div>
 
-            <div class="proof">
-              <div class="todo"></div>
+              <div class="proof">
+                <div class="todo"></div>
+              </div>
             </div>
           </li>
 
@@ -1738,11 +1746,11 @@
               K(x^*, j)
               \]
               для любых $i \in X, j \in Y$.
-            </div>
 
-            <div class="proof">
-              <div class="todo">
-                Расписать.
+              <div class="proof">
+                <div class="todo">
+                  Расписать.
+                </div>
               </div>
             </div>
           </li>
@@ -1761,10 +1769,10 @@
                   если $K(x^*, j) \gt K(x^*, y^*)$, то $\eta_j^* = 0$;
                 </li>
               </ol>
-            </div>
 
-            <div class="proof">
-              <div class="todo">
+              <div class="proof">
+                <div class="todo">
+                </div>
               </div>
             </div>
           </li>
@@ -1781,10 +1789,10 @@
                   $\min\limits_j K(x^*, j) = K(x^*, y^*) = V$.
                 </li>
               </ol>
-            </div>
 
-            <div class="proof">
-              <div class="todo"></div>
+              <div class="proof">
+                <div class="todo"></div>
+              </div>
             </div>
           </li>
         </ol>
@@ -1798,17 +1806,14 @@
       </div>
       <div class="content">
         <div class="theorem">
-          <i>
-            (фон Неймана о существовании ситуации равновесия
-            в матричной игре).
-          </i>
+          (<i>фон Неймана о существовании ситуации равновесия в матричной игре</i>).
 
           Всякая матричная игра имеет ситуацию равновесия в
           смешанных стратегиях.
-        </div>
 
-        <div class="proof">
-          <div class="todo"></div>
+          <div class="proof">
+            <div class="todo"></div>
+          </div>
         </div>
       </div>
     </li>
@@ -1826,15 +1831,15 @@
           $a_{ij} \gt a_{kj}$ для любого $j \in Y$.
 
           Аналогично для $II$-го игрока.
+        </div>
 
-          <div class="remark">
-            Если $a_{ij} \geqslant a_{kj}$ для любого $j \in Y$,
-            то говорят о <i>нестрогом доминировании</i>.
-          </div>
+        <div class="remark">
+          Если $a_{ij} \geqslant a_{kj}$ для любого $j \in Y$,
+          то говорят о <i class="important">нестрогом доминировании</i>.
         </div>
 
         <div class="definition">
-          Говоря, что <i>смешанная стратегия $\xi'$ доминирует
+          Говорят, что <i>смешанная стратегия $\xi'$ доминирует
           смешанную стратегию $\xi''$</i> для игрока $I$, если
           \[
           \xi' a^j \geqslant \xi'' a^j \quad \forall j \in Y.
@@ -1897,10 +1902,10 @@
             быть получена расширением оптимальной стратегии
             в $\Gamma'$ на $i$-ом месте.
           </div>
-        </div>
 
-        <div class="proof">
-          <div class="todo"></div>
+          <div class="proof">
+            <div class="todo"></div>
+          </div>
         </div>
       </div>
     </li>
@@ -1963,30 +1968,30 @@
         <div class="theorem">
           В случае матричной игры ($n = 2$ и $K_1 = -K_2$) NE
           эквивалентна ситуации равновесия.
-        </div>
 
-        <div class="proof">
-          По определению NE
-          \[
-          \begin{aligned}
-          K_1(x_1^*, x_2^*) &\geqslant K_1(x_1, x_2^*) \\
-          K_2(x_1^*, x_2^*) &\geqslant K_2(x_1^*, x_2),
-          \end{aligned}
-          \implies
-          \begin{aligned}
-          K_1(x_1^*, x_2^*) &\geqslant \phantom{-} K_1(x_1, x_2^*) \\
-          -K_2(x_1^*, x_2^*) &\leqslant -K_2(x_1^*, x_2),
-          \end{aligned}
-          \]
+          <div class="proof">
+            По определению NE
+            \[
+            \begin{aligned}
+            K_1(x_1^*, x_2^*) &\geqslant K_1(x_1, x_2^*) \\
+            K_2(x_1^*, x_2^*) &\geqslant K_2(x_1^*, x_2),
+            \end{aligned}
+            \implies
+            \begin{aligned}
+            K_1(x_1^*, x_2^*) &\geqslant \phantom{-} K_1(x_1, x_2^*) \\
+            -K_2(x_1^*, x_2^*) &\leqslant -K_2(x_1^*, x_2),
+            \end{aligned}
+            \]
 
-          но $K_1 = -K_2$, поэтому
-          \[
-          K_1(x_1, x_2^*) \leqslant K(x_1^*, x_2^*)
-          \leqslant K_1(x_1^*, x_2),
-          \]
+            но $K_1 = -K_2$, поэтому
+            \[
+            K_1(x_1, x_2^*) \leqslant K(x_1^*, x_2^*)
+            \leqslant K_1(x_1^*, x_2),
+            \]
 
-          откуда по определению $(x_1^*, x_2^*)$ &mdash; ситуация
-          равновесия.
+            откуда по определению $(x_1^*, x_2^*)$ &mdash; ситуация
+            равновесия.
+          </div>
         </div>
 
         <div class="definition">
@@ -2077,7 +2082,7 @@
             \end{matrix} &
             \left[
             \begin{matrix}
-            {\color{blue}(-7,-7)} \\
+            {\color{#47c7f0}(-7,-7)} \\
             {\color{orange}(-10,0)}
             \end{matrix}
             \right. &
@@ -2094,7 +2099,7 @@
           
           Возможные ситуации:
           <ul>
-            <li style="color:blue">
+            <li style="color:lightblue">
               $(\alpha_1, \beta_1)$ &mdash; NE;
             </li>
 
@@ -2324,132 +2329,132 @@
           \alpha \in C(N, v) \iff
           \sum_{i \in S} \alpha_i \geqslant v(S) \quad \forall S \subset N.
           \]
-        </div>
 
-        <div class="proof">
-          <div class="necessity">
-            Рассмотрим $\alpha \in C(N, v)$. Предположим, что
-            \[
-            \exists T \subset N: \quad \alpha(T) \lt v(T).
-            \]
-        
-            Тогда рассмотрим вектор $\beta \in \mathbb{R}^n$,
-            коэффициенты которого имеют вид:
-            \[
-            \left\{
-            \begin{aligned}
-            \beta_i &= \alpha_i + \frac{v(T) - \alpha(T)}{\abs{T}},
-            & i \in T \\
-            \beta_i &= v(\{i\})
-            + \frac{v(N) - v(T) - \sum_{i \not\in T} v(\{i\})}
-            {\abs{N} - \abs{T}},
-            & i \not\in T.
-            \end{aligned}
-            \right.
-            \]
-        
-            Проверим, является ли он дележом:
-            <ol>
-              <li>
-                Должно выполняться $\beta_i \geqslant v(\{i\}), i \in N$. Проверяем:
-                \[
-                \begin{aligned}
-                \forall i \in T &&
-                \beta_i &= \alpha_i + \frac{v(T) - \alpha(T)}{\abs{T}}
-                \gt \alpha_i \geqslant v(\{i\}) \\
-                \forall i \not\in T &&
-                \beta_i &= v(\{i\})
-                + \frac{V(N) - V(T) - \sum_{i \not\in T} v(\{i\})}
-                {\abs{N} - \abs{T}} \geqslant v(\{i\}).
-                \end{aligned}
-                \]
-              </li>
-        
-              <li>
-                Должно выполняться $\sum_{i \in N} \beta_i = v(N)$. Проверяем:
-                \[
-                \begin{aligned}
-                \sum_{i \in N} \beta_i
-                &= \sum_{i \in T} \beta_i + \sum_{i \not\in T} \beta_i \\
-                &= {\color{red}\sum_{i \in T} \alpha_i} + {\color{blue}v(T)}
-                - {\color{red}\alpha(T)} + {\color{green}\sum_{i \not\in T} v(\{i\})}
-                + v(N) - {\color{blue}v(T)}
-                - {\color{green}\sum_{i \not\in T} v(\{i\})} \\
-                &= v(N).
-                \end{aligned}
-                \]
-              </li>
-            </ol>
-        
-            <p>
-              Таким образом, $\beta$ является дележом.
-            </p>
-        
-            <p>
-              Проверим, доминирует ли он делёж $\alpha$:
-            </p>
-            <ol>
-              <li>
-                <i>Предпочтительность:</i>
-                \[
-                \beta_i \gt \alpha_i \quad \forall i \in T.
-                \]
-              </li>
+          <div class="proof">
+            <div class="necessity">
+              Рассмотрим $\alpha \in C(N, v)$. Предположим, что
+              \[
+              \exists T \subset N: \quad \alpha(T) \lt v(T).
+              \]
+              
+              Тогда рассмотрим вектор $\beta \in \mathbb{R}^n$,
+              коэффициенты которого имеют вид:
+              \[
+              \left\{
+              \begin{aligned}
+              \beta_i &= \alpha_i + \frac{v(T) - \alpha(T)}{\abs{T}},
+              & i \in T \\
+              \beta_i &= v(\{i\})
+              + \frac{v(N) - v(T) - \sum_{i \not\in T} v(\{i\})}
+              {\abs{N} - \abs{T}},
+              & i \not\in T.
+              \end{aligned}
+              \right.
+              \]
+              
+              Проверим, является ли он дележом:
+              <ol>
+                <li>
+                  Должно выполняться $\beta_i \geqslant v(\{i\}), i \in N$. Проверяем:
+                  \[
+                  \begin{aligned}
+                  \forall i \in T &&
+                  \beta_i &= \alpha_i + \frac{v(T) - \alpha(T)}{\abs{T}}
+                  \gt \alpha_i \geqslant v(\{i\}) \\
+                  \forall i \not\in T &&
+                  \beta_i &= v(\{i\})
+                  + \frac{V(N) - V(T) - \sum_{i \not\in T} v(\{i\})}
+                  {\abs{N} - \abs{T}} \geqslant v(\{i\}).
+                  \end{aligned}
+                  \]
+                </li>
+                
+                <li>
+                  Должно выполняться $\sum_{i \in N} \beta_i = v(N)$. Проверяем:
+                  \[
+                  \begin{aligned}
+                  \sum_{i \in N} \beta_i
+                  &= \sum_{i \in T} \beta_i + \sum_{i \not\in T} \beta_i \\
+                  &= {\color{red}\sum_{i \in T} \alpha_i} + {\color{#47c7f0}v(T)}
+                  - {\color{red}\alpha(T)} + {\color{green}\sum_{i \not\in T} v(\{i\})}
+                  + v(N) - {\color{#47c7f0}v(T)}
+                  - {\color{green}\sum_{i \not\in T} v(\{i\})} \\
+                  &= v(N).
+                  \end{aligned}
+                  \]
+                </li>
+              </ol>
+              
+              <p>
+                Таким образом, $\beta$ является дележом.
+              </p>
+              
+              <p>
+                Проверим, доминирует ли он делёж $\alpha$:
+              </p>
+              <ol>
+                <li>
+                  <i>Предпочтительность:</i>
+                  \[
+                  \beta_i \gt \alpha_i \quad \forall i \in T.
+                  \]
+                </li>
 
-              <li>
-                <i>Реализуемость:</i>
-                \[
-                \sum\limits_{i \in T} \beta_i
-                = {\color{red}\alpha(T)} + v(t) -
-                {\color{red}\alpha(T)} = v(t) \leqslant v(t).
-                \]
-              </li>
-            </ol>
+                <li>
+                  <i>Реализуемость:</i>
+                  \[
+                  \sum\limits_{i \in T} \beta_i
+                  = {\color{red}\alpha(T)} + v(t) -
+                  {\color{red}\alpha(T)} = v(t) \leqslant v(t).
+                  \]
+                </li>
+              </ol>
 
-            <p>
-              Таким образом, делёж $\beta$ доминирует делёж $\alpha$,
-              что противоречит тому, что $\alpha \in C(N,v)$.
-            </p>
-          </div>
+              <p>
+                Таким образом, делёж $\beta$ доминирует делёж $\alpha$,
+                что противоречит тому, что $\alpha \in C(N,v)$.
+              </p>
+            </div>
 
-          <div class="sufficiency">
-            Пусть
-            \[
-            \alpha(S) \geqslant v(S) \quad \forall S \subset N.
-            \]
+            <div class="sufficiency">
+              Пусть
+              \[
+              \alpha(S) \geqslant v(S) \quad \forall S \subset N.
+              \]
 
-            Предположим, что $\alpha \not\in C$, то есть существует делёж $\beta$,
-            доминирующий $\alpha$ по некоторой коалиции $T \subset N$, то есть
-            выполнены свойства:
-            <ol>
-              <li>
-                <i>Предпочтительность</i>:
-                \[
-                \beta_i \gt \alpha_i \quad \forall i \in T;
-                \]
-              </li>
+              Предположим, что $\alpha \not\in C$, то есть существует делёж $\beta$,
+              доминирующий $\alpha$ по некоторой коалиции $T \subset N$, то есть
+              выполнены свойства:
+              <ol>
+                <li>
+                  <i>Предпочтительность</i>:
+                  \[
+                  \beta_i \gt \alpha_i \quad \forall i \in T;
+                  \]
+                </li>
 
-              <li>
-                <i>Реализуемость:</i>
-                \[
-                \sum\limits_{i \in T} \beta_i \leqslant v(T).
-                \]
-              </li>
-            </ol>
+                <li>
+                  <i>Реализуемость:</i>
+                  \[
+                  \sum\limits_{i \in T} \beta_i \leqslant v(T).
+                  \]
+                </li>
+              </ol>
 
-            Из предпочтительности следует, что
-            \[
-            \beta(T) \gt \alpha(T),
-            \]
-            но
-            \[
-            \alpha(S) \geqslant v(S) \quad \forall S \subset N,
-            \]
-            поэтому
-            \[
-            \beta(T) \gt v(T),
-            \]
-            что противоречит реализуемости дележа $\beta$.
+              Из предпочтительности следует, что
+              \[
+              \beta(T) \gt \alpha(T),
+              \]
+              но
+              \[
+              \alpha(S) \geqslant v(S) \quad \forall S \subset N,
+              \]
+              поэтому
+              \[
+              \beta(T) \gt v(T),
+              \]
+              что противоречит реализуемости дележа $\beta$.
+            </div>
           </div>
         </div>
 
@@ -2482,17 +2487,17 @@
 
         <div class="proposition">
           $C$-ядро &mdash; подмножество $NM$-решения.
-        </div>
 
-        <div class="proof">
-          От противного: пусть $C \not\subset NM$, тогда
-          существует по крайней мере один элемент $C$-ядра $\alpha$,
-          не принадлежащий $NM$. Тогда
-          \[
-          \exists \alpha \not\in NM: \quad \forall \beta \in NM
-          \quad \beta \not\succ \alpha,
-          \]
-          что противоречит определению $NM$-решения.
+          <div class="proof">
+            От противного: пусть $C \not\subset NM$, тогда
+            существует по крайней мере один элемент $C$-ядра $\alpha$,
+            не принадлежащий $NM$. Тогда
+            \[
+            \exists \alpha \not\in NM: \quad \forall \beta \in NM
+            \quad \beta \not\succ \alpha,
+            \]
+            что противоречит определению $NM$-решения.
+          </div>
         </div>
       </div>
     </li>
@@ -2505,8 +2510,8 @@
         Рассмотрим кооперативную игру $(N, v)$ с $n$ игроками.
 
         <p>
-          Рассмотрим $v(S) - v(S \setminus \{i\})$ &mdash; вклад игрока $i$
-          в коалицию $S$, которая создаётся случайным образом:
+          Рассмотрим $v(S) - v(S \setminus \{i\})$. Это вклад игрока $i$ в коалицию $S$, которая создаётся случайным
+          образом:
         </p>
 
         <ul>
@@ -2853,82 +2858,82 @@
             Задача заключается в том, чтобы перейти из начальной вершины $x_0 \in N$
             в конечную $M \in N$ наискорейшим способом.
           </p>
-        </div>
 
-        <div class="solution">
-          Рассмотрим произвольную последовательность рёбер
-          \[
-          \pi = \set{ (x_0, x_1), (x_1, x_2), \dots, (x_k, M)},
-          \]
-          тогда задача заключается в поиске последовательности, доставляющей минимум
-          функции
-          \[
-          T(\pi) = \sum_{i=0}^{k} t(x_i, x_{i+1}).
-          \]
-
-          <p>
-            Введём в рассмотрение функцию Беллмана $T(x)$, означающую минимальное
-            время перехода из точки $x$ в $M$.
-          </p>
-
-          <p>
-            Предположим, что первый шаг совершаем произвольно и переходим в точку
-            $x_1$ за время $t(x, x_1)$, а дальнейшую последовательность рёбер
-            строим <i>оптимально</i>. Тогда суммарное время составит
-            $t(x, x_1) + T(x_1)$.
-          </p>
-
-          <p>
-            Функция Беллмана для данной задачи:
+          <div class="solution">
+            Рассмотрим произвольную последовательность рёбер
             \[
-            \begin{aligned}
-            T(x_0) &= \min_{x_1 \in N} \left[ t(x_0, x_1) + T(x_1) \right] \\
-            T(M) &= 0.
-            \end{aligned}
+            \pi = \set{ (x_0, x_1), (x_1, x_2), \dots, (x_k, M)},
             \]
-          </p>
-
-          <p>
-            До сих пор не ясно, как искать $T(x_1)$. Для решения этой проблемы
-            воспользуемся методом последовательных приближений:
-          </p>
-          <ul>
-            <li>
-              Пусть $T_0(x) = t(x, M)$ &mdash; минимальное время перехода из $x$
-              в $M$ <i>без промежуточных точек</i>,
-            </li>
-
-            <li>
-              $T_1(x) = \min\limits_{x_1 \in N} \left[ t(x, x_1) + T_0(x_1) \right]$
-              &mdash; минимальное время перехода из $x$ в $M$ <i>с не более чем одной
-              промежуточной точкой</i>.
-            </li>
-
-            <li>
-              $\dots$
-            </li>
-
-            <li>
-              $T_k(x) = \min\limits_{y \in N} \left[t(x, y) + T_{k-1}(y)\right]$
-              &mdash; минимальное время перехода из $x$ в $M$ <i>с не более чем $k$
-              промежуточными точками</i>.
-            </li>
-          </ul>
-
-          <p>
-            Последовательность функций $T_0(x), \dots, T_k(x), \dots$ монотонно
-            невозрастает, так как $t(x, y) \geqslant 0$, поэтому,
-            по <a href="https://wikiless.org/wiki/%D0%A2%D0%B5%D0%BE%D1%80%D0%B5%D0%BC%D0%B0_%D0%92%D0%B5%D0%B9%D0%B5%D1%80%D1%88%D1%82%D1%80%D0%B0%D1%81%D1%81%D0%B0_%D0%BE%D0%B1_%D0%BE%D0%B3%D1%80%D0%B0%D0%BD%D0%B8%D1%87%D0%B5%D0%BD%D0%BD%D0%BE%D0%B9_%D0%B2%D0%BE%D0%B7%D1%80%D0%B0%D1%81%D1%82%D0%B0%D1%8E%D1%89%D0%B5%D0%B9_%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8?lang=ru" target="_blank">теореме Вейерштрасса</a>,
-            данная последовательность сходится за конечное число шагов к своему
-            пределу, то есть
+            тогда задача заключается в поиске последовательности, доставляющей минимум
+            функции
             \[
-            \exists n \in \mathbb{N}: \quad T_{n-1}(x) = T_n(x) = T_{n+1}(x) = \dots
+            T(\pi) = \sum_{i=0}^{k} t(x_i, x_{i+1}).
             \]
-          </p>
 
-          <div class="remark">
-            Вообще у нас количество узлов конечно ($m$), поэтому можно получить
-            оптимальное решение уже через $m$ итераций.
+            <p>
+              Введём в рассмотрение функцию Беллмана $T(x)$, означающую минимальное
+              время перехода из точки $x$ в $M$.
+            </p>
+
+            <p>
+              Предположим, что первый шаг совершаем произвольно и переходим в точку
+              $x_1$ за время $t(x, x_1)$, а дальнейшую последовательность рёбер
+              строим <i>оптимально</i>. Тогда суммарное время составит
+              $t(x, x_1) + T(x_1)$.
+            </p>
+
+            <p>
+              Функция Беллмана для данной задачи:
+              \[
+              \begin{aligned}
+              T(x_0) &= \min_{x_1 \in N} \left[ t(x_0, x_1) + T(x_1) \right] \\
+              T(M) &= 0.
+              \end{aligned}
+              \]
+            </p>
+
+            <p>
+              До сих пор не ясно, как искать $T(x_1)$. Для решения этой проблемы
+              воспользуемся методом последовательных приближений:
+            </p>
+            <ul>
+              <li>
+                Пусть $T_0(x) = t(x, M)$ &mdash; минимальное время перехода из $x$
+                в $M$ <i>без промежуточных точек</i>,
+              </li>
+
+              <li>
+                $T_1(x) = \min\limits_{x_1 \in N} \left[ t(x, x_1) + T_0(x_1) \right]$
+                &mdash; минимальное время перехода из $x$ в $M$ <i>с не более чем одной
+                промежуточной точкой</i>.
+              </li>
+
+              <li>
+                $\dots$
+              </li>
+
+              <li>
+                $T_k(x) = \min\limits_{y \in N} \left[t(x, y) + T_{k-1}(y)\right]$
+                &mdash; минимальное время перехода из $x$ в $M$ <i>с не более чем $k$
+                промежуточными точками</i>.
+              </li>
+            </ul>
+
+            <p>
+              Последовательность функций $T_0(x), \dots, T_k(x), \dots$ монотонно
+              невозрастает, так как $t(x, y) \geqslant 0$, поэтому,
+              по <a href="https://ru.wikipedia.org/wiki/%D0%A2%D0%B5%D0%BE%D1%80%D0%B5%D0%BC%D0%B0_%D0%92%D0%B5%D0%B9%D0%B5%D1%80%D1%88%D1%82%D1%80%D0%B0%D1%81%D1%81%D0%B0_%D0%BE%D0%B1_%D0%BE%D0%B3%D1%80%D0%B0%D0%BD%D0%B8%D1%87%D0%B5%D0%BD%D0%BD%D0%BE%D0%B9_%D0%B2%D0%BE%D0%B7%D1%80%D0%B0%D1%81%D1%82%D0%B0%D1%8E%D1%89%D0%B5%D0%B9_%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8?lang=ru" target="_blank">теореме Вейерштрасса</a>,
+              данная последовательность сходится за конечное число шагов к своему
+              пределу, то есть
+              \[
+              \exists n \in \mathbb{N}: \quad T_{n-1}(x) = T_n(x) = T_{n+1}(x) = \dots
+              \]
+            </p>
+
+            <div class="remark">
+              Вообще у нас количество узлов конечно ($m$), поэтому можно получить
+              оптимальное решение уже через $m$ итераций.
+            </div>
           </div>
         </div>
       </div>
@@ -3165,24 +3170,24 @@
           \[
           f(s, N) \leqslant u(S, S') \quad \forall f, \forall (S, S').
           \]
-        </div>
 
-        <div class="proof">
-          Так как $s \in S$, но $s' \not\in S$, то $S \setminus \{s\}$ &mdash;
-          множество, состоящее из промежуточных узлов:
-          \[
-          \sum_{x \in S \setminus \{s\}} f(x, N) = 0,
-          \]
-          поэтому
-          \[
-          \begin{aligned}
-          f(s, N) &= f({\color{green}s}, N)
-          + f({\color{green}S \setminus \{s\}}, N) \\
-          &= f({\color{green}S}, N) \\
-          &= \cancel{f(S, S)} + f(S, S') \\
-          &\leqslant u(S, S').
-          \end{aligned}
-          \]
+          <div class="proof">
+            Так как $s \in S$, но $s' \not\in S$, то $S \setminus \{s\}$ &mdash;
+            множество, состоящее из промежуточных узлов:
+            \[
+            \sum_{x \in S \setminus \{s\}} f(x, N) = 0,
+            \]
+            поэтому
+            \[
+            \begin{aligned}
+            f(s, N) &= f({\color{green}s}, N)
+            + f({\color{green}S \setminus \{s\}}, N) \\
+            &= f({\color{green}S}, N) \\
+            &= \cancel{f(S, S)} + f(S, S') \\
+            &\leqslant u(S, S').
+            \end{aligned}
+            \]
+          </div>
         </div>
 
         <div class="lemma">
@@ -3193,43 +3198,43 @@
           \]
           то $\overline f$ &mdash; максимальный поток, а $(\overline S, \overline S')$
           &mdash; минимальное сечение.
-        </div>
 
-        <div class="proof">
-          <ul>
-            <li>
-              По предыдущей лемме известно, что
-              \[
-              f(s, N) \leqslant u(\overline S, \overline S') \quad \forall f,
-              \]
-              но по условию леммы
-              \[
-              \overline f(s, N) = u(\overline S, \overline S'),
-              \]
-              поэтому
-              \[
-              f(s, N) \leqslant \overline f(s, N) \quad \forall f,
-              \]
-              откуда следует, что $\overline f$ &mdash; максимальный поток.
-            </li>
+          <div class="proof">
+            <ul>
+              <li>
+                По предыдущей лемме известно, что
+                \[
+                f(s, N) \leqslant u(\overline S, \overline S') \quad \forall f,
+                \]
+                но по условию леммы
+                \[
+                \overline f(s, N) = u(\overline S, \overline S'),
+                \]
+                поэтому
+                \[
+                f(s, N) \leqslant \overline f(s, N) \quad \forall f,
+                \]
+                откуда следует, что $\overline f$ &mdash; максимальный поток.
+              </li>
 
-            <li>
-              По предыдущей лемме известно, что
-              \[
-              \overline f(s, N) \leqslant u(S, S') \quad \forall (S, S'),
-              \]
-              но по условию леммы
-              \[
-              \overline f(s, N) = u(\overline S, \overline S'),
-              \]
-              поэтому
-              \[
-              u(\overline S, \overline S') \leqslant u(S, S') \quad \forall (S, S')
-              \]
-              откуда следует, что $(\overline S, \overline S')$ &mdash;
-              минимальное сечение.
-            </li>
-          </ul>
+              <li>
+                По предыдущей лемме известно, что
+                \[
+                \overline f(s, N) \leqslant u(S, S') \quad \forall (S, S'),
+                \]
+                но по условию леммы
+                \[
+                \overline f(s, N) = u(\overline S, \overline S'),
+                \]
+                поэтому
+                \[
+                u(\overline S, \overline S') \leqslant u(S, S') \quad \forall (S, S')
+                \]
+                откуда следует, что $(\overline S, \overline S')$ &mdash;
+                минимальное сечение.
+              </li>
+            </ul>
+          </div>
         </div>
 
         <div class="theorem">
@@ -3242,34 +3247,34 @@
             \overline f(s, N) = u(\overline S, \overline S').
             \]
           </p>
+
+          <div class="proof">
+            Из первой леммы следует, что:
+            <ul>
+              <li>
+                $f(s, N)$ ограничена сверху пропускной способностью любого сечения,
+                но у множества пропускных способностей любых сечений существует
+                точное нижнее значение (пропускная способность минимального
+                сечения), откуда, в силу целочисленности задачи, следует, что
+                существует максимальный поток $\overline f$.
+              </li>
+
+              <li>
+                $u(S, S')$ ограничена снизу мощностью любого потока, но у мощностей
+                любых потоков существует точное верхнее значение, откуда, в силу
+                целочисленности задачи, следует, что существует минимальное сечение.
+              </li>
+            </ul>
+
+            <div class="todo">
+              Недостаточно обоснованное доказательство: как $\leqslant$ превратился в
+              $=$?
+            </div>
+          </div>
         </div>
 
         <div class="remark">
           Эта теорема является аналогом теоремы двойственной.
-        </div>
-
-        <div class="proof">
-          Из первой леммы следует, что:
-          <ul>
-            <li>
-              $f(s, N)$ ограничена сверху пропускной способностью любого сечения,
-              но у множества пропускных способностей любых сечений существует
-              точное нижнее значение (пропускная способность минимального
-              сечения), откуда, в силу целочисленности задачи, следует, что
-              существует максимальный поток $\overline f$.
-            </li>
-
-            <li>
-              $u(S, S')$ ограничена снизу мощностью любого потока, но у мощностей
-              любых потоков существует точное верхнее значение, откуда, в силу
-              целочисленности задачи, следует, что существует минимальное сечение.
-            </li>
-          </ul>
-
-          <div class="todo">
-            Недостаточно обоснованное доказательство: как $\leqslant$ превратился в
-            $=$?
-          </div>
         </div>
 
         <div class="definition">
@@ -3294,22 +3299,25 @@
         <ol>
           <li>
             $s' \not\in \overline S$ (тогда $(\overline S, \overline S')$ &mdash;
-            сечение). Докажем, что в этом случае $\overline f(s, N) = u(\overline S,
-            \overline S')$.
+            сечение).
 
-            <div class="proof">
-              От противного: пусть $\overline f(s,N) \lt
-              u(\overline S, \overline S')$. Из леммы 1 известно, что
-              \[
-              \overline f(\overline S, \overline S') \lt u(\overline S, \overline S'),
-              \]
-              то есть существует ребро $(x, y)$, где $x \in \overline S,
-              \; y \in \overline S'$, такое, что
-              \[
-              \overline f(x,y) \lt u(x,y),
-              \]
-              то есть $y$ можно достичь по ненасыщенном пути из $S$ &mdash;
-              противоречие.
+            <div class="proposition">
+              В этом случае $\overline f(s, N) = u(\overline S, \overline S')$.
+
+              <div class="proof">
+                От противного: пусть $\overline f(s,N) \lt
+                u(\overline S, \overline S')$. Из леммы 1 известно, что
+                \[
+                \overline f(\overline S, \overline S') \lt u(\overline S, \overline S'),
+                \]
+                то есть существует ребро $(x, y)$, где $x \in \overline S,
+                \; y \in \overline S'$, такое, что
+                \[
+                \overline f(x,y) \lt u(x,y),
+                \]
+                то есть $y$ можно достичь по ненасыщенном пути из $S$ &mdash;
+                противоречие.
+              </div>
             </div>
           </li>
 
@@ -3339,18 +3347,18 @@
 
             <div class="proposition">
               $f'(x,y)$ &mdash; поток.
-            </div>
 
-            <div class="proof">
-              <ul>
-                <li>
-                  $f'(x,y) \leqslant u(x, y)$;
-                </li>
+              <div class="proof">
+                <ul>
+                  <li>
+                    $f'(x,y) \leqslant u(x, y)$;
+                  </li>
 
-                <li>
-                  $f'(x,y) = -f(y, x)$.
-                </li>
-              </ul>
+                  <li>
+                    $f'(x,y) = -f(y, x)$.
+                  </li>
+                </ul>
+              </div>
             </div>
 
             <p>
@@ -3455,10 +3463,10 @@
           \]
           где $J(S)$ &mdash; множество работ, которое могут выполнять работники
           из $S$.
-        </div>
 
-        <div class="proof">
-          <div class="todo"></div>
+          <div class="proof">
+            <div class="todo"></div>
+          </div>
         </div>
       </div>
     </li>
@@ -3536,25 +3544,25 @@
           \forall \tau \in (0, \delta),
           \]
           причём $x + \tau d \in F$.
-        </div>
 
-        <div class="proof">
-          \[
-          \dp{\nabla f(x)}{d} \gt 0 \implies
-          \lim\limits_{\tau \to +0} \dfrac{f(x + \tau d) - f(x)}{\tau} \gt 0,
-          \]
-          следовательно,
-          \[
-          \exists \delta' \gt 0 \quad \dfrac{f(x + \tau d) - f(x)}{\tau} \gt 0
-          \quad g\forall \tau \in (0, \delta').
-          \]
+          <div class="proof">
+            \[
+            \dp{\nabla f(x)}{d} \gt 0 \implies
+            \lim\limits_{\tau \to +0} \dfrac{f(x + \tau d) - f(x)}{\tau} \gt 0,
+            \]
+            следовательно,
+            \[
+            \exists \delta' \gt 0 \quad \dfrac{f(x + \tau d) - f(x)}{\tau} \gt 0
+            \quad g\forall \tau \in (0, \delta').
+            \]
 
-          Так как $x \in F$, то
-          \[
-          \exists \delta'' \gt 0: \quad x + \tau d \in F \quad
-          \tau \in (0, \delta'').
-          \]
-          Тогда для выполнения леммы положим $\delta = \min \set{\delta', \delta''}$.
+            Так как $x \in F$, то
+            \[
+            \exists \delta'' \gt 0: \quad x + \tau d \in F \quad
+            \tau \in (0, \delta'').
+            \]
+            Тогда для выполнения леммы положим $\delta = \min \set{\delta', \delta''}$.
+          </div>
         </div>
 
         <div class="lemma">
@@ -3564,42 +3572,42 @@
           \[
           \forall d \in D(x^*) \quad \dp{\nabla f(x^*)}{d} \leqslant 0.
           \]
-        </div>
 
-        <div class="proof">
-          <p>
-            Если $D(x^*) = \varnothing$, то доказывать нечего.
-          </p>
+          <div class="proof">
+            <p>
+              Если $D(x^*) = \varnothing$, то доказывать нечего.
+            </p>
 
-          От противного: пусть $x^*$ &mdash; оптимальное решение, но
-          \[
-          \exists d \in D(x^*) \quad \dp{\nabla f(x)}{d} \gt 0.
-          \]
-          Тогда по предыдущей лемме следует, что
-          \[
-          \exists d \gt 0 \quad f(x^* + \tau d) \gt f(x^*)
-          \]
-          и при этом $x^* + \tau d \in F$ для любого $\tau \in (0, \delta)$,
-          что противоречит предположению о том, что $f(x^*)$ &mdash; оптимальное
-          решение.
+            От противного: пусть $x^*$ &mdash; оптимальное решение, но
+            \[
+            \exists d \in D(x^*) \quad \dp{\nabla f(x)}{d} \gt 0.
+            \]
+            Тогда по предыдущей лемме следует, что
+            \[
+            \exists d \gt 0 \quad f(x^* + \tau d) \gt f(x^*)
+            \]
+            и при этом $x^* + \tau d \in F$ для любого $\tau \in (0, \delta)$,
+            что противоречит предположению о том, что $f(x^*)$ &mdash; оптимальное
+            решение.
+          </div>
         </div>
 
         <div class="corollary">
           Если $F = \mathbb{R}^n$, а $x^* \in F$ &mdash; оптимальное
           решение ЗНЛП, то $\nabla f(x^*) = 0$.
-        </div>
 
-        <div class="proof">
-          Если $F = \mathbb{R}^n$, то $D(x^*) = \mathbb{R}^n$, откуда по необходимому
-          условию оптимальности
-          \[
-          \forall d \in D(x^*) \quad
-          \begin{cases}
-          \dp{\nabla f(x^*)}{d} \leqslant 0 \\
-          \dp{\nabla f(x^*)}{(-d)} \leqslant 0,
-          \end{cases}
-          \]
-          откуда $\nabla f(x^*) = 0$.
+          <div class="proof">
+            Если $F = \mathbb{R}^n$, то $D(x^*) = \mathbb{R}^n$, откуда по необходимому
+            условию оптимальности
+            \[
+            \forall d \in D(x^*) \quad
+            \begin{cases}
+            \dp{\nabla f(x^*)}{d} \leqslant 0 \\
+            \dp{\nabla f(x^*)}{(-d)} \leqslant 0,
+            \end{cases}
+            \]
+            откуда $\nabla f(x^*) = 0$.
+          </div>
         </div>
 
         <div class="corollary">
@@ -3607,25 +3615,25 @@
           \[
           \forall d \in \overline D(x^*) \quad \dp{\nabla f(x^*)}{d} \leqslant 0.
           \]
-        </div>
 
-        <div class="proof">
-          Рассмотрим сходящуюся последовательность направлений
-          \[
-          \set{ d^k }_{k=1}^\infty \quad d^k \in D(x^*),
-          \]
-          причём
-          \[
-          \lim_{k \to \infty} d^k = d \in \overline{D}.
-          \]
-          Так как $x^*$ &mdash; оптимальное решение, то
-          \[
-          \dp{\nabla f(x^*)}{d^k} \leqslant 0 \quad \forall k \in \mathbb{N},
-          \]
-          откуда из непрерывности следует, что
-          \[
-          \dp{\nabla f(x^*)}{d} \leqslant 0 \quad \forall d \in \overline D.
-          \]
+          <div class="proof">
+            Рассмотрим сходящуюся последовательность направлений
+            \[
+            \set{ d^k }_{k=1}^\infty \quad d^k \in D(x^*),
+            \]
+            причём
+            \[
+            \lim_{k \to \infty} d^k = d \in \overline{D}.
+            \]
+            Так как $x^*$ &mdash; оптимальное решение, то
+            \[
+            \dp{\nabla f(x^*)}{d^k} \leqslant 0 \quad \forall k \in \mathbb{N},
+            \]
+            откуда из непрерывности следует, что
+            \[
+            \dp{\nabla f(x^*)}{d} \leqslant 0 \quad \forall d \in \overline D.
+            \]
+          </div>
         </div>
 
         <div class="definition">
@@ -3648,47 +3656,47 @@
           \widetilde D(x) = \set{d: \nabla g_i(x) d \geqslant 0 \quad
           i \in A(x)}.
           \]
-        </div>
 
-        <div class="proof">
-          <ol>
-            <li>
-              Проверим, что $D(x) \subset \widetilde D(x)$.
+          <div class="proof">
+            <ol>
+              <li>
+                Проверим, что $D(x) \subset \widetilde D(x)$.
 
-              <p>
-                От противного: пусть найдётся $d \in \mathbb{R}^n$ такой, что
-                \[
-                d \in D(x), \quad \text{но} \quad d \not\in \widetilde{D}(x).
-                \]
+                <p>
+                  От противного: пусть найдётся $d \in \mathbb{R}^n$ такой, что
+                  \[
+                  d \in D(x), \quad \text{но} \quad d \not\in \widetilde{D}(x).
+                  \]
 
-                Тогда $\exists i \in A(x)$ такой, что $\nabla g_i(x) d \geqslant 0$,
-                значит, по первой теореме
-                \[
-                g_i(x + \tau d) \lt \overbrace{g_i(x) = 0}^{\text{т.к. } i \in A(x)}
-                \quad \forall \tau \in (0, \delta).
-                \]
-                Получается, что
-                \[
-                \begin{cases}
-                g_i(x + \tau d) \lt 0, \\
-                g_i(x) \geqslant 0,
-                \end{cases}
-                \]
-                то есть, двигаясь по направлению $d$, мы выходим из множества
-                допустимых решений, что противоречит тому, что $d \in D(x)$.
-              </p>
-            </li>
+                  Тогда $\exists i \in A(x)$ такой, что $\nabla g_i(x) d \geqslant 0$,
+                  значит, по первой теореме
+                  \[
+                  g_i(x + \tau d) \lt \overbrace{g_i(x) = 0}^{\text{т.к. } i \in A(x)}
+                  \quad \forall \tau \in (0, \delta).
+                  \]
+                  Получается, что
+                  \[
+                  \begin{cases}
+                  g_i(x + \tau d) \lt 0, \\
+                  g_i(x) \geqslant 0,
+                  \end{cases}
+                  \]
+                  то есть, двигаясь по направлению $d$, мы выходим из множества
+                  допустимых решений, что противоречит тому, что $d \in D(x)$.
+                </p>
+              </li>
 
-            <li>
-              $D(x) \subset \widetilde D(x)$, следовательно,
-              $\overline D(x) \subset \overline{\widetilde{D}}(x) = \widetilde D(x)$,
-              т.к. $\widetilde D(x)$ &mdash; замкнутое множество.
+              <li>
+                $D(x) \subset \widetilde D(x)$, следовательно,
+                $\overline D(x) \subset \overline{\widetilde{D}}(x) = \widetilde D(x)$,
+                т.к. $\widetilde D(x)$ &mdash; замкнутое множество.
 
-              <div class="todo">
-                Показать замкнутость множества $\widetilde D(x)$.
-              </div>
-            </li>
-          </ol>
+                <div class="todo">
+                  Показать замкнутость множества $\widetilde D(x)$.
+                </div>
+              </li>
+            </ol>
+          </div>
         </div>
 
         <div class="definition">
@@ -3745,31 +3753,31 @@
             q + lA = 0.
             \]
           </p>
-        </div>
 
-        <div class="proof">
-          Система разрешима $\iff$ ЗЛП
-          \[
-          \begin{cases}
-          \max (qx) = 0 \\
-          -Ax \leqslant 0
-          \end{cases}
-          \]
-          имеет решение $\iff$ двойственная задача
-          \[
-          \left\{
-          \begin{aligned}
-          \min l &\cdot 0 \\
-          -l A &= q \\
-          l &\geqslant 0.
-          \end{aligned}
-          \right.
-          \]
-          имеет оптимальное решение, то есть
-          \[
-          \exists \vec l \in \mathbb{R}^m \geqslant 0: \quad
-          q + lA = 0.
-          \]
+          <div class="proof">
+            Система разрешима $\iff$ ЗЛП
+            \[
+            \begin{cases}
+            \max (qx) = 0 \\
+            -Ax \leqslant 0
+            \end{cases}
+            \]
+            имеет решение $\iff$ двойственная задача
+            \[
+            \left\{
+            \begin{aligned}
+            \min l &\cdot 0 \\
+            -l A &= q \\
+            l &\geqslant 0.
+            \end{aligned}
+            \right.
+            \]
+            имеет оптимальное решение, то есть
+            \[
+            \exists \vec l \in \mathbb{R}^m \geqslant 0: \quad
+            q + lA = 0.
+            \]
+          </div>
         </div>
 
         <div class="theorem">
@@ -3802,55 +3810,55 @@
               \]
             </li>
           </ol>
-        </div>
 
-        <div class="proof">
-          Пусть $x^*$ &mdash; оптимальное решение.
-          <ol>
-            <li>
-              $x^*$ удовлетворяет условию 1, т.к. он должен быть допустимым;
-            </li>
+          <div class="proof">
+            Пусть $x^*$ &mdash; оптимальное решение.
+            <ol>
+              <li>
+                $x^*$ удовлетворяет условию 1, т.к. он должен быть допустимым;
+              </li>
 
-            <li>
-              Для оптимального решения справедливо
-              \[
-              \dp{\nabla f(x^*)}{d} \leqslant 0
-              \quad \forall d \in \overline D(x^*) = \widetilde D(x),
-              \]
-              поэтому
-              \[
-              \begin{cases}
-              \dp{\nabla f(x^*)}{d} \leqslant 0 \\
-              \dp{\nabla g_i(x^*)}{d} \geqslant 0, & i \in A(x^*).
-              \end{cases}
-              \]
-              Тогда по теореме Фаркаша
-              \[
-              \exists \lambda_i \geqslant 0: \quad
-              \nabla f(x^*) + \sum_{i \in A(x^*)} \lambda_i \nabla g_i(x^*) = 0.
-              \]
-            </li>
+              <li>
+                Для оптимального решения справедливо
+                \[
+                \dp{\nabla f(x^*)}{d} \leqslant 0
+                \quad \forall d \in \overline D(x^*) = \widetilde D(x),
+                \]
+                поэтому
+                \[
+                \begin{cases}
+                \dp{\nabla f(x^*)}{d} \leqslant 0 \\
+                \dp{\nabla g_i(x^*)}{d} \geqslant 0, & i \in A(x^*).
+                \end{cases}
+                \]
+                Тогда по теореме Фаркаша
+                \[
+                \exists \lambda_i \geqslant 0: \quad
+                \nabla f(x^*) + \sum_{i \in A(x^*)} \lambda_i \nabla g_i(x^*) = 0.
+                \]
+              </li>
 
-            <div class="todo">
-              Дальше что-то странное, надо разобраться.
-            </div>
+              <div class="todo">
+                Дальше что-то странное, надо разобраться.
+              </div>
 
-            <li>
-              Пусть выполнено
-              \[
-              \lambda_i g_i (x^*) = 0, \quad i = \overline{1,m}.
-              \]
-              Тогда, в частности, справедливо
-              \[
-              i \not\in A(x^*) \implies g_i(x^*) \gt 0 \implies \lambda_i = 0,
-              \]
-              поэтому, предполагая, что 3 условие выполнено, 2 условие можно
-              переписать в виде
-              \[
-              \nabla f(x^*) + \sum_{i=1}^m \lambda_i \nabla g_i(x^*) = 0.
-              \]
-            </li>
-          </ol>
+              <li>
+                Пусть выполнено
+                \[
+                \lambda_i g_i (x^*) = 0, \quad i = \overline{1,m}.
+                \]
+                Тогда, в частности, справедливо
+                \[
+                i \not\in A(x^*) \implies g_i(x^*) \gt 0 \implies \lambda_i = 0,
+                \]
+                поэтому, предполагая, что 3 условие выполнено, 2 условие можно
+                переписать в виде
+                \[
+                \nabla f(x^*) + \sum_{i=1}^m \lambda_i \nabla g_i(x^*) = 0.
+                \]
+              </li>
+            </ol>
+          </div>
         </div>
 
         <div class="definition">
@@ -3876,71 +3884,71 @@
             а $f_i$ и $g_i$ &mdash; вогнутые на $F$, то $x^*$ &mdash; оптимальное
             решение ЗНЛП.
           </p>
-        </div>
 
-        <div class="proof">
-          <ol>
-            <li>
-              Рассмотрим множество
-              \[
-              F_i = \set{x: \quad g_i(x) \geqslant 0}.
-              \]
-              Выберем произвольные $x_1, x_2 \in F_i$. Так как $g_i$ &mdash;
-              вогнута, то
-              \[
-              \forall \lambda \in [0;1] \quad
-              g_i(\lambda x_1 + (1 - \lambda) x_2) \geqslant
-              \lambda g_i(x_1) + (1 - \lambda) g(x_2) \geqslant 0,
-              \]
-              то есть
-              \[
-              g_i(\lambda x_1 + (1 - \lambda) x_2) \geqslant 0,
-              \]
-              откуда следует, что $\lambda x_1 + (1 - \lambda) x_2 \in F_i$,
-              то есть $F_i$ &mdash; выпуклое множество.
-
-              <p>
-                Таким образом,
+          <div class="proof">
+            <ol>
+              <li>
+                Рассмотрим множество
                 \[
-                F = \bigcap_{i=1}^m F_i
+                F_i = \set{x: \quad g_i(x) \geqslant 0}.
                 \]
-                также является выпуклым как пересечение выпуклых множеств.
-              </p>
-            </li>
-
-            <li>
-              Пусть $x^*$ удовлетворяет необходимым условиям Куна-Таккера,
-              тогда $x^* \in F$.
-
-              <p>
-                Рассмотрим $x \in F$, тогда $d = x - x^* \in D(x^*)$ из-за
-                выпуклости $F$. По условию $f$ вогнута, поэтому
+                Выберем произвольные $x_1, x_2 \in F_i$. Так как $g_i$ &mdash;
+                вогнута, то
                 \[
-                \begin{aligned}
-                f(\lambda x + (1 - \lambda) x^*) &\geqslant \lambda f(x)
-                + (1 - \lambda) f(x^*) \\
-                f(x^* + \lambda (x - x^*)) &\geqslant f(x^*)
-                + \lambda (f(x) - f(x^*)) \\
-                f(x^* + \lambda d) &\geqslant f(x^*) + \lambda (f(x) - f(x^*))
-                & \vert :\lambda \in (0; 1] \\
-                \frac{f(x^* + \lambda d) - f(x^*)}{\lambda} &\geqslant f(x) - f(x^*).
-                \end{aligned}
+                \forall \lambda \in [0;1] \quad
+                g_i(\lambda x_1 + (1 - \lambda) x_2) \geqslant
+                \lambda g_i(x_1) + (1 - \lambda) g(x_2) \geqslant 0,
                 \]
-                Устремим $\lambda \to +0$, получим
+                то есть
                 \[
-                \nabla f(x^* + \lambda d) \geqslant f(x) - f(x^*).
+                g_i(\lambda x_1 + (1 - \lambda) x_2) \geqslant 0,
                 \]
+                откуда следует, что $\lambda x_1 + (1 - \lambda) x_2 \in F_i$,
+                то есть $F_i$ &mdash; выпуклое множество.
 
-                Из 2-го необходимого условия Куна-Таккера следует, что
-                \[
-                0 \geqslant - \sum_{i=1}^m \lambda_i \nabla g_i(x^*)
-                \geqslant f(x) - f(x^*),
-                \]
-                значит, $f(x) \leqslant f(x^*)$, то есть $x^*$ &mdash; оптимальное
-                решение.
-              </p>
-            </li>
-          </ol>
+                <p>
+                  Таким образом,
+                  \[
+                  F = \bigcap_{i=1}^m F_i
+                  \]
+                  также является выпуклым как пересечение выпуклых множеств.
+                </p>
+              </li>
+
+              <li>
+                Пусть $x^*$ удовлетворяет необходимым условиям Куна-Таккера,
+                тогда $x^* \in F$.
+
+                <p>
+                  Рассмотрим $x \in F$, тогда $d = x - x^* \in D(x^*)$ из-за
+                  выпуклости $F$. По условию $f$ вогнута, поэтому
+                  \[
+                  \begin{aligned}
+                  f(\lambda x + (1 - \lambda) x^*) &\geqslant \lambda f(x)
+                  + (1 - \lambda) f(x^*) \\
+                  f(x^* + \lambda (x - x^*)) &\geqslant f(x^*)
+                  + \lambda (f(x) - f(x^*)) \\
+                  f(x^* + \lambda d) &\geqslant f(x^*) + \lambda (f(x) - f(x^*))
+                  & \vert :\lambda \in (0; 1] \\
+                  \frac{f(x^* + \lambda d) - f(x^*)}{\lambda} &\geqslant f(x) - f(x^*).
+                  \end{aligned}
+                  \]
+                  Устремим $\lambda \to +0$, получим
+                  \[
+                  \nabla f(x^* + \lambda d) \geqslant f(x) - f(x^*).
+                  \]
+
+                  Из 2-го необходимого условия Куна-Таккера следует, что
+                  \[
+                  0 \geqslant - \sum_{i=1}^m \lambda_i \nabla g_i(x^*)
+                  \geqslant f(x) - f(x^*),
+                  \]
+                  значит, $f(x) \leqslant f(x^*)$, то есть $x^*$ &mdash; оптимальное
+                  решение.
+                </p>
+              </li>
+            </ol>
+          </div>
         </div>
       </div>
     </li>

@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Парето &mdash; 07 &mdash; Список вопросов</title>
+
+    <link href="/assets/css/styles.css" rel="stylesheet">
+    <script defer src="/assets/js/core.js"></script>
+    <script defer src="/assets/js/questions.js"></script>
+    <script defer src="/assets/js/controls.js"></script>
+
+    <link rel="stylesheet" href="/assets/katex/katex.min.css">
+    <script defer src="/assets/katex/katex.min.js"></script>
+    <script defer src="/assets/katex/auto-render.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false },
+            { left: '\\(', right: '\\)', display: false },
+            { left: '\\[', right: '\\]', display: true }
+          ],
+          // • rendering keys, e.g.:
+          throwOnError: false
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1 id="title">Парето &mdash; 07 &mdash; Список вопросов</h1>
+    <nav>
+      <a href="/">Домой</a>
+      <a href="/pareto">Парето</a>
+      <a href="/links">Ссылки</a>
+      <a href="/about">Контакты</a>
+    </nav>
+
+    <div class="controls">
+      <button onclick="HideQuestions()">Скрыть вопросы</button>
+      <button onclick="ShowQuestions()">Показать вопросы</button>
+      <button onclick="HideAnswers()">Скрыть ответы</button>
+      <button onclick="ShowAnswers()">Показать ответы</button>
+      <button onclick="HideExamples()">Скрыть примеры</button>
+      <button onclick="ShowExamples()">Показать примеры</button>
+      <button onclick="HideProofs()">Скрыть доказательства</button>
+      <button onclick="S
+howProofs()">Показать доказательства</button>
+      <button onclick="ShowRandomElement(HideQuestions)">
+        Показать случайный вопрос
+      </button>
+    </div>
+
+    <div class="proof-type">
+      Показывать
+      <select id="select-proof-type" name="select-proof-type">
+        <option value="proofs">доказательства полностью</option>
+        <option value="ideas">только идеи доказательств</option>
+      </select>
+    </div>
+
+    <div style="display:none">
+      $\global\def\at#1#2{\left. #1 \right\rvert_{#2}}$
+      $\global\def\abs#1{\left\lvert #1 \right\rvert}$
+      $\global\def\norm#1{\left\lVert #1 \right\rVert}$
+      $\global\def\bvec#1{\mathbf{#1}}$
+      $\global\def\floor#1{\left\lfloor #1 \right\rfloor}$
+
+      $\global\def\limto#1{\underset{#1}{\longrightarrow}}$
+      $\global\def\prob#1{\mathbb{P} \left\{ #1 \right\}}$
+      $\global\def\mean#1{\mathbb{E} \left[ #1 \right]}$
+      $\global\def\disp#1{D \left[ #1 \right]}$
+
+      $\global\def\dp#1#2{\left\langle #1, #2\right\rangle}$
+      $\global\def\vp#1#2{#1 \times #2\,}$
+
+      $\global\def\dv#1#2{\frac{d #1}{d #2}}$
+      $\global\def\rdv#1#2{\frac{d' #1}{d #2}}$ <!-- относительная производная -->
+      $\global\def\pd#1#2{\frac{\partial #1}{\partial #2}}$
+      $\global\def\pdv2#1#2{\frac{\partial^2 #1}{\partial #2^2}}$
+      $\global\def\pdvk#1#2#3{\frac{\partial^#1 #2}{\partial #3^#1}}$
+      $\global\def\ppdv#1#2#3{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
+
+      $\global\def\pois#1{\left\{ #1 \right\}}$
+      $\global\def\paren#1{\left( #1 \right)}$
+      $\global\def\bydef#1{\overset{\mathrm{def}}{#1}}$
+
+      $\global\def\mbox#1{\text{#1}}$
+
+      $\global\def\div{\text{div}\,}$
+      $\global\def\dsum{\displaystyle\sum\,}$
+      $\global\def\grad{\text{grad}\,}$
+      $\global\def\rot{\text{rot}\,}$
+
+      $\global\def\vb#1{\textbf{#1}}$
+
+      $\global\def\op#1{\mathrm{#1}\,}$
+
+      $\global\def\Im{\text{Im}\,}$
+      $\global\def\Res{\text{Res}\,}$
+      $\global\def\Re{\text{Re}\,}$
+      $\global\def\argtg{\text{argtg}\,}$
+      $\global\def\ch{\text{ch}\,}$
+      $\global\def\const{\text{const}\,}$
+      $\global\def\degree{\text{degree}\,}$
+      $\global\def\proj{\mathrm{proj}}$
+      $\global\def\rank{\mathrm{rank}}$
+      $\global\def\cov{\mathrm{cov}}$
+      $\global\def\Arg{\mathrm{Arg}}$
+      $\global\def\res{\text{res}\,}$
+      $\global\def\sh{\text{sh}\,}$
+      $\global\def\sign{\text{sign}\,}$
+      $\global\def\tg{\mathrm{tg}\,}$
+    </div>
+
+    <ol id="questions">
+      <li class="question">
+        <div class="name">
+          Многокритериальная задача (основные объекты и постановка)
+        </div>
+        <div class="content">
+          <p>
+            Многокритериальная задача является прямым обобщением
+            обычной экстремальной задачи и включает следующие два
+            объекта:
+          </p>
+          <ol>
+            <li>
+              $X$ &mdash; непустое множество, содержащее по крайней мере два
+              элемента. Это множество называют
+              <i class="important">
+                множеством возможных (допустимых) вариантов
+                (решений, альтернатив)
+              </i>.
+            </li>
+
+            <li>
+              $f(\cdot) = \paren{ f_1(\cdot), \dots, f_m(\cdot) }$ &mdash;
+              числовую векторную функцию, заданную на множестве $X$ и именуемую
+              <i class="important">векторным критерием</i>.
+            </li>
+          </ol>
+
+          <p>
+            Будем считать, что возможные решения являются векторами арифметического
+            $n$-мерного пространства:
+            \[
+            X \subset \R^n,
+            \]
+            причём в общем случае множество $X$ не совпадает со всем пространством $\R^n$.
+          </p>
+
+          <p>
+            Векторная функция $y = f(x)$ принимает значения в арифметическом векторном
+            пространстве $\R^m$, которое называют <i class="important">критериальным пространством</i>.
+          </p>
+
+          <div class="definition">
+            Введём образ множества $X$ при отображении $f$:
+            \[
+            Y = f(X) = \set{ y \in \R^m: y = f(x) \quad \text{при некотором} \quad x \in X }.
+            \]
+            Множество $Y$ будем называть <i>множеством возможных векторов</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: основные бинарные отношения. Свойства бинарных отношений
+        </div>
+        <div class="content">
+          На критериальном пространстве $\R^m$ вводятся следующие
+          бинарные отношения:
+          \[
+          \begin{aligned}
+          a \geqq b &\iff & a_i &\geqslant b_i, & i &= 1, \dots, m \\
+          a \gt b &\iff & a_i &\gt b_i, & i &= 1, \dots, m, \\
+          a \geq b &\iff & a &\geqq b \quad \text{и} \quad a \neq b, \\
+          a \eqslantgtr b &\iff & b &\not\geq a.
+          \end{aligned}
+          \]
+
+          <div class="definition">
+            Отношение $\geq$ называют <i>отношением Парето</i>.
+          </div>
+
+          <div class="images small">
+            <img src="images/02-bin-relations.png" />
+          </div>
+
+          <p>
+            Взаимосвязь введённых отношений можно выразить следующим образом:
+            \[
+            \gt \implies \geq \implies \geqq \implies \eqslantgtr.
+            \]
+          </p>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Оптимальность по Парето
+        </div>
+        <div class="content">
+          <div class="definition">
+            (оптимальность по Парето, в негативной форме).
+            <br />
+            Точка $x^* \in X$ называется <i>оптимальной по Парето</i>
+            (<i>парето-оптимальной</i> или <i>эффективной</i>), если не существует
+            такой точки $x \in X$, для которой выполнено неравенство
+            \[
+            f(x) \geq f(x^*).
+            \]
+            При этом вектор $f(x^*)$ называют <i>оптимальным по Парето</i> или <i>эффективным</i>.
+          </div>
+
+          <div class="definition">
+            (оптимальность по Парето, в позитивной форме).
+            <br />
+            Точка $x^* \in X$ называется <i>оптимальной по Парето</i>
+            (<i>парето-оптимальной</i> или <i>эффективной</i>), если для любой
+            точки $x \in X$ выполнено соотношение
+            \[
+            f(x^*) \eqslantgtr f(x).
+            \]
+          </div>
+
+          <p>
+            Также вводятся обозначения для множества всех эффективных точек
+            \[
+            P_f(X) = \set{ x^* \in X: \text{ не существует } x \in X \text{ такого, что } f(x) \geq f(x^*) }
+            \]
+            и для множества всех эффективных векторов:
+            \[
+            P(Y) = f(P_f(X)) = \set{ y^* \in Y: \text{ не существует } y \in Y \text{ такого, что } y \geq y^* }.
+            \]
+          </p>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Оптимальность по Слейтеру
+        </div>
+        <div class="content">
+          <div class="definition">
+            (оптимальность по Слейтеру, в негативной форме).
+            <br />
+            Точка $x^* \in X$ называется <i>оптимальной по Слейтеру</i>
+            (<i>слабо эффективной</i>), если не существует
+            такой точки $x \in X$, для которой выполнено неравенство
+            \[
+            f(x) \gt f(x^*).
+            \]
+            При этом вектор $f(x^*)$ называют <i>оптимальным по Слейтеру</i>
+            или <i>слабо эффективным</i>.
+          </div>
+
+          <div class="definition">
+            (оптимальность по Слейтеру, в позитивной форме).
+            <br />
+            Точка $x^* \in X$ называется <i>оптимальной по Слейтеру</i>
+            (<i>слабо эффективной</i>), если для любой
+            точки $x \in X$ существует такой номер $i \in I$, что
+            \[
+            f_i(x^*) \geqslant f_i(x).
+            \]
+          </div>
+
+          <p>
+            Также вводятся обозначения для множества всех слабо эффективных точек
+            \[
+            S_f(X) = \set{ x^* \in X: \text{ не существует } x \in X \text{ такого, что } f(x) \gt f(x^*) }
+            \]
+            и для множества всех слабо эффективных векторов:
+            \[
+            S(Y) = f(S_f(X)) = \set{ y^* \in Y: \text{ не существует } y \in Y \text{ такого, что } y \gt y^* }.
+            \]
+          </p>
+
+          <div class="remark">
+            Имеют место включения:
+            \[
+            P_f(X) \subset S_f(X), \qquad P(Y) \subset S(Y).
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Оптимальность по Джеоффриону
+        </div>
+        <div class="content">
+          <div class="definition">
+            (оптимальность по Джеоффриону).
+            <br />
+            Точка $x^* \in X$ называется <i>оптимальной по Джеоффриону</i>
+            (<i>собственно эффективной</i>), если она эффективна и, кроме того,
+            существует число $A \gt 0$ такое, что для всех номеров $i \in I$,
+            всех $x \in X$, для которых выполнено неравенство
+            \[
+            f_i(x) \gt f_i(x^*),
+            \]
+            и некоторого $j \in I$ такого, что
+            \[
+            f_j(x) \lt f_j(x^*),
+            \]
+            выполняется неравенство
+            \[
+            \frac{f_i(x) - f_i(x^*)}{f_j(x^*) - f_j(x)} \leqslant A.
+            \]
+          </div>
+
+          <p>
+            Для обозначения множества всех собственно эффективных точек и векторов
+            используют обозначения
+            \[
+            G_f(X) \quad \text{и} \quad G(Y).
+            \]
+          </p>
+
+          <div class="remark">
+            По определению собственной эффективности имеют место включения:
+            \[
+            G_f(X) \subset P_f(X), \qquad G(Y) \subset P(Y).
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Внутренняя и внешняя устойчивость множества Парето $P(Y)$
+        </div>
+        <div class="content">
+          <p>
+            Множество Парето $P(Y)$ <i>внутренне устойчиво</i> в том смысле, что
+            в нём не содержится ни одной такой пары векторов $y, y'$, которые были
+            бы сравнимы по отношению $\geq$, то есть ни одно из соотношений
+            \[
+            y \geq y', \qquad y' \geq y
+            \]
+            не имеет места. Это означает, что при переходе от одного эффективного вектора
+            к другому происходит увеличение одной из компонент при уменьшении другой
+            компоненты.
+          </p>
+
+          <div class="definition">
+            Множество Парето $P(Y)$ называют <i>внешне устойчивым</i>, если для любого
+            $y \in Y \setminus P(Y)$ найдётся эффективный вектор $y^* \in P(Y)$ такой,
+            что
+            \[
+            y^* \geq y.
+            \]
+          </div>
+
+          <div class="remark">
+            В случае конечного $Y$ множество эффективных векторов $P(Y)$ будет внешне
+            устойчивым.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: внешняя устойчивость множества Слейтера
+        </div>
+        <div class="content">
+          <div class="definition">
+            Множество Слейтера $S(Y)$ называют <i>внешне устойчивым</i>, если
+            для любого $y \in Y \setminus S(Y)$ найдётся слабо эффективный вектор
+            $y^* \in S(Y)$ такой, что
+            \[
+            y^* \gt y.
+            \]
+          </div>
+
+          <div class="remark">
+            В случае конечного $Y$ множество слабо эффективных векторов $S(Y)$ будет внешне
+            устойчивым.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема Гермейера
+        </div>
+        <div class="content">
+          <div class="theorem">
+            (Гермейера).
+            <br />
+            Пусть $y^* \in Y$ и $y^* \gt \bvec{0}$. Вектор $y^*$ слабо эффективен
+            тогда и только тогда, когда существует $\mu \in \bvec{M}$ такой, что
+            \[
+            \min_{i \in I} \mu_i y_i^* \geqslant \min_{i \in I} \mu_i y_i
+            \quad \text{для всех} \quad y \in Y.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема 3.3 (Подиновского)
+        </div>
+        <div class="content">
+          <div class="theorem">
+            (Подиновского).
+            <br />
+            Вектор $y^* \in Y$ эффективен тогда и только тогда, когда для
+            каждого $i \in I$ выполнено
+            \[
+            y_i^* \geqslant y_i \qquad \forall y \in Y_i,
+            \]
+            где
+            \[
+            Y_i = \set{ y \in Y: y_k \geqslant y_k^*, \quad k = 1, \dots, m, \quad k \neq i }.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема 3.8 о геометрической характеризации собственно эффективных точек
+        </div>
+        <div class="content">
+          <div class="theorem">
+            Вектор $y^* \in Y$ собственно эффективен тогда и только тогда, когда найдётся
+            $\varepsilon \in (0, 1/m)$, при котором выполнено равенство
+            \[
+            Y \cap [ \Lambda_\varepsilon + y^* ] = \set{ y^* },
+            \]
+            где
+            \[
+            \Lambda_\varepsilon = \set{ z \in \R^m: \dp{\mu^i}{z} \geqslant 0, \quad i \in I },
+            \]
+            а векторы $\mu^i$ имеют вид
+            \[
+            \mu_j^i =
+            \begin{cases}
+            \varepsilon, & j \in I; \quad j \neq i, \\
+            1 - (m - 1) \varepsilon, & j = i.
+            \end{cases}
+            \]
+
+            <div class="images small">
+              <img src="images/theorem-3-8.png" />
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема Моцкина
+        </div>
+        <div class="content">
+          <div class="theorem">
+            (Моцкина).
+            <br />
+            Пусть $a^i, b^j \in \R^n$, причём $i = \overline{1,m}$ и $j = \overline{1,k}$. Тогда
+            имеет место один и только один из следующих случаев:
+            <ol>
+              <li>
+                Однородная система линейных неравенств
+                \[
+                \begin{aligned}
+                \dp{a^i}{x} &\gt 0, & i &= \overline{1,m}, \\
+                \dp{b^j}{x} &\geqslant 0, & j &= \overline{1,k}
+                \end{aligned}
+                \]
+                имеет решение $x \in \R^n$;
+              </li>
+
+              <li>
+                Однородная система линейных уравнений
+                \[
+                \sum\limits_{i=1}^{m} \mu_i a^i + \sum\limits_{j=1}^{k} \lambda_j b^j = \bvec{0}
+                \]
+                имеет решение
+                \[
+                \mu \geq \bvec{0}, \qquad \lambda \geqq \bvec{0}.
+                \]
+              </li>
+            </ol>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема Таккера
+        </div>
+        <div class="content">
+          <div class="theorem">
+            (Таккера).
+            <br />
+            Пусть $a^i, b^j \in \R^n$, причём $i = \overline{1,m}$ и $j = \overline{1,k}$. Тогда
+            имеет место один и только один из следующих случаев:
+            <ol>
+              <li>
+                Однородная система линейных неравенств
+                \[
+                \begin{aligned}
+                \dp{a^i}{x} &\geqslant 0, & i &= \overline{1,m}, \\
+                \dp{b^j}{x} &\geqslant 0, & j &= \overline{1,k}
+                \end{aligned}
+                \]
+                имеет решение $x \in \R^n$;
+              </li>
+
+              <li>
+                Однородная система линейных уравнений
+                \[
+                \sum\limits_{i=1}^{m} \mu_i a^i + \sum\limits_{j=1}^{k} \lambda_j b^j = \bvec{0}
+                \]
+                имеет решение
+                \[
+                \mu \gt \bvec{0}, \qquad \lambda \geqq \bvec{0}.
+                \]
+              </li>
+            </ol>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема 3.10 Джеоффриона о характеризации собственно эффективных точек
+          в терминах линейной свёртки критериев
+        </div>
+        <div class="content">
+          <div class="theorem">
+            (Джеоффриона).
+            <br />
+            Пусть множество $X \subset \R^n$ выпукло, а вектор-функция $f = (f_1, \dots, f_m)$
+            покомпонентно вогнута на нём. Точка $x^* \in X$ собственно эффективна тогда и только
+            тогда, когда найдётся вектор $\mu \in \bvec{M}$, при котором имеет место равенство
+            \[
+            \sum\limits_{i=1}^{m} \mu_i f_i(x^*) = \max_{x \in X} \sum\limits_{i=1}^{m} \mu_i f_i(x).
+            \]
+
+            <div class="images small">
+              <img src="images/theorem-3-10.png" />
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: множество идеальных векторов
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Множеством идеальных векторов</i> называют множество
+            \[
+            U = \set{ u \in \R^m: u_i \gt \sup_{x \in X} f_i(x), \quad i \in I },
+            \]
+            предполагая, что все функции $f_i(x)$ являются ограниченными на множестве $X$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема 3.11 о характеризации собственно эффективных точек в терминах
+          расстояния до идеальной точки
+        </div>
+        <div class="content">
+          <div class="theorem">
+            Пусть множество $X$ выпукло, а числовые функции $f_1, \dots, f_m$ ограничены сверху
+            и покомпонентно вогнуты на нём. Точка $x^* \in X$ является собственно эффективной
+            относительно $f$ тогда и только тогда, когда существует вектор $u \in U$, для которого
+            имеет место неравенство
+            \[
+            \norm{u - f(x^*)} = \min_{x \in X} \norm{u - f(x)}.
+            \]
+
+            <div class="images small">
+              <img src="images/theorem-3-11.png" />
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: функция выбора
+        </div>
+        <div class="content">
+          <p>
+            Пусть имеется непустое множество $\Omega$ объектов произвольной природы.
+            Через $2^\Omega$ будем обозначать множество всех его подмножеств.
+          </p>
+
+          <div class="definition">
+            Однозначное отображение
+            \[
+            C: A \to 2^\Omega,
+            \]
+            где $A = 2^\Omega \setminus \set{ \varnothing }$, называют
+            <i>функцией выбора</i>, заданной на $A$, если для любого $Y \in A$
+            выполняется включение
+            \[
+            C(Y) \subset Y.
+            \]
+          </div>
+
+          <p>
+            Функция выбора каждому предъявляемому множеству $Y \in A$
+            сопоставляет определённое его подмножество $C(Y)$, которое обычно
+            интерпретируют как множество <i>выбираемых</i> элементов. В частном
+            случае, когда $C(Y) = \varnothing$, говорят об отказе от выбора.
+          </p>
+
+          <div class="definition">
+            Если нет ни одного отказа в выборе, то будем говорить о функции
+            <i>непустого</i> выбора.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Аксиомы выбора
+        </div>
+        <div class="content">
+          <div class="axiom">
+            (наследования).
+            <br />
+            Пусть $C$ &mdash; функция выбора, заданная на семействе подмножеств $A$.
+            Для любых двух множеств $Y_1, Y_2 \in A$ таких, что $Y_1 \subset Y_2$,
+            имеет место включение
+            \[
+            Y_1 \cap C(Y_2) \subset C(Y_1).
+            \]
+          </div>
+
+          <p>
+            Смысл этой аксиомы в следующем: если мы сужаем произвольное множество $Y_2$
+            до $Y_1$, то всякий элемент, попадающий в выбор из более широкого множества $Y_2$,
+            войдёт в выбор из более узкого множества $Y_1$ при условии, что он содержится
+            в $Y_1$.
+          </p>
+
+          <div class="axiom">
+            (согласия).
+            <br />
+            Пусть $C$ &mdash; функция выбора, заданная на семействе подмножеств $A$. Для любого
+            непустого подсемейства $A' \subset A$ имеет место включение:
+            \[
+            \bigcap_{Y \in A'} C(Y) \subset C \paren{ \bigcap_{Y \in A'} Y }.
+            \]
+          </div>
+
+          <p>
+            В соответствии с аксиомой согласия, элементы, выбираемые одновременно
+            из нескольких множеств, обязательно должны входить в число выбираемых
+            из объединения этих множеств.
+          </p>
+
+          <div class="axiom">
+            (независимости от посторонних вариантов).
+            <br />
+            Пусть $C$ &mdash; функция выбора, заданная на семействе подмножеств $A$. Для
+            всех множеств $Y_1, Y_2 \in A$ таких, что
+            \[
+            C(Y_2) \subset Y_1 \subset Y_2,
+            \]
+            имеет место равенство
+            \[
+            C(Y_1) = C(Y_2).
+            \]
+          </div>
+
+          <p>
+            В соответствии с этой аксиомой, если в более узкое множество $Y_1$ по сравнению
+            с множеством $Y_2$ вошли все элементы, выбираемые из более широкого множества $Y_2$,
+            то в выбор $C(Y_1)$ входят все элементы множества $C(Y_2)$ и не входят
+            никакие другие элементы.
+          </p>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Задача многокритериального выбора (основные объекты и постановка)
+        </div>
+        <div class="content">
+          <p>
+            Рассмотрим задачу <i>многокритериального выбора</i> $\left\langle X, f, \succ_X \right\rangle$,
+            содержащую следующие объекты:
+          </p>
+          <ol>
+            <li>
+              $X$ &mdash; множество возможных вариантов (решений), из которого осуществляется выбор;
+            </li>
+
+            <li>
+              $f = (f_1, \dots, f_m)$ &mdash; векторный критерий, определённый на множестве $X$
+              и принимающий числовые значения в арифметическом векторном пространстве $\R^m$;
+            </li>
+
+            <li>
+              $\succ_X$ &mdash; асимметричное бинарное <i>отношение строгого предпочтения</i>,
+              заданное на множестве $X$. Запись $x \succ_X x'$ для вариантов $x, x' \in X$
+              означает, что вариант $x$ для <i>лица, принимающего решения</i> (ЛПР), предпочтительнее
+              варианта $x'$.
+            </li>
+          </ol>
+
+          <p>
+            Возможные варианты из $X$, которые должны быть найдены в результате решения задачи
+            многокритериального выбора, будем именовать <i>выбираемыми вариантами</i>. Они образуют
+            <i>множество выбираемых вариантов</i> $C(X)$.
+          </p>
+
+          <p>
+            Будем также использовать множество возможных $Y = f(X)$ и <i>множество выбираемых векторов</i>
+            $C(Y) = f(C(X))$. Также будем считать, что на множестве возможных векторов $Y$ задано
+            асимметричное отношение строгого предпочтения $\succ_Y$, которое согласовано с отношением
+            $\succ_X$ следующим образом:
+            \[
+            f(x) \succ_Y f(x') \iff x \succ_X x'
+            \]
+            для всех $x \in \tilde x$ и $x' \in \tilde x'$, где $\tilde x, \tilde x' \in \tilde X$,
+            а $\tilde X$ &mdash; совокупность классов эквивалентности, порождённых отношением эквивалентности
+            \[
+            x \sim x' \iff f(x) = f(x')
+            \]
+            на множестве $X$.
+          </p>
+
+          <p>
+            Задача многокритериального выбора $\left\langle Y, \succ_Y \right\rangle$ в терминах векторов
+            содержит множество возможных векторов $Y \subset \R^m$ и отношение строгого предпочтения
+            $\succ_Y$, заданное на $Y$, а её решением является множество выбираемых векторов $C(Y)$.
+          </p>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Аксиома Парето
+        </div>
+        <div class="content">
+          <div class="axiom">
+            (Парето).
+            <br />
+            Для любых двух векторов $y, y' \in Y$, удовлетворяющих неравенству
+            \[
+            y \geq y',
+            \]
+            выполнено
+            \[
+            y \succ_Y y'.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Аксиома исключения доминируемых векторов
+        </div>
+        <div class="content">
+          <div class="axiom">
+            (исключения доминируемых векторов).
+            <br />
+            Для любой пары векторов $y, y' \in Y$, удовлетворяющих соотношению
+            \[
+            y \succ_Y y',
+            \]
+            выполнено $y' \not\in C(Y)$.
+          </div>
+
+          <p>
+            В соответствии с этой аксиомой всякий вектор, не выбираемый в паре,
+            не должен выбираться из всего множества $Y$.
+          </p>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Принцип Эджворта-Парето
+        </div>
+        <div class="content">
+          <div class="theorem">
+            (принцип Эджворта-Парето).
+            <br />
+            Пусть выполнены аксиома Парето и аксиома исключения доминируемых векторов. Тогда
+            для любого множества выбираемых векторов $C(Y)$ имеет место включение
+            \[
+            C(Y) \subset P(Y).
+            \]
+          </div>
+
+          <p>
+            Согласно принципу Эджворта-Парето наилучший выбор в широком классе задач
+            многокритериального выбора (в котором справедливы аксиома Парето и аксиома исключения)
+            следует осуществлять только в пределах множества Парето. С другой стороы, любой
+            эффективный вектор может оказаться наилучшим, например, когда этот эффективный вектор
+            для ЛПР предпочтительнее любого другого элемента.
+          </p>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: полиэдрально вогнутая функция
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Полиэдрально вогнутой</i> называют функцию
+            \[
+            h: \R^n \to \R
+            \]
+            вида
+            \[
+            h(x) = \min_{j = 1, \dots, s} \paren{
+            \dp{c^j}{x} + \alpha_j
+            },
+            \]
+            где
+            \[
+            c^j \in \R^n, \qquad \alpha_j \in \R
+            \]
+            для всех $j = 1, 2, \dots, s$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Аксиома инвариантности отношения предпочтения
+        </div>
+        <div class="content">
+          <div class="axiom">
+            (инвариантность отношения предпочтения).
+            <br />
+            Отношение предпочтения $\succ$ инвариантно относительно линейного
+            положительного преобразования: для любого $\alpha \gt 0$ и любых
+            $c, y, y' \in \R^m$ выполняется
+            \[
+            y \succ y' \implies \alpha y + c \succ \alpha y' + c.
+            \]
+          </div>
+        </div>
+      </li>
+    </ol>
+  </body>
+</html>

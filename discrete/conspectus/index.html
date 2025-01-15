@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Основы теории дискретных динамических систем</title>
+
+    <link href="/assets/css/styles.css" rel="stylesheet">
+    <script defer src="/assets/js/core.js"></script>
+    <script defer src="/assets/js/questions.js"></script>
+    <script defer src="/assets/js/controls.js"></script>
+
+    <link rel="stylesheet" href="/assets/katex/katex.min.css">
+    <script defer src="/assets/katex/katex.min.js"></script>
+    <script defer src="/assets/katex/auto-render.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          renderMathInElement(document.body, {
+              // customised options
+              // • auto-render specific keys, e.g.:
+              delimiters: [
+                  { left: '$$', right: '$$', display: true },
+                  { left: '$', right: '$', display: false },
+                  { left: '\\(', right: '\\)', display: false },
+                  { left: '\\[', right: '\\]', display: true }
+              ],
+              // • rendering keys, e.g.:
+              throwOnError: false
+          });
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1 id="title">Основы теории дискретных динамических систем</h1>
+    <nav>
+      <a href="/">Домой</a>
+      <a href="..">Основы теории дискретных динамических систем</a>
+      <a href="/links">Ссылки</a>
+      <a href="/about">Контакты</a>
+    </nav>
+
+    <div style="display:none">
+      $\global\def\at#1{\left. #1 \right\rvert}$
+      $\global\def\abs#1{\left\lvert #1 \right\rvert}$
+      $\global\def\norm#1{\left\lVert #1 \right\rVert}$
+      $\global\def\bvec#1{\mathbf{#1}}$
+      $\global\def\floor#1{\left\lfloor #1 \right\rfloor}$
+
+      $\global\def\limto#1{\underset{#1}{\longrightarrow}}$
+      $\global\def\prob#1{\mathbb{P} \left\{ #1 \right\}}$
+      $\global\def\mean#1{\mathbb{E} \left[ #1 \right]}$
+      $\global\def\disp#1{D \left[ #1 \right]}$
+
+      $\global\def\dp#1#2{#1 \cdot #2\,}$
+      $\global\def\vp#1#2{#1 \times #2\,}$
+
+      $\global\def\dv#1#2{\frac{d #1}{d #2}}$
+      $\global\def\rdv#1#2{\frac{d' #1}{d #2}}$ <!-- относительная производная -->
+      $\global\def\pd#1#2{\frac{\partial #1}{\partial #2}}$
+      $\global\def\pdv2#1#2{\frac{\partial^2 #1}{\partial #2^2}}$
+      $\global\def\pdvk#1#2#3{\frac{\partial^#1 #2}{\partial #3^#1}}$
+      $\global\def\ppdv#1#2#3{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
+
+      $\global\def\pois#1{\left\{ #1 \right\}}$
+      $\global\def\paren#1{\left( #1 \right)}$
+      $\global\def\bydef#1{\overset{\mathrm{def}}{#1}}$
+
+      $\global\def\mbox#1{\text{#1}}$
+
+      $\global\def\div{\text{div}\,}$
+      $\global\def\dsum{\displaystyle\sum\,}$
+      $\global\def\grad{\text{grad}\,}$
+      $\global\def\rot{\text{rot}\,}$
+
+      $\global\def\vb#1{\textbf{#1}}$
+
+      $\global\def\op#1{\mathrm{#1}\,}$
+
+      $\global\def\Im{\text{Im}\,}$
+      $\global\def\Res{\text{Res}\,}$
+      $\global\def\Re{\text{Re}\,}$
+      $\global\def\argtg{\text{argtg}\,}$
+      $\global\def\ch{\text{ch}\,}$
+      $\global\def\const{\text{const}\,}$
+      $\global\def\degree{\text{degree}\,}$
+      $\global\def\proj{\mathrm{proj}}$
+      $\global\def\rank{\mathrm{rank}}$
+      $\global\def\res{\text{res}\,}$
+      $\global\def\sh{\text{sh}\,}$
+      $\global\def\sign{\text{sign}\,}$
+      $\global\def\tg{\mathrm{tg}\,}$
+    </div>
+
+    <h2>2024-02-16</h2>
+
+    Рассмотрим дифференциальный оператор
+    \[
+    L: u \to Y.
+    \]
+    Пусть необходимо решить уравнение
+    \[
+    L u = f.
+    \]
+    Рассматриваем конечно-разностную схему с частотой
+    дискретизации $h$:
+    \[
+    L_h u_h = f_h.
+    \]
+    Пусть $u^*$ &mdash; решение исходной задачи:
+    \[
+    L u^* = f.
+    \]
+    Пусть $u_h^*$ &mdash; точное решение дискретной задачи.
+    Тогда ему соответствует какое-то приближённое решение
+    исходной задачи $\tilde u^*$.
+
+    <p>
+      Можем измерить расстояние $\rho(u_h^*, u^*)$ между $u_h^*$ и $u^*$.
+      Оно характеризует степень аппроксимации. Возникает вопрос: а насколько
+      приближённое решение $\tilde u^*$ близко к $u^*$? Речь идёт о сходимости.
+      Величина $\rho(\tilde u_h, u_h^*)$ характеризует устойчивость.
+    </p>
+
+    <p>
+      Необходимо решить задачу так, чтобы получить сходимость. Получили простейшую
+      формулу: сходимость = аппроксимация + устойчивость.
+    </p>
+
+    <p>
+      Можно рассмотреть два способа аппроксимации производной функции $u(x)$:
+      \[
+      \frac{u(x+h) - u(x-h)}{2h},
+      \qquad
+      \frac{u(x+h) - u(x)}{h}.
+      \]
+      Аппроксимация:
+      \[
+      \begin{aligned}
+      u(x+h) &= u(x) + u'(x) h + o(h^2), \\
+      u(x-h) &= u(x) - u'(x) h + o(h^2).
+      \end{aligned}
+      \]
+      Пусть наше уравнение такое:
+      \[
+      u'(x) + \alpha u(x) = 0.
+      \]
+      Скомбинируем эти две формулы:
+      \[
+      \mu
+      \frac{u(x+h) - u(x-h)}{2h}
+      + (1-\mu)
+      \frac{u(x+h) - u(x)}{h}.
+      \]
+      Это тоже будет аппроксимировать производную. Если, например, $\mu = 4$, то получим
+      неустойчивую схему.
+    </p>
+
+    <p>
+      Будем заниматься устойчивостью дискретных схем.
+    </p>
+
+    <hr />
+
+    <p>
+      Рассмотрим линейное уравнение
+      \[
+      A x = y.
+      \]
+      Пусть существует $A^{-1}$.
+    </p>
+
+    <div class="definition">
+      Говорят, что задача <i>поставлена корректно</i>, если
+      <ul>
+        <li>
+          решение существует;
+        </li>
+
+        <li>
+          решение единственно;
+        </li>
+
+        <li>
+          решение непрерывно зависит от начальных данных.
+        </li>
+      </ul>
+    </div>
+
+    <p>
+      Если $\delta y$ &mdash; погрешность, то ей соответствует погрешность $\delta x$:
+      \[
+      \delta x = A^{-1} \delta y.
+      \]
+      Посчитаем
+      \[
+      \frac{\norm{\delta x}}{\norm{x}}.
+      \]
+      Норма мультипликативна, поэтому
+      \[
+      \norm{\delta x} \leqslant \norm{A^{-1}}\norm{\delta y},
+      \]
+      тогда
+      \[
+      \frac{\norm{\delta x}}{\norm{x}}
+      \leqslant
+      \frac{\norm{A^{-1}}\norm{\delta y}}{\norm{x}}.
+      \]
+      Из первого равенства следует, что
+      \[
+      \norm{y} \leqslant \norm{A} \norm{x},
+      \implies
+      \norm{x} \geqslant \frac{\norm{y}}{\norm{A}},
+      \]
+      поэтому
+      \[
+      \frac{\norm{\delta x}}{\norm{x}}
+      \leqslant
+      \frac{\norm{A^{-1}}\norm{\delta y}}{\norm{x}}
+      \leqslant
+      \norm{A^{-1}}\norm{A}
+      \frac{\norm{\delta y}}{\norm{y}}.
+      \]
+      Число
+      \[
+      \mu(A) = \norm{A} \norm{A^{-1}}
+      \]
+      называется <i>числом обусловленности</i>. Она не может быть меньше единицы, так как
+      \[
+      E = A A^{-1} \implies \norm{E} \leqslant \norm{A} \norm{A^{-1}}.
+      \]
+    </p>
+
+    <p>
+      Будем заниматься дискретными системами вида
+      \[
+      x(k+1) = F(k, x(k)), \qquad k \geqslant k_0,
+      \]
+      где $F(k, z)$ при каждом $k$ непрерывна по $z \in D \subset \mathbb{E}^n$.
+      Будем изучать устойчивость этой системы.
+    </p>
+
+    <p>
+      Задача Коши: пусть $x(k_0) = x_0$, тогда при $k = k_0, k_0 + 1, \dots$ можно
+      рекуррентно построить решение системы.
+    </p>
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+  </body>
+</html>

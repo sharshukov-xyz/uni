@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Парето &mdash; 07 &mdash; Вопросы</title>
+
+    <link href="/assets/css/styles.css" rel="stylesheet">
+    <script defer src="/assets/js/core.js"></script>
+    <script defer src="/assets/js/tickets.js"></script>
+    <script defer src="/assets/js/controls.js"></script>
+
+    <link rel="stylesheet" href="/assets/katex/katex.min.css">
+    <script defer src="/assets/katex/katex.min.js"></script>
+    <script defer src="/assets/katex/auto-render.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false },
+            { left: '\\(', right: '\\)', display: false },
+            { left: '\\[', right: '\\]', display: true }
+          ],
+          // • rendering keys, e.g.:
+          throwOnError: false
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1 id="title">Парето &mdash; 07 &mdash; Вопросы</h1>
+    <nav>
+      <a href="/">Домой</a>
+      <a href="..">Парето</a>
+      <a href="/links">Ссылки</a>
+      <a href="/about">Контакты</a>
+    </nav>
+
+    <div class="controls">
+      <button onclick="HideTickets()">Спрятать билеты</button>
+      <button onclick="ShowTickets()">Показать все билеты</button>
+      <button onclick="ShowRandomElement(HideTickets)">
+        Показать случайный билет
+      </button>
+    </div>
+
+    <div style="display:none">
+      $\global\def\abs#1{\left\lvert #1 \right\rvert}$
+
+      $\global\def\dv#1#2{\frac{d #1}{d #2}}$
+      $\global\def\pd#1#2{\frac{\partial #1}{\partial #2}}$
+      $\global\def\pdv2#1#2{\frac{\partial^2 #1}{\partial #2^2}}$
+      $\global\def\ppdv#1#2#3{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
+
+      $\global\def\paren#1{\left( #1 \right)}$
+
+      $\global\def\mbox#1{\text{#1}}$
+
+      $\global\def\div{\text{div}\,}$
+      $\global\def\grad{\text{grad}\,}$
+      $\global\def\rot{\text{rot}\,}$
+
+      $\global\def\vb#1{\textbf{#1}}$
+
+      $\global\def\const{\text{const}\,}$
+      $\global\def\res{\text{res}\,}$
+      $\global\def\Res{\text{Res}\,}$
+      $\global\def\Re{\text{Re}\,}$
+      $\global\def\Im{\text{Im}\,}$
+      $\global\def\ch{\text{ch}\,}$
+      $\global\def\sh{\text{sh}\,}$
+      $\global\def\argtg{\text{argtg}\,}$
+    </div>
+
+    <ol id="tickets">
+      <li class="ticket">
+        <div class="name">
+          Основные объекты многокритериальной задачи. Бинарные отношения
+          и их свойства
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Оптимальность по Парето и Слейтеру. Внешняя устойчивость
+          множества эффективных и слабо эффективных точек
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Общие условия оптимальности: теорема Гермейера и её
+          геометрическая иллюстрация. Следствие
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Общие условия оптимальности: теорема 3.2 и теорема
+          Подиновского
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Необходимое и достаточное условие Парето-оптимальности
+          в терминах суммы критериев (теорема 3.4). Достаточные
+          условия Парето-оптимальности (теорема 3.5) и следствия
+          из них
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Общие условия собственной эффективности: теорема 3.6.
+          Следствия из неё
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Теоремы 3.7, лемма 3.1 и теорема 3.8
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Условия оптимальности для вогнутых задач: теорема 3.9
+          Слейтера и следствие из неё
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Теорема 3.10 Джеоффриона о необходимых и достаточных условиях
+          собственной эффективности
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Теорема 3.11 &mdash; необходимое и достаточное условие
+          собственной эффективности
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Условия оптимальности в терминах седловых точек функции
+          Лагранжа (теорема 3.12)
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Необходимое условие оптимальности для задач с дифференцируемыми
+          функциями (теорема 3.15)
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Достаточное условие оптимальности для задач с дифференцируемыми
+          функциями (теорема 3.16)
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Условия замкнутости множеств Парето и Слейтера
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Свойство плотности множества собственно эффективных точек
+          (теоремы 4.2 и 4.3). Теорема 4.4 Эрроу-Баранкина-Блекуэлла
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Лемма 4.3, теорема 4.5 о плотности множества точек максимума
+          линейных свёрток критериев в множестве Парето, следствие из неё
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Функции и аксиомы выбора. Теорема Сена. Парнодоминантный выбор
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Аксиома независимости от посторонних альтернатив. Теорема Шварца
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Задача многокритериального выбора. Аксиомы разумного выбора.
+          Принцип Эджворта-Парето
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Проблема сужения множества Парето и подходы к её решению
+        </div>
+      </li>
+    </ol>
+  </body>
+
+</html>

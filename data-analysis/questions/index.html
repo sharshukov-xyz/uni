@@ -1,0 +1,3613 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Вопросы &mdash; Инструменты анализа данных в экономике и финансах</title>
+
+    <link href="/assets/css/styles.css" rel="stylesheet">
+    <script defer src="/assets/js/core.js"></script>
+    <script defer src="/assets/js/questions.js"></script>
+    <script defer src="/assets/js/controls.js"></script>
+
+    <link rel="stylesheet" href="/assets/katex/katex.min.css">
+    <script defer src="/assets/katex/katex.min.js"></script>
+    <script defer src="/assets/katex/auto-render.min.js"></script>
+
+    <script>
+     document.addEventListener("DOMContentLoaded", function () {
+       renderMathInElement(document.body, {
+         // customised options
+         // • auto-render specific keys, e.g.:
+         delimiters: [
+           { left: '$$', right: '$$', display: true },
+           { left: '$', right: '$', display: false },
+           { left: '\\(', right: '\\)', display: false },
+           { left: '\\[', right: '\\]', display: true }
+         ],
+         // • rendering keys, e.g.:
+         throwOnError: false
+       });
+     });
+    </script>
+  </head>
+
+  <body>
+    <h1 id="title">Вопросы &mdash; Инструменты анализа данных в экономике и финансах</h1>
+    <nav>
+      <a href="/">Домой</a>
+      <a href="..">Инструменты анализа данных в экономике и финансах</a>
+      <a href="/links">Ссылки</a>
+      <a href="/about">Контакты</a>
+    </nav>
+
+    <div class="controls">
+      <button onclick="HideQuestions()">Скрыть вопросы</button>
+      <button onclick="ShowQuestions()">Показать вопросы</button>
+      <button onclick="HideAnswers()">Скрыть ответы</button>
+      <button onclick="ShowAnswers()">Показать ответы</button>
+      <button onclick="HideProofs()">Скрыть доказательства</button>
+      <button onclick="ShowProofs()">Показать доказательства</button>
+      <button onclick="ShowRandomElement(HideQuestions)">
+        Показать случайный вопрос
+      </button>
+    </div>
+
+    <div class="proof-type">
+      Показывать
+      <select id="select-proof-type" name="select-proof-type">
+        <option value="proofs">доказательства полностью</option>
+        <option value="ideas">только идеи доказательств</option>
+      </select>
+    </div>
+
+    <div style="display:none">
+      $\global\def\at#1#2{\left. #1 \right\rvert_{#2}}$
+      $\global\def\abs#1{\left\lvert #1 \right\rvert}$
+      $\global\def\norm#1{\left\lVert #1 \right\rVert}$
+      $\global\def\limto#1{\underset{#1}{\longrightarrow}}$
+
+      $\global\def\dp#1#2{#1 \cdot #2\,}$
+      $\global\def\vp#1#2{#1 \times #2\,}$
+
+      $\global\def\dv#1#2{\frac{d #1}{d #2}}$
+      $\global\def\pd#1#2{\frac{\partial #1}{\partial #2}}$
+      $\global\def\pdv2#1#2{\frac{\partial^2 #1}{\partial #2^2}}$
+      $\global\def\ppdv#1#2#3{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
+
+      $\global\def\paren#1{\left( #1 \right)}$
+
+      $\global\def\mbox#1{\text{#1}}$
+
+      $\global\def\div{\text{div}\,}$
+      $\global\def\dsum{\displaystyle\sum\,}$
+      $\global\def\grad{\text{grad}\,}$
+      $\global\def\rot{\text{rot}\,}$
+
+      $\global\def\bvec#1{\mathbf{#1}}$
+      $\global\def\vb#1{\textbf{#1}}$
+
+      $\global\def\op#1{\mathrm{#1}\,}$
+
+      $\global\def\proj{\mathrm{proj}}$
+      $\global\def\bydef{\mathrm{def}}$
+      $\global\def\const{\text{const}\,}$
+      $\global\def\res{\text{res}\,}$
+      $\global\def\Res{\text{Res}\,}$
+      $\global\def\Re{\text{Re}\,}$
+      $\global\def\Im{\text{Im}\,}$
+      $\global\def\ch{\text{ch}\,}$
+      $\global\def\sh{\text{sh}\,}$
+      $\global\def\tg{\mathrm{tg}\,}$
+      $\global\def\ctg{\mathrm{ctg}\,}$
+      $\global\def\argtg{\text{argtg}\,}$
+
+      $\global\def\cov{\operatorname{cov}}$
+      $\global\def\var{\operatorname{var}}$
+      $\global\def\corr{\operatorname{corr}}$
+      $\global\def\se{\operatorname{se}}$
+      $\global\def\logit{\operatorname{logit}}$
+    </div>
+
+    <ol id="questions">
+      <li class="question">
+        <div class="name repeat">
+          Определение: дисперсия
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Дисперсией</i> случайной величины $x$ называют величину
+            \[
+            D x = E \left[ {(x - E x)}^2 \right] = E x^2 - {(E x)}^2.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name repeat">
+          Определение: стандартное отклонение
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Стандартным отклонением</i> случайной величины $x$ называют величину
+            \[
+            \sigma_x = \sqrt{D x}.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name repeat">
+          Определение: ковариация
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Ковариация</i> случайных величин $x$ и $y$:
+            \[
+            \cov(x,y) = E \left[
+            (x - Ex) (y - Ey)
+            \right]
+            =
+            \frac{1}{n}
+            \sum\limits_{i=1}^{n} \left[
+            (x_i - \overline x) (y_i - \overline y)
+            \right].
+            \]
+          </div>
+
+          <div class="remark">
+            Ковариация может быть записана как
+            \[
+            \cov(x,y) = E[xy] - Ex Ey.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name repeat">
+          Определение: выборочная ковариация
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Выборочной ковариацией</i> случайных величин $x$ и $y$ называют величину
+            \[
+            \widehat \cov(x,y) = \frac{1}{n} \sum\limits_{i=1}^{n} (x_i - \overline x) (y_i - \overline y).
+            \]
+          </div>
+
+          <div class="remark">
+            Выборочная ковариация может быть вычислена как
+            \[
+            \widehat \cov(x,y) = \overline{xy} - \overline{x} \cdot \overline{y}.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name repeat">
+          Свойства выборочной ковариации
+        </div>
+        <div class="content">
+          Пусть $b$ &mdash; некоторая константа, а $x,y,z$ &mdash; случайные величины. Тогда справедливы свойства:
+          <ol>
+            <li>
+              $\widehat \cov(x,b) = 0$;
+            </li>
+
+            <li>
+              $\widehat \cov(x, by) = b \cdot \widehat \cov(x,y)$;
+            </li>
+
+            <li>
+              $\widehat \cov(x, y + b) = \widehat \cov(x,y)$;
+            </li>
+
+            <li>
+              $\widehat \cov(x, y + z) = \widehat \cov(x,y) + \widehat \cov(x,z)$.
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name repeat">
+          Определение: выборочная дисперсия
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Выборочной дисперсией</i> случайной величины $x$ называют величину
+            \[
+            \widehat \var(x) = \frac{1}{n} \sum\limits_{i=1}^{n} {\left( x_i - \overline x \right)}^2.
+            \]
+          </div>
+
+          <div class="remark">
+            Выборочная дисперсия может быть вычислена как
+            \[
+            \widehat \var(x) = \overline{x^2} - (\overline x)^2.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name repeat">
+          Свойства выборочной дисперсии
+        </div>
+        <div class="content">
+          Пусть $b$ &mdash; некоторая константа, а $x,y$ &mdash; случайные величины. Тогда справедливы свойства:
+          <ol>
+            <li>
+              $\widehat \var(b) = 0$;
+            </li>
+
+            <li>
+              $\widehat \var(bx) = b^2 \cdot \widehat \var(x)$;
+            </li>
+
+            <li>
+              $\widehat \var(x + b) = \widehat \var(x)$;
+            </li>
+
+            <li>
+              $\widehat \var(x + y) = \widehat \var(x) + \widehat \var(y) + 2 \widehat \cov(x,y)$.
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name repeat">
+          Определение: выборочный коэффициент корреляции
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Выборочным коэффициентом корреляции</i> случайных величин $x,y$ называют величину
+            \[
+            \widehat \corr(x,y) = \frac{\widehat \cov(x, y)}{\sqrt{\widehat \var(x) \widehat \var(y)}}.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Каковы цели регрессионного анализа?
+        </div>
+        <div class="content">
+          <ol>
+            <li>
+              Оценка влияния независимых переменных на зависимую.
+            </li>
+
+            <li>
+              Предсказание значений зависимой переменной на основе новых данных.
+            </li>
+
+            <li>
+              Выявление закономерностей и трендов.
+            </li>
+
+            <li>
+              Проверка гипотез.
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Классификация данных с точки зрения структуры
+        </div>
+        <div class="content">
+          <ul>
+            <li>
+              <i class="important">Пространственные данные</i> (cross section data): данные, собранные о множестве
+              объектов за один момент времени.
+
+              <div class="example">
+                Данные о ценах однокомнатных квартир в Москве в ноябре 2024 года.
+              </div>
+            </li>
+
+            <li>
+              <i class="important">Временные ряды</i> (time series): данные об одном объекте, собранные в течение
+              нескольких последовательных моментов времени.
+
+              <div class="example">
+                Ежедневные данные о курсе доллара, собранные за год.
+              </div>
+            </li>
+
+            <li>
+              <i class="important">Панельные данные</i> (panel data): данные о нескольких объектах, собранные в течение
+              нескольких последовательных моментов времени.
+
+              <div class="example">
+                Ежегодные данные об уровне инфляции в 50 развивающихся странах, собранные за 10 лет.
+              </div>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: парная линейная регрессия
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Парная линейная регрессия</i> задаётся формулой
+            \[
+            y_i = \beta_1 + \beta_2 x_i + \varepsilon_i, \qquad i = \overline{1,n},
+            \]
+            где
+            <ul>
+              <li>
+                $y_i$ &mdash; зависимая (объясняемая) переменная;
+              </li>
+
+              <li>
+                $x_i$ &mdash; независимая (объясняющая) переменная;
+              </li>
+
+              <li>
+                $\beta_1$ &mdash; свободный член, показывающий значение $y$, когда $x = 0$;
+              </li>
+
+              <li>
+                $\beta_2$ &mdash; коэффициент регрессии, который показывает, насколько изменится $y$ при изменении $x$ на
+                одну единицу;
+              </li>
+
+              <li>
+                $\varepsilon_i$ &mdash; случайная ошибка, учитывающая влияние других, неучтённых переменных;
+              </li>
+
+              <li>
+                $n$ &mdash; количество наблюдений.
+              </li>
+            </ul>
+          </div>
+
+          <p>
+            На практике точные значения коэффициентов регрессии $\beta_1$ и $\beta_2$ неизвестны, но можно получить их
+            оценки $\widehat \beta_1, \widehat \beta_2$ на основе собранных статистических данных.
+          </p>
+
+          <div class="remark">
+            Полученные оценки $\widehat \beta_1, \widehat \beta_2$ являются случайными величинами.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Как ищутся оценки коэффициентов регрессии классической линейной модели парной регрессии?
+        </div>
+        <div class="content">
+          Оценки $\widehat \beta_1, \widehat \beta_2$ ищутся методом неопределённых коэффициентов (МНК).
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Каковы предпосылки классической линейной модели парной регрессии?
+        </div>
+        <div class="content">
+          <ol>
+            <li>
+              Модель линейна по параметрам и корректно специфицирована:
+              \[
+              y_i = \beta_1 + \beta_2 x_i + \varepsilon_i, \qquad i = \overline{1,n}.
+              \]
+            </li>
+
+            <li>
+              $x_1, \dots, x_n$ &mdash; детерминированные величины, не все равные друг другу.
+            </li>
+
+            <li>
+              Математическое ожидание случайных ошибок равно нулю:
+              \[
+              E \varepsilon_i = 0.
+              \]
+            </li>
+
+            <li>
+              Дисперсия случайной ошибки одинакова для всех наблюдений:
+              \[
+              D \varepsilon_i = \sigma^2 = \const.
+              \]
+              Это значит, что случайные ошибки <i class="important">гомоскедастичны</i>.
+            </li>
+
+            <li>
+              Случайные ошибки, относящиеся к разным наблюдениям, взаимно независимы:
+              \[
+              \cov(\varepsilon_i, \varepsilon_j) = 0.
+              \]
+            </li>
+
+            <li>
+              Случайные ошибки имеют нормальное распределение:
+              \[
+              \varepsilon_i \sim N(0, \sigma^2).
+              \]
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: гомоскедастичность
+        </div>
+        <div class="content">
+          <div class="definition">
+            Говорят, что случайные ошибки $\varepsilon_i$ <i>гомоскедастичны</i>, если их дисперсия постоянна:
+            \[
+            D \varepsilon_i = \sigma^2 = \const.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: гетероскедастичность
+        </div>
+        <div class="content">
+          <div class="definition">
+            Говорят, что случайные ошибки $\varepsilon_i$ <i>гомоскедастичны</i>, если их дисперсия не является
+            постоянной:
+            \[
+            D \varepsilon_i = \sigma_i^2 \neq \const.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: несмещённая оценка
+        </div>
+        <div class="content">
+          <div class="definition">
+            Оценка $\widehat \theta$ параметра $\theta$ называется <i>несмещённой</i>, если её мат. ожидание совпадает с
+            точной оценкой:
+            \[
+            E \widehat \theta = \theta.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: эффективная оценка
+        </div>
+        <div class="content">
+          <div class="definition">
+            Оценка $\widehat \theta$ параметра $\theta$ называется <i>эффективной</i> в некотором классе оценок, если её
+            дисперсия является минимальной среди всех оценок этого класса.
+          </div>
+
+          <div class="remark">
+            Можно считать, что эффективная оценка является &laquo;наиболее точной&raquo;.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема Гаусса&dash;Маркова
+        </div>
+        <div class="content">
+          <div class="theorem">
+            (Гаусса&dash;Маркова).
+            <br/>
+            Если выполнены предпосылки 1&dash;5 классической линейной модели парной регрессии:
+            <ol>
+              <li>
+                модель линейна по параметрам и корректно специфицирована:
+                \[
+                y_i = \beta_1 + \beta_2 x_i + \varepsilon_i, \qquad i = \overline{1,n};
+                \]
+              </li>
+
+              <li>
+                $x_1, \dots, x_n$ &mdash; детерминированные величины, не все равные друг другу;
+              </li>
+
+              <li>
+                математическое ожидание случайных ошибок равно нулю:
+                \[
+                E \varepsilon_i = 0;
+                \]
+              </li>
+
+              <li>
+                дисперсия случайной ошибки одинакова для всех наблюдений:
+                \[
+                D \varepsilon_i = \sigma^2;
+                \]
+              </li>
+
+              <li>
+                случайные ошибки, относящиеся к разным наблюдениям, взаимно независимы:
+                \[
+                \cov(\varepsilon_i, \varepsilon_j) = 0;
+                \]
+              </li>
+            </ol>
+
+            то МНК&dash;оценки коэффициентов $\widehat \beta_1, \widehat \beta_2$ будут:
+            <ul>
+              <li>
+                несмещёнными;
+              </li>
+
+              <li>
+                эффективными в классе всех несмещённых и линейных по $y$ оценок.
+              </li>
+            </ul>
+          </div>
+
+          <div class="remark">
+            Линейность по $y$ означает, что рассматриваются все оценки, которые могут быть представлены в виде
+            линейной комбинации значений объясняемой переменной:
+            \[
+            \sum\limits_{i=1}^{n} c_i y_i.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: множественная линейная регрессия
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Множественная линейная регрессия</i> задаётся формулой
+            \[
+            y_i = \beta_1 + \beta_2 x_i^{(2)} + \dots + \beta_k x_i^{(k)} + \varepsilon_i, \qquad i = \overline{1,n},
+            \]
+            где
+            <ul>
+              <li>
+                $y_i$ &mdash; зависимая переменная;
+              </li>
+
+              <li>
+                $x_i^{(2)}, \dots, x_i^{(k)}$ &mdash; независимые переменные (регрессоры);
+              </li>
+
+              <li>
+                $\beta_1$ &mdash; свободный член;
+              </li>
+
+              <li>
+                $\beta_2, \dots, \beta_k$ &mdash; коэффициенты регрессии;
+              </li>
+
+              <li>
+                $\varepsilon_i$ &mdash; случайная ошибка, учитывающая влияние других, неучтённых переменных;
+              </li>
+
+              <li>
+                $k$ &mdash; число коэффициентов (или регрессоров) модели;
+              </li>
+
+              <li>
+                $n$ &mdash; количество наблюдений.
+              </li>
+            </ul>
+          </div>
+
+          <div class="remark">
+            Модель удобно представлять в виде:
+            \[
+            y_i = \beta_1 x_i^{(1)} + \beta_2 x_i^{(2)} + \dots + \beta_k x_i^{(k)} + \varepsilon_i, \qquad i = \overline{1,n},
+            \]
+            где $x_i^{(1)} \equiv 1, \quad i = \overline{1,n}$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Каковы предпосылки классической линейной модели множественной регрессии?
+        </div>
+        <div class="content">
+          <ol>
+            <li>
+              Модель линейна по параметрам и корректно специфицирована:
+              \[
+              y_i = \beta_1 + \beta_2 x_i^{(2)} + \dots + \beta_k x_i^{(k)} + \varepsilon_i, \qquad i = \overline{1,n}.
+              \]
+            </li>
+
+            <li>
+              $x_i^{m}, \quad m = \overline{2,k}, \; i = \overline{1,n}$ &mdash; детерминированные линейно независимые величины.
+            </li>
+
+            <li>
+              Математическое ожидание случайных ошибок равно нулю:
+              \[
+              E \varepsilon_i = 0.
+              \]
+            </li>
+
+            <li>
+              Дисперсия случайной ошибки одинакова для всех наблюдений:
+              \[
+              D \varepsilon_i = \sigma^2 = \const.
+              \]
+              Это значит, что случайные ошибки <i class="important">гомоскедастичны</i>.
+            </li>
+
+            <li>
+              Случайные ошибки, относящиеся к разным наблюдениям, взаимно независимы:
+              \[
+              \cov(\varepsilon_i, \varepsilon_j) = 0.
+              \]
+            </li>
+
+            <li>
+              Случайные ошибки имеют нормальное распределение:
+              \[
+              \varepsilon_i \sim N(0, \sigma^2).
+              \]
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Метод наименьших квадратов
+        </div>
+        <div class="content">
+          <div class="definition">
+            МНК &mdash; такой способ проведения регрессионной линии, что сумма квадратов отклонений отдельных значений
+            зависимой переменной от неё была минимальной.
+          </div>
+
+          <p>
+            Пусть $y_i$ &mdash; координата точки по оси $y$, а $\widehat y_i$ &mdash; предсказанное значение. Тогда
+            \[
+            e_i = y_i - \widehat y_i,
+            \]
+            где $e_i$ &mdash; расстояние от $y$ до линии регрессии (<i class="important">остаток регрессии</i>).
+          </p>
+
+          <p>
+            Суммируя квадраты остатков, получаем:
+            \[
+            RSS = \sum\limits_{i=1}^{n} {(y_i - \widehat y_i)}^2.
+            \]
+          </p>
+
+          <div class="definition">
+            <i>RSS</i> (Residual Sum of Squares) &mdash; сумма квадратов разниц между фактическими и предсказанными
+            линейной регрессией значениями зависимой переменной.
+          </div>
+          <div class="problem">
+            Требуется минимизировать RSS:
+            \[
+            RSS = \sum\limits_{i=1}^{n} {(y_i - \widehat y_i)}^2 \to \min.
+            \]
+
+            <div class="solution">
+              Учитывая, что $\widehat y_i = a x_i + b$, найдём частные производные:
+              \[
+              \begin{aligned}
+              \frac{\partial RSS}{\partial a}
+              &=
+              {\left( \sum\limits_{i=1}^{n} {\left[ y_i - (a x_i + b) \right]}^2 \right)}_a' = \\
+              &=
+              \sum\limits_{i=1}^{n} \left[
+              2 (y_i - (a x_i + b)) \cdot (-x_i)
+              \right] = \\
+              &=
+              2 \sum\limits_{i=1}^{n} \left(
+              a x_i^2 + b x_i - x_i y_i
+              \right), \\
+
+              \frac{\partial RSS}{\partial b}
+              &=
+              {\left( \sum\limits_{i=1}^{n} {\left[ y_i - (a x_i + b) \right]}^2 \right)}_b' = \\
+              &=
+              \sum\limits_{i=1}^{n} \left[
+              2 (y_i - (a x_i + b)) \cdot (-1)
+              \right] = \\
+              &=
+              2 \sum\limits_{i=1}^{n} \left(
+              a x_i + b - y_i
+              \right).
+              \end{aligned}
+              \]
+
+              Приравнивая полученные производные к нулю, получаем следующую систему:
+              \[
+              \begin{aligned}
+              \sum\limits_{i=1}^{n} \left(
+              a x_i^2 + b x_i - x_i y_i
+              \right) &= 0, \\
+              \sum\limits_{i=1}^{n} \left(
+              a x_i + b - y_i
+              \right) &= 0.
+              \end{aligned}
+              \]
+
+              <p>
+                Стоит отметить, что исходная функция является положительно определённой, поэтому решение этой системы
+                будет точкой минимума.
+              </p>
+
+              Разбиваем суммы:
+              \[
+              \begin{aligned}
+              a \sum\limits_{i=1}^{n} x_i^2
+              + b \sum\limits_{i=1}^{n} x_i
+              &= \sum\limits_{i=1}^{n} x_i y_i, \\
+              a \sum\limits_{i=1}^{n} x_i
+              + n b
+              &= \sum\limits_{i=1}^{n} y_i.
+              \end{aligned}
+              \]
+
+              Положим
+              \[
+              \widehat \beta_1 := a, \qquad \widehat \beta_2 := b,
+              \]
+              тогда получаем систему
+              \[
+              \begin{aligned}
+              \widehat \beta_2 \sum\limits_{i=1}^{n} x_i^2
+              + \widehat \beta_1 \sum\limits_{i=1}^{n} x_i
+              &= \sum\limits_{i=1}^{n} x_i y_i, \\
+              \widehat \beta_2 \sum\limits_{i=1}^{n} x_i
+              + n \widehat \beta_1
+              &= \sum\limits_{i=1}^{n} y_i.
+              \end{aligned}
+              \]
+
+              Поделим оба уравнения на $n$, получаем:
+              \[
+              \begin{aligned}
+              \widehat \beta_2 \overline{x^2} + \widehat \beta_1 \overline x &= \overline{xy}, \\
+              \widehat \beta_2 \overline x + \widehat \beta_1 &= \overline y.
+              \end{aligned}
+              \]
+
+              Выражая искомые оценки коэффициентов линейной парной регрессии, получаем:
+              \[
+              \begin{aligned}
+              \widehat \beta_2 &= \frac{\overline{xy} - \overline{x} \cdot \overline{y}}{\overline{x^2} - \overline{x}^2}, \\
+              \widehat \beta_1 &= \overline y - \widehat \beta_2 \overline x,
+              \end{aligned}
+              \]
+              или, вспоминая формулы
+              \[
+              \begin{aligned}
+              \widehat \cov(x,y) &= \frac{1}{n} \sum\limits_{i=1}^{n} (x_i - \overline x) (y_i - \overline y), \\
+              \widehat \var(x) &= \frac{1}{n} \sum\limits_{i=1}^{n} {(x_i - \overline x)}^2,
+              \end{aligned}
+              \]
+              окончательно имеем
+              \[
+              \begin{aligned}
+              \widehat \beta_2
+              &= \phantom{\overline y -} \frac{\widehat \cov(x,y)}{\widehat \var(x)}, \\
+              \widehat \beta_1
+              &= \overline y - \frac{\widehat \cov(x,y)}{\widehat \var(x)} \overline x.
+              \end{aligned}
+              \]
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Свойства остатков регрессии $e_i$, полученных в процессе применения МНК
+        </div>
+        <div class="content">
+          Пусть $e_i = y_i - \widehat y_i$. Тогда справедливы свойства:
+          <ol>
+            <li>
+              $\sum\limits_{i=1}^{n} e_i = 0$;
+            </li>
+
+            <li>
+              $\sum\limits_{i=1}^{n} x_i e_i = 0$;
+            </li>
+
+            <li>
+              $\sum\limits_{i=1}^{n} y_i = \sum\limits_{i=1}^{n} \widehat y_i$;
+            </li>
+
+            <li>
+              $\sum\limits_{i=1}^{n} (\widehat y_i - \overline y) e_i = 0$ или $\widehat \cov(\widehat y, e) = 0$.
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Как оценить качество полученной регресии?
+        </div>
+        <div class="content">
+          <p>
+            Пусть $\widehat \beta_1, \widehat \beta_2$ &mdash; коэффициенты регрессии, полученные МНК.
+          </p>
+
+          <p>
+            Чтобы оценить качество полученной регрессии (то, насколько хорошо линия регрессии соответствует фактическим
+            данным), можно сделать следующее.
+          </p>
+
+          Для начала выразим переменную $y$ через остатки и предсказанные значения $\widehat y_i$:
+          \[
+          e_i = y_i - \widehat y_i \implies y_i = e_i + \widehat y_i.
+          \]
+          Теперь вычислим выборочную дисперсию этой переменной:
+          \[
+          \begin{aligned}
+          \widehat \var(y)
+          &= \widehat \var(e + \widehat y) = \\
+          &= \widehat \var(e) + \widehat \var(\widehat y) + 2 \cov(e, \widehat y).
+          \end{aligned}
+          \]
+          Заметим, что $\cov(e, \widehat y) = 0$, поэтому
+          \[
+          \widehat \var(y) = \widehat \var(e) + \widehat \var(\widehat y),
+          \]
+          или, что то же самое,
+          \[
+          \frac{1}{n} \sum\limits_{i=1}^{n} {(y_i - \overline{y})}^2
+          =
+          \frac{1}{n} \sum\limits_{i=1}^{n} {(e_i - \overline{e})}^2
+          +
+          \frac{1}{n} \sum\limits_{i=1}^{n} {(\widehat y_i - \overline{y})}^2.
+          \]
+
+          Теперь, пользуясь свойствами остатков регрессии:
+          <ul>
+            <li>
+              $\overline e = 0$;
+            </li>
+
+            <li>
+              $\overline y = \overline {\widehat y}$
+            </li>
+          </ul>
+          и домножая полученное равенство на $n$, окончательно имеем
+          \[
+          \sum\limits_{i=1}^{n} {(y_i - \overline{y})}^2
+          =
+          \sum\limits_{i=1}^{n} e_i^2
+          +
+          \sum\limits_{i=1}^{n} {(\widehat y_i - \overline{y})}^2.
+          \]
+
+          Этот факт записывают следующим образом:
+          \[
+          TSS = ESS + RSS,
+          \]
+          где
+          <ul>
+            <li>
+              $TSS = \sum\limits_{i=1}^{n} {(y_i - \overline{y})}^2$ &mdash; <i>общая сумма квадратов</i>;
+            </li>
+
+            <li>
+              $ESS = \sum\limits_{i=1}^{n} {(\widehat y_i - \overline{y})}^2$ &mdash; <i>объяснённая регрессией сумма квадратов</i>;
+            </li>
+
+            <li>
+              $RSS = \sum\limits_{i=1}^{n} {(y_i - \widehat y_i)}^2$ &mdash; <i>необъяснённая регрессией сумма квадратов</i> (сумма квадратов остатков).
+            </li>
+          </ul>
+
+          <p>
+            Чем лучше построенная модель соответствует фактическим данным, тем меньше сумма квадратов остатков,
+            следовательно, тем ближе ESS к TSS. Иными словами, если модель хорошо соответствует данным, то дробь
+            \[
+            \frac{ESS}{TSS} = \frac{
+                \sum\limits_{i=1}^{n} {(\widehat y_i - \overline y)}^2
+            }{
+                \sum\limits_{i=1}^{n} {(y_i - \overline y)}^2
+            }
+            \]
+            близка к единице, а в идеальном случае дробь равна единице.
+          </p>
+
+          <p>
+            Напротив, чем хуже линия регрессии описывает фактические данные, тем ближе отношение $\dfrac{ESS}{TSS}$ к
+            нулю.
+          </p>
+
+          <p>
+            На этой идее основывается использование коэффициента $R^2$.
+          </p>
+
+          <div class="definition">
+            <i>Коэффициент детерминации $R^2$</i> задаётся как
+            \[
+            R^2 = 1 - \frac{RSS}{TSS} = \frac{TSS - RSS}{TSS} = \frac{ESS}{TSS}.
+            \]
+
+            Его также можно представить в виде
+            \[
+            \begin{aligned}
+            R^2 = \frac{ESS}{TSS}
+            &= \frac{
+                \sum\limits_{i=1}^{n} {(\widehat y_i - \overline y)}^2
+            }{
+                \sum\limits_{i=1}^{n} {(y_i - \overline y)}^2
+            } = \\
+            &= \frac{
+                \frac{1}{n} \sum\limits_{i=1}^{n} {(\widehat y_i - \overline y)}^2
+            }{
+                \frac{1}{n} \sum\limits_{i=1}^{n} {(y_i - \overline y)}^2
+            } = \\
+            &= \frac{\widehat \var (\widehat y)}{\widehat \var (y)}.
+            \end{aligned}
+            \]
+          </div>
+
+          Понятно, что $R^2 \in [0, 1]$.
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Чему равна стандартная ошибка МНК-оценки $\widehat \beta_1$?
+        </div>
+        <div class="content">
+          <div class="answer">
+            Пусть $S^2$ &mdash; несмещённая оценка дисперсии $\sigma^2$ случайной ошибки:
+            \[
+            S^2 = \frac{1}{n-2} \sum\limits_{i=1}^{n} e_i^2.
+            \]
+            <div class="definition">
+              <i>Стандартной ошибкой $\se(\widehat \beta_1)$ МНК-оценки $\widehat \beta_1$</i> называют величину
+              \[
+              \se(\widehat \beta_1) = \sqrt{\widehat \var (\widehat \beta_1)}
+              = \sqrt{ \frac{S^2 \cdot \overline{x^2} }{\sum\limits_{i=1}^{n} {(x_i - \overline x)}^2} }.
+              \]
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Чему равна стандартная ошибка МНК-оценки $\widehat \beta_2$?
+        </div>
+        <div class="content">
+          <div class="answer">
+            Пусть $S^2$ &mdash; несмещённая оценка дисперсии $\sigma^2$ случайной ошибки:
+            \[
+            S^2 = \frac{1}{n-2} \sum\limits_{i=1}^{n} e_i^2.
+            \]
+            <div class="definition">
+              <i>Стандартной ошибкой $\se(\widehat \beta_2)$ МНК-оценки $\widehat \beta_2$</i> называют величину
+              \[
+              \se(\widehat \beta_2) = \sqrt{\widehat \var (\widehat \beta_2)}
+              = \sqrt{ \frac{S^2}{\sum\limits_{i=1}^{n} {(x_i - \overline x)}^2} }.
+              \]
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Гипотеза о независимости переменных
+        </div>
+        <div class="content">
+          Рассмотрим КЛМПР:
+          \[
+          y_i = \beta_1 + \beta_2 x_i + \varepsilon_i, \qquad i = \overline{1,n}.
+          \]
+          Рассмотрим две гипотезы:
+          <ul>
+            <li>
+              Нулевая гипотеза $H_0: \beta_2 = 0$ &mdash; переменная $x$ не влияет на $y$;
+            </li>
+
+            <li>
+              Альтернативная гипотеза $H_1: \beta_2 \neq 0$ &mdash; переменная $x$ влияет на $y$.
+            </li>
+          </ul>
+
+          Для проверки гипотезы понадобится расчётное значение тестовой статистики:
+          \[
+          t_\mbox{расч} = \frac{\widehat \beta_2}{\se(\widehat \beta_2)},
+          \]
+          где $\se(\widehat \beta_2)$ &mdash; стандартная ошибка коэффициента:
+          \[
+          \se(\widehat \beta_2) = \sqrt{ \frac{S^2}{\sum\limits_{i=1}^{n} {(x_i - \overline x)}^2} }.
+          \]
+          Здесь $S$ &mdash; несмещённая оценка дисперсии $\sigma^2$ случайной ошибки (среднеквадратичное отклонение остатков):
+          \[
+          S^2 = \frac{1}{n-2} \sum\limits_{i=1}^{n} e_i^2 = \frac{1}{n - 2} \sum\limits_{i=1}^{n} {(y_i - \widehat y_i)}^2.
+          \]
+
+          <p>
+            Зададим уровень значимости $\alpha$ &mdash; вероятность ошибки первого рода, то есть вероятность отклонить
+            проверяемую гипотезу при условии, что в действительности эта гипотеза верна.
+          </p>
+
+          <p>
+            Критическим значением тогда будет являться $t_{n-2}^{\alpha/2}$ &mdash; значение распределения Стьюдента
+            для $(n-2)$ степеней свободы и выбранного уровня значимости $\alpha$.
+          </p>
+
+          <p>
+            Тогда, если выполняется неравенство
+            \[
+            \abs{
+            \frac{\widehat \beta_2}{\se(\widehat \beta_2)}
+            }
+            \gt t_{n-2}^{\alpha/2},
+            \]
+            то гипотезу $H_0$ следует отвергнуть, то есть следует сделать вывод о том, что $x$ влияет на $y$. В этом случае
+            переменную $x$ называют <i class="important">статистически значимой при уровне значимости $\alpha$</i>.
+          </p>
+
+          <p>
+            В противном случае нет оснований отвергнуть гипотезу $H_0$, а переменную $x$ называют
+            <i class="important">статистически незначимой при уровне значимости $\alpha$</i>.
+          </p>
+
+          <div class="remark">
+            Аналогично можно проверять гипотезу $H_0: \beta_2 = c$ против альтернативной гипотезы $H_1: \beta_2 \neq c$.
+            Тогда расчётное значение тестовой статистики задаётся формулой
+            \[
+            t_\mbox{расч} = \frac{\widehat \beta_2 - c}{\se(\widehat \beta_2)}.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Почему тестовая статистика $t_\mbox{расч}$ имеет распределение Стьюдента?
+        </div>
+        <div class="content">
+          <div class="answer">
+            Это следует из 6 предпосылки КЛМПР о том, что случайные ошибки имеют нормальное распределение:
+            \[
+            \varepsilon_i \sim N(0, \sigma^2).
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Построение доверительного интервала для коэффициента $\hat \beta_2$ парной регрессии
+        </div>
+        <div class="content">
+          Рассмотрим классическую линейную модель парной регрессии:
+          \[
+          y_i = \beta_1 + \beta_2 x_i + \varepsilon_i, \qquad i = \overline{1,n}.
+          \]
+
+          Пусть $\alpha$ &mdash; заданный уровень значимости. Зная распределение коэффициента $\widehat \beta_2$, можно
+          утверждать, что с вероятностью $1 - \alpha$ выполняется неравенство
+          \[
+          \abs{
+          \frac{\widehat \beta_2 - \beta_2}{\se(\widehat \beta_2)}
+          }
+          \lt t_{n-2}^{\alpha/2}.
+          \]
+
+          Решив это неравенство относительно $\beta_2$, получаем, что
+          \[
+          \widehat \beta_2 - \se(\widehat \beta_2) t_{n-2}^{\alpha/2}
+          \lt
+          \beta_2
+          \lt
+          \widehat \beta_2 + \se(\widehat \beta_2) t_{n-2}^{\alpha/2}.
+          \]
+
+          Следовательно, <i class="important">доверительный интервал</i> для $\beta_2$ имеет вид
+          \[
+          \left(
+          \widehat \beta_2 - \se(\widehat \beta_2) t_{n-2}^{\alpha/2}; \;
+          \widehat \beta_2 + \se(\widehat \beta_2) t_{n-2}^{\alpha/2}
+          \right).
+          \]
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Оценка качества регрессии: $F$-статистика
+        </div>
+        <div class="content">
+          <p>
+            Кроме проверки значимости отдельных коэффициентов, важно выяснить, является ли рассматриваемая модель в целом
+            статистически значимой.
+          </p>
+
+          Рассмотрим две гипотезы:
+          <ul>
+            <li>
+              $H_0$: все коэффициенты регрессии равны нулю;
+            </li>
+
+            <li>
+              $H_1$: по крайней мере один из коэффициентов не равен нулю, то есть модель является статистически
+              значимой.
+            </li>
+          </ul>
+
+          Рассмотрим тестовую статистику, которую называют $F$-статистикой:
+          \[
+          F_\mbox{расч} = \frac{R^2 / (k-1)}{(1 - R^2) / (n - k)},
+          \]
+          где $k$ &mdash; количество степеней свободы (число коэффициентов в модели линейной регрессии).
+
+          <div class="remark">
+            В КЛМПР $k = 2$, поэтому $F$-статистика принимает вид
+            \[
+            F_\mbox{расч} = (n-2) \frac{R^2}{1 - R^2}.
+            \]
+          </div>
+
+          Далее, находим критическое значение $F_\mbox{кр}$ распределения Фишера со степенями свободы $(k-1, n-k)$ и
+          выбранного уровня значимости $\alpha$:
+          <ul>
+            <li>
+              если $F_\mbox{расч} < F_\mbox{кр}$, то нет оснований отвергнуть гипотезу $H_0$, то есть модель является
+              статистически незначимой при уровне значимости $\alpha$;
+            </li>
+
+            <li>
+              в противном случае гипотеза $H_0$ отвергается, а модель признаётся статистически значимой.
+            </li>
+          </ul>
+
+          <div class="proposition">
+            Для случая парной регрессии $F_\mbox{расч} = t_\mbox{расч}^2$.
+
+            <div class="derivation">
+              \[
+              \begin{aligned}
+              F_\mbox{расч}
+              &=
+              \frac{ESS}{RSS / (n - 2)} = \\
+              &=
+              \frac{\sum\limits_{i=1}^{n} {(\widehat y_i - \overline y)}^2}{\left( \sum\limits_{i=1}^{n} {(y_i - \widehat y_i)}^2 \right) / (n - 2)}
+              = \\
+              &=
+              \frac{\sum\limits_{i=1}^{n} {\left[ (\widehat \beta_1 + \widehat \beta_2 x_i) - \sum\limits (\widehat \beta_1 + \widehat \beta_2) \right]}^2}
+              {\sum\limits_{i=1}^{n} {(y_i - \widehat y_i)}^2 / (n - 2)} = \\
+              &=
+              \frac{\sum\limits_{i = 1}^{n} \widehat \beta_2^2 (x_i - \overline x)^2}{s^2} = \\
+              &=
+              \frac{\widehat \beta_2^2}{s^2 / \sum\limits_{i=1}^{n} (x_i - \overline x)^2} = \\
+              &=
+              \left(
+              \frac{\widehat \beta_2}{\se (\widehat \beta_2)}
+              \right)^2 = \\
+              &=
+              t_\mbox{расч}^2.
+              \end{aligned}
+              \]
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: строгая мультиколлинеарность
+        </div>
+        <div class="content">
+          <div class="definition">
+            Говорят, что имеет место <i>строгая мультиколлинеарность</i>, если между регрессорами в модели есть точная
+            линейная связь, то есть когда одна объясняющая переменная точным образом линейно выражается через другие.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Можно ли вычислить МНК-оценки коэффициентов регрессии, когда имеет место строгая мультиколлинеарность?
+        </div>
+        <div class="content">
+          <div class="answer">
+            Нет, нельзя: при полной мультиколлинеарности столбцы матрицы регрессоров $X$ является вырожденной, поэтому
+            матрица $(X^T X)^{-1}$ не определена.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Как можно избавиться от строгой мультиколлинеарности?
+        </div>
+        <div class="content">
+          <div class="answer">
+            От строгой мультиколлинеарности можно избавиться, исключив линейно зависимые переменные.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: нестрогая мультиколлинеарность
+        </div>
+        <div class="content">
+          <div class="definition">
+            Говорят, что имеет место <i>нестрогая мультиколлинеарность</i>, если между регрессорами в модели отсутствует
+            точная линейная связь, но они сильно коррелируют между собой.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Какое негативное влияние оказывает нестрогая мультиколлинеарность?
+        </div>
+        <div class="content">
+          <div class="answer">
+            При нестрогой мультиколлинеарности можно вычислить МНК-оценки коэффициентов регрессии, но их стандартные ошибки
+            оказываются высокими, а точность оценок &mdash; низкой.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Почему при нестрогой мультиколлинеарности МНК-оценки оказываются неточными?
+        </div>
+        <div class="content">
+          <div class="answer">
+            Это происходит из-за того, что при сильной корреляции двух регрессоров в выборке они, как правило, меняются
+            одновременно, поэтому оказывается трудно отличить влияние одного регрессора от другого.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Происходит ли смещение МНК-оценок при нестрогой мультиколлинеарности?
+        </div>
+        <div class="content">
+          <div class="answer">
+            Нет &mdash; все предпосылки КЛММР соблюдаются.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Причины мультиколлинеарности
+        </div>
+        <div class="content">
+          <ul>
+            <li>
+              Высокая корреляция между объясняющими переменными (например, одна переменная является линейной комбинацией
+              двух других).
+            </li>
+
+            <li>
+              Присутствие фиктивных переменных (если все категории включены в модель).
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Последствия мультиколлинеарности
+        </div>
+        <div class="content">
+          <ul>
+            <li>
+              Нестабильные оценки коэффициентов &mdash; небольшое изменение исходных данных влечёт за собой существенное
+              изменение МНК-оценок коэффициентов регрессии.
+            </li>
+
+            <li>
+              Увеличение стандартных ошибок.
+            </li>
+
+            <li>
+              Незначимость большинства переменных &mdash; каждая переменная в отдельности является незначимой, а уравнение
+              в целом является значимым и характеризуется близким к единице коэффициентом $R^2$.
+            </li>
+
+            <li>
+              Проблемы с интерпретацией (сложно понять, какая переменная влияет на зависимую и в каком направлении).
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Как выявить мультиколлинеарность?
+        </div>
+        <div class="content">
+          О существенной частичной мультиколлинеарности можно судить по следующим признакам:
+          <ul>
+            <li>
+              большие по модулю парные коэффициенты корреляции между регрессорами (больше 0.9); выявить можно по матрице корреляции;
+            </li>
+
+            <li>
+              близость к нулю определителя матрицы $X^T X$;
+            </li>
+
+            <li>
+              большие значения коэффициентов VIF (больше 10).
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: коэффициент корреляции Пирсона
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Коэффициент корреляции Пирсона</i> задаётся формулой
+            \[
+            r_{xy} = \frac{
+            \sum\limits_{i=1}^{n} (x_i - \overline x) (y_i - \overline y)
+            }{
+            \sqrt{
+            \sum\limits_{i=1}^{n} {(x_i - \overline x)}^2
+            }
+            \sqrt{
+            \sum\limits_{i=1}^{n} {(y_i - \overline y)}^2
+            }
+            }
+            = \frac{\cov(x,y)}{\sigma_x \sigma_y}.
+            \]
+          </div>
+
+          Трактовка:
+          <ul>
+            <li>
+              $r_{xy}$ принимает значения на промежутке $[-1, 1]$;
+            </li>
+
+            <li>
+              знак $r_{xy}$ показывает направление связи (прямая или обратная);
+            </li>
+
+            <li>
+              абсолютная величина $r_{xy}$ показывает силу связи.
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: матрица корреляции
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Матрицей корреляции</i> называют матрицу, в позиции $(i,j)$ которой стоит коэффициент корреляции между
+            переменными $i$ и $j$:
+            \[
+            R
+            =
+            \begin{pmatrix}
+            1 & r_{12} & r_{13} & \dots & r_{1n} \\
+            r_{21} & 1 & r_{23} & \dots & r_{2n} \\
+            \vdots & \vdots & \vdots & \ddots & \vdots \\
+            r_{n1} & r_{n2} & r_{n3} & \dots & 1
+            \end{pmatrix},
+            \]
+            где $r_{ij}$ &mdash; коэффициент корреляции Пирсона между переменными $i$ и $j$.
+          </div>
+
+          Матрицу корреляции можно изобразить в виде heatmap, по которой можно найти переменные с сильной корреляцией.
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: VIF
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>VIF</i> (variance inflation factor) &mdash; коэффициенты, показывающие, насколько сильно связаны друг
+            с другом регрессоры модели.
+          </div>
+
+          <p>
+            Чтобы определить коэффициент VIF, соответствующий регрессору $x^{(j)}$, нужно оценить вспомогательную регрессию,
+            в которой слева стоит $x^{(j)}$, а справа &mdash; все остальные объясняющие переменные исходной модели.
+          </p>
+          <p>
+            После этого нужно вычислить коэффициент VIF по формуле
+            \[
+            \operatorname{VIF} = \frac{1}{1 - R^2},
+            \]
+            где $R^2$ &mdash; коэффициент детерминации из оценённой вспомогательной регрессии.
+          </p>
+
+          <p>
+            Если коэффициенты VIF всех регрессоров меньше 10, то существенной мультиколлинеарности в модели не
+            наблюдается.
+          </p>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: VIF
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>VIF</i> (variance inflation factor) &mdash; коэффициенты, показывающие, насколько сильно связаны друг
+            с другом регрессоры модели.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Как бороться с мультиколлинеарностью?
+        </div>
+        <div class="content">
+          <ul>
+            <li>
+              Увеличение количества наблюдений (если возможно).
+            </li>
+
+            <li>
+              Удаление сильно коррелирующих регрессоров &mdash; есть риск получить смещение МНК-оценок в результате
+              пропуска существенной переменной.
+            </li>
+
+            <li>
+              Комбинирование переменных (объединение коррелирующих переменных в одну).
+            </li>
+
+            <li>
+              Регуляризация (использование методов регуляризации, таких как Ridge или Lasso регрессий).
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: регуляризация
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Регуляризация</i> &mdash; метод добавления некоторых дополнительных ограничений к условию с целью решить
+            некорректно поставленную задачу или предотвратить переобучение.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Пример: LASSO-регуляризация
+        </div>
+        <div class="content">
+          LASSO-регуляризация задаётся формулой
+          \[
+          J_\mbox{LASSO} = \sum\limits_{i=1}^{n} (y_i - \widehat y_i)^2 - \lambda \norm{\beta}_1,
+          \]
+          где $\lambda$ &mdash; гиперпараметр. На коэффициенты $\beta$ накладываются дополнительное ограничение вида
+          \[
+          \sum\limits_{i=1}^{n} \abs{\beta_i} \leqslant t,
+          \]
+          где $t$ &mdash; обратно пропорциональная $\lambda$ величина.
+
+          <div class="remark">
+            Чем больше $\lambda$, тем сильнее модель штрафуется за величину коэффициентов и их количество.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Пример: RIDGE-регуляризация
+        </div>
+        <div class="content">
+          RIDGE-регуляризация задаётся формулой
+          \[
+          J_\mbox{RIDGE} = \sum\limits_{i=1}^{n} (y_i - \widehat y_i)^2 - \lambda \beta^2,
+          \]
+          где $\lambda$ &mdash; гиперпараметр. На коэффициенты $\beta$ накладываются дополнительное ограничение вида
+          \[
+          \sum\limits_{i=1}^{n} \beta_i^2 \leqslant t,
+          \]
+          где $t$ &mdash; обратно пропорциональная $\lambda$ величина.
+
+          <div class="remark">
+            Чем больше $\lambda$, тем сильнее модель штрафуется за величину коэффициентов и их количество.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Может ли LASSO-регуляризация занулить МНК-оценки коэффициентов регрессии?
+        </div>
+        <div class="content">
+          <div class="answer">
+            Да.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Может ли RIDGE-регуляризация занулить МНК-оценки коэффициентов регрессии?
+        </div>
+        <div class="content">
+          <div class="answer">
+            Нет.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: фиктивная переменная
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Фиктивной переменной</i> называют качественную переменную, принимающую значения 0 либо 1, включаемую
+            в модель для учёта влияния качественных признаков на объясняемую переменную.
+          </div>
+
+          <div class="remark">
+            Фиктивную переменную включают в модель линейной регресии, когда подозревают качественную зависимость.
+          </div>
+
+          <div class="remark">
+            Если качественная переменная имеет $k$ альтернативных значений, то при моделировании используется только
+            $k - 1$ фиктивных переменных.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Почему для признака, принимающего $m$ возможных значений, используется $m-1$ фиктивная переменная?
+        </div>
+        <div class="content">
+          <div class="answer">
+            Если включать в модель $m$ фиктивных переменных, то столкнёмся с чистой мультиколлинеарностью.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: фиктивная переменная наклона
+        </div>
+        <div class="content">
+          <p>
+            Если есть подозрение, что с ростом одного регрессора $x_i$ линейно изменяется разница между значениями
+            качественной переменной $d_i$, для вычисления этого изменения вводят <i class="important">фиктивные
+            переменные наклона</i> $x_i d_i$.
+          </p>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Проверка центрированности
+        </div>
+        <div class="content">
+          Чтобы проверить, равняется ли мат. ожидание случайной ошибки нулю или нет, можно воспользоваться статистическими критериями
+          <ul>
+            <li>
+              Колмогорова-Смирнова;
+            </li>
+
+            <li>
+              Стьюдента.
+            </li>
+          </ul>
+
+          <p>
+            Иногда случайная составляющая (ошибка) будет положительной, иногда отрицательной, но она не должна иметь
+            систематического смещения ни в одном из двух возможных направлений.
+          </p>
+
+          Высказываем гипотезы:
+          <ul>
+            <li>
+              $H_0: E \varepsilon = \mu_0 = 0$;
+            </li>
+
+            <li>
+              $H_1: E \varepsilon \neq \mu_0 = 0$.
+            </li>
+          </ul>
+
+          Расчётная статистика:
+          \[
+          t = \frac{\overline \varepsilon - \mu_0}{s_\varepsilon / \sqrt{n}},
+          \]
+          где $s_\varepsilon$ &mdash; несмещённая оценка дисперсии случайной ошибки.
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Проверка гомоскедастичности
+        </div>
+        <div class="content">
+          <ul>
+            <li>
+              $H_0$: ошибка гомоскедастична;
+            </li>
+
+            <li>
+              $H_1$: ошибка гетероскедастична.
+            </li>
+          </ul>
+
+          Существует два теста:
+          <ol type="a">
+            <li>
+              <i class="important">тест Бройша&mdash;Пагана</i>.
+              <ol start="0">
+                <li>
+                  Рассматриваем уравнение регрессии: $y_i = \beta_1 + \beta_2 x_{2i} + \dots + \beta_k x_{ki} + \varepsilon_i$.
+                </li>
+
+                <li>
+                  Ищем МНК-оценки и вычисляем RSS.
+                </li>
+
+                <li>
+                  В предположении гомоскедастичности случайных ошибок строим состоятельную оценку дисперсии ошибок:
+                  \[
+                  \widehat \sigma^2 = RSS / n.
+                  \]
+                </li>
+
+                <li>
+                  Ищем МНК-оценки для новой регрессионной модели:
+                  \[
+                  \frac{e_i}{\widehat \sigma^2} = \gamma_1 + \gamma_2 z_{2i} + \dots + \gamma_k z_{ki} + \eta_i,
+                  \]
+                  где в качестве $z_i$ обычно берут $x_i$.
+                </li>
+
+                <li>
+                  В качестве тестовой статистики берём $\operatorname{ESS} / 2$, где $\operatorname{ESS}$ &mdash;
+                  объяснённая часть вспомогательной регрессионной модели.
+                </li>
+
+                <li>
+                  В случае гомоскедастичности тестовая статистика подчиняется распределению $\chi^2_{k-1}$.
+                  <div class="remark">
+                    Также тут надо требовать, чтобы ошибки имели нормальное распределение (см. предпосылку 6).
+                  </div>
+                </li>
+              </ol>
+            </li>
+
+            <li>
+              <i class="important">тест Голфелда&mdash;Квандта</i>.
+              <ol start="0">
+                <li>
+                  Рассматриваем уравнение регрессии: $y_i = \beta_1 + \beta_2 x_{2i} + \dots + \beta_k x_{ki} + \varepsilon_i$.
+                </li>
+
+                <li>
+                  Упорядочиваем наблюдения по возрастанию $x_j$ &mdash; переменной, относительно которой имеется
+                  подозрение на гетероскедастичность.
+                </li>
+
+                <li>
+                  Оцениваем исходную регрессионную модель обычным МНК для двух выборок:
+                  <ul>
+                    <li>
+                      для первых $n_1$ наблюдений;
+                    </li>
+                    <li>
+                      для последних $n_2$ наблюдений.
+                    </li>
+                  </ul>
+                </li>
+
+                <li>
+                  Вычисляем $\operatorname{RSS}_1$ и $\operatorname{RSS}_2$, строим тестовую статистику:
+                  \[
+                  F_\mbox{расч} = \frac{\operatorname{RSS}_1 / (m_1 - k)}{\operatorname{RSS}_2 / (m_2 - k)}.
+                  \]
+                </li>
+
+                <li>
+                  Данная статистика при отсутствии гетероскедастичности имеет распределение Фишера $F(m_1 - k, m_2 - k)$.
+                </li>
+              </ol>
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Проверка на автокорреляцию
+        </div>
+        <div class="content">
+          Проверяем, присутствует ли систематическая связь между значениями остатков любых двух наблюдений. Случайные
+          составляющие должны быть взаимно независимы.
+
+          <ol type="a">
+            <li>
+              <i class="important">Тест Дарбина&mdash;Уотсона</i> &mdash; проверка автокорреляции первого порядка между остатками регрессии
+              <ol>
+                <li>
+                  Ищем МНК-оценки и вычисляем остатки $e_i$.
+                </li>
+
+                <li>
+                  Строим статистику Дарбина&mdash;Уотсона:
+                  \[
+                  \operatorname{DW} = \frac{\sum\limits_{i=1}^{n} (e_i - e_{i-1})^2}{\sum\limits_{i=1}^{n} e_i^2}.
+                  \]
+                  Чем больше $n$, тем ближе $DW$ к $2 (1 - \rho_1)$, где $\rho_1$ &mdash; коэффициент автокорреляции
+                  первого порядка.
+                </li>
+
+                <li>
+                  <ul>
+                    <li>
+                      Отсутствие автокорреляции &mdash; $\rho_1 = 0 \implies DW \approx 2$;
+                    </li>
+                    <li>
+                      Положительная автокорреляция &mdash; $\rho_1 = 1 \implies DW \approx 0$;
+                    </li>
+                    <li>
+                      Отрицательная автокорреляция &mdash; $\rho_1 = -1 \implies DW \approx 4$.
+                    </li>
+                  </ul>
+                </li>
+              </ol>
+            </li>
+
+            <li>
+              <i class="important">Тест Бройша&mdash;Годфри</i> &mdash; подходит для проверки автокорреляции любого порядка.
+              <ol>
+                <li>
+                  Проверка автокорреляции порядка $p$: строим вспомогательную регрессионную модель:
+                  \[
+                  e_i = \beta_1 + \beta_2 x_{2i} + \dots + \beta_k x_{ki} + \sum\limits_{j=1}^{p} a_j e_{i - k} + \varepsilon_i.
+                  \]
+                </li>
+
+                <li>
+                  Высказываем гипотезу об одновременном равенстве нулю $a_j$. Строим тестовую статистику: $(n-p)R^2$, где
+                  $R^2$ &mdash; коэффициент детерминации вспомогательной модели, а $n$ &mdash; объём исходной выборки.
+                </li>
+
+                <li>
+                  В случае отсутствия автокорреляции тестовая статистика имеет асимптотическое распределение $\chi_p^2$.
+                  Если LM &gt; крит. значение, то АК признаётся значимой.
+                </li>
+              </ol>
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Проверка некоррелированности
+        </div>
+        <div class="content">
+          <p>
+            Остатки должны быть распределены независимо от объясняющих переменных:
+            \[
+            \cov(x_i, e_i) = 0.
+            \]
+          </p>
+
+          <p>
+            Для проверки используют <i class="important">ранговый тест Спирмена</i>:
+          </p>
+          <ol>
+            <li>
+              для каждой пары $(x_i, e_i)$ вычисляем ранги $(R[x_i], R[e_i])$ (под рангом подразумевается порядковый
+              номер данной величины в отсортированном массиве всех подобных величин);
+            </li>
+
+            <li>
+              вычисляем величину
+              \[
+              R_s = 1 - \frac{6 \sum\limits_{i=1}^{n} d_i^2}{n(n^2 - 1)}, \qquad d_i \equiv R[x_i] - R[e_i].
+              \]
+
+              <div class="remark">
+                Тут мы считаем, что нет одинаковых величин $x_i$ и $e_i$. Если они есть, надо считать так:
+                \[
+                R_s = \rho(R[x], R[e]),
+                \]
+                где $\rho$ &mdash; коэффициент корреляции Пирсона.
+              </div>
+            </li>
+
+            <li>
+              строим статистику
+              \[
+              t_\mbox{расч} = R_s \sqrt{ \frac{n-2}{1 - R_s^2} },
+              \]
+              которая в случае отсутствия корреляции подчиняется распределению Стьюдента с $n-2$ степенями свободы.
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: панельные данные
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Панельные данные</i> &mdash; пролонгированные пространственные выборки, где каждый объект наблюдается
+            многократно на протяжении отрезка времени.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Сколько измерений насчитывают панельные данные?
+        </div>
+        <div class="content">
+          <div class="answer">
+            Три:
+            <ul>
+              <li>
+                признаки;
+              </li>
+
+              <li>
+                объекты;
+              </li>
+
+              <li>
+                время.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Представление панельных данных
+        </div>
+        <div class="content">
+          Панельные данные можно представлять в виде long panel dataset:
+          <table class="centered elems-centered">
+            <th>
+              <td><b>Группа</b></td>
+              <td><b>Период времени</b></td>
+              <td><b>Обозначение</b></td>
+            </th>
+            <tr>
+              <td></td>
+              <td>$1$</td> <td>$1$</td><td>$X_{11}$</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>$1$</td> <td>$2$</td> <td>$X_{12}$</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>$\dots$</td> <td>$\dots$</td> <td>$\dots$</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>$1$</td> <td>$T$</td> <td>$X_{1T}$</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>$\dots$</td> <td>$\dots$</td> <td>$\dots$</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>$N$</td> <td>$1$</td> <td>$X_{N1}$</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>$N$</td> <td>$2$</td> <td>$X_{N2}$</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>$\dots$</td> <td>$\dots$</td> <td>$\dots$</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>$N$</td> <td>$T$</td> <td>$X_{NT}$</td>
+            </tr>
+          </table>
+
+          Также их можно представлять в виде wide panel dataset:
+          <table class="centered elems-centered">
+            <th>
+              <td><b>Время</b></td>
+              <td><b>Группа 1</b></td>
+              <td><b>Группа 2</b></td>
+              <td><b>$\dots$</b></td>
+              <td><b>Группа $N$</b></td>
+            </th>
+            <tr>
+              <td></td>
+              <td>$1$</td> <td>$X_{11}$</td> <td>$X_{21}$</td> <td>$\dots$</td> <td>$X_{N1}$</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>$2$</td> <td>$X_{12}$</td> <td>$X_{22}$</td> <td>$\dots$</td> <td>$X_{N2}$</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>$\dots$</td> <td>$\dots$</td> <td>$\dots$</td> <td>$\dots$</td> <td>$\dots$</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>$T$</td> <td>$X_{1T}$</td> <td>$X_{2T}$</td> <td>$\dots$</td> <td>$X_{NT}$</td>
+            </tr>
+          </table>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: эндогенный регрессор
+        </div>
+        <div class="content">
+          <div class="definition">
+            Регрессор называют <i>эндогенным</i>, если он коррелирует со случайными ошибками в модели.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: экзогенный регрессор
+        </div>
+        <div class="content">
+          <div class="definition">
+            Регрессор называют <i>экзогенным</i>, если он не коррелирует со случайными ошибками в модели.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Преимущества панельных данных
+        </div>
+        <div class="content">
+          <ol>
+            <li>
+              Большое количество наблюдений.
+            </li>
+
+            <li>
+              Возможность отслеживать динамику для множества объектов.
+            </li>
+
+            <li>
+              Дополнительный способ устранить эндогенность.
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: сбалансированная панель
+        </div>
+        <div class="content">
+          <div class="definition">
+            Панель называют <i>сбалансированной</i>, если общее число наблюдений равняется $N \cdot T$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: несбалансированная панель
+        </div>
+        <div class="content">
+          <div class="definition">
+            Панель называют <i>несбалансированной</i>, если общее число наблюдений &lt; $N \cdot T$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Можно ли для несбалансированной панели использовать те же методы оценивания, что и для сбалансированной?
+        </div>
+        <div class="content">
+          <div class="answer">
+            Да, но только в том случае, если возникновение пропусков является экзогенным.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Как неоднородность моделируемых объектов может затруднить оценивание?
+        </div>
+        <div class="content">
+          Рассмотрим модель:
+          \[
+          y_{it} = \beta x_{it} + \mu_i + \varepsilon_{it},
+          \]
+          где
+          <ul>
+            <li>
+              $y_{it}$ &mdash; описываемая переменная;
+            </li>
+
+            <li>
+              $x_{it}$ &mdash; описывающая переменная;
+            </li>
+
+            <li>
+              $\varepsilon_{it}$ &mdash; случайные ошибки модели;
+            </li>
+
+            <li>
+              $\mu_i$ &mdash; ненаблюдаемые величины, характеризующие специфику объектов.
+            </li>
+          </ul>
+
+          Имеем дилемму:
+          <ul>
+            <li>
+              с одной стороны, мы не можем включить $\mu_i$ в модель, так как эти величины являются ненаблюдаемыми;
+            </li>
+
+            <li>
+              с другой стороны, если $\mu_i$ коррелированы с интересующими нас $x_{it}$, то их невключение приведёт
+              к несостоятельности оценки коэффициента $\beta$ из-за пропуска существенной переменной.
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Модель сквозной регрессии
+        </div>
+        <div class="content">
+          Модель задаётся уравнением
+          \[
+          y_{it} = \beta x_{it} + \alpha + \varepsilon_{it}, \qquad t = \overline{1,T}.
+          \]
+          Решается обычным МНК:
+          \[
+          \widehat \beta_\mbox{OLS} = (X^T X)^{-1} X^T y.
+          \]
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Модель с фиксированными эффектами, предпосылки
+        </div>
+        <div class="content">
+          Предпосылки модели с фиксированными эффектами:
+          <ol>
+            <li>
+              модель линейна по параметрам:
+              \[
+              y_{it} = \beta x_{it} + \mu_i + \varepsilon_{it}, \qquad t = \overline{1,T};
+              \]
+            </li>
+
+            <li>
+              наблюдения
+              \[
+              x_{it}, \varepsilon_{it}, \qquad i = \overline{1,n}, \quad t = \overline{1,T}
+              \]
+              независимы и одинаково распределены.
+
+              <div class="remark">
+                Эта предпосылка не требует независимости между значениями регрессоров, относящихся к одному объекту, но
+                в разные моменты времени: например, допустимо, чтобы $x_{i3}$ был коррелирован с $x_{i2}$.
+              </div>
+            </li>
+
+            <li>
+              $x_{it}$ и $\varepsilon_{it}$ имеют ненулевые конечные четвёртые моменты распределения:
+              \[
+              E(x_{it}^4) \lt \infty, \qquad E(\varepsilon_{it}^4) \lt \infty;
+              \]
+            </li>
+
+            <li>
+              случайные ошибки имеют нулевое условное мат. ожидание:
+              \[
+              E(\varepsilon_{it} | x_{i1}, \dots, x_{iT}, \mu_i) = 0.
+              \]
+
+              <div class="remark">
+                Эта предпосылка требует, чтобы регрессор был экзогенен в том смысле, что он не должен быть связан со
+                случайной ошибкой в модели. В то же время она допускает наличие корреляции между $x_{it}$ и $\mu_i$.
+              </div>
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Модель с фиксированными эффектами, решение
+        </div>
+        <div class="content">
+          Рассмотрим модель с ФЭ:
+          \[
+          y_{it} = \beta x_{it} + \mu_i + \varepsilon_{it}, \qquad t = \overline{1,T},
+          \]
+          где $\beta$ &mdash; вектор $(1 \times n)$.
+
+          <p>
+            Перейдём к средним по времени величинам и вычтем полученные уравнения из соответствующих исходных:
+            \[
+            y_{it} - \overline{y_i} = \beta (x_{it} - \overline{x_i}) + \cancel{\mu_i - \overline{\mu_i}}
+            + \varepsilon_{it} - \overline{\varepsilon_i}.
+            \]
+            Полученная модель не зависит от ненаблюдаемых эффектов $\mu_i$.
+          </p>
+
+          <p>
+            Потребуем условия:
+          </p>
+
+          <ul>
+            <li>
+              ошибки $\varepsilon_{it}$ не коррелируют между собой по $i$ и $t$;
+            </li>
+
+            <li>
+              ошибки $\varepsilon_{it}$ не коррелируют с регрессорами $x_{js}$ по всем $i,t,j,s$.
+            </li>
+          </ul>
+
+          <div class="remark">
+            Эти условия гарантируют несмещённость и состоятельность оценок.
+          </div>
+
+          <p>
+            Для решения применяем обычный МНК:
+            \[
+            \widehat \beta = {\left(
+            \sum\limits_{i=1}^{N} \sum\limits_{t=1}^{T} (x_{it} - \overline{x_i}) (x_{it} - \overline{x_i})^T
+            \right)}^{-1}
+            \cdot
+            \sum\limits_{i=1}^{N} \sum\limits_{t=1}^{T} (x_{it} - \overline{x_i}) (y_{it} - \overline{y_i}).
+            \]
+          </p>
+
+          <div class="definition">
+            Полученные оценки называют <i>внутригрупповыми эффектами</i> или оценками с фиксированным эффектом.
+          </div>
+
+          <p>
+            В качестве оценок индивидуальных эффектов можно взять
+            \[
+            \widehat \mu_i = \overline{y_i} - \overline{x_i}^T \widehat \beta.
+            \]
+          </p>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Модель со случайными эффектами, предпосылки
+        </div>
+        <div class="content">
+          Предпосылки модели со случайными эффектами:
+          <ol>
+            <li>
+              модель линейна по параметрам:
+              \[
+              y_{it} = \beta_1 x_{it}^{(1)} + \dots + \beta_k x_{it}^{(k)} + \mu_i + \varepsilon_{it}, \qquad t = \overline{1,T};
+              \]
+            </li>
+
+            <li>
+              наблюдения
+              \[
+              x_{it}^{(j)}, \varepsilon_{it}, \qquad i = \overline{1,n}, \quad j = \overline{1,k}, \quad t = \overline{1,T}
+              \]
+              независимы и одинаково распределены;
+            </li>
+
+            <li>
+              $x_{it}^{(1)}, \dots, x_{it}^{(k)}$ и $\varepsilon_{it}$ имеют ненулевые конечные четвёртые моменты распределения;
+            </li>
+
+            <li>
+              случайные ошибки имеют нулевое условное мат. ожидание:
+              \[
+              E(\varepsilon_{it} | x_{i1}^{(1)}, \dots, x_{i1}^{(k)}, \dots, x_{iT}^{(1)}, \dots, x_{iT}^{(k)}, \mu_i) = 0;
+              \]
+            </li>
+
+            <li>
+              с вероятностью единица в модели отсутствует чистая мультиколлинеарность;
+            </li>
+
+            <li>
+              \[
+              E(\mu_i | x_{i1}^{(1)}, \dots, x_{i1}^{(k)}, \dots, x_{iT}^{(1)}, \dots, x_{iT}^{(k)}) = E(\mu_i) = 0.
+              \]
+
+              Другими словами, регрессоры не должны быть коррелированы с ненаблюдаемыми эффектами $\mu_i$.
+            </li>
+          </ol>
+
+          Положив $\nu_{it} = \mu_i + \varepsilon_{it}$, можно перейти к модели
+          \[
+          y_{it} = \beta_1 x_{it}^{(1)} + \dots + \beta_k x_{it}^{(k)} + \nu_{it}, \qquad t = \overline{1,T}.
+          \]
+          В ней все регрессоры экзогенны, поэтому параметры могут быть состоятельно оценены обычным МНК.
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Как выбрать модель для анализа панельных данных?
+        </div>
+        <div class="content">
+          Для простых линейных регрессионных моделей должны соблюдаться 5 свойств:
+          <ol>
+            <li>
+              линейность;
+            </li>
+
+            <li>
+              экзогенность;
+            </li>
+
+            <li>
+              гомоскедастичность и отсутствие автокорреляции;
+            </li>
+
+            <li>
+              независимые переменные являются детерминированными;
+            </li>
+
+            <li>
+              отсутствует мультиколлинеарность.
+            </li>
+          </ol>
+
+          Если условия 2 или 3 не выполняются, стоит отдать предпочтение моделям FE/RE.
+
+          <p>
+            Выбирая между FE и RE, стоит обращать внимание на следующее:
+          </p>
+          <ul>
+            <li>
+              является ли индивидуальная особенность постоянным или случайным эффектом?
+            </li>
+
+            <li>
+              тест Хаусмана &mdash; позволяет оценить экзогенность факторов модели.
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Тест Хаусмана
+        </div>
+        <div class="content">
+          <p>
+            Тест Хаусмана позволяет проверить некоррелированность регрессоров $x_{it}$ и случайного эффекта: именно это
+            отличает FE и RE.
+          </p>
+
+          Гипотезы:
+          <ul>
+            <li>
+              $H_0$: оценки RE являются состоятельными;
+            </li>
+
+            <li>
+              $H_1$: оценки RE являются несостоятельными.
+            </li>
+          </ul>
+
+          Тестовая статистика:
+          \[
+          \left( \widehat \beta_\mbox{FE} - \widehat \beta_\mbox{RE} \right)^T
+          \left( \widehat V(\widehat \beta_\mbox{FE}) - \widehat V(\widehat \beta_\mbox{RE}) \right)^{-1}
+          \left( \widehat \beta_\mbox{FE} - \widehat \beta_\mbox{RE} \right)^T,
+          \]
+          где $\widehat V(\widehat \beta)$ &mdash; оценка ковариационной матрицы вектора $\widehat \beta$.
+
+          <p>
+            Эта статистика имеет асимптотическое распределение $\chi^2$ с количеством степеней свободы, равным рангу
+            матрицы $\widehat V(\widehat \beta_\mbox{FE}) - \widehat V(\widehat \beta_\mbox{RE})$.
+          </p>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: дерево решений
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Дерево принятия решений</i> &mdash; средство поддержки принятия решений. Структура дерева:
+            <ul>
+              <li>
+                в узлах записаны признаки, по которым различаются случаи;
+              </li>
+
+              <li>
+                на рёбрах записаны признаки, от которых зависит целевая функция;
+              </li>
+
+              <li>
+                в листьях записаны значения целевой функции;
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Задачи дерева принятия решений
+        </div>
+        <div class="content">
+          <ul>
+            <li>
+              Классификация &mdash; распределение данных на группы близких друг к другу наблюдений.
+            </li>
+
+            <li>
+              Регрессия &mdash; нахождение связи между зависимой и независимой переменными.
+            </li>
+          </ul>
+
+          <div class="images small">
+            <img src="images/decision-tree.png"/>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Какой алгоритм используется для построения бинарного дерева решений?
+        </div>
+        <div class="content">
+          <div class="answer">
+            Алгоритм CART (classification and regression trees). Описание:
+            <ul>
+              <li>
+                выбор условия остановки (количество узлов, наблюдений в узле, величина критерия);
+              </li>
+
+              <li>
+                выбор условия для разделения выборки;
+              </li>
+
+              <li>
+                разделение выборки относительно условия;
+              </li>
+
+              <li>
+                повторение пп. 2 и 3 до соблюдения условия остановки;
+              </li>
+
+              <li>
+                создание дерева.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Постановка условий в узлах дерева решений
+        </div>
+        <div class="content">
+          Можно минимизировать ошибку. Возможные критерии:
+          <ul>
+            <li>
+              средняя квадратическая ошибка:
+              \[
+              H(Q_m) = \frac{1}{n_m} \sum\limits_{y\in Q_m}^{} (y - \overline y_m)^2,
+              \]
+              где
+              \[
+              \overline y_m = \frac{1}{n_m} \sum\limits_{y \in Q_m}^{} y;
+              \]
+            </li>
+
+            <li>
+              средняя абсолютная ошибка.
+            </li>
+          </ul>
+
+          Цель: минимизация ошибки для двух листьев:
+          \[
+          H(Q_1) + H(Q_2) \to \min.
+          \]
+
+          Если делать в лоб, то асимптотика такая:
+          <ul>
+            <li>
+              всего признаков $D$, всего объектов $N$;
+            </li>
+
+            <li>
+              всего сплитов $D * N$, всего подсчётов на каждом сплите $N$;
+            </li>
+
+            <li>
+              суммарно $N^2 D$.
+            </li>
+          </ul>
+
+          Если значений слишком много, можно сделать так:
+          <ul>
+            <li>
+              сортируем по признаку &mdash; $N \log_2 N$;
+            </li>
+
+            <li>
+              считаем критерии &mdash; $N$;
+            </li>
+
+            <li>
+              суммарно $N D \log_2 N + ND = N D(1 + \log_2 N)$.
+            </li>
+          </ul>
+
+          В качестве критерия также можно взять <i class="important">индекс Джини</i>:
+          \[
+          \operatorname{Gini}(D) = 1 - \sum\limits_{i=1}^{k} p_i^2,
+          \]
+          где $p_i$ &mdash; относительная частота класса $i$ в исходной выборке.
+          <br/>
+          
+          Тогда цель &mdash; минимизировать показатель индекса Джини для узла:
+          \[
+          \operatorname{Gini}_\mbox{split}(D) = \frac{n_1}{n} \operatorname{Gini}(D_1) + \frac{n_2}{n} \operatorname{Gini}(D_2),
+          \]
+          где $n_1$ и $n_2$ &mdash; количество элементов в каждом наборе.
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Какая основная проблема дерева решений?
+        </div>
+        <div class="content">
+          <div class="answer">
+            Основной проблемой дерева решений является склонность к переобучению.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Из-за чего происходит переобучение дерева решений?
+        </div>
+        <div class="content">
+          <div class="answer">
+            В процессе построения дерева решений могут создаваться слишком сложные конструкции, которые недостаточно
+            полно представляют данные.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Как можно повысить обобщающую способность слабых моделей?
+        </div>
+        <div class="content">
+          <div class="answer">
+            Повысить обобщающую способность слабых моделей можно при помощи <i class="important">ансамблирования</i>.
+            Есть три основных метода:
+            <ul>
+              <li>
+                <i>стекинг</i> &mdash; параллельное обучение разнородных моделей, аггрегация их предсказаний;
+              </li>
+
+              <li>
+                <i>бэггинг</i> &mdash; параллельное обучение однородных моделей, аггрегация их предсказаний;
+              </li>
+
+              <li>
+                <i>бустинг</i> &mdash; последовательное обучение однородных моделей, каждая минимизирует ошибку
+                предыдущей.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Основная идея бэггинга
+        </div>
+        <div class="content">
+          <div class="answer">
+            Усреднить большое количество зашумлённых, но приблизительно несмещённых моделей, уменьшив дисперсию.
+          </div>
+
+          Состоит из двух шагов:
+          <ul>
+            <li>
+              bootstrapping &mdash; сэмплирование $k$ объектов из исходной выборки с возвращением. В результате получаем
+              подвыборку размера $k$, в которой некоторые объекты встречаются несколько раз, а некоторые &mdash; ни
+              разу.
+              <br/>
+              В итоге бутстраппинга для леса получаем, что каждому дереву достаётся $\abs{X_i}$ элементов, а в сумме
+              \[
+              \sum\limits_{i=1}^{M} \abs{X_i} = N,
+              \]
+              где $M$ &mdash; количество деревьев в лесу.
+            </li>
+
+            <li>
+              aggregating &mdash; усреднение предсказаний. Результат: предсказания одиночных моделей усредняются, давая
+              итоговый ответ
+              \[
+              a = \frac{1}{M} \sum\limits_{i=1}^{M} a_i (X_i),
+              \]
+              где $a_i(X_i)$ &mdash; предсказание $i$-го дерева.
+            </li>
+          </ul>
+
+          Алгоритм построения каждого конкретного дерева остаётся прежним (но выбираем $m$ признаков из множества всех
+          признаков $p$), а так как подмножества случайные, то и лес тоже случайный.
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Преимущества и недостатки случайного леса
+        </div>
+        <div class="content">
+          Преимущества:
+          <ul>
+            <li>
+              высокая точность предсказаний;
+            </li>
+
+            <li>
+              нечувствительность к выбросам;
+            </li>
+
+            <li>
+              параллелизуемость;
+            </li>
+
+            <li>
+              невозможность переобучить;
+            </li>
+
+            <li>
+              простота реализации.
+            </li>
+          </ul>
+
+          Недостатки:
+          <ul>
+            <li>
+              неумение экстраполировать: СЛ не сможет вернуть ранее невиданное значение;
+            </li>
+
+            <li>
+              плохо работает, когда много разреженных признаков (например, тесты);
+            </li>
+
+            <li>
+              большой размер модели, требует много памяти.
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: временной ряд
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Временным рядом</i> называют последовательность $y_1, \dots, y_t \in \mathbb{R}$ наблюдений некоторого
+            признака (случайной величины) в последовательные моменты времени.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: уровень временного ряда
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Уровнем временного ряда</i> называют отдельные наблюдения временного ряда.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: длина временного ряда
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Длиной временного ряда</i> называют количество $n$ входящих в него уровней.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Классификация временных рядов
+        </div>
+        <div class="content">
+          <table class="centered">
+            <th>
+              <td><b>Признак классификации</b></td>
+              <td><b>Виды временного ряда</b></td>
+            </th>
+            <tr>
+              <td></td>
+              <td>
+              Как уровни выражают состояние явлений во времени
+              </td>
+              <td>
+                <ol>
+                  <li>
+                    Интервальные ряды
+                  </li>
+
+                  <li>
+                    Моментные ряды
+                  </li>
+                </ol>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                В зависимости от качественной особенности изучаемого явления
+              </td>
+              <td>
+                <ol>
+                  <li>
+                    Абсолютные величины
+                  </li>
+
+                  <li>
+                    Относительные величины
+                  </li>
+
+                  <li>
+                    Средние величины
+                  </li>
+                </ol>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                В зависимости от расстояния между уровнями
+              </td>
+              <td>
+                <ol>
+                  <li>
+                    Равноотстоящие по времени уровни
+                  </li>
+
+                  <li>
+                    Неравноотстоящие по времени уровни
+                  </li>
+                </ol>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                В зависимости от наличия тенденции изучаемого процесса
+              </td>
+              <td>
+                <ol>
+                  <li>
+                    Стационарные ряды
+                  </li>
+
+                  <li>
+                    Нестационарные ряды
+                  </li>
+                </ol>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Каковы требования к построению временного ряда?
+        </div>
+        <div class="content">
+          <ol>
+            <li>
+              Периодизация развития.
+            </li>
+
+            <li>
+              Сопоставимость.
+            </li>
+
+            <li>
+              Соответствие величины временных интервалов интенсивности изучаемых процессов.
+            </li>
+
+            <li>
+              Упорядоченность числовых уровней рядов динамики во времени.
+            </li>
+
+            <li>
+              Однородность данных.
+            </li>
+
+            <li>
+              Устойчивость тенденции.
+            </li>
+
+            <li>
+              Полнота данных.
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Аддитивная модель временного ряда
+        </div>
+        <div class="content">
+          \[
+          y_t = T + S + C + E, \qquad t = \overline{1,n},
+          \]
+          где
+          <ul>
+            <li>
+              $T$ &mdash; тренд;
+            </li>
+
+            <li>
+              $S$ &mdash; сезонная компонента;
+            </li>
+
+            <li>
+              $C$ &mdash; циклическая компонента;
+            </li>
+
+            <li>
+              $E$ &mdash; случайная компонента.
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Мультипликативная модель временного ряда
+        </div>
+        <div class="content">
+          \[
+          y_t = T \cdot S \cdot C \cdot E, \qquad t = \overline{1,n},
+          \]
+          где
+          <ul>
+            <li>
+              $T$ &mdash; тренд;
+            </li>
+
+            <li>
+              $S$ &mdash; сезонная компонента;
+            </li>
+
+            <li>
+              $C$ &mdash; циклическая компонента;
+            </li>
+
+            <li>
+              $E$ &mdash; случайная компонента.
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Типы трендов временного ряда
+        </div>
+        <div class="content">
+          <ul>
+            <li>
+              Тренд среднего.
+            </li>
+
+            <li>
+              Тренд дисперсии (гетероскедастичность).
+            </li>
+
+            <li>
+              Тренд автокорреляции и автоковариации.
+            </li>
+          </ul>
+
+          Основные виды трендов:
+          <ul>
+            <li>
+              Полиномиальный тренд:
+              \[
+              \overline y_t = a_0 + a_1 t + \dots + a_p t^p.
+              \]
+              Для $p = 1$ имеем линейный тренд.
+            </li>
+
+            <li>
+              Экспоненциальный тренд:
+              \[
+              \overline y_t = e^{a_0} \cdot e^{a_1 t} \cdot \ldots \cdot e^{a_p t^p}.
+              \]
+            </li>
+
+            <li>
+              Гармонический тренд:
+              \[
+              \overline y_t = R \cos (\omega t + \varphi).
+              \]
+            </li>
+
+            <li>
+              Тренд, выраженный логистической функцией:
+              \[
+              \overline y_t = \frac{k}{1 + b e^{-at}}.
+              \]
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Этапы анализа временных рядов
+        </div>
+        <div class="content">
+          <ol>
+            <li>
+              Графическое поведение и описание временного ряда.
+            </li>
+
+            <li>
+              Выделение и удаление закономерных (неслучайных) составляющих временного ряда:
+              <ul>
+                <li>
+                  трендов;
+                </li>
+
+                <li>
+                  сезонных составляющих;
+                </li>
+
+                <li>
+                  циклических составляющих.
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              Сглаживание и фильтрация: удаление низко- или высокочастотных составляющих временного ряда.
+            </li>
+
+            <li>
+              Исследование случайной составляющей временного ряда; построение и проверка адекватности математической
+              модели для её описания.
+            </li>
+
+            <li>
+              Прогнозирование развития изучаемого процесса на основе имеющегося временного ряда.
+            </li>
+
+            <li>
+              Исследование взаимосвязи между различными временными рядами.
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Задача прогнозирования временного ряда
+        </div>
+        <div class="content">
+          Рассмотрим временной ряд
+          \[
+          y_1, \dots, y_t, \qquad y_t \in \mathbb{R}.
+          \]
+
+          <div class="problem">
+            <b>Задача прогнозирования</b>: найти функцию $f_T$ такую, что
+            \[
+            y_{T + h} \approx f_T(y_T, \dots, y_1, h) \equiv \widehat y_{T + h | T},
+            \]
+            где $h \in \overline{1,H}$, а $H$ &mdash; горизонт планирования.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: предсказательный интервал
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Предсказательным интервалом</i> называют интервал, в котором предсказываемая величина окажется с
+            вероятностью не меньше заданной.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: стационарный временной ряд
+        </div>
+        <div class="content">
+          <div class="definition">
+            Временной ряд называют <i>стационарным</i>, если для любого $s$ совместное распределение $y_t, \dots,
+            y_{t+s}$ не зависит от $t$, то есть его свойства не зависят от времени.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          У временного ряда есть тренд. Следует ли из этого нестационарность?
+        </div>
+        <div class="content">
+          Да.
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          У временного ряда есть сезонность. Следует ли из этого нестационарность?
+        </div>
+        <div class="content">
+          Да.
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          У временного ряда есть цикличность. Следует ли из этого нестационарность?
+        </div>
+        <div class="content">
+          Нет.
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: эргодичность
+        </div>
+        <div class="content">
+          <i>Эргодичность</i> &mdash; свойство, позволяющее для оценки математических ожиданий использовать усреднения
+          по времени (по реализации).
+        </div>
+
+        <div class="example">
+          Мы хотим оценить математическое ожидание. Мы должны взять всевозможные значения в один и тот же момент времени
+          $t$, но у нас таких нет; вместо этого у нас есть значения в другие моменты времени. Эргодичность означает, что
+          если у нас достаточно длинная реализация, то можно заменить усреднение по множеству усреднением по времени.
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Достаточное условие эргодичности стационарного процесса
+        </div>
+        <div class="content">
+          <div class="proposition">
+            Для того, чтобы стационарный процесс был эргодичным, достаточно выполнения следующего условия:
+            \[
+            \frac{1}{n} \sum\limits_{i=1}^{n} \gamma(i) \limto{n \to \infty} 0.
+            \]
+          </div>
+
+          <div class="todo">Что такое гамма...</div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: дифференцирование ряда
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Дифференцирование ряда</i> &mdash; переход к попарным разностям его соседних значений:
+            \[
+            y_1, \dots, y_T \mapsto y_2', \dots, y_T',
+            \]
+            где
+            \[
+            y_t' = y_t - y_{t-1}.
+            \]
+          </div>
+
+          <div class="remark">
+            Дифференцированием можно стабилизировать среднее значение ряда и избавиться от тренда и сезонности.
+          </div>
+
+          <div class="remark">
+            Дифференцирование может применяться несколько раз.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: сезонное дифференцирование
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Сезонное дифференцирование ряда</i>:
+            \[
+            y_1, \dots, y_T \mapsto y_{s+1}', \dots, y_T',
+            \]
+            где
+            \[
+            y_t' = y_t - y_{t-s}.
+            \]
+          </div>
+
+          <div class="remark">
+            Дифференцированием можно стабилизировать среднее значение ряда и избавиться от тренда и сезонности.
+          </div>
+
+          <div class="remark">
+            Дифференцирование может применяться несколько раз.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: ложная регрессия
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Ложная регрессия</i> &mdash; ситуация, когда между объясняющей и зависимой переменными в действительности
+            нет причинно&dash;следственной связи, однако коэффициент корреляции между ними по модулю близок к единице,
+            а уравнение, описывающее их взаимосвязь, с высокой точностью соответствует данным.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Когда может возникать ложная регрессия?
+        </div>
+        <div class="content">
+          <div class="answer">
+            Ложная регрессия может вызывать в случае работы с временными рядами, которые характеризуются наличием тренда
+            (детерминированного или стохастического) или нестационарностью.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Как можно избавиться от ложной регрессии?
+        </div>
+        <div class="content">
+          <div class="answer">
+            От ложной регрессии можно избавиться, например, дифференцированием ряда.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: ESS
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>ESS</i> &mdash; объяснённая регрессионной моделью часть:
+            \[
+            ESS = \sum\limits_{i=1}^{n} {(\widehat y_i - \overline y)}^2.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: RSS
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>RSS</i> (Residual Sum of Squares) &mdash; сумма квадратов разниц между фактическими и предсказанными
+            линейной регрессией значениями зависимой переменной:
+            \[
+            RSS = \sum\limits_{i=1}^{n} {(y_i - \widehat y_i)}^2 = \sum\limits_{i=1}^{n} e_i.
+            \]
+            Отвечает за необъяснённую регрессионной моделью часть.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: TSS
+        </div>
+        <div class="content">
+          Общая сумма квадратов (TSS) равна сумме объяснённой (ESS) и необъяснённой (RSS) регрессионной моделью частей:
+          \[
+          TSS = ESS + RSS,
+          \]
+          где
+          <ul>
+            <li>
+              $TSS$ (Total sum of squares) &mdash; общая сумма квадратов:
+              \[
+              TSS = \sum\limits_{i=1}^{n} {(y_i - \overline y)}^2;
+              \]
+            </li>
+
+            <li>
+              $ESS$ (Explained sum of squares) &mdash; объяснённая регрессией сумма квадратов:
+              \[
+              ESS = \sum\limits_{i=1}^{n} {(\widehat y_i - \overline y)}^2;
+              \]
+            </li>
+
+            <li>
+              $RSS$ (Residual sum of squares) &mdash; сумма квадратов остатков:
+              \[
+              RSS = \sum\limits_{i=1}^{n} {(y_i - \widehat y_i)}^2.
+              \]
+              Отвечает за необъяснённую регрессией часть.
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: коэффициент детерминации $R^2$
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Коэффициент детерминации $R^2$</i> задаётся как
+            \[
+            R^2 = 1 - \frac{RSS}{TSS} = \frac{TSS - RSS}{TSS} = \frac{ESS}{TSS}.
+            \]
+
+            Его также можно представить в виде
+            \[
+            \begin{aligned}
+            R^2 = \frac{ESS}{TSS}
+            &= \frac{
+                \sum\limits_{i=1}^{n} {(\widehat y_i - \overline y)}^2
+            }{
+                \sum\limits_{i=1}^{n} {(y_i - \overline y)}^2
+            } = \\
+            &= \frac{
+                \frac{1}{n} \sum\limits_{i=1}^{n} {(\widehat y_i - \overline y)}^2
+            }{
+                \frac{1}{n} \sum\limits_{i=1}^{n} {(y_i - \overline y)}^2
+            } = \\
+            &= \frac{\widehat \var (\widehat y)}{\widehat \var (y)}.
+            \end{aligned}
+            \]
+          </div>
+
+          Понятно, что $R^2 \in [0, 1]$.
+        </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Чему равны значения $\widehat \beta_1, \widehat \beta_2$, полученные в результате применения МНК?
+        </div>
+        <div class="content">
+          <div class="answer">
+            \[
+            \begin{aligned}
+            \widehat \beta_2
+            &= \phantom{\overline y -} \frac{\widehat \cov(x,y)}{\widehat \var(x)}, \\
+            \widehat \beta_1
+            &= \overline y - \frac{\widehat \cov(x,y)}{\widehat \var(x)} \overline x.
+            \end{aligned}
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Для чего используются стандартные ошибки МНК-оценок $\widehat \beta_1$ и $\widehat \beta_2$?
+        </div>
+        <div class="content">
+          <div class="answer">
+            Стандартные ошибки $\se(\widehat \beta_1)$ и $\se(\widehat \beta_2)$ используются для проверки гипотез:
+            например, они используются для проверки гипотезы о независимости переменных $x$ и $y$ в КЛМПР.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Что такое уровень значимости $\alpha$?
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Уровнем значимости $\alpha$</i> называют вероятность ошибки первого рода, то есть вероятность отклонить
+            проверяемую гипотезу при условии, что в действительности эта гипотеза верна.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: $p$-значение
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>$p$-значением</i> ($p$-value) называют такой уровень значимости, при котором тестируемая гипотеза
+            находится на грани между отвержением и принятием.
+          </div>
+
+          <div class="remark">
+            Другими словами, если $p$-значение меньше заданного уровня значимости $\alpha$, то нулевая гипотеза $H_0$
+            отвергается.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Чему равны МНК-оценки коэффициентов регрессии в КЛММР?
+        </div>
+        <div class="content">
+          Зададим матрицу регрессоров и вектор МНК-оценок коэффициентов модели:
+          \[
+          X =
+          \begin{pmatrix}
+          x_1^{(1)} & x_1^{(2)} & \dots & x_1^{(k)} \\
+          x_2^{(1)} & x_2^{(2)} & \dots & x_2^{(k)} \\
+          \vdots & \vdots & \ddots & \vdots \\
+          x_n^{(1)} & x_n^{(2)} & \dots & x_n^{(k)}
+          \end{pmatrix},
+          \qquad
+          \widehat \beta =
+          \begin{pmatrix}
+          \widehat \beta_1 \\
+          \widehat \beta_2 \\
+          \vdots \\
+          \widehat \beta_k
+          \end{pmatrix}.
+          \]
+          Тогда
+          \[
+          \widehat \beta = (X^T X)^{-1} X^T y,
+          \]
+          где $y$ &mdash; вектор значений зависимой переменной:
+          \[
+          y =
+          \begin{pmatrix}
+          y_1 \\
+          y_2 \\
+          \vdots \\
+          y_n
+          \end{pmatrix}.
+          \]
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Последствия гетероскедастичности
+        </div>
+        <div class="content">
+          <ul>
+            <li>
+              МНК-оценки останутся несмещёнными.
+            </li>
+
+            <li>
+              МНК-оценки перестанут быть эффективными.
+            </li>
+
+            <li>
+              Стандартные ошибки коэффициентов окажутся смещёнными и неэффективными.
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: логистическая функция
+        </div>
+        <div class="content">
+          <div class="definition">
+            Функция
+            \[
+            F(x) = \frac{1}{1 + e^{-x}}
+            \]
+            называется <i>логистической</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: логит
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Логит</i> &mdash; функция, обратная к логистической:
+            \[
+            \logit p = \ln \frac{p}{1 - p}.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: логит-модель
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Логит-модель</i>:
+            \[
+            P(y_i = 1) = \frac{1}{1 + e^{-(\beta_1 + \beta_2 x)}}.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Какой метод используется для оценки логит-модели?
+        </div>
+        <div class="content">
+          <div class="answer">
+            Для оценки логит-модели используется метод максимального правдоподобия:
+            <ul>
+              <li>
+                строят функцию правдоподобия:
+                \[
+                \begin{aligned}
+                L(y_1, \dots, y_n)
+                &= \prod_{y_i = 1} P(y_i = 1) \cdot \prod_{y_i = 0} P(y_i = 0) = \\
+                &= \prod_{y_i = 1} \left( \frac{1}{1 + e^{-(\beta_1 + \beta_2 x)}} \right)^{y_i}
+                \cdot \prod_{y_i = 0} \left( \frac{1}{1 - e^{-(\beta_1 + \beta_2 x)}} \right)^{1 - y_i};
+                \end{aligned}
+                \]
+              </li>
+
+              <li>
+                берут от неё логарифм:
+                \[
+                \ln L(y_1, \dots, y_n)
+                = \sum\limits_{i=1}^{n} y_i \ln \left( \frac{1}{1 + e^{-(\beta_1 + \beta_2 x)}} \right)
+                + \sum\limits_{i=1}^{n} (1 - y_i) \ln \left( \frac{1}{1 - e^{-(\beta_1 + \beta_2 x)}} \right);
+                \]
+              </li>
+
+              <li>
+                для получения оценок вычисляют производные по $\beta_1, \beta_2$ и приравнивают их к нулю.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: пробит-модель
+        </div>
+        <div class="content">
+          Пробит-модель:
+          \[
+          P(Y_i = 1) = \Phi(\beta_1 + \beta_2 x_i^{(2)} + \dots + \beta_k x_i^{(k)}),
+          \]
+          где $\Phi$ &mdash; функция стандартного нормального распределения:
+          \[
+          \Phi(x) = \frac{1}{\sqrt{2 \pi}} \exp\left(- \frac{x^2}{2}\right).
+          \]
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Общая формула обобщённой линейной модели
+        </div>
+        <div class="content">
+          \[
+          F(Y) = B_0 + B_1 X_1 + \dots + B_N X_N + \varepsilon,
+          \]
+          где $F(Y)$ &mdash; функция связи.
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: функция связи
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Функция связи</i> &mdash; функция $F(Y)$, преобразующая распределение зависимой переменной так, что:
+            <ul>
+              <li>
+                оно принимает значение от $-\infty$ до $\infty$;
+              </li>
+
+              <li>
+                связь зависимой переменной с регрессорами линейна.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: accuracy (точность) и error rate (доля ошибок)
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Accuracy</i> (точность) &mdash; величина, отражающая долю правильно спрогнозированных классов среди всех
+            образцов:
+            \[
+            \operatorname{Accuracy} = \frac{TP + TN}{TP + FP + TN + FN}.
+            \]
+
+            <i>Error rate</i> задаётся как
+            \[
+            \operatorname{Error\ rate} = 1 - \operatorname{Accuracy}.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: precision
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Precision</i> &mdash; величина, характеризующая долю правильно предсказанных положительных классов среди
+            всех образцов, которые модель спрогнозировала положительно:
+            \[
+            \operatorname{Precision} = \frac{TP}{TP + FP}.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: recall (TPR)
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Recall</i> (True positive rate) &mdash; величина, отражающая долю правильно предсказанных положительных классов среди всех реальных
+            положительных образцов:
+            \[
+            \operatorname{Recall} = \frac{TP}{TP + FN}.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: FPR
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>False positive rate</i> &mdash; величина, отражающая долю ошибочно классифицированных отрицательных
+            классов относительно всех отрицательных результатов:
+            \[
+            \operatorname{FPR} = \frac{FP}{FP + TN}.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: TNR
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>True negative rate</i> &mdash; величина, показывающая, насколько хорошо модель классифицирует
+            отрицательные примеры:
+            \[
+            \operatorname{TNR} = \frac{TN}{FP + TN}.
+            \]
+          </div>
+        </div>
+      </li>
+    </ol>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+  </body>
+
+</html>

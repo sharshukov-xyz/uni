@@ -107,12 +107,18 @@
       $\global\def\ch{\text{ch}\,}$
       $\global\def\const{\text{const}\,}$
       $\global\def\degree{\text{degree}\,}$
-      $\global\def\proj{\mathrm{proj}}$
-      $\global\def\rank{\mathrm{rank}}$
+      $\global\def\proj{\operatorname{proj}}$
+      $\global\def\rank{\operatorname{rank}}$
       $\global\def\res{\text{res}\,}$
       $\global\def\sh{\text{sh}\,}$
-      $\global\def\sign{\text{sign}\,}$
-      $\global\def\tg{\mathrm{tg}\,}$
+      $\global\def\sign{\operatorname{sign}}$
+      $\global\def\tg{\operatorname{tg}}$
+
+      <!-- эллиптические функции -->
+      $\global\def\am{\operatorname{am}}$
+      $\global\def\sn{\operatorname{sn}}$
+      $\global\def\cn{\operatorname{cn}}$
+      $\global\def\dn{\operatorname{dn}}$
     </div>
 
     <ol id="questions">
@@ -1104,7 +1110,7 @@
           }^2.
           \end{aligned}
           \]
-          Если ввести обознчаения
+          Если ввести обозначения
           \[
           \begin{aligned}
           a_{ik} = a_{ki} &=
@@ -1587,8 +1593,9 @@
             <li>
               $F(x,p) = 0$ &mdash; не зависит от $z$. Тогда
               \[
-              z = z(x, a_1, \dots, a_{n-1}) + a_n.
+              z = z(x, a_1, \dots, a_{n-1}) + a_n
               \]
+              &mdash; полный интеграл.
             </li>
 
             <li id="pde_missing_variables">
@@ -1599,9 +1606,26 @@
               \]
 
               <div class="derivation">
-                <div class="todo">
-                  расписать.
-                </div>
+                Учитывая
+                \[
+                p_j = \pd{z}{x_j}  = a_j, \qquad j = \overline{1,k},
+                \]
+                функцию $F(x_{k+1}, \dots, x_n, p_1, \dots, p_n)$ можно представить в виде
+                \[
+                F = F\paren{
+                x_{k+1}, \dots, x_n, a_1, \dots, a_k,
+                \pd{\zeta}{x_{k+1}} \dots \pd{\zeta}{x_n}
+                } = 0.
+                \]
+                Так как $F$ не зависит от $\zeta$, то из первого пункта следует, что
+                \[
+                \zeta = \zeta(x_{k+1}, \dots, x_n, a_1, \dots, a_k, a_{k+1}, \dots, a_{n-1}) + a_n
+                \]
+                является полным интегралом, откуда следует, что
+                \[
+                z = \sum_{j=1}^k a_j x_j + \zeta(x_{k+1}, \dots, x_n)
+                \]
+                является полным интегралом уравнения $F(x_{k+1}, \dots, x_n, p_1, \dots, p_n) = 0$.
               </div>
             </li>
           </ol>
@@ -1658,18 +1682,18 @@
           Эти уравнения могут рассматриваться как уравнения характеристик для
           ДУЧП 1-го порядка
           \[
-          \pd{S}{t} + H(q_1, \dots, q_n, \pd{S}{q_1}, \dots, \pd{S}{q_n}, t)
+          \pd{S}{t} + H\paren{q_1, \dots, q_n, \pd{S}{q_1}, \dots, \pd{S}{q_n}, t}
           = 0,
           \]
           которое называют <i class="important">уравнением Гамильтона-Якоби</i>.
 
           <p>
           Так как левая часть уравнения Гамильтона-Якоби не зависит от $S$, то
-          полный интеграл этого ДУЧП представим в виде
+          полный интеграл этого ДУЧП представим в виде функции
           \[
           S = S(t, q_1, \dots, q_n, a_1, \dots, a_n) + a_{n+1},
           \]
-          которое называют <i class="important">главной функцией Гамильтона</i>.
+          которую называют <i class="important">главной функцией Гамильтона</i>.
           </p>
         </div>
       </li>
@@ -1689,7 +1713,7 @@
             \]
             уравнения
             \[
-            \pd{S}{t} + H(q_1, \dots, q_n, \pd{S}{q_1}, \dots, \pd{S}{q_n}, t)
+            \pd{S}{t} + H\paren{q_1, \dots, q_n, \pd{S}{q_1}, \dots, \pd{S}{q_n}, t}
             = 0,
             \]
             удовлетворяющий условию
@@ -1813,112 +1837,10 @@
           Решение задачи о движении точки относительно планеты методом Якоби
         </div>
         <div class="content">
-          Рассмотрим движение материальной точки массы $m$ в потенциальном поле
-          сил. Пусть движение задаётся обобщёнными координатами $x,y,z$.
-          Составим лагранжиан:
-          \[
-          \begin{gathered}
-          T = \frac{1}{2} m \paren{
-          \dot{x}^2 + \dot{y}^2 + \dot{z}^2
-          }, \qquad \Pi = \Pi(x,y,z,t), \\
-          \implies L = T - \Pi = 
-          \frac{1}{2} m \paren{
-          \dot{x}^2 + \dot{y}^2 + \dot{z}^2
-          } - \Pi(x,y,z,t).
-          \end{gathered}
-          \]
-          Составим обобщённые импульсы:
-          \[
-          \left\{
-          \begin{aligned}
-          p_x &= \pd{L}{\dot{x}} = m \dot{x}, \\
-          p_y &= \pd{L}{\dot{y}} = m \dot{y}, \\
-          p_z &= \pd{L}{\dot{z}} = m \dot{z},
-          \end{aligned}
-          \right.
-          \implies
-          \left\{
-          \begin{aligned}
-          \dot{x} &= \frac{p_x}{m}, \\
-          \dot{y} &= \frac{p_y}{m}, \\
-          \dot{z} &= \frac{p_z}{m}.
-          \end{aligned}
-          \right.
-          \]
-
-          Представив кинетическую энергию в виде
-          \[
-          \begin{aligned}
-          T
-          &= \frac{1}{2} m \paren{
-          \dfrac{p_x^2}{m^2}
-          + \dfrac{p_y^2}{m^2}
-          + \dfrac{p_z^2}{m^2}
-          } = \\
-          &= \frac{1}{2m} \paren{
-          p_x^2
-          + p_y^2
-          + p_z^2
-          },
-          \end{aligned}
-          \]
-          составим гамильтониан:
-          \[
-          \begin{aligned}
-          H(q,p,t)
-          &= \sum_{i=1}^3 p_i \dot{q}_i(q,p,t) - L(q, \dot{q}(q,p,t), t) \\
-          &= p_x \frac{p_x}{m} + p_y \frac{p_y}{m} + p_z \frac{p_z}{m}
-          - \frac{1}{2m} \paren{
-          p_x^2
-          + p_y^2
-          + p_z^2
-          } + \Pi \\
-          &= \frac{1}{2m} \paren{
-          p_x^2
-          + p_y^2
-          + p_z^2
-          } + \Pi.
-          \end{aligned}
-          \]
-
-          Запишем уравнение Гамильтона-Якоби:
-          \[
-          \pd{S}{t} + \frac{1}{2m} \left[
-          \paren{\pd{S}{x}}^2 +
-          \paren{\pd{S}{y}}^2 +
-          \paren{\pd{S}{z}}^2
-          \right] + \Pi(x,y,z,t) = 0.
-          \]
-
-          <div class="remark">
-            Если $\Pi = \Pi(x,y,z)$, то $H$ не зависит от $t$, <a
-              href="#pde_missing_variables"> поэтому</a> будем искать полный
-            интеграл в виде
-            \[
-            S = ht + S_1(x,y,z).
-            \]
-
-            Так как $H(q,p) = E = \const$ является первым интегралом
-            канонической системы, то из уравнения Гамильтона-Якоби следует, что
-            \[
-            \pd{S}{t} = -H = -E,
-            \]
-            но
-            \[
-            \pd{S}{t} = h, \implies h = -E,
-            \]
-            поэтому
-            \[
-            S = -Et + S_1(x,y,z),
-            \]
-            а уравнение Гамильтона-Якоби запишется в виде
-            \[
-            \frac{1}{2m} \left[
-            \paren{\pd{S_1}{x}}^2 +
-            \paren{\pd{S_1}{y}}^2 +
-            \paren{\pd{S_1}{z}}^2
-            \right] + \Pi(x,y,z) = E.
-            \]
+          <div class="images">
+            <img src="images/11-1.png"/>
+            <img src="images/11-2.png"/>
+            <img src="images/11-3.png"/>
           </div>
         </div>
       </li>
@@ -3074,6 +2996,56 @@
           Контактные преобразования
         </div>
         <div class="content">
+          <p>
+            Удачый выбор обобщённых координат может существенно облегчить исследования уравнений
+            движения, которые при любом выборе координат
+            \[
+            q_i' = q_i'(q_1, \dots, q_k, t), \qquad q_i' \in C^2, \quad \overline{1,s}
+            \]
+            можно записать в форме Лагранжа II-го рода или в каноническом виде.
+          </p>
+
+          <div class="definition">
+            Преобразование
+            \[
+            q_i' = q_i'(q_1, \dots, q_s, t), \qquad q_i' \in C^2, \quad \overline{1,s}
+            \]
+            называется <i>точечным</i>.
+          </div>
+
+          <p>
+            Если одновременно с заменой координат перейти к новым обобщённым импульсам по
+            формулам
+            \[
+            \begin{aligned}
+            q_i' &= q_i'(q_1, \dots, q_s, p_1, \dots, p_s, t), \\
+            p_i' &= p_i'(q_1, \dots, q_s, p_1, \dots, p_s, t),
+            \end{aligned}
+            \]
+            то в общем случае уравнения движения не сохраняют канонического вида. Однако при
+            определённых условиях это преобразование к новым переменным позволяет вместо уравнений
+            \[
+            \begin{aligned}
+            \dot q = \phantom{-} \pd{H}{p}, \\
+            \dot p = - \pd{H}{q}
+            \end{aligned}
+            \]
+            с произвольной функцией $H(q, p, t)$ получить канонические уравнения относительно
+            новых переменных с новой функцией Гамильтона $H'(q', p', t)$.
+          </p>
+
+          <div class="definition">
+            Формулы
+            \[
+            \begin{aligned}
+            q_i' &= q_i'(q_1, \dots, q_s, p_1, \dots, p_s, t), \\
+            p_i' &= p_i'(q_1, \dots, q_s, p_1, \dots, p_s, t)
+            \end{aligned}
+            \]
+            определяют <i>каноническое преобразование</i>, если любая каноническая система
+            уравнений переводится в каноническую.
+          </div>
+
           Рассмотрим канонические уравнения
           \[
           \left\{
@@ -3198,7 +3170,6 @@
             </ol>
 
             <div class="proof">
-              <div class="todo">Расписать.</div>
               Рассмотрим, например,
               \[
               p \delta q + Q \delta P = \delta S(q,P,t).
@@ -3207,12 +3178,104 @@
               Продифференцируем по $t$:
               \[
               \dv{}{t} \paren{ p \delta q} + \dot Q \delta P
-              + Q \delta \dot P = \dv{}{t} \delta S(q, P, t).
+              + Q \dv{}{t} \delta P = \dv{}{t} \delta S(q, P, t).
+              \]
+              Пользуясь тем, что операции варьирования и дифференцирования перестановочны:
+              \[
+              \dv{}{t} \delta P = \delta \dot P,
+              \]
+              а также тем, что
+              \[
+              \dv{}{t} (p \delta q) = \delta L,
+              \quad
+              H = p \dot q - L
+              \implies
+              \dv{}{t} (p \delta q) = \delta \paren{ -H + p \dot q },
+              \]
+              получаем, что
+              \[
+              \delta L + \dot Q \delta P + Q \delta \dot P
+              =
+              \delta \dot s(q, P, t)
+              =
+              \delta \paren{
+              \pd{S}{q} \dot q + \pd{S}{P} \dot P + \pd{S}{t}
+              }
               \]
 
-              <div class="images">
-                <img src="images/18-1.png" alt="">
-              </div>
+              <p>
+                Заметим, что уравнение
+                \[
+                p \delta q + Q \delta P = \delta S(q,P,t)
+                \]
+                равносильно системе
+                \[
+                \left\{
+                \begin{aligned}
+                p_i &= \pd{S}{q_i}, \\
+                Q_i &= \pd{S}{P_i},
+                \end{aligned}
+                \right.
+                \]
+                откуда следует, что
+                \[
+                \begin{aligned}
+                \delta L + \dot Q \delta P + Q \delta \dot P
+                &=
+                \delta \paren{ p \dot q + Q \dot P + \pd{S}{t} }, \implies \\
+                \implies
+                \delta \paren{ L - p \dot q - \pd{S}{t} }
+                &=
+                \dot P \delta Q + \cancel{Q \delta \dot P}
+                - \dot Q \delta P - \cancel{Q \delta \dot P}, \implies \\
+                \implies
+                \delta \paren{ L - p \dot q - \pd{S}{t} }
+                &=
+                \dot P \delta Q - \dot Q \delta P.
+                \end{aligned}
+                \]
+                Воспользуемся тем, что
+                \[
+                \dot P \delta Q = \dv{}{t} \paren{ P \delta Q } - P \delta \dot Q,
+                \]
+                тогда
+                \[
+                \delta \paren{ L - p \dot q - \pd{S}{t} + \dot P Q }
+                =
+                \dv{}{t} \paren{ P \delta Q }.
+                \]
+                Используя определение гамильтониана, это равенство можно записать в виде
+                \[
+                \delta \paren{ - H - \pd{S}{t} + \dot P Q }
+                =
+                \dv{}{t} \paren{ P \delta Q }.
+                \]
+
+                Рассмотрим теперь основной дифференциальный принцип в новых координатах:
+                \[
+                \dv{}{t} \paren{ P \delta Q } = \delta L',
+                \]
+                причём $L'$ можно выразить через гамильтониан в новых координатах:
+                \[
+                H' = P \dot Q - L'
+                \implies L' = P \dot Q - H',
+                \]
+                откуда следует, что
+                \[
+                \dv{}{t} \paren{ P \delta Q } = \delta \paren{ P \dot Q - H' }.
+                \]
+
+                Но
+                \[
+                \delta \paren{ - H - \pd{S}{t} + \dot P Q }
+                =
+                \dv{}{t} \paren{ P \delta Q },
+                \]
+                откуда следует, что
+                \[
+                H' = H + \pd{S}{t}.
+                \]
+              </p>
             </div>
           </div>
         </div>
@@ -3223,13 +3286,84 @@
           Контактные преобразования и уравнения Гамильтона-Якоби
         </div>
         <div class="content">
-          <div class="todo">Расписать.</div>
-          \[
-          4(a): \quad p \delta q + Q \delta P = \delta S(q,P,t).
-          \]
-          <div class="images">
-            <img src="images/19-1.png" alt="">
-          </div>
+          <p>
+            Попробуем найти такую производящую функцию $S(q, p', t)$, чтобы контактное
+            преобразование переводило исходные переменные $q, p$ в постоянные величины
+            \[
+            p_i' = \alpha_i = \const, \qquad q_i' = \beta_i = \const.
+            \]
+            Такая функция должна удовлетворять равенствам
+            \[
+            p_i = \pd{S}{q_i} = p_i(q, p', t),
+            \qquad
+            q_i' = \pd{S}{\alpha_i} = \beta_i.
+            \]
+            Кроме того, новые переменные должны удовлетворять каноническим уравнениям с
+            гамильтонианом
+            \[
+            H' = H + \pd{S}{t}.
+            \]
+            В этом случае
+            \[
+            \begin{aligned}
+            \dot q_i' &= 0 = \pd{H'}{p'}, \\
+            \dot p_i' &= 0 = \pd{H'}{q'}, & i = \overline{1,s}.
+            \end{aligned}
+            \]
+            Следовательно, новая функция Гамильтона $H'(q', p', t)$ не зависит от новых переменных
+            $q', p'$. Тогда должно выполняться равенство
+            \[
+            H\paren{ q, \pd{S}{q}, t } + \pd{S}{t} = f(t),
+            \]
+            которое называют <i class="important">уравнением Гамильтона-Якоби</i>. Правая часть
+            представляет собой произвольную функцию времени $f(t)$.
+          </p>
+
+          <p>
+            Вместо этого уравнения можно рассмотреть другое уравнение в частных производных,
+            которому должна удовлетворять производящая функция $\tilde S(q, \alpha, t)$:
+            \[
+            H\paren{ q, \pd{\tilde S}{q}, t } + \pd{\tilde S}{t} = 0,
+            \]
+            где
+            \[
+            \tilde S = S - \int\limits_{t_0}^{t} f(\tau) d\tau.
+            \]
+          </p>
+
+          <p>
+            Таким образом, для решения поставленной задачи нужно найти полное решение
+            (<i>полный интеграл</i>) уравнения Гамильтона-Якоби, которое будет зависеть от $s$
+            постоянных $\alpha$ и аддитивной постоянной $\alpha_0$ в виде
+            \[
+            \tilde S = \psi(q, \alpha, t) + \alpha_0.
+            \]
+            Тогда задача интегрирования канонических уравнений заменяется нахождением
+            решения уравнения Гамильтона-Якоби. Если функция $\tilde S$ получена, она
+            порождает контактное преобразование
+            \[
+            p_i = \pd{\psi}{q_i}, \qquad \beta_i = \pd{\psi}{\alpha_i}.
+            \]
+            Разрешая последние уравнения относительно $q$, получим явное решение исходных
+            уравнений движения:
+            \[
+            q_i = q_i(t, \alpha, \beta), \qquad p_i = p_i(t, \alpha, \beta).
+            \]
+          </p>
+
+          <p>
+            Если рассматривать движение механической системы со стационарными связями, то
+            функция Гамильтона не зависит явно от времени. Тогда можно искать решение $\u{S}$
+            уравнения Гамильтона-Якоби вида
+            \[
+            H\paren{ q, \pd{\u{S}}{q} } = h.
+            \]
+            После этого получим
+            \[
+            S(q, \alpha, t) = -h t + \u{S}(q, \alpha),
+            \]
+            где $h = \alpha_1$.
+          </p>
         </div>
       </li>
 
@@ -3411,7 +3545,7 @@
           </p>
 
           <div class="remark">
-            Здесь $\sum$ &mdash; условное обознчаение.
+            Здесь $\sum$ &mdash; условное обозначение.
           </div>
 
           <p>
@@ -3609,7 +3743,7 @@
 
             <li>
               $\theta$ &mdash; угол <i class="important">нутации</i> &mdash;
-              угол между $O\xi$ и $Oz$;
+              угол между $O\zeta$ и $Oz$;
             </li>
 
             <li>
@@ -3642,29 +3776,284 @@
           \]
           или
           \[
+          \tag{1}
           \dv{\bvec{e}}{t}
           = \rdv{\bvec{e}}{t} + \vp{\bvec{\omega}}{\bvec{e}} = 0.
           \]
-          Проецируя это уравнение на подвижные оси $Oxyz$, получаем <i>уравнения
-            Пуассона</i>:
+          Проецируя это уравнение на подвижные оси $Oxyz$, получаем
+          <i class="important">уравнения Пуассона</i>:
           \[
+          \tag{2}
           \begin{aligned}
           \dot\gamma_1 &= r \gamma_2 - q \gamma_3, \\
           \dot\gamma_2 &= p \gamma_3 - r \gamma_1, \\
           \dot\gamma_3 &= q \gamma_1 - p \gamma_2.
           \end{aligned}
           \]
-          <div class="todo">
-            Расписать до конца.
+
+          Единственная внешняя сила, действующая на ТТ &mdash; сила тяжести:
+          \[
+          \bvec{P} = -P \bvec{e}.
+          \]
+          Главный момент этой силы относительно точки $O$ равен
+          \[
+          \bvec{M}_O(\bvec{P})
+          = \vp{\bvec{r}_C}{\bvec{P}}
+          = P \vp{\bvec{e}}{\bvec{r}_C}
+          = P
+          \begin{vmatrix}
+          \bvec{i} & \bvec{j} & \bvec{k} \\
+          \gamma_1 & \gamma_2 & \gamma_3 \\
+          x_C & y_C & z_C
+          \end{vmatrix},
+          \]
+          где $\bvec{r}_C = \paren{ x_C, y_C, z_C }$ &mdash; радиус-вектор центра
+          тяжести ТТ относительно $O$ в СК $Oxyz$.
+
+          <p>
+            С учётом этого, динамические уравнения Эйлера примут вид
+            \[
+            \tag{3}
+            \begin{aligned}
+            A\dot p + (C - B) qr &= P(\gamma_2 z_C - \gamma_3 y_C), \\
+            B\dot q + (A - C) rp &= P(\gamma_3 x_C - \gamma_1 z_C), \\
+            C\dot r + (B - A) pq &= P(\gamma_1 y_C - \gamma_2 x_C).
+            \end{aligned}
+            \]
+            Из (2) и (3) получаем систему из 6 нелинейных ОДУ 1-го порядка относительно
+            6 неизвестных функций времени $\gamma_1, \gamma_2, \gamma_3, p, q, r$.
+          </p>
+
+          <p>
+            Если $\gamma_1, \gamma_2, \gamma_3, p, q, r$ найдены как функции времени, то
+            для полного решения задачи (т.е. для определения эйлеровых углов как функций
+            времени) необходимо из любого из кинематических уравнений Эйлера
+            \[
+            \left\{
+            \begin{aligned}
+            p &= \dot\psi \sin\theta \sin\varphi + \dot\theta \cos\varphi, \\
+            q &= \dot\psi \sin\theta \cos\varphi - \dot\theta \sin\varphi, \\
+            r &= \dot\psi \cos\theta + \dot\varphi,
+            \end{aligned}
+            \right.
+            \]
+            найти $\psi(t)$ одной квадратурой: например, исключим из первых двух уравнений
+            $\dot\theta$, тогда
+            \[
+            p \sin \varphi + q \cos \varphi = \dot \psi \sin \theta,
+            \]
+            откуда
+            \[
+            \dot \psi = \frac{p \sin\varphi + q \cos\varphi}{\sin\theta},
+            \]
+            а $\theta(t)$ и $\varphi(t)$ определяются непосредственно через
+            $\gamma_1(t), \gamma_2(t), \gamma_3(t)$, так как
+            \[
+            \begin{aligned}
+            \gamma_1 &= \sin \theta \sin \varphi, \\
+            \gamma_2 &= \sin \theta \cos \varphi, \\
+            \gamma_3 &= \cos \theta.
+            \end{aligned}
+            \]
+          </p>
+
+          <p>
+            Установлено, что для полного решения системы (2)-(3) достаточно знать
+            4 независимых интеграла вместо 6.
+          </p>
+
+          <p>
+            Можно указать следующие первые интегралы:
+          </p>
+
+          <ol>
+            <li>
+              <i>Геометрический</i>. Так как $\bvec{e} = (\gamma_1, \gamma_2, \gamma_3)$
+              в СК $Oxyz$ и $\abs{\bvec{e}} = 1$, то
+              \[
+              \tag{4}
+              \gamma_1^2 + \gamma_2^2 + \gamma_3^2 = 1.
+              \]
+            </li>
+
+            <li>
+              <i>Интеграл площадей</i>. Применим теорему об изменении кинетического
+              момента относительно оси $O\xi$:
+              \[
+              M_{O\xi}(\bvec{P}) = 0,
+              \]
+              так как
+              \[
+              O\xi \parallel \bvec{P}
+              \implies
+              \dv{K_\xi}{t} = M_{O\xi} = 0
+              \implies
+              K_\xi = \const.
+              \]
+              Так как
+              \[
+              K_\xi
+              = \dp{\bvec{K}_O}{\bvec{e}}
+              = \paren{ A p \bvec{i}, B q \bvec{j}, C r \bvec{k} }
+              \cdot
+              \paren{ \gamma_1 \bvec{i}, \gamma_2 \bvec{j}, \gamma_3 \bvec{k} }
+              = A p \gamma_1 + B q \gamma_2 + C r \gamma_3,
+              \]
+              то
+              \[
+              \tag{5}
+              A p \gamma_1 + B q \gamma_2 + C r \gamma_3 = \const.
+              \]
+
+              <div class="todo">
+                Расписать закон сохранения площадей.
+              </div>
+            </li>
+
+            <li>
+              <i>Интеграл энергии</i>. По теореме об изменении кинетической энергии
+              \[
+              dT = - P d\xi_C,
+              \]
+              где $\xi_C$ &mdash; координата центра тяжести ТТ в $O\xi\eta\zeta$.
+
+              <p>
+                Интегрируя это равенство, получаем, что
+                \[
+                T = -P \xi_C + \const.
+                \]
+                Так как
+                \[
+                2T
+                = J_{xx} p^2 + J_{yy} q^2 + J_{zz} r^2
+                = A p^2 + B q^2 + C r^2,
+                \]
+                а
+                \[
+                \xi_C
+                = \dp{\bvec{r}_C}{\bvec{e}}
+                = x_C \gamma_1 + y_C \gamma_2 + z_C \gamma_3,
+                \]
+                то
+                \[
+                \tag{6}
+                \frac{1}{2} \paren{ A p^2 + B q^2 + C r^2 }
+                =
+                -P \paren{ x_C \gamma_1 + y_C \gamma_2 + z_C \gamma_3 } + \const;
+                \]
+                это равенство и называют интегралом энергии.
+              </p>
+            </li>
+          </ol>
+
+          <p>
+            Остаётся найти ещё один интеграл, независимый от (4)-(6). Сделать это
+            удалось только для трёх частных предположений относительно движущегося
+            тела и условий его движения:
+          </p>
+          <ol type="a">
+            <li>
+              Случай Эйлера: центр тяжести является неподвижной точкой
+              \[
+              x_C = 0, \; y_C = 0, \; z_C = 0,
+              \qquad
+              A \neq B \neq C.
+              \]
+            </li>
+
+            <li>
+              Случай Лагранжа: моменты инерции относительно главных осей удовлетворяют условиям
+              \[
+              A = B \neq C,
+              \]
+              а центр тяжести находится на оси симметрии эллипсоида инерции:
+              \[
+              x_C = 0, \quad y_C = 0.
+              \]
+            </li>
+
+            <li>
+              Случай Ковалевской: центр тяжести расположен в экваториальной плоскости эллипсоида
+              инерации
+              \[
+              z_C = 0,
+              \]
+              а моменты инерции относительно главных осей удовлетворяют условиям
+              \[
+              A = B = 2C.
+              \]
+            </li>
+          </ol>
+
+          <div class="definition">
+            Интеграл
+            \[
+            \tag{7}
+            u = \int\limits_{0}^{x} \frac{dx}{\sqrt{(1-x^2)(1 - k^2 x^2)}}
+            \]
+            называют <i>эллиптическим интегралом Якоби 1-го рода</i>.
           </div>
 
-          <div class="images">
-            <img src="images/22-1.png" alt="">
-            <img src="images/22-2.png" alt="">
-            <img src="images/22-3.png" alt="">
-            <img src="images/22-4.png" alt="">
-            <img src="images/22-5.png" alt="">
-            <img src="images/22-6.png" alt="">
+          После замены $x = \sin \varphi$ он принимает вид
+          \[
+          u
+          = \int\limits_{0}^{\varphi} \frac{d\varphi}{\sqrt{ 1 - k^2 \sin^2 \varphi }}
+          = F(\varphi, k).
+          \]
+
+          <div class="definition">
+            Интеграл
+            \[
+            \tag{8}
+            u
+            = \int\limits_{0}^{\varphi} \frac{d\varphi}{\sqrt{ 1 - k^2 \sin^2 \varphi }}
+            = F(\varphi, k)
+            \]
+            называют <i>эллиптическим интегралом Лежандра 1-го рода</i>.
+            <br/>
+            Обратную функцию $\varphi(u)$ называют <i>амплитудой</i>:
+            \[
+            \varphi = \am u = \am F(\varphi, k).
+            \]
+          </div>
+
+          <div class="definition">
+            <i>Эллиптическими функциями</i> назывюатся тригонометрические функции
+            от $\am u$:
+            \[
+            \tag{10}
+            \left\{
+            \begin{aligned}
+            \sin \varphi &= \sin \am u = \sn u, \\
+            \cos \varphi &= \cos \am u = \cn u, \\
+            \sqrt{ 1 - k^2 \sin^2\varphi }
+            &= \Delta \varphi = \Delta \am u = \dn u.
+            \end{aligned}
+            \right.
+            \]
+
+            Функцию $\dn u$ называют <i>дельтой амплитуды</i>.
+          </div>
+
+          Нетрудно проверить, что справедливо равенство
+          \[
+          \tag{11}
+          \sn^2 u + \cn^2 u = 1.
+          \]
+
+          Если $k = 0$, то $\sn u = \sin u$ и $\cn u = \cos u$, так как в этом случае
+          $\varphi = u$. Отсюда следует, что при $k = 0$
+          \[
+          \sn 0 = 0, \qquad \cn 0 = 1, \qquad \dn 0 = 1.
+          \]
+
+          <div class="remark">
+            Эллиптические функции являются периодическими с действительным периодом $4l$,
+            где
+            \[
+            l = \int\limits_{0}^{\pi / 2}
+            \frac{d\varphi}{\sqrt{ 1 - k^2 \sin^2 \varphi }}.
+            \]
           </div>
         </div>
       </li>
@@ -3675,15 +4064,234 @@
           ограничения
         </div>
         <div class="content">
+          Рассмотрим систему ОДУ
+          \[
+          \dot x = f(x(t), u(t)),
+          \]
+          где
+          \[
+          x \in \R^n, \qquad u \in \R^m, \qquad t \in [t_\text{н}, t_\text{к}].
+          \]
 
-          <div class="images">
-            <img src="images/23-1.png" alt="">
-            <img src="images/23-2.png" alt="">
-            <img src="images/23-3.png" alt="">
-            <img src="images/23-4.png" alt="">
-            <img src="images/23-5.png" alt="">
-            <img src="images/23-6.png" alt="">
+          Рассмотрим классификацию критериев качества:
+          <ol type="a">
+            <li>
+              <i>Задача Лагранжа</i>:
+              \[
+              J_0 = \int\limits_{t_\text{н}}^{t_\text{к}} F_0(x(t), u(t)) dt.
+              \]
+            </li>
+
+            <li>
+              <i>Задача Майера</i>:
+              \[
+              J_0 = \varphi_0(t_\text{н}, x(t_\text{н}), t_\text{к}, x(t_\text{к})).
+              \]
+            </li>
+
+            <li>
+              <i>Задача Больца</i>:
+              \[
+              J_0 = \int\limits_{t_\text{н}}^{t_\text{к}} F_0(x(t), u(t)) dt.
+              + \varphi_0(t_\text{н}, x(t_\text{н}), t_\text{к}, x(t_\text{к})),
+              \]
+              причём первое слагаемое называют <i>интегральной частью</i>, а второе
+              &mdash; <i>терминальной частью</i>.
+            </li>
+          </ol>
+
+          <p>
+            Рассмотрим классификацию ограничений:
+          </p>
+          <ol>
+            <li>
+              <i>Ограничения на траекторию</i>
+              <ol type="a">
+                <li>
+                  <i>Задача с фиксированными концами</i>:
+                  \[
+                  x(t_\text{н}) = x^\text{н},
+                  \qquad
+                  x(t_\text{к}) = x^\text{к}.
+                  \]
+                </li>
+
+                <li>
+                  <i>Задача со свободным левым/правым концом</i>:
+                  \[
+                  x(t_\text{н}) = x^\text{н}
+                  \quad \text{или} \quad
+                  x(t_\text{к}) = x^\text{к}.
+                  \]
+                </li>
+
+                <li>
+                  <i>Задача с подвижными концами</i>:
+                  \[
+                  x(t_\text{н}) = G(t_\text{н}),
+                  \qquad
+                  x(t_\text{к}) = G(t_\text{к}).
+                  \]
+                </li>
+
+                <li>
+                  <i>Изопериметрическая задача</i>:
+                  \[
+                  \left\{
+                  \begin{aligned}
+                  J_j &= \int\limits_{t_\text{н}}^{t_\text{к}} F_j(t, x(t)) dt
+                  \leqslant 0,
+                  & j &= \overline{1, m_1} \\
+                  J_i &= \int\limits_{t_\text{н}}^{t_\text{к}} F_i(t, x(t)) dt
+                  = 0,
+                  & i &= \overline{m_1 + 1, m_2}.
+                  \end{aligned}
+                  \right.
+                  \]
+                </li>
+              </ol>
+            </li>
+
+            <li>
+              <i>Ограничения на управление</i>:
+              <ol type="a">
+                <li>
+                  <i>Программное управление</i>:
+                  \[
+                  u = u(t).
+                  \]
+                </li>
+
+                <li>
+                  <i>Синтез-управление</i>:
+                  \[
+                  u = u(t, x).
+                  \]
+                </li>
+
+                <li>
+                  <i>Специфические ограничения</i>:
+                  \[
+                  u \in U.
+                  \]
+                </li>
+
+                <li>
+                  <i>Изопериметрические ограничения</i>:
+                  \[
+                  \left\{
+                  \begin{aligned}
+                  J_j &= \int\limits_{t_\text{н}}^{t_\text{к}} F_j(t, u(t)) dt
+                  \leqslant 0,
+                  & j &= \overline{m_2 + 1, m_3} \\
+                  J_i &= \int\limits_{t_\text{н}}^{t_\text{к}} F_i(t, u(t)) dt
+                  = 0,
+                  & i &= \overline{m_3 + 1, m_4}.
+                  \end{aligned}
+                  \right.
+                  \]
+                </li>
+              </ol>
+            </li>
+          </ol>
+
+          <div class="problem">
+            <i>(оптимального управления)</i>.
+
+            Рассмотрим
+            <ol>
+              <li>
+                систему ОДУ
+                $\dot x = f(x(t), u, t)$,
+                где
+                \[
+                x \in \R^n, \qquad u \in \R^m \qquad t \in [t_\text{н}, t_\text{к}],
+                \]
+                с начальными условиями $x(t_\text{н}) = x^\text{н}$;
+              </li>
+
+              <li>
+                критерий качества
+                \[
+                J_0(t_\text{н}, x^\text{н}, t_\text{к}, x^\text{к}) \to \inf,
+                \]
+              </li>
+
+              <li>
+                ограничения:
+                \[
+                \left\{
+                \begin{aligned}
+                J_j(t_\text{н}, x^\text{н}, t_\text{к}, x^\text{к}, u) &\leqslant 0,
+                & j &= \overline{1, m_1}, \\
+                J_i(t_\text{н}, x^\text{н}, t_\text{к}, x^\text{к}, u) &= 0,
+                & i &= \overline{m_1 + 1, m_2}, \\
+                u &\in U, & & &
+                \end{aligned}
+                \right.
+                \]
+                где
+                \[
+                J_k = \int\limits_{t_\text{н}}^{t_\text{к}} F_k(x(t), u, t) dt
+                + \varphi_k(t_\text{н}, x^\text{н}, t_\text{к}, x^\text{к}),
+                \]
+                причём
+                \[
+                u(t) \in PC, \qquad x(t) \in PC^1.
+                \]
+              </li>
+            </ol>
           </div>
+
+          <p>
+            Рассмотрим совокупность варьируемых параметров
+            \[
+            q = q(t_\text{н}, t_\text{к}, x(t_\text{н}), x(t_\text{к}), u).
+            \]
+          </p>
+
+          <div class="definition">
+            Совокупность $q$ варьируемых параметров называется <i>допустимой</i>, если
+            она удовлетворяет условиям
+            \[
+            \begin{aligned}
+            \dot x &= f(x(t), u, t), \\
+            J_k &= \int\limits_{t_\text{н}}^{t_\text{к}} F_k(x(t), u, t) dt
+            + \varphi_k(t_\text{н}, t_\text{к}, x(t_\text{н}), x(t_\text{к})).
+            \end{aligned}
+            \]
+          </div>
+
+          <div class="definition">
+            Допустимую совокупность $\tilde q$ называют <i>оптимальной</i>, если для
+            любой другой бесконечно близкой к ней совокупности $q$ выполняется условие
+            \[
+            J_0(\tilde q) \leqslant J_0(q).
+            \]
+          </div>
+
+          <div class="definition">
+            Допустимую совокупность $\tilde q$ называют <i>локально оптимальной в
+              сильном смысле</i>, если существует $\varepsilon \gt 0$ такой, что
+            для любой допустимой совокупности $q$ такой, что
+            \[
+            \abs{\tilde t_\text{н} - t_\text{н}}
+            +
+            \abs{\tilde t_\text{к} - t_\text{к}}
+            + \max_t \abs{\tilde x(\tilde u, t) - x(u, t)} \lt \varepsilon,
+            \qquad
+            t \in [t_\text{н}, t_\text{к}] \cap [\tilde t_\text{н}, \tilde t_\text{к}],
+            \]
+            выполняется
+            \[
+            J_0(\tilde q) \leqslant J_0(q).
+            \]
+          </div>
+
+          <p>
+            В дальнейшем будем искать локально оптимальные сильные экстремумы, то есть
+            рассматривать непрерывные функции.
+          </p>
         </div>
       </li>
 
@@ -3693,10 +4301,183 @@
           вариации условного функционала
         </div>
         <div class="content">
+          <p>
+            Рассмотрим уравнения движения
+            \[
+            \dot x = f(x(t), u(t), t),
+            \qquad
+            x \in \R^n, \quad u \in \R^m,
+            \qquad t \in [t_\text{н}, t_\text{к}] \in \R,
+            \]
+            причём
+            \[
+            f \in C^1, \qquad \pd{f}{x} \in C^1,
+            \]
+            с начальными условиями
+            \[
+            x(t_\text{н}) = x^\text{н}.
+            \]
+          </p>
+
+          <p>
+            Будем считать, что заданы условия на управление:
+            \[
+            u_{j1} \leqslant u_j(t) \leqslant u_{j2},
+            \qquad
+            u_{j1}, u_{j2} \in \overline{\R}.
+            \]
+          </p>
+
+          <div class="definition">
+            Если для всех $j$
+            \[
+            u_{j1} = -\infty, \qquad u_{j2} = \infty,
+            \]
+            то задача называется <i>задачей классического вариационного исчисления</i>.
+          </div>
+
+          <p>
+            Будем рассматривать управления $u_j(t) \in PC$ с конечным числом точек
+            разрыва $\tau$. Будем считать, что они изолированы, а $u_j(t)$ непрерывны
+            справа.
+          </p>
+
+          <div class="definition">
+            Управления, имеющие конечное число точек разрыва и удовлетворяющие
+            ограничениям
+            \[
+            u_{j1} \leqslant u_j(t) \leqslant u_{j2},
+            \qquad
+            u_{j1}, u_{j2} \in \overline{\R},
+            \]
+            будем называть <i>допуститмыми</i>.
+          </div>
+
+          <div class="definition">
+            Говорят, что пары $(u, x)$ из допустимого управления и отвечающей ему
+            траектории, удовлетворяющие уравнениям движения, образуют <i>управляемый
+              процесс</i>.
+          </div>
+
+          <p>
+            Будем считать, что также заданы ограничения на траекторию:
+            \[
+            J_i(t_\text{н}, t_\text{к}, x_i(t_\text{н}), x_i(t_\text{к})) = 0,
+            \qquad i = \overline{1,n},
+            \quad j = \overline{1,l},
+            \quad l \leqslant 2n + 2,
+            \]
+            причём считаем, что функции $J_i \in C^1$ и независимы, то есть
+            \[
+            \rank \paren{
+            \pd{J_j}{t_\text{н}},
+            \pd{J_j}{t_\text{к}},
+            \pd{J_j}{x_i^\text{н}},
+            \pd{J_j}{x_i^\text{к}}
+            }
+            = l.
+            \]
+          </p>
+
+          <div class="definition">
+            Управляемый процесс, удовлетворяющий ограничениям на траекторию, называют
+            <i>допустимым управляемым процессом</i>.
+          </div>
+
+          <p>
+            Зададим критерий качества в виде Больца:
+            \[
+            J_0 = \int\limits_{t_\text{н}}^{t_\text{к}} F_0(x(t), u(t), t) dt
+            + \varphi_0(t_\text{н}, t_\text{к}, x^\text{н}, x^\text{к})
+            \to \min,
+            \]
+            причём считаем, что $\varphi_0, F_0, \pd{F_0}{x} \in C^1$.
+          </p>
+
+          <div class="definition">
+            <i>Задача вариационного управления движения</i> заключается в поиске
+            допустимого управляемого процесса, удовлетворяющего критерию качества.
+          </div>
+
+          <br/>
+          <hr/>
+
+          <p>
+            Введём понятие игольчатых вариаций. Рассмотрим управление $u(t)$,
+            при котором минимизируется функционал. Будем варьировать это управление
+            следующим образом. Рассмотрим конечное число моментов времени $t_\sigma$:
+            \[
+            t_\text{н} \lt t_1 \lt \dots \lt t_n \lt t_\text{к},
+            \qquad \sigma = \overline{1,n},
+            \]
+            в которых управление $u(t)$ меняется соответственно на $v_\sigma(t)$.
+            Будем считать, что $v_\sigma(t)$ удовлетворяет ограничением на управление,
+            то есть
+            \[
+            u_{j1} \leqslant v_{j\sigma} \leqslant u_{j2}.
+            \]
+          </p>
+
+          <p>
+            Введём в рассмотрение величины
+            \[
+            \Delta t_\sigma \gt 0,
+            \qquad \Delta t_\text{н},
+            \quad \Delta t_\text{к},
+            \]
+            построим непересекающиеся интервалы
+            \[
+            \left\{
+            \begin{aligned}
+            i_\text{н} &=
+            \begin{cases}
+            [t_\text{н}, t_\text{н} + \Delta t_\text{н}), & \Delta t_\text{н} \gt 0, \\
+            (t_\text{н} + \Delta t_\text{н}, t_\text{н}], & \Delta t_\text{н} \lt 0,
+            \end{cases} \\
+            i_\sigma &= [t_\sigma, t_\sigma + \Delta t_\sigma], \\
+            i_\text{к} &=
+            \begin{cases}
+            [t_\text{к}, t_\text{к} + \Delta t_\text{к}), & \Delta t_\text{к} \gt 0, \\
+            (t_\text{к} + \Delta t_\text{к}, t_\text{к}], & \Delta t_\text{к} \lt 0.
+            \end{cases} \\
+            \end{aligned}
+            \right.
+            \]
+            Заметим, что точки разрыва изолированы.
+          </p>
+
+          <p>
+            Используя построенные интервалы, рассмотрим новое управление:
+            \[
+            u'(t) =
+            \begin{cases}
+            u(t_\text{н}), & t \in i_\text{н}, \\
+            u(t_\text{к}), & t \in i_\text{к}, \\
+            v_\sigma, & t \in i_\sigma, \\
+            u, & t \not \in i_\text{н}, i_\text{к}, i_\sigma.
+            \end{cases}
+            \]
+
+            Тогда <i class="important">игольчатой вариацией</i> называется функция
+            \[
+            v(t) = u'(t + \Delta t) - u(t).
+            \]
+          </p>
+
+          <p>
+            Так как
+            \[
+            u'(t) = u(t), \qquad t \not \in i_\text{н}, i_\text{к}, i_\sigma,
+            \]
+            то
+            \[
+            v = u(t + \Delta t) - u(t) = \Delta u.
+            \]
+          </p>
+
+          <div class="todo">Разобраться до конца, что надо писать, а что нет.</div>
 
           <div class="images">
-            <img src="images/24-1.png" alt="">
-            <img src="images/24-2.png" alt="">
             <img src="images/24-3.png" alt="">
             <img src="images/24-4.png" alt="">
           </div>
@@ -3708,12 +4489,218 @@
           Полная вариация условного функционала: слабое варьирование
         </div>
         <div class="content">
+          Рассмотрим
+          <ol>
+            <li>
+              уравнение движения
+              \[
+              \dot x = f(x(t), u(t), t),
+              \]
+            </li>
 
-          <div class="images">
-            <img src="images/25-1.png" alt="">
-            <img src="images/25-2.png" alt="">
-            <img src="images/25-3.png" alt="">
-          </div>
+            <li>
+              ограничения на траекторию
+              \[
+              J_j(t_\text{н}, t_\text{к}, x^\text{н}, x^\text{к}) = 0,
+              \qquad
+              j = \overline{1,l},
+              \]
+            </li>
+
+            <li>
+              критерий качества
+              \[
+              J_0 = \int\limits_{t_\text{н}}^{t_\text{к}} F_0(t, x(t), u(t)) dt
+              + \varphi_0(t_\text{н}, t_\text{к}, x^\text{н}, x^\text{к})
+              \to \min.
+              \]
+            </li>
+          </ol>
+
+          <p>
+            Эту задачу можно рассматривать как задачу условной минимизации функционала
+            $J_0$. Перейдём от неё к задаче безусловной минимизации функционала введением
+            множителей Лагранжа:
+            \[
+            \lambda(t) \in \R^n, \qquad \nu \in \R^l.
+            \]
+            Тогда будем минимизировать функционал
+            \[
+            \Phi = \int\limits_{t_\text{н}}^{t_\text{к}} \left[
+            F_0(t, x(t), u(t)) dt + \lambda (\dot x - f)
+            \right] dt
+            + \varphi_0(t_\text{н}, t_\text{к}, x^\text{н}, x^\text{к})
+            + \sum\limits_{j=1}^{l} \nu_j J_j.
+            \]
+            Введя обозначения
+            \[
+            L = F_0 + \lambda (\dot x - f),
+            \qquad
+            R = \varphi_0 + \sum\limits_{j=1}^{l} \nu_j J_j,
+            \]
+            перепишем этот функционал в следующем виде:
+            \[
+            \Phi = \int\limits_{t_\text{н}}^{t_\text{к}}
+            L(x(t), \dot x, \lambda, u(t), t) dt
+            + R(t_\text{н}, t_\text{к}, x^\text{н}, x^\text{к})
+            \to \min.
+            \]
+          </p>
+
+          <p>
+            Найдём полную вариацию этого функционала:
+            \[
+            \Delta \Phi = \delta \Phi + \dot \Phi \Delta t.
+            \]
+          </p>
+
+          <p>
+            Пользуясь определением функционала действия по Гамильтону
+            \[
+            S = \int\limits_{t_\text{н}}^{t_\text{к}} L dt,
+            \]
+            можно записать
+            \[
+            \Delta \Phi
+            = \Delta \int\limits_{t_\text{н}}^{t_\text{к}} L dt + \Delta R
+            = \Delta_1 S + \Delta_2 S + \Delta_1 R
+            = \Delta_1 \Phi + \Delta_2 \Phi,
+            \]
+            где:
+          </p>
+          <ul>
+            <li>
+              $\Delta_1$ отвечает за вариации без разрывов, то есть за слабые
+              вариации параметров $x, \dot x, \lambda, u, t$ и за сильные вариации для
+              $\dot x$;
+            </li>
+
+            <li>
+              $\Delta_2$ отвечает за сильные вариации для управления.
+            </li>
+          </ul>
+
+          <p>
+            Рассмотрим для начала вариации без разрывов:
+            \[
+            \Delta_1 \Phi = \Delta_1 S + \Delta_1 R.
+            \]
+            Известно, что
+            \[
+            \Delta_1 S
+            = \Delta \int\limits_{t_\text{н}}^{t_\text{к}} L dt
+            = \int\limits_{t_\text{н}}^{t_\text{к}} \delta L dt
+            + \left .\paren{ L \Delta t } \right|_{t_\text{н}}^{t_\text{к}}.
+            \]
+            Рассмотрим изохронную вариацию функции $L$:
+            \[
+            \delta L(x, \dot x, \lambda, u, t) =
+            \pd{L}{x} \delta x + \pd{L}{\dot x} \delta \dot x
+            + \pd{L}{\lambda} \delta \lambda + \pd{L}{u} \delta u.
+            \]
+            Так как
+            \[
+            \dv{}{t} \paren{ \pd{L}{\dot x} \delta x }
+            = \dv{}{t} \pd{L}{\dot x} \delta x + \pd{L}{\dot x} \delta \dot x,
+            \]
+            то
+            \[
+            \pd{L}{\dot x} \delta \dot x
+            = \dv{}{t} \paren{ \pd{L}{\dot x} \delta x }
+            - \dv{}{t} \pd{L}{\dot x} \delta x,
+            \]
+            поэтому
+            \[
+            \delta L(x, \dot x, \lambda, u, t) =
+            \paren{
+            \pd{L}{x} - \dv{}{t} \pd{L}{\dot x}
+            } \delta x
+            + \dv{}{t} \paren{ \pd{L}{\dot x} \delta x }
+            + \pd{L}{\lambda} \delta \lambda + \pd{L}{u} \delta u.
+            \]
+            Введём функцию Гамильтона:
+            \[
+            H = \lambda \dot x - L(x, \dot x, \lambda, u, t),
+            \]
+            где $x$ и $\lambda$ будем воспринимать как аналог обобщённых координат
+            и импульсов соответственно. Из определения
+            \[
+            L = F_0 + \lambda (\dot x - f)
+            \]
+            следует, что
+            \[
+            H = -F_0 + \lambda f, \implies
+            H = H(x, \lambda, u, t).
+            \]
+            Пользуясь этим обозначением, а также тем, что
+            \[
+            \pd{L}{\dot x} = \lambda,
+            \]
+            получаем
+            \[
+            \delta L
+            =
+            - \paren{ \pd{H}{x} + \dot \lambda } \delta x
+            + \dv{}{t} \paren{ \lambda \delta x }
+            + \paren{ \dot x - \pd{H}{\lambda} } \delta \lambda
+            - \pd{H}{u} \delta u.
+            \]
+            Заметим, что
+            \[
+            \left\{
+            \begin{aligned}
+            \pd{L}{x} &= - \pd{H}{x}, \\
+            \pd{L}{\lambda} &= \dot x - \pd{H}{\lambda}, \\
+            \pd{L}{u} &= - \pd{H}{u}.
+            \end{aligned}
+            \right.
+            \]
+          </p>
+
+          <p>
+            Рассмотрим теперь второе слагаемое:
+            \[
+            \begin{aligned}
+            L \Delta t &= \paren{ \lambda \dot x - H } \Delta t = \\
+            &= \lambda \dot x \Delta t - H \Delta t = \\
+            &= \lambda \Delta x - \lambda \delta x - H \Delta t.
+            \end{aligned}
+            \]
+          </p>
+
+          <p>
+            Собирая полученные результаты, получаем, что
+            \[
+            \begin{aligned}
+            \Delta_1 S
+            &= \int\limits_{t_\text{н}}^{t_\text{к}} \delta L dt
+            + \left .\paren{ L \Delta t } \right|_{t_\text{н}}^{t_\text{к}} = \\
+            &= -\int\limits_{t_\text{н}}^{t_\text{к}} 
+            \left[
+            \paren{ \pd{H}{x} + \dot \lambda } \delta x
+            + \paren{ \pd{H}{\lambda} - \dot x } \delta \lambda
+            + \pd{H}{u} \delta u
+            \right] dt
+            + \cancel{\left. \paren{ \lambda \delta x } \right|_{t_\text{н}}^{t_\text{к}}}
+            + \\
+            &\phantom{=} +
+            \left.
+            \paren{ \lambda \Delta x - \cancel{\lambda \delta x} - H \Delta t }
+            \right|_{t_\text{н}}^{t_\text{к}} = \\
+            &= -\int\limits_{t_\text{н}}^{t_\text{к}} 
+            \left[
+            \paren{ \pd{H}{x} + \dot \lambda } \delta x
+            + \paren{ \pd{H}{\lambda} - \dot x } \delta \lambda
+            + \pd{H}{u} \delta u
+            \right] dt
+            + \\
+            &\phantom{=} +
+            \left.
+            \paren{ \lambda \Delta x - H \Delta t }
+            \right|_{t_\text{н}}^{t_\text{к}}
+            \end{aligned}
+            \]
+          </p>
         </div>
       </li>
 
@@ -3723,12 +4710,223 @@
           Эрдмана-Вейерштрасса
         </div>
         <div class="content">
+          Рассмотрим
+          <ol>
+            <li>
+              уравнение движения
+              \[
+              \dot x = f(x(t), u(t), t),
+              \]
+            </li>
 
-          <div class="images">
-            <img src="images/26-1.png" alt="">
-            <img src="images/26-2.png" alt="">
-            <img src="images/26-3.png" alt="">
-          </div>
+            <li>
+              ограничения на траекторию
+              \[
+              J_j(t_\text{н}, t_\text{к}, x^\text{н}, x^\text{к}) = 0,
+              \qquad
+              j = \overline{1,l},
+              \]
+            </li>
+
+            <li>
+              критерий качества
+              \[
+              J_0 = \int\limits_{t_\text{н}}^{t_\text{к}} F_0(t, x(t), u(t)) dt
+              + \varphi_0(t_\text{н}, t_\text{к}, x^\text{н}, x^\text{к})
+              \to \min.
+              \]
+            </li>
+          </ol>
+
+          <p>
+            Эту задачу можно рассматривать как задачу условной минимизации функционала
+            $J_0$. Перейдём от неё к задаче безусловной минимизации функционала введением
+            множителей Лагранжа:
+            \[
+            \lambda(t) \in \R^n, \qquad \nu \in \R^l.
+            \]
+            Тогда будем минимизировать функционал
+            \[
+            \Phi = \int\limits_{t_\text{н}}^{t_\text{к}} \left[
+            F_0(t, x(t), u(t)) dt + \lambda (\dot x - f)
+            \right] dt
+            + \varphi_0(t_\text{н}, t_\text{к}, x^\text{н}, x^\text{к})
+            + \sum\limits_{j=1}^{l} \nu_j J_j.
+            \]
+            Введя обозначения
+            \[
+            L = F_0 + \lambda (\dot x - f),
+            \qquad
+            R = \varphi_0 + \sum\limits_{j=1}^{l} \nu_j J_j,
+            \]
+            перепишем этот функционал в следующем виде:
+            \[
+            \Phi = \int\limits_{t_\text{н}}^{t_\text{к}}
+            L(x(t), \dot x, \lambda, u(t), t) dt
+            + R(t_\text{н}, t_\text{к}, x^\text{н}, x^\text{к})
+            \to \min.
+            \]
+          </p>
+
+          <p>
+            Найдём полную вариацию этого функционала:
+            \[
+            \Delta \Phi = \delta \Phi + \dot \Phi \Delta t.
+            \]
+          </p>
+
+          <p>
+            Пользуясь определением функционала действия по Гамильтону
+            \[
+            S = \int\limits_{t_\text{н}}^{t_\text{к}} L dt,
+            \]
+            можно записать
+            \[
+            \Delta \Phi
+            = \Delta \int\limits_{t_\text{н}}^{t_\text{к}} L dt + \Delta R
+            = \Delta_1 S + \Delta_2 S + \Delta_1 R
+            = \Delta_1 \Phi + \Delta_2 \Phi,
+            \]
+            где:
+          </p>
+          <ul>
+            <li>
+              $\Delta_1$ отвечает за вариации без разрывов, то есть за слабые
+              вариации параметров $x, \dot x, \lambda, u, t$ и за сильные вариации для
+              $\dot x$;
+            </li>
+
+            <li>
+              $\Delta_2$ отвечает за сильные вариации для управления.
+            </li>
+          </ul>
+
+          <p>
+            Рассмотрим сильные вариации. Обозначим за $u'$ управление, отвечающее
+            траектории сравнения, тогда
+            \[
+            \begin{aligned}
+            \Delta_2 \Phi &= \Delta_2 S = \\
+            &= \int\limits_{t_\text{н}}^{t_\text{к}} \left[
+            L(x, \dot x, \lambda, u', t) - L(x, \dot x, \lambda, u, t)
+            \right] dt = \\
+            &= \int\limits_{t_\text{н}}^{t_\text{к}} \left[
+            H(x, \lambda, u, t) - H(x, \lambda, u', t)
+            \right] dt \approx \\
+            &\approx \sum\limits_{\sigma = 0}^{N + 1}
+            \int\limits_{t_\sigma}^{t_\sigma + \Delta t_\sigma}
+            \left[ H(x, \lambda, u, t) - H(x, \lambda, v_\sigma, t) \right] dt,
+            \end{aligned}
+            \]
+            где $N$ &mdash; количество точек разрыва и
+            \[
+            t_0 := t_\text{н}, \qquad t_{N+1} := t_\text{к}.
+            \]
+          </p>
+
+          <p>
+            Проверим, является ли функция
+            \[
+            H(x, \lambda, u, t) - H(x, \lambda, v_\sigma, t)
+            \]
+            непрерывной как функция времени. Для этого рассмотрим произвольный момент
+            времени $\tau \in [t_\text{н}, t_\text{к}]$ (который, вообще говоря, может
+            совпадать с одной из точек разрыва). Тогда
+            \[
+            S
+            = \int\limits_{t_\text{н}}^{t_\text{к}} L dt
+            = \int\limits_{t_\text{н}}^{\tau} L dt
+            + \int\limits_{\tau}^{t_\text{к}} L dt.
+            \]
+            Так как
+            \[
+            \begin{aligned}
+            \Delta_1 S
+            &= -\int\limits_{t_\text{н}}^{t_\text{к}} 
+            \left[
+            \paren{ \pd{H}{x} + \dot \lambda } \delta x
+            + \paren{ \pd{H}{\lambda} - \dot x } \delta \lambda
+            + \pd{H}{u} \delta u
+            \right] dt
+            + \\
+            &\phantom{=} +
+            \paren{ \lambda \Delta x - H \Delta t }
+            \big|_{t_\text{н}}^{t_\text{к}},
+            \end{aligned}
+            \]
+            то, варьируя обе части формулы функционала действия и сравнивая полученные
+            результаты, получаем, что
+            \[
+            \paren{ \lambda \Delta x - H \Delta t } \big|_{\tau - 0}
+            -
+            \paren{ \lambda \Delta x - H \Delta t } \big|_{\tau + 0}
+            = 0.
+            \]
+
+            Замечая, что
+            \[
+            \begin{aligned}
+            \at{\Delta x}{\tau - 0} = \at{\Delta x}{\tau + 0} &= \Delta x, \\
+            \at{\Delta t}{\tau - 0} = \at{\Delta t}{\tau + 0} &= \Delta t
+            \end{aligned}
+            \]
+            в силу непрерывности, причём $\Delta x$ и $\Delta t$ независимы, окончательно
+            получаем, что
+            \[
+            \begin{aligned}
+            \at{\lambda_i}{\tau - 0} &= \at{\lambda_i}{\tau + 0}, \\
+            \at{H}{\tau - 0} &= \at{H}{\tau + 0}, & i = \overline{1,n}.
+            \end{aligned}
+            \]
+            Эти равенства называют <i class="important">условиями
+              Эрдмана-Вейерштрасса</i>.
+          </p>
+
+          <p>
+            Итак, если условия Эрдмана-Вейерштрасса выполнены, то функция
+            \[
+            H(x, \lambda, u, t) - H(x, \lambda, v_\sigma, t)
+            \]
+            непрерывна как функция времени, поэтому, выделив линейную часть приращения
+            функционала $\Phi$, получим, что
+            \[
+            \begin{aligned}
+            \Delta_2 \Phi &= \sum\limits_{\sigma = 0}^{N + 1}
+            \int\limits_{t_\sigma}^{t_\sigma + \Delta t_\sigma}
+            \left[ H(x, \lambda, u, t) - H(x, \lambda, v_\sigma, t) \right] dt = \\
+            &= \sum\limits_{\sigma=0}^{N+1} \left[
+            H(x, \lambda, u, t_\sigma) - H(x, \lambda, v_\sigma, t_\sigma)
+            \right] \abs{ \Delta t_\sigma }.
+            \end{aligned}
+            \]
+          </p>
+
+          <p>
+            Итак, полная вариация функционала $\Phi$ для конечных и бесконечно малых
+            приращений записывается как
+            \[
+            \begin{aligned}
+            \Delta \Phi &= \Delta_1 \Phi + \Delta_2 \Phi = \\
+            &= -\int\limits_{t_\text{н}}^{t_\text{к}} 
+            \left[
+            \paren{ \pd{H}{x} + \dot \lambda } \delta x
+            + \paren{ \pd{H}{\lambda} - \dot x } \delta \lambda
+            + \pd{H}{u} \delta u
+            \right] dt
+            + \\
+            &\phantom{=} +
+            \Delta R(t_\text{н}, t_\text{к}, x^\text{н}, x^\text{к}) +
+            \left.
+            \paren{ \lambda \Delta x - H \Delta t }
+            \right|_{t_\text{н}}^{t_\text{к}}
+            + \\
+            &\phantom{=} +
+            \sum\limits_{\sigma=0}^{N+1} \left[
+            H(x, \lambda, u, t_\sigma) - H(x, \lambda, v_\sigma, t_\sigma)
+            \right] \abs{ \Delta t_\sigma }.
+            \end{aligned}
+            \]
+          </p>
         </div>
       </li>
 
@@ -3738,21 +4936,351 @@
           исчисления
         </div>
         <div class="content">
+          Рассмотрим формулу для полной вариации функционала $\Phi$:
+          \[
+          \begin{aligned}
+          \Delta \Phi
+          &= -\int\limits_{t_\text{н}}^{t_\text{к}} 
+          \left[
+          \paren{ \pd{H}{x} + \dot \lambda } \delta x
+          + \paren{ \pd{H}{\lambda} - \dot x } \delta \lambda
+          + \pd{H}{u} \delta u
+          \right] dt
+          + \\
+          &\phantom{=} +
+          \Delta R(t_\text{н}, t_\text{к}, x^\text{н}, x^\text{к}) +
+          \left.
+          \paren{ \lambda \Delta x - H \Delta t }
+          \right|_{t_\text{н}}^{t_\text{к}}
+          + \\
+          &\phantom{=} +
+          \sum\limits_{\sigma=0}^{N+1} \left[
+          H(x, \lambda, u, t_\sigma) - H(x, \lambda, v_\sigma, t_\sigma)
+          \right] \abs{ \Delta t_\sigma }.
+          \end{aligned}
+          \]
 
-          <div class="images">
-            <img src="images/27-1.png" alt="">
-            <img src="images/27-2.png" alt="">
-            <img src="images/27-3.png" alt="">
-            <img src="images/27-4.png" alt="">
-            <img src="images/27-5.png" alt="">
-            <img src="images/27-6.png" alt="">
-            <img src="images/27-7.png" alt="">
-            <img src="images/27-8.png" alt="">
-            <img src="images/27-9.png" alt="">
-            <img src="images/27-10.png" alt="">
-            <img src="images/27-11.png" alt="">
-            <img src="images/27-12.png" alt="">
-            <img src="images/27-13.png" alt="">
+          <p>
+            Анализ этой формулы позволяет выписать необходимые условия экстремума как для
+            непрерывной функции управления без ограничений, так и для ограниченного
+            кусочно-непрерывного управления.
+          </p>
+
+          <p>
+            Рассмотрим случай, когда управление представляет собой непрерывную функцию без
+            ограничений. Тогда необходимые условия оптимального управления называют
+            <i class="important">необходимыми условиями для классического вариационного
+              исчисления</i>.
+          </p>
+
+          <p>
+            Если на опорной траектории достигается локальный минимум, то $\Delta \Phi \geqslant 0$.
+          </p>
+
+          <p>
+            Так как основные сложности сопряжены с варьированием управления, то проварьируем
+            сначала остальные параметры и выпишем условия, соответствующие этому варьированию.
+          </p>
+
+          <p>
+            При частном выборе на траекториях сравнения управлений, равных оптимальным
+            (т.е. $u' = u$ и $\delta u = 0$), будем иметь <i class="important">внутренний
+              экстремум</i> (так как управление не варьируется, ограничения на него не учитываются),
+            поэтому необходимое условие экстремума &mdash; общее условие стационарности:
+            \[
+            \Delta \Phi = 0.
+            \]
+            Заметим, что в расширенном пространстве допустимых кривых сравнения вариации
+            $\delta x_i, \delta \lambda_i, \Delta t_\text{н}, \Delta t_\text{к},
+            \Delta x_i^\text{н}, \Delta x_i^\text{к}$ независимы, поэтому получаем следующие
+            условия:
+          </p>
+
+          <ol>
+            <li>
+              <i class="important">уравнения движения</i>:
+              \[
+              \dot x_i = \pd{H}{\lambda_i} = f_i(x, u, t),
+              \]
+            </li>
+
+            <li>
+              <i class="important">уравнения Эйлера-Лагранжа</i>:
+              \[
+              \dot \lambda_i
+              = - \pd{H}{x_i}
+              = \pd{F_0}{x_i} - \sum\limits_{j=1}^{n} \lambda_j \pd{f_j(x, u, t)}{x_i},
+              \]
+            </li>
+
+            <li>
+              <i class="important">общее условие трансверсальности</i>:
+              \[
+              \Delta R(t_\text{н}, t_\text{к}, x^\text{н}, x^\text{к})
+              + \left. \paren{ \lambda \Delta x - H \Delta t } \right|_{t_\text{н}}^{t_\text{к}}
+              = 0
+              \]
+
+              Учитывая, что
+              \[
+              \Delta R
+              =
+              \pd{R}{t_\text{н}} \Delta t_\text{н}
+              +
+              \pd{R}{t_\text{к}} \Delta t_\text{к}
+              +
+              \sum\limits_{i=1}^{n} \pd{R}{x_i^\text{н}} \Delta x_i^\text{н}
+              +
+              \sum\limits_{i=1}^{n} \pd{R}{x_i^\text{к}} \Delta x_i^\text{к},
+              \]
+              получаем $2n + 2$ <i class="important">развёрнутых условий трансверсальности</i>:
+              \[
+              \left\{
+              \begin{aligned}
+              \pd{R}{t_\text{н}} + H_\text{н} &= 0, \\
+              \pd{R}{t_\text{к}} - H_\text{к} &= 0, \\
+              \pd{R}{x_i^\text{н}} - \lambda_i^\text{н} &= 0, \\
+              \pd{R}{x_i^\text{к}} + \lambda_i^\text{к} &= 0.
+              \end{aligned}
+              \right.
+              \]
+
+              Заметим, что условия трансверсальности нужно решать совместно с уравнениями связей:
+              \[
+              J_j(t_\text{н}, t_\text{к}, x^\text{н}, x^\text{к}) = 0, \qquad i = \overline{1,m}.
+              \]
+            </li>
+          </ol>
+
+          <div class="remark">
+            Условия 1-3 справедливы как для случая непрерывного управления, так и для управления
+            в ограничениях.
+          </div>
+
+          <p>
+            Рассмотрим теперь только вариации управления, положив остальные вариации нулю. При
+            слабых вариациях управления для выполнения условия $\Delta \Phi \geqslant 0$ получаем
+            следующее необходимое условие:
+            \[
+            - \int\limits_{t_\text{н}}^{t_\text{к}} \pd{H}{u} \delta u dt \geqslant 0.
+            \]
+
+            Пусть $u_j \in (u_{j1}, u_{j2})$, то есть управление на опорной траектории является
+            внутренним значением. Тогда $\delta u$ может принимать как положительные, так и
+            отрицательные значения, поэтому для выполнения $\Delta \Phi \geqslant 0$ должно
+            выполняться условие
+            \[
+            \pd{H}{u_j} = 0, \qquad u_{j1} \lt u_j \lt u_{j2}.
+            \]
+
+            Рассмотрим теперь граничные значения управления $u_j$:
+          </p>
+
+          <ol>
+            <li>
+              Если $u_j = u_{j1}$, то
+              \[
+              \begin{aligned}
+              \delta u_j = u_j' - u_j \neq 0
+              &\implies u_j' \neq u_j \\
+              &\implies u_j' \in (u_{j1}, u_{j2}] \\
+              &\implies \delta u_j \gt 0 \\
+              &\implies \pd{H}{u_j} \leqslant 0.
+              \end{aligned}
+              \]
+            </li>
+
+            <li>
+              Если $u_j = u_{j2}$, то
+              \[
+              \begin{aligned}
+              \delta u_j = u_j' - u_j \neq 0
+              &\implies u_j' \neq u_j \\
+              &\implies u_j' \in [u_{j1}, u_{j2}) \\
+              &\implies \delta u_j \lt 0 \\
+              &\implies \pd{H}{u_j} \geqslant 0.
+              \end{aligned}
+              \]
+            </li>
+          </ol>
+
+          <p>
+            Итак, можно записать <i class="important">необходимые условия оптимальности для
+              классического вариационного исчисления</i>:
+          </p>
+
+          <ol>
+            <li>
+              <i class="important">уравнения движения</i>:
+              \[
+              \dot x_i = \pd{H}{\lambda_i} = f_i(x, u, t),
+              \]
+            </li>
+
+            <li>
+              <i class="important">уравнения Эйлера-Лагранжа</i>:
+              \[
+              \dot \lambda_i
+              = - \pd{H}{x_i}
+              = \pd{F_0}{x_i} - \sum\limits_{j=1}^{n} \lambda_j \pd{f_j(x, u, t)}{x_i},
+              \]
+            </li>
+
+            <li>
+              <i class="important">общее условие трансверсальности</i>:
+              \[
+              \Delta R(t_\text{н}, t_\text{к}, x^\text{н}, x^\text{к})
+              + \left. \paren{ \lambda \Delta x - H \Delta t } \right|_{t_\text{н}}^{t_\text{к}}
+              = 0
+              \]
+
+              либо $2n + 2$ <i class="important">развёрнутых условий трансверсальности</i>:
+              \[
+              \left\{
+              \begin{aligned}
+              \pd{R}{t_\text{н}} + H_\text{н} &= 0, \\
+              \pd{R}{t_\text{к}} - H_\text{к} &= 0, \\
+              \pd{R}{x_i^\text{н}} - \lambda_i^\text{н} &= 0, \\
+              \pd{R}{x_i^\text{к}} + \lambda_i^\text{к} &= 0.
+              \end{aligned}
+              \right.
+              \]
+            </li>
+
+            <li>
+              ${\displaystyle \pd{H}{u_j} = 0} \quad \text{при} \quad u_{j1} \lt u_j \lt u_{j2}.$
+            </li>
+          </ol>
+
+          <div class="remark">
+            Система из уравнений Эйлера-Лагранжа и уравнений движения представляет собой
+            каноническую систему с гамильтонианом
+            \[
+            H \bydef= -F_0 + \lambda f,
+            \]
+            координатами $x_i$ и импульсами $\lambda_i$. Она отличается от стандартной канонической
+            системы аналитической динамики линейной зависимостью $H$ от $\lambda_i$ и наличием
+            дополнительных переменных $u_j$ &mdash; неизвестных функций от времени.
+          </div>
+
+          <div class="remark">
+            Заметим, что на участках экстремальной траектории, не содержащих угловых точек,
+            полная производная гамильтониана в силу системы будет равна частной производной по
+            времени; рассмотрим
+            \[
+            \dv{H(x, \lambda, u, t)}{t}
+            = \pd{H}{t}
+            + \pd{H}{x} \dot x
+            + \pd{H}{\lambda} \dot \lambda
+            + \pd{H}{u} \dot u.
+            \]
+
+            Так как
+            \[
+            \left\{
+            \begin{aligned}
+            \pd{H}{x} \dot x &= \phantom{-} \pd{H}{x} \pd{H}{\lambda}, \\
+            \pd{H}{\lambda} \dot \lambda &= - \pd{H}{\lambda} \pd{H}{x}, \\
+            \pd{H}{u} &= 0 && \text{при} \quad u_j \in (u_{j1}, u_{j2}), \\
+            \dot u_j &= 0 && \text{при} \quad u_j = u_{j1} \quad \text{или} \quad u_j = u_{j2},
+            \end{aligned}
+            \right.
+            \]
+            то
+            \[
+            \dv{H}{t} = \pd{H}{t}.
+            \]
+
+            Таким образом, если гамильтониан явно не зависит от времени, то для любого участка
+            экстремали с непрерывным управлением будет выполняться условие
+            \[
+            H = h = \const.
+            \]
+            Из условий Эрдмана-Вейерштрасса следует, что в угловых точках гамильтониан $H$
+            непрерывен, откуда следует, что $h = \const$ является одной и той же для всей
+            экстремальной траектории.
+          </div>
+
+          <div class="remark">
+            Пусть $H$ линейно зависит от управления $u_j$, тогда ${\displaystyle \pd{H}{u_j} }$
+            является непрерывной функции времени, откуда следует, что для всех моментов времени,
+            в которые управление $u_j$ изменяется, выполняется соотношение
+            \[
+            \pd{H}{u_j} = 0.
+            \]
+            Такие моменты времени называются
+            <i class="important">точками переключения управления $u_j$</i>.
+          </div>
+
+          <div class="remark">
+            При решении конкретной задачи можно не вводить в рассмотрение множители $\nu_j$, а
+            развёрнутые условия трансверсальности получать с помощью приравнивания скобок
+            при независимых вариациях в общем уравнении
+            \[
+            \Delta \varphi_0
+            + \paren{ \lambda \Delta x - H \Delta t }
+            \big|_{t_\text{н}}^{t_\text{к}} = 0.
+            \]
+
+            <div class="todo">
+              Насколько я понимаю, это связано с тем, что $J_j = 0$ &mdash; уточнить.
+            </div>
+          </div>
+
+          <div class="todo">
+            Добавить пример (конспект Яна, стр. 56).
+          </div>
+
+          <div class="remark">
+            Варьирование условного функционала производилось при наличии ограничений
+            \[
+            J_j(t_\text{н}, t_\text{к}, x^\text{н}, x^\text{к}) = 0.
+            \]
+
+            <ol>
+              <li>
+                Если даны изопериметрические ограничения вида
+                \[
+                J_j \leqslant 0, \qquad j = \overline{1, m_1},
+                \]
+                то на множители Лагранжа $\nu_j$ накладываются дополнительные
+                <i class="important">условия дополняющей нежёсткости</i>:
+                \[
+                \nu_j J_j = 0, \qquad j = \overline{1, m_1}
+                \]
+                и <i class="important">условия неположительности</i>:
+                \[
+                \nu_j \leqslant 0, \qquad j = \overline{1, m_1}.
+                \]
+              </li>
+
+              <li>
+                Если даны изопериметрические ограничения вида
+                \[
+                J_j \geqslant 0, \qquad j = \overline{1, m_1},
+                \]
+                то условие дополнительной нежёсткости сохраняется:
+                \[
+                \nu_j J_j = 0, \qquad j = \overline{1, m_1},
+                \]
+                а условие неположительности меняется на <i class="important">условие
+                  неотрицательности</i>:
+                \[
+                \nu_j \geqslant 0, \qquad j = \overline{1, m_1}.
+                \]
+              </li>
+            </ol>
+
+            Смысл этих условий заключается в том, что
+            <ul>
+              <li>
+                $\nu_j \lt 0$, если ограничение $J_j$ активно, то есть $J_j = 0$;
+              </li>
+
+              <li>
+                $\nu_j = 0$, если ограничение $J_j$ неактивно, то есть $J_j \lt 0$.
+              </li>
+            </ul>
           </div>
         </div>
       </li>
@@ -3762,10 +5290,279 @@
           Принцип максимума Понтрягина: формулировки, замечания
         </div>
         <div class="content">
+          Рассмотрим формулу для полной вариации функционала $\Phi$:
+          \[
+          \begin{aligned}
+          \Delta \Phi
+          &= -\int\limits_{t_\text{н}}^{t_\text{к}} 
+          \left[
+          \paren{ \pd{H}{x} + \dot \lambda } \delta x
+          + \paren{ \pd{H}{\lambda} - \dot x } \delta \lambda
+          + \pd{H}{u} \delta u
+          \right] dt
+          + \\
+          &\phantom{=} +
+          \Delta R(t_\text{н}, t_\text{к}, x^\text{н}, x^\text{к}) +
+          \left.
+          \paren{ \lambda \Delta x - H \Delta t }
+          \right|_{t_\text{н}}^{t_\text{к}}
+          + \\
+          &\phantom{=} +
+          \sum\limits_{\sigma=0}^{N+1} \left[
+          H(x, \lambda, u, t_\sigma) - H(x, \lambda, v_\sigma, t_\sigma)
+          \right] \abs{ \Delta t_\sigma }.
+          \end{aligned}
+          \]
 
-          <div class="images">
-            <img src="images/28-1.png" alt="">
-            <img src="images/28-2.png" alt="">
+          <p>
+            Рассмотрим только сильные вариации управления, тогда
+            \[
+            \Delta \Phi
+            =
+            \sum\limits_{\sigma=0}^{N+1} \left[
+            H(x, \lambda, u, t_\sigma) - H(x, \lambda, v_\sigma, t_\sigma)
+            \right] \abs{ \Delta t_\sigma }.
+            \]
+            Тогда для выполнения условия $\Delta \Phi \geqslant 0$ необходимо, чтобы
+            \[
+            H(x, \lambda, u, t_\sigma) - H(x, \lambda, v_\sigma, t_\sigma) \geqslant 0,
+            \qquad v_\sigma \in U.
+            \]
+            Считаем, что $x = x(t_\sigma), \lambda = \lambda(t_\sigma), u = u(t_\sigma)$ &mdash;
+            значения указанных величин на оптимальной траектории.
+          </p>
+
+          <div class="definition">
+            Условие
+            \[
+            H(x, \lambda, u, t_\sigma) - H(x, \lambda, v_\sigma, t_\sigma) \geqslant 0,
+            \qquad v_\sigma \in U
+            \]
+            вместе с уравнениями Эйлера-Лагранжа
+            \[
+            \dot \lambda_i
+            = - \pd{H}{x_i}
+            = \pd{F_0}{x_i}
+            - \sum\limits_{j=1}^{n} \lambda_j \pd{f_j(x, t, u)}{x_i}
+            \]
+            называются <i>принципом максимума Понтрягина</i>, так как при выборе ограниченного
+            множества $U$ в виде
+            \[
+            u_{j1} \leqslant u_j \leqslant u_{j2}
+            \]
+            это условие равносильно тому, что
+            \[
+            H(x, \lambda, u, t)
+            = \max_{u_{j1} \leqslant u'_j \leqslant u_{j2}} H(x, \lambda, u', t).
+            \]
+          </div>
+
+          <p>
+            Итак, <i class="important">необходимые условия оптимальности управления, имеющего
+              разрывы и ограничения вида $u_{j1} \leqslant u_j(t) \leqslant u_{j2}$</i>:
+          </p>
+
+          <ol>
+            <li>
+              <i class="important">уравнения движения</i>:
+              \[
+              \dot x_i = \pd{H}{\lambda_i} = f_i(x, u, t),
+              \]
+            </li>
+
+            <li>
+              <i class="important">уравнения Эйлера-Лагранжа</i>:
+              \[
+              \dot \lambda_i
+              = - \pd{H}{x_i}
+              = \pd{F_0}{x_i} - \sum\limits_{j=1}^{n} \lambda_j \pd{f_j(x, u, t)}{x_i},
+              \]
+            </li>
+
+            <li>
+              <i class="important">общее условие трансверсальности</i>:
+              \[
+              \Delta R(t_\text{н}, t_\text{к}, x^\text{н}, x^\text{к})
+              + \left. \paren{ \lambda \Delta x - H \Delta t } \right|_{t_\text{н}}^{t_\text{к}}
+              = 0
+              \]
+
+              либо $2n + 2$ <i class="important">развёрнутых условий трансверсальности</i>:
+              \[
+              \left\{
+              \begin{aligned}
+              \pd{R}{t_\text{н}} + H_\text{н} &= 0, \\
+              \pd{R}{t_\text{к}} - H_\text{к} &= 0, \\
+              \pd{R}{x_i^\text{н}} - \lambda_i^\text{н} &= 0, \\
+              \pd{R}{x_i^\text{к}} + \lambda_i^\text{к} &= 0.
+              \end{aligned}
+              \right.
+              \]
+            </li>
+
+            <li>
+              ${
+              \displaystyle H(x, \lambda, u, t)
+              = \max_{u_{j1} \leqslant u'_j \leqslant u_{j2}}
+              H(x, \lambda, u', t)
+              }$.
+            </li>
+          </ol>
+
+          <h4 class="subtitle">Формулировка принципа максимума</h4>
+
+          Рассмотрим уравнения движения
+          \[
+          \dot x(t) = f(x(t), u(t), t),
+          \qquad x \in \R^n, \quad u \in \R^m,
+          \quad t \in [t_\text{н}, t_\text{к}]
+          \]
+          с начальными условиями $x(t_\text{н}) = x^\text{н}$.
+
+          <p>
+            В качестве критерия качества рассмотрим задачу Больца со свободным правым концом
+            \[
+            J_0 = \int\limits_{t_\text{н}}^{t_\text{к}} F_0(x(t), u(t), t) dt
+            + \varphi_0(x(t_\text{к})) \to \inf.
+            \]
+          </p>
+
+          <p>
+            Управление $u(t) \in U$ будем искать в классе кусочно-непрерывных функций, то есть
+            $u(t) \in PC$.
+          </p>
+
+          <div class="theorem">
+            <i>(принцип максимума Понтрягина)</i>.
+            <p>
+              Если $u_0(t)$ &mdash; оптимальное управление для поставленной задачи, а $x_0(t)$
+              &mdash; соответствующая ему оптимальная траектория, то $u_0$ удовлетворяет условиям
+              максимальности:
+              \[
+              \max_{u \in U} H(t, x_0(t), \lambda(t), u(t))
+              =
+              H(t, x_0(t), \lambda(t), u_0(t)),
+              \]
+              где
+              \[
+              H(t, x(t), \lambda(t), u(t)) = -F_0(x(t), u(t), t) + \lambda(t) f(x(t), u(t), t),
+              \]
+              а множители $\lambda(t) \in C, \lambda(t) \neq 0$ является решением уравнений
+              Эйлера-Лагранжа
+              \[
+              \dot \lambda = - \pd{H}{x}
+              \]
+              и удовлетворяют условиям трансверсальности:
+              \[
+              \lambda(t_\text{к}) = - \pd{\varphi_0(x_0(t_\text{к}))}{x_\text{к}}.
+              \]
+            </p>
+          </div>
+
+          <div class="remark">
+            В общем случае ПМП является необходимым условием оптимальности, однако он является
+            достаточным для некоторых классов задач (например, для линейно выпуклых &mdash;
+            где $f$ линейна по $x$, а $J_0$ &mdash; выпуклый)
+          </div>
+
+          <div class="remark">
+            <i>(алгоритм использования ПМП)</i>.
+            <ol>
+              <li>
+                Найдём $u_0(t)$ из условия максимальности:
+                \[
+                \max_{u \in U} H(t, x_0(t), \lambda(t), u(t))
+                =
+                H(t, x_0(t), \lambda(t), u_0(t)).
+                \]
+              </li>
+
+              <li>
+                Подставив найденное управление $u_0(t)$ в уравнения движения, найдём траекторию
+                $x_0(t)$.
+              </li>
+
+              <li>
+                Подставив найденное управление $u_0(t)$ в уравнения Эйлера-Лагранжа и условия
+                трансверсальности, найдём $\lambda(t)$.
+              </li>
+
+              <li>
+                Используя найденные $x_0(t)$ и $\lambda(t)$, можно выразить управление как функцию
+                времени:
+                \[
+                u_0 = u_0(x_0(t), \lambda(t), t) = u_0(t).
+                \]
+              </li>
+            </ol>
+          </div>
+
+          <p>
+            Рассмотрим задачу Лагранжа с закреплённым правым концом и свободным временем.
+            Зададим уравнения движения
+            \[
+            \dot x(t) = f(x(t), u(t), t),
+            \qquad x \in \R^n, \quad u \in \R^m, \quad t \geqslant t_\text{н}
+            \]
+            с начальными и конечными условиями
+            \[
+            x(t_\text{н}) = x^\text{н},
+            \qquad
+            x(t_\text{к}) = x^\text{к}.
+            \]
+            Зададим критерий качества в виде задачи Лагранжа
+            \[
+            J_0 = \int\limits_{t_\text{н}}^{t_\text{к}} F_0(x(t), u(t), t) dt \to \inf.
+            \]
+            Будем считать, что $t_\text{к}$ &mdash; произволен, а $u \in U(t)$.
+          </p>
+
+          <p>
+            ПМП для этой задачи формулируется так: если $u_0(t)$ &mdash; оптимальное управление,
+            а $x_0(t)$ &mdash; соответствующая оптимальная траектория, то найдётся ненулевой вектор
+            $\lambda(t) \in R^{n + 1}$ такой, что $\lambda(t) \in C$, а также
+            \[
+            \lambda_0(t) = \const \leqslant 0,
+            \qquad
+            \dot \lambda_i(t) = - \pd{H}{x_i}, \quad i = \overline{1, n},
+            \]
+            где
+            \[
+            H(t, x, u, \lambda) = \sum\limits_{i=1}^{n} \lambda_i f_i + \lambda_0 F_0,
+            \]
+            для которого выполняется условие максимальности:
+            \[
+            \max_{u \in U} H(t, x_0(t), \lambda(t), u(t)) = H(t, x_0(t), \lambda(t), u_0(t)),
+            \]
+            причём
+            \[
+            H(t, x_0(t), \lambda(t), u_0(t))
+            = \int\limits_{t_\text{н}}^{t} \pd{H}{s}(s, x_0(s), \lambda(s), u_0(s)) ds.
+            \]
+          </p>
+
+          <div class="remark">
+            Если задача стационарная, то есть
+            \[
+            f = f(x, u), \qquad F_0 = F_0(x, u), \qquad U(t) = U,
+            \]
+            то из существования оптимального управления $u_0$ и соответствующей ему траектории
+            $x_0$ следует, что существует $\lambda(t) \in R^{n+1}$, удовлетворяющий тем же
+            условиям, что и в формулировке ПМП, а также имеет место тождество
+            \[
+            H(t, x_0(t), \lambda(t), u_0(t)) \equiv 0.
+            \]
+          </div>
+
+          <div class="remark">
+            Для стационарной задачи быстродействия $H = \lambda(t) f(t)$, найдётся
+            \[
+            \lambda(t) \in \R^n, \qquad \lambda \in C, \qquad \lambda \neq 0,
+            \]
+            для которого
+            \[
+            \max_{u \in U} H(x_0, \lambda, u) = H(x_0, \lambda, u_0) = \const \geqslant 0.
+            \]
           </div>
         </div>
       </li>
@@ -3775,10 +5572,272 @@
           Оптимальное по быстродействию управление в задаче Лагранжа
         </div>
         <div class="content">
+          Рассмотрим поворот твёрдого тела. Введём две СК:
+          <ul>
+            <li>
+              $Oxyz$ &mdash; жёстко связанную с телом, причём оси выбираем по главным осям
+              инерции ТТ для точки $O$; тогда
+              \[
+              A = I_x, \qquad B = I_y, \qquad C = I_z,
+              \]
+              а проекции угловой скорости представимы в виде
+              \[
+              \vec{\omega}(p, q, r) = (\omega_x, \omega_y, \omega_z).
+              \]
+            </li>
+
+            <li>
+              $O\xi\eta\zeta$ &mdash; неподвижная СК.
+            </li>
+          </ul>
+
+          Рассмотрим динамические уравнения Эйлера:
+          \[
+          \left\{
+          \begin{aligned}
+          A \dot p + (C - B) qr &= M_x + u_x, \\
+          B \dot q + (A - C) pr &= M_y + u_y, \\
+          C \dot r + (B - A) qp &= M_z + u_z,
+          \end{aligned}
+          \right.
+          \]
+          где $u_x, u_y, u_z$ &mdash; проекции моментов управления.
+
+          <p>
+            Рассмотрим три случая, при которых можно найти аналитическое решение:
+          </p>
+          <ul>
+            <li>
+              Эйлер: $A, B, C$ &mdash; 2 из 3 равны
+            </li>
+
+            <li>
+              Лагранж: $A, B, C$ &mdash; 2 из 3 равны
+            </li>
+
+            <li>
+              Ковалевская
+            </li>
+          </ul>
+
+          <p>
+            Пусть $A = C \neq B$, рассмотрим спутник на орбите:
+            \[
+            \left\{
+            \begin{aligned}
+            A \dot p + (A - B) qr &= u_x, \\
+            B \dot q &= u_y, \\
+            A \dot r + (B - A) qp &= u_z,
+            \end{aligned}
+            \right.
+            \implies
+            \left\{
+            \begin{aligned}
+            A \dot p &= u_x + (B - A) qr, \\
+            B \dot q &= u_y, \\
+            A \dot r &= u_z + (A - B) qp,
+            \end{aligned}
+            \right.
+            \]
+          </p>
+
+          <p>
+            Пусть $B \gt A$. Введём обозначения:
+            \[
+            u_1 := \frac{u_x}{A}, \qquad u_2 := \frac{u_z}{A}, \qquad u_3 = \frac{u_y}{B},
+            \qquad a := \frac{q (B - A)}{A},
+            \]
+            тогда систему можно переписать в виде
+            \[
+            \left\{
+            \begin{aligned}
+            \dot p &= \phantom{-}ar + u_1, \\
+            \dot r &= - ap + u_2, \\
+            \dot q &= u_3.
+            \end{aligned}
+            \right.
+            \]
+
+            Представим, что
+            \[
+            -\nu \leqslant u_1, u_2 \leqslant \nu, \qquad u_3 \equiv 0,
+            \]
+            тогда
+            \[
+            \dot q = 0
+            \implies q = \const = q_0 \gt 0
+            \implies a_0 = \const \gt 0
+            \]
+
+            Введя обозначения
+            \[
+            x_1 := p, \qquad x_2 := r,
+            \]
+            приведём систему к виду $\dot x = f(x, u(t))$:
+            \[
+            \left\{
+            \begin{aligned}
+            \dot x_1 &= \phantom{-} a x_2 + u_1, \\
+            \dot x_2 &= - a x_1 + u_2.
+            \end{aligned}
+            \right.
+            \]
+
+            Поставим задачу: перевести систему из начального положения
+            \[
+            x_1(t_\text{н}) = x_1^\text{н},
+            \qquad
+            x_2(t_\text{н}) = x_2^\text{н}
+            \]
+            в положение
+            \[
+            x_1(t_\text{к}) = 0,
+            \qquad
+            x_2(t_\text{к}) = 0
+            \]
+            за минимальное время. Значит, в качестве критерия качества надо взять функционал
+            \[
+            J_0 = \int\limits_{t_\text{н}}^{t_\text{к}} dt.
+            \]
+            Так как на управление наложены ограничения, воспользуемся принципом максимума
+            Понтрягина.
+          </p>
+
+          <ol>
+            <li>
+              Введём функцию Гамильтона:
+              \[
+              H = -F_0 + \lambda f = -1 + \lambda_1 (a x_2 + u_1) + \lambda_2 (u_2 - a x_1).
+              \]
+            </li>
+
+            <li>
+              Составим уравнения Эйлера-Лагранжа:
+              \[
+              \left\{
+              \begin{aligned}
+              \dot \lambda_1 &= -\pd{H}{x_1} = \phantom{-} a \lambda_2, \\
+              \dot \lambda_2 &= -\pd{H}{x_2} = - a \lambda_1,
+              \end{aligned}
+              \right.
+
+              \implies
+
+              \ddot \lambda_1 = a \dot \lambda_2 = - a^2 \lambda_1,
+              \]
+
+              Итак, получили уравнение математического маятника:
+              \[
+              \ddot \lambda_1 + a^2 \lambda_1 = 0.
+              \]
+
+              Решения этого уравнения находятся в виде
+              \[
+              \left\{
+              \begin{aligned}
+              \lambda_1 &= N \sin(a t + \alpha), \\
+              \lambda_2 &= N \cos(a t + \alpha),
+              \end{aligned}
+              \right.
+              \]
+              где $a$ &mdash; круговая частота. Эти решения можно также записать в виде
+              \[
+              \left\{
+              \begin{aligned}
+              \lambda_1 &= N \sin(a t + \alpha), \\
+              \lambda_2 &= N \sin\paren{a t + \alpha + \frac{\pi}{2}},
+              \end{aligned}
+              \right.
+              \]
+            </li>
+
+            <li>
+              Рассмотрим, возможен ли вырожденный случай, то есть одновременное выполнение
+              условий
+              \[
+              \pd{H}{u_1} = 0, \qquad \pd{H}{u_2} = 0.
+              \]
+              Пользуясь определением гамильтониана, получаем, что этот случай равносилен тому, что
+              \[
+              \lambda_1 = 0, \qquad \lambda_2 = 0,
+              \]
+              что невозможно.
+
+              <p>
+                Найдём точки переключения управлений:
+                \[
+                \left\{
+                \begin{aligned}
+                \pd{H}{u_1} = \lambda_1 &= 0,
+                & \text{&mdash;} \quad \text{точки переключения} \; u_1, \\
+                \pd{H}{u_2} = \lambda_2 &= 0,
+                & \text{&mdash;} \quad \text{точки переключения} \; u_2.
+                \end{aligned}
+                \right.
+                \]
+              </p>
+            </li>
+
+            <li>
+              Рассмотрим теперь условие максимальности:
+              \[
+              \max_{\nu \leqslant u \leqslant \nu} H
+              =
+              \max_{\nu \leqslant u \leqslant \nu} \paren{ \lambda_1 u_1 + \lambda_2 u_2 }.
+              \]
+              Из него следует, что
+              \[
+              \left\{
+              \begin{aligned}
+              u_1 &= \nu \sign \lambda_1(t), \\
+              u_2 &= \nu \sign \lambda_2(t).
+              \end{aligned}
+              \right.
+              \]
+            </li>
+          </ol>
 
           <div class="images">
-            <img src="images/29-1.png" alt="">
-            <img src="images/29-2.png" alt="">
+            <img src="images/29-u-1.png"/>
+            <img src="images/29-u-2.png"/>
+          </div>
+
+          <p>
+            Из уравнений движения
+            \[
+            \left\{
+            \begin{aligned}
+            \dot x_1 &= \phantom{-} a x_2 + u_1, \\
+            \dot x_2 &= - a x_1 + u_2
+            \end{aligned}
+            \right.
+            \]
+            при
+            \[
+            u_1 = \pm \nu, \qquad u_2 = \pm \nu
+            \]
+            следует, что
+            \[
+            \left\{
+            \begin{aligned}
+            x_1 &= M \sin \paren{ a t + \beta } + \frac{u_2}{a}, \\
+            x_2 &= M \cos \paren{ a t + \beta } - \frac{u_1}{a}.
+            \end{aligned}
+            \right.
+            \]
+            Исключением времени можно получить уравнение для фазовой траектории:
+            \[
+            M^2 = \paren{ x_1 - \frac{u_2}{a} }^2 + \paren{ x_2 + \frac{u_1}{2} }^2.
+            \]
+            Заметим, что это уравнение задаёт окружность с центром в точке
+            \[
+            \paren{ \frac{u_2}{a}, -\frac{u_1}{a} },
+            \]
+            причём при различных значениях управления получаются различные центры.
+          </p>
+
+          <div class="todo">
+            Дописать
           </div>
         </div>
       </li>
@@ -3789,12 +5848,254 @@
           замечания о методе динамического программирования
         </div>
         <div class="content">
+          Метод динамического программирования является методом синтеза оптимального управления.
+          Он основан на <i class="important">принципе динамического программирования</i>,
+          сформулированным Беллманом.
 
-          <div class="images">
-            <img src="images/30-1.png" alt="">
-            <img src="images/30-2.png" alt="">
-            <img src="images/30-3.png" alt="">
-            <img src="images/30-4.png" alt="">
+          <div class="definition">
+            <i>Принцип динамического программирования</i>:
+            <p>
+              оптимальное управление обладает тем свойством, что для любого начального состояния
+              и использованного начального управления последующее оптимальное управление
+              совпадает с исходным оптимальным управлением относительно состояния, получающегося
+              в результате применения начального управления.
+            </p>
+          </div>
+
+          <p>
+            Другими словами, пусть построена экстремальная траектория, решающая задачу
+            оптимизации по некоторому критерию для управляемого процесса $u(t), x(t)$,
+            переводящего механическую систему из заданного начального состояния $x_\text{н}$
+            в момент времени $t = t_\text{н}$ в некоторое конечное положение $x_\text{к}$
+            при $t = t_\text{к}$. Если взять в качестве новой начальной точки любую точку
+            $x(\tau)$ этой траектории, причём $t_\text{н} \lt \tau \lt t_\text{к}$, то
+            оптимальным управлением в случае $F_0(x, u, t) \geqslant 0$ будет оставшаяся часть
+            ранее построенного оптимального управления, отвечающая отрезку
+            $t \in [\tau, t_\text{к}]$. Оба вектора управления (первоначального и укороченного)
+            на этом отрезке совпадают.
+          </p>
+
+          <div class="definition">
+            Говорят, что второй вектор управления является <i>сужением</i> первого на отрезке
+            $t \in [\tau, t_\text{к}]$.
+          </div>
+
+          <p>
+            Рассмотрим задачу управления на конечном интервале времени:
+          </p>
+          <ol>
+            <li>
+              уравнения движения:
+              \[
+              \tag{1}
+              \dot x(t) = f(t, x(t), u), \qquad t_\text{н} \leqslant t \leqslant t_\text{к}
+              \]
+              с начальными условиями $x(t_\text{н}) = x_\text{н}$;
+            </li>
+
+            <li>
+              критерий качества:
+              \[
+              \tag{2}
+              J(u)
+              = \int\limits_{t_\text{н}}^{t_\text{к}} F_0(t, x(t), u) dt
+              + \varphi_0(x(t_\text{к}))
+              \limto{u \in U} \inf,
+              \]
+            </li>
+
+            <li>
+              ограничение на управление: $u \in U$.
+            </li>
+          </ol>
+
+          <p>
+            Пусть движение системы происходит на отрезке
+            \[
+            t_\text{н} \leqslant \tau \leqslant t \leqslant t_\text{к}
+            \]
+            с начальными условиями
+            \[
+            x(\tau) = x, \qquad x \in \R^n,
+            \]
+            то есть
+            \[
+            \tag{3}
+            \dot x(t) = f(t, x(t), u),
+            \qquad \tau \leqslant t \leqslant t_\text{к},
+            \qquad x(\tau) = x.
+            \]
+            Для этой системы рассмотрим задачу минимизации функционала
+            \[
+            \tag{4}
+            \int\limits_{\tau}^{t_\text{к}} F_0(t, x(t), u) dt
+            + \varphi_0(x(t_\text{к}))
+            \limto{u \in U} \inf.
+            \]
+          </p>
+
+          <div class="definition">
+            <i>Допустимым управлением</i> называется любая измеримая функция $u \in U$ такая,
+            что для всех моментов времени $\tau \in [t_\text{н}, t_\text{к}]$ и $x \in \R^n$
+            существует решение суженной задачи (3).
+          </div>
+
+          <div class="definition">
+            <i>Функцией Беллмана</i> $B(\tau, x)$ называют функцию, равную $\inf$ функционала (4)
+            на траекториях системы (3) по всем допустимым управлениям:
+            \[
+            \tag{5}
+            B(\tau, x)
+            = \inf_{u \in U} \left[
+            \int\limits_{\tau}^{t_\text{к}} F_0(t, x(t), u) dt
+            + \varphi_0(x(t_\text{к}))
+            \right].
+            \]
+          </div>
+
+          <p>
+            Рассмотрим произвольные моменты времени $\tau$ и $\tau_1$:
+            \[
+            t_\text{н} \leqslant \tau \leqslant \tau_1 \leqslant t_\text{к}.
+            \]
+            На основании принципа динамического программирования запишем, что
+            \[
+            \tag{6}
+            \begin{aligned}
+            B(\tau, x)
+            &= \inf_{u \in U} \left[
+            \int\limits_{\tau}^{t_\text{к}} F_0(t, x(t), u) dt
+            + \varphi_0(x(t_\text{к}))
+            \right] = \\
+            &= \inf_{u \in U} \left[
+            \int\limits_{\tau}^{\tau_1} F_0(t, x(t), u) dt
+            +
+            \int\limits_{\tau_1}^{t_\text{к}} F_0(t, x(t), u) dt + \varphi_0(x(t_\text{к}))
+            \right] = \\
+            &= \inf_{\substack{u \in U \\ \tau \leqslant t \leqslant \tau_1}} \left[
+            \int\limits_{\tau}^{\tau_1} F_0(t, x(t), u) dt
+            +
+            \inf_{\substack{u \in U \\ \tau_1 \leqslant t \leqslant t_\text{к}}} \left[
+            \int\limits_{\tau_1}^{t_\text{к}} F_0(t, x(t), u) dt + \varphi_0(x(t_\text{к}))
+            \right]
+            \right] = \\
+            &= \inf_{\substack{u \in U \\ \tau \leqslant t \leqslant \tau_1}} \left[
+            \int\limits_{\tau}^{\tau_1} F_0(t, x(t), u) dt
+            +
+            B(\tau_1, x(\tau_1))
+            \right].
+            \end{aligned}
+            \]
+
+            Здесь $x(t)$ &mdash; решение задачи (3), а управление при $t \in [\tau, \tau_1]$ влияет
+            на
+            \[
+            \int\limits_{\tau}^{\tau_1} F_0(t, x(t), u) dt
+            \]
+            и на величину $x(\tau_1)$.
+          </p>
+
+          <p>
+            Представим формулу (6) в виде
+            \[
+            \tag{7}
+            \inf_{\substack{u \in U \\ \tau \leqslant t \leqslant \tau_1}} \left[
+            \int\limits_{\tau}^{\tau_1} F_0(t, x(t), u) dt
+            + B(\tau_1, x(\tau_1))
+            - B(\tau, x)
+            \right]
+            = 0.
+            \]
+            Пусть $B(\tau, x)$ непрерывно дифференцируема, тогда при
+            $\Delta t = \tau_1 - \tau \to 0$ с точностью до малых более высокого порядка малости
+            относительно $\Delta t$ выполняется равенство
+            \[
+            \tag{8}
+            B(\tau_1, x(\tau_1)) - B(\tau, x) = \dot B(\tau, x) \Delta t,
+            \]
+            где $\dot B(\tau, x)$ &mdash; полная производная функции $B$ вдоль траекторий системы
+            (1):
+            \[
+            \tag{9}
+            \dv{B(\tau, x)}{t} = \pd{B(\tau, x)}{t} + \pd{B(\tau, x)}{x} f(t, x, u).
+            \]
+            Разделив обе части (7) на $\Delta t$ и переходя к пределу при $\Delta t \to 0$,
+            получаем
+            \[
+            \inf_{u \in U} \left[
+            \pd{B(t, x)}{t} + \pd{B(t, x)}{x} f(t, x, u) + F_0(t, x, u)
+            \right] = 0,
+            \quad \text{где}
+            \quad t_\text{н} \leqslant t \leqslant t_\text{к},
+            \quad x \in \R^n.
+            \]
+          </p>
+
+          <div class="definition">
+            Уравнение
+            \[
+            \tag{10}
+            \inf_{u \in U} \left[
+            \pd{B(t, x)}{t} + \pd{B(t, x)}{x} f(t, x, u) + F_0(t, x, u)
+            \right] = 0,
+            \quad \text{где}
+            \quad t_\text{н} \leqslant t \leqslant t_\text{к},
+            \quad x \in \R^n
+            \]
+            называют <i>уравнением Беллмана</i>.
+          </div>
+
+          <p>
+            Заметим, что из определения функции Беллмана следует, что
+            \[
+            \tag{11}
+            B(t_\text{к}, x) = \varphi(x(t_\text{к})), \qquad x \in \R^n.
+            \]
+            Таким образом, если решение задачи (1),(2) оптимального управления существует, а
+            функция Беллмана $B(t, x)$ непрерывно дифференцируема, то справедливы соотношения
+            \[
+            \begin{gathered}
+            \inf_{u \in U} \left[
+            \pd{B(t, x)}{t} + \pd{B(t, x)}{x} f(t, x, u) + F_0(t, x, u)
+            \right] = 0, \\
+            B(t_\text{к}, x) = \varphi(x(t_\text{к})).
+            \end{gathered}
+            \]
+            Таким образом, решение задачи оптимального управления для системы ОДУ сводится к
+            решению одного уравнения в частных производных с граничными условиями
+            (аналогично методу Якоби для решения канонических уравнений).
+          </p>
+
+          <div class="remark">
+            Существуют случаи, когда решение ДУЧП не приводит к решению исходной задачи:
+            <ol type="a">
+              <li>
+                В заданном классе допустимых управлений не всегда существует такое управление,
+                при котором достигается $\inf$ в определении функции Беллмана.
+              </li>
+
+              <li>
+                $B(t,x)$ не всегда обладает гладкостью, поэтому решение уравнения Беллмана не
+                обязательно совпадает с соответствующей функцией Беллмана.
+              </li>
+
+              <li>
+                Если функция Беллмана удовлетворяет уравнению Беллмана, то отсюда не следует,
+                что управление, при котором достигается $\inf$ в уравнении Беллмана, является
+                оптимальным.
+
+                <p>
+                  Например, при этом уравнении вообще может не существовать решение
+                  уравнений движения (1).
+                </p>
+              </li>
+
+              <li>
+                Решение задачи (10), (11) может быть не единственным, поэтому потребуется
+                дополнительное исследование для установления того, какое же из решений является
+                функцией Беллмана для исходной задачи оптимального управления.
+              </li>
+            </ol>
           </div>
         </div>
       </li>
@@ -3804,9 +6105,94 @@
           Построение управления с помощью метода динамического программирования
         </div>
         <div class="content">
+          <p>
+            Рассмотрим задачу управления на конечном интервале времени:
+          </p>
+          <ol>
+            <li>
+              уравнения движения:
+              \[
+              \tag{1}
+              \dot x(t) = f(t, x(t), u), \qquad t_\text{н} \leqslant t \leqslant t_\text{к}
+              \]
+              с начальными условиями $x(t_\text{н}) = x_\text{н}$;
+            </li>
 
-          <div class="images">
-            <img src="images/31-1.png" alt="">
+            <li>
+              критерий качества:
+              \[
+              \tag{2}
+              J(u)
+              = \int\limits_{t_\text{н}}^{t_\text{к}} F_0(t, x(t), u) dt
+              + \varphi_0(x(t_\text{к}))
+              \limto{u \in U} \inf,
+              \]
+            </li>
+
+            <li>
+              ограничение на управление: $u \in U$.
+            </li>
+          </ol>
+
+          <p>
+            Управление, реализующее
+            \[
+            \begin{gather}
+            \tag{10}
+            \inf_{u \in U} \left[
+            \pd{B(t, x)}{t} + \pd{B(t, x)}{x} f(t, x, u) + F_0(t, x, u)
+            \right] = 0, \\
+            \tag{11}
+            B(t_\text{к}, x) = \varphi(x(t_\text{к})),
+            \end{gather}
+            \]
+            является С-управлением (т.е. $u = u(t, x)$). Приведём условия, при которых МДП
+            приводит к решению исходной задачи (1), (2).
+          </p>
+
+          <div class="theorem">
+            Пусть существует единственное непрерывно дифференцируемое решение задачи (10)-(11)
+            $B_0$ и существует допустимое управление $u_0(t, x)$ такое, что
+            \[
+            \tag{12}
+            \inf_{u \in U} \left[
+            \pd{B(t, x)}{x} f(t, x, u) + F_0(t, x, u)
+            \right]
+            =
+            \pd{B_0(t,x)}{x} f(t, x, u_0) + F_0(t, x, u_0).
+            \]
+            Тогда С-управление $u_0(t,x)$ является оптимальным, а соответствующая функция Беллмана
+            есть $B_0(t,x)$.
+          </div>
+
+          <div class="algorithm">
+            <i>(построение С-управления с помощью МДП)</i>:
+            <ol>
+              <li>
+                Находим управление $u = u(t, x, B)$, доставляющее минимум левой части
+                уравнения (10).
+              </li>
+
+              <li>
+                Подставляем это управление в (10), получаем нелинейное уравнение в частных
+                производных относительно функции $B(t,x)$. Краевое условие имеет вид (11).
+              </li>
+
+              <li>
+                Решая поставленную задачу, получаем $B(t,x)$.
+              </li>
+
+              <li>
+                Подставляя найденное значение $B(t,x)$ в выражение $u(t, x, B)$,
+                находим оптимальное С-управление $u(t,x) = u(t, x, B(t, x))$.
+              </li>
+            </ol>
+          </div>
+
+          <div class="remark">
+            На основании теоремы можно утверждать, что если решение $B(t,x)$ уравнения Беллмана
+            единственно, а найденное управление $u(t,x)$ допустимо, то $u(t,x)$ &mdash;
+            оптимальное С-управление, а $B(t,x)$ &mdash; функция Беллмана.
           </div>
         </div>
       </li>
@@ -3817,12 +6203,141 @@
           Понтрягина
         </div>
         <div class="content">
+          <p>
+            Рассмотрим задачу управления на конечном интервале времени:
+          </p>
+          <ol>
+            <li>
+              уравнения движения:
+              \[
+              \tag{1}
+              \dot x(t) = f(t, x(t), u), \qquad t_\text{н} \leqslant t \leqslant t_\text{к}
+              \]
+              с начальными условиями $x(t_\text{н}) = x_\text{н}$;
+            </li>
 
-          <div class="images">
-            <img src="images/32-1.png" alt="">
-            <img src="images/32-2.png" alt="">
-            <img src="images/32-3.png" alt="">
-          </div>
+            <li>
+              критерий качества:
+              \[
+              \tag{2}
+              J(u)
+              = \int\limits_{t_\text{н}}^{t_\text{к}} F_0(t, x(t), u) dt
+              + \varphi_0(x(t_\text{к}))
+              \limto{u \in U} \inf,
+              \]
+            </li>
+
+            <li>
+              ограничение на управление: $u \in U$.
+            </li>
+          </ol>
+
+          <p>
+            С помощью МДП мы свели эту задачу к решению задачи Коши
+            \[
+            \begin{gather}
+            \tag{10}
+            \inf_{u \in U} \left[
+            \pd{B(t, x)}{t} + \pd{B(t, x)}{x} f(t, x, u) + F_0(t, x, u)
+            \right] = 0, \\
+            \tag{11}
+            B(t_\text{к}, x) = \varphi(x(t_\text{к})).
+            \end{gather}
+            \]
+            Пусть существует единственное непрерывное решение $B(t,x)$ этой задачи с непрерывными
+            производными
+            \[
+            \pd{B}{t}, \quad \pd{B}{x}, \quad \ppdv{B}{t}{x}, \quad \ppdv{B}{x}{t}
+            \]
+            и допустимое управление $u_0(t,x)$, удовлетворяющее уравнению
+            \[
+            \tag{12}
+            \inf_{u \in U} \left[
+            \pd{B(t, x)}{x} f(t, x, u) + F_0(t, x, u)
+            \right]
+            =
+            \pd{B_0(t,x)}{x} f(t, x, u_0) + F_0(t, x, u_0).
+            \]
+            Тогда $u_0$ является оптимальным. Пусть $x_0(t)$ &mdash; соответствующая оптимальная
+            траектория.
+          </p>
+
+          <p>
+            Введём обозначения:
+            \[
+            \tag{13}
+            \begin{aligned}
+            \lambda(t) &= -\pd{B}{x}(t, x(t)), \\
+            H(t, x, u, \lambda) &= -F_0(t, x, u) + \lambda f(t, x, u).
+            \end{aligned}
+            \]
+            Тогда из (12) следует, что
+            \[
+            \pd{B(t, x_0)}{x} f(t, x_0, u_0) + F_0(t, x_0, u_0)
+            =
+            \min_{u \in U} \left[
+            \pd{B(t, x_0)}{x} f(t, x_0, u) + F_0(t, x_0, u)
+            \right].
+            \]
+            Отсюда и из (13) следует, что
+            \[
+            \tag{14}
+            \begin{aligned}
+            \max_{u \in U} \left[
+            - \pd{B(t, x_0)}{x} f(t, x_0, u) - F_0(t, x_0, u)
+            \right]
+            &=
+            \max_{u \in U} \left[
+            \lambda f(t, x_0, u) - F_0(t, x_0, u)
+            \right] = \\
+            &= \max_{u \in U} H(t, x_0, u, \lambda) = \\
+            &= H(t, x_0, u_0, \lambda).
+            \end{aligned}
+            \]
+
+            На основании (10) и (12) имеем:
+            \[
+            \pd{B(t,x)}{t} = -\pd{B(t, x)}{x} f(t, x, u_0) - F_0(t, x, u_0) = H(t, x, u_0, \lambda).
+            \]
+            Так как частные производные
+            \[
+            \ppdv{B}{t}{x} = \ppdv{B}{x}{t}
+            \]
+            существуют и непрерывны, то при $x = x_0$ в силу (13) получаем
+            \[
+            \tag{15}
+            \ppdv{B}{t}{x} = - \dot \lambda(t) = \pd{H}{x}(t, x_0, u_0, \lambda).
+            \]
+            Дифференцируя обе части (11) по $x$ и полагая $x = x_0$, получаем, что
+            \[
+            \tag{16}
+            \pd{B}{x}(t_\text{к}, x_0(t_\text{к}))
+            = -\lambda(t_\text{к})
+            = \pd{\varphi_0(x_0(t_\text{к}))}{x}.
+            \]
+          </p>
+
+          <p>
+            Из (15) и (16) следует, что $\lambda(t)$ &mdash; решение задачи Коши
+            \[
+            \tag{17}
+            \begin{aligned}
+            \dot \lambda(t) &= - \pd{H(t, x_0, u_0, \lambda)}{x}, \\
+            \lambda(t_\text{к}) &= - \pd{\varphi_0(x_0(t_\text{к}))}{x}.
+            \end{aligned}
+            \]
+          </p>
+
+          <p>
+            Условия (14) и (17) совпадают с условиями ПМП.
+          </p>
+
+          <p>
+            Таким образом, МДП позволяет свести задачу оптимального управления к исследованию
+            задачи Коши (10)-(11) для нелинейного уравнения в частных производных. С помощью же
+            ПМП решение задач управления сводится к изучению краевых задач для систем ОДУ,
+            что представляется более простым.
+          </p>
         </div>
       </li>
 
@@ -3832,13 +6347,287 @@
           случае Эйлера
         </div>
         <div class="content">
-          <div class="images">
-            <img src="images/33-1.png" alt="">
-            <img src="images/33-2.png" alt="">
-            <img src="images/33-3.png" alt="">
-            <img src="images/33-4.png" alt="">
-            <img src="images/33-5.png" alt="">
+          <p>
+            Рассмотрим задачу о наискорейшем успокоении ТТ, совершающего вращательные движения
+            относительно центра масс $O$ (случай Эйлера). Тогда точка $O$ &mdash; центр подвижной
+            системы координат $Ox_1 x_2 x_3$, жёстко связанной с телом. Оси этой системы являются
+            главными центральными осями инерции тела. Обозначим проекции вектора кинетического
+            момента на эти оси как $x_1, x_2, x_3$, то есть
+            \[
+            K = \paren{ x_1, x_2, x_3 } = \paren{ Ap, Bq, Cr },
+            \]
+            где $\omega = \paren{ p, q, r }$ &mdash; координаты угловой скорости ТТ $\vec{\omega}$
+            в системе $O x_1 x_2 x_3$, а $A,B,C$ &mdash; главные центральные моменты инерции ТТ.
+          </p>
+
+          <p>
+            Динамические уравнения Эйлера в этом случае для однородного поля тяжести
+            (то есть вращение тела происходит под действием одной только силы тяжести $\vec{P}$)
+            имеют вид
+            \[
+            \left\{
+            \begin{aligned}
+            A \dot p + (C - B) qr &= 0, \\
+            B \dot q + (A - C) pr &= 0, \\
+            C \dot r + (B - A) qp &= 0.
+            \end{aligned}
+            \right.
+            \]
+          </p>
+
+          <p>
+            Введём управление $u = (u_1, u_2, u_3)$. Примем обозначения
+            \[
+            \eta_1 = \frac{B - C}{CB},
+            \qquad
+            \eta_2 = \frac{C - A}{AC},
+            \qquad
+            \eta_3 = \frac{A - B}{AB}.
+            \]
+            Учитывая, что
+            \[
+            \dot x_1 = A \dot p,
+            \qquad
+            \dot x_2 = B \dot q,
+            \qquad
+            \dot x_3 = C \dot r,
+            \]
+            перепишем динамические уравнения Эйлера в следующем виде:
+            \[
+            \tag{18}
+            \begin{aligned}
+            \dot x_1 &= \eta_1 x_2 x_3 + u_1, \\
+            \dot x_2 &= \eta_2 x_1 x_3 + u_2, \\
+            \dot x_3 &= \eta_3 x_1 x_2 + u_3.
+            \end{aligned}
+            \]
+            Здесь $u_1, u_2, u_3$ &mdash; проекции управляющего момента $\bvec{u}$ на
+            соответствующие оси $O x_1 x_2 x_3$. На управление принято ограничение
+            \[
+            \tag{19}
+            \abs{u} = \sqrt{u_1^2 + u_2^2 + u_3^2} \leqslant b.
+            \]
+            В начальный момент времени $t_0 = 0$ задано начальное значение $x(0) = x_0$.
+          </p>
+
+          <p>
+            Требуется перейти в начало координат за кратчайшее время $T$.
+          </p>
+
+          <p>
+            Для решения поставленной задачи воспользуемся МДП. Согласно определению, функция
+            Беллмана в рассматриваемой задаче имеет смысл минимума времени успокоения, то есть
+            $B \gt 0$. Так как уравнения движения (18) и ограничения на управления (19)
+            не зависят явно от времени, то время успокоения $T$ зависит только от $x(0)$ и
+            не зависит от момента начала движения, следовательно, и $B$ тоже зависит только от
+            $x(0)$, то есть
+            \[
+            B = B(x), \implies \pd{B}{t} = 0.
+            \]
+            Так как подынтегральная функция $F_0 = 1$, то уравнение Беллмана запишется в виде
+            \[
+            \begin{gather}
+            \tag{20}
+            \inf_{u: \; \abs{u} \leqslant b} \left[
+            \pd{B}{x_1} \eta_1 x_2 x_3
+            + \pd{B}{x_2} \eta_2 x_1 x_3
+            + \pd{B}{x_3} \eta_3 x_1 x_2
+            + \pd{B}{x_1} u_1
+            + \pd{B}{x_2} u_2
+            + \pd{B}{x_3} u_3
+            \right]
+            = -1, \\
+            \tag{21}
+            B(x(T)) = 0, \quad \text{т.к.} \quad \varphi_0 \equiv 0.
+            \end{gather}
+            \]
+            Согласно алгоритму использования МДП, найдём значение $u(t, x, B)$, доставляющее минимум
+            левой части (20). Так как первые три слагаемых не зависят от $u$, необходимо
+            найти $u$, при котором достигается $\inf$ выражения
+            \[
+            \tag{22}
+            \pd{B}{x_1} u_1
+            + \pd{B}{x_2} u_2
+            + \pd{B}{x_3} u_3
+            = \dp{\vec{\nabla} B}{\vec{u}},
+            \qquad \abs{u} \leqslant b.
+            \]
+            При заданном $\vec{\nabla} B$ выражение достигает минимума, если $\abs{u} = b$, а сам
+            вектор $u$ направлен противоположно градиенту, то есть
+            \[
+            \tag{23}
+            \vec{u} = - b \frac{\vec{\nabla} B}{\abs{\vec{\nabla} B}}.
+            \]
+            Подставим это выражение в уравнение Беллмана, учитывая, что
+            \[
+            \begin{gathered}
+            \abs{\vec{\nabla} B} = \sqrt{
+            \paren{ \pd{B}{x_1} }^2
+            +
+            \paren{ \pd{B}{x_2} }^2
+            +
+            \paren{ \pd{B}{x_3} }^2
+            }, \\
+            \dp{\vec{\nabla} B}{\vec{u}}
+            = - \abs{\vec{\nabla} B} \abs{u}
+            = - b \frac{\abs{\vec{\nabla} B}^2}{\abs{\vec{\nabla} B}};
+            \end{gathered}
+            \]
+            получаем, что
+            \[
+            \tag{24}
+            \pd{B}{x_1} \eta_1 x_2 x_3 + \pd{B}{x_2} \eta_2 x_1 x_3 + \pd{B}{x_3} \eta_3 x_1 x_2
+            - b \abs{\vec{\nabla} B} = -1.
+            \]
+          </p>
+
+          <p>
+            Заметим, что $\eta_1 + \eta_2 + \eta_3 = 0$. Функцию $B(x)$ будем искать при выполнении
+            условия
+            \[
+            \pd{B}{x_i} = \psi(x) x_i,
+            \]
+            где $\psi(x)$ &mdash; некоторая непрерывная функция фазовых переменных. Тогда
+            \[
+            \abs{\vec{\nabla} B} = \abs{\psi(x)} \sqrt{ x_1^2 + x_2^2 + x_3^2 },
+            \]
+            а уравнение (24) принимает вид
+            \[
+            \psi(x) x_1 x_2 x_3 \underbrace{\paren{ \eta_1 + \eta_2 + \eta_3 }}_{0}
+            - b \abs{\psi(x)} \sqrt{ x_1^2 + x_2^2 + x_3^2 } = -1,
+            \]
+            откуда следует, что
+            \[
+            b \abs{\psi(x)} \sqrt{ x_1^2 + x_2^2 + x_3^2 } = 1,
+            \]
+            или, иначе,
+            \[
+            \abs{\psi(x)} = \frac{1}{b \sqrt{ x_1^2 + x_2^2 + x_3^2 }}.
+            \]
+            Учитывая, что $B \gt 0$, получаем, что
+            \[
+            \pd{B}{x_i} = \frac{x_i}{b \sqrt{ x_1^2 + x_2^2 + x_3^2 }},
+            \]
+            откуда следует, что
+            \[
+            B = \frac{\sqrt{ x_1^2 + x_2^2 + x_3^2 }}{b}.
+            \]
+            Полученная функция обращается в 0 в конечной точке $x(T) = 0$, следовательно, $B(x)$
+            удовлетворяет граничному условию
+            \[
+            B(x(T)) = 0.
+            \]
+          </p>
+
+          <p>
+            Определим управление:
+            \[
+            \begin{aligned}
+            \vec{u}
+            &= - b \frac{\vec{\nabla} B}{\abs{\vec{\nabla} B}} = \\
+            &= - \frac{bx}{\sqrt{ x_1^2 + x_2^2 + x_3^2 }} = \\
+            &= - \frac{bx}{\abs{x}}.
+            \end{aligned}
+            \]
+            Минимальное время торможения равно
+            \[
+            \min(T - t_0) = \min T = B(x(0))
+            = \frac{\sqrt{ x_1^2(0) + x_2^2(0) + x_3^2(0) }}{b}.
+            \]
+          </p>
+
+          <p>
+            Таким образом, оптимальное гашение угловой скорости тела осуществляется управляющим
+            моментом, направленным в обратную сторону кинетического момента, а не угловой скорости.
+          </p>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: динамические уравнения Эйлера
+        </div>
+        <div class="content">
+          Рассмотрим движение ТТ относительно неподвижной точки $O$. Введём две СК:
+          неподвижную $O\xi\eta\zeta$ и жёстко связанную с ТТ $Oxyz$, причём оси $Ox, Oy, Oz$
+          направлены вдоль главных осей инерции для точки $O$.
+
+          <div class="definition">
+            Уравнения
+            \[
+            \begin{aligned}
+            A \dot p + (C - B) qr = M_x, \\
+            B \dot q + (A - C) pr = M_y, \\
+            C \dot r + (B - A) pq = M_z,
+            \end{aligned}
+            \]
+            где
+            \[
+            A = J_{xx}, \quad B = J_{yy}, \quad C = J_{zz},
+            \]
+            а $\omega = \paren{p, q, r}$ &mdash; угловая скорость ТТ с координатами в $Oxyz$,
+            называют <i class="important">динамическими уравнениями Эйлера</i>.
           </div>
+        </div>
+      </li>
+
+      <h4 class="subtitle">Разные вопросы</h4>
+
+      <li class="question">
+        <div class="name">
+          Определение: кинематические уравнения Эйлера
+        </div>
+        <div class="content">
+          Чтобы полностью описать движение твёрдого тела с неподвижной точкой, к
+          динамическим уравнениям Эйлера необходимо добавить <i
+            class="important">кинематические уравнения Эйлера</i>, связывающие
+          проекции $(p,q,r)$ угловой скорости твёрдого тела $\bvec{\omega}$ в СК
+          $Oxyz$ и углы Эйлера:
+          \[
+          \left\{
+          \begin{aligned}
+          p &= \dot\psi \sin\theta \sin\varphi + \dot\theta \cos\varphi, \\
+          q &= \dot\psi \sin\theta \cos\varphi - \dot\theta \sin\varphi, \\
+          r &= \dot\psi \cos\theta + \dot\varphi,
+          \end{aligned}
+          \right.
+          \]
+          <div class="images">
+            <img src="images/21-1.png" alt="">
+          </div>
+          где:
+          <ul>
+            <li>
+              $O\xi\eta\zeta$ &mdash; неподвижная СК;
+            </li>
+
+            <li>
+              $Oxyz$ &mdash; подвижная СК;
+            </li>
+
+            <li>
+              $ON$ &mdash; линия узлов, образуемая пересечением плоскостей
+              $O\xi\eta$ и $Oxy$;
+            </li>
+
+            <li>
+              $\psi$ &mdash; угол <i class="important">прецессии</i> &mdash;
+              угол между $O\xi$ и $ON$;
+            </li>
+
+            <li>
+              $\theta$ &mdash; угол <i class="important">нутации</i> &mdash;
+              угол между $O\zeta$ и $Oz$;
+            </li>
+
+            <li>
+              $\varphi$ &mdash; угол <i class="important">чистого вращения</i>
+              &mdash; угол между $Ox$ и $ON$.
+            </li>
+          </ul>
+
+          Скорости $\dot\psi, \dot\varphi, \dot\theta$ направлены по осям
+          $O\xi, Oz, ON$, соответственно.
         </div>
       </li>
     </ol>

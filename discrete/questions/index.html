@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Вопросы &mdash; Дискретные системы</title>
+
+    <link href="/assets/css/styles.css" rel="stylesheet">
+    <script defer src="/assets/js/core.js"></script>
+    <script defer src="/assets/js/questions.js"></script>
+    <script defer src="/assets/js/controls.js"></script>
+
+    <link rel="stylesheet" href="/assets/katex/katex.min.css">
+    <script defer src="/assets/katex/katex.min.js"></script>
+    <script defer src="/assets/katex/auto-render.min.js"></script>
+
+    <script>
+     document.addEventListener("DOMContentLoaded", function () {
+       renderMathInElement(document.body, {
+         // customised options
+         // • auto-render specific keys, e.g.:
+         delimiters: [
+           { left: '$$', right: '$$', display: true },
+           { left: '$', right: '$', display: false },
+           { left: '\\(', right: '\\)', display: false },
+           { left: '\\[', right: '\\]', display: true }
+         ],
+         // • rendering keys, e.g.:
+         throwOnError: false
+       });
+     });
+    </script>
+  </head>
+
+  <body>
+    <h1 id="title">Вопросы &mdash; Дискретные системы</h1>
+    <nav>
+      <a href="/">Домой</a>
+      <a href="..">Дискретные системы</a>
+      <a href="/links">Ссылки</a>
+      <a href="/about">Контакты</a>
+    </nav>
+
+    <div class="controls">
+      <button onclick="HideQuestions()">Скрыть вопросы</button>
+      <button onclick="ShowQuestions()">Показать вопросы</button>
+      <button onclick="HideAnswers()">Скрыть ответы</button>
+      <button onclick="ShowAnswers()">Показать ответы</button>
+      <button onclick="HideProofs()">Скрыть доказательства</button>
+      <button onclick="ShowProofs()">Показать доказательства</button>
+      <button onclick="ShowRandomElement(HideQuestions)">
+        Показать случайный вопрос
+      </button>
+    </div>
+
+    <div class="proof-type">
+      Показывать
+      <select id="select-proof-type" name="select-proof-type">
+        <option value="proofs">доказательства полностью</option>
+        <option value="ideas">только идеи доказательств</option>
+      </select>
+    </div>
+
+    <div style="display:none">
+      $\global\def\at#1#2{\left. #1 \right\rvert_{#2}}$
+      $\global\def\abs#1{\left\lvert #1 \right\rvert}$
+      $\global\def\norm#1{\left\lVert #1 \right\rVert}$
+      $\global\def\limto#1{\underset{#1}{\longrightarrow}}$
+
+      $\global\def\dp#1#2{#1 \cdot #2\,}$
+      $\global\def\vp#1#2{#1 \times #2\,}$
+
+      $\global\def\dv#1#2{\frac{d #1}{d #2}}$
+      $\global\def\pd#1#2{\frac{\partial #1}{\partial #2}}$
+      $\global\def\pdv2#1#2{\frac{\partial^2 #1}{\partial #2^2}}$
+      $\global\def\ppdv#1#2#3{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
+
+      $\global\def\paren#1{\left( #1 \right)}$
+
+      $\global\def\mbox#1{\text{#1}}$
+
+      $\global\def\div{\text{div}\,}$
+      $\global\def\dsum{\displaystyle\sum\,}$
+      $\global\def\grad{\text{grad}\,}$
+      $\global\def\rot{\text{rot}\,}$
+
+      $\global\def\bvec#1{\mathbf{#1}}$
+      $\global\def\vb#1{\textbf{#1}}$
+
+      $\global\def\op#1{\mathrm{#1}\,}$
+
+      $\global\def\proj{\mathrm{proj}}$
+      $\global\def\bydef{\mathrm{def}}$
+      $\global\def\const{\text{const}\,}$
+      $\global\def\res{\text{res}\,}$
+      $\global\def\Res{\text{Res}\,}$
+      $\global\def\Re{\text{Re}\,}$
+      $\global\def\Im{\text{Im}\,}$
+      $\global\def\ch{\text{ch}\,}$
+      $\global\def\sh{\text{sh}\,}$
+      $\global\def\tg{\mathrm{tg}\,}$
+      $\global\def\ctg{\mathrm{ctg}\,}$
+      $\global\def\argtg{\text{argtg}\,}$
+    </div>
+
+    <ol id="questions">
+      <li class="question">
+        <div class="name">
+          Определение: разностная система
+        </div>
+        <div class="content">
+          Разностной называется система вида
+          \[
+          \bvec{x}(k + 1) = \bvec{F}(k, \bvec{x}(k)),
+          \]
+          где
+          <ul>
+            <li>
+              $\bvec{x}(k)$ &mdash; $n$-мерный вектор, причём $k$ принимает
+              значения $0, 1, \dots$;
+            </li>
+
+            <li>
+              $\bvec{F}(k, \bvec{z})$ &mdash; векторная функция,
+              определённая при $k = 0, 1, \dots$ и $\bvec{z} \in G$,
+              где $G \subseteq \mathbb{E}^n$, причём при любом
+              фиксированном $k$ функция $\bvec{F}(k, \bvec{x})$ непрерывна
+              по $\bvec{z}$.
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: решение разностной системы
+        </div>
+        <div class="content">
+          Рассмотрим разностную систему
+          \[
+          \bvec{x}(k + 1) = \bvec{F}(k, \bvec{x}(k)).
+          \]
+
+          <div class="definition">
+            Функция $\bvec{x}(k)$, заданная при $k' \leqslant k \lt k''$,
+            где $k' \geqslant 0$ и $k'' \leqslant \infty$,
+            называется <i>решением разностной системы</i>, если она
+            обращает эту систему в тождество.
+          </div>
+
+          Решение, удовлетворяющее начальному условию $\bvec{x}(k_0) =
+          \bvec{x}_0$, обозначают как $\bvec{x}(k, \bvec{x}_0, k_0)$.
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: общее решение системы в форме Коши
+        </div>
+        <div class="content">
+          <div class="definition">
+            Решение разностной системы $\bvec{x}(k, \bvec{x}_0, k_0)$,
+            заданное на множестве $k_0 \geqslant 0, \bvec{x}_0 \in G,
+            k_0 \leqslant k \lt k_1(k_0, \bvec{x}_0)$, называют
+            <i>общим решением системы в форме Коши</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: устойчивость по Ляпунову (ненулевое решение)
+        </div>
+        <div class="content">
+          <div class="definition">
+            Решение $\tilde{\bvec{x}}(k)$ <i>устойчиво по Ляпунову</i>,
+            если для любого $k_0 \geqslant 0$ и любого числа $\varepsilon \gt 0$
+            можно указать такое $\delta(k_0, \varepsilon) \gt 0$, что
+            при выполнении неравенства
+            \[
+            \norm{\bvec{x}_0 - \tilde{\bvec{x}}(k_0)} \lt \delta(k_0, \varepsilon)
+            \]
+            решение $\bvec{x}(k, \bvec{x}_0, k_0)$ определено для всех
+            $k \geqslant k_0$ и удовлетворяет условию
+            \[
+            \norm{\bvec{x}(k, \bvec{x}_0, k_0) - \tilde{\bvec{x}}(k)} \lt \varepsilon.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: устойчивость и равномерная устойчивость по Ляпунову
+        </div>
+        <div class="content">
+          <div class="definition">
+            Нулевое решение называется <i>устойчивым по Ляпунову</i>,
+            если для любого $k_0 \geqslant 0$ и любого числа $\varepsilon \gt 0$
+            можно указать такое $\delta(k_0, \varepsilon) \gt 0$, что
+            при выполнении неравенства
+            \[
+            \norm{\bvec{x}_0} \lt \delta(k_0, \varepsilon)
+            \]
+            решение $\bvec{x}(k, \bvec{x}_0, k_0)$ определено для всех
+            $k \geqslant k_0$ и удовлетворяет условию
+            \[
+            \norm{\bvec{x}(k, \bvec{x}_0, k_0)} \lt \varepsilon.
+            \]
+          </div>
+
+          <div class="definition">
+            Если в определении устойчивости нулевого решения число $\delta(k_0,
+            \varepsilon)$ можно выбрать не зависящим от $k_0$, то говорят, что
+            нулевое решение <i>устойчиво равномерно относительно $k_0$</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: асимптотическая и равномерная асимптотическая устойчивость по Ляпунову
+        </div>
+        <div class="content">
+          <div class="definition">
+            Нулевое решение называется <i>асимптотически устойчивым по Ляпунову</i>,
+            если
+            <ol>
+              <li>
+                оно является устойчивым;
+              </li>
+
+              <li>
+                для любого $k_0 \geqslant 0$ существует число $\delta'(k_0) \gt 0$
+                такое, что при всех $\bvec{x}_0$, удовлетворяющих условию
+                $\norm{\bvec{x}_0} \lt \delta'(k_0)$, справедливо
+                предельное соотношение
+                \[
+                \lim\limits_{k \to \infty} \norm{\bvec{x}(k, \bvec{x}_0, k_0)} = 0.
+                \]
+              </li>
+            </ol>
+          </div>
+
+          <div class="definition">
+            Нулевое решение называется <i>асимптотически устойчивым равномерно
+            по $k_0$ и $\bvec{x}_0$</i>, если
+            <ul>
+              <li>
+                оно равномерно устойчиво;
+              </li>
+
+              <li>
+                существует не зависящее от $k_0$ число $\delta' \gt 0$ такое,
+                что
+                \[
+                \norm{\bvec{x}(k, \bvec{x}_0, k_0)} \to 0
+                \quad
+                \text{при}
+                \quad
+                k - k_0 \to \infty
+                \]
+                равномерно относительно $k_0$ и $\bvec{x}_0$ на множестве
+                $k_0 \geqslant 0, \norm{\bvec{x}_0} \lt \delta'$.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: фундаментальная матрица линейной однородной системы
+        </div>
+        <div class="content">
+          Рассмотрим линейную однородную разностную систему
+          \[
+          \bvec{x}(k + 1) = \bvec{P}(k) \bvec{x}(k).
+          \]
+
+          <div class="definition">
+            Фундаментальной матрицей этой системы, нормированной в точке $k_0$,
+            называют заданная при всех $k \geqslant k_0$ матрица $\bvec{X}(k, k_0)$
+            такая, что $\bvec{X}(k_0, k_0) = \bvec{I}$ и
+            \[
+            \bvec{X}(k, k_0) = \prod_{j = k_0}^{k - 1} \bvec{P}(j),
+            \qquad
+            k \gt k_0.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Как выглядит общее решение в форме Коши для линейной однородной
+          системы?
+        </div>
+        <div class="content">
+          <div class="answer">
+            Общее решение в форме Коши для системы
+            \[
+            \bvec{x}(k + 1) = \bvec{P}(k) \bvec{x}(k)
+            \]
+            имеет вид
+            \[
+            \bvec{x}(k, \bvec{x}_0, k_0) = \bvec{X}(k, k_0) \bvec{x}_0,
+            \]
+            где $\bvec{X}(k, k_0)$ &mdash; фундаментальная матрица.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема об устойчивости линейной однородной системы
+        </div>
+        <div class="content">
+          <div class="theorem">
+            Для устойчивости системы
+            \[
+            \bvec{x}(k + 1) = \bvec{P}(k) \bvec{x}(k)
+            \]
+            необходимо и достаточно, чтобы условие
+            \[
+            \sup_{k \geqslant k_0} \norm{\bvec{X}(k, k_0)} = M(k_0) \lt +\infty
+            \]
+            выполнялось при всех $k_0 \geqslant 0$.
+          </div>
+
+          <div class="corollary">
+            Система
+            \[
+            \bvec{x}(k + 1) = \bvec{P}(k) \bvec{x}(k)
+            \]
+            неустойчива тогда и только тогда, когда при некотором $k_0 \geqslant 0$
+            имеет место равенство
+            \[
+            \sup_{k \geqslant k_0} \norm{\bvec{X}(k, k_0)} = +\infty.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема о равномерной устойчивости линейной однородной системы
+        </div>
+        <div class="content">
+          <div class="theorem">
+            Для равномерной устойчивости системы
+            \[
+            \bvec{x}(k + 1) = \bvec{P}(k) \bvec{x}(k)
+            \]
+            необходимо и достаточно, чтобы выполнялось условие
+            \[
+            \sup_{k_0 \geqslant 0} \sup_{k \geqslant k_0}
+            \norm{\bvec{X}(k, k_0)} = M_1 \lt +\infty.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема об асимптотической устойчивости линейной однородной системы
+        </div>
+        <div class="content">
+          <div class="theorem">
+            Для асимптотической устойчивости системы
+            \[
+            \bvec{x}(k + 1) = \bvec{P}(k) \bvec{x}(k)
+            \]
+            необходимо и достаточно, чтобы условие
+            \[
+            \lim\limits_{k \to \infty} \norm{\bvec{X}(k, k_0)} = 0
+            \]
+            выполнялось при любом $k_0 \geqslant 0$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема о равномерной асимптотической устойчивости линейной однородной
+          системы
+        </div>
+        <div class="content">
+          <div class="theorem">
+            Для того, чтобы система
+            \[
+            \bvec{x}(k + 1) = \bvec{P}(k) \bvec{x}(k)
+            \]
+            была асимптотически устойчивой равномерно по $k_0$ и $\bvec{x}_0$,
+            необходимо и достаточно, чтобы равномерно по $k_0 \geqslant 0$
+            выполнялось условие
+            \[
+            \lim\limits_{k - k_0 \to \infty} \norm{\bvec{X}(k, k_0)} = 0.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема об устойчивости линейной стационарной системы через собственные
+          числа матрицы $\bvec{P}$
+        </div>
+        <div class="content">
+          <div class="theorem">
+            Система
+            \[
+            \bvec{x}(k+1) = \bvec{P} x(k)
+            \]
+            является:
+            <ol type="a">
+              <li>
+                равномерно асимптотически устойчивой тогда и только тогда, когда
+                все собственные числа матрицы $\bvec{P}$ по модулю меньше единицы;
+              </li>
+
+              <li>
+                равномерно устойчивой тогда и только тогда, когда все собственные
+                числа матрицы $\bvec{P}$ по модулю не превосходят единицы,
+                и при этом у собственных чисел, по модулю равных единице,
+                имеются только простые элементарные делители;
+              </li>
+
+              <li>
+                неустойчивой в остальных случаях.
+              </li>
+            </ol>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Критерий Шура-Кона
+        </div>
+        <div class="content">
+          <div class="theorem">
+            (критерий Шура&dash;Кона).
+            <br />
+            Рассмотрим полином
+            \[
+            f(\lambda) = a_0 \lambda^{n} + a_1 \lambda{n-1} + \dots + a_n.
+            \]
+            Построим возвратный к $f(\lambda)$ полином:
+            \[
+            \tilde f(\lambda) = a_n \lambda^{n} + a_{n-1} \lambda{n-1} + \dots + a_0.
+            \]
+            Корни полинома $f(\lambda)$ будут по модулю меньше единицы тогда и
+            только тогда, когда будут положительны все главные
+            миноры матрицы $\bvec{R}$, полученной следующим образом:
+            \[
+            \frac{\tilde f(\lambda) \tilde f(\mu) - f(\lambda) f(\mu)}{1 - \lambda \mu}
+            =
+            \left( 1, \lambda, \dots, \lambda^{n-1} \right)
+            \mathbb{R}
+            \begin{pmatrix}
+            1 \\ \mu \\ \vdots \\ \mu^{n-1}
+            \end{pmatrix}.
+            \]
+          </div>
+
+          <div class="theorem">
+            Корни полинома $f(\lambda)$ лежат в центральном единичном круге,
+            если $\abs{a_n} \lt \abs{a_0}$ и у полинома $f_1(\lambda)$, полученного
+            из равенства
+            \[
+            \lambda f_1(\lambda) = a_0 f(\lambda) - a_n \tilde f(\lambda),
+            \]
+            корни также лежат в центральном единичном круге.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: экспоненциальная устойчивость линейной однородной системы
+        </div>
+        <div class="content">
+          <div class="definition">
+            Система
+            \[
+            \bvec{x}(k+1) = \bvec{P}(k) \bvec{x}(k)
+            \]
+            называется <i>экспоненциально устойчивой</i>, если
+            существуют числа $L \gt 0$ и $0 \lt q \lt 1$ такие, что для всех
+            $k_0 \geqslant 0, \bvec{x}_0 \in \mathbb{E}^n$ и $k \geqslant k_0$
+            выполняется неравенство
+            \[
+            \norm{\bvec{x}(k, \bvec{x}_0, k_0)}
+            \leqslant
+            L \norm{\bvec{x}_0} q^{k - k_0}.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: положительно определённая функция $V(\bvec{z})$
+        </div>
+        <div class="content">
+          Пусть вещественная функция $V(\bvec{z})$ задана и непрерывна в области
+          $\norm{\bvec{z}} \lt H$, где $0 \lt H \leqslant +\infty$, а $\bvec{z}$
+          &mdash; $n$-мерный вектор.
+
+          <div class="definition">
+            Функция $V(\bvec{z})$ называется <i>положительно определённой</i>,
+            если $V(\bvec{0}) = 0$ и $V(\bvec{z}) \gt 0$ при всех
+            $\bvec{z} \neq \bvec{0}$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: знакопеременная функция $V(\bvec{z})$
+        </div>
+        <div class="content">
+          Пусть вещественная функция $V(\bvec{z})$ задана и непрерывна в области
+          $\norm{\bvec{z}} \lt H$, где $0 \lt H \leqslant +\infty$, а $\bvec{z}$
+          &mdash; $n$-мерный вектор.
+
+          <div class="definition">
+            Функция $V(\bvec{z})$ называется <i>знакопеременной</i>,
+            если она принимает как положительные, так и отрицательные значения.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: положительно определённая функция $V(k, \bvec{z})$
+        </div>
+        <div class="content">
+          Рассмотрим вещественную функцию $V(k, \bvec{z})$, заданную на множестве
+          \[
+          k = 0, 1, \dots, \qquad \norm{\bvec{z}} \lt H.
+          \]
+
+          <div class="definition">
+            Функция $V(k, \bvec{z})$ называется <i>положительно определённой</i>,
+            если она обладает следующими свойствами:
+            <ol>
+              <li>
+                $V(k, \bvec{0}) = 0$ при всех $k = 0, 1, \dots$;
+              </li>
+
+              <li>
+                при любом фиксированном $k \geqslant 0$ функция $V(k, \bvec{z})$
+                непрерывна по $\bvec{z}$ в точке $\bvec{z} = \bvec{0}$;
+              </li>
+
+              <li>
+                существует положительно определённая функция $V_1(\bvec{z})$ такая,
+                что $V(k, \bvec{z}) \geqslant V_1(\bvec{z})$ в области
+                определения функции.
+              </li>
+            </ol>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: знакопостоянная положительная функция $V(k, \bvec{z})$
+        </div>
+        <div class="content">
+          Рассмотрим вещественную функцию $V(k, \bvec{z})$, заданную на множестве
+          \[
+          k = 0, 1, \dots, \qquad \norm{\bvec{z}} \lt H.
+          \]
+
+          <div class="definition">
+            Функция $V(k, \bvec{z})$ называется <i>знакопостоянной положительной</i>,
+            если в её области определения выполнено неравенство
+            $V(k, \bvec{z}) \geqslant 0$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: функция $V(k, \bvec{z})$ допускает б. м. в. п.
+        </div>
+        <div class="content">
+          Рассмотрим вещественную функцию $V(k, \bvec{z})$, заданную на множестве
+          \[
+          k = 0, 1, \dots, \qquad \norm{\bvec{z}} \lt H.
+          \]
+
+          <div class="definition">
+            Говорят, что функция $V(k, \bvec{z})$ <i>допускает бесконечно малый
+            высший предел (б.м.в.п.)</i>, если $V(k, \bvec{0}) = 0$ при всех
+            $k = 0, 1, \dots$ и она непрерывна по $\bvec{z}$ в точке
+            $\bvec{z} = \bvec{0}$ равномерно относительно $k \geqslant 0$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: обобщённо-однородная класса $(m_1, \dots, m_n)$ порядка
+          $\mu$ функция
+        </div>
+        <div class="content">
+          Рассмотрим вещественную функцию $\varphi(\bvec{z})$, заданную при всех
+          $z \in \mathbb{E}^n$.
+
+          <div class="definition">
+            Функция $\varphi(\bvec{z})$ называется <i>обобщённо-однородной класса
+              $(m_1, \dots, m_n)$ порядка $\mu$</i>, где $m_1, \dots, m_n, \mu$
+            &mdash; положительные рациональные числа с нечётными знаменателями,
+            если для любых $\bvec{z} \in \mathbb{E}^n$ и $c \in \mathbb{R}$
+            имеет место равенство
+            \[
+            \varphi\left(
+            c^{m_1} z_1, \dots, c^{m_n} z_n
+            \right)
+            = c^\mu \varphi(z_1, \dots, z_n).
+            \]
+            Если это равенство справедливо при $c \gt 0$, то функция
+            $\varphi(\bvec{z})$ называется <i>положительно обобщённо-однородной</i>.
+            При этом не требуется, чтобы числа $m_1, \dots, m_n, \mu$ были
+            рациональными с нечётными знаменателями.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: однородная порядка $\mu$ функция
+        </div>
+        <div class="content">
+          <div class="definition">
+            Функция $\varphi(\bvec{z})$ называется <i>однородной порядка $\mu$</i>,
+            где $\mu$ &mdash; положительное рациональное число с нечётным
+            знаменателем, если для любых $\bvec{z} \in \mathbb{E}^n$ и
+            $c \in \mathbb{R}$ имеет место равенство
+            \[
+            \varphi(c z_1, \dots, c z_n) = c^\mu \varphi(z_1, \dots, z_n).
+            \]
+            Если это равенство справедливо при $c \gt 0$, то функция
+            $\varphi(\bvec{z})$ называется <i>положительно однородной</i>. При
+            этом не требуется, чтобы число $\mu$ было рациональным с нечётным
+            знаменателем.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема Ляпунова об устойчивости
+        </div>
+        <div class="content">
+          Рассмотрим систему
+          \[
+          \bvec{x}(k+1) = \bvec{F}(k, \bvec{x}(k)),
+          \]
+          определённую на множестве
+          \[
+          k = 0, 1, \dots, \qquad \norm{\bvec{z}} \lt H.
+          \]
+          Будем считать, что функция $\bvec{F}(k, \bvec{z})$ при каждом
+          фиксированном значении $k$ непрерывна по $\bvec{z}$, а также что
+          $\bvec{F}(k, \bvec{0}) = \bvec{0}$ при всех $k = 0, 1, \dots$.
+
+          <div class="theorem">
+            Если существует заданная на множестве $k = 0, 1, \dots,
+            \norm{\bvec{z}} \lt H$ положительно определённая функция $V(k, \bvec{z})$,
+            приращение которой на решениях рассматриваемой системы
+            \[
+            \Delta V
+            = V(k + 1, \bvec{F}(k, \bvec{x}(k))) - V(k, \bvec{x}(k))
+            = W(k, \bvec{z})
+            \]
+            неположительно, то нулевое решение этой системы устойчиво.
+          </div>
+
+          <div class="remark">
+            Если функция $V(k, \bvec{z})$ удовлетворяет условиям теоремы и при этом
+            допускает б.м.в.п., то нулевое решение равномерно устойчиво.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема Ляпунова об асимптотической устойчивости
+        </div>
+        <div class="content">
+          Рассмотрим систему
+          \[
+          \bvec{x}(k+1) = \bvec{F}(k, \bvec{x}(k)),
+          \]
+          определённую на множестве
+          \[
+          k = 0, 1, \dots, \qquad \norm{\bvec{z}} \lt H.
+          \]
+          Будем считать, что функция $\bvec{F}(k, \bvec{z})$ при каждом
+          фиксированном значении $k$ непрерывна по $\bvec{z}$, а также что
+          $\bvec{F}(k, \bvec{0}) = \bvec{0}$ при всех $k = 0, 1, \dots$.
+
+          <div class="theorem">
+            Если существует заданная на множестве $k = 0, 1, \dots,
+            \norm{\bvec{z}} \lt H$ положительно определённая функция $V(k, \bvec{z})$,
+            приращение которой на решениях рассматриваемой системы
+            \[
+            \Delta V
+            = V(k + 1, \bvec{F}(k, \bvec{x}(k))) - V(k, \bvec{x}(k))
+            = W(k, \bvec{z})
+            \]
+            отрицательно определено, то нулевое решение этой системы
+            асимптотически устойчиво.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема Ляпунова о равномерной асимптотической устойчивости
+        </div>
+        <div class="content">
+          Рассмотрим систему
+          \[
+          \bvec{x}(k+1) = \bvec{F}(k, \bvec{x}(k)),
+          \]
+          определённую на множестве
+          \[
+          k = 0, 1, \dots, \qquad \norm{\bvec{z}} \lt H.
+          \]
+          Будем считать, что функция $\bvec{F}(k, \bvec{z})$ при каждом
+          фиксированном значении $k$ непрерывна по $\bvec{z}$, а также что
+          $\bvec{F}(k, \bvec{0}) = \bvec{0}$ при всех $k = 0, 1, \dots$.
+
+          <div class="theorem">
+            Если существует функция $V(k, \bvec{z})$, заданная на множестве
+            \[
+            k = 0, 1, \dots, \qquad \norm{\bvec{z}} \lt H
+            \]
+            и обладающая следующими свойствами:
+            <ol>
+              <li>
+                $V(k, \bvec{z})$ положительно определена;
+              </li>
+
+              <li>
+                $V(k, \bvec{z})$ допускает б.м.в.п.;
+              </li>
+
+              <li>
+                функция $W(k, \bvec{z}) = V(k+1, \bvec{F}(k, \bvec{z})) - V(k, \bvec{z})$
+                отрицательно определена,
+              </li>
+            </ol>
+            то нулевое решение системы равномерно асимптотически устойчиво.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Первая теорема Ляпунова о неустойчивости
+        </div>
+        <div class="content">
+          Рассмотрим систему
+          \[
+          \bvec{x}(k+1) = \bvec{F}(k, \bvec{x}(k)),
+          \]
+          определённую на множестве
+          \[
+          k = 0, 1, \dots, \qquad \norm{\bvec{z}} \lt H.
+          \]
+          Будем считать, что функция $\bvec{F}(k, \bvec{z})$ при каждом
+          фиксированном значении $k$ непрерывна по $\bvec{z}$, а также что
+          $\bvec{F}(k, \bvec{0}) = \bvec{0}$ при всех $k = 0, 1, \dots$.
+
+          <div class="theorem">
+            Если существует функция $V(k, \bvec{z})$, заданная на множестве
+            \[
+            k = 0, 1, \dots, \qquad \norm{\bvec{z}} \lt H
+            \]
+            и обладающая следующими свойствами:
+            <ol>
+              <li>
+                $V(k, \bvec{z})$ допускает б.м.в.п.;
+              </li>
+
+              <li>
+                для некоторого $\tilde k \geqslant 0$ и любого $\delta \gt 0$
+                найдётся $\tilde{\bvec{z}}$ такое, что
+                \[
+                \norm{\tilde{\bvec{z}}} \lt \delta,
+                \qquad
+                V(k, \tilde{\bvec{z}}) \gt 0;
+                \]
+              </li>
+
+              <li>
+                функция $W(k, \bvec{z}) = V(k+1, \bvec{F}(k, \bvec{z})) - V(k, \bvec{z})$
+                положительно определена,
+              </li>
+            </ol>
+            то нулевое решение системы неустойчиво.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Вторая теорема Ляпунова о неустойчивости
+        </div>
+        <div class="content">
+          Рассмотрим систему
+          \[
+          \bvec{x}(k+1) = \bvec{F}(k, \bvec{x}(k)),
+          \]
+          определённую на множестве
+          \[
+          k = 0, 1, \dots, \qquad \norm{\bvec{z}} \lt H.
+          \]
+          Будем считать, что функция $\bvec{F}(k, \bvec{z})$ при каждом
+          фиксированном значении $k$ непрерывна по $\bvec{z}$, а также что
+          $\bvec{F}(k, \bvec{0}) = \bvec{0}$ при всех $k = 0, 1, \dots$.
+
+          <div class="theorem">
+            Если существует функция $V(k, \bvec{z})$, заданная на множестве
+            \[
+            k = 0, 1, \dots, \qquad \norm{\bvec{z}} \lt H
+            \]
+            и обладающая следующими свойствами:
+            <ol>
+              <li>
+                $V(k, \bvec{z})$ ограничена;
+              </li>
+
+              <li>
+                для некоторого $\tilde k \geqslant 0$ и любого $\delta \gt 0$
+                найдётся $\tilde{\bvec{z}}$ такое, что
+                \[
+                \norm{\tilde{\bvec{z}}} \lt \delta,
+                \qquad
+                V(k, \tilde{\bvec{z}}) \gt 0;
+                \]
+              </li>
+
+              <li>
+                для функции
+                $W(k, \bvec{z}) = V(k+1, \bvec{F}(k, \bvec{z})) - V(k, \bvec{z})$
+                имеет место равенство
+                \[
+                W(k, \bvec{z}) = \lambda V(k, \bvec{z}) + \widetilde{W}(k, \bvec{z}),
+                \]
+                где $\lambda \gt 0$ и $\widetilde{W}(k, \bvec{z}) \geqslant 0$,
+              </li>
+            </ol>
+            то нулевое решение системы неустойчиво.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Матричное уравнение Ляпунова. Условие однозначной разрешимости
+        </div>
+        <div class="content">
+          Рассмотрим линейную однородную стационарную систему:
+          \[
+          \tag{4.1}
+          \bvec{x}(k + 1) = \bvec{P} \bvec{x}(k).
+          \]
+
+          <div class="definition">
+            Уравнение
+            \[
+            \tag{4.2}
+            \bvec{P}^T \bvec{A} \bvec{P} - \bvec{A} = \bvec{B}
+            \]
+            является дискретным аналогом матричного уравнения Ляпунова.
+          </div>
+
+          Пусть $\lambda_1, \dots, \lambda_n$ &mdash; собственные числа матрицы
+          $\bvec{P}$.
+
+          <div class="lemma">
+            Если
+            \[
+            \lambda_j \lambda_s \neq 1, \qquad j, s = 1, \dots, n,
+            \]
+            то для любой постоянной симметрической матрицы $\bvec{B}$ существует
+            единственная постоянная симметрическая матрица $\bvec{A}$,
+            удовлетворяющая матричному уравнению Ляпунова $(4.2)$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема о виде функции Ляпунова для асимптотически устойчивой линейной
+          стационарной системы
+        </div>
+        <div class="content">
+          Рассмотрим линейную однородную стационарную систему:
+          \[
+          \tag{4.1}
+          \bvec{x}(k + 1) = \bvec{P} \bvec{x}(k).
+          \]
+
+          <div class="theorem">
+            Пусть система $(4.1)$ асимптотически устойчива. Тогда для неё существует
+            функция Ляпунова в виде квадратичной формы, удовлетворяющая требованиям
+            теоремы Ляпунова о равномерной асимптотической устойчивости.
+          </div>
+
+          <div class="theorem">
+            Если у матрицы $\bvec{P}$ существует хотя бы одно собственное число,
+            по модулю большее единицы, то для любой положительно определённой
+            квадратичной формы $W(\bvec{z}) = \bvec{z}^T \bvec{B} \bvec{z}$
+            с постоянной матрицей $\bvec{B}$ найдутся положительное число $\alpha$
+            и квадратичная форма $V(\bvec{z}) = \bvec{z}^T \bvec{A} \bvec{z}$
+            с постоянной матрией $\bvec{A}$ такие, что
+            \[
+            V(\bvec{P} \bvec{z}) - V(\bvec{z}) = \alpha V(\bvec{z}) + W(\bvec{z})
+            \qquad
+            \forall
+            \bvec{z} \in \mathbb{E}^n,
+            \]
+            причём $V(\bvec{z})$ не является знакопостоянной отрицательной.
+          </div>
+
+          <div class="corollary">
+            Если матрица $\bvec{P}$ имеет хотя бы одно собственное число,
+            по модулю большее единицы, то для системы $(4.1)$ существует функция
+            Ляпунова, удовлетворяющая требованиям второй теоремы о неустойчивости.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема об асимптотической устойчивости системы по линейному приближению
+        </div>
+        <div class="content">
+          Рассмотрим нелинейную систему
+          \[
+          \tag{4.8}
+          \bvec{x}(k + 1) = \bvec{P} \bvec{x}(k) + \bvec{R}(k, \bvec{x}(k)),
+          \]
+          где $\bvec{R}(k, \bvec{z})$ &mdash; векторная функция, определённая
+          при
+          \[
+          k = 0, 1, \dots, \qquad \norm{\bvec{z}} \lt H,
+          \]
+          непрерывная по $\bvec{z}$ и удовлетворяющая неравенству
+          \[
+          \norm{\bvec{R}(k, \bvec{z})} \leqslant c \norm{\bvec{z}}^\sigma,
+          \]
+          где $c \gt 0, \sigma \gt 1$.
+
+          <div class="theorem">
+            Если система
+            \[
+            \tag{4.1}
+            \bvec{x}(k + 1) = \bvec{P} \bvec{x}(k)
+            \]
+            асимптотически устойчива, то нулевое решение системы $(4.8)$
+            также является асимптотически устойчивым.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема о неустойчивости системы по линейному приближению
+        </div>
+        <div class="content">
+          Рассмотрим нелинейную систему
+          \[
+          \tag{4.8}
+          \bvec{x}(k + 1) = \bvec{P} \bvec{x}(k) + \bvec{R}(k, \bvec{x}(k)),
+          \]
+          где $\bvec{R}(k, \bvec{z})$ &mdash; векторная функция, определённая
+          при
+          \[
+          k = 0, 1, \dots, \qquad \norm{\bvec{z}} \lt H,
+          \]
+          непрерывная по $\bvec{z}$ и удовлетворяющая неравенству
+          \[
+          \norm{\bvec{R}(k, \bvec{z})} \leqslant c \norm{\bvec{z}}^\sigma,
+          \]
+          где $c \gt 0, \sigma \gt 1$.
+
+          <div class="theorem">
+            Если у матрицы $\bvec{P}$ существует хотя бы одно собственное число,
+            по модулю большее единицы, то нулевое решение системы $(4.8)$
+            неустойчиво.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Когда исследование устойчивости по линейному приближению не даёт
+          результата?
+        </div>
+        <div class="content">
+          <div class="answer">
+            Когда у матрицы $\bvec{P}$ исходной системы
+            \[
+            \tag{4.8}
+            \bvec{x}(k + 1) = \bvec{P} \bvec{x}(k) + \bvec{R}(k, \bvec{x}(k))
+            \]
+            нет собственных чисел, лежащих вне единичного круга, но есть
+            собственные числа, по модулю равные единице.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема об асимптотической устойчивости нестационарной системы по
+          линейному приближению
+        </div>
+        <div class="content">
+          <div class="theorem">
+            Если линейная нестационарная система
+            \[
+            \bvec{x}(k + 1) = \bvec{P}(k) \bvec{x}(k)
+            \]
+            экспоненциально устойчива, а векторная функция $R(k, \bvec{z})$
+            определена при $k = 0, 1, \dots, \norm{\bvec{z}} \lt H$,
+            непрерывна по $\bvec{z}$ и удовлетворяет неравенству
+            \[
+            \norm{\bvec{R}(k, \bvec{z})} \leqslant c \norm{\bvec{z}}^\sigma,
+            \]
+            где $c \gt 0, \sigma \gt 1$, то нулевое решение системы
+            \[
+            \bvec{x}(k + 1) = \bvec{P}(k) \bvec{x}(k) + R(k, \bvec{x}(k))
+            \]
+            асимптотически устойчиво, причём асимптотическая устойчивость
+            также имеет экспоненциальный характер.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: область асимптотической устойчивости
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Областью асимптотической устойчивости</i> нулевого решения
+            системы
+            \[
+            \tag{5.1}
+            \bvec{x}(k + 1) = \bvec{F}(k, \bvec{x}(k))
+            \]
+            называется множество
+            \[
+            \bvec{A} = \left\{
+            (k_0, \bvec{x}_0): \bvec{x}(k, \bvec{x}_0, k_0) \to \bvec{0}
+            \quad \text{при} \quad k \to \infty
+            \right\}.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: область притяжения нулевого решения
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Областью притяжения</i> нулевого решения
+            системы
+            \[
+            \tag{5.1}
+            \bvec{x}(k + 1) = \bvec{F}(k, \bvec{x}(k))
+            \]
+            называется множество
+            \[
+            \bvec{A}(k_0) = \left\{
+            \bvec{x}_0: (k_0, \bvec{x}_0) \in \bvec{A}
+            \right\}.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: асимптотическая устойчивость в целом
+        </div>
+        <div class="content">
+          <div class="definition">
+            Если область асимптотической устойчивости нулевого решения системы
+            \[
+            \tag{5.1}
+            \bvec{x}(k + 1) = \bvec{F}(k, \bvec{x}(k))
+            \]
+            имеет вид
+            $\bvec{A} = \left\{ 0, 1, \dots, \right\} \times \mathbb{E}^n$,
+            то говорят, что нулевое решение этой системы <i>асимтотически
+              устойчиво в целом</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема об асимптотической устойчивости в целом нулевого решения
+        </div>
+        <div class="content">
+          Рассмотрим систему
+          \[
+          \tag{5.1}
+          \bvec{x}(k+1) = \bvec{F}(k, \bvec{x}(k)).
+          \]
+          Пусть векторная функция $\bvec{F}(k, \bvec{z})$ определена на множестве
+          \[
+          \tag{5.2}
+          k = 0, 1, \dots, \qquad \bvec{z} \in \mathbb{E}^n,
+          \]
+          непрерывна по $\bvec{z}$ и $F(k, \bvec{0}) \equiv \bvec{0}$.
+
+          <div class="theorem">
+            Пусть функции $V(k, \bvec{z})$ и $W(k, \bvec{z})$ обладают
+            следующими свойствами:
+            <ol>
+              <li>
+                функция $V(k, \bvec{z})$ задана, непрерывна по $\bvec{z}$
+                на множестве $(5.2)$ и отрицательно определена;
+              </li>
+
+              <li>
+                функция $W(k, \bvec{z})$ задана, непрерывна по $\bvec{z}$
+                на множестве $(5.2)$, положительно определена, и для любого
+                $\alpha \gt 0$ существует $\gamma \gt 0$ такое, что если
+                $\norm{\bvec{z}} \geqslant \alpha$, то
+                $W(k, \bvec{z}) \geqslant \gamma$ при всех $k \geqslant 0$;
+              </li>
+
+              <li>
+                справедливо соотношение
+                \[
+                \Delta V
+                = V(k + 1, \bvec{F}(k, \bvec{z})) - V(k, \bvec{z})
+                = W(k, \bvec{z}) (1 + V(k, \bvec{z})).
+                \]
+              </li>
+            </ol>
+            Тогда множество
+            \[
+            \bvec{A}_1 = \left\{
+            (k_0, \bvec{x}_0): -1 \lt V(k_0, \bvec{x}_0) \leqslant 0
+            \right\}
+            \]
+            содержится в области асимптотической устойчивости.
+          </div>
+
+          <div class="theorem">
+            Для того чтобы нулевое решение системы $(5.1)$ было асимптотически
+            устойчивым в целом, достаточно, чтобы существовали функции Ляпунова
+            $V(k, \bvec{z})$ и $W(k, \bvec{z})$, удовлетворяющие условиям 1,2
+            предыдущей теоремы и условию
+            <ol start="3">
+              <li>
+                справедливо соотношение:
+                \[
+                \Delta V
+                = V(k + 1, \bvec{F}(k, \bvec{z})) - V(k, \bvec{z})
+                = W(k, \bvec{z}).
+                \]
+              </li>
+            </ol>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: область асимптотической устойчивости нулевого решения
+          автономной системы
+        </div>
+        <div class="content">
+          <div class="definition">
+            Областью асимптотической устойчивости нулевого решения системы
+            \[
+            \bvec{x}(k + 1) = \tilde{\bvec{F}}(\bvec{x}(k))
+            \]
+            называется множество
+            \[
+            \tilde{\bvec{A}} = \left\{
+            \bvec{x}_0: \bvec{x}(k, \bvec{x}_0) \to \bvec{0}
+            \quad \text{при} \quad k \to \infty
+            \right\}.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: положительно инвариантное множество автономной системы
+        </div>
+        <div class="content">
+          <div class="definition">
+            Множество $\bvec{M} \subset \mathbb{E}^n$ называется
+            <i>положительно инвариантным множеством системы</i>
+            \[
+            \tag{5.5}
+            \bvec{x}(k + 1) = \tilde{\bvec{F}}(\bvec{x}(k)),
+            \]
+            если для любой точки $\bvec{x}_0 \in \bvec{M}$ выполняется
+            условие $\bvec{x}(k, \bvec{x}_0) \in \bvec{M}$ при всех
+            $k \geqslant 0$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Свойства области асимтотической устойчивости нулевого решения
+          автономной системы
+        </div>
+        <div class="content">
+          Рассмотрим область $\tilde{\bvec{A}}$ асимптотической устойчивости
+          нулевого решения системы
+          \[
+          \tag{5.5}
+          \bvec{x}(k + 1) = \tilde{\bvec{F}}(\bvec{x}(k)).
+          \]
+          Справедливы свойства:
+          <ol type="a">
+            <li>
+              $\tilde{\bvec{A}}$ &mdash; положительно инвариантное множество;
+            </li>
+
+            <li>
+              $\tilde{\bvec{A}}$ &mdash; открытое множество;
+            </li>
+
+            <li>
+              $\tilde{\bvec{A}}$ содержит некоторую окрестность положения
+              равновесия $\bvec{x} = \bvec{0}$;
+            </li>
+
+            <li>
+              граница области $\tilde{\bvec{A}}$ является положительно
+              инвариантным замкнутым множеством.
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема об асимптотической устойчивости в целом нулевого решения
+          автономной системы
+        </div>
+        <div class="content">
+          <div class="theorem">
+            Для того чтобы нулевое решение системы
+            \[
+            \tag{5.5}
+            \bvec{x}(k + 1) = \tilde{\bvec{F}}(\bvec{x}(k))
+            \]
+            было асимптотически устойчиво в целом, достаточно, чтобы
+            существовали функции $V(\bvec{z})$ и $W(\bvec{z})$, удовлетворяющие
+            условиям:
+            <ol>
+              <li>
+                функция $V(\bvec{z})$ задана и непрерывна при всех
+                $\bvec{z} \in \mathbb{E}^n$, положительно определена, и для
+                любого $\alpha \gt 0$ существует $\beta \gt 0$ такое, что
+                если $\norm{\bvec{z}} \geqslant \beta$, то $V(\bvec{z})
+                \geqslant \alpha$;
+              </li>
+
+              <li>
+                функция $W(\bvec{z})$ задана, непрерывна и неположительна при всех
+                $\bvec{z} \in \mathbb{E}^n$, и множество
+                \[
+                \left\{ \bvec{z} \in \mathbb{E}^n: W(\bvec{z}) = 0 \right\}
+                \]
+                не содержит целых полутраекторий системы $(5.5)$, отличных от
+                положения равновесия $\bvec{x} = \bvec{0}$;
+              </li>
+
+              <li>
+                имеет место соотношение
+                \[
+                \Delta V
+                = V(\tilde{\bvec{F}}(\bvec{z})) - V(\bvec{z})
+                = W(\bvec{z}).
+                \]
+              </li>
+            </ol>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: оценка области асимптотической устойчивости нулевого
+          решения автономной системы
+        </div>
+        <div class="content">
+          <div class="definition">
+            Положительно инвариантное множество $\widehat{\bvec{A}}$,
+            содержащееся в области $\tilde{\bvec{A}}$, называют
+            <i>оценкой области асимптотической устойчивости</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Алгоритм построения оценок области асимптотической устойчивости
+          для автономных систем
+        </div>
+        <div class="content">
+          <p>
+            Рассмотрим параметрическое семейство поверхностей $S(\bvec{z}) = c$.
+            Считаем, что функция $S(\bvec{z})$ задана, непрерывна и положительно
+            определена при всех $\bvec{z} \in \mathbb{E}^n$, причём
+            \[
+            S(\bvec{z}) \to +\infty
+            \quad \text{при} \quad \norm{\bvec{z}} \to \infty.
+            \]
+            Значит, поверхности не пересекаются, охватывают начало координат и
+            при $c \to 0$ непрерывно стягиваются к точке $\bvec{z} = \bvec{0}$.
+          </p>
+
+          <p>
+            Пусть семейство выбрано так, чтобы при достаточно малых значениях
+            параметра $c$ точки поверхности отображались системой
+            \[
+            \tag{5.5}
+            \bvec{x}(k + 1) = \tilde{\bvec{F}}(\bvec{x}(k))
+            \]
+            внутрь множества, ограниченного поверхностью. Выберем среди
+            поверхностей (исключая точку $\bvec{z} = \bvec{0}$) те, у которых
+            есть точки, отображаемые системой $(5.5)$ в точки этой же
+            поверхности. Тогда в качестве оценки $\widehat{\bvec{A}}$ области
+            асимптотической устойчивости можно взять множество, ограниченное
+            минимальной из выбранных поверхностей:
+            \[
+            \widehat{\bvec{A}} = \left\{
+            \bvec{x}_0: S(\bvec{x}_0) \lt \hat c
+            \right\},
+            \qquad
+            \hat c = \inf_{0 \lt S(\bvec{z}) = S(\tilde{\bvec{F}}(\bvec{z}))}
+            S(\bvec{z}).
+            \]
+          </p>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: равномерно диссипативная система
+        </div>
+        <div class="content">
+          <div class="definition">
+            Система
+            \[
+            \bvec{x}(k + 1) = \bvec{F}(k, \bvec{x}(k))
+            \]
+            называется <i>равномерно диссипативной</i>, если существует
+            число $D \gt 0$ такое, что для любого $R \gt 0$ можно указать
+            натуральное число $N$, для которого при всех $k_0 \geqslant 0$
+            и $k \geqslant k_0 + N$ выполняется неравенство
+            \[
+            \norm{\bvec{x}(k, \bvec{x}_0, k_0)} \lt D,
+            \]
+            если $\norm{\bvec{x}_0} \leqslant R$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Достаточное условие равномерной диссипативности системы
+        </div>
+        <div class="content">
+          Рассмотрим систему
+          \[
+          \tag{6.1}
+          \bvec{x}(k + 1) = \bvec{F}(k, \bvec{x}(k)).
+          \]
+          Пусть функция $\bvec{F}(k, \bvec{z})$ ограничена во всякой
+          ограниченной области изменения $\bvec{z}$.
+
+          <div class="theorem">
+            Пусть существует функция $V(k, \bvec{z})$, которая на множестве
+            $k \geqslant 0, \norm{\bvec{z}} \geqslant H$ удовлетворяет
+            следующим условиям:
+            <ol>
+              <li>
+                $V_1(\bvec{z}) \leqslant V(k, \bvec{z}) \leqslant V_2(\bvec{z})$;
+              </li>
+
+              <li>
+                $V(k+1, \bvec{F}(k, \bvec{z})) - V(k, \bvec{z})
+                \leqslant
+                - W(\bvec{z})$,
+              </li>
+            </ol>
+            где $V_1(\bvec{z}), V_2(\bvec{z}), W(\bvec{z})$ &mdash;
+            непрерывные и положительные при $\norm{\bvec{z}} \geqslant H$
+            функции, причём $V_1(\bvec{z}) \to +\infty$ при
+            $\norm{\bvec{z}} \to \infty$.
+            <br />
+            Тогда система $(6.1)$ равномерно диссипативна.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Стабилизация системы по нелинейному приближению
+        </div>
+        <div class="content">
+          Рассмотрим систему
+          \[
+          \tag{7.3}
+          \bvec{y}(k+1) = \bvec{G}(k, \bvec{y}(k), \bvec{v}(k)).
+          \]
+          Пусть при
+          \[
+          k = 0, 1, \dots,
+          \qquad
+          \norm{\bvec{y}(k)} \lt H,
+          \qquad
+          \norm{\bvec{v}(k)} \lt H
+          \]
+          система $(7.3)$ представима в виде
+          \[
+          \tag{7.5}
+          \bvec{y}(k+1) = \bvec{A}(k) \bvec{y}(k) + \bvec{B}(k) \bvec{v}(k)
+          + \bvec{Q}(k, \bvec{y}(k), \bvec{v}(k)),
+          \]
+          где матрицы $\bvec{A}(k)$ и $\bvec{B}(k)$ заданы и ограничены
+          при $k \geqslant 0$, а векторная функция
+          $\bvec{Q}(k, \bvec{z}, \bvec{\xi})$ при каждом фиксированном $k$
+          непрерывна по $\bvec{z}, \bvec{\xi}$ и удовлетворяет условию
+          \[
+          \tag{7.6}
+          \norm{\bvec{Q}(k, \bvec{z}, \bvec{\xi})}
+          \leqslant
+          L {\left( \norm{\bvec{z}} + \norm{\bvec{\xi}} \right)}^{1 + \alpha},
+          \]
+          где $\alpha, L \gt 0$.
+
+          <div class="theorem">
+            Если при управлении
+            \[
+            \tag{7.8}
+            \bvec{v}(k) = \bvec{C}(k) \bvec{y}(k),
+            \]
+            где $\bvec{C}(k)$ &mdash; заданная и ограниченная при $k \geqslant 0$
+            матрица, нулевое решение системы линейного приближения
+            \[
+            \bvec{y}(k+1) = \bvec{A}(k) \bvec{y}(k) + \bvec{B}(k) \bvec{v}(k)
+            \]
+            асимптотически устойчиво и выполнены неравенства
+            \[
+            \tag{7.10}
+            a_1 e^{-b_1(k - k_0)} \norm{\bvec{y}_0}
+            \leqslant
+            \norm{\bvec{y}(k, \bvec{y}_0, k_0)}
+            \leqslant
+            a_2 e^{-b_2(k - k_0)} \norm{\bvec{y}_0},
+            \qquad
+            a_1, a_2, b_1, b_2 \gt 0,
+            \]
+            то нулевое решение системы $(7.5)$, замкнутой управлением $(7.8)$:
+            \[
+            \bvec{y}(k + 1)
+            = \bvec{A}(k) \bvec{y}(k)
+            + \bvec{B}(k) \bvec{C}(k) \bvec{y}(k)
+            + \bvec{Q}(k, \bvec{y}(k), \bvec{C}(k) \bvec{y}(k))
+            \]
+            равномерно асимптотически устойчиво, и любое её решение, начинающееся
+            в достаточно малой окрестности точки $\bvec{y} = \bvec{0}$,
+            удовлетворяет оценкам типа $(7.10)$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теоремы о построении скалярного стабилизирующего управления
+          для линейной автономной системы
+        </div>
+        <div class="content">
+          Рассмотрим систему
+          \[
+          \tag{7.15}
+          \bvec{y}(k + 1) = \bvec{A} \bvec{y}(k) + \bvec{b} v(k),
+          \]
+          где $v(k)$ является скалярной функцией.
+
+          <div class="theorem">
+            Пусть векторы
+            \[
+            \tag{7.16}
+            \bvec{b},
+            \bvec{A} \bvec{b},
+            \bvec{A}^2 \bvec{b},
+            \dots
+            \bvec{A}^{n-1} \bvec{b}
+            \]
+            линейно независимы. В этом случае всегда можно построить
+            управление вида
+            \[
+            \tag{7.17}
+            v(k) = \bvec{c}^T \bvec{y}(k), \qquad \bvec{c} = \const,
+            \]
+            доставляющее системе $(7.15)$ любые наперёд заданные собственные
+            числа.
+          </div>
+
+          <div class="corollary">
+            Если векторы $(7.16)$ линейно независимы, то систему $(7.15)$ всегда
+            можно сделать экспоненциально устойчивой за счёт выбора управления
+            вида $(7.17)$.
+          </div>
+
+          Пусть $\rho_1, \dots, \rho_n$ &mdash; собственные числа матрицы
+          $\bvec{A}$. Предположим, что среди них имеется $l$ чисел,
+          по модулю больших или равных единицы. Тогда неособым линейным
+          преобразованием $\bvec{y}(k) = \tilde{\bvec{S}} \tilde{\bvec{y}}(k)$
+          систему $(7.15)$ можно привести к виду
+          \[
+          \tag{7.23}
+          \left\{
+          \begin{aligned}
+          \tilde{\bvec{y}}^{(1)}(k+1)
+          &=
+          \bvec{A}_1 \tilde{\bvec{y}}^{(1)}(k)
+          + \bvec{b}^{(1)} v(k), \\
+          \tilde{\bvec{y}}^{(2)}(k+1)
+          &=
+          \bvec{A}_2 \tilde{\bvec{y}}^{(2)}(k)
+          + \bvec{b}^{(2)} v(k),
+          \end{aligned}
+          \right.
+          \]
+          где $\bvec{A}_1$ и $\bvec{A}_2$ &mdash; матрицы размерности $l \times l$
+          и $(n - l) \times (n - l)$ соответственно. Собственные числа матрицы
+          $\bvec{A}_1$ по модулю больше или равны единицы, а все собственные
+          числа матрицы $\bvec{A}_2$ по модулю строго меньше единицы.
+
+          <div class="theorem">
+            Если векторы
+            \[
+            \bvec{b}^{(1)},
+            \bvec{A}_1 \bvec{b}^{(1)},
+            \dots,
+            \bvec{A}_1^{l-1} \bvec{b}^{(1)}
+            \]
+            линейно независимы, то систему $(7.15)$ можно сделать экспоненциально
+            устойчивой за счёт выбора управления вида $(7.17)$.
+          </div>
+        </div>
+      </li>
+    </ol>
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+  </body>
+
+</html>

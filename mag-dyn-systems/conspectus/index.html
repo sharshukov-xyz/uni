@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Мат. анализ динамических систем &mdash; 01 &mdash; Конспект</title>
+
+    <link href="/assets/css/styles.css" rel="stylesheet">
+    <script defer src="/assets/js/core.js"></script>
+    <script defer src="/assets/js/questions.js"></script>
+    <script defer src="/assets/js/controls.js"></script>
+
+    <link rel="stylesheet" href="/assets/katex/katex.min.css">
+    <script defer src="/assets/katex/katex.min.js"></script>
+    <script defer src="/assets/katex/auto-render.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          renderMathInElement(document.body, {
+              // customised options
+              // • auto-render specific keys, e.g.:
+              delimiters: [
+                  { left: '$$', right: '$$', display: true },
+                  { left: '$', right: '$', display: false },
+                  { left: '\\(', right: '\\)', display: false },
+                  { left: '\\[', right: '\\]', display: true }
+              ],
+              // • rendering keys, e.g.:
+              throwOnError: false
+          });
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1 id="title">Мат. анализ динамических систем &mdash; 01 &mdash; Конспект</h1>
+    <nav>
+      <a href="/">Домой</a>
+      <a href="..">Мат. анализ динамических систем</a>
+      <a href="/links">Ссылки</a>
+      <a href="/about">Контакты</a>
+    </nav>
+
+    <div style="display:none">
+      $\global\def\at#1{\left. #1 \right\rvert}$
+      $\global\def\abs#1{\left\lvert #1 \right\rvert}$
+      $\global\def\norm#1{\left\lVert #1 \right\rVert}$
+      $\global\def\bvec#1{\mathbf{#1}}$
+      $\global\def\floor#1{\left\lfloor #1 \right\rfloor}$
+
+      $\global\def\limto#1{\underset{#1}{\longrightarrow}}$
+      $\global\def\prob#1{\mathbb{P} \left\{ #1 \right\}}$
+      $\global\def\mean#1{\mathbb{E} \left[ #1 \right]}$
+      $\global\def\disp#1{D \left[ #1 \right]}$
+
+      $\global\def\dp#1#2{#1 \cdot #2\,}$
+      $\global\def\vp#1#2{#1 \times #2\,}$
+
+      $\global\def\dv#1#2{\frac{d #1}{d #2}}$
+      $\global\def\rdv#1#2{\frac{d' #1}{d #2}}$ <!-- относительная производная -->
+      $\global\def\pd#1#2{\frac{\partial #1}{\partial #2}}$
+      $\global\def\pdv2#1#2{\frac{\partial^2 #1}{\partial #2^2}}$
+      $\global\def\pdvk#1#2#3{\frac{\partial^#1 #2}{\partial #3^#1}}$
+      $\global\def\ppdv#1#2#3{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
+
+      $\global\def\pois#1{\left\{ #1 \right\}}$
+      $\global\def\paren#1{\left( #1 \right)}$
+      $\global\def\bydef#1{\overset{\mathrm{def}}{#1}}$
+
+      $\global\def\mbox#1{\text{#1}}$
+
+      $\global\def\div{\text{div}\,}$
+      $\global\def\dsum{\displaystyle\sum\,}$
+      $\global\def\grad{\text{grad}\,}$
+      $\global\def\rot{\text{rot}\,}$
+
+      $\global\def\vb#1{\textbf{#1}}$
+
+      $\global\def\op#1{\mathrm{#1}\,}$
+
+      $\global\def\Im{\text{Im}\,}$
+      $\global\def\Res{\text{Res}\,}$
+      $\global\def\Re{\text{Re}\,}$
+      $\global\def\argtg{\text{argtg}\,}$
+      $\global\def\ch{\text{ch}\,}$
+      $\global\def\const{\text{const}\,}$
+      $\global\def\degree{\text{degree}\,}$
+      $\global\def\proj{\mathrm{proj}}$
+      $\global\def\rank{\mathrm{rank}}$
+      $\global\def\res{\text{res}\,}$
+      $\global\def\sh{\text{sh}\,}$
+      $\global\def\sign{\text{sign}\,}$
+      $\global\def\tg{\mathrm{tg}\,}$
+    </div>
+
+    <h2>2024-09-04</h2>
+
+    <p>
+      Экзамен:
+    </p>
+    <ol>
+      <li>
+        вопрос по ФА (если была оценка, то ставят её)
+      </li>
+
+      <li>
+        вопрос по курсу
+      </li>
+
+      <li>
+        + задача, если нужна. Зависит от того, как отвечал на вопросы. Задача на
+        2-3 строчки.
+      </li>
+    </ol>
+
+    <h2>Глава 1. Динамические системы в метрическом пространстве</h2>
+    <h3>§1. Метрические пространства</h3>
+
+    $X$ &mdash; множество объектов, $P$ &mdash; поле. Множество $X$ замкнуто
+    относительно операций:
+    <ul>
+      <li>
+        сложения: $\forall x, y \in X \quad x + y \in X$.
+      </li>
+
+      <li>
+        умножения на скаляр: $\forall p \in P, x \in X \quad p \cdot x \in X$.
+      </li>
+    </ul>
+
+    <p>
+      Примеры:
+    </p>
+    <ol>
+      <li>
+        $X = \mathbb{R}$;
+      </li>
+
+      <li>
+        $X = \mathbb{C}$;
+      </li>
+
+      <li>
+        $X = C^0([a,b])$;
+      </li>
+
+      <li>
+        $X = C^1([a,b])$.
+      </li>
+    </ol>
+
+    <div class="definition">
+      <i>Метрическим пространством</i> называется множество $X$ над полем $P$:
+      <ol start="0">
+        <li>
+          замкнутое относительно операций сложения и умножения на скаляр из $P$;
+        </li>
+      </ol>
+      с определённой операцией $\rho : X \times X \to \mathbb{R}$, которую
+      называют <i>метрикой</i>, удовлетворяющей следующим свойствам:
+      <ol>
+        <li>
+          неотрицательность: $\rho(x,y) \geqslant 0$, причём
+          $\rho(x,y) = 0 \iff x = y$;
+        </li>
+
+        <li>
+          симметричность: $\rho(x,y) = \rho(y,x)$;
+        </li>
+
+        <li>
+          неравенство треугольника: $\rho(x,y) \leqslant \rho(x,z) + \rho(z,y)$.
+        </li>
+
+        <li>
+          $\rho(\alpha x_1 + \beta x_2, y) = \alpha \rho(x_1, y) + \beta \rho(x_2, y)$.
+        </li>
+      </ol>
+    </div>
+
+    <p>
+    </p>
+
+    <div class="definition">
+      Говорят, что последовательность $\set{x_n} \in X$ <i>сходится к $\hat x
+      \in X$</i>, если $\rho(x_n, \hat x) \limto{n \to \infty} 0$.
+    </div>
+
+    <div class="definition">
+      Пусть задана $f: X \to X$. Тогда $f(x_n) \to f(\hat x)$, если
+      \[
+      \rho(f(x_n), f(\hat x)) \limto{n \to \infty}c 0.
+      \]
+    </div>
+
+    <div class="definition">
+      Функция $f(x)$ называется <i>непрерывной в точке $\hat x$</i>,
+      если для всех последовательностей $\set{x_n} \limto{n \to \infty} \hat x$
+      выполнено
+      \[
+      \lim\limits_{n \to \infty} f(x_n) = f(\hat x).
+      \]
+    </div>
+
+    <div class="definition">
+      Последовательность $\set{x_n}$ называется <i>фундаментальной</i>,
+      если
+      \[
+      \rho(x_n, x_m) \limto{n,m \to \infty} 0.
+      \]
+    </div>
+
+    <div class="remark">
+      Фундаментальная последовательность может не иметь предела в $X$.
+
+      <div class="example">
+        $X = (0, +\infty)$, $x_n = \frac{1}{n}$.
+      </div>
+    </div>
+
+    <h3>§2. Динамические системы в евклидовом пространстве</h3>
+
+    <p>
+      Рассмотрим систему
+      \[
+      \tag{1}
+      y' = f(y), \qquad y \in \mathbb{R}^n.
+      \]
+      Будем считать, что $f(y)$ непрерывно дифференцируема.
+    </p>
+
+    <p>
+      Рассмотрим начальное условие $(x_0, y^0)$. Из наших предположений следует
+      существование и единственность решения $y = \psi(x, x_0, y^0)$.
+    </p>
+
+    <div class="remark">
+      Из стационарности исходной системы $(1)$ следует, что
+      \[
+      \psi(x, x_0, y^0) = \Phi(x - x_0, y^0).
+      \]
+    </div>
+
+    <div class="proposition">
+      Справедливо <i>групповое свойство решений в форме Коши</i>:
+      \[
+      \Phi(x_1, \Phi(x_0, y^0)) = \Phi(x_1 + x_2, y^0).
+      \]
+    </div>
+
+    <p>
+      Пусть $\Phi_x(y) := \Phi(x,y)$ тогда
+      \[
+      \Phi_x: X \to X, \qquad \Phi_x^{-1}: X \leftarrow X.
+      \]
+      Имеет место взаимнооднозначность.
+    </p>
+
+    Свойства:
+    <ol start="0">
+      <li>
+        $\Phi_{x_1} \circ \Phi_{x_2} = \Phi_{x_1 + x_2}$.
+      </li>
+
+      <li>
+        Ассоциативность:
+        \[
+        \Phi_{x_1} \circ (\Phi_{x_2} \circ \Phi_{x_3})
+        = (\Phi_{x_1} \circ \Phi_{x_2}) \circ \Phi_{x_3}.
+        \]
+      </li>
+
+      <li>
+        $\Phi_0 = \varepsilon$ &mdash; тождественный оператор:
+        \[
+        \Phi_0 \circ \Phi_x = \Phi_x.
+        \]
+      </li>
+
+      <li>
+        $\Phi_x^{-1} = \Phi_{-x}$.
+      </li>
+
+      <li>
+        Коммутативность:
+        \[
+        \Phi_{x_1} \circ \Phi_{x_2} = \Phi_{x_2} \circ \Phi_{x_1}.
+        \]
+      </li>
+    </ol>
+
+    <div class="remark">
+      Множество операторов
+      $\left\{ \Phi_x \; | \; x \in \mathbb{R} \right\}$
+      представляет собой абелеву группу.
+    </div>
+
+    <div class="definition">
+      Если оператор $\Phi_x: \mathbb{R}^n \to \mathbb{R}^n$ определён при всех
+      $x \in \mathbb{R}$ и удовлетворят свойствам 0-4, то множество операторов
+      называется <i>динамической системой в евклидовом пространстве</i>.
+    </div>
+
+    <h2>2024-09-11</h2>
+
+    Рассмотрим
+    \[
+    y' = f(y).
+    \]
+
+    <p>
+      Нас интересует проекция решения $y(x)$ на ось $Oy$.
+    </p>
+
+    Если решение непродолжимо на $\mathbb{R}$, то сделаем замену: $y(x(t)) =
+    z(t)$. Пусть:
+    <ul>
+      <li>
+        $t \in \mathbb{R}$;
+      </li>
+
+      <li>
+        $x(t)$ возрастает при возрастании $t$.
+      </li>
+    </ul>
+
+    Замена:
+    \[
+    \frac{dy}{(1 + \norm{f(y)}) dx} = \frac{f(y)}{1 + \norm{f(y)}}
+    \]
+    Пусть
+    \[
+    dt = (1 + \norm{f(y)}) dx.
+    \]
+    Тогда
+    \[
+    t = \int\limits_{0}^{x} (1 + \norm{f(\psi(\tau, y^0))}) d\tau.
+    \]
+
+    Окончательно получаем систему
+    \[
+    \frac{d z}{d t} = \frac{f(z)}{1 + \norm{f(z)}}.
+    \]
+
+    <div class="theorem">
+      (Винтера).
+      <br/>
+      Рассмотрим систему
+      \[
+      \tag{*}
+      y' = f(x, y).
+      \]
+      Пусть $f(x, y)$ определена и непрерывна в области $\mathbb{R}^{n+1}$.
+      Предположим, что
+      \[
+      \norm{f(x,y)} \leqslant W(\norm{y})
+      \]
+      для некоторой функции $W$ и выполнено условие
+      \[
+      \int\limits_{0}^{\infty} \frac{dr}{1 + W(r)} = \infty.
+      \]
+      Тогда любое решение $y = \varphi(x)$ уравнения $(*)$ определено при всех
+      $x \in \mathbb{R}$.
+
+      <div class="proof">
+        Рассмотрим решение $y = \varphi(x)$. Значит, справедливы тождества
+        \[
+        \varphi_s'(x) \equiv f_s(x, \varphi(x)), \qquad s = \overline{1,n}.
+        \]
+        Домножим $s$-ое уравнение на $\varphi_s(x)$:
+        \[
+        \varphi_s(x) \varphi_s'(x) \equiv \varphi_s(x) f_s(x, \varphi(x)), \qquad s = \overline{1,n},
+        \]
+        после чего сложим их:
+        \[
+        \sum\limits_{s=1}^{n} \frac{1}{2} \paren{\varphi_s^2(x)}'
+        \equiv
+        \sum\limits_{s=1}^{n} \varphi_s(x) f_s(x, \varphi(x)).
+        \]
+        Тогда
+        \[
+        \frac{1}{2} \paren{
+        \norm{\varphi(x)}^2
+        }'
+        =
+        \dp{\varphi(x)}{f(x, \varphi(x))},
+        \]
+        поэтому
+        \[
+        \begin{aligned}
+        \frac{1}{2} \cdot 2 \cdot \norm{\varphi(x)} \paren{\norm{\varphi(x)}}'
+        &\equiv
+        \norm{\varphi(x)} \cdot \norm{f(x, \varphi(x))}
+        \cdot \cos \paren{ \widehat{\varphi(x), f(x, \varphi(x))} }
+        \leqslant \\
+        &\leqslant
+        \norm{\varphi(x)} \cdot \norm{f(x, \varphi(x))}.
+        \end{aligned}
+        \]
+        В силу положительности нормы и выполнения условия
+        \[
+        \norm{f(x,y)} \leqslant W(\norm{y})
+        \]
+        следует
+        \[
+        \norm{\varphi(x)} \paren{\norm{\varphi(x)}}'
+        \leqslant
+        \norm{\varphi(x)} \cdot W(\norm{\varphi(x)}).
+        \]
+
+        <div class="remark">
+          Если $\norm{\varphi(x)} = 0$, то неравенство остаётся верным &mdash;
+          функция $\varphi(x)$ непрерывна.
+        </div>
+
+        <p>
+          Разделив обе части неравенства на $\norm{\varphi(x)}$, получаем
+          \[
+          \norm{\varphi(x)}'
+          \leqslant
+          W(\norm{\varphi(x)}) \lt 1 + W(\norm{\varphi(x)}).
+          \]
+          Правая часть положительна, поэтому можно разделить:
+          \[
+          \frac{\norm{\varphi(x)}'}{1 + W(\norm{\varphi(x)})} \lt 1.
+          \]
+        </p>
+
+        <p>
+          Покажем, что решение определено при $x \in [x_0, +\infty)$.
+        </p>
+
+        <p>
+          Проинтегрируем обе части неравенства от $x_0$ до $x$ (считаем, что
+          $x \gt x_0$, в обратную сторону аналогично):
+          \[
+          \int\limits_{x_0}^{x} 
+          \frac{\norm{\varphi(\tau)}'}{1 + W(\norm{\varphi(\tau)})} d\tau
+          \lt x - x_0.
+          \]
+        </p>
+
+        <p>
+          Предположим, что решение определено при $x \in [x_0, H)$, где
+          $H \lt +\infty$. Сделаем замену:
+          \[
+          \norm{\varphi(\tau)} = r,
+          \qquad
+          \norm{\varphi(\tau)}' = \frac{d r}{d \tau},
+          \]
+          тогда
+          \[
+          \int\limits_{\norm{\varphi(x_0)}}^{\norm{\varphi(x)}}
+          \frac{dr}{1 + W(r)} \lt x - x_0.
+          \]
+          Устремим $x \to H - 0$, получим
+          \[
+          \int\limits_{\norm{y^0}}^{\norm{\varphi(H - 0)}}
+          \frac{dr}{1 + W(r)} \leqslant H - x_0.
+          \]
+        </p>
+
+        <div class="remark">
+          Знак неравенства стал нестрогим, тк ищем предел.
+        </div>
+
+        <p>
+          Если $\norm{\varphi(H - 0)} = M \lt +\infty$, то отсюда следует,
+          что в точке $x = H$ тоже определена, следовательно, решение
+          определено на отрезке $[x_0, H]$ &mdash; можно продолжить дальше.
+          Получили противоречие.
+        </p>
+
+        <div class="todo">
+          Расписать, почему можно продолжить дальше.
+        </div>
+
+        <p>
+          Значит, $\norm{\varphi(H - 0)} = +\infty$. Получаем:
+          \[
+          \int\limits_{\norm{y^0}}^{+\infty}
+          \frac{dr}{1 + W(r)} \leqslant H - x_0.
+          \]
+          По условию теоремы интеграл равен $\infty$, а справа стоит конечная
+          величина &mdash; противоречие. Значит, решение $\varphi(x)$ определено
+          при $[x_0, +\infty)$.
+        </p>
+      </div>
+    </div>
+
+    <h4>§4. Динамические системы на торе</h4>
+
+    <p>
+      Рассмотрим двухстепенный гироскоп.
+    </p>
+
+    <div class="todo">
+      Риc. 1
+    </div>
+
+    <p>
+      Углы $\varphi$ и $\psi$ независимы. Уравнения Ньютона можно представить в
+      виде
+      \[
+      \left\{
+      \begin{aligned}
+      \dot \varphi &= \Phi(\varphi, \psi), \\
+      \dot \psi &= \Psi(\varphi, \psi).
+      \end{aligned}
+      \right.
+      \]
+
+      $(\varphi, \psi)^T$ однозначно определяют положение системы,
+      причём $\varphi, \psi \in (-\infty, +\infty)$.
+    </p>
+
+    <p>
+      Функции $\Phi, \Psi$ считаем непрерывными и $2\pi$-периодическими по обоим
+      аргументам:
+      \[
+      \begin{aligned}
+      \Phi(\varphi + 2 \pi, \psi) &= \Phi(\varphi, \psi)
+      &
+      \Phi(\varphi, \psi + 2 \pi) &= \Phi(\varphi, \psi), \\
+      \Psi(\varphi + 2 \pi, \psi) &= \Psi(\varphi, \psi)
+      &
+      \Psi(\varphi, \psi + 2 \pi) &= \Psi(\varphi, \psi).
+      \end{aligned}
+      \]
+      Из периодичности и непрерывности по теореме Вейерштрасса следует, что
+      существуют максимумы
+      \[
+      \max_{\mathbb{R}^2} \abs{\Phi(\varphi, \psi)} \leqslant M,
+      \qquad
+      \max_{\mathbb{R}^2} \abs{\Psi(\varphi, \psi)} \leqslant M.
+      \]
+      Значит, продолжимость решения есть.
+    </p>
+
+    <p>
+      Опираясь на предыдущий параграф, заключаем, что перед нами динамическая
+      система. В связи с этим перейдём к фазовому пространству.
+    </p>
+
+    <div class="todo">
+      Рис. 2
+    </div>
+
+    <p>
+      Пусть траектория вышла на границу. В силу периодичности траектория
+      "телепортируется" в совпадающую точку (см. рисунок).
+    </p>
+
+    <div class="remark">
+      Вообще говоря, участки траектории не пересекаются в силу единственности
+      решения.
+    </div>
+
+    <p>
+      Совместим одинаковые границы &mdash; получим цилиндр. Повторив процесс ещё
+      раз, получаем тор, который будем обозначать $T_2$.
+    </p>
+
+    <div class="proposition">
+      $T_2$ &mdash; компакт.
+    </div>
+
+    <div class="example">
+      (система на торе).
+
+      \[
+      \begin{aligned}
+      \dot \varphi &= 1, \\
+      \dot \psi &= \alpha.
+      \end{aligned}
+      \]
+      Если $\alpha = 1$, то
+      \[
+      \begin{aligned}
+      \varphi &= \varphi_0 + x, \\
+      \psi &= \psi_0 + x.
+      \end{aligned}
+      \]
+      Исключаем $x$, чтобы получить фазовую траекторию:
+      \[
+      \psi = \psi_0 + \varphi - \varphi_0.
+      \]
+      Получили прямую.
+
+      <div class="todo">
+        Рис. 3
+      </div>
+
+      <p>
+        Если $\alpha = \dfrac{m}{n}$, тогда
+        \[
+        \begin{aligned}
+        \varphi &= \varphi_0 + x, \\
+        \psi &= \psi_0 + \frac{m}{n} x.
+        \end{aligned}
+        \]
+        Точки $x = 0$ и $x = 2 \pi n$ совпадают. Получили периодическую
+        траекторию, но она зацикливается после $n$ оборотов.
+      </p>
+
+      <p>
+        Если $\alpha$ &mdash; иррациональное число, то получаем
+        \[
+        \begin{aligned}
+        \varphi &= \varphi_0 + x, \\
+        \psi &= \psi_0 + \alpha x.
+        \end{aligned}
+        \]
+        Исключаем $x$:
+        \[
+        \psi = \psi_0 + \alpha \varphi - \alpha \varphi_0.
+        \]
+        Ни при каком $\varphi$, кратным $2 \pi k$, мы не попадём в $\psi$.
+        Тогда фазовая траектория будет всюду плотно на торе, то есть
+        замыкание множества точек
+        \[
+        \left\{
+        \begin{pmatrix}
+        \varphi \\ \psi
+        \end{pmatrix}
+        \paren{x,
+        \begin{pmatrix}
+        \varphi_0 \\ \psi_0
+        \end{pmatrix}
+        }
+        \; | \; x \in \mathbb{R}
+        \right\}.
+        \]
+        совпадает с $T_2$.
+      </p>
+
+      Получили три типа траекторий, которые возникают в зависимости от $\alpha$.
+    </div>
+
+    <h2>2024-09-18</h2>
+
+    <div class="todo">
+      Напомнить об аналитической записи метрики на торе &mdash; хотели обсудить.
+    </div>
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+  </body>
+</html>

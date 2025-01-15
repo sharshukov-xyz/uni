@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset=utf-8>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Билеты &mdash; Мед. диагностика</title>
+
+  <link href="/assets/css/styles.css" rel="stylesheet">
+  <script defer src="/assets/js/core.js"></script>
+  <script defer src="/assets/js/tickets.js"></script>
+  <script defer src="/assets/js/controls.js"></script>
+
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/katex/katex.min.js"></script>
+  <script defer src="/assets/katex/auto-render.min.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      renderMathInElement(document.body, {
+        // customised options
+        // • auto-render specific keys, e.g.:
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        // • rendering keys, e.g.:
+        throwOnError: false
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <h1 id="title">Билеты &mdash; Мед. диагностика</h1>
+  <nav>
+    <a href="/">Домой</a>
+    <a href="..">Мед. диагностика</a>
+    <a href="/links">Ссылки</a>
+    <a href="/about">Контакты</a>
+  </nav>
+
+  <div class="controls">
+    <button onclick="HideTickets()">Спрятать билеты</button>
+    <button onclick="ShowTickets()">Показать все билеты</button>
+    <button onclick="ShowRandomElement(HideTickets)">
+      Показать случайный билет
+    </button>
+  </div>
+
+  <div style="display:none">
+    $\global\def\abs#1{\left\lvert #1 \right\rvert}$
+
+    $\global\def\dv#1#2{\frac{d #1}{d #2}}$
+    $\global\def\pd#1#2{\frac{\partial #1}{\partial #2}}$
+    $\global\def\pdv2#1#2{\frac{\partial^2 #1}{\partial #2^2}}$
+    $\global\def\ppdv#1#2#3{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
+
+    $\global\def\paren#1{\left( #1 \right)}$
+
+    $\global\def\mbox#1{\text{#1}}$
+
+    $\global\def\div{\text{div}\,}$
+    $\global\def\grad{\text{grad}\,}$
+    $\global\def\rot{\text{rot}\,}$
+
+    $\global\def\vb#1{\textbf{#1}}$
+
+    $\global\def\const{\text{const}\,}$
+    $\global\def\res{\text{res}\,}$
+    $\global\def\Res{\text{Res}\,}$
+    $\global\def\Re{\text{Re}\,}$
+    $\global\def\Im{\text{Im}\,}$
+    $\global\def\ch{\text{ch}\,}$
+    $\global\def\sh{\text{sh}\,}$
+    $\global\def\argtg{\text{argtg}\,}$
+  </div>
+
+  <ol id="tickets">
+    <li class="ticket">
+      <div class="name">
+        Основные методы медицинской диагностической визуализации
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Элементы ядерной физики в радионуклидной диагностике. Строение и
+        основные свойства атомных ядер
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Радиоактивный распад (<i>Радиоактивность</i>, <i>Эффективный период
+          полувыведения</i>, <i>Активность</i>)
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Радионуклиды, применяемые для визуализации. Получение радионуклидов
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Типы радиоактивного распада
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Выбор радиоизотопа для получения изображений
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Взаимодействие $\gamma$-излучения с веществом
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Доза излучения и ее единицы
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Приборы для радионуклидной диагностики. Общая характеристика приборов
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Детекторы излучения. Сцинтилляционные детекторы для ОФЭКТ
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Блок детектирования для ОФЭКТ
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Гамма – камера/гамма-томограф
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Алгоритмы вычисления координат сцинтилляционных событий для гамма-камер и гамма томографов
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Основные характеристики гамма-камер и гамма томографов
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Режимы сбора данных радионуклидного исследования, проводимого на гамма-томографе
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        ПЭТ (Позитронный эмиссионный томограф), история развития метода
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        ПЭТ (Позитронный эмиссионный томограф)
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Основные факторы, влияющие на качество изображения ПЭТ
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Сцинтилляционные детекторы для ПЭТ, характеристики сцинтилляторов
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Гибридные аппараты (ОФЭКТ/КТ, ПЭТ/КТ и тд)
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Математическая обработка информации. Виды обработки
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Классификация математических моделей транспорта индикатора
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Камерные линейные модели транспорта индикатора
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Математическая модель кинетики РФП при исследовании функции почек
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Построение функциональных изображений при планарных исследованиях с синхронизацией. Равновесная
+        вентрикулография сердца
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Построение функциональных изображений для томографических исследований перфузии миокарда
+        Изображения перфузии. Фазовое изображение
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Построение функциональных изображений для томографических исследований перфузии миокарда
+        Изображение движения стенок. Изображение систолического утолщения
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Комплекс клинических диагностических программ для радионуклидной диагностики. Общая структура и
+        назначение основных компонент
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Программы исследований в кардиологии. Равновесная томовентрикулография сердца. Математическая
+        обработка исследования
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Программы исследований в кардиологии. Перфузионная томосцинтиграфия миокарда синхронизированная
+        с ЭКГ. Математическая обработка исследования
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Программы радионуклидных исследований в пульмонологии и эндокринологии. Математическая
+        обработка
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Программы исследований в нефрологии. Математическая обработка
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Программа радионуклидного исследования гепатобилиарной системы. Математическая обработка
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Программа радионуклидных исследований головного мозга. Математическая обработка
+      </div>
+    </li>
+  </ol>
+</body>
+
+</html>

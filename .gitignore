@@ -12,3 +12,5 @@ docs/
 *.doc
 *.docx
 
+# MacOS crap
+.DS_Store

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Билеты &mdash; Матмод</title>
+
+    <link href="/assets/css/styles.css" rel="stylesheet">
+    <script defer src="/assets/js/core.js"></script>
+    <script defer src="/assets/js/tickets.js"></script>
+    <script defer src="/assets/js/controls.js"></script>
+
+    <link rel="stylesheet" href="/assets/katex/katex.min.css">
+    <script defer src="/assets/katex/katex.min.js"></script>
+    <script defer src="/assets/katex/auto-render.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false },
+            { left: '\\(', right: '\\)', display: false },
+            { left: '\\[', right: '\\]', display: true }
+          ],
+          // • rendering keys, e.g.:
+          throwOnError: false
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1 id="title">Билеты &mdash; Матмод</h1>
+    <nav>
+      <a href="/">Домой</a>
+      <a href="..">Матмод</a>
+      <a href="/links">Ссылки</a>
+      <a href="/about">Контакты</a>
+    </nav>
+
+    <div class="controls">
+      <button onclick="HideTickets()">Спрятать билеты</button>
+      <button onclick="ShowTickets()">Показать все билеты</button>
+      <button onclick="ShowRandomElement(HideTickets)">
+        Показать случайный билет
+      </button>
+    </div>
+
+    <div style="display:none">
+      $\global\def\abs#1{\left\lvert #1 \right\rvert}$
+
+      $\global\def\dv#1#2{\frac{d #1}{d #2}}$
+      $\global\def\pd#1#2{\frac{\partial #1}{\partial #2}}$
+      $\global\def\pdv2#1#2{\frac{\partial^2 #1}{\partial #2^2}}$
+      $\global\def\ppdv#1#2#3{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
+
+      $\global\def\paren#1{\left( #1 \right)}$
+
+      $\global\def\mbox#1{\text{#1}}$
+
+      $\global\def\div{\text{div}\,}$
+      $\global\def\grad{\text{grad}\,}$
+      $\global\def\rot{\text{rot}\,}$
+
+      $\global\def\vb#1{\textbf{#1}}$
+
+      $\global\def\const{\text{const}\,}$
+      $\global\def\res{\text{res}\,}$
+      $\global\def\Res{\text{Res}\,}$
+      $\global\def\Re{\text{Re}\,}$
+      $\global\def\Im{\text{Im}\,}$
+      $\global\def\ch{\text{ch}\,}$
+      $\global\def\sh{\text{sh}\,}$
+      $\global\def\argtg{\text{argtg}\,}$
+    </div>
+
+    <ol id="tickets">
+      <li class="ticket practice">
+        <div class="name">
+          Предмет математического моделирования. Фундаментальные законы природы. Примеры
+        </div>
+      </li>
+
+      <li class="ticket practice">
+        <div class="name">
+          Модель одноступенчатой ракеты. Формула Циолковского
+        </div>
+      </li>
+
+      <li class="ticket practice">
+        <div class="name">
+          Модель многоступенчатой ракеты
+        </div>
+      </li>
+
+      <li class="ticket practice">
+        <div class="name">
+          Вариационные принципы. Вывод закона Снеллиуса
+        </div>
+      </li>
+
+      <li class="ticket practice">
+        <div class="name">
+          Вариационные принципы. Задача о движении света
+          в прозрачной среде с переменной оптической плотностью
+        </div>
+      </li>
+
+      <li class="ticket practice">
+        <div class="name">
+          Модели динамики популяций. Модель Мальтуса.
+          Логистическая модель
+        </div>
+      </li>
+
+      <li class="ticket practice">
+        <div class="name">
+          Модель хищник-жертва
+        </div>
+      </li>
+
+      <li class="ticket practice">
+        <div class="name">
+          Модель гонки вооружений между двумя странами
+        </div>
+      </li>
+
+      <li class="ticket practice">
+        <div class="name">
+          Модели Ланчестера. Вывод параболического и
+          квадратического законов ведения боевых действий
+        </div>
+      </li>
+
+      <li class="ticket practice">
+        <div class="name">
+          Организация рекламной кампании
+        </div>
+      </li>
+
+      <li class="ticket practice">
+        <div class="name">
+          Макромодель равновесия рыночной экономики
+        </div>
+      </li>
+
+      <li class="ticket practice">
+        <div class="name">
+          Макромодель экономического роста
+        </div>
+      </li>
+
+      <li class="ticket theory">
+        <div class="name">
+          Гидродинамика. Вывод уравнения Бернулли. Задача об
+          истечении жидкости из ёмкости
+        </div>
+      </li>
+
+      <li class="ticket practice">
+        <div class="name">
+          Моделирование процесса истечения молока из пакета без
+          наклона
+        </div>
+      </li>
+
+      <li class="ticket practice">
+        <div class="name">
+          Влияние наклона на процесс истечения молока из пакета
+        </div>
+      </li>
+
+      <li class="ticket theory">
+        <div class="name">
+          Преобразование Лапласа. Основные свойства
+        </div>
+      </li>
+
+      <li class="ticket theory">
+        <div class="name">
+          Преобразование Лапласа. Восстановление оригинала по
+          изображению
+        </div>
+      </li>
+
+      <li class="ticket theory">
+        <div class="name">
+          Преобразование Лапласа и его применение к решению
+          дифференциальных уравнений с частными производными.
+          Вывод вспомогательных формул
+        </div>
+      </li>
+
+      <li class="ticket theory">
+        <div class="name">
+          Преобразование Лапласа и его применение к решению
+          обыкновенных дифференциальных уравнений
+        </div>
+      </li>
+
+      <li class="ticket theory">
+        <div class="name">
+          Преобразование Лапласа и его применение к решению
+          дифференциальных уравнений с частными производными
+        </div>
+      </li>
+
+      <li class="ticket theory">
+        <div class="name">
+          Термодинамика. Вывод закона Фурье
+        </div>
+      </li>
+
+      <li class="ticket theory">
+        <div class="name">
+          Вывод уравнения теплопроводности. Постановка типичных
+          краевых условий
+        </div>
+      </li>
+
+      <li class="ticket theory">
+        <div class="name">
+          Метод разделения переменных. Примеры
+        </div>
+      </li>
+
+      <li class="ticket practice">
+        <div class="name">
+          Динамика скопления амёб
+        </div>
+      </li>
+
+      <li class="ticket theory">
+        <div class="name">
+          Метод Ритца. Основная идея. Сходимость. Примеры
+        </div>
+      </li>
+
+      <li class="ticket theory">
+        <div class="name">
+          Методы Ритца и Галёркина. Доказательство относительной
+          полноты систем функций $\left\{ \sin \dfrac{\pi k x}{l} \right\}$ и
+          $\left\{ x^k (l - x) \right\}$. Примеры
+        </div>
+      </li>
+
+      <li class="ticket theory">
+        <div class="name">
+          Методы Ритца и Галёркина для минимизации функционала
+          ${\displaystyle I(y) = \int\limits_{0}^{l} \left[ p {y'}^2 + q y^2 + 2 f y \right] dx}$
+        </div>
+      </li>
+    </ol>
+  </body>
+
+</html>

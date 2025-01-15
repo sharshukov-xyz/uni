@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Билеты &mdash; Поступление в магистратуру</title>
+
+    <link href="/assets/css/styles.css" rel="stylesheet">
+    <script defer src="/assets/js/core.js"></script>
+    <script defer src="/assets/js/tickets.js"></script>
+    <script defer src="/assets/js/controls.js"></script>
+
+    <link rel="stylesheet" href="/assets/katex/katex.min.css">
+    <script defer src="/assets/katex/katex.min.js"></script>
+    <script defer src="/assets/katex/auto-render.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false },
+            { left: '\\(', right: '\\)', display: false },
+            { left: '\\[', right: '\\]', display: true }
+          ],
+          // • rendering keys, e.g.:
+          throwOnError: false
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1 id="title">Билеты &mdash; Поступление в магистратуру</h1>
+    <nav>
+      <a href="/">Домой</a>
+      <a href="..">Поступление в магистратуру</a>
+      <a href="/links">Ссылки</a>
+      <a href="/about">Контакты</a>
+    </nav>
+
+    <div class="controls">
+      <button onclick="HideTickets()">Спрятать билеты</button>
+      <button onclick="ShowTickets()">Показать все билеты</button>
+      <button onclick="ShowRandomElement(HideTickets)">
+        Показать случайный билет
+      </button>
+    </div>
+
+    <div style="display:none">
+      $\global\def\abs#1{\left\lvert #1 \right\rvert}$
+
+      $\global\def\dv#1#2{\frac{d #1}{d #2}}$
+      $\global\def\pd#1#2{\frac{\partial #1}{\partial #2}}$
+      $\global\def\pdv2#1#2{\frac{\partial^2 #1}{\partial #2^2}}$
+      $\global\def\ppdv#1#2#3{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
+
+      $\global\def\paren#1{\left( #1 \right)}$
+
+      $\global\def\mbox#1{\text{#1}}$
+
+      $\global\def\div{\text{div}\,}$
+      $\global\def\grad{\text{grad}\,}$
+      $\global\def\rot{\text{rot}\,}$
+
+      $\global\def\vb#1{\textbf{#1}}$
+
+      $\global\def\const{\text{const}\,}$
+      $\global\def\res{\text{res}\,}$
+      $\global\def\Res{\text{Res}\,}$
+      $\global\def\Re{\text{Re}\,}$
+      $\global\def\Im{\text{Im}\,}$
+      $\global\def\ch{\text{ch}\,}$
+      $\global\def\sh{\text{sh}\,}$
+      $\global\def\argtg{\text{argtg}\,}$
+    </div>
+
+    <ol id="tickets">
+      <li class="ticket">
+        <div class="name">
+          Комплексные числа: определения и алгебраические действия. Тригонометрическая
+          форма комплексного числа
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Метод Гаусса решения систем линейных уравнений
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Матрицы: основные определения и операции
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Определение определителя. Определитель: элементарные свойства
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Теорема Кронекера&dash;Капелли. Общее решение системы линейных уравнений
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Собственные числа и собственные векторы матриц
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Непрерывные функции. Определение, свойства
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Производная функции. Непрерывность дифференцируемой функции
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Понятие неопределённого интеграла. Формула интегрирования по частям
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Степенные ряды. Радиус сходимости степенного ряда
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Линейные пространства. Основные определения (линейной независимости, базиса,
+          размерности пространства, подпространства)
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Определённый интеграл. Сумма Римана. Свойства определённого интеграла
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Выпуклость и вогнутость функции. Условие выпуклости и вогнутости функции
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Понятие обыкновенного дифференциального уравнения 1-го порядка и его решения
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Теорема существование и единственности решения задачи Коши дифференциального уравнения
+          1-го порядка (теорема Пикара). Условие Липшица. Примеры
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Уравнения с разделяющимися переменными. Примеры
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Обыкновенные дифференциальные уравнения $n$-го порядка с постоянными коэффициентами
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Линейная зависимость и независимость системы функций
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Линейные однородные уравнения $n$-го порядка с постоянными коэффициентами. Фундаментальная система решений
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Системы линейных однородных уравнений. Свойства решений. Фундаментальная матрица
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Задача линейного программирования
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Прямая и двойственная задачи линейного программирования
+        </div>
+      </li>
+    </ol>
+  </body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset=utf-8>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Билеты &mdash; МАДС</title>
+
+  <link href="/assets/css/styles.css" rel="stylesheet">
+  <script defer src="/assets/js/core.js"></script>
+  <script defer src="/assets/js/tickets.js"></script>
+  <script defer src="/assets/js/controls.js"></script>
+
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/katex/katex.min.js"></script>
+  <script defer src="/assets/katex/auto-render.min.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      renderMathInElement(document.body, {
+        // customised options
+        // • auto-render specific keys, e.g.:
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        // • rendering keys, e.g.:
+        throwOnError: false
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <h1 id="title">Билеты &mdash; МАДС</h1>
+  <nav>
+    <a href="/">Домой</a>
+    <a href="..">МАДС</a>
+    <a href="/links">Ссылки</a>
+    <a href="/about">Контакты</a>
+  </nav>
+
+  <div class="controls">
+    <button onclick="HideTickets()">Спрятать билеты</button>
+    <button onclick="ShowTickets()">Показать все билеты</button>
+    <button onclick="ShowRandomElement(HideTickets)">
+      Показать случайный билет
+    </button>
+  </div>
+
+  <div style="display:none">
+    $\global\def\abs#1{\left\lvert #1 \right\rvert}$
+
+    $\global\def\dv#1#2{\frac{d #1}{d #2}}$
+    $\global\def\pd#1#2{\frac{\partial #1}{\partial #2}}$
+    $\global\def\pdv2#1#2{\frac{\partial^2 #1}{\partial #2^2}}$
+    $\global\def\ppdv#1#2#3{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
+
+    $\global\def\paren#1{\left( #1 \right)}$
+
+    $\global\def\mbox#1{\text{#1}}$
+
+    $\global\def\div{\text{div}\,}$
+    $\global\def\grad{\text{grad}\,}$
+    $\global\def\rot{\text{rot}\,}$
+
+    $\global\def\vb#1{\textbf{#1}}$
+
+    $\global\def\const{\text{const}\,}$
+    $\global\def\res{\text{res}\,}$
+    $\global\def\Res{\text{Res}\,}$
+    $\global\def\Re{\text{Re}\,}$
+    $\global\def\Im{\text{Im}\,}$
+    $\global\def\ch{\text{ch}\,}$
+    $\global\def\sh{\text{sh}\,}$
+    $\global\def\argtg{\text{argtg}\,}$
+  </div>
+
+  <ol id="tickets">
+    <li class="ticket"><div class="name">Динамические системы в евклидовых пространствах. Примеры</div></li>
+    <li class="ticket"><div class="name">Динамические системы на торе. Примеры</div></li>
+    <li class="ticket"><div class="name">Динамические системы в функциональных пространствах. Пример линейного уравнения в частных производных</div></li>
+    <li class="ticket"><div class="name">Динамические системы в метрическом пространстве. Свойства</div></li>
+    <li class="ticket"><div class="name">Динамические системы в метрическом пространстве. Классы движений</div></li>
+    <li class="ticket"><div class="name">Инвариантные множества. Свойства</div></li>
+    <li class="ticket"><div class="name">Свойства множества точек покоя</div></li>
+    <li class="ticket"><div class="name">Предельные множества траекторий. Свойства. Примеры</div></li>
+    <li class="ticket"><div class="name">Устойчивость по Лагранжу. Свойства</div></li>
+    <li class="ticket"><div class="name">Устойчивость по Лагранжу. Контрпримеры. Классификация движений</div></li>
+    <li class="ticket"><div class="name">Устойчивость по Пуассону. Свойства. Примеры</div></li>
+    <li class="ticket"><div class="name">Устойчивость по Пуассону. Теорема о компактности предельного множества в полном пространстве</div></li>
+    <li class="ticket"><div class="name">Основные понятия устойчивости по Ляпунову инвариантных множеств. Примеры</div></li>
+    <li class="ticket"><div class="name">Область асимптотической устойчивости. Примеры</div></li>
+    <li class="ticket"><div class="name">Равномерная асимптотическая устойчивость. Оценка поведения решений</div></li>
+    <li class="ticket"><div class="name">Равномерная асимптотическая устойчивость и равномерная притягиваемость</div></li>
+    <li class="ticket"><div class="name">Поведение траекторий в окрестности устойчивого по Ляпунову инвариантного множества</div></li>
+    <li class="ticket"><div class="name">Поведение траекторий в окрестности асимптотически устойчивого по Ляпунову инвариантного множества</div></li>
+    <li class="ticket"><div class="name">Критерий асимптотической устойчивости по Ляпунову нулевого решения системы обыкновенных дифференциальных уравнений</div></li>
+    <li class="ticket"><div class="name">Системы обыкновенных дифференциальных уравнений на плоскости</div></li>
+    <li class="ticket"><div class="name">Блуждающие траектории. Свойства</div></li>
+    <li class="ticket"><div class="name">Свойства множества не блуждающих точек. Теорема существования центра ДС</div></li>
+    <li class="ticket"><div class="name">Центральные движения. Свойства</div></li>
+    <li class="ticket"><div class="name">Минимальное множество. Теорема существования. Примеры</div></li>
+    <li class="ticket"><div class="name">Рекуррентные движения. Свойства. Примеры. Классификация движений</div></li>
+    <li class="ticket"><div class="name">Теоремы Биркгофа о структуре минимального компактного множества и о замыкании рекуррентного движения в полном пространстве</div></li>
+  </ol>
+</body>
+
+</html>

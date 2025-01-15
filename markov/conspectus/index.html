@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Марковские процессы &mdash; 07 &mdash; Конспект</title>
+
+    <link href="/assets/css/styles.css" rel="stylesheet">
+    <script defer src="/assets/js/core.js"></script>
+    <script defer src="/assets/js/questions.js"></script>
+    <script defer src="/assets/js/controls.js"></script>
+
+    <link rel="stylesheet" href="/assets/katex/katex.min.css">
+    <script defer src="/assets/katex/katex.min.js"></script>
+    <script defer src="/assets/katex/auto-render.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false },
+            { left: '\\(', right: '\\)', display: false },
+            { left: '\\[', right: '\\]', display: true }
+          ],
+          // • rendering keys, e.g.:
+          throwOnError: false
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1 id="title">Марковские процессы &mdash; 07 &mdash; Конспект</h1>
+    <nav>
+      <a href="/">Домой</a>
+      <a href="..">Марковские процессы</a>
+      <a href="/links">Ссылки</a>
+      <a href="/about">Контакты</a>
+    </nav>
+
+    <div style="display:none">
+      $\global\def\at#1#2{\left. #1 \right\rvert_{#2}}$
+      $\global\def\abs#1{\left\lvert #1 \right\rvert}$
+      $\global\def\norm#1{\left\lVert #1 \right\rVert}$
+      $\global\def\bvec#1{\mathbf{#1}}$
+      $\global\def\floor#1{\left\lfloor #1 \right\rfloor}$
+
+      $\global\def\limto#1{\underset{#1}{\longrightarrow}}$
+      $\global\def\prob#1{\mathbb{P} \left\{ #1 \right\}}$
+      $\global\def\mean#1{\mathbb{E} \left[ #1 \right]}$
+      $\global\def\disp#1{D \left[ #1 \right]}$
+
+      $\global\def\dp#1#2{#1 \cdot #2\,}$
+      $\global\def\vp#1#2{#1 \times #2\,}$
+
+      $\global\def\dv#1#2{\frac{d #1}{d #2}}$
+      $\global\def\rdv#1#2{\frac{d' #1}{d #2}}$ <!-- относительная производная -->
+      $\global\def\pd#1#2{\frac{\partial #1}{\partial #2}}$
+      $\global\def\pdv2#1#2{\frac{\partial^2 #1}{\partial #2^2}}$
+      $\global\def\pdvk#1#2#3{\frac{\partial^#1 #2}{\partial #3^#1}}$
+      $\global\def\ppdv#1#2#3{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
+
+      $\global\def\pois#1{\left\{ #1 \right\}}$
+      $\global\def\paren#1{\left( #1 \right)}$
+      $\global\def\bydef#1{\overset{\mathrm{def}}{#1}}$
+
+      $\global\def\mbox#1{\text{#1}}$
+
+      $\global\def\div{\text{div}\,}$
+      $\global\def\dsum{\displaystyle\sum\,}$
+      $\global\def\grad{\text{grad}\,}$
+      $\global\def\rot{\text{rot}\,}$
+
+      $\global\def\vb#1{\textbf{#1}}$
+
+      $\global\def\op#1{\mathrm{#1}\,}$
+
+      $\global\def\Im{\text{Im}\,}$
+      $\global\def\Res{\text{Res}\,}$
+      $\global\def\Re{\text{Re}\,}$
+      $\global\def\argtg{\text{argtg}\,}$
+      $\global\def\ch{\text{ch}\,}$
+      $\global\def\const{\text{const}\,}$
+      $\global\def\degree{\text{degree}\,}$
+      $\global\def\proj{\mathrm{proj}}$
+      $\global\def\rank{\mathrm{rank}}$
+      $\global\def\res{\text{res}\,}$
+      $\global\def\sh{\text{sh}\,}$
+      $\global\def\sign{\text{sign}\,}$
+      $\global\def\tg{\mathrm{tg}\,}$
+    </div>
+
+   <h2>2023-10-23</h2>
+
+   Рассматриваем цепь Маркова $(X_n) = (X_0, \dots, X_N)$. Пусть $N \geqslant 1$.
+   Рассмотрим обратную цепь Маркова $(X_{N-n}) = (X_N, X_{N-1}, \dots, X_0)$.
+
+   <div class="theorem">
+     Пусть определена цепь Маркова $(X_n): (\pi, P)$, матрица перехода положительно
+     возвратна, тогда
+     <ol>
+       <li>
+         Для любого $N \geqslant 1$ обратная цепь Маркова $(X_{N-n})$ тоже будет цепью
+         Маркова с тем же стационарным распределением и матрицей перехода
+         \[
+         \tilde P = (\tilde p_{ij}) = \frac{\pi_j}{\pi_i} p_{ji}
+         \]
+       </li>
+
+       <li>
+         если матрица перехода неприводима, то $\tilde P$ тоже неприводима.
+       </li>
+     </ol>
+
+     <div class="proof">
+       <ol>
+         <li>
+           $\tilde p_{ij} \geqslant 0$, поэтому
+           \[
+           \begin{aligned}
+           \sum\limits_{j}^{} \tilde p_{ij}
+           &=
+           \sum\limits_{j}^{} \frac{\pi_j}{\pi_i} p_{ji} = \\
+           &=
+           \frac{1}{\pi_i} \sum\limits_{j}^{} \pi_j p_{ji} = \\
+           &=
+           \frac{\pi_i}{\pi_i} = 1.
+           \end{aligned}
+           \]
+           Сумма строк равна единице, поэтому $\tilde P$ &mdash; стохастическая
+           матрица.
+
+           <p>
+             Докажем теперь, что (?). Рассмотрим
+             \[
+             \sum\limits_{j}^{} \pi_j \tilde p_{ij}
+             =
+             \sum\limits_{i}^{} \pi_j p_{ji}
+             =
+             \pi_j \underbrace{\sum\limits_{j}^{} p_{ij}}_{=1}
+             =
+             \pi_j,
+             \]
+             тогда $\pi_i$ &mdash; $\tilde P$-инвариантна.
+           </p>
+         </li>
+
+         <li>
+         </li>
+       </ol>
+     </div>
+   </div>
+
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+  </body>
+</html>

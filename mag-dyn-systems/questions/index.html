@@ -1,0 +1,3419 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Вопросы &mdash; МАДС</title>
+
+    <link href="/assets/css/styles.css" rel="stylesheet">
+    <script defer src="/assets/js/core.js"></script>
+    <script defer src="/assets/js/questions.js"></script>
+    <script defer src="/assets/js/controls.js"></script>
+
+    <link rel="stylesheet" href="/assets/katex/katex.min.css">
+    <script defer src="/assets/katex/katex.min.js"></script>
+    <script defer src="/assets/katex/auto-render.min.js"></script>
+
+    <script>
+     document.addEventListener("DOMContentLoaded", function () {
+       renderMathInElement(document.body, {
+         // customised options
+         // • auto-render specific keys, e.g.:
+         delimiters: [
+           { left: '$$', right: '$$', display: true },
+           { left: '$', right: '$', display: false },
+           { left: '\\(', right: '\\)', display: false },
+           { left: '\\[', right: '\\]', display: true }
+         ],
+         // • rendering keys, e.g.:
+         throwOnError: false
+       });
+     });
+    </script>
+  </head>
+
+  <body>
+    <h1 id="title">Вопросы &mdash; МАДС</h1>
+    <nav>
+      <a href="/">Домой</a>
+      <a href="..">МАДС</a>
+      <a href="/links">Ссылки</a>
+      <a href="/about">Контакты</a>
+    </nav>
+
+    <div class="controls">
+      <button onclick="HideQuestions()">Скрыть вопросы</button>
+      <button onclick="ShowQuestions()">Показать вопросы</button>
+      <button onclick="HideAnswers()">Скрыть ответы</button>
+      <button onclick="ShowAnswers()">Показать ответы</button>
+      <button onclick="HideProofs()">Скрыть доказательства</button>
+      <button onclick="ShowProofs()">Показать доказательства</button>
+      <button onclick="ShowRandomElement(HideQuestions)">
+        Показать случайный вопрос
+      </button>
+    </div>
+
+    <div class="proof-type">
+      Показывать
+      <select id="select-proof-type" name="select-proof-type">
+        <option value="proofs">доказательства полностью</option>
+        <option value="ideas">только идеи доказательств</option>
+      </select>
+    </div>
+
+    <div style="display:none">
+      $\global\def\at#1#2{\left. #1 \right\rvert_{#2}}$
+      $\global\def\abs#1{\left\lvert #1 \right\rvert}$
+      $\global\def\norm#1{\left\lVert #1 \right\rVert}$
+      $\global\def\limto#1{\underset{#1}{\longrightarrow}}$
+
+      $\global\def\dp#1#2{#1 \cdot #2\,}$
+      $\global\def\vp#1#2{#1 \times #2\,}$
+
+      $\global\def\dv#1#2{\frac{d #1}{d #2}}$
+      $\global\def\pd#1#2{\frac{\partial #1}{\partial #2}}$
+      $\global\def\pdv2#1#2{\frac{\partial^2 #1}{\partial #2^2}}$
+      $\global\def\ppdv#1#2#3{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
+
+      $\global\def\paren#1{\left( #1 \right)}$
+
+      $\global\def\mbox#1{\text{#1}}$
+
+      $\global\def\div{\text{div}\,}$
+      $\global\def\dsum{\displaystyle\sum\,}$
+      $\global\def\grad{\text{grad}\,}$
+      $\global\def\rot{\text{rot}\,}$
+
+      $\global\def\bvec#1{\mathbf{#1}}$
+      $\global\def\vb#1{\textbf{#1}}$
+
+      $\global\def\op#1{\mathrm{#1}\,}$
+
+      $\global\def\proj{\mathrm{proj}}$
+      $\global\def\bydef{\mathrm{def}}$
+      $\global\def\const{\text{const}\,}$
+      $\global\def\res{\text{res}\,}$
+      $\global\def\Res{\text{Res}\,}$
+      $\global\def\Re{\text{Re}\,}$
+      $\global\def\Im{\text{Im}\,}$
+      $\global\def\ch{\text{ch}\,}$
+      $\global\def\sh{\text{sh}\,}$
+      $\global\def\tg{\mathrm{tg}\,}$
+      $\global\def\ctg{\mathrm{ctg}\,}$
+      $\global\def\argtg{\text{argtg}\,}$
+
+      $\global\def\cov{\operatorname{cov}}$
+      $\global\def\var{\operatorname{var}}$
+      $\global\def\corr{\operatorname{corr}}$
+      $\global\def\se{\operatorname{se}}$
+      $\global\def\logit{\operatorname{logit}}$
+      $\global\def\id{\operatorname{id}}$
+      $\global\def\Ext{\operatorname{Ext}}$
+    </div>
+
+    <ol id="questions">
+      <li class="question">
+        <div class="name">
+          Динамические системы в евклидовых пространствах. Примеры
+        </div>
+        <div class="content">
+          Рассмотрим систему
+          \[
+          y' = f(y), \quad y \in \mathbb{R}^n.
+          \]
+          Будем считать, что $f(y)$ является непрерывно дифференцируемой, то есть принадлежит классу $C^1$. Отсюда
+          следует существование и единственность решения задачи Коши с начальными условиями $(x_0, y^0)$.
+
+          <p>
+            Также будем считать, что все решения системы продолжимы на интервал $I = \mathbb{R} = (-\infty, +\infty)$.
+          </p>
+
+          <div class="proposition">
+            Если правые части исходной системы ограничины во всём пространстве $\mathbb{R}^n$, то есть существует
+            $M = \const \gt 0$ такая, что
+            \[
+            \abs{f(y)} \lt M \qquad \forall y \in \mathbb{R}^n,
+            \]
+            то любое решение этой системы неограниченно продолжаемо, а максимальный интервал его существования равен $I$.
+          </div>
+
+          <div class="remark">
+            Рассмотрим систему
+            \[
+            \dot x = f(x).
+            \]
+
+            Если правые части системы не являются ограниченными, то всегда можно добиться условия продолжимости решения
+            путём перехода к новому времени $\tau$, введя его по формуле
+            \[
+            \frac{d \tau}{d t} = {\left(1 + \abs{f}^{p_1} \right)}^{p_2} \geqslant 1,
+            \]
+            где вещественные параметры $p_1, p_2 \gt 0$, а их произведение $p_1 p_2 \geqslant 1$.
+            <p>
+              Обычно берут $p_1 = 2, \; p_2 = 1/2$.
+            </p>
+
+            <p>
+              Новое время $\tau$ строго монотонно растёт вместе с $t$.
+            </p>
+
+            <p>
+              Исходная система перейдёт в новую систему с ограниченными правыми частями:
+              \[
+              \frac{d x}{d \tau} = \frac{f}{(1 + \abs{f}^{p_1})^{p_2}},
+              \qquad
+              \abs{\frac{f}{(1 + \abs{f}^{p_1})^{p_2}}}
+              = \frac{\abs{f}}{(1 + \abs{f}^{p_1})^{p_2}}
+              \lt 1,
+              \]
+              поэтому все решения будут неограниченно продолжаемы.
+            </p>
+          </div>
+
+          <div class="theorem">
+            <i>(Уинтнера).</i>
+            <br/>
+            Рассмотрим систему
+            \[
+            y' = f(x, y).
+            \]
+            Пусть $f(x, y)$ определена и непрерывна в области $\mathbb{R}^{n+1}$. Преположим, что
+            \[
+            \norm{f(x,y)} \leqslant W(\norm{y})
+            \]
+            для некоторой функции $W$ и выполнено условие
+            \[
+            \int\limits_{0}^{+\infty} \frac{dr}{1 + W(r)} = +\infty.
+            \]
+            Тогда любое решение $y = \varphi(x)$ исходной системы определено при всех $x \in \mathbb{R}$.
+
+            <div class="proof">
+              <div class="todo">переписать из <a target="_blank" href="/mag-dyn-systems/conspectus">конспекта</a>.</div>
+            </div>
+          </div>
+
+          <p>
+            Пусть $y = \psi(x, x_0, y^0)$ &mdash; решение исходной системы ОДУ.
+          </p>
+
+          <div class="proposition">
+            В силу стационарности системы
+            \[
+            \psi(x, x_0, y^0) = \Phi(x - x_0, y^0),
+            \]
+            причём справедливо <i class="important">групповое свойство решений в форме Коши</i>:
+            \[
+            \Phi(x_1, \Phi(x_2, y^0)) = \Phi(x_1 + x_2, y^0).
+            \]
+          </div>
+
+          Введём обозначение: $\Phi_x(y) := \Phi(x, y)$, тогда
+          \[
+          \Phi_x: \mathbb{R}^n \to \mathbb{R}^n.
+          \]
+
+          Справедливы следующие свойства оператора $\Phi_x$:
+          <ul>
+            <li>
+              $\Phi_{x_1} \circ \Phi_{x_2} = \Phi_{x_1 + x_2}$;
+            </li>
+
+            <li>
+              ассоциативность:
+              \[
+              \Phi_{x_1} \circ (\Phi_{x_2} \circ \Phi_{x_3}) = (\Phi_{x_1} \circ \Phi_{x_2}) \circ \Phi_{x_3};
+              \]
+            </li>
+
+            <li>
+              коммутативность:
+              \[
+              \Phi_{x_1} \circ \Phi_{x_2}) = \Phi_{x_2} \circ \Phi_{x_1};
+              \]
+            </li>
+
+            <li>
+              существует тождественный оператор $\Phi_0 := \varepsilon$ такой, что:
+              \[
+              \Phi_x \circ \Phi_0 = \Phi_x.
+              \]
+            </li>
+
+            <li>
+              оператор $\Phi_x$ обратим, причём
+              \[
+              \Phi_x^{-1} = \Phi_{-x};
+              \]
+            </li>
+          </ul>
+
+          <div class="proposition">
+            Множество операторов $\left\{ \Phi_x, \; x \in \mathbb{R} \right\}$ представляет собой абелеву группу.
+          </div>
+
+          <div class="definition">
+            Если оператор $\Phi_x: \mathbb{R}^n \to \mathbb{R}^n$
+            <ul>
+              <li>
+                определён при всех $x \in \mathbb{R}$;
+              </li>
+
+              <li>
+                удовлетворяет свойствам 1-5,
+              </li>
+            </ul>
+
+            то множество операторов $\left\{ \Phi_x, \; x \in \mathbb{R} \right\}$ называется <i>динамической системой в
+            евклидовом пространстве</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Динамические системы на торе. Примеры
+        </div>
+        <div class="content">
+          Рассмотрим двухстепенный гироскоп:
+          <div class="images small">
+            <img alt="гироскоп" src="images/gyro.png"/>
+          </div>
+          Углы $\varphi, \psi$ независимы, а уравнения Ньютона можно представить в виде
+          \[
+          \left\{
+          \begin{aligned}
+          \dot \varphi &= \Phi(\varphi, \psi), \\
+          \dot \psi &= \Psi(\varphi, \psi).
+          \end{aligned}
+          \right.
+          \]
+
+          Вектор $(\varphi, \psi)^T$ однозначно определяет положение системы, причём $\varphi, \psi \in \mathbb{R}$.
+          <p>
+            Функции $\Phi, \Psi$ считаем непрерывными и $2\pi$-периодическими по обоим аргументам:
+            \[
+            \begin{aligned}
+            \Phi(\varphi + 2 \pi, \psi) &= \Phi(\varphi, \psi),
+            &
+            \Phi(\varphi, \psi + 2 \pi) &= \Phi(\varphi, \psi), \\
+            \Psi(\varphi + 2 \pi, \psi) &= \Psi(\varphi, \psi),
+            &
+            \Psi(\varphi, \psi + 2 \pi) &= \Psi(\varphi, \psi).
+            \end{aligned}
+            \]
+            Из периодичности и непрерывности по теореме Вейерштрасса следует, что существуют максимумы
+            \[
+            \max_{\mathbb{R}^2} \abs{\Phi(\varphi, \psi)} \leqslant M,
+            \qquad
+            \max_{\mathbb{R}^2} \abs{\Psi(\varphi, \psi)} \leqslant M.
+            \]
+            Значит, продолжимость решения есть.
+          </p>
+
+          <p>
+            Нетрудно проверить, что перед нами динамическая система. В связи с этим перейдём к фазовому пространству:
+            <div class="images small">
+              <img alt="фазовое пространство" src="images/gyro-phase.png"/>
+            </div>
+            Пусть траектория вышла на границу, тогда (в силу периодичности) траектория &laquo;телепортируется&raquo;
+            в совпадающую точку.
+          </p>
+
+          <div class="remark">
+            Участки траектории не пересекаются в силу единственности решения задачи Коши.
+          </div>
+
+          <p>
+            Тор можно получить, совмещая одинаковые границы:
+          </p>
+          <div class="images small">
+            <img alt="получение тора" src="images/torus-creation.png"/>
+          </div>
+          Тор обозначают как $T_2$. Формально его можно задать как
+          \[
+          T_2 = \left\{
+          (\varphi_1, \varphi_2) \mod 2\pi \; | \; (\varphi_1, \varphi_2) \in \mathbb{R}^2
+          \right\}.
+          \]
+
+          <div class="proposition">
+            Тор является компактом.
+          </div>
+
+          <div class="example">
+            Рассмотрим систему
+            \[
+            \left\{
+            \begin{aligned}
+            \dot \varphi &= 1, \\
+            \dot \psi &= \alpha.
+            \end{aligned}
+            \right.
+            \]
+
+            Рассмотрим три случая.
+            <ol>
+              <li>
+                $\alpha = 1$, тогда
+                \[
+                \begin{aligned}
+                \varphi &= \varphi_0 + x, \\
+                \psi &= \psi_0 + x.
+                \end{aligned}
+                \]
+                Исключаем $x$, чтобы получить фазовую траекторию:
+                \[
+                \psi = \psi_0 + \varphi - \varphi_0.
+                \]
+                Получили прямую.
+              </li>
+              <li>
+                $\alpha = \dfrac{m}{n}$, тогда
+                \[
+                \begin{aligned}
+                \varphi &= \varphi_0 + x, \\
+                \psi &= \psi_0 + \frac{m}{n} x.
+                \end{aligned}
+                \]
+                Точки $x = 0$ и $x = 2 \pi n$ совпадают. Получили периодическую траекторию, которая зацикливается после
+                $n$ оборотов.
+              </li>
+
+              <li>
+                Если $\alpha$ &mdash; иррациональное число, то получаем
+                \[
+                \begin{aligned}
+                \varphi &= \varphi_0 + x, \\
+                \psi &= \psi_0 + \alpha x.
+                \end{aligned}
+                \]
+                Исключаем $x$:
+                \[
+                \psi = \psi_0 + \alpha \varphi - \alpha \varphi_0.
+                \]
+                Ни при каком $\varphi$, кратным $2 \pi k$, мы не попадём в $\psi$. Тогда фазовая траектория будет всюду
+                плотна на торе, то есть замыкание множества точек
+                \[
+                \left\{
+                \begin{pmatrix}
+                \varphi \\ \psi
+                \end{pmatrix}
+                \paren{x,
+                \begin{pmatrix}
+                \varphi_0 \\ \psi_0
+                \end{pmatrix}
+                }
+                \; | \; x \in \mathbb{R}
+                \right\}.
+                \]
+                совпадает с $T_2$.
+              </li>
+            </ol>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Динамические системы в функциональных пространствах. Пример линейного уравнения в частных производных
+        </div>
+        <div class="content">
+          Рассмотрим линейное ДУЧП первого порядка:
+          \[
+          \frac{\partial u}{\partial t} = au + b \frac{\partial u}{\partial x},
+          \]
+          где
+          <ul>
+            <li>
+              $a = \const \in \mathbb{R}^1$;
+            </li>
+
+            <li>
+              $b = \const \in \mathbb{R}^n$;
+            </li>
+
+            <li>
+              $x \in \mathbb{R}^n$;
+            </li>
+
+            <li>
+              $u = u(x, t)$ &mdash; неизвестная функция.
+            </li>
+          </ul>
+
+          В развёрнутом виде система имеет вид
+          \[
+          \frac{\partial u}{\partial t} = a u + \sum\limits_{i=1}^{n} b_i \frac{\partial u}{\partial x_i}.
+          \]
+
+          <p>
+            Из пространства $C^1(\mathbb{R}^n)$ выделим подмножество функций
+            \[
+            X = \left\{
+            \varphi = \varphi(x): \mathbb{R}^n \to \mathbb{R}:
+            \;
+            \varphi \in C^1(\mathbb{R}^n), \; \varphi(x) \limto{\abs{x} \to \infty} L_\varphi = \const
+            \right\}.
+            \]
+            Для каждой функции $\varphi \in X$ существует её <i>предельное значение на бесконечности</i>:
+            $L_\varphi = \const \in \mathbb{R}$.
+          </p>
+
+          <div class="remark">
+            $\abs{L_\varphi} \lt \infty$ для каждой $\varphi \in X$.
+          </div>
+
+          <div class="theorem">
+            Любая функция $\varphi \in X$ ограничена и равномерно непрерывна во всём пространстве $\mathbb{R}^n$.
+
+            <div class="proof">
+              Рассмотрим произвольую функцию $\varphi \in X$ и найдём для неё $L_\varphi = \const \lt \infty$.
+
+              <p>
+                Фиксируем произвольный $\varepsilon \gt 0$. Учитвая, что
+                \[
+                \varphi \to L_\varphi \quad \mbox{при} \quad \abs{x} \to \infty,
+                \]
+                найдём для $\varepsilon / 2 \gt 0$ такое $R = R(\varepsilon) \gt 0$, что
+                \[
+                \tag{1}
+                \abs{\varphi(x) - L_\varphi} \lt \varepsilon / 2 \qquad \forall x: \abs{x} \gt R.
+                \]
+                Тогда для любых $x_1, x_2$, у которых $\abs{x_1}, \abs{x_2} \gt R$, получаем
+                \[
+                \abs{\varphi(x_1) - \varphi(x_2)}
+                \leqslant \abs{\varphi(x_1) - L_\varphi}
+                + \abs{\varphi(x_2) - L_\varphi}
+                \lt \varepsilon.
+                \]
+
+                Сузим теперь функцию $\varphi$ на замкнутый шар $\overline{K}_{R + \Delta}(0)$, где $\Delta \gt 0$
+                &mdash; произвольная фиксированная постоянная. Шар является компактом, поэтому сужение является
+                равномерно непрерывным, откуда следует, что для рассматриваемых $\varepsilon$ и $R + \Delta$
+                существует $\delta = \delta(\varepsilon, R + \Delta) \gt 0$ такое, что
+                \[
+                \abs{\varphi(x_1) - \varphi(x_2)} \lt \varepsilon
+                \qquad
+                \forall x_1, x_2 \in \overline{K}_{R + \Delta}(0): \abs{x_1 - x_2} \lt \delta.
+                \]
+
+                Если потребуется, уменьшим $\delta$ так, чтобы $0 \lt \delta \lt \Delta$. Тогда
+                \[
+                \abs{\varphi(x_1) - \varphi(x_2)} \lt \varepsilon
+                \qquad
+                \forall x_1, x_2 \in \mathbb{R}^n: \abs{x_1 - x_2} \lt \delta.
+                \]
+                Равномерная непрерывность функции $\varphi$ доказана.
+              </p>
+
+              <p>
+                Докажем теперь ограниченность. Пусть модуль $\abs{\varphi(x)}$ на компакте $\overline{K}_R(0)$
+                ограничен сверху константой $M \gt 0$, то есть в силу компактности замкнутого шара существует
+                $M = \const \gt 0$ такая, что
+                \[
+                \abs{\varphi(x)} \leqslant M \qquad \forall x: \abs{x} \leqslant R.
+                \]
+                Используя соотношение $(1)$, получаем, что
+                \[
+                \min \left\{ -M, L_\varphi - \varepsilon/2 \right\}
+                \lt
+                \varphi(x)
+                \lt
+                \max \left\{  M, L_\varphi + \varepsilon/2 \right\}.
+                \]
+              </p>
+              Так как
+              \[
+              -\infty \lt \min \left\{ -M, L_\varphi - \varepsilon/2 \right\},
+              \qquad
+              \max \left\{  M, L_\varphi + \varepsilon/2 \right\} \lt \infty,
+              \]
+              то функция $\varphi(x)$ ограничена для любого $x \in \mathbb{R}^n$.
+            </div>
+          </div>
+
+          <div class="proposition">
+            $X$ &mdash; линейное пространство с обычными операциями сложения функций и умножения на скаляр.
+          </div>
+
+          <p>
+            Теорема 1 позволяет ввести норму в $X$ как норму линейного подпространства пространства $M(\mathbb{R}^n)$
+            ограниченных в $\mathbb{R}^n$ функций:
+            \[
+            \norm{\varphi} = \sup_{x \in \mathbb{R}^n} \abs{\varphi(x)},
+            \]
+            тем самым $X$ становится нормированным пространством.
+          </p>
+
+          <div class="proposition">
+            $X$ &mdash; замкнутое подпространство пространства $M(\mathbb{R}^n)$.
+          </div>
+
+          Из предыдущего утверждения следует, что $X$ является <i>полным</i> пространством, следовательно, оно является
+          <i>банаховым</i>.
+
+          <hr/>
+
+          <p>
+            Для произвольной $\varphi \in X$ обозначим через $f(\varphi, t)$ решение $u(x, t)$ исходного уравнения
+            с задачей Коши $u(x, 0) = \varphi(x)$. Таким решением является функция
+            \[
+            f(\varphi, t) = u(x, t) = e^{at} \varphi(x + bt), \qquad x \in \mathbb{R}^n, \quad t \in \mathbb{R}.
+            \]
+          </p>
+
+          <div class="proposition">
+            $f(\varphi, t) \in X$ для всех $t \in \mathbb{R}^n$.
+          </div>
+
+          <p>
+            Таким образом, в рассматриваемом пространстве $X$ возникает однопараметрическое семейство операторов
+            \[
+            \left\{
+            F_t: X \to X, \; \varphi \mapsto F_t(\varphi) \leftrightharpoons f(\varphi, t):
+            \; t \in \mathbb{R}^n
+            \right\}
+            \]
+            со свойствами:
+          </p>
+
+          <ol>
+            <li>
+              $F_0 = \id_X$ или $f(\varphi, 0) = \varphi$ для любой $\varphi \in X$;
+            </li>
+
+            <li>
+              отображение $f(\varphi, t)$ непрерывно по совокупности переменных;
+              <div class="derivation">
+                <div class="todo">1 часть, стр. 110.</div>
+              </div>
+            </li>
+
+            <li>
+              $F_{t_2} \circ F_{t_1} = F_{t_2 + t_1}$, что эквивалентно
+              \[
+              f(f(\varphi, t_1), t_2) = f(\varphi, t_1 + t_2) \quad \forall t_1, t_2 \in \mathbb{R}, \; \varphi \in X.
+              \]
+            </li>
+          </ol>
+
+          <div class="definition">
+            Введённая однопараметрическая группа преобразований пространства $X$ называется <i>динамической системой
+            в функциональном пространстве $X$, отвечающей линейному ДУЧП</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Динамические системы в метрическом пространстве. Свойства
+        </div>
+        <div class="content">
+          Пусть $(X, \rho)$ &mdash; произвольное метрическое пространство.
+
+          <div class="definition">
+            <i>Динамической системой в метрическом пространстве $X$</i> называют однопараметрическое семейство
+            преобразований пространства $X$
+            \[
+            \left\{
+            F_t: X \to X, \; p \mapsto F_t(p) = f(p, t):
+            \; t \in \mathbb{R}
+            \right\},
+            \]
+            удовлетворяющее свойствам:
+            <ol>
+              <li>
+                $F_0 = \id$ или $f(p, 0) = p$ для любого $p \in X$;
+              </li>
+
+              <li>
+                отображение $f(p, t)$ непрерывно по совокупности аргументов;
+              </li>
+
+              <li>
+                $F_{t_2} \circ F_{t_1} = F_{t_2 + t_1}$, или, в развёрнутом виде,
+                \[
+                f(f(p, t_1), t_2) = f(p, t_1 + t_2) \qquad \forall t_1, t_2 \in \mathbb{R}, \; p \in X.
+                \]
+              </li>
+            </ol>
+          </div>
+
+          <div class="definition">
+            Пространство $X$ называют <i>фазовым пространством</i> динамической системы, а параметр $t$ &mdash;
+            <i>временем</i>.
+          </div>
+
+          <div class="remark">
+            Из условий 1, 3 следует, что
+            \[
+            F_t \circ F_{-t} = \id, \qquad F_{-t} \circ F_{t} = \id \qquad \forall t \in \mathbb{R}.
+            \]
+            Это значит, что операторы $F_t$ необходимо обратимы, то есть являются преобразованиями фазового пространства
+            $X$.
+          </div>
+
+          <div class="theorem">
+            Семейство преобразований $\left\{ F_t \right\}$ образует коммутативную группу.
+          </div>
+
+          <div class="remark">
+            Из условия 2 и предыдущей теоремы следует, что для любого $t \in \mathbb{R}$ преобразования
+            \[
+            F_t, \qquad F_t^{-1} = F_{-t}
+            \]
+            непрерывны, то есть всякое преобразование $F_t$ является <i>гомеоморфизмом фазового пространства $X$</i>.
+          </div>
+
+          <div class="definition">
+            Отображение $f(p, t)$ при произвольной фиксированной точке $p \in X$, то есть отображение
+            \[
+            \mathbb{R} \to X, \quad t \mapsto f(p,t) \in X,
+            \]
+            называется <i>движением (точки p)</i> динамической системы.
+          </div>
+
+          <div class="definition">
+            Говорят, что движение $f(p, t)$ <i>проходит через точку $p$ в момент времени $t = 0$</i> (учитывая, что
+            $f(p, 0) = p$ по свойству 1 определения ДС), а сам образ $f(p, t)$ трактуют как
+            <i>положение точки $p$ в момент времени $t$</i>.
+          </div>
+
+          <div class="definition">
+            Множество точек
+            \[
+            f(p, I) = \left\{ f(p, t): \; t \in \mathbb{R} \right\}
+            \]
+            называется <i>траекторией</i> динамической системы, проходящей через точку $p \in X$.
+          </div>
+
+          <div class="definition">
+            <ul>
+              <li>
+                Множество $f(p, I^+)$ называют <i>положительной полутраекторией</i>, исходящей из точки $p$.
+              </li>
+
+              <li>
+                Множество $f(p, I^-)$ называют <i>отрицательной полутраекторией</i>, исходящей из точки $p$.
+              </li>
+
+              <li>
+                Множество $f(p, T_1, T_2) = \left\{ f(p, t): \; t \in [T_1, T_2] \right\}$ называют
+                <i>конечной дугой траектории</i> $f(p, I)$, отвечающей отрезку времени $[T_1, T_2] \subset I$.
+              </li>
+            </ul>
+          </div>
+
+          <div class="remark">
+            Одной и той же траектории $f(p, I)$ отвечают различные движения: $f(p,I)$ и $f(q,I)$ для любой точки $q \in X$
+            так, что $f(p, I) = f(q, I)$.
+          </div>
+
+          <div class="theorem">
+            Траектории ДС не пересекаются, определяя разбиение пространства $X$ на классы эквивалентности.
+            <br/>
+            Две точки принадлежат одному классу эквивалентности тогда и только тогда, когда они лежат на одной и той же
+            траектории.
+          </div>
+
+          Из предыдущей теоремы следует, что изображающая точка, двигаясь по одной траектории, ни за какое
+          <i class="important">конечное</i> время не может достигнуть никакой другой траектории.
+
+          <div class="corollary">
+            Различные движения $f(p, t)$ и $f(q,t)$ отвечают одной и той же траектории тогда и только тогда, когда
+            существует $\tau \in \mathbb{R}$ такое, что $q = f(p, \tau)$.
+          </div>
+
+          <div class="definition">
+            Качественная структура разбиения фазового пространства $X$ ДС на траектории называется
+            <i>фазовым портретом (картиной)</i> ДС.
+          </div>
+
+          <div class="theorem">
+            <i>(об интегральной непрерывности движений ДС)</i>.
+            <br/>
+            Рассмотрим произвольное движение $f(p,t)$ ДС. Тогда при любых $\varepsilon \gt 0, T \gt 0$ существует
+            $\delta = \delta(\varepsilon, T) \gt 0$ такое, что для всех $q \in X: \rho(p, q) \lt \delta$
+            выполнено условие
+            \[
+            \rho(f(p, t), f(q, t)) \lt \varepsilon \qquad \forall t \in \mathbb{R}: \abs{t} \leqslant T.
+            \]
+          </div>
+
+          <div class="remark">
+            Предыдущая теорема означает, что движения непрерывно зависят от начальных данных на конечном промежутке
+            времени.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Динамические системы в метрическом пространстве. Классы движений
+        </div>
+        <div class="content">
+          Пусть $(X, \rho)$ &mdash; произвольное метрическое пространство и $f(p,t)$ &mdash; динамическая система.
+
+          <div class="theorem">
+            <i>(о трёх видах траекторий)</i>.
+            <br/>
+            Движение ДС и соответствующая ему траектория может быть только одного из следующих трёх видов:
+            <ol>
+              <li>
+                непериодическое движение $f(p,t)$, для которого
+                \[
+                f(p, t_1) \neq f(p, t_2) \qquad \forall t_1, t_2 \in \mathbb{R}, \; t_1 \neq t_2.
+                \]
+                Траектория, соответствующая этому движению, является простой (без самопересечений) кривой в пространстве $X$.
+              </li>
+
+              <li>
+                периодическое движение, то есть движение $f(p, t)$, для которого существует такая постоянная $T \gt 0$,
+                что
+                \[
+                f(p, t + T) = f(p, t) \qquad \forall t \in \mathbb{R}
+                \]
+                и
+                \[
+                f(p, t_1) \neq f(p, t_2) \qquad \forall t_1, t_2 \in \mathbb{R}: \; 0 \leqslant t_1 \lt t_2 \lt T.
+                \]
+                Этому движению отвечает простая замкнутая траектория $f(p, I)$.
+              </li>
+
+              <li>
+                постоянное движение $f(p, t) \equiv p$ при всех $t \in \mathbb{R}$. Соответствующая траектория &mdash;
+                точка $f(p, 0) = p$.
+              </li>
+            </ol>
+
+            <div class="idea">
+              <ol>
+                <li>
+                  Предполагаем, что имеем не случай 1, то есть траектория $f(p_0, I)$ либо замкнута, либо имеет
+                  самопересечение.
+                </li>
+
+                <li>
+                  Пользуясь 3 свойством определения ДС, показываем, что самопересечений быть не может, поэтому траектория
+                  замкнута, а соотв. движение &mdash; периодическое.
+                </li>
+
+                <li>
+                  Строим множество периодов $G$; показываем, что оно замкнуто (содержит всякий предел по $t$).
+                </li>
+
+                <li>
+                  Рассматриваем точную нижнюю границу $T$ множества $G$; возможные альтернативы: $T = 0$ и $T \gt 0$.
+                </li>
+
+                <li>
+                  Если $T = 0$, то имеем постоянное движение; если $T \gt 0$, то цикл, причём
+                  \[
+                  G = \left\{ nT: n \in \mathbb{Z} \right\}.
+                  \]
+                  Равенство выше показывается от противного.
+                </li>
+              </ol>
+            </div>
+
+            <div class="proof">
+              <div class="todo">2 часть, стр. 9.</div>
+            </div>
+          </div>
+
+          <div class="definition">
+            Траекторию &mdash; точку $p$, отвечающую постоянному движению $f(p,t) \equiv p$, называют
+            <i>точкой покоя</i> или <i>положением равновесия</i> ДС.
+          </div>
+
+          <div class="definition">
+            Траекторию &mdash; простую замкнутую кривую, отвечающую периодическому движению, называют <i>циклом</i>.
+          </div>
+
+          <div class="remark">
+            Отличная от точки покоя траектория $f(p, I)$ есть <i>ориентированная кривая</i>, положительное направление
+            которой совпадает с положительным направлением времени $t$.
+          </div>
+
+          <div class="theorem">
+            Точка покоя, цикл и всякая конечная дуга траектории есть компактные, следовательно, ограниченные и замкнутые
+            множества.
+          </div>
+
+          <div class="proposition">
+            Всякие траектория $f(p, I)$, полутраектория $f(p, I^+), f(p, I^-)$ связны. Следовательно, также связны их
+            замыкания
+            \[
+            \overline{f(p, I)}, \quad \overline{f(p, I^+)}, \quad \overline{f(p, I^-)}
+            \]
+            как замыкания связных множеств.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Инвариантные множества. Свойства
+        </div>
+        <div class="content">
+          <div class="definition">
+            Пусть $f: X \to Y$ &mdash; какое-либо отображение множеств $X, Y$. Если $A \subset X$, то
+            <i>образом множества $A$ при отображении $f$</i> называют множество
+            \[
+            f(A) \leftrightharpoons \left\{ y = f(x): \; x \in A \right\} \subset Y.
+            \]
+          </div>
+
+          <div class="definition">
+            Если $B \subset Y$, то <i>(полным) прообразом множества $B$ при отображении $f$</i> называют множество
+            \[
+            f^{-1}(B) \leftrightharpoons \left\{ x \in X: \; f(x) \in B \right\} \subset X.
+            \]
+          </div>
+
+          <div class="remark">
+            Прообраз множества $f^{-1}(B)$ всегда определён, вне зависимости от обратимости отображения $f$.
+          </div>
+
+          <hr/>
+
+          Рассмотрим ДС $f(p,t)$ в метрическом пространстве $(X, \rho)$ и множество $A \subset X$.
+
+          <div class="definition">
+            Для всякого момента времени $t \in \mathbb{R}$ множество
+            \[
+            f(A, t) = \left\{ f(p, t): \; p \in A \right\}
+            \]
+            будем называть <i>образом</i> множества $A$ или его <i>сдвигом (по траекториям ДС)</i>, отвечающим моменту
+            $t$.
+          </div>
+
+          <div class="definition">
+            Множество $A$ называется <i>инвариантным</i>, если всякий его образ
+            \[
+            f(A, t) = A \qquad \forall t \in \mathbb{R}.
+            \]
+          </div>
+
+          Рассмотрим свойства инвариантных множеств.
+          <ol>
+            <li>
+              Множество $A$ инвариантно тогда и только тогда, когда оно состоит из целых траекторий, то есть
+              \[
+              f(p, I) \subset A \qquad \forall p \in A.
+              \]
+            </li>
+
+            <li>
+              <ul>
+                <li>
+                  Вся траектория $A = f(p, I)$ для любой точки $p \in X$;
+                </li>
+
+                <li>
+                  произвольное объединение траекторий
+                  \[
+                  A = \bigcup_{\alpha} f(p_\alpha, I)
+                  \]
+                  для любого набора $\left\{ p_\alpha \right\} \subset X$;
+                </li>
+
+                <li>
+                  само пространство $A = X$
+                </li>
+              </ul>
+              являются инвариантными множествами.
+            </li>
+
+            <li>
+              Если множества $A, A_1, A_2$ &mdash; инвариантны, то множества
+              <ul>
+                <li>
+                  $A_1 \cap A_2$;
+                </li>
+
+                <li>
+                  $A_1 \cup A_2$;
+                </li>
+
+                <li>
+                  $A_1 \setminus A_2$;
+                </li>
+
+                <li>
+                  $X \setminus A$
+                </li>
+              </ul>
+              тоже являются инвариантными.
+            </li>
+          </ol>
+
+          <div class="theorem">
+            Если множество $A \subset X$ инвариантно, то
+            <ul>
+              <li>
+                его замыкание $\overline{A}$;
+              </li>
+
+              <li>
+                внутренность $\mathring{A}$;
+              </li>
+
+              <li>
+                граница $\Gamma A = \overline{A} \setminus \mathring A$;
+              </li>
+
+              <li>
+                край $\partial A = A \setminus \mathring A$;
+              </li>
+
+              <li>
+                внешность $\Ext A$
+              </li>
+            </ul>
+            также являются инвариантными множествами.
+
+            <div class="idea">
+              <ol>
+                <li>
+                  Начинаем с доказательства инвариантности замыкания $\overline A$.
+                </li>
+
+                <li>
+                  Из определения замыкания строим последовательность точек $p_n$ из $A$, которые сходятся к $p$ при $n
+                  \to \infty$.
+                </li>
+
+                <li>
+                  Фиксируем $t$, рассматриваем $f(p_n, t) \in A$. Берём предел, по непрерывности получаем $f(p, t) \in A$.
+                </li>
+
+                <li>
+                  Инвариантность остальных множеств показывается по первому пункту и по формулам
+                  \[
+                  \mathring A = X \setminus (\overline{X \setminus A});
+                  \quad
+                  \Gamma A = \overline{A} \setminus \mathring A;
+                  \quad
+                  \partial A = A \setminus \mathring A;
+                  \quad
+                  \Ext A = X \mathring{\setminus} A.
+                  \]
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Свойства множества точек покоя
+        </div>
+        <div class="content">
+          <div class="theorem">
+            Множество точек покоя ДС является замкнутым инвариантным множеством.
+
+            <div class="idea">
+              <ol>
+                <li>
+                  Инвариантность очевидна &mdash; никуда не денемся из точки равновесия :)
+                </li>
+
+                <li>
+                  Показываем замкнутость. Пусть $A$ &mdash; множество точек покоя ДС $f(p,t)$.
+                </li>
+
+                <li>
+                  Строим последовательность $p_n$ точек покоя ($p_n \in A$), по определению
+                  \[
+                  f(p_n, t) = p_n \qquad \forall t \in \mathbb{R}.
+                  \]
+                </li>
+
+                <li>
+                  Переходим к пределу; в силу непрерывности получаем $f(p, t) = p$, то есть $p \in A$ &mdash; победа.
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="theorem">
+            Ни одна траектория ни при каком <i>конечном</i> t не может входить в точку покоя и выходить из неё.
+          </div>
+
+          <div class="theorem">
+            Пусть $p \in X$. Если для любого $\delta \gt 0$ существует точка $q \in u_\delta(p)$ такая, что полутраектория
+            $f(q, I^+) \subset u_\delta(p)$, то $p$ &mdash; точка покоя.
+
+            <div class="proof">
+              <div class="todo">2 часть, стр. 24.</div>
+            </div>
+          </div>
+
+          <div class="theorem">
+            Если $f(q, t) \to p$ при $t \to +\infty$ или $t \to -\infty$, то $p$ &mdash; точка покоя.
+
+            <div class="proof">
+              Следует из предыдущей теоремы.
+            </div>
+          </div>
+
+          <div class="definition">
+            Точка покоя $p$ ДС $f(p, t)$ называется <i>изолированной</i>, если существует её окрестность, не содержащая
+            других точек покоя. В противном случае она называется <i>неизолированной</i>.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Предельные множества траекторий. Свойства. Примеры
+        </div>
+        <div class="content">
+          Пусть $f(p,t)$ &mdash; ДС в метрическом пространстве $(X, \rho)$.
+
+          <div class="definition">
+            Если существуют последовательность $t_n \to \infty, \; t_n \geqslant 0$ и точка $q \in X$ такие, что
+            \[
+            f(p, t_n) \limto{n \to \infty} q,
+            \]
+            то точка $q$ называется <i>$\omega$-предельной точкой</i> движения $f(p,t)$ (или траектории $f(p, I)$, или
+            положительной полутраектории $f(p, I^+)$).
+          </div>
+
+          <div class="definition">
+            Множество $\omega$-предельных точек движения $f(p,t)$ (траектории $f(p, I)$) называется его
+            <i>положительным предельным множеством</i> и обозначается $\Omega_p$.
+          </div>
+
+          <div class="definition">
+            Если существуют последовательность $t_n \to -\infty, \; t_n \leqslant 0$ и точка $q \in X$ такие, что
+            \[
+            f(p, t_n) \limto{n \to \infty} q,
+            \]
+            то точка $q$ называется <i>$\alpha$-предельной точкой</i> движения $f(p,t)$ (или траектории $f(p, I)$, или
+            отрицательной полутраектории $f(p, I^-)$).
+          </div>
+
+          <div class="definition">
+            Множество $\alpha$-предельных точек движения $f(p,t)$ (траектории $f(p, I)$) называется его
+            <i>отрицательным предельным множеством</i> и обозначается $\Alpha_p$.
+          </div>
+
+          <div class="definition">
+            Все $\omega$-предельные и $\alpha$-предельные точки ДС называют её <i>предельными точками</i>.
+          </div>
+
+          <div class="proposition">
+            Для всякой точки $p \in X$ и для любого $t \in \mathbb{R}$ справедливы равенства
+            \[
+            \Omega_p = \Omega_{f(p,t)}, \qquad \Alpha_p = \Alpha_{f(p,t)}.
+            \]
+
+            <div class="proof">
+              Напрямую следует из пункта 3 определения ДС:
+              \[
+              f(f(p,t_n), t) = f(p, t_n + t) \qquad \forall t \in \mathbb{R}
+              \]
+              после предельного перехода.
+            </div>
+          </div>
+
+          <div class="remark">
+            Таким образом, понятия предельных точек относятся <i class="important">целиком к траектории $f(p,I)$</i>
+            и не зависят от выбора точки $q = f(p, t_1)$ этой траектории.
+          </div>
+
+          <div class="proposition">
+            Для всякой точки $p \in X$ справедливы включения:
+            \[
+            \Omega_p \subset \overline{f(p, I^+)}, \qquad \Alpha_p \subset \overline{f(p, I^-)}.
+            \]
+
+            <div class="proof">
+              В силу определений предельных точек они всегда являются замыканиями соотв. полутраекторий.
+            </div>
+          </div>
+
+          <div class="proposition">
+            Для любой точки $p \in X$ справедливы равенства
+            \[
+            \Omega_p = \bigcap_{q \in f(p, I^+)} \overline{f(q, I^+)},
+            \qquad
+            \Alpha_p = \bigcap_{q \in f(p, I^-)} \overline{f(q, I^-)}.
+            \]
+          </div>
+
+          <div class="theorem">
+            Предельные множества $\Omega_p, \Alpha_p$ &mdash; замкнутые инвариантные множества.
+
+            <div class="proof">
+              Доказательство будем вести для $\Omega_p$ (для $\Alpha_p$ аналогично).
+              <p>
+                Если $\Omega_p = \varnothing$, то утверждение теоремы тривиально.
+              </p>
+
+              Пусть теперь $\Omega_p \neq \varnothing$.
+
+              <ol>
+                <li>
+                  Доказываем замкнутость. Рассмотрим точку $q \in \overline{\Omega_p}$. Из определения замыкания на языке
+                  последовательностей следует, что существует последовательность $\left\{ q_n \right\} \subset \Omega_p$
+                  такая, что $q_n \limto{n \to \infty} q$.
+
+                  <p>
+                    Так как $q_n \in \Omega_p$, то из определения положительного предельного множества следует, что
+                    найдётся последовательность $t_n$ такая, что
+                    \[
+                    t_n \gt n, \qquad \rho(q_n, f(p, t_n)) \lt \frac{1}{n}.
+                    \]
+                    Устремляя $n \to \infty$ и используя неравенство треугольника по точке $q$, получаем
+                    \[
+                    \rho(q, f(p, t_n)) \leqslant \underbrace{\rho(q, q_n)}_{\to 0}
+                    + \underbrace{\rho(q_n, f(p, t_n))}_{\lt 1/n \to 0}.
+                    \]
+                    Следовательно, $f(p, t_n) \to q$ при $n \to \infty$, то есть $q \in \Omega_p$ по определению.
+                    Замкнутость показана.
+                  </p>
+                </li>
+
+                <li>
+                  Доказываем инвариантность. Пусть $q \in \Omega_p$, тогда по определению существует последовательность
+                  $t_n \to +\infty$, для которой $f(p, t_n) \to q$. Взяв оператор $f(\cdot, t)$ для любого
+                  $t \in \mathbb{R}$ от обеих частей предельного соотношения, используя свойство 3 определения ДС и
+                  секвенциальную непрерывность преобразований фазового пространства ДС, получаем
+                  \[
+                  f(p, t + t_n) = f(f(p, t_n), t) \to f(q, t) \qquad \forall t \in \mathbb{R}.
+                  \]
+                  Последовательность $\tau_n = t + t_n \to \infty$ (смотрим только на $\tau_n \geqslant 0$), поэтому
+                  точка $f(q, t) \in \Omega_p$ для любого $t \in \mathbb{R}$. Инвариантность показана.
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="remark">
+            Инвариантность множеств $\Omega_p$ и $\Alpha_p$ означает, что они состоят только из целых траекторий ДС.
+          </div>
+
+          Предельные множества могут быть пустыми. Рассмотрим критерий для случая евклидова пространства
+          $X = \mathbb{R}^n$.
+
+          <div class="theorem">
+            Пусть $X = \mathbb{R}^n$. В этом случае $\Omega_p = \varnothing$ (или $\Alpha_p = \varnothing$)
+            тогда и только тогда, когда
+            \[
+            f(p, t) \to \pm\infty,
+            \]
+            то есть
+            \[
+            \abs{f(p, t)} \limto{t \to \infty} \infty
+            \qquad
+            (\abs{f(p, t)} \limto{t \to -\infty} \infty)
+            \]
+
+            <div class="proof">
+              Доказываем для $\Omega_p$ (для $\Alpha_p$ аналогично).
+
+              <div class="sufficiency">
+                Если $f(p, t) \to \infty$, то для всякой последовательности $t_n \to \infty$ при $n \to \infty$
+                также имеем
+                \[
+                f(p, t_n) \to \infty,
+                \]
+                то есть траектория $f(p,I)$ не может иметь $\omega$-предельных точек, поэтому $\Omega_p = \varnothing$.
+              </div>
+
+              <div class="necessity">
+                От противного: пусть $\Omega_p = \varnothing$, но $f(p, t) \not\to \infty$. Это значит, что
+                существует $R = \const \gt 0$ и последовательность $t_n \to \infty$ при $n \to \infty$, для которых
+                $f(p, t_n) \in \overline{K}_R(0)$.
+
+                <div class="remark">
+                  $\overline{K}_R(0)$ &mdash; замкнутый шар радиуса $R$ с центром в точке $0$:
+                  \[
+                  \overline{K}_R(0) = \left\{ x \in X: \; \rho(x, 0) \leqslant R \right\}.
+                  \]
+                </div>
+
+                <p>
+                В силу компактности замкнутого шара существует точка $q \in \overline{K}_R(0)$ и сходящаяся к ней
+                подпоследовательность $f(p, t_{n_k}) \to q$, где $t_{n_k} \to \infty$ при $k \to \infty$.
+                </p>
+
+                Таким образом, $q \in \Omega_p$, что противоречит предположению $\Omega_p = \varnothing$. Значит,
+                $f(p, t) \to \infty$.
+              </div>
+            </div>
+          </div>
+
+          Рассмотрим случай, когда предельное множество состоит из одной точки.
+
+          <div class="theorem">
+            Для того чтобы положительное (отрицательное) предельное множество состояло из единственной точки:
+            \[
+            \Omega_p = q \in X \qquad (\Alpha_p = q \in X),
+            \]
+            достаточно (а в случае $X = \mathbb{R}^n$ и необходимо), чтобы $f(p, t) \to q$ при $t \to \infty$
+            ($t \to -\infty$).
+
+            <div class="proof">
+              Доказываем для $\Omega_p$.
+
+              <div class="sufficiency">
+                Если $f(p, t) \to q$ при $t \to \infty$, то для любой последовательности $t_n \to \infty$ имеем
+                $f(p, t_n) \to q$, то есть $\Omega_p = q$.
+              </div>
+
+              <div class="necessity">
+                <div class="todo">2 часть, стр. 30.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="proposition">
+            Пусть $p \in X$.
+            <ul>
+              <li>
+                Если $\overline{f(q, I^+)} = X$ для любой точки $q \in f(p, I^+)$, то $\Omega_p = X$.
+              </li>
+
+              <li>
+                Если $\overline{f(q, I^-)} = X$ для любой точки $q \in f(p, I^-)$, то $\Alpha_p = X$.
+              </li>
+            </ul>
+
+            <div class="proof">
+              Утверждение напрямую следует из свойств:
+              \[
+              \Omega_p = \bigcap_{q \in f(p, I^+)} \overline{f(q, I^+)},
+              \qquad
+              \Alpha_p = \bigcap_{q \in f(p, I^-)} \overline{f(q, I^-)}.
+              \]
+            </div>
+          </div>
+
+          <hr/>
+
+          <div class="example">
+            Если $p$ &mdash; точка покоя, то $\Omega_p = \Alpha_p = p$.
+          </div>
+
+          <div class="example">
+            Если $f(p,t) \limto{t \to \infty} q$, то $\Omega_p = q$. Аналогично для $\Alpha_p$.
+          </div>
+
+          <div class="example">
+            Если движение $f(p,t)$ периодическое с периодом $T \gt 0$ и траектория $f(p, I)$ &mdash; цикл $C$, то
+            \[
+            \Omega_p = \Alpha_p = C.
+            \]
+
+            <div class="derivation">
+              Фиксируем $q \in f(p, t)$ для некоторого $t \in \mathbb{R}$ и строим последовательность $t_n = t + nT$.
+              Тогда
+              \[
+              \lim\limits_{n \to \infty} f(p, t_n) = \lim\limits_{n \to \infty} q = q,
+              \]
+              поэтому $q \in \Omega_p$.
+
+              <p>
+                Заметим, что никакая другая точка из $X \setminus C$ не может входить ни в $\Omega_p$, ни в $\Alpha_p$.
+                Это следует из того, что $C$ &mdash; замкнутое множество, поэтому $X \setminus C$ &mdash; открытое, то
+                есть для любой точки существует окрестность, полностью лежащая в $X \setminus C$, то есть не
+                пересекающаяся с $C$.
+              </p>
+            </div>
+          </div>
+
+          <div class="theorem">
+            $\Omega_p = f(p, I^+)$ тогда и только тогда, когда $f(p, I)$ &mdash; точка покоя или цикл.
+
+            <div class="proof">
+              <div class="todo">2 часть, стр. 40.</div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Устойчивость по Лагранжу. Свойства
+        </div>
+        <div class="content">
+          Пусть $f(p,t)$ &mdash; ДС в метрическом пространстве $(X, \rho)$.
+
+          <div class="definition">
+            <ul>
+              <li>
+                Точка $p \in X$;
+              </li>
+
+              <li>
+                 движение $f(p,t)$;
+              </li>
+
+              <li>
+                 траектория $f(p,I)$;
+              </li>
+
+              <li>
+                 полутраектория $f(p,I^+)$
+              </li>
+            </ul>
+            называются <i>положительно устойчивыми по Лагранжу (устойчивыми $L^+$)</i>, если
+            $\overline{f(p, I^+)}$ &mdash; компактное множество.
+
+            <br/>
+            <br/>
+
+            Компактность $\overline{f(p, I^+)}$ эквивалентна тому, что $f(p, I^+) \subset K$, где $K$ &mdash; компакт.
+          </div>
+
+          <div class="definition">
+            <ul>
+              <li>
+                Точка $p \in X$;
+              </li>
+
+              <li>
+                 движение $f(p,t)$;
+              </li>
+
+              <li>
+                 траектория $f(p,I)$;
+              </li>
+
+              <li>
+                 полутраектория $f(p,I^-)$
+              </li>
+            </ul>
+            называются <i>отрицательно устойчивыми по Лагранжу (устойчивыми $L^-$)</i>, если
+            $\overline{f(p, I^-)}$ &mdash; компактное множество.
+
+            <br/>
+            <br/>
+
+            Компактность $\overline{f(p, I^-)}$ эквивалентна тому, что $f(p, I^-) \subset K$, где $K$ &mdash; компакт.
+          </div>
+
+          <div class="definition">
+            <ul>
+              <li>
+                Точка $p \in X$;
+              </li>
+
+              <li>
+                 движение $f(p,t)$;
+              </li>
+
+              <li>
+                 траектория $f(p,I)$
+              </li>
+            </ul>
+
+            называются <i>устойчивыми по Лагранжу (устойчивыми $L$)</i>, если они устойчивы $L^+$ и $L^-$.
+          </div>
+
+          <div class="remark">
+            Если $X$ компактно, то всякое движение устойчиво $L$.
+          </div>
+
+          <div class="remark">
+            Тривиальные примеры устойчивых $L$ траекторий &mdash; точки покоя и циклы.
+          </div>
+
+          <div class="proposition">
+            Усточивость $L$ ($L^+, L^-$) влечёт за собой ограниченность и даже полную ограниченность траектории $f(p, I)$
+            ($f(p, I^+), f(p, I^-)$).
+            <br/>
+            В случае $X = \mathbb{R}^n$ устойчивость $L$ ($L^+, L^-$) эквивалентна ограниченности траектории
+            (положительной, отрицательной полутраектории).
+          </div>
+
+          <div class="proposition">
+            Если движение $f(p,t)$ устойчиво $L^+$ ($L^-$), то предельное множество $\Omega_p$ ($\Alpha_p$) компактно.
+
+            <div class="proof">
+              Пусть $f(p, t)$ устойчиво $L^+$, тогда $\overline{f(p, I^+)}$ &mdash; компактное множество. Тогда, в силу
+              того, что $\Omega_p \subset \overline{f(p, I^+)}$ и $\Omega_p$ &mdash; замкнутое, оно также является
+              компактным.
+            </div>
+          </div>
+
+          <div class="theorem">
+            Если движение $f(p,t)$ устойчиво $L^+$ ($L^-$), то $\Omega_p \neq \varnothing$ ($\Alpha_p \neq \varnothing$).
+
+            <div class="proof">
+              Пусть $f(p,t)$ устойчиво $L^+$. Значит, $f(p, I^+) \subset K$, где $K$ &mdash; компакт.
+              <br/>
+              Рассмотрим последовательность $t_n \to \infty$. Из содержащейся в компакте $K$ последовательности точек
+              $\left\{ f(p, t_n) \right\}$ полутраектории выделим сходящуюся подпоследовательность $f(p, t_{n_k}) \to
+              q$ при $k \to \infty$. Отсюда следует, что $q \in \Omega_p$, поэтому $\Omega_p \neq \varnothing$.
+            </div>
+          </div>
+
+          <div class="theorem">
+            Если движение $f(p,t)$ устойчиво $L^+$ ($L^-$), то
+            \[
+            \lim\limits_{t \to \infty} \rho(f(p, t), \Omega_p) = 0
+            \qquad
+            \left( \lim\limits_{t \to -\infty} \rho(f(p, t), \Alpha_p) = 0 \right).
+            \]
+
+            <div class="proof">
+              От противного: пусть $f(p,t)$ устойчиво $L^+$, но условие теоремы не выполнено, то есть
+              \[
+              \tag{1}
+              \exists \varepsilon \gt 0 \; \mbox{ и } \left\{ t_n \right\}, \; t_n \to \infty:
+              \quad
+              \rho(f(p, t_n), \Omega_p) \geqslant \varepsilon.
+              \]
+              В силу устойчивости $L^+$ имеем $f(p, I^+) \subset K$, где $K$ &mdash; компакт. Из содержащейся в $K$
+              последовательности точек $\left\{ f(p, t_n) \right\}$ выделим сходящуюся подпоследовательность
+              \[
+              \lim\limits_{k \to \infty} f(p, t_{n_k}) \to q.
+              \]
+              Получается, что $q \in \Omega_p$, но переходя к пределу в неравенстве $(1)$ получаем
+              \[
+              \rho(q, \Omega_p) \geqslant \varepsilon \gt 0,
+              \]
+              что невозможно.
+            </div>
+          </div>
+
+          <div class="theorem">
+            Если движение $f(p,t)$ устойчиво $L^+$ ($L^-$), то предельное множество $\Omega_p$ ($\Alpha_p$) связно.
+
+            <div class="proof">
+              <div class="todo">2 часть, стр. 43.</div>
+            </div>
+          </div>
+
+          <div class="proposition">
+            Если $f(p,t)$ устойчиво $L^+$ и точки $x,y \in \Omega_p$, то существует $z \in \Omega_p$ такая, что
+            \[
+            \rho(x,z) = \rho(y,z).
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Устойчивость по Лагранжу. Контрпримеры. Классификация движений
+        </div>
+        <div class="content">
+          <div class="example">
+            Пусть $X = \mathbb{R}^2 = \left\{ (x,y) \right\}$. Рассмотрим ОДУ
+            \[
+            \left\{
+            \begin{aligned}
+            \dot x &= x - y, \\
+            \dot y &= x + y.
+            \end{aligned}
+            \right.
+            \]
+            Ей отвечает некоторая ДС.
+
+            <p>
+              В полярных координатах $\rho, \varphi$ имеем
+              \[
+              \left\{
+              \begin{aligned}
+              \dot \rho &= \rho, \\
+              \dot \varphi &= 1.
+              \end{aligned}
+              \right.
+              \]
+              Эта система имеет единственное положение равновесия $(0,0)$. Все другие траектории &mdash; раскручивающиеся логарифмические спирали, так как
+              \[
+              \rho = \rho_0 e^{\varphi}.
+              \]
+
+              <div class="images small">
+                <img src="images/L-example-src.png"/>
+              </div>
+            </p>
+
+            Модифицируем СОДУ в два этапа:
+            <ul>
+              <li>
+                сожмём плоскость $\mathbb{R}^2$, диффеоморфно отобразив её на открытую полосу $\xi \in (-\pi/2, \pi/2)$
+                на плоскости $\mathbb{R}^2 = \left\{ (\xi, \eta) \right\}$:
+                \[
+                \left\{
+                \begin{aligned}
+                \xi &= \arctan x, \\
+                \eta &= y,
+                \end{aligned}
+                \right.
+                \quad \implies \quad
+                \left\{
+                \begin{aligned}
+                \dot \xi &= \frac{\dot x}{1 + x^2}, \\
+                \dot \eta &= \dot y;
+                \end{aligned}
+                \right.
+                \]
+                в итоге приходим к системе
+                \[
+                \left\{
+                \begin{aligned}
+                \dot \xi &= \frac{\tan \xi - \eta}{1 + \tan^2 \xi} = f_1(\xi, \eta), \\
+                \dot \eta &= \tan \xi + \eta = f_2(\xi, \eta),
+                \end{aligned}
+                \right.
+                \quad \xi \in (-\pi/2, \pi/2).
+                \]
+              </li>
+
+              <li>
+                проведём регуляризацию полученных диффуров с помощью замены независимой переменной так, чтобы полученным
+                диффурам соответствовала ДС в <i>замкнутой</i> полосе $\xi \in [-\pi/2, \pi/2]$:
+                \[
+                d\tau = \kappa dt,
+                \quad
+                \kappa = \sqrt{1 + (f_1(\xi, \eta))^2 + (f_2(\xi, \eta))^2} \geqslant 1.
+                \]
+              </li>
+            </ul>
+
+            <div class="images small">
+              <img src="images/L-example-dest.png"/>
+            </div>
+
+            <p>
+              Получаем систему, у которой существует единственное решение задачи Коши, а также решения неограниченно
+              продолжаемы. Значит, ей соответствует некоторая ДС.
+            </p>
+
+            <p>
+              Рассмотрим произвольную отличную от положения равновесия точку $p = (\xi_0, \eta_0)$, причём
+              $\xi_0 \neq \pm \pi/2$. Понятно, что отвечающее ей движение неустойчиво $L^+$, и для него имеем
+              \[
+              \Alpha_p = (0,0), \qquad \Omega_p = L_1 \cup L_2.
+              \]
+            </p>
+          </div>
+
+          <hr/>
+
+          Проведём классификацию точек, движений и траекторий в зависимости от типа соотв. предельных множеств.
+
+          <div class="definition">
+            Точка $p \in X$, движение $f(p, t)$ и траектория $f(p, I)$ называются <i>уходящими в положительном
+            направлении</i>, если $\Omega_p = \varnothing$.
+            <br/>
+            Положительная полутраектория $f(p,I^+)$ называется в таком случае <i>уходящей</i>.
+          </div>
+
+          <div class="definition">
+            Точка $p \in X$, движение $f(p, t)$ и траектория $f(p, I)$ называются <i>уходящими в отрицательном
+            направлении</i>, если $\Alpha_p = \varnothing$.
+            <br/>
+            Отрицательная полутраектория $f(p,I^-)$ называется в таком случае <i>уходящей</i>.
+          </div>
+
+          <div class="remark">
+            По определению устойчивая $L$ траектория всегда является неуходящей (соот. $L^+$ и $L^-$ &mdash; неуходящей
+            в положительном и отрицательном направлении).
+          </div>
+
+          Пусть $V^+, V^-$ &mdash; множества точек данной ДС, уходящих в положительном и отрицательном направлениях
+          соответственно, а через $V = V^- \cap V^+$ &mdash; множество уходящих точек.
+
+          <div class="remark">
+            $V, V^+, V^-$ &mdash; инвариантные множества ДС.
+          </div>
+
+          <div class="definition">
+            Если для данной точки $p \in X$ положительное предельное множество $\Omega_p \neq \varnothing$,
+            но $\Omega_p \cap f(p, I^+) = \varnothing$, то движение $f(p,t)$ и траектория $f(p, I)$ называются
+            <i>положительно асимптотическими</i>.
+          </div>
+
+          <div class="definition">
+            Если для данной точки $p \in X$ отрицательное предельное множество $\Alpha_p \neq \varnothing$,
+            но $\Alpha_p \cap f(p, I^-) = \varnothing$, то движение $f(p,t)$ и траектория $f(p, I)$ называются
+            <i>отрицательно асимптотическими</i>.
+          </div>
+
+          <div class="remark">
+            Устойчивая $L^+$ положительно асимптотическая траектория всегда неограниченно приближается к своему
+            предельному множеству:
+            \[
+            f(p, t) \limto{t \to \infty} \Omega_p.
+            \]
+            Для $L^-$ аналогично.
+          </div>
+
+          <div class="definition">
+            Если $\Omega_p \cap f(p, I^+) \neq \varnothing$, то приходим к <i>устойчивым по Пуассону</i> точкам.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Устойчивость по Пуассону. Свойства. Примеры
+        </div>
+        <div class="content">
+          Рассматриваем ДС $f(p, t)$ в метрическом пространстве $(X, \rho)$.
+
+          <div class="definition">
+            Точка $p \in X$ и движение $f(p,t)$ называются <i>положительно устойчивыми по Пуассону (устойчивыми
+            $P^+$)</i>, если $p \in \Omega_p$.
+          </div>
+
+          <div class="remark">
+            Условие $p \in \Omega_p$ эквивалентно следующему:
+            \[
+            \forall \varepsilon \gt 0, T \gt 0
+            \quad \exists t \gt T:
+            \quad f(p, t) \in K_\varepsilon(p).
+            \]
+          </div>
+
+          <div class="definition">
+            Точка $p \in X$ и движение $f(p,t)$ называются <i>отрицательно устойчивыми по Пуассону (устойчивыми
+            $P^-$)</i>, если $p \in \Alpha_p$.
+          </div>
+
+          <div class="definition">
+            Точка $p \in X$ и движение $f(p,t)$ называются <i>устойчивыми по Пуассону (устойчивыми $P$)</i>,
+            если они устойчивы $P^+$ и $P^-$.
+          </div>
+
+          <p>
+            Пусть $B, B^+, B^-$ &mdash; множества устойчивых $P, P^+, P^-$ точек ДС.
+          </p>
+
+          <div class="proposition">
+            Множества $B, B^+, B^-$ инвариантны.
+
+            <div class="proof">
+              Напрямую следует из инвариантности $\Omega_p$, а также того факта, что
+              \[
+              f(p, t) \in \Omega_p = \Omega_{f(p,t)} \qquad \forall t \in \mathbb{R}.
+              \]
+              Для $\Alpha_p$ аналогично.
+            </div>
+          </div>
+
+          <div class="remark">
+            Множество устойчивых по Пуассону точек $B$ может быть и незамкнутым, и неоткрытым. В свою очередь $\Omega_p$
+            и $\Alpha_p$ замкнуты.
+          </div>
+
+          <div class="corollary">
+            Если $p \in X$ устойчива $P^+$, то точка $f(p,t)$ при всех $t \in \mathbb{R}$ также устойчива $P^+$,
+            поэтому можно говорить об устойчивых $P^+$ целых траекториях $f(p, I)$.
+            <p>
+              Аналогично для устойчивостей $P^-$ и $P$.
+            </p>
+          </div>
+
+          <div class="corollary">
+            Если $p \in X$ устойчива $P^+$, то соотв. траектория $f(p, I) \subset \Omega_p$.
+
+            <p>
+              Аналогично для устойчивости $P^-$.
+            </p>
+          </div>
+
+          <div class="theorem">
+            Точка $p \in X$ устойчива $P^+$ тогда и только тогда, когда выполнено любое из равенств
+            \[
+            \Omega_p = \overline{f(p, I^+)} \quad \mbox{или} \quad \Omega_p = \overline{f(p, I)}
+            \]
+            и устойчива $P^-$ тогда и только тогда, когда выполнено любое из равенств
+            \[
+            \Alpha_p = \overline{f(p, I^-)} \quad \mbox{или} \quad \Alpha_p = \overline{f(p, I)}.
+            \]
+
+            <div class="proof">
+              <div class="todo">2 часть, стр. 52.</div>
+            </div>
+          </div>
+
+          <div class="remark">
+            Таким образом, критерий устойчивости $P^+$ &mdash; плотность траектории $f(p,I^+)$ или полутраектории
+            $f(p, I)$ в своём предельном множестве $\Omega_p$.
+          </div>
+
+          <div class="corollary">
+            Если точка $p \in X$ устойчива $P^+$, то
+            \[
+            \overline{f(p, I^+)} = \overline{f(p, I)} = \Omega_p.
+            \]
+
+            Аналогично для устойчивости $P^-$.
+          </div>
+
+          <div class="theorem">
+            Справедливы утверждения:
+            <ul>
+              <li>
+                если движение $f(p,t)$ устойчиво $P^+$, то $\Alpha_p \subseteq \Omega_p = \overline{f(p,I)}$;
+              </li>
+              <li>
+                если движение $f(p,t)$ устойчиво $P^-$, то $\Omega_p \subseteq \Alpha_p = \overline{f(p,I)}$;
+              </li>
+              <li>
+                если движение $f(p,t)$ устойчиво $P$, то $\Alpha_p = \Omega_p = \overline{f(p,I)}$.
+              </li>
+            </ul>
+
+            <div class="proof">
+              Рассмотрим первый случай. Если $f(p,t)$ устойчиво $P^+$, то
+              \[
+              \Alpha_p \subset \overline{f(p,I^-)} \subset \overline{f(p, I)} = \Omega_p.
+              \]
+            </div>
+          </div>
+
+          <div class="example">
+            Постоянное движение и соотв. траектория (точка покоя) устойчивы $P$.
+          </div>
+
+          <div class="example">
+            Периодическое движение и соотв. траектория (цикл) устойчивы $P$.
+          </div>
+
+          <p>
+            Чтобы ввести в рассмотрение нетривиальные устойчивые $P$ движения, надо сформулировать следующую теорему.
+          </p>
+
+          <div class="theorem">
+            <i>(Жордана).</i>
+            <br/>
+            Всякая простая (без самопересечений) замкнутая кривая на плоскости $X = \mathbb{R}^2$ делит её на две
+            линейно несвязные между собой открытые части, общей границей которых эта кривая и является.
+          </div>
+
+          <div class="theorem">
+            У всякой гладкой ДС $f(p,t)$, заданной на плоскости $X = \mathbb{R}^2$ или на двумерной поверхности $X$,
+            на которой справедлива теорема Жордана, единственные устойчивые $P, P^+, P^-$ траектории &mdash;
+            точки покоя и циклы.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Устойчивость по Пуассону. Теорема о компактности предельного множества в полном пространстве
+        </div>
+        <div class="content">
+          <div class="definition">
+            $A$ называется <i>плотным в $B$</i>, если $\overline{A} \supset B$.
+          </div>
+
+          <div class="definition">
+            $A$ называется <i>везде плотным</i>, если $\overline{A} = X$.
+          </div>
+
+          <div class="definition">
+            $A$ называется <i>нигде не плотным в $X$</i>, если
+            \[
+            \mathring{\overline{A}} = \varnothing.
+            \]
+            Это условие эквивалентно тому, что $A$ не плотно в любой сфере
+            \[
+            \left\{ p \; | \; p \in U_\varepsilon(q), \quad \varepsilon \gt 0, \; q \in X \right\}.
+            \]
+          </div>
+
+          <div class="theorem">
+            (<i>о компактности предельного множества в полном пространстве</i>)
+            <br/>
+            Рассмотрим траекторию:
+            <ul>
+              <li>
+                устойчивую $P^+$;
+              </li>
+
+              <li>
+                отличную от точки покоя и периодической траектории;
+              </li>
+
+              <li>
+                расположенную в полном $X$.
+              </li>
+            </ul>
+            Тогда множество предельных точек $\Omega_p$, не принадлежащих траектории, плотно в $\Omega_p$, то есть
+            \[
+            \overline{\Omega_p \setminus f(p,I)} = \Omega_p.
+            \]
+
+            <div class="proof">
+              Все построения будем проводить в множестве $A := \Omega_p \subset X$ &mdash; замкнутном подпространстве
+              фазового пространства.
+
+              <p>
+                Для начала отметим, что $A$ является полным как замкнутое подмножество полного пространства $X$.
+              </p>
+
+              <p>
+                Так как $f(p,t)$ устойчива $P^+$, то
+                \[
+                f(p,I) \subset \Omega_p = A.
+                \]
+                Для любого $n \in \mathbb{N}$ рассмотрим конечную дугу
+                \[
+                X_n := f(p, [-n, n]) = \left\{ f(p,t): \; t \in [-n, n] \right\};
+                \]
+                понятно, что
+                \[
+                X_n  \subset f(p,I) \subset \Omega_p = A.
+                \]
+              </p>
+
+              Множество $X_n$:
+              <ul>
+                <li>
+                  компактное в $X$;
+                </li>
+
+                <li>
+                  следовательно, оно замкнуто в $X$ 
+                </li>
+
+                <li>
+                  следовательно, оно замкнуто в $A$, так как замкнутое в $X$ множество замкнуто в любом подпространстве
+                  пространства $X$:
+                  \[
+                  \overline{X_n}^A = X_n.
+                  \]
+                </li>
+              </ul>
+
+              Покажем теперь, что
+              \[
+              \mathring{\overline{X_n}}^A
+              =
+              \mathring{X_n}^A
+              = \varnothing.
+              \]
+
+              <div class="images small">
+                <img src="images/compactness-theorem.jpeg"/>
+              </div>
+
+              <div class="derivation">
+                Для любой точки $x \in X_n$ любая её окрестность в множестве $A$ получается пересечением произвольной
+                окрестности в $X$ с $A$:
+                \[
+                u^A = u^X \cap A.
+                \]
+
+                <p>
+                  Так как $x \in X_n \subset \Omega_p = A$, то $x$ &mdash; $\omega$-предельная, то по определению
+                  найдётся последовательность $t_k \to \infty$ такая, что $f(p,t_k) \to x$.
+                </p>
+
+                <p>
+                  Значит, по определению предела последовательности найдётся номер $N \in \mathbb{N}$ такой, что
+                  $f(p, t_k) \in u^X$ для любого $k \gt N$. Так как $f(p, I) \subset A$, то
+                  \[
+                  f(p,t_k) \in u^X \cap A = u^A \qquad \forall k \gt N.
+                  \]
+                </p>
+
+                <p>
+                  В то же время, учитывая незамкнутость траектории $f(p,I)$, имеем $f(p, t_k) \not\in X_n$ при
+                  $t_k \gt n$. Значит, $u^A \not\subset X_n$, то есть никакая окрестность $u^A$ не содержится в $X_n$
+                  целиком. Следовательно,
+                  \[
+                  \mathring{X_n}^A = \varnothing.
+                  \]
+                </p>
+              </div>
+
+              <p>
+                Значит, $X_n$ &mdash; замкнутое и нигде не плотное множество в $A = \Omega_p$. Тогда его дополнение
+                $A \setminus X_n$ &mdash; открытое всюду плотное в $A$.
+              </p>
+
+              <p>
+                Теперь, учитывая, что
+                \[
+                \Omega_p \setminus f(p,I)
+                =
+                \Omega_p \setminus \bigcup_{n=1}^{\infty} X_n
+                =
+                \bigcap_{n=1}^\infty \left( \Omega_p \setminus X_n \right),
+                \]
+                получаем, что $\Omega_p \setminus f(p, I)$ является всюду плотным в $A = \Omega_p$ множеством,
+                так как может быть представлено в виде счётного пересечения открытых всюду плотных в $A$ множеств
+                $\left\{ \Omega_p \setminus X_n \right\}$.
+              </p>
+            </div>
+          </div>
+
+          <div class="remark">
+            Для устойчивой $P^+$ траектории $f(p, I)$ дополнительное условие её устойчивости $L^+$ эквивалентно
+            компактности предельного множества $\Omega_p = \overline{f(p, I)}$.
+          </div>
+
+          <div class="corollary">
+            В рамках условий прошлой теоремы траектория $f(p,I)$ всюду полна в $\Omega_p$, но любая её конечная дуга
+            $f(p, [t_1, t_2])$, $t_1, t_2 \in \mathbb{R}$ является нигде не полной и в $\Omega_p$, и в $X$.
+          </div>
+
+          <div class="corollary">
+            Если траектория $f(p,I)$ ДС компактна, то это &mdash; точка покоя или цикл.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Основные понятия устойчивости по Ляпунову инвариантных множеств. Примеры
+        </div>
+        <div class="content">
+          Рассмотрим метрическое пространство $R = (X, \rho)$ и динамическую систему $f(t, p)$.
+
+          <div class="definition">
+            Замкнутое инвариантное множество $M$ называется <i>устойчивым по Ляпунову</i>, если
+            \[
+            \forall \varepsilon \gt 0
+            \quad \exists \delta = \delta(\varepsilon) \gt 0:
+            \quad \forall q: \rho(q, M) \lt \delta
+            \quad \implies \quad
+            \rho(f(t, q), M) \lt \varepsilon \quad \forall t \geqslant 0.
+            \]
+          </div>
+
+          <div class="example">
+            Проведём аналогию с теорией устойчивости движения: рассмотрим систему
+            \[
+            y' = f(y), \quad f(0) = 0, \quad f \in C^1(\mathbb{R}), \quad x \in \mathbb{R}.
+            \]
+
+            Известно, что нулевое решение этой системы называют устойчивым по Ляпунову, если
+            \[
+            \forall \varepsilon \gt 0
+            \quad \exists \delta = \delta(\varepsilon) \gt 0:
+            \quad \forall y_0: \abs{y_0} \lt \delta
+            \quad \implies \quad
+            \abs{y(x, y_0)} \lt \varepsilon \quad \forall x \geqslant 0.
+            \]
+
+            Тогда
+            <ul>
+              <li>
+                фазовое пространство: $q \in X \sim \mathbb{R} \ni y \implies y \sim q$;
+              </li>
+
+              <li>
+                $x \sim t$;
+              </li>
+
+              <li>
+                $M = \left\{ 0 \right\}$, оно является инвариантным, так как $f(0) = 0$;
+              </li>
+
+              <li>
+                $\rho(x,y) = \abs{x - y}$.
+              </li>
+            </ul>
+          </div>
+
+          <div class="example">
+            Рассмотрим систему
+            \[
+            \left\{
+            \begin{aligned}
+            y_1' &= f_1(y_1, y_2), \\
+            y_2' &= f_2(y_1, y_2).
+            \end{aligned}
+            \right.
+            \]
+            Пусть существует периодическое движение:
+            \[
+            \left\{
+            \begin{aligned}
+            y_1(x) &= \varphi_1(x), \\
+            y_2(x) &= \varphi_2(x),
+            \end{aligned}
+            \right.
+
+            \qquad \varphi_s(x + T) = \varphi_s(x), \quad s = 1,2.
+            \]
+
+            Перейдём к системе в отклонениях. Для этого сделаем замену переменных:
+            \[
+            \left\{
+            \begin{aligned}
+            z_1(x) &= y_1(x) - \varphi_1(x), \\
+            z_2(x) &= y_2(x) - \varphi_2(x),
+            \end{aligned}
+            \right.
+            \implies
+            \left\{
+            \begin{aligned}
+            y_1(x) &= z_1(x) + \varphi_1(x), \\
+            y_2(x) &= z_2(x) + \varphi_2(x).
+            \end{aligned}
+            \right.
+            \]
+            Тогда исходная система примет вид
+            \[
+            \left\{
+            \begin{aligned}
+            z_1' &= f_1(z_1 + \varphi_1(x), z_2 + \varphi_2(x)) - \varphi_1'(x), \\
+            z_2' &= f_2(z_1 + \varphi_1(x), z_2 + \varphi_2(x)) - \varphi_2'(x).
+            \end{aligned}
+            \right.
+            \]
+            Заметим теперь, что $\varphi_1(x), \varphi_2(x)$ являются периодическим решением исходной системы, поэтому
+            \[
+            \left\{
+            \begin{aligned}
+            \varphi_1'(x) &= f_1(\varphi_1(x), \varphi_2(x)), \\
+            \varphi_2'(x) &= f_2(\varphi_1(x), \varphi_2(x)).
+            \end{aligned}
+            \right.
+            \]
+            Окончательно имеем
+            \[
+            \left\{
+            \begin{aligned}
+            z_1' &= f_1(z_1 + \varphi_1(x), z_2 + \varphi_2(x)) - f_1(\varphi_1(x), \varphi_2(x)), \\
+            z_2' &= f_2(z_1 + \varphi_1(x), z_2 + \varphi_2(x)) - f_2(\varphi_1(x), \varphi_2(x))
+            \end{aligned}
+            \right.
+            \]
+            или
+            \[
+            \left\{
+            \begin{aligned}
+            z_1' &= \widehat f_1(x, z_1, z_2), \\
+            z_2' &= \widehat f_2(x, z_1, z_2),
+            \end{aligned}
+            \right.
+            \]
+            причём $\widehat f_1(x, 0, 0) = \widehat f_2(x, 0, 0) \equiv 0$.
+
+            <p>
+              Отметим, что
+              \[
+              \mbox{устойчиво решение} \quad z(x) =
+              \begin{pmatrix}
+              z_1(x) \\ z_2(x)
+              \end{pmatrix}
+              =
+              \begin{pmatrix}
+              0 \\ 0
+              \end{pmatrix}
+              \quad
+              \iff
+              \quad
+              \mbox{устойчиво решение} \quad y(x) =
+              \begin{pmatrix}
+              y_1(x) \\ y_2(x)
+              \end{pmatrix}
+              =
+              \begin{pmatrix}
+              \varphi_1(x) \\ \varphi_2(x)
+              \end{pmatrix}.
+              \]
+            </p>
+
+            <div class="definition">
+              Решение $z(x) = 0$ называют <i>устойчивым по Ляпунову</i>, если
+              \[
+              \forall \varepsilon \gt 0 \quad \forall x_0 \geqslant 0
+              \quad \exists \delta = \delta(\varepsilon, x_0) \gt 0:
+              \quad \forall z^0: \; \norm{z} \lt \delta
+              \quad \implies \quad
+              \norm{z(x, x_0, z^0)} \lt \varepsilon \quad \forall x \geqslant x_0.
+              \]
+            </div>
+
+            Определение устойчивости инвариантного множества, вообще говоря, не эквивалентно устойчивости в примере 2.
+            <div class="todo">вставить картинку, поясняющую неэквивалентность (см. 2 лекцию от 06.11, 1:25:00).</div>
+            Однако оно эквивалентно орбитальной устойчивости.
+
+            <p>
+              Рассмотрим орбиту
+              \[
+              M = \left\{
+              (y_1, y_2):
+              y_1 = \varphi_1(x), \; y_2 = \varphi_2(x),
+              \quad x \in [0, T]
+              \right\}.
+              \]
+            </p>
+
+            <div class="definition">
+              Говорят, что $y = \varphi(x)$ <i>орбитально устойчиво</i>, если
+              \[
+              \forall \varepsilon \gt 0
+              \quad \exists \delta = \delta(\varepsilon) \gt 0:
+              \quad \forall y^0: \; \rho(y^0, M) \lt \delta
+              \quad \implies \quad
+              \rho(y(x, y^0), M) \lt \varepsilon
+              \quad \forall x \geqslant 0.
+              \]
+            </div>
+          </div>
+
+          <div class="example">
+            Рассмотрим систему уравнений в частных производных:
+            \[
+            \frac{\partial u_s}{\partial t} = f_s \left(
+            x_1, \dots, x_n, u_1, \dots, u_k, \frac{\partial u_i}{\partial x_j}
+            \right),
+            \qquad s = \overline{1,k},
+            \]
+            причём
+            \[
+            f(x, \vec{0}, \vec{0}) = 0 \qquad \forall s = \overline{1,k}.
+            \]
+            Значит, у системы есть тривиальное решение $u(t,x) \equiv \vec{0}$.
+            <p>
+              Начальные условия:
+              \[
+              u(0,x) = \varphi(x) \in C^1(\mathbb{R}^n).
+              \]
+              Также введена норма
+              \[
+              \norm{\varphi} = \sup_{x \in \mathbb{R}^n} \norm{\varphi(x)}.
+              \]
+              Метрика задана как
+              \[
+              \rho(\varphi, \psi) = \norm{\varphi - \psi}.
+              \]
+            </p>
+
+            <div class="definition">
+              Решение $u(t,x) \equiv 0$ называют <i>устойчивым по Ляпунову</i>, если
+              \[
+              \forall \varepsilon \gt 0
+              \quad \exists \delta = \delta(\varepsilon) \gt 0:
+              \quad \forall \varphi \in C^1(\mathbb{R}^n): \norm{\varphi} \lt \delta
+              \quad \implies \quad
+              \norm{u(t, \varphi)} \lt \varepsilon
+              \quad \forall t \geqslant 0.
+              \]
+            </div>
+
+            <div class="remark">
+              В этом случае $M = \left\{ u(t,x) \equiv 0 \right\}$.
+            </div>
+          </div>
+
+          <div class="definition">
+            Если замкнутое инвариантное множество $M$
+            <ul>
+              <li>
+                устойчиво по Ляпунову;
+              </li>
+
+              <li>
+                выполнено условие
+                \[
+                \exists \tilde \delta \gt 0: \quad \forall p: \rho(p,M) \lt \tilde\delta
+                \quad \implies \quad \rho(f(t,p), M) \limto{t \to \infty} 0,
+                \]
+              </li>
+            </ul>
+            то $M$ называется <i>асимптотически устойчивым по Ляпунову</i>.
+          </div>
+
+          <div class="definition">
+            Замкнутое инвариантное множество $M$ <i>неустойчиво по Ляпунову</i>, если
+            \[
+            \exists \varepsilon \gt 0:
+            \quad \forall \delta \gt 0
+            \quad \exists p_\delta: \rho(p_\delta, M) \lt \delta
+            \quad \exists t_0 \gt 0:
+            \quad \rho(f(t_0, p_\delta), M) \geqslant \varepsilon.
+            \]
+          </div>
+
+          <div class="example">
+            Рассмотрим уравнение
+            \[
+            y' = a y^3, \quad a \in \mathbb{R}.
+            \]
+            Здесь $M = \left\{ 0 \right\}.$
+
+            <p>
+              Возможны три случая:
+            </p>
+            <ul>
+              <li>
+                $a > 0$ &mdash; множество $M$ неустойчиво.
+              </li>
+
+              <li>
+                $a = 0$ &mdash; множество $M$ устойчиво.
+              </li>
+
+              <li>
+                $a < 0$ &mdash; множество $M$ асимптотически устойчиво.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Область асимптотической устойчивости. Примеры
+        </div>
+        <div class="content">
+          <div class="definition">
+            Если замкнутое инвариантное множество $M$ асимптотически устойчиво по Ляпунову, то множество $A$
+            \[
+            A = \left\{ p \in X, \; p \not\in M: \quad \rho(f(t, p), M) \limto{t \to \infty} 0 \right\}
+            \]
+            называется <i>областью асимптотической устойчивости (ОАУ)</i> множества $M$.
+          </div>
+
+          <div class="example">
+            Рассмотрим уравнение
+            \[
+            y' = a y^3, \quad a \in \mathbb{R}.
+            \]
+            Здесь $M = \left\{ 0 \right\}.$
+
+            <p>
+              Возможны три случая:
+            </p>
+            <ul>
+              <li>
+                $a > 0$ &mdash; множество $M$ неустойчиво.
+              </li>
+
+              <li>
+                $a = 0$ &mdash; множество $M$ устойчиво.
+              </li>
+
+              <li>
+                $a < 0$ &mdash; множество $M$ асимптотически устойчиво, причём
+                $A = \mathbb{R} \setminus M = \left\{ y \in \mathbb{R} \setminus \left\{ 0 \right\} \right\}$.
+              </li>
+            </ul>
+          </div>
+
+          <div class="theorem">
+            Областью асимптотической устойчивости инвариантного множества $M$ динамической системы $f(t,p)$
+            является открытое инвариантное множество, содержащее достаточно малую $\delta$-окрестность множества $M$,
+            где $\delta \gt 0$.
+
+            <div class="proof">
+              <ul>
+                <li>
+                  Инвариантность множества $A$ следует из определения.
+                </li>
+
+                <li>
+                  $M$ &mdash; АУЛ, поэтому
+                  \[
+                  \forall \varepsilon \gt 0
+                  \quad \exists \delta = \delta(\varepsilon) \gt 0:
+                  \quad \forall p \in X: \rho(p, M) \lt \delta
+                  \implies \rho(f(p,t), M) \lt \varepsilon
+                  \quad \forall t \geqslant 0
+                  \]
+                  и, кроме того, $\lim\limits_{t \to \infty} \rho(f(p,t), M) = 0$.
+
+                  <p>
+                    Отсюда следует, что $\delta$-окрестность целиком содержится в $A$.
+                  </p>
+                </li>
+
+                <li>
+                  <div class="todo">2 часть, стр. 94.</div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="definition">
+            Если у асимптотически устойчивого по Ляпунову замкнутого инвариантного множества $M \subset X$ область
+            асимптотической устойчивости $A = X \setminus M$, то $M$ называется <i>асимптотически устойчивым в
+            целом</i>.
+          </div>
+
+          <div class="definition">
+            <i>Границей области асимптотической устойчивости</i> АУЛ замкнутого инвариантного множества $M \subset X$
+            называется замкнутое инвариантное множество
+            \[
+            \Gamma = \overline A \setminus (A \cup M).
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Равномерная асимптотическая устойчивость. Оценка поведения решений
+        </div>
+        <div class="content">
+          <div class="derivation">
+            Выпишем развёрнутое определение АУЛ.
+
+            <div class="definition">
+              Замкнутое инвариантное множество $M$ называется <i>АУЛ</i>, если
+              <ol>
+                <li>
+                  оно устойчиво:
+                  \[
+                  \forall \varepsilon \gt 0
+                  \quad \exists \delta = \delta(\varepsilon) \gt 0:
+                  \quad \forall p \in X: \rho(p, M) \lt \delta
+                  \quad \implies \quad
+                  \rho(f(p,t), M) \lt \varepsilon
+                  \quad \forall t \geqslant 0;
+                  \]
+                </li>
+
+                <li>
+                  выполнено условие:
+                  \[
+                  \exists \delta_1 \gt 0:
+                  \quad \forall p \in X: \rho(p, M) \lt \delta_1,
+                  \quad \forall H \gt 0
+                  \quad \exists T = T(H, p) \gt 0:
+                  \quad \rho(f(p,t), M) \lt H
+                  \quad \forall t \geqslant T.
+                  \]
+                </li>
+              </ol>
+            </div>
+
+            Видим, что во втором условии величина $T = T(H, p)$ зависит и от $p$, и от $H$.
+            Если существует $\delta_1 \gt 0$ такое, что можно найти $T = T(H)$ (то есть не зависящее от $p$),
+            то можно получить равномерную по $p$ оценку $\rho(f(p,t), M) \lt H$.
+          </div>
+
+          <div class="definition">
+            АУЛ замкнутое инвариантное множество $M$ называется <i>равномерно асимптотически устойчивым</i>, если
+            \[
+            \exist \delta_1 \gt 0:
+            \quad \forall H \gt 0
+            \quad \exists T = T(H) \gt 0:
+            \quad
+            \rho(f(p,t), M) < H \qquad \forall t \geqslant T, \; p \in X: \; \rho(p,M) \lt \delta_1.
+            \]
+          </div>
+
+          <div class="theorem">
+            Пусть $M \subset X$ &mdash; РАУЛ замкнутое инвариантное множество. Тогда существует $\delta \gt 0$
+            и непрерывная $L(t)$, строго монотонно убывающая от $\infty$ до $0$ при возрастании $t$ от $-\infty$ до
+            $+\infty$, такие, что
+            \[
+            \rho(f(p,t), M) \leqslant L(t)
+            \qquad
+            \forall t \geqslant 0, \; p \in X: \rho(p, M) \lt \delta.
+            \]
+
+            <div class="proof">
+              <div class="todo">2 часть, стр. 101.</div>
+            </div>
+          </div>
+
+          <div class="remark">
+            Равномерная устойчивость характеризуется отсутствием &laquo;очень быстро приближающихся к $M$&raquo; точек.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Равномерная асимптотическая устойчивость и равномерная притягиваемость
+        </div>
+        <div class="content">
+          <div class="definition">
+            АУЛ замкнутое инвариантное множество $M$ ДС $f(p,t)$ называется <i>равномерно притягивающим</i>,
+            если
+            \[
+            \exists \delta_2 \gt 0:
+            \quad \forall h \in (0, \delta_2), \; T \gt 0
+            \quad \exists \alpha = \alpha(H, T) \gt 0:
+            \quad \rho(f(p,t), M) \gt \alpha
+            \quad \forall t \in [0,T], \; p \in X: h \lt \rho(p,M) \lt \delta_2.
+            \]
+          </div>
+
+          <p>
+            Суть заключается в том, что точки, первоначально находившиеся в полосе $(h, \delta_2)$, за время $T$
+            не смогут попасть в зону $(0, \alpha)$.
+          </p>
+
+          <div class="remark">
+            Равномерность заключается в том, что $\alpha = \alpha(h, T)$ не зависит от $p \in X$.
+          </div>
+
+          <div class="remark">
+            Множество называется относительно компактным в $X$, если его замыкание в $X$ компактно.
+          </div>
+
+          <div class="theorem">
+            АУЛ замкнутое инвариантное множество $M$, имеющее относительно компактную окрестность $u_r(M), \; r \gt 0$,
+            является равномерно асимптотически устойчивым и равномерно притягивающим.
+
+            <div class="proof">
+              <div class="todo">2 часть, стр. 104.</div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Поведение траекторий в окрестности устойчивого по Ляпунову инвариантного множества
+        </div>
+        <div class="content">
+          Пусть $f(p,t)$ &mdash; ДС в метрическом пространстве $(X, \rho)$.
+
+          <p>
+            Рассмотрим замкнутое инвариантное множество $M$.
+          </p>
+
+          <div class="theorem">
+            Замкнутое инвариантное множество $M$ является УЛ<sup>+</sup> тогда и только тогда, когда для любого достаточно
+            малого $\varepsilon \gt 0$
+            \[
+            \delta(\varepsilon) := \inf_{\rho(p, M) = \varepsilon, \; t \leqslant 0} \rho(f(p,t), M) \gt 0.
+            \]
+
+            <div class="proof">
+              <div class="todo">2 часть, стр. 107.</div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Поведение траекторий в окрестности асимптотически устойчивого по Ляпунову инвариантного множества
+        </div>
+        <div class="content">
+          Пусть $f(p,t)$ &mdash; ДС в метрическом пространстве $(X, \rho)$.
+
+          <p>
+            Далее будем рассматривать замкнутые инвариантные множества $M$, имеющие относительно компактную окрестность
+            $u_r(M), \; r \gt 0$.
+          </p>
+
+          <div class="lemma">
+            Если для движения $f(p,t)$, происходящего вне $M$, при некотором $\varepsilon \in (0,r)$ выполнено условие
+            \[
+            \rho(f(p,t), M) \leqslant \varepsilon \qquad \forall t \geqslant 0,
+            \]
+            то имеем альтернативу:
+            <ul>
+              <li>
+                либо движение $f(p,t)$ имеет $\alpha$-предельную точку в $M$ (то есть $\Alpha_p \subset M$) и
+                \[
+                f(p,t) \limto{t \to -\infty} M;
+                \]
+              </li>
+
+              <li>
+                либо существует целая траектория
+                \[
+                f(q, I)
+                \subset \overline{u_\varepsilon(M)} \setminus M
+                \subset u_r(M)
+                \]
+                (то есть $\Alpha_p \setminus M \neq \varnothing$), причём если $\Alpha_p \cap M = \varnothing$,
+                то
+                \[
+                \varepsilon \geqslant \rho(f(q,I), M) \gt 0.
+                \]
+              </li>
+            </ul>
+
+            <div class="proof">
+              <div class="todo">2 часть, стр. 109.</div>
+            </div>
+          </div>
+
+          <div class="lemma">
+            Пусть для некоторых величин $\varepsilon \in (0,r)$, точек $\left\{ p_n \right\} \in X$ и моментов
+            $\left\{ \tau_n \lt 0 \right\}$ выполнены условия:
+            <ol>
+              <li>
+                $\rho(p_n, M) = \varepsilon$;
+              </li>
+
+              <li>
+                $\rho(f(p_n, t), M) \leqslant \varepsilon$ при всяком $t \in [\tau_n, 0]$;
+              </li>
+
+              <li>
+                $\rho(f(p_n, \tau_n), M) = \beta_n \limto{n \to \infty} 0$.
+              </li>
+            </ol>
+
+            Тогда существует точка $p \in X, p \not\in M$ такая, что
+            \[
+            \rho(p, M) = \varepsilon,
+            \qquad
+            \rho(f(p,t), M) \leqslant \varepsilon
+            \qquad \forall t \leqslant 0.
+            \]
+
+            <div class="proof">
+              <div class="todo">2 часть, стр. 109.</div>
+            </div>
+          </div>
+
+          <div class="theorem">
+            Замкнутое инвариантное множество $M$ с относительно компактной окрестностью $u_r(M), \; r \gt 0$,
+            является АУЛ<sup>+</sup> тогда и только тогда, когда выполнены следующие два условия:
+
+            <ol>
+              <li>
+                не существует движения $f(p,t), \; p \not\in M$, с $\alpha$-предельными точками в $M$;
+              </li>
+
+              <li>
+                существует окрестность $u_\sigma(M)$, где $\sigma \in (0, r)$, не содержащая целых траекторий.
+              </li>
+            </ol>
+
+            <div class="proof">
+              <div class="todo">2 часть, стр. 110.</div>
+            </div>
+          </div>
+
+          <div class="remark">
+            Условие 1 предыдущей теоремы можно заменить на
+            <ol type="i">
+              <li>
+                не существует движения $f(p,t), \; p \not\in M$, у которого $f(p,t) \to M$ при $t \to -\infty$.
+              </li>
+            </ol>
+          </div>
+
+          <div class="theorem">
+            Замкнутое инвариантное множество $M$ с относительно компактной окрестностью $u_r(M), \; r \gt 0$
+            является АУЛ<sup>+</sup> тогда и только тогда, когда оно УЛ<sup>+</sup> и существует его окрестность
+            $u_\sigma(M)$, где $\sigma \in (0,r)$, не содержащая целых траекторий.
+
+            <div class="proof">
+              <div class="todo">2 часть, стр. 115.</div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Критерий асимптотической устойчивости по Ляпунову нулевого решения системы обыкновенных дифференциальных
+          уравнений
+        </div>
+        <div class="content">
+          Рассмотрим СОДУ
+          \[
+          \dot x = f(x), \qquad x \in X = \mathbb{R}^n,
+          \]
+          где векторное поле $f$ удовлетворяет условиям теорем существования, единственности и непрерывности по
+          начальным данным.
+
+          <p>
+            Система стационарна, поэтому $x(t, t_0, x_0) = x(t - t_0, 0, x_0)$. В дальнейшем будем обозначать их
+            в виде $x = x(t, x_0)$ и $x(0, x_0) = x_0$.
+          </p>
+
+          <p>
+            Пусть $f(0) = 0$, тогда точка покоя $x = 0$ &mdash; замкнутое инвариантное множество
+            $M = \left\{ x = 0 \right\}$ с относительно компактной окрестностью $u_r(0)$ для любого $r \gt 0$.
+          </p>
+
+          <div class="theorem">
+            Нулевое решение $x \equiv 0$ исходной СОДУ является АУЛ<sup>+</sup> тогда и только тогда, когда выполнены
+            два условия:
+            <ol>
+              <li>
+                не существует решения $x = x(t, x_0), \; x_0 \neq 0$, для которого $\abs{x} \to 0$ при $t \to -\infty$;
+              </li>
+
+              <li>
+                существует окрестность $u_\sigma(0), \; \sigma \gt 0$ точки $x = 0$, не содержащая никакой целой
+                траектории $x = x(t, x_0), \; t \in \mathbb{R}, \; x_0 \neq 0$.
+              </li>
+            </ol>
+
+            <div class="proof">
+              <div class="todo">2 часть, стр. 116.</div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Системы обыкновенных дифференциальных уравнений на плоскости
+        </div>
+        <div class="content">
+          Рассмотрим СОДУ 2-го порядка:
+          \[
+          \left\{
+          \begin{aligned}
+          \dot x_1 &= f_1(x_1, x_2), \\
+          \dot x_2 &= f_2(x_1, x_2),
+          \end{aligned}
+          \right.
+          \]
+          где $x \in X = \mathbb{R}^2$, где векторное поле $f: X \to X$ удовлетворяет условиям теорем существования,
+          единственности и непрерывности по начальным данным.
+
+          <p>
+            Пусть $f(0) = 0$, тогда точка $x = 0$ &mdash; положение равновесия, которое будем считать
+            <i>изолированным</i>. Система имеет замкнутое инвариантное множество $M = \left\{ x = 0 \right\}$ с
+            относительно компактной окрестностью.
+          </p>
+
+          <div class="theorem">
+            Нулевое решение $x \equiv 0$ исходной СОДУ является АУЛ<sup>+</sup> тогда и только тогда, когда выполнены
+            два условия:
+            <ol>
+              <li>
+                не существует решения $x = x(t, x_0), \; x_0 \neq 0$, для которого $\abs{x} \to 0$ при $t \to -\infty$;
+              </li>
+
+              <li>
+                существует по крайней мере одно движение $x(t, x_0) \to 0, \; x_0 \neq 0$ при $t \to +\infty$.
+              </li>
+            </ol>
+
+            <div class="proof">
+              <div class="todo">2 часть, стр. 117.</div>
+            </div>
+          </div>
+
+          <div class="remark">
+            Полученный результат показывает, что если у изолированного положения равновесия нет &laquo;выходящих&raquo;
+            (при $t \to -\infty$) из него траекторий, то существование уже одной &laquo;входящей&raquo;
+            (при $t \to +\infty$) траектории приводит к АУЛ<sup>+</sup> этого положения равновесия.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Блуждающие траектории. Свойства
+        </div>
+        <div class="content">
+          Пусть $f(p,t)$ &mdash; ДС в метрическом пространстве $(X, \rho)$.
+
+          <div class="definition">
+            Говорят, что ДС $f(p,t)$ обладает свойством <i>возвращаемости открытых множеств</i>, если для любого
+            открытого множества $\sigma \subset X$ и момента времени $T \gt 0$ существует момент времени $t \geqslant T$
+            такой, что
+            \[
+            \tag{1}
+            \sigma \cap f(\sigma, t) \neq \varnothing.
+            \]
+          </div>
+
+          <p>
+            Взяв оператор $f(\cdot, -t)$ от обеих частей неравенства $(1)$ и пользуясь свойствами 1,3 из
+            определения ДС, находим, что для любого открытого множества $\sigma \subset X$ и момента времени $-T \lt 0$
+            существует момент времени $-t \leqslant -T$ такой, что
+            \[
+            \tag{2}
+            \sigma \cap f(\sigma, -t) \neq \varnothing.
+            \]
+          <p>
+
+          <div class="remark">
+            Определение возвращаемости относится и к положительным, и к отрицательным $t$, причём положительная
+            возвращаемость эквивалентна отрицательной возвращаемости, следовательно, они эквивалентны просто
+            <i class="important">возвращаемости</i>, то есть одновременному выполнению условий $(1)$ и $(2)$.
+          </div>
+
+          <div class="definition">
+            Точка $p \in X$ называется <i>блуждающей</i>, если существуют её окрестность $u(p) \subset X$ и момент
+            $T \gt 0$ такие, что
+            \[
+            u(p) \cap f(u(p), t) = \varnothing \qquad \forall t \geqslant T.
+            \]
+          </div>
+
+          <div class="remark">
+            Как и в случае возвращаемости, понятие блуждаемости относится одновременно и к положительным, и к
+            отрицательным $t$.
+          </div>
+
+          <div class="definition">
+            Точка $p \in X$ называется <i>неблуждающей</i>, если она не является блуждающей, то есть для любых
+            её окрестности $u(p) \subset X$ и момента $T \gt 0$ существует момент $t \geqslant T$ такой, что
+            \[
+            u(p) \cap f(u(p), t) \neq \varnothing.
+            \]
+          </div>
+
+          <div class="remark">
+            Как и в случае возвращаемости, понятие неблуждаемости относится одновременно и к положительным, и к
+            отрицательным $t$.
+          </div>
+
+          <div class="example">
+            Тривиальные примеры неблуждающих точек:
+            <ol>
+              <li>
+                положения равновесия;
+              </li>
+
+              <li>
+                точки циклов.
+              </li>
+            </ol>
+          </div>
+
+          <div class="remark">
+            Уходящая точка или нет &mdash; индивидуальное свойство самой точки. А вот блуждаемость и неблуждаемость
+            &mdash; групповое свойство, существенно зависящее от поведения соседних точек.
+          </div>
+
+          <p>
+            Множество всех блуждающих точек ДС обозначим через $W_1$, а неблуждающих &mdash; через $M_1$.
+            Ясно, что множества $W_1, M_1$ дополняют друг друга:
+            \[
+            W_1 = X \setminus M_1, \qquad M_1 = X \setminus W_1.
+            \]
+          </p>
+
+          <div class="theorem">
+            Множество $W_1$ блуждающих точек открыто и инвариантно; множество $M_1$ неблуждающих точек замкнуто и
+            инвариантно.
+
+            <div class="proof">
+              <div class="todo">3 часть, стр. 11.</div>
+            </div>
+          </div>
+
+          <div class="remark">
+            В силу инвариантности $W_1, M_1$ можно говорить о блуждающих и неблуждающих движениях и траекториях.
+          </div>
+
+          <div class="proposition">
+            Существуют уходящие как неблуждающие, так и блуждающие точки.
+          </div>
+
+          <div class="proposition">
+            Существуют неуходящие как неблуждающие, так и блуждающие точки.
+          </div>
+
+          <div class="proposition">
+            Всякая точка, устойчивая $P^+$ или $P^-$, является неблуждающей, то есть
+            \[
+            B^+ \cup B^- \subset M_1.
+            \]
+            Следовательно, любая блуждающая точка не является устойчивой $P^+$ или $P^-$.
+
+            <div class="proof">
+              Достаточно вспомнить, что образ $f(p,t)$ устойчивой $P^+$ или $P^-$ точки $p \in X$ возвращается в
+              произвольную окрестность $u(p)$ точки $p$ при сколь угодно больших положительных или отрицательных $t$.
+            </div>
+          </div>
+
+          <div class="proposition">
+            Существуют неблуждающие точки, не являющиеся устойчивыми $P^+$ или $P^-$, то есть возможен случай, когда
+            \[
+            M_1 \setminus (B^+ \cup B^-) \neq \varnothing.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Свойства множества не блуждающих точек. Теорема существования центра ДС
+        </div>
+        <div class="content">
+          Пусть $f(p,t)$ &mdash; ДС в метрическом пространстве $(X, \rho)$.
+
+          <div class="proposition">
+            В фазовом пространстве $X$ ДС имеет место возвращаемость открытых множеств тогда и только тогда, когда
+            $M_1 = X$, то есть все точки являются неблуждающими.
+
+            <div class="proof">
+              Действительно:
+              <ul>
+                <li>
+                  если имеет место возвращаемость открытых множеств, то всякая точка $p \in X$ &mdash; неблуждающая,
+                  так как всякая её окрестность $u(p)$ &mdash; открытое множество;
+                </li>
+
+                <li>
+                  с другой стороны, если $M_1 = X$, то всякое открытое множество обладает свойством возвращаемости,
+                  так как является окрестностью всякой своей точки.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="proposition">
+            Во всяком открытом в $X$ и инвариантном множестве $G \subset M_1$ имеет место возвращаемость открытых
+            множеств.
+
+            <div class="proof">
+              <div class="todo">
+                я не уверен в формулировке шага 3 &mdash; в определении неблуждаемости рассматриваются произвольные
+                окрестности.
+              </div>
+              <ul>
+                <li>
+                  Рассмотрим произвольное открытое множество $\sigma \subset G \subset M_1$.
+                </li>
+
+                <li>
+                  Из открытости $G$ следует открытость множества $\sigma$ в $X$.
+                </li>
+
+                <li>
+                  Для любой точки $p \in \sigma$ в качестве окрестности возьём $u(p) = \sigma$.
+                </li>
+
+                <li>
+                  Наконец, по определению неблуждаемости находим, что $f(\sigma, t) \cap \sigma \neq \varnothing$
+                  при сколь угодно больших $t$.
+                </li>
+
+                <li>
+                  Заключаем, что в $G$ имеет место возвращаемость открытых множеств.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="proposition">
+            Рассмотрим инвариантное множество $M$ в пространстве $X$. Сужение $f | M$ даёт ДС в $M$. Тогда неблуждаемость
+            точки из $M$ относительно $M$ всегда влечёт её неблуждаемость в $X$.
+
+            <div class="proof">
+              <div class="todo">3 часть, стр. 18.</div>
+            </div>
+          </div>
+
+          <div class="theorem">
+            Для всякой точки $p \in X$ предельные множества содержатся в множестве неблуждающих точек:
+            $\Omega_p, \Alpha_p \subset M_1$.
+
+            <div class="proof">
+              <div class="todo">3 часть, стр. 19.</div>
+            </div>
+          </div>
+
+          <div class="corollary">
+            Если ДС $f(p,t)$ имеет хотя бы одно устойчивое $L^+$ или $L^-$ движение, то $M_1 \neq \varnothing$.
+          </div>
+
+          <div class="corollary">
+            Если $X$ компактно, то $M_1 \neq \varnothing$.
+
+            <div class="proof">
+              Если $X$ компактно, то все движения устойчивы $L$.
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Центральные движения. Свойства
+        </div>
+        <div class="content">
+          Рассмотрим динамическую систему $f(p,t)$ в метрическом пространстве $(X, \rho)$.
+
+          <p>
+            Будем считать, что $X$ &mdash; компакт, тогда $M_1$ &mdash; непусто и компактно.
+          </p>
+
+          <p>
+            Какие движения будут происходить при $t \to \pm \infty$? С блуждающими всё понятно, они через определённое
+            время $T(\varepsilon)$ перейдут в $\varepsilon$-окрестность множества $M_1$. А что с неблуждающими?
+          </p>
+
+          <p>
+            Множество $M_1$ инвариантно, значит, можно сузить ДС на $M_1$. В новой ДС возникнут $W_2 \subset M_1$ и
+            $M_2 \subset M_1$. Заметим, что $M_1$ компактно, следовательно, $M_2$ непусто и компактно.
+          </p>
+
+          <p>
+            Если $W_2 = \varnothing$, то $M_2 = M_1$. Такое множество называется <i>множеством центральных движений</i>.
+          </p>
+
+          <hr/>
+
+          <p>
+            Формально множество центральных движений задаётся при помощи трансфинитной индукции.
+          </p>
+
+          <p>
+            Продолжаем процесс сужения ДС на $M_i$. В итоге получаем убывающую последовательность вложенных непустых
+            замкнутых инвариантных компактных множеств
+            \[
+            M_1 \supset M_2 \supset M_3 \supset \dots \supset M_n \supset \cdots.
+            \]
+            Если на каком-то шаге окажется, что $M_k = M_{k+1}$, то нашли множество центральных движений.
+          </p>
+
+          <p>
+            Если такого шага нет, то последовательность вложенных множеств счётная. Делаем переход 2-го рода, задавая
+            множество
+            \[
+            M_\omega = \bigcap_{i=1}^\infty M_i.
+            \]
+            Оно
+            <ul>
+              <li>
+                непусто как пересечение последовательности непустых замкнутых убывающих множеств;
+              </li>
+
+              <li>
+                замкнуто как пересечение замкнутых множеств;
+              </li>
+
+              <li>
+                инвариантно как пересечение инвариантных множеств;
+              </li>
+
+              <li>
+                компактно как замкнутое подмножество исходного компактного $X$.
+              </li>
+            </ul>
+
+            Снова делаем шаги первого рода, снова получаем последовательность
+            \[
+            M_{\omega + 1} \supset M_{\omega + 2} \supset M_{\omega + 3} \supset \dots \supset M_{\omega + n} \supset \cdots.
+            \]
+            Если есть шаг, на котором $M_{\omega + k} = M_{\omega + k + 1}$, то нашли множество центральных движений.
+          </p>
+
+          <p>
+            Иначе снова делаем шаг 2-го рода.
+          </p>
+
+          <p>
+            Пусть эта процедура проделана для вполне упорядоченной системы индексов $\left\{ \gamma | \gamma \lt \delta \right\}$,
+            где индекс $\delta$ отвечает некоторому трансфинитному числу 2-го рода.
+          </p>
+
+          <ul>
+            <li>
+              Если в этой системе имеется максимальный элемент $\alpha$, то есть $\gamma \leqslant \alpha$ для всех
+              $\gamma$, то берём $\delta = \alpha + 1$ и делаем шаг 1-го рода.
+            </li>
+
+            <li>
+              Если максимального элемента не существует, то есть определены все соотв. множества $M_\gamma$, то делаем
+              шаг второго рода.
+              <br/>
+              Вводим множество $M_\delta := \bigcap_{\gamma \lt \delta} M_\gamma$. Оно непусто, замкнуто, инвариантно и
+              компактно. Переходим к ДС $f | M_\delta$ с фазовым пространством $M_\delta$.
+            </li>
+          </ul>
+
+          <p>
+            Проделав указанную процедуру, получаем вполне упорядоченную убывающую систему непустых замкнутых
+            компактных инвариантных множеств с <u>несчётной</u> вполне упорядоченной системой индексов.
+          </p>
+
+          <p>
+            Пространство $X$ как метрический компакт имеет счётную базу, и по теореме Бэра различных множеств в $X$
+            не более чем счётное число. Поэтому обязательно найдётся индекс $\beta$ такой, что
+            \[
+            M_\beta = M_{\beta + 1} = \dots.
+            \]
+            Такое множество $M = M_\beta$ и будет <i class="important">множеством центральных движений</i>.
+          </p>
+
+          <div class="theorem">
+            Множество центральных движений $M$ &mdash; наибольшее замкнутое инвариантное множество, все точки которого
+            являются неблуждающими относительно этого множества.
+            <br/>
+            Эквивалентно: наибольшее замкнутое инвариантное множество, в котором имеет место возвращаемость открытых в
+            $M$ множеств.
+
+            <div class="proof">
+              <div class="todo">3 часть, стр. 25.</div>
+            </div>
+          </div>
+
+          <div class="proposition">
+            Пусть $A \subset X$ &mdash; инвариантное множество и пусть $p \in A$. Тогда точка $p$ устойчива $P^+$
+            относительно $X$ тогда и только тогда, когда она устойчива $P^+$ относительно $A$.
+
+            <div class="proof">
+              <div class="todo">3 часть, стр. 29.</div>
+            </div>
+          </div>
+
+          <div class="theorem">
+            Множества $B^+, B^-, B \subset M$, где $M$ &mdash; множество центральных движений.
+          </div>
+
+          <div class="corollary">
+            Положения равновесия и циклы всегда входят в $M$.
+          </div>
+
+          <div class="theorem">
+            В множестве центральных движений $M$ всюду плотны точки, устойчивые $P$, то есть $\overline B = M$.
+          </div>
+
+          Тогда можно дать такое определение.
+
+          <div class="definition">
+            <i>Множество центральных движений</i> ДС &mdash; замыкание $M = \overline B$ множества устойчивых $P$ точек.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Минимальное множество. Теорема существования. Примеры
+        </div>
+        <div class="content">
+          <div class="definition">
+            Множество $M \subset X$ называется <i>минимальным</i>, если оно:
+            <ol>
+              <li>
+                непусто $M \neq \varnothing$;
+              </li>
+
+              <li>
+                замкнуто $\overline M = M$;
+              </li>
+
+              <li>
+                инвариантно $f(M,t) = M$ для всех $t \in \mathbb{R}$;
+              </li>
+
+              <li>
+                не имеет истинного подмножества (то есть подмножества $\Sigma \subset M, \; \Sigma \neq M$),
+                обладающего свойствами 1-3.
+              </li>
+            </ol>
+          </div>
+
+          <div class="theorem">
+            (<i>критерий минимальности</i>).
+            <br/>
+            Множество $M$ минимально тогда и только тогда, когда замыкание траектории $\overline{f(p, I)} = M$
+            для любой точки $p \in M$.
+          </div>
+
+          <div class="corollary">
+            Минимальное множество $M$ всегда связно.
+          </div>
+
+          <div class="corollary">
+            Если минимальное множество $M$ содержит положение равновесия или цикл, то оно совпадает с ним.
+          </div>
+
+          <div class="remark">
+            Минимальное множество может быть не единственным.
+          </div>
+
+          <div class="remark">
+            Минимальное множество может быть некомпактным.
+          </div>
+
+          <div class="theorem">
+            Во всяком непустом инвариантном компактном множестве $F \subset X$ содержится некоторое минимальное
+            множество $M$.
+          </div>
+
+          <div class="corollary">
+            Если $X$ компактно, то оно имеет минимальное множество $M$.
+          </div>
+
+          <div class="corollary">
+            Если движение $f(p,t)$ устойчиво $L^+$, то множество $\Omega_p$ содержит некоторое компактное минимальное
+            множество $M$.
+          </div>
+
+          <div class="remark">
+            В компактном множестве каждое минимальное множество также компактно.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Рекуррентные движения. Свойства. Примеры. Классификация движений
+        </div>
+        <div class="content">
+          <div class="definition">
+            Движение $f(p,t)$ динамической системы называют <i>рекуррентным</i>, если для любого $\varepsilon \gt 0$
+            существует $T = T(\varepsilon) = T_\varepsilon \gt 0$ такое, что любая конечная дуга
+            $f(p, [t_0, t_0 + T_\varepsilon])$ траектории $f(p, I)$ длины $T_\varepsilon$ аппроксимирует всю эту
+            траекторию $f(p, I)$ с точностью до $\varepsilon$.
+          </div>
+
+          <div class="definition">
+            Движение $f(p,t)$ динамической системы называют <i>рекуррентным</i>, если для любого $\varepsilon \gt 0$
+            найдётся величина $T = T_\varepsilon \gt 0$ такая, что для любых моментов $t_0, t \in \mathbb{R}$
+            существует момент $w = w(t_0, t, \varepsilon) \in [t_0, t_0 + T_\varepsilon]$, для которого
+            \[
+            \rho(f(p,t), f(p,w)) \lt \varepsilon.
+            \]
+          </div>
+
+          <div class="definition">
+            Движение $f(p,t)$ динамической системы называют <i>рекуррентным</i>, если для любого $\varepsilon \gt 0$
+            найдётся величина $T = T_\varepsilon \gt 0$ такая, что для любых моментов $t_0, t \in \mathbb{R}$
+            существует момент $\tau = \tau(t_0, t, \varepsilon) \in [0, T_\varepsilon]$, для которого
+            \[
+            \rho(f(p,t), f(p,t_0 + \tau)) \lt \varepsilon.
+            \]
+          </div>
+
+          Если положить $t_0 = t + a, w = t + \tau$, то получаем следующее определение.
+
+          <div class="definition">
+            Движение $f(p,t)$ динамической системы называют <i>рекуррентным</i>, если для любого $\varepsilon \gt 0$
+            найдётся величина $L = L_\varepsilon \equiv T_\varepsilon \gt 0$ такая, что для любых моментов
+            $t, a \in \mathbb{R}$ существует момент $\tau = \tau(t, a, \varepsilon) \in [a, a + T_\varepsilon]$, для
+            которого
+            \[
+            \rho(f(p,t), f(p,t + \tau)) \lt \varepsilon.
+            \]
+          </div>
+
+          <div class="definition">
+            Если в последнем определении $\tau = \tau(a, \varepsilon)$, то такое рекуррентное движение называют
+            <i>почти периодическим</i>.
+          </div>
+
+          <div class="proposition">
+            Любое рекуррентное движение устойчиво $P$.
+
+            <div class="proof">
+              <div class="todo">3 часть, стр. 48.</div>
+            </div>
+          </div>
+
+          <div class="remark">
+            Обратное неверно: существуют устойчивые $P$, но не рекуррентные движения.
+          </div>
+
+          <div class="proposition">
+            Траектория $f(p, I)$ всякого рекуррентного движения вполне ограничена и ограничена.
+
+            <div class="proof">
+              <div class="todo">3 часть, стр. 48.</div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теоремы Биркгофа о структуре минимального компактного множества и о замыкании рекуррентного движения в полном пространстве
+        </div>
+        <div class="content">
+          <div class="theorem">
+            (<i>Биркгофа, первая</i>).
+            <br/>
+
+            Каждое движение $f(p,t)$ в компактном минимальном множестве $M \subset X$ рекуррентно.
+
+            <div class="proof">
+              <div class="todo">3 часть, стр. 49.</div>
+            </div>
+          </div>
+
+          <div class="corollary">
+            Компактное минимальное множество $M$ всегда содержится в множестве центральных движений.
+          </div>
+
+          <div class="corollary">
+            Если движение $f(p,t)$ устойчиво $L^+$, то в множестве $\Omega_p$ содержится некоторое рекуррентное
+            движение.
+          </div>
+
+          <div class="theorem">
+            (<i>Биркгофа, вторая</i>).
+            <br/>
+
+            Пусть $X$ полно. Тогда замыкание $\overline{f(p, I)} = M$ траектории всякого рекуррентного движения
+            $f(p,I)$ есть компактное минимальное множество.
+            <br/>
+            Если же траектория незамкнута, то все траектории в $M$ рекуррентны, незамкнуты, а их общее число несчётно.
+
+            <div class="proof">
+              <div class="todo">3 часть, стр. 51.</div>
+            </div>
+          </div>
+
+          <div class="corollary">
+            Если рекуррентное движение $f(p,t)$ устойчиво $L$, то $M = \overline{f(p,I)}$ &mdash; компактное минимальное
+            множество.
+          </div>
+
+          <div class="corollary">
+            В полном пространстве $X$ всякое рекуррентное движение $f(p,t)$ устойчиво $L$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: гомеоморфизм
+        </div>
+        <div class="content">
+          <div class="definition">
+            Биективное отображение $f: X \to Y$ метрических пространств называется <i>гомеоморфизмом</i>, если
+            оба отображения $f$ и $f^{-1}$ являются непрерывными.
+          </div>
+
+          <div class="remark">
+            Гомеоморфизм является биекцией, сохраняющая в обе стороны открытость и замкнутость множеств.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: динамическая система в метрическом пространстве
+        </div>
+        <div class="content">
+          Пусть $(X, \rho)$ &mdash; произвольное метрическое пространство.
+
+          <div class="definition">
+            <i>Динамической системой в метрическом пространстве $X$</i> называют однопараметрическое семейство
+            преобразований пространства $X$
+            \[
+            \left\{
+            F_t: X \to X, \; p \mapsto F_t(p) = f(p, t):
+            \; t \in \mathbb{R}
+            \right\},
+            \]
+            удовлетворяющее свойствам:
+            <ol>
+              <li>
+                $F_0 = \id$ или $f(p, 0) = p$ для любого $p \in X$;
+              </li>
+
+              <li>
+                отображение $f(p, t)$ непрерывно по совокупности аргументов;
+              </li>
+
+              <li>
+                $F_{t_2} \circ F_{t_1} = F_{t_2 + t_1}$, или, в развёрнутом виде,
+                \[
+                f(f(p, t_1), t_2) = f(p, t_1 + t_2) \qquad \forall t_1, t_2 \in \mathbb{R}, \; p \in X.
+                \]
+              </li>
+            </ol>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: движение динамической системы
+        </div>
+        <div class="content">
+          <div class="definition">
+            Отображение $f(p, t)$ при произвольной фиксированной точке $p \in X$, то есть отображение
+            \[
+            \mathbb{R} \to X, \quad t \mapsto f(p,t) \in X,
+            \]
+            называется <i>движением (точки p)</i> динамической системы.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: траектория динамической системы
+        </div>
+        <div class="content">
+          <div class="definition">
+            Множество точек
+            \[
+            f(p, I) = \left\{ f(p, t): \; t \in \mathbb{R} \right\}
+            \]
+            называется <i>траекторией</i> динамической системы, проходящей через точку $p \in X$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: устойчивость по Пуассону
+        </div>
+        <div class="content">
+          Рассматриваем ДС $f(p, t)$ в метрическом пространстве $(X, \rho)$.
+
+          <div class="definition">
+            Точка $p \in X$ и движение $f(p,t)$ называются <i>положительно устойчивыми по Пуассону (устойчивыми
+            $P^+$)</i>, если $p \in \Omega_p$.
+          </div>
+
+          <div class="remark">
+            Условие $p \in \Omega_p$ эквивалентно следующему:
+            \[
+            \forall \varepsilon \gt 0, T \gt 0
+            \quad \exists t \gt T:
+            \quad f(p, t) \in K_\varepsilon(p).
+            \]
+          </div>
+
+          <p>
+            Аналогично для $P^-$.
+          </p>
+
+          <div class="definition">
+            Точка называется <i>устойчивой по Пуассону (устойчивой $P$)</i>, если она устойчива $P^+$ и $P^-$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+        </div>
+        <div class="content">
+        </div>
+      </li>
+    </ol>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+  </body>
+
+</html>

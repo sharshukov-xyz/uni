@@ -1,3 +1,7 @@
+h5 {
+  font-size: 15px;
+}
+
 .centered {
   margin-left: auto;
   margin-right: auto;
@@ -27,8 +31,16 @@ h4.subtitle {
   max-width: 1200px;
 }
 
+.theory > .name {
+  text-decoration: underline;
+}
+
 .question {
   margin: 10px 0 10px 0;
+}
+
+.question.red > .name {
+  color: var(--red-color);
 }
 
 .quote {
@@ -101,13 +113,24 @@ h4.subtitle {
 
 .important,
 .theorem > i,
+.proposition > i,
 .lemma > i,
 .definition i {
-  border-bottom: 3px double lightgreen;
+  /* background-color: #0b8007; */
+  border-bottom: 1px solid lightgreen;
 }
 
 .definition::before {
-  content: 'Определение. ';
+  content: attr(definition-name);
+  font-weight: bold;
+}
+
+.axiom {
+  margin: 5px 0 5px 0;
+}
+
+.axiom::before {
+  content: attr(axiom-name);
   font-weight: bold;
 }
 
@@ -125,6 +148,14 @@ h4.subtitle {
   max-width: 100%;
   margin: 10px auto 10px auto;
   text-align: center;
+}
+
+
+@media (min-width: 600px) {
+  .images.small {
+    max-width: 40%;
+    min-width: 200px;
+  }
 }
 
 .images img {
@@ -159,7 +190,10 @@ h4.subtitle {
 .solution,
 .explanation,
 .reminder,
-.proof {
+.axiom,
+.proof,
+.resume,
+.quick-question {
     margin: 10px;
     padding: 10px;
     border: 1px dashed var(--text-color);
@@ -190,7 +224,7 @@ h4.subtitle {
 }
 
 .lemma::before {
-  content: 'Лемма. ';
+  content: attr(lemma-name);
   font-weight: bold;
 }
 
@@ -235,7 +269,8 @@ h4.subtitle {
   color: var(--blue-color);
 }
 
-button.proof-toggle {
+button.proof-toggle,
+button.example-toggle {
   margin-top: 10px;
   margin-left: 10px;
 }
@@ -245,9 +280,13 @@ button.derivation-toggle {
     margin-bottom: 5px;
 }
 
-
 .derivation::before {
   content: 'Вывод. ';
+}
+
+.resume::before {
+    content: 'Вывод. ';
+    font-weight: bold;
 }
 
 .idea::before,
@@ -281,6 +320,11 @@ button.derivation-toggle {
 
 .explanation::before {
   content: 'Объяснение. ';
+  font-style: italic;
+}
+
+.quick-question::before {
+  content: 'Вопрос. ';
   font-style: italic;
 }
 
@@ -356,6 +400,14 @@ nav a {
   padding-right: 15px;
 }
 
+table.elems-centered > tbody > tr > td {
+    text-align: center;
+}
+
+table.centered {
+  margin-left: auto;
+  margin-right: auto;
+}
 table.inner-border {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -475,4 +527,3 @@ div.break {
     --red-color: lightpink;
   }
 }
-

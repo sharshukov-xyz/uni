@@ -1,0 +1,3532 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Вопросы &mdash; Матмод</title>
+
+    <link href="/assets/css/styles.css" rel="stylesheet">
+    <script defer src="/assets/js/core.js"></script>
+    <script defer src="/assets/js/questions.js"></script>
+    <script defer src="/assets/js/controls.js"></script>
+
+    <link rel="stylesheet" href="/assets/katex/katex.min.css">
+    <script defer src="/assets/katex/katex.min.js"></script>
+    <script defer src="/assets/katex/auto-render.min.js"></script>
+
+    <script>
+     document.addEventListener("DOMContentLoaded", function () {
+       renderMathInElement(document.body, {
+         // customised options
+         // • auto-render specific keys, e.g.:
+         delimiters: [
+           { left: '$$', right: '$$', display: true },
+           { left: '$', right: '$', display: false },
+           { left: '\\(', right: '\\)', display: false },
+           { left: '\\[', right: '\\]', display: true }
+         ],
+         // • rendering keys, e.g.:
+         throwOnError: false
+       });
+     });
+    </script>
+  </head>
+
+  <body>
+    <h1 id="title">Вопросы &mdash; Матмод</h1>
+    <nav>
+      <a href="/">Домой</a>
+      <a href="..">Матмод</a>
+      <a href="/links">Ссылки</a>
+      <a href="/about">Контакты</a>
+    </nav>
+
+    <div class="controls">
+      <button onclick="HideQuestions()">Скрыть вопросы</button>
+      <button onclick="ShowQuestions()">Показать вопросы</button>
+      <button onclick="HideAnswers()">Скрыть ответы</button>
+      <button onclick="ShowAnswers()">Показать ответы</button>
+      <button onclick="HideProofs()">Скрыть доказательства</button>
+      <button onclick="ShowProofs()">Показать доказательства</button>
+      <button onclick="ShowRandomElement(HideQuestions)">
+        Показать случайный вопрос
+      </button>
+    </div>
+
+    <div class="proof-type">
+      Показывать
+      <select id="select-proof-type" name="select-proof-type">
+        <option value="proofs">доказательства полностью</option>
+        <option value="ideas">только идеи доказательств</option>
+      </select>
+    </div>
+
+    <div style="display:none">
+      $\global\def\at#1#2{\left. #1 \right\rvert_{#2}}$
+      $\global\def\abs#1{\left\lvert #1 \right\rvert}$
+      $\global\def\norm#1{\left\lVert #1 \right\rVert}$
+      $\global\def\limto#1{\underset{#1}{\longrightarrow}}$
+
+      $\global\def\dp#1#2{#1 \cdot #2\,}$
+      $\global\def\vp#1#2{#1 \times #2\,}$
+
+      $\global\def\dv#1#2{\frac{d #1}{d #2}}$
+      $\global\def\pd#1#2{\frac{\partial #1}{\partial #2}}$
+      $\global\def\pdv2#1#2{\frac{\partial^2 #1}{\partial #2^2}}$
+      $\global\def\ppdv#1#2#3{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
+
+      $\global\def\paren#1{\left( #1 \right)}$
+
+      $\global\def\mbox#1{\text{#1}}$
+
+      $\global\def\div{\text{div}\,}$
+      $\global\def\dsum{\displaystyle\sum\,}$
+      $\global\def\grad{\text{grad}\,}$
+      $\global\def\rot{\text{rot}\,}$
+
+      $\global\def\vb#1{\textbf{#1}}$
+
+      $\global\def\op#1{\mathrm{#1}\,}$
+
+      $\global\def\proj{\mathrm{proj}}$
+      $\global\def\bydef{\mathrm{def}}$
+      $\global\def\const{\text{const}\,}$
+      $\global\def\res{\text{res}\,}$
+      $\global\def\Res{\text{Res}\,}$
+      $\global\def\Re{\text{Re}\,}$
+      $\global\def\Im{\text{Im}\,}$
+      $\global\def\ch{\text{ch}\,}$
+      $\global\def\sh{\text{sh}\,}$
+      $\global\def\tg{\mathrm{tg}\,}$
+      $\global\def\ctg{\mathrm{ctg}\,}$
+      $\global\def\argtg{\text{argtg}\,}$
+    </div>
+
+    <ol id="questions">
+      <li class="question practice">
+        <div class="name">
+          Предмет математического моделирования. Фундаментальные законы природы. Примеры
+        </div>
+        <div class="content">
+          Фундаментальные законы природы:
+          <ol type="a">
+            <li>
+              <h4>Закон сохранения энергии</h4>
+
+              <div class="example">
+                <p>
+                  Рассмотрим задачу об ударении пули массы $m$ об брусок массы
+                  $M$, подвешенный на нерастяжимой нити длины $l$, в результате
+                  которого брусок отклонился на угол $\alpha$ от своего положения
+                  равновесия. Требуется найти скорость $v$, с которой пуля
+                  ударилась в брусок.
+                </p>
+                <div class="images small">
+                  <img src="images/01-bullet.png" />
+                </div>
+                <p>
+                  Будем считать удар абсолютно неупругим, то есть
+                  в результате тела соединяются и продолжают своё
+                  движение как единое целое.
+                </p>
+
+                Так как по закону сохранения энергии
+                \[
+                T + U = \const,
+                \]
+                где $T$ и $U$ &mdash; кинетическая и потенциальная энергии соответственно, то
+                \[
+                \Delta T = - \Delta U.
+                \]
+                В рассматриваемой задаче
+                \[
+                \frac{m v^2}{2} = (M + g) gl (1 - \cos \alpha),
+                \]
+                откуда требуемая скорость выражается следующим образом:
+                \[
+                v = \sqrt{ \frac{2 (M + m)}{m} gl (1 - \cos \alpha) }.
+                \]
+
+                <p>
+                  Стоит иметь в виду, что при таком подходе не учитываются весьма существенные
+                  немеханические процессы, происходящие при торможении пули в бруске (то есть
+                  в случае, когда удар не подразумевается абсолютно неупругим), поэтому
+                  полученная формула даёт лишь нижнюю границу для оценки скорости пули.
+                </p>
+
+                <p>
+                  Для правильного решения нужно воспользоваться законом сохранения импульса,
+                  который позволяет в данном случае обойти обозначенную выше проблему:
+                  \[
+                  (M + m) V = m v, \implies V = \frac{m}{M + m} v.
+                  \]
+                  Тогда, подставляя полученное выражение в закон сохранения энергии, получаем
+                  \[
+                  \frac{(m + M) V^2}{2} = (M + v) gl (1 - \cos \alpha),
+                  \]
+                  откуда
+                  \[
+                  v = \frac{M + m}{m} \sqrt{2 g l (1 - \cos \alpha)},
+                  \]
+                  что в $\sqrt{ \dfrac{M + m}{m} }$ больше, чем полученная выше нижняя граница.
+                </p>
+              </div>
+
+              <div class="example">
+                Рассмотрим задачу об облучении лазером мощности $W(t)$ поверхности $S$.
+                <div class="images small">
+                  <img src="images/01-lazer.png"/>
+                </div>
+
+                <p>
+                  Требуется определить глубину отверстия $l(t)$, образованную
+                  лазером за время $t$.
+                </p>
+
+                Пусть $h$ &mdash; энергия, требуемая для испарения единицы массы, тогда
+                \[
+                h = (T_\text{пл} - T) h_1 + h_2 + (T_\text{кип} - T_\text{пл}) h_3 + h_4,
+                \]
+                где
+                <ol>
+                  <li>
+                    $T_\text{пл}$ &mdash; температура плавления металла;
+                  </li>
+
+                  <li>
+                    $T_\text{кип}$ &mdash; температура кипения металла;
+                  </li>
+
+                  <li>
+                    $T$ &mdash; исходная температура металла;
+                  </li>
+
+                  <li>
+                    $h_1$ &mdash; удельная теплоёмкость твёрдого металла;
+                  </li>
+
+                  <li>
+                    $h_2$ &mdash; удельная теплота плавления;
+                  </li>
+
+                  <li>
+                    $h_3$ &mdash; удельная теплоёмкость жидкого металла;
+                  </li>
+
+                  <li>
+                    $h_4$ &mdash; удельная теплота парообразования.
+                  </li>
+                </ol>
+
+                Тогда, введя обозначения для плотности металла $\rho$ и углубления $l(t)$,
+                можно записать, что
+                \[
+                (l(t + \Delta t) - l(t)) S \rho h = W(t + \xi \Delta t) \Delta t.
+                \]
+                Переписав это равенство как
+                \[
+                \frac{l(t + \Delta t) - l(t)}{\Delta t} S \rho h = W(t + \xi \Delta t)
+                \]
+                и перейдя к пределу при $\Delta t \to 0$, получаем, что
+                \[
+                \dv{l}{t} = \frac{W(t)}{S \rho h}.
+                \]
+
+                Интегрируя обе части
+                \[
+                \int\limits_{0}^{l} dl = \int\limits_{0}^{t} \frac{W(t)}{S \rho h} dt,
+                \]
+                получаем, что
+                \[
+                l(t) = \frac{E(t)}{S \rho h},
+                \]
+                где $E(t)$ &mdash; количество энергии, переданной металлу лазером.
+
+                <p>
+                  Заметим, что в данной модели не учитывается, например, нагрев толщи вещества
+                  и удаление газа из выемки.
+                </p>
+              </div>
+            </li>
+
+            <li>
+              <h4>Закон сохранения массы</h4>
+
+              <div class="example">
+                Пусть в области I имеется радиоактивное вещество с линейными
+                размерами области $l_1$. Вещество находится в некоторой
+                (допустим, свинцовой) оболочке II с линейными размерами $l_2$,
+                полностью поглощающей его продукты распада. Требуется выяснить,
+                как будет изменяться со временем масса вещества в областях I и II.
+
+                <div class="images small">
+                  <img src="images/01-fission.png"/>
+                </div>
+
+                Введём следующие обозначения:
+                <ol>
+                  <li>
+                    $\lambda_1$ &mdash; длина свободного пробега частиц в области I;
+                  </li>
+
+                  <li>
+                    $\lambda_2$ &mdash; длина свободного пробега частиц в области II;
+                  </li>
+
+                  <li>
+                    $N$ &mdash; количество вещества (атомов);
+                  </li>
+
+                  <li>
+                    $\mu$ &mdash; молярная (атомная) масса.
+                  </li>
+                </ol>
+
+                Будем считать, что
+                \[
+                \lambda_1 \gg l_1, \qquad \lambda_2 \ll l_1,
+                \]
+                то есть частица, попавшая в область II, становится поглощённой.
+                Дефектом массы будем пренебрегать.
+
+                <p>
+                  Закон сохранения массы записывается в виде
+                  \[
+                  M_1(0) + M_2(0) = M_1(t) + M_2(t).
+                  \]
+                  Для количества атомов вещества справедливо равенство
+                  \[
+                  N(t + \Delta t) - N(t) = - \alpha N(t + \xi \Delta t) \Delta t,
+                  \]
+                  поэтому
+                  \[
+                  \frac{N(t + \Delta t) - N(t)}{\Delta t} = - \alpha N(t + \xi \Delta t),
+                  \]
+                  откуда, перейдя к пределу при $\Delta t \to 0$, получаем
+                  \[
+                  \dv{N}{t} = - \alpha N.
+                  \]
+                  Так как
+                  \[
+                  M_1 = \mu N,
+                  \]
+                  то
+                  \[
+                  \dv{M_1}{t} = - \alpha M_1,
+                  \]
+                  откуда интегрированием находим закон изменения массы вещества:
+                  \[
+                  M_1(t) = C e^{-\alpha t}.
+                  \]
+                  Так как $M_1(0) = C$, то можно записать
+                  \[
+                  M_1(t) = M_1(0) e^{-\alpha t}.
+                  \]
+                  Подставляя это выражение в закон сохранения массы, получаем следующий
+                  закон для массы оболочки:
+                  \[
+                  M_2(t) = M_1(0) (1 - e^{-\alpha t}) + M_2(0).
+                  \]
+                </p>
+              </div>
+            </li>
+
+            <li>
+              <h4>Закон сохранения импульса</h4>
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question practice">
+        <div class="name">
+          Модель одноступенчатой ракеты. Формула Циолковского
+        </div>
+        <div class="content">
+          <p>
+            Вычислим скорость, которую необходимо сообщить телу, чтобы оно двигалось
+            по круговой орбите вокруг планеты.
+          </p>
+          <div class="images small">
+            <img src="images/02-planet.png" />
+          </div>
+          <p>
+            Уравнение второго закона Ньютона для тела, принимаемого за материальную точку,
+            движущегося по орбите вокруг планеты, можно записать в виде
+            \[
+            ma = G \frac{M m}{R^2},
+            \]
+            где $m$ &mdash; масса тела, $M$ &mdash; масса планеты, $R$ &mdash; радиус орбиты.
+          </p>
+
+          <p>
+            В общем случае при движении тела по окружности с постоянной по модулю скоростью
+            $v$ его ускорение равно центростремительному ускорению $\dfrac{v^2}{R}$, откуда
+            для объекта, движущегося с первой космической скоростью $v_1$, следует, что
+            \[
+            m \frac{v_1^2}{R} = G \frac{M m}{R^2}.
+            \]
+            Тогда
+            \[
+            v_1 = \sqrt{G \frac{M}{R}}.
+            \]
+            Радиус орбиты можно представить в виде $R = R_0 + h$, где $R_0$ &mdash;
+            радиус планеты, а $h$ &mdash; высота над её поверхностью. Тогда
+            \[
+            v_1 = \sqrt{ \frac{G M}{R_0 + h} }.
+            \]
+            В случае Земли $M \approx 5.97 \cdot 10^{24} \,\text{кг}$ и
+            $R_0 = 6 371 000 \,\text{м}$, поэтому, учитывая, что
+            $G \approx 6.67 \cdot 10^{-11}$, вблизи поверхности получаем
+            \[
+            v_1 \approx 7900 \,\text{м/с}.
+            \]
+            Если орбита находится на высоте в 600 км, то
+            \[
+            v_1 \approx 7600 \,\text{м/с}.
+            \]
+          </p>
+
+          <p>
+            Рассмотрим задачу запуска ракеты в космос. Для того чтобы ракета успешно
+            преодолела атмосферу Земли и вышла на орбиту, необходимо обеспечить достижение
+            первой космической скорости.
+          </p>
+
+          <div class="images small">
+            <img src="images/02-rocket.png" />
+          </div>
+
+          Из закона сохранения импульса следует, что
+          \[
+          m(t) v(t) = m(t + \Delta t) v(t + \Delta t) - \Delta m (v(t + \xi \Delta t) - u).
+          \]
+          Так как
+          \[
+          m(t + \Delta t) = m(t) + \Delta m,
+          \]
+          то
+          \[
+          \begin{aligned}
+          m(t) v(t)
+          &=
+          m(t) v(t + \Delta t)
+          + \Delta m \left[ v(t + \Delta t) - v(t + \xi \Delta t) \right]
+          + \Delta m u, \\
+          - m(t) v(t + \Delta t) + m(t) v(t)
+          &=
+          \Delta m \left[ v(t + \Delta t) - v(t + \xi \Delta t) \right]
+          + \Delta m u,
+          \end{aligned}
+          \]
+          Разделим обе части уравнения на $\Delta t$:
+          \[
+          - \frac{m(t) \left[ v(t + \Delta t) - v(t) \right]}{\Delta t}
+          =
+          \frac{\Delta m \left[ v(t + \Delta t) - v(t + \xi \Delta t) + u \right]}{\Delta t}.
+          \]
+          Тогда, переходя к пределу при $\Delta t \to 0$, получаем
+          \[
+          - m(t) \dv{v}{t} = u \dv{m}{t},
+          \]
+          откуда следует, что
+          \[
+          m \dv{v}{t} = - u \dv{m}{t},
+          \]
+          где $\displaystyle \left( -u \dv{m}{t} \right)$ &mdash; реактивная сила.
+
+          <p>
+            Перепишем теперь полученное равенство в виде
+            \[
+            dv = - u \frac{dm}{m},
+            \]
+            тогда после интегрирования получаем
+            \[
+            \int\limits_{v_0}^{v} dv = -u \int\limits_{m_0}^{m} \frac{dm}{m}
+            \quad \implies \quad
+            v = v_0 + u \ln \frac{m_0}{m}.
+            \]
+            В случае, когда $v_0 = 0$, получаем
+            \[
+            v(t) = u \ln \frac{m_0}{m(t)}.
+            \]
+            Эту формулу называют <i class="important">формулой Циолковского</i>.
+          </p>
+
+          <p>
+            Так как $m_0 = m_s + m_p + m_f$, где
+          </p>
+          <ul>
+            <li>
+              $m_s$ &mdash; структурная масса;
+            </li>
+
+            <li>
+              $m_p$ &mdash; полезная масса;
+            </li>
+
+            <li>
+              $m_f$ &mdash; масса топлива,
+            </li>
+          </ul>
+          из формулы Циолковского получаем, что максимальная скорость
+          достигается при $m_f = 0$, то есть
+          \[
+          v_{\max} = u \ln \frac{m_0}{m_s + m_p}.
+          \]
+          При современном технологическом уровне
+          \[
+          \lambda = \frac{m_s}{m_0 - m_p} = \frac{m_s}{m_s + m_f} = 0.1,
+          \qquad u \approx 3 \, \text{км/с},
+          \]
+          поэтому при $m_p = 0$ (то есть без полезной нагрузки)
+          \[
+          v_{\max} = u \ln \frac{m_0}{m_s} = u \ln \frac{1}{\lambda} \approx 7 \, \text{км/c}.
+          \]
+          Таким образом, даже в идеальной ситуации ракета не способна достичь 1-й космической
+          скорости.
+
+          <p>
+            Причина неудачи кроется в том, что двигатель разгоняет бесполезный вес.
+            Необходимо по мере выгорания топлива сбрасывать пустые баки.
+          </p>
+        </div>
+      </li>
+
+      <li class="question practice">
+        <div class="name">
+          Модель многоступенчатой ракеты
+        </div>
+        <div class="content">
+          <p>
+            Рассмотрим идеальную ситуацию непрерывного отбрасывания отработанной
+            структурной массы. Если придём к успеху, то можно будет поставить
+            вопрос о практической реализации этого подхода.
+          </p>
+
+          <div class="images small">
+            <img src="images/03-rocket-cont.png" />
+          </div>
+
+          <p>
+            Пусть $\Delta m$ &mdash; изменение массы ракеты за время $\Delta t$.
+            Обозначим за $\lambda$ долю отброшенной структурной массы, тогда доля
+            выгоревшего топлива будет равно $1 - \lambda$.
+          </p>
+
+          <p>
+            Из закона сохранения импульса следует, что
+            \[
+            m(t) v(t)
+            =
+            m(t + \Delta t) v(t + \Delta t)
+            - \lambda \Delta m v(t + \xi \Delta t)
+            - (1 - \lambda) \Delta m (v(t + \xi \Delta t) - u).
+            \]
+            Раскроем скобки:
+            \[
+            \begin{aligned}
+            m(t) v(t)
+            &=
+            m(t + \Delta t) v(t + \Delta t)
+            - \cancel{\lambda \Delta m v(t + \xi \Delta t)}
+            - \Delta m v(t + \xi \Delta t)
+            + \cancel{\lambda \Delta m v(t + \xi \Delta t)}
+            + (1 - \lambda) \Delta m u = \\
+            &=
+            m(t + \Delta t) v(t + \Delta t)
+            - \Delta m v(t + \xi \Delta t)
+            + (1 - \lambda) \Delta m u.
+            \end{aligned}
+            \]
+            Так как $\Delta m = m(t + \Delta t) - m(t)$, то
+            \[
+            m(t) v(t)
+            =
+            m(t + \Delta t) v(t + \Delta t)
+            - m(t + \Delta t) v(t + \xi \Delta t)
+            + m(t) v(t + \xi \Delta t)
+            + (1 - \lambda) \Delta m u,
+            \]
+            поэтому
+            \[
+            m(t) \left[ v(t) - v(t + \xi \Delta t) \right]
+            =
+            m(t + \Delta t) \left[ v(t + \Delta t) - v(t + \xi \Delta t) \right]
+            + (1 - \lambda) \Delta m u.
+            \]
+            Разделим обе части на $\Delta t$:
+            \[
+            m(t) \frac{\left[ v(t) - v(t + \xi \Delta t) \right]}{\Delta t}
+            =
+            \frac{m(t + \Delta t) \left[ v(t + \Delta t) - v(t + \xi \Delta t) \right]
+            + (1 - \lambda) \Delta m u
+            }{\Delta t}.
+            \]
+            Устремим $\Delta t \to 0$, получим
+            \[
+            - m(t) \dv{v}{t} = (1 - \lambda) u \dv{m}{t},
+            \]
+            или
+            \[
+            m(t) \dv{v}{t} = - (1 - \lambda) u \dv{m}{t}.
+            \]
+            Интегрируя это уравнение, получим
+            \[
+            v = v_0 + (1 - \lambda) u \ln \frac{m_0}{m_p}.
+            \]
+          </p>
+
+          <div class="remark">
+            При интегрировании считаем, что мы избавились как от структурной
+            массы, так и от топлива.
+          </div>
+
+          <p>
+            Таким образом, при заданных $\lambda, u$ и $m_0$ изменением массы полезной
+            нагрузки $m_p$ можем достичь любой скорости.
+          </p>
+
+          <p>
+            При $v_0 = 0$ получим
+            \[
+            \frac{m_0}{m_p} = e^{ \frac{v}{u (1 - \lambda)} }.
+            \]
+            Положим $v = 10.5\,\text{км/с}$ (взяв с запасом на сопротивление
+            воздуха, гравитацию и так далее), тогда, учитывая, что $u \approx 3\,\text{км/с}$
+            и $\lambda = 0.1$, получаем
+            \[
+            \frac{m_0}{m_p} \approx 50,
+            \]
+            то есть в идеальном случае для вывода на орбиту 1 тонны полезного груза
+            нужна ракета весом в 49 тонн.
+          </p>
+
+          <p>
+            На практике невозможно непрерывно отбрасывать структурную массу, однако данный
+            процесс можно дискретизировать.
+          </p>
+
+          <p>
+            Рассмотрим модель трёхступенчатой ракеты. Положим $\lambda$ для всех ступеней
+            одинакова. В такой постановке естественен вопрос выбора масс $m_1, m_2, m_3$
+            таких, чтобы получить максимальное значение полезного груза $m_p$ для данной
+            полной начальной массы $m_0$ при заданных значениях $v_3, u$ и $\lambda$.
+          </p>
+
+          <p>
+            Заметим, что
+            \[
+            \begin{aligned}
+            m_0 &= m_p + m_1 + m_2 + m_3, \\
+            v_1 &= u \ln \left(
+            \frac{m_p + m_1 + m_2 + m_3}{m_p + \lambda m_1 + m_2 + m_3}
+            \right), \\
+            v_2 &= v_1 + u \ln \left(
+            \frac{m_p + m_2 + m_3}{m_p + \lambda m_2 + m_3}
+            \right), \\
+            v_3 &= v_2 + u \ln \left(
+            \frac{m_p + m_3}{m_p + \lambda m_3}
+            \right).
+            \end{aligned}
+            \]
+            Подставляя $v_1$ и $v_2$, получаем значение для $v_3$:
+            \[
+            v_3 = u \ln \left(
+            \frac{m_p + m_1 + m_2 + m_3}{m_p + \lambda m_1 + m_2 + m_3}
+            \cdot
+            \frac{m_p + m_2 + m_3}{m_p + \lambda m_2 + m_3}
+            \cdot
+            \frac{m_p + m_3}{m_p + \lambda m_3}
+            \right).
+            \]
+            Введём для удобства обозначения:
+            \[
+            \alpha_1
+            =
+            \frac{m_p + m_2 + m_3}{m_p + m_1 + m_2 + m_3},
+            \quad
+            \alpha_2
+            =
+            \frac{m_p + m_3}{m_p + m_2 + m_3},
+            \quad
+            \alpha_3
+            =
+            \frac{m_p}{m_p + m_3}.
+            \]
+            Таким образом, имеем:
+            \[
+            v_3 = u \ln \left(
+            \frac{1}{(1 - \alpha_1) \lambda + \alpha_1}
+            \cdot
+            \frac{1}{(1 - \alpha_2) \lambda + \alpha_2}
+            \cdot
+            \frac{1}{(1 - \alpha_3) \lambda + \alpha_3}
+            \right).
+            \]
+            Очевидно, что
+            \[
+            \alpha_1 \cdot \alpha_2 \cdot \alpha_3 = \frac{m_p}{m_0}.
+            \]
+            Можно поставить задачу максимизации произведения
+            $\alpha_1 \cdot \alpha_2 \cdot \alpha_3$ при условии
+            \[
+            \frac{v_3}{u}
+            =
+            \ln \left(
+            \frac{1}{(1 - \alpha_1) \lambda + \alpha_1}
+            \cdot
+            \frac{1}{(1 - \alpha_2) \lambda + \alpha_2}
+            \cdot
+            \frac{1}{(1 - \alpha_3) \lambda + \alpha_3}
+            \right).
+            \]
+            Так как задача симметрична относительно переменных $\alpha_1, \alpha_2, \alpha_3$,
+            то можно утверждать, что оптимум достигается при
+            $\alpha_1 = \alpha_2 = \alpha_3 = \alpha$, которое находится из равенства
+            \[
+            \frac{v_3}{3 u} = \ln \frac{1}{(1 - \alpha) \lambda + \alpha},
+            \implies
+            \alpha (1 - \lambda) + \lambda = e^{- \frac{v_3}{3 u}},
+            \]
+            откуда
+            \[
+            \alpha = \frac{e^{- \frac{v_3}{3 u}} - \lambda}{1 - \lambda}.
+            \]
+            Итак, окончательно получаем, что
+            \[
+            \frac{m_0}{m_p}
+            =
+            {\left( \frac{1}{\alpha} \right)}^3
+            =
+            {\left(
+            \frac{1 - \lambda}{e^{- \frac{v_3}{3 u}} - \lambda}
+            \right)}^3.
+            \]
+          </p>
+
+          <p>
+            В случае $n$-ступенчатой ракеты по аналогии получаем, что
+            \[
+            \frac{m_0}{m_p}
+            =
+            {\left(
+            \frac{1 - \lambda}{e^{- \frac{v_n}{n u}} - \lambda}
+            \right)}^n.
+            \]
+          </p>
+
+          <div class="proposition">
+            Справедливо утверждение:
+            \[
+            {\left(
+            \frac{1 - \lambda}{e^{- \frac{v_n}{n u}} - \lambda}
+            \right)}^n
+            \limto{n \to \infty}
+            e^{ \frac{v}{u (1 - \lambda)} }.
+            \]
+
+            <div class="derivation">
+              Разложим функцию $e^{- \frac{v}{n u}}$ в ряд Тейлора:
+              \[
+              e^{- \frac{v}{n u}} = 1 - \frac{v}{n u} + o\left( \frac{1}{n^2} \right).
+              \]
+              Тогда
+              \[
+              \begin{aligned}
+              {\left(
+              \frac{1 - \lambda}{e^{- \frac{v}{n u}} - \lambda}
+              \right)}^n
+              &\approx
+              {\left(
+              \frac{1 - \lambda}{1 - \lambda - \frac{v}{n u}}
+              \right)}^n = \\
+              &=
+              {\left(
+              \frac{1 - \lambda - \frac{v}{n u}}{1 - \lambda}
+              \right)}^{-n} = \\
+              &=
+              {\left(
+              1
+              +
+              \frac{v}{- n u (1 - \lambda)}
+              \right)}^{-n}.
+              \end{aligned}
+              \]
+              Пользуясь вторым замечательным пределом
+              \[
+              \lim\limits_{n \to \infty} {\left( 1 + \frac{x}{n} \right)}^n = e^x,
+              \]
+              получаем, что
+              \[
+              {\left(
+              1
+              +
+              \frac{v}{- n u (1 - \lambda)}
+              \right)}^{-n}
+              \limto{n \to \infty} e^{ \frac{v}{u (1 - \lambda)} }.
+              \]
+            </div>
+          </div>
+
+          Рассмотрим таблицу масс $n$-ступенчатой ракеты, предназначенной для вывода на орбиту
+          спутника массой в 1 тонну, при значениях $u, v, \lambda$, используемых ранее.
+          <table>
+            <tr>
+              <th>$n$ (число ступеней)</th>
+              <th>$m_0$ (масса в тоннах)</th>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>149</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>77</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>65</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>60</td>
+            </tr>
+            <tr>
+              <td>$\dots$</td>
+              <td>$\dots$</td>
+            </tr>
+            <tr>
+              <td>$\infty$</td>
+              <td>50</td>
+            </tr>
+          </table>
+          <p>
+            Видно, что при переходе от $n = 2$ к $n = 3$ получаем выигрыш почти в
+            2 раза.  Дальнейшее увеличение количества ступеней не даёт заметного
+            выигрыша, но усложняет конструкцию и увеличивает вероятность выхода
+            системы из строя.
+          </p>
+
+          <p>
+            Пусть процент брака при изготовлении пироболта равен $0.5\%$. Вычислим вероятность
+            того, что хотя бы один болт из $S$ штук откажет (окажется бракованным),
+            предполагая, что события являются независимыми:
+            \[
+            p = 1 - (1 - 0.005)^S.
+            \]
+          </p>
+          <table>
+            <tr>
+              <th>$S$ (количество пироболтов)</th>
+              <td>15</td>
+              <td>45</td>
+              <td>75</td>
+              <td>105</td>
+              <td>135</td>
+            </tr>
+            <tr>
+              <th>$P$ (вероятность аварии)</th>
+              <td>$7\%$</td>
+              <td>$20\%$</td>
+              <td>$31\%$</td>
+              <td>$41\%$</td>
+              <td>$49\%$</td>
+            </tr>
+          </table>
+
+          <p>
+            Для подъёма ракеты создают тягу
+            \[
+            T = - \dv{m}{t} u,
+            \]
+            превосходящую вес ракеты примерно в 1,25 раз. Скорость сгорания
+            топлива в ракетном двигателе равна
+            \[
+            - \dv{m}{t} = \frac{1.25 m g}{u} = \frac{1.25 \cdot 9.81 \cdot 60}{3000}
+            = 0.24 m \,\text{тонн/мин}.
+            \]
+            Таким образом, ракетный двигатель сжигает около четверти массы всей ракеты в
+            минуту, из чего следует, что он работает лишь несколько минут.
+          </p>
+        </div>
+      </li>
+
+      <li class="question practice">
+        <div class="name">
+          Вариационные принципы. Вывод закона Снеллиуса
+        </div>
+        <div class="content">
+          <div class="problem">
+            Пусть необходимо попасть из точки $A$ в точку $B$, по пути
+            добравшись до некоторой границы. Суммарная длина проекций двух точек
+            на данную границу равна $C$. Каким образом необходимо построить
+            маршрут, чтобы время пути, удовлетворяющего условиям задачи, было
+            минимальным?
+            <div class="images small">
+              <img src="images/04-ferma.png"/>
+            </div>
+
+            <div class="solution">
+              Составим функцию времени с учётом того, что траектория в виде
+              прямой займёт меньше времени по сравнению с любой криволинейной траекторией:
+              \[
+              t(\alpha) = \frac{a}{v \sin \alpha} + \frac{b}{v \sin \beta(\alpha)},
+              \]
+              где $\alpha$ &mdash; угол, под которым происходит движение к заданной
+              границе. В рамках данной задачи имеем следующее условие оптимальности:
+              \[
+              \tag{1}
+              \dv{t(\alpha)}{\alpha}
+              =
+              \frac{a \cos \alpha}{v \sin^2 \alpha}
+              +
+              \frac{b \cos \beta(\alpha)}{v \sin^2 \beta(\alpha)} \dv{\beta}{\alpha}
+              = 0.
+              \]
+              Далее выразим длину $C$ через известные величины
+              и продифференцируем результат по $\alpha$:
+              \[
+              C = \frac{a}{\tg \alpha} + \frac{b}{\tg \beta(\alpha)}
+              \implies
+              \frac{a}{\sin^2 \alpha} + \frac{b}{\sin^2 \beta(\alpha)} \dv{\beta}{\alpha}
+              = 0.
+              \]
+              Отсюда следует, что
+              \[
+              \frac{b}{\sin^2 \beta(\alpha)} \dv{\beta}{\alpha}
+              =
+              - \frac{a}{\sin^2 \alpha}.
+              \]
+              Подставляя полученное выражение в (1), получаем
+              \[
+              \frac{a \cos \alpha}{\sin^2 \alpha} - \frac{a \cos \beta(\alpha)}{\sin^2 \alpha}
+              = 0.
+              \]
+              Отсюда следует, что
+              \[
+              \cos \alpha = \cos \beta(\alpha)
+              \implies
+              \alpha = \beta.
+              \]
+              Согласно принципу Ферма, свет движется так же (из множества путей
+              между двумя точками свет выбирает тот путь, который потребует
+              наименьшего времени).
+            </div>
+          </div>
+
+          <div class="problem">
+            <p>
+              Пусть необходимо попасть из точки $A$ I-ой области в точку $B$,
+              находящуюся за некоторой границей в области II. Суммарная длина
+              проекций двух точек на данную границу равна $C$. Скорости
+              передвижения в областях постоянны, но не равны друг другу. Каким
+              образом необходимо построить маршрут, чтобы время пути,
+              удовлетворяющего условиям задачи, было минимальным?
+            </p>
+
+            <div class="images small">
+              <img src="images/04-snell.png" />
+            </div>
+
+            <div class="solution">
+              Пусть $v_1, v_2$ &mdash; скорости перемещения в областях I и II соответственно.
+              Тогда
+              \[
+              t(\alpha) = \frac{a}{v_1 \sin \alpha} + \frac{b}{v_2 \sin \beta(\alpha)},
+              \]
+              где $\alpha$ &mdash; угол, под которым происходит движение к заданной границе.
+              В рамках данной задачи имеем следующее условие оптимальности:
+              \[
+              \tag{2}
+              \dv{t}{\alpha}
+              =
+              \frac{a \cos \alpha}{v_1 \sin^2 \alpha}
+              +
+              \frac{b \cos \beta(\alpha)}{v_2 \sin^2 \beta(\alpha)} \dv{\beta}{\alpha}
+              = 0.
+              \]
+              Далее выразим длину $C$ через известные величины и
+              продифференцируем результат по $\alpha$:
+              \[
+              C = \frac{a}{\tg \alpha} + \frac{b}{\tg \beta(\alpha)}
+              \implies
+              \frac{a}{\sin^2 \alpha} + \frac{b}{\sin^2 \beta(\alpha)} \dv{\beta}{\alpha}
+              = 0.
+              \]
+              Отсюда следует, что
+              \[
+              \frac{b}{\sin^2 \beta(\alpha)} \dv{\beta}{\alpha} = - \frac{a}{\sin^2 \alpha}.
+              \]
+              Подставляя данный результат в формулу (2), приходим к следующему выражению:
+              \[
+              \frac{a \cos \alpha}{v_1 \sin^2 \alpha}
+              - \frac{a \cos \beta(\alpha)}{v_2 \sin^2 \alpha}
+              = 0.
+              \]
+              Отсюда следует <i class="important">закон преломления света</i>:
+              \[
+              \frac{\cos \alpha}{\cos \beta} = \frac{v_1}{v_2}.
+              \]
+
+              <div class="remark">
+                $\cos x$ &mdash; убывающая на $[0, \frac{\pi}{2}]$ функция, поэтому
+                если $\cos \alpha \lt \cos \beta$, то отсюда следует, что $v_1 \lt v_2$,
+                то есть чем больше угол, тем меньше скорость.
+              </div>
+
+              <div class="remark">
+                При $\displaystyle \alpha = \arccos \frac{v_1}{v_2}$ луч скользит
+                по границе областей сред, а при меньших углах и вовсе отражается от границы,
+                то есть возвращается в среду I.
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question practice">
+        <div class="name">
+          Вариационные принципы. Задача о движении света
+          в прозрачной среде с переменной оптической плотностью
+        </div>
+        <div class="content">
+          <div class="problem">
+            В прозрачной среде с переменной оптической плотностью необходимо
+            определить траекторию луча света, проходящего из точки A в точку B
+            за минимальное время. Ограничимся плоским случаем, то есть рассмотрим
+            плоскость $xOy$.
+
+            <div class="images small">
+              <img src="images/05-trajectory.png" />
+            </div>
+
+            <div class="solution">
+              Пусть $y = y(x)$ &mdash; уравнение кривой, по которой движется свет
+              из точки $A$ в точку $B$. Тогда
+              \[
+              dl = \sqrt{dx^2 + dy^2} = \sqrt{1 + {y'}^2(x)} dx.
+              \]
+              Обозначим через $v(x, y)$ скорость света в точке $(x, y)$. Тогда
+              \[
+              dt = \frac{dl}{v} = \frac{\sqrt{ 1 + {y'}^2(x) }}{ v(x, y(x)) } dx.
+              \]
+              Таким образом, время $T$ распространения света вдоль кривой $y = y(x)$
+              из $A$ в $B$ выражается интегралом
+              \[
+              T = \int\limits_{x_0}^{x_1} \frac{\sqrt{ 1 + {y'}^2(x) }}{ v(x, y(x)) } dx.
+              \]
+              Согласно принципу Ферма задача определения траектории луча света сводится
+              к определению линии, для которой функционал принимает наименьшее значение.
+              Решим для случая, когда скорость $v$ непрерывно зависит только от координаты
+              $y$, то есть $v = v(y)$. Построим в $xOy$ горизонтальную полосу шириной
+              $y_1 - y_0 = h$:
+              \[
+              y_0 \leqslant y \leqslant y_0 + h = y_1.
+              \]
+              Эта полоса ограничена прямыми, параллельными $Ox$ и проходящими через точки
+              $A$ и $B$.
+
+              <p>
+                Разобьём эту полосу на $n$ горизонтальных полосок:
+                \[
+                y = y_0 + i \cdot \frac{h}{n}, \qquad i = \overline{0, n-1}.
+                \]
+              </p>
+
+              <div class="images small">
+                <img src="images/05-discrete.png" />
+              </div>
+
+              <p>
+                Более того, пусть скорость света изменяется скачкообразно, то есть
+                в пределах $i$-ой полоски будем иметь
+                \[
+                y_0 + \frac{i h}{n} \leqslant y \leqslant y_0 + \frac{(i+1)h}{n},
+                \qquad i = \overline{0, n-1}.
+                \]
+                Скорость света внутри каждый полоски будем считать постоянной и равной
+                \[
+                v_i = v \left(y_0 + \frac{ih}{n}\right).
+                \]
+              </p>
+
+              <p>
+                Итак, исходная задача сводится к задаче поиска минимума функции с $n-1$
+                переменной. Траектория луча в этом случае будет представлять из себя
+                ломаную. Обозначая через $a_i$ абсциссу $i$-ой вершины этой ломаной,
+                соответствующую ординате $y_0 = \frac{ih}{n}$, получим для времени
+                $T_n$ прохождения света по ломаной выражение
+                \[
+                T_n = \sum\limits_{i=0}^{n-1} \frac{1}{v_i} \sqrt{
+                {(a_{i+1} - a+i)}^2 + {\left( \frac{h}{n} \right)}^2
+                }.
+                \]
+                Согласно принципу Ферма, абсциссы $a_i$ должны быть выбраны так,
+                чтобы $T_n$ достигало минимума, то есть должны выполняться условия
+                \[
+                \pd{T_n}{a_i} = 0, \qquad i = \overline{0, n-1}.
+                \]
+                Тогда
+                \[
+                \begin{aligned}
+                \pd{T_n}{a_i}
+                &=
+                - \frac{a_{i+1} - a_i}{v_i \sqrt{ (a_{i+1} - a_i)^2 + (\frac{h}{n})^2 }}
+                + \frac{a_i - a_{i-1}}{v_{i-1} \sqrt{ (a_i - a_{i-1})^2 + (\frac{h}{n})^2 }} = \\
+                &=
+                - \frac{\cos \varphi_i}{v_i} + \frac{\cos \varphi_{i-1}}{v_{i-1}},
+                \end{aligned}
+                \]
+                где $\varphi_i$ &mdash; угол наклона $i$-го звена ломаной к оси $Ox$.
+                Таким образом,
+                \[
+                \frac{\cos \varphi_{i-1}}{v_{i-1}} = \frac{\cos \varphi_i}{v_i} = \frac{1}{k},
+                \]
+                где $k$ &mdash; некоторая константа, не зависящая от $i$.
+              </p>
+
+              <p>
+                При переходе к пределу при $n \to \infty$ мы переходим от
+                скачкообразного распределения плотностей среды к непрерывному их
+                распределению, а ломаная перейдёт в криволинейную траекторию, выраженную
+                уравнениями
+                \[
+                y = y(x),
+                \qquad
+                T
+                = \int\limits_{x_0}^{x_1} \frac{\sqrt{1 + {y'}^2(x)}}{v(y)} dx
+                = \lim\limits_{n \to \infty} T_n.
+                \]
+                Кроме того, необходимые условия минимума $T_n$ перейдут в
+                \[
+                \frac{\cos \varphi}{v(y)} = \frac{1}{k} = \const.
+                \]
+                Но $\tg \varphi = y'$, поэтому
+                \[
+                \cos \varphi
+                = \frac{1}{\sqrt{1 + {\tg}^2 \varphi}}
+                = \frac{1}{\sqrt{1 + {y'}^2}}.
+                \]
+                Значит,
+                \[
+                v(y) \sqrt{1 + {y'}^2} = k.
+                \]
+                Получили уравнение с разделяющимися переменными. Перейдём к общему
+                интегралу:
+                \[
+                \begin{aligned}
+                v(y) \sqrt{1 + {y'}^2} = k
+                &\implies
+                \sqrt{1 + {y'}^2} = \frac{k}{v(y)}
+                &&\implies
+                1 + {y'}^2 = \frac{k^2}{v^2(y)} \\
+                {y'}^2 = \frac{k^2 - v^2(y)}{v^2(y)}
+                &\implies
+                y' = \sqrt{\frac{k^2 - v^2(y)}{v^2(y)}}
+                &&\implies
+                x = \int\limits_{}^{} \frac{v(y) dy}{\sqrt{k^2 - v^2(y)}} + C.
+                \end{aligned}
+                \]
+              </p>
+
+              <p>
+                Таким образом, в данной среде траектория луча света всегда принадлежит
+                двупараметрическому семейству кривых (параметры $C$ и $k$). Из каждой
+                точки $M(x_0, y_0)$ выходит пучок лучей
+                \[
+                x - x_0 = \int\limits_{y_0}^{y} \frac{v dy}{\sqrt{k^2 - v^2}}.
+                \]
+                Это уравнение зависит от параметра $k$, который можно найти, если
+                известна ещё одна точка, через которую проходит луч.
+              </p>
+
+              <p>
+                Рассмотрим частный случай, когда решение может быть получено в конечном виде.
+                Допустим, что скорость $v$ распространения света в этой среде пропорциональна
+                ординате:
+                \[
+                v = \alpha y, \qquad \alpha \gt 0.
+                \]
+                В этом случае уравнение семейства траекторий луча примет вид
+                \[
+                \begin{aligned}
+                x
+                &=
+                \int\limits_{}^{} \frac{\alpha y dy}{\sqrt{k^2 - \alpha^2 y^2}} + C = \\
+                &=
+                - \frac{1}{2 \alpha} \int \frac{d(k^2 - \alpha^2 y^2)}{\sqrt{k^2 - \alpha^2 y^2}} + C = \\
+                &=
+                - \frac{\sqrt{k^2 - \alpha^2 y^2}}{\alpha} + C.
+                \end{aligned}
+                \]
+                Отсюда следует, что
+                \[
+                (x - C)^2 + y^2 = \left( \frac{k}{\alpha} \right)^2 = r^2.
+                \]
+                Таким образом, траектория луча &mdash; дуга окружности с центром на оси $Ox$.
+                Через каждые две точки проходит единственная траектория.
+              </p>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question practice">
+        <div class="name">
+          Модели динамики популяций. Модель Мальтуса.
+          Логистическая модель
+        </div>
+        <div class="content">
+          <div class="example">
+            <i>Модель Мальтуса</i>.
+            <br/>
+            Пусть скорость изменения населения со временем $t$ пропорциональна
+            его текущей численности $N(t)$, умноженной на сумму коэффициентов
+            рождаемости $\alpha(t) \geqslant 0$ и смерности $\beta(t) \geqslant 0$.
+            Таким образом, имеем соотношение:
+            \[
+            \dv{N}{t} = \left[ \alpha(t) - \beta(t) \right] N(t).
+            \]
+            Интегрированием получаем выражение для решения этого уравнения:
+            \[
+            N(t) = N(t_0) e^{ \int\limits_{t_0}^{t} \left[ \alpha(t) - \beta(t) \right] dt }.
+            \]
+            Если $\alpha = \const$ и $\beta = \const$, то
+            \[
+            N(t) = N(t_0) e^{(\alpha - \beta) (t - t_0)}.
+            \]
+            Если $\alpha = \beta$, то $N(t) = N(t_0) = \const$ &mdash; положение
+            равновесия, но оно неустойчиво, так как при $\alpha \gt \beta$ будем
+            наблюдать экспоненциальный рост, а при $\alpha \lt \beta$ будем
+            наблюдать экспоненциальное снижение (аналогично уравнению
+            радиоактивного распада).
+          </div>
+
+          <div class="example">
+            <i>Логистическая модель</i>.
+            <p>
+              Проблема модели Мальтуса в том, что она не учитывает конечность
+              ресурсов. Отсюда следует, что даже в идеальном случае численность
+              не может расти бесконечно.
+            </p>
+
+            <p>
+              Будем считать, что $N_p$ &mdash; некоторая равновесная численность популяции,
+              которую может обеспечить окружающая среда. Также будем считать, что
+              скорость изменения численности популяции пропорциональна самой численности,
+              умноженной на величину отклонения от равновесного значения, то есть
+              \[
+              \dv{N}{t} = \alpha \left( 1 - \frac{N}{N_p} \right) N, \qquad \alpha \gt 0.
+              \]
+              Представляя это уравнение в виде
+              \[
+              \frac{dN}{N_p - N} + \frac{dN}{N} = \alpha dt
+              \]
+              и интегрируя его, получаем
+              \[
+              - \ln \abs{N_p - N} + \ln N = \alpha t + C,
+              \]
+              или, иначе,
+              \[
+              \ln \frac{N}{\abs{N_p - N}} = \alpha t + C.
+              \]
+              В начальный момент времени $t = 0$
+              \[
+              C = \ln \frac{N_0}{\abs{N_p - N_0}},
+              \]
+              поэтому
+              \[
+              \frac{N}{N_p - N} = \frac{N_0}{N_p - N_0} e^{\alpha t}.
+              \]
+              Выражая отсюда $N$, получаем уравнение логистической кривой:
+              \[
+              N = \frac{N_p N_0 e^{\alpha t}}{N_p + N_0 (e^{\alpha t} - 1)}.
+              \]
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li class="question practice">
+        <div class="name">
+          Модель хищник-жертва
+        </div>
+        <div class="content">
+          Ни один вид не живёт изолированно от другого; все виды взаимодействуют
+          со своим окружением.
+
+          <p>
+            Для построения модели хищник-жертва предполагаем:
+          </p>
+          <ol>
+            <li>
+              не учитывается пространственное распределение численности жертв $N$
+              и хищников $M$ &mdash; они зависят лишь от времени $t$;
+            </li>
+
+            <li>
+              в отсутствии взаимодействия численности изменяются по модели Мальтуса:
+              \[
+              \begin{aligned}
+              \dv{N}{t} &= \phantom{-}\alpha N, \\
+              \dv{M}{t} &= -\beta M,
+              \end{aligned}
+              \]
+              где $\alpha$ &mdash; рождаемость, а $\beta$ &mdash; смертность;
+            </li>
+
+            <li>
+              естественная смертность хищников и жертв несущественна;
+            </li>
+
+            <li>
+              эффект насыщения численности обоих популяций не учитывается;
+            </li>
+
+            <li>
+              скорость роста численности жертв уменьшается пропорционально численности
+              хищников, т.е. величине $c M$, а тем роста численности хищников увеличивается
+              пропорционально численности жертв, т.е. $k N$.
+            </li>
+          </ol>
+
+          <p>
+            Объединяя эти предположения, приходим к модели
+            <i class="important">Лотки-Вольтерра</i>:
+            \[
+            \begin{aligned}
+            \dv{N}{t} &= (\phantom{-} \alpha - c M) N, \\
+            \dv{M}{t} &= (- \beta + kN) M.
+            \end{aligned}
+            \]
+            Определим его положение равновесия, приравняв правые части к нулю:
+            \[
+            \begin{aligned}
+            (\phantom{-} \alpha - c M) N &= 0, \\
+            (- \beta + kN) M &= 0.
+            \end{aligned}
+            \]
+            Тогда положение равновесия представляет собой пару
+            \[
+            \hat N = \frac{\beta}{k}, \qquad
+            \hat M = \frac{\alpha}{c}.
+            \]
+          </p>
+
+          <p>
+            Введём начальные условия:
+            \[
+            N(0) = N_0, \qquad M(0) = M_0.
+            \]
+            Поделив первое уравнение системы на второе, получаем дифференциальное уравнение
+            с разделяющимися переменными:
+            \[
+            \dv{N}{M} = \frac{(\alpha - c M) N}{(- \beta + k N) M}.
+            \]
+            Перепишем его в виде
+            \[
+            \frac{-\beta + k N}{N} dN = \frac{\alpha - cM}{M} dM,
+            \]
+            тогда после интегрирования приходим к выражению
+            \[
+            -\beta \ln N + k N = \alpha \ln M - c M + c_1,
+            \]
+            которое можно записать в виде
+            \[
+            \alpha \ln M + \beta \ln N - c M - k N = \const.
+            \]
+            Занесём все множители и слагаемые под знак логарифма:
+            \[
+            \ln M^\alpha + \ln N^\beta = c_1 + \ln e^{c M} + \ln e^{k N}.
+            \]
+            Потенцируя это уравнение, получим интеграл
+            \[
+            N^\beta e^{-k N} = \hat c M^{-\alpha} e^{c M}.
+            \]
+          </p>
+
+          Отсюда следует два факта:
+          <ol>
+            <li>
+              если $N(0) = \hat N$ и $M(0) = \hat M$, то во все моменты времени
+              численность не меняется;
+            </li>
+
+            <li>
+              при малом отклонении от положения равновесия численности как хищника,
+              так и жертвы с течением времени не возвращаются к равновесным значениям
+              &mdash; имеем дело с колебаниями.
+            </li>
+          </ol>
+
+          <div class="images small">
+            <img src="images/07-circles.png" />
+            <img src="images/07-oscillations.png" />
+          </div>
+
+          Если учитывать эффект насыщения жертв (как в логистической модели), тогда
+          в первом уравнении модели появляется логистический член:
+          \[
+          \dv{N}{t} = (\alpha - cM - a N) N.
+          \]
+          Фазовые траектории в этом случае имеют вид спиралей.
+
+          <div class="images small">
+            <img src="images/07-spirals.png" />
+          </div>
+
+          Рассмотрим теперь поведение системы в окрестности моложения равновесия, то есть
+          \[
+          \begin{aligned}
+          N &= \hat N + \tilde N, \\
+          M &= \hat M + \tilde M,
+          \end{aligned}
+          \]
+          где $\tilde N, \tilde M$ &mdash; некоторые малые отклонения от $\hat N, \hat M$.
+          Тогда
+          \[
+          \begin{aligned}
+          \dv{\tilde N}{t} &= (\alpha - c(\hat M + \tilde M)) (\hat N + \tilde N), \\
+          \dv{\tilde M}{t} &= (-\beta + k(\hat N + \tilde N)) (\hat M + \tilde M).
+          \end{aligned}
+          \]
+          Раскроем скобки:
+          \[
+          \begin{aligned}
+          \dv{\tilde N}{t}
+          &= \cancel{(\alpha - c \hat M)} (\hat N + \tilde N)
+          - c \tilde M (\hat N + \tilde N), \\
+          \dv{\tilde M}{t}
+          &= \cancel{(-\beta + k \hat N)} (\hat M + \tilde M)
+          + k \tilde N (\hat M + \tilde M).
+          \end{aligned}
+          \]
+          Тогда, пренебрегая членами более выского порядка малости, получаем систему
+          \[
+          \begin{aligned}
+          \dv{\tilde N}{t} &= -c \tilde M \hat N, \\
+          \dv{\tilde M}{t} &= \phantom{-} k \tilde N \hat M.
+          \end{aligned}
+          \]
+          Подставим выражения для положения равновесия, тогда
+          \[
+          \begin{aligned}
+          \dv{\tilde N}{t} &= - \frac{c \beta}{k} \tilde M, \\
+          \dv{\tilde M}{t} &= \phantom{-} \frac{k \alpha}{c} \tilde N.
+          \end{aligned}
+          \]
+
+          Дифференцируя первое уравнение и подставляя в полученное выражение второе уравнение,
+          можно будет найти параметрическое задание фазовой кривой.
+        </div>
+      </li>
+
+      <li class="question practice">
+        <div class="name">
+          Модель гонки вооружений между двумя странами
+        </div>
+        <div class="content">
+          Предполагается, что общее количество вооружений у каждой страны
+          изменяется с течением времени в зависимости от трёх факторов:
+          <ul>
+            <li>
+              количества оружия у противника;
+            </li>
+
+            <li>
+              износа уже существующего вооружения;
+            </li>
+
+            <li>
+              степени недоверия между противниками.
+            </li>
+          </ul>
+
+          Будем считать темпы прироста и уменьшения вооружений пропорциональными
+          указанным факторам. Тогда
+          \[
+          \tag{1}
+          \begin{aligned}
+          \dv{M_1}{t} &= \alpha_1(t) M_2 - \beta_1(t) M_1 + \gamma_1(t), \\
+          \dv{M_2}{t} &= \alpha_2(t) M_1 - \beta_2(t) M_2 + \gamma_2(t).
+          \end{aligned}
+          \]
+          Считаем, что
+          <ul>
+            <li>
+              $M_1(t), M_2(t) \geqslant 0$ &mdash; объёмы вооружений;
+            </li>
+
+            <li>
+              $\alpha_1(t), \alpha_2(t) \gt 0$ &mdash; скорости наращивания;
+            </li>
+
+            <li>
+              $\beta_1(t), \beta_2(t) \gt 0$ &mdash; скорости старения;
+            </li>
+
+            <li>
+              $\gamma_1(t), \gamma_2(t) \gt 0$ &mdash; настороженность.
+            </li>
+          </ul>
+
+          <p>
+            Анализ особенно прост в случае, когда коэффициенты не зависят от времени:
+            \[
+            \tag{2}
+            \begin{aligned}
+            \dv{M_1}{t} &= \alpha_1 M_2 - \beta_1 M_1 + \gamma_1, \\
+            \dv{M_2}{t} &= \alpha_2 M_1 - \beta_2 M_2 + \gamma_2.
+            \end{aligned}
+            \]
+            Уравнения имеют положение равновесия, которое находится из условий
+            \[
+            \begin{aligned}
+            \alpha_1 M_2 - \beta_1 M_1 + \gamma_1 &= 0, \\
+            \alpha_2 M_1 - \beta_2 M_2 + \gamma_2 &= 0.
+            \end{aligned}
+            \]
+            Равновесные значения равны
+            \[
+            \tag{3}
+            M_1^0 = \frac{\alpha_1 \gamma_2 + \beta_2 \gamma_1}{\beta_1 \beta_2 - \alpha_1 \alpha_2},
+            \qquad
+            M_2^0 = \frac{\alpha_2 \gamma_1 + \beta_1 \gamma_2}{\beta_1 \beta_2 - \alpha_1 \alpha_2}.
+            \]
+            Отсюда следует, что для существования равновесия при положительных $M_1, M_2$,
+            должно выполняться неравенство
+            \[
+            \tag{4}
+            \beta_1 \beta_2 \gt \alpha_1 \alpha_2.
+            \]
+            Смысл этого неравенства в следующем. Пусть, например, параметры
+            $\alpha_1, \beta_1$ и $\beta_2$ неизменны, а $\alpha_2$
+            увеличивается. Это значит, что первая страна не меняет свою стратегию
+            в области вооружений, а вторая наращивает вооружения при неизменном
+            темпе износа оружия $\beta_2$. Тогда при достаточно большой
+            величине $\alpha_2$ равновесие станет заведомо невозможным, а неравенство
+            (4) обязательно нарушится.
+          </p>
+
+          <p>
+            Заметим, что если оба параметра $\gamma_1, \gamma_2$ равны нулю, то
+            положение равновесия отвечает отсутствию вооружений у обеих сторон.
+          </p>
+
+          <p>
+            Поделив первое уравнение системы на второе, получим дифференциальное уравнение
+            с разделяющимися переменными:
+            \[
+            \dv{M_2}{M_1} = \frac{\alpha_2 M_1 - \beta_2 M_2 + \gamma_2}{\alpha_1 M_2 - \beta_1 M_1 + \gamma_1}.
+            \]
+            Отсюда следует, что
+            \[
+            \begin{cases}
+            \dv{M_2}{M_1} = 0, & M_2 = \frac{\alpha_2}{\beta_2} M_1 + \frac{\gamma_2}{\beta_2}, \\
+            \dv{M_2}{M_1} = \infty, & M_2 = \frac{\beta_1}{\alpha_1} M_1 - \frac{\gamma_1}{\alpha_1}.
+            \end{cases}
+            \]
+            Изоклина бесконечности имеет больший наклон, чем изоклина нуля, так как из
+            неравенства (4) следует, что
+            \[
+            \frac{\beta_1}{\alpha_1} \gt \frac{\alpha_2}{\beta_2}.
+            \]
+          </p>
+
+          <p>
+            Изучим теперь вопрос об устойчивости равновесия (3) при условии (4).
+            В этом случае интегральные кривые уравнения (2) в плоскости $M_1, M_2$
+            имеют следующий вид.
+          </p>
+
+          <div class="images small">
+            <img src="images/08-const.png" />
+          </div>
+
+          Штриховые прямые отвечают изоклинам нуля
+          \[
+          M_2 = \frac{\alpha_2}{\beta_2} M_1 + \frac{\gamma_2}{\beta_2}
+          \]
+          и бесконечности
+          \[
+          M_2 = \frac{\beta_1}{\alpha_1} M_1 - \frac{\gamma_1}{\alpha_1}.
+          \]
+          Функции $M_1(t)$ и $M_2(t)$ при возрастании $t$ стремятся к равновесным
+          значениям, поэтому это положение равновесия устойчиво.
+
+          <p>
+            Введём обозначения:
+            \[
+            \begin{aligned}
+            M_1 &= x + a, & dM_1 &= dx, \\
+            M_2 &= y + b, & dM_2 &= dy.
+            \end{aligned}
+            \]
+            Тогда
+            \[
+            \dv{y}{x} = \frac{\alpha_2 x + \alpha_2 a - \beta_2 y - \beta_2 b + \gamma_2}{\alpha_1 x + \alpha_1 a - \beta_1 y - \beta_1 b + \gamma_1}.
+            \]
+            Можно выбрать $a,b$ таким образом, чтобы переход к переменным $x,y$ приводил
+            к однородным числителю и знаменателю линейной функции. Для этого решим следующую систему:
+            \[
+            \begin{aligned}
+            \alpha_2 a - \beta_2 b &= -\gamma_2, \\
+            -\beta_1 a + \alpha_1 b &= -\gamma_1,
+            \end{aligned}
+            \]
+            откуда
+            \[
+            \begin{aligned}
+            a &= \frac{-\gamma_2 \alpha_1 - \gamma_1 \beta_2}{\alpha_1 \alpha_2 - \beta_1 \beta_2}, \\
+            b &= \frac{-\gamma_1 \alpha_2 - \gamma_2 \beta_1}{\alpha_1 \alpha_2 - \beta_1 \beta_2}.
+            \end{aligned}
+            \]
+            Таким образом, получаем
+            \[
+            \dv{y}{x} = \frac{\alpha_2 x - \beta_2 y}{-\beta_1 x + \alpha_1 y}.
+            \]
+            Введём следующее обозначение:
+            \[
+            u = \frac{y}{x}.
+            \]
+            Тогда
+            \[
+            y = u x, \qquad \dv{y}{x} = u + x \dv{u}{x}.
+            \]
+            В итоге получаем уравнение с разделяющимися переменными:
+            \[
+            u + x \dv{u}{x} = \frac{\alpha_2 - \beta_2 u}{-\beta_1 + \alpha_1 u}.
+            \]
+            Решение данного уравнения можно найти, проинтегрировав уравнение
+            \[
+            \frac{dx}{x} = \frac{du}{ \frac{\alpha_2 - \beta_2 u}{- \beta_1 + \alpha_1 u} - u }.
+            \]
+          </p>
+
+          <p>
+            Для дальнейшего изучения модели введём следующие условия:
+          </p>
+          <ul>
+            <li>
+              страны находятся в равновесии, но темп наращивания вооружения в
+              первом и втором уравнении изменится на небольшую величину
+              $d\alpha_1 = d\alpha_2 = d\alpha$;
+            </li>
+
+            <li>
+              объёмы вооружений также изменяются.
+            </li>
+          </ul>
+          Тогда для того, чтобы интересы стран не ущемлялись, должно быть выполнено
+          \[
+          d M_1^0 = d M_2^0.
+          \]
+          Найдём эти величины, взяв дифференциал от (3):
+          \[
+          \begin{aligned}
+          d M_1^0
+          &=
+          \frac
+          {\gamma_2 d\alpha_1 (\beta_1 \beta_2 - \alpha_1 \alpha_2)}
+          {(\beta_1 \beta_2 - \alpha_1 \alpha_2)^2}
+          +
+          \frac
+          {(\alpha_1 d\alpha_2 + \alpha_2 d\alpha_1) (\gamma_2 \alpha_1 + \gamma_1 \beta_2)}
+          {(\beta_1 \beta_2 - \alpha_1 \alpha_2)^2} = \\
+          &=
+          \frac{1}{(\beta_1 \beta_2 - \alpha_1 \alpha_2)^2} \left[
+          - \gamma_2 \beta_1 \beta_2 - \cancel{\gamma_2 \alpha_1 \alpha_2}
+          + \alpha_1 \gamma_1 \beta_2 + \alpha_1^2 \gamma_2 +
+          \right. \\
+          &\phantom{=}
+          \left.
+          +
+          \alpha_2 \gamma_1 \beta_2 + \cancel{\alpha_2 \gamma_2 \alpha_1}
+          \right] d\alpha = \\
+          &=
+          \frac{1}{(\beta_1 \beta_2 - \alpha_1 \alpha_2)^2} \left[
+          - \gamma_2 \beta_1 \beta_2 + \alpha_1 \gamma_1 \beta_2
+          + \alpha_1^2 \gamma_2 + \alpha_2 \gamma_1 \beta_2
+          \right] d\alpha.
+          \end{aligned}
+          \]
+          Аналогично
+          \[
+          d M_2^0 = \frac{1}{(\beta_1 \beta_2 - \alpha_1 \alpha_2)^2} \left[
+          \gamma_1 \beta_1 \beta_2 + \alpha_1 \beta_1 \gamma_2
+          + \alpha_2^2 \gamma_1 + \alpha_2 \beta_1 \gamma_2
+          \right] d\alpha.
+          \]
+          Если $\gamma_1 = \gamma_2$, то условие $dM_1^0 = dM_2^0$ приводит к равенству
+          \[
+          \alpha_1 \beta_2 + \alpha_1^2 + \alpha_2 \beta_2 = \alpha_1 \beta_1
+          + \alpha_2^2 + \alpha_2 \beta_1,
+          \]
+          откуда
+          \[
+          (\alpha_1 - \alpha_2) (\alpha_1 + \alpha_2) = (\alpha_1 + \alpha_2) (\beta_1 - \beta_2).
+          \]
+          В итоге получаем равенство
+          \[
+          \alpha_1 - \alpha_2 = \beta_1 - \beta_2,
+          \]
+          которое может быть положено в основу соответствующих договорённостей между странами.
+          Например, в случае, когда $\alpha_1 - \alpha_2 = 10$, у первой страны
+          техника на 10 единиц быстрее выходит из строя.
+        </div>
+      </li>
+
+      <li class="question practice">
+        <div class="name">
+          Модели Ланчестера. Вывод параболического и
+          квадратического законов ведения боевых действий
+        </div>
+        <div class="content">
+          Пусть даны две регулярные армии численностью $N_1(t) \geqslant 0$ и
+          $N_2(t) \geqslant 0$. Если она из сторон достигает нулевой численности, она считается
+          потерпевшей поражение при ненулевой численности противника.
+
+          <p>
+            Рассмотрим факторы, влияющие на численность армии:
+          </p>
+          <ul>
+            <li>
+              потери, не связанные с боевыми действиями (болезни, дезертирство):
+            </li>
+
+            <li>
+              потери в бою;
+            </li>
+
+            <li>
+              подкрепление.
+            </li>
+          </ul>
+
+          Тогда можно составить следующую систему:
+          \[
+          \tag{1}
+          \begin{aligned}
+          \dv{N_1}{t} &= -\alpha_1(t) N_1 - \beta_2(t) N_2 + \gamma_1(t), \\
+          \dv{N_2}{t} &= -\alpha_2(t) N_2 - \beta_1(t) N_1 + \gamma_2(t),
+          \end{aligned}
+          \]
+          где
+          <ul>
+            <li>
+              $\alpha_1(t), \alpha_2(t)$ &mdash; небоевые потери в единицу времени;
+            </li>
+
+            <li>
+              $\beta_1(t), \beta_2(t)$ &mdash; насколько хорошо воюет соперник;
+            </li>
+
+            <li>
+              $\gamma_1(t), \gamma_2(t)$ &mdash; подкрепление в единицу времени.
+            </li>
+          </ul>
+
+          Для простоты положим $\gamma_1 = \gamma_2 = 0$ и
+          \$\alpha_1, \alpha_2, \beta_1, \beta_2 = \const$ &mdash; скоротечные
+          боевые действия.
+
+          <p>
+            Получаем следующую систему:
+            \[
+            \begin{aligned}
+            \dv{N_1}{t} &= -\alpha_1 N_1 - \beta_2 N_2, \\
+            \dv{N_2}{t} &= -\alpha_2 N_2 - \beta_1 N_1.
+            \end{aligned}
+            \]
+            Таким образом, численности сторон могут лишь убывать. Положим также
+            $\alpha_1 = \alpha_2 = 0$ &mdash; небоевые потери несущественны.
+            В итоге система принимает следующий вид:
+            \[
+            \begin{aligned}
+            \dv{N_1}{t} &= - \beta_2 N_2, \\
+            \dv{N_2}{t} &= - \beta_1 N_1.
+            \end{aligned}
+            \]
+          </p>
+
+          <p>
+            Построим изоклины для этой системы, исследовав следующее уравнение с
+            разделяющимися переменными:
+            \[
+            \dv{N_1}{N_2} = \frac{\beta_2 N_2}{\beta_1 N_1}.
+            \]
+            Тогда
+            \[
+            \beta_1 \frac{N_1^2}{2} - \beta_2 \frac{N_2^2}{2} = \tilde C.
+            \]
+            Отсюда следует, что
+            \[
+            \beta_1 N_1^2 - \beta_2 N_2^2 = 2 \tilde C = C = \beta_1 N_1^2(0) - \beta_2 N_2^2(0).
+            \]
+          </p>
+
+          <p>
+            Возможны два варианта приведения уравнения к каноническому виду:
+            \[
+            \begin{cases}
+            \phantom{-}
+            \frac{N_1^2}{\left( \sqrt{\frac{C}{\beta_1}} \right)^2}
+            -
+            \frac{N_2^2}{\left( \sqrt{\frac{C}{\beta_2}} \right)^2} = 1, & C \gt 0, \\
+            -\frac{N_1^2}{\left( \sqrt{\frac{-C}{\beta_1}} \right)^2}
+            +
+            \frac{N_2^2}{\left( \sqrt{\frac{-C}{\beta_2}} \right)^2} = 1, & C \lt 0.
+            \end{cases}
+            \]
+            В обоих случаях уравнение имеет гиперболический тип. Таким образом, при
+            $\beta_1 N_1^2(0) \gt \beta_2 N_2^2(0)$ побеждает первая армия,
+            при $\beta_1 N_1^2(0) \lt \beta_2 N_2^2(0)$ побеждает вторая армия.
+            Если же $C = 0$, то армии одновременно уничтожат друг друга.
+          </p>
+
+          <p>
+            Коэффициент $\beta$ (теническое развитие и навыки армии) и $N$ (численность армии)
+            вносят различный вклад &mdash; <i class="important">квадратичный закон боевых действий</i>.
+          </p>
+
+          <div class="images small">
+            <img src="images/09-quad.png"/>
+          </div>
+
+          <hr/>
+
+          <p>
+            Рассмотрим теперь противостояние регулярной армии и партизанским ополчением.
+            Считается, что нерегулярные соединения менее уязвимы в сравнении с армейскими,
+            так как действуют скрытно. Поэтому считается, что темп потерь партизан,
+            проводящих свои операции в разных местах на некоторой известной территории,
+            пропорционален не только численности армейских соединений $N_1(t)$, но и
+            численности самих партизан $N_2(t)$. В результате модель становится
+            нелинейной:
+            \[
+            \tag{2}
+            \begin{aligned}
+            \dv{N_1}{t} &= - \alpha_1(t) N_1 - \beta_2(t) N_2 + \gamma_1(t), \\
+            \dv{N_2}{t} &= - \alpha_2(t) N_2 - \beta_1(t) N_1 N_2 + \gamma_2(t).
+            \end{aligned}
+            \]
+          </p>
+
+          <div class="definition">
+            Модели (1) и (2) называют <i>моделями Ланчестера</i>.
+          </div>
+
+          <p>
+            Положим как и ранее $\alpha_1 = \alpha_2 = \gamma_1 = \gamma_2 = 0$ и
+            $\beta_1, \beta_2 = \const$. Тогда
+            \[
+            \begin{aligned}
+            \dv{N_1}{t} &= - \beta_2 N_2, \\
+            \dv{N_2}{t} &= - \beta_1 N_1 N_2.
+            \end{aligned}
+            \]
+            Также расмотрим уравнение с разделяющимися переменными:
+            \[
+            \dv{N_1}{N_2} = \frac{\beta_2}{\beta_1 N_1}.
+            \]
+            Отсюда следует, что
+            \[
+            \beta_1 \frac{N_1^2}{2} - \beta_2 N_2 = C.
+            \]
+            Так как
+            \[
+            C = \beta_1 \frac{N_1^2(0)}{2} - \beta_2 N_2(0),
+            \]
+            то можно полученное уравнение записать так:
+            \[
+            N_2(t) + \frac{C}{\beta_2} = \frac{\beta_1}{2 \beta_2} N_1^2(t).
+            \]
+            Уравнение имеет параболический тип. Если $C \lt 0$, то побеждают партизаны,
+            если же $C \gt 0$, то побеждают армейские соединения.
+          </p>
+
+          <p>
+            Получаем <i class="important">параболический закон боевых действий</i>.
+          </p>
+
+          <div class="images small">
+            <img src="images/09-parab.png"/>
+          </div>
+        </div>
+      </li>
+
+      <li class="question practice">
+        <div class="name">
+          Организация рекламной кампании
+        </div>
+        <div class="content">
+          Предположения:
+          <ol>
+            <li>
+              считается, что величина $dN / dt$ &mdash; скорость изменения числа потребителей,
+              узнавших о товаре и готовых купить его &mdash; пропорциональна числу покупателей,
+              ещё не знающих о нём, то есть величине $\alpha_1(t) (N_0 - N(t))$,
+              где $N_0$ &mdash; общее число потенциальных платежеспособных покупателей,
+              а $\alpha_1(t) \gt 0$ характеризует интенсивность рекламной кампании;
+            </li>
+
+            <li>
+              узнавшие о товаре потребители тем или иным образом распространяют
+              полученную информацию среди неосведомлённых; их вклад равен
+              $\alpha_2(t) N(t) (N_0 - N(t))$. Величина $\alpha_2(t) \gt 0$ характеризует
+              степень общения покупателей между собой.
+            </li>
+          </ol>
+
+          В итоге получаем уравнение
+          \[
+          \dv{N}{t} = \left[ \alpha_1(t) + \alpha_2(t) N(t) \right] (N_0 - N).
+          \]
+
+          <p>
+            При $\alpha_1(t) \gg \alpha_2 N(t)$ получается модель типа модели Мальтуса,
+            при противоположном неравенстве &mdash; уравнение логистической кривой.
+          </p>
+
+          <p>
+            Модель лишена недостатка, который имеет логистическая кривая. Последняя
+            не имеет решений, обращающихся в нуль в конечный момент времени. Применительно
+            к рекламе это означало бы, что часть покупателей ещё до начала кампании
+            знает о новом товаре. Если же рассмотреть данную модель в окрестности точки
+            $N(0) = 0$, считая, что $N \ll N_0$ и $\alpha_2(t) N \ll \alpha_1(t)$,
+            то уравнение принимает вид
+            \[
+            \dv{N}{t} = \alpha_1(t) N_0
+            \]
+            и имеет решение
+            \[
+            N(t) = N_0 \int\limits_{0}^{t} \alpha_1(t) dt,
+            \]
+            удовлетворяющее естественному начальному условию при $t = 0$.
+          </p>
+
+          <p>
+            Отсюда легко вывести соотношение между рекламными издержками и прибылью в самом
+            начале кампании. Обозначим через $p$ величину прибыли от единичной продажи,
+            какой бы она была без затрат на рекламу. Считаем для простоты, что каждый
+            покупатель приобретает лишь одну единицу товара. Коэффициент $\alpha_1(t)$
+            по своему смыслу &mdash; число равнозначных рекламных действий
+            в единицу времени. Через $s$ обозначим стоимость элементарного акта рекламы,
+            тогда суммарная прибыль есть
+            \[
+            P = p N(t) = p N_0 \int\limits_{0}^{t} \alpha_1(t) dt,
+            \]
+            а произведённые затраты
+            \[
+            S = s \int\limits_{0}^{t} \alpha_1(t) dt.
+            \]
+            Прибыль превосходит издержки при условии $p N_0 \gt s$. При не
+            слишком эффективной или дорогой рекламе фирма на первых шагах несёт
+            убытки, но это, вообще говоря, не может служить основанием для
+            прекращения рекламы. Выражение для прибыли и условие прибыльности
+            справедливы лишь при малых значениях $N(t)$.
+          </p>
+
+          <p>
+            Рассмотрим частный случай уравнения, когда $\alpha_1, \alpha_2 = \const$. Тогда
+            заменой
+            \[
+            \bar N = \frac{\alpha_1}{\alpha_2} + N
+            \]
+            оно сводится к логистическому уравнению
+            \[
+            \dv{\bar N}{t} = \alpha_2 \bar N (\bar N_0 - \bar N),
+            \qquad
+            \bar N_0 = \frac{\alpha_1}{\alpha_2} + N_0,
+            \]
+            имеющему решение
+            \[
+            \bar N(t) = \bar N_0 \left[
+            1 + \paren{ \frac{\alpha_2}{\alpha_1} \bar N_0 - 1 } e^{- \bar N_0 \alpha_2 t}
+            \right]^{-1}.
+            \]
+            При этом $\bar N(0) = \alpha_1 / \alpha_2$, так что $N(0) = 0$, и начальное
+            условие выполняется.
+          </p>
+
+          <p>
+            Из логистического уравнения видно, что производная функции $\bar N$
+            (а, следовательно, и $N$) может при $t \gt 0$ быть больше её начального значения
+            (при условии $\bar N_0 \gt 2 \alpha_1 / \alpha_2$ или $N_0 \gt \alpha_1 / \alpha_2$).
+          </p>
+
+          <p>
+            Максимум производной достигается при $\bar N = \bar N_0 / 2$,
+            тогда
+            \[
+            \paren{ \dv{\bar N}{t} }_m
+            =
+            \paren{ \dv{N}{t} }_m
+            =
+            \alpha_2 \frac{\bar N_0^2}{4}
+            =
+            \alpha_2 \frac{(\alpha_1 / \alpha_2 + N_0)^2}{4}.
+            \]
+            В этот период для текущей прибыли имеем
+            \[
+            P_m = p \dv{N}{t} = p \alpha_2 \frac{(\alpha_1 / \alpha_2 + N_0)^2}{4}.
+            \]
+            Вычитая из $P_m$ начальную прибыль $P_0 = \alpha_1 N_0$, получаем
+            \[
+            P_m - P_0 = p \frac{(\alpha_1 / \sqrt{\alpha_2} - \sqrt{\alpha_2} N_0)^2}{4},
+            \]
+            то есть разница может быть весьма значительной.
+          </p>
+
+          <p>
+            Суммарный эффект от кампании, необходимым условием которого является
+            выполнение неравенства
+            \[
+            P_m = p \frac{(\alpha_1 / \sqrt{\alpha_2} + \sqrt{\alpha_2} N_0)^2}{4}
+            \gt \alpha_1 s,
+            \]
+            определяется всем её ходом.
+          </p>
+
+          <p>
+            Из логистического уравнения следует, что с какого-то момента продолжать
+            рекламу становится невыгодно. Действительно, при $\bar N(t)$,
+            близких к $\bar N_0$, логистическое уравнкение записывается в виде
+            \[
+            \dv{\bar N}{t} \alpha_2 \bar N_0 (\bar N_0 - \bar N)
+            \]
+            (внимание: множитель поменялся с $\bar N$ на $\bar N_0$). Его
+            решение стремится при $t \to \infty$ к предельному значению $\bar N_0$
+            по медленному экспоненциальному закону. В единицу времени появляется
+            ничтожно малое число новых покупателей, и поступающая прибыть при
+            любых условиях не может покрыть издержек.
+          </p>
+        </div>
+      </li>
+
+      <li class="question practice">
+        <div class="name">
+          Макромодель равновесия рыночной экономики
+        </div>
+        <div class="content">
+          <div class="definition">
+            Если в результате коллективного взаимодействия общее производство
+            товаров и услуг в системе согласовано с общим спросом на них, то такое
+            состояние экономики называется <i>равновесным</i>.
+          </div>
+
+          <p>
+            Наиболее простые математические модели экономического равновесия
+            строятся при следующих предположениях:
+          </p>
+
+          <ol>
+            <li>
+              совершенная рыночная конкуренция, означающая отсутствие как крупных
+              производственных корпораций, так и объединений работников,
+              могущих диктовать свои условия для всей системы;
+            </li>
+
+            <li>
+              неизменность производственных возможностей системы: оборудование,
+              производственные помещения, технологии не изменяются со временем;
+            </li>
+
+            <li>
+              неизменные во времени экономические интересы партнёров:
+              предприниматели не пытаются увеличить свою прибыль, рабочие &mdash;
+              свою зарплату, инвесторов устраивают проценты и т.д.
+            </li>
+          </ol>
+
+          <p>
+            Одна из таких макромоделей &mdash; модель Кейнса &mdash;
+            рассматривает в качестве агентов нанимателей и нанимаемых,
+            потребителей и сберегателей, производителей и инвесторов,
+            действующих на рынках рабочей силы, продуктов и денег, то есть
+            распределяющих и обменивающих эти товары (труд, продукты, деньги)
+            между собой.
+          </p>
+
+          <p>
+            Первый макропоказатель экономики &mdash; <i>национальный доход $Y$</i>,
+            являющийся единственным продуктом, производимым в единицу времени. Этот
+            продукт вырабатывается производственным сектором экономики, а его
+            величина даётся функцией $F$, зависящей от количества и качества ресурсов,
+            состава основных фондов и <i>числа занятых работников $R$</i>
+            (второй макроэкономический показатель).
+          </p>
+
+          <p>
+            В соответствии с предположением 2 в состоянии равновесия производственная функция
+            $F$, а с нею и продукт $Y$ определяются лишь занятостью, то есть
+            \[
+            Y = F(R).
+            \]
+            Обычно считают, что
+            \[
+            F(0) = 0, \qquad F'(R) \gt 0, \; R \gt 0, \qquad F''(R) \lt 0, \; R \gt 0.
+            \]
+            Она обладает свойством насыщения &mdash; с ростом $R$ выпуск растёт
+            всё медленнее. Это оправдано тем, что с какого-то момента просто не
+            найдётся фронт работ.
+          </p>
+
+          <div class="images small">
+            <img src="images/11-F.png" />
+          </div>
+
+          Сформулируем один из основных постулатов классической политэкономии:
+          <ol start="4">
+            <li>
+              <i>заработная плата $s$</i> работника равна стоимости продукта,
+              которая была бы потеряна при уменьшении занятости на одну единицу.
+            </li>
+          </ol>
+          Таким образом, из этого постулата получаем
+          \[
+          \Delta Y^{(1)} p = s,
+          \]
+          где $\Delta Y^{(1)}$ &mdash; количество продукта, потерянное при
+          уменьшении занятости на единицу, а $p$ &mdash; <i>цена продукта</i>.
+
+          <p>
+            Если занятость изменилась на $\Delta R$, то из последнего равенства следует,
+            что
+            \[
+            \Delta Y p = s \Delta R,
+            \]
+            где $\Delta Y = \Delta Y^{(1)} \Delta R$. Считая $\Delta R$ и $\Delta Y$
+            малыми в сравнении с $R$ и $Y$, перепишем последнее равенство в дифференциальной
+            форме:
+            \[
+            \dv{Y}{R} = \frac{s}{p},
+            \]
+            или, учитывая, что $Y = F(R)$,
+            \[
+            F'(R) = \frac{s}{p}.
+            \]
+          </p>
+
+          <p>
+            Предполагается, что для обеспечения равновесного уровня занятости всегда найдётся
+            достаточное количество желающих работать на существующих условиях, то есть
+          </p>
+          <ol start="5">
+            <li>
+              предложение труда не сдерживает производства, число занятых
+              определяется спросом на труд со стороны предпринимателей.
+            </li>
+
+            <li>
+              Заработная плата $s$ в модели считается заданной.
+            </li>
+          </ol>
+
+          <p>
+            Произведённый продукт частично тратится на потребление, а частично сберегается:
+            \[
+            Y = S + \omega,
+            \]
+            где $\omega$ &mdash; <i>потребляемая часть</i>, а $S$ &mdash; сберегаемая часть.
+          </p>
+
+          <ol start="7">
+            <li>
+              Потребляемая часть выпуска зависит от величины самого выпуска, то есть
+              $\omega = \omega(Y)$.
+            </li>
+          </ol>
+          При этом функция $\omega(Y)$ также обладает свойством насыщения.
+
+          <div class="definition">
+            Величина
+            \[
+            \dv{\omega}{Y} = c(Y)
+            \]
+            называется <i>склонностью к потреблению</i> и лежит в пределах
+            $0 \lt c \lt 1$. Величина $d = 1 - c$ &mdash; <i>склонность к накоплению</i>.
+          </div>
+
+          <p>
+            Фондообразующий продукт
+            \[
+            S = Y - \omega(Y)
+            \]
+            вкладывается в экономику с целью в будущем получить инвестиционный
+            доход. Инвестиции определяются ещё одним макропоказателем &mdash;
+            <i>нормой банковского процента $r$</i>. Сделав инвестиции в размере $A$
+            и получив через год доход $D = A r$, инвестор ничего не теряет (но и не выигрывает)
+            по сравнению с вложением этих средств в банк под процент $r$.
+          </p>
+
+          <p>
+            Спрос на инвестиции задаётся функцией $A(r)$ такой, что
+          </p>
+          <ul>
+            <li>
+              $A'(r) \lt 0$ при $0 \lt r \lt r_1$;
+            </li>
+
+            <li>
+              $A(r) = 0$ при $r \geqslant r_1$;
+            </li>
+          </ul>
+          при большой норме процента инвестиции отсутствуют.
+          <div class="images small">
+            <img src="images/11-A.png" />
+          </div>
+
+          <p>
+            В условиях равновесия предложение фондообразующего продукта $S(Y)$
+            сбалансировано спросом на инвестиции $A(r)$:
+            \[
+            S(Y) = A(r), \implies Y - \omega(Y) = A(r).
+            \]
+          </p>
+
+          <p>
+            Рассмотрим рынок финансов. Считается, что деньги выпускает государство,
+            и их количество (предложение) $Z$ является заданным управляющим
+            параметром системы.
+          </p>
+
+          <ol start="8">
+            <li>
+              Спрос на деньги представляет собой сумму операционного и спекулятивного спроса.
+            </li>
+          </ol>
+
+          <div class="definition">
+            <i>Операционный спрос</i> определяется количеством денег, которое надо
+            иметь на руках, чтобы производить покупки товара $Y$. Если цена продукта
+            равна $p$, а <i>время обращения</i> равно $\tau$, то операционный спрос
+            равен $\tau p Y$.
+          </div>
+
+          <div class="definition">
+            <i>Спекулятивный спрос</i> связан с величиной нормы процента $r$. Если норма
+            высока, то большую часть денег их владельцы предпочитают хранить в банке. При
+            низкой процентной ставке спекулятивный спрос увеличивается: владельцы
+            желают иметь на руках всё больше банкнот, аккумулируя в них свои
+            накопления.
+          </div>
+
+          <p>
+            Таким образом, спекулятивный спрос задаётся функцией $I(r)$ такой, что
+            $I'(r) \lt 0$ при $r \gt r_2$, а $I(r)$ резко возрастает при $r \to r_2$.
+          </p>
+
+          <p>
+            Так как финансовый рынок находится в равновесии, то баланс денег в системе
+            даётся уравнением
+            \[
+            Z = \tau p Y + I(r).
+            \]
+          </p>
+
+          <p>
+            Объединяя уравнения, приходим к
+            <i class="important">математической модели рыночного равновесия</i>,
+            полученной в предположениях 1-8:
+            \[
+            \tag{1}
+            \begin{gathered}
+            Y = F(R), \\
+            F'(R) = \frac{s}{p}, \\
+            Y - \omega(Y) = A(r), \\
+            Z = \tau p Y + I(r).
+            \end{gathered}
+            \]
+            В модели задаются параметры $s, Z$ и $\tau$. Функции $F, F', \omega, A, I$ &mdash;
+            известные функции своих аргументов с описанными выше свойствами. По этим
+            входным данным из модели определяются 4 величины: $Y, R, p, r$.
+          </p>
+
+          <p>
+            Исключая величины $p, r, Y$, эти уравнения легко свести к одному уравнению
+            относительно занятости:
+            \[
+            \tag{2}
+            - \frac{\tau s F(R)}{F'(R)} + Z = I \left[
+            A^{-1}(F(R) - \omega(F(R)))
+            \right],
+            \]
+            где $A^{-1}$ &mdash; функция, обратная к $A$.
+          </p>
+
+          <p>
+            Докажем существование решения уравнения (2), основываясь на анализе
+            графиков функций в левой и правой частях.
+          </p>
+
+          <p>
+            Функция $F(R) - \omega(F(R))$ &mdash; монотонно растущая функция $R$,
+            равная нулю при $R = 0$. Её монотонность следует из условия
+            \[
+            \dv{\omega(F(R))}{F(R)} = c \lt 1,
+            \]
+            а рост по мере увеличения $R$ &mdash; из условия
+            \[
+            \dv{F(R)}{R} \gt 0.
+            \]
+          </p>
+
+          <div class="images small">
+            <img src="images/11-analysis-1.png" />
+          </div>
+
+          <p>
+            Данная функция является аргументом монотонной функции $A^{-1}$, и из свойств
+            функции $A$ легко установить качественный вид зависимости $A^{-1}$ от $R$,
+            причём $A^{-1} \equiv 0$ при $R \gt R_1$, где $0 \lt R_1 \lt \infty$
+            &mdash; некоторое значение величины $R$.
+          </p>
+
+          <p>
+            В свою очередь $A^{-1}$ служит аргументом монотонной функции $I$,
+            свойства которой таковы, что как функция $R$ она имеет следующий вид.
+          </p>
+
+          <div class="images small">
+            <img src="images/11-analysis-2.png" />
+          </div>
+
+          <p>
+            Рассмотрим теперь левую часть уравнения (2). Функция
+            \[
+            \frac{- \tau s F(R)}{F'(R)}
+            \]
+            равна нулю при $R = 0$ (считается, что $F'(R) \neq 0$). Её первая производная
+            по $R$, как следует из свойств функций $F'$ и $F''$, отрицательна, то есть она
+            монотонно убывает.
+          </p>
+
+          <p>
+            Совмещая графики левой (кривая 2) и правой (кривая 1) частей уравнения (2),
+            убеждаемся в том, что при достаточно большом значении управляющего параметра $Z$
+            кривые пересекаются в некоторой точке $0 \lt R_0 \lt \infty$.
+          </p>
+
+          <div class="images small">
+            <img src="images/11-analysis-3.png" />
+          </div>
+
+          <p>
+            В силу монотонности графиков пересечение единственно.
+          </p>
+
+          <hr/>
+
+          <p>
+            Допустим, что значения равновесных параметров $s_0$ и $Z_0$ изменились
+            на малые величины $\delta s_0$ и $\delta Z_0$ при переходе из одного
+            равеновесного состояния в другое (считаем параметр $\tau$ неизменным).
+            Тогда изменятся все остальные характеристики системы. Их можно найти из (1),
+            имея в виду, что оба сравниваемых состояния равновесны.
+          </p>
+
+          <p>
+            Например, из второго уравнения (1), используя разложение в ряд Тейлора,
+            получаем
+            \[
+            \frac{s_0}{p_0} \frac{\delta p}{p} = \frac{\delta s}{p_0} - F''(R_0) \delta R.
+            \]
+            Проведя аналогичную процедуру с остальными уравнениями (1) и сводя
+            результаты воедино, получаем
+            \[
+            \frac{\delta p}{p_0}
+            = a_1 (\delta A + \delta \omega)
+            + a_2 (\delta Z - \delta I)
+            + a_1 \delta s - a_4 \delta Y.
+            \]
+            В этом выражении присутствуют все характеристики изучаемой системы (коэффициенты
+            $a_i \lt 0$ определяются равновесными значениями величин $s_0, p_0, Y_0, r_0$,
+            функций $R, \omega, A, I$ и их производных).
+          </p>
+
+          <p>
+            Пусть, например, при неизменном числе занятых ($\delta R = 0, \delta Y = 0$),
+            уровне зарплаты ($\delta s = 0$) и уровне потребления ($\omega = 0$)
+            требуется понизить цену $\delta p \lt 0$, то есть увеличить реальную
+            заработную плату рабочих. Тогда необходимо стремиться уменьшить инвестиции
+            ($\delta A \lt 0$), снизить общий объём денег ($\delta Z \lt 0$)
+            и увеличить спекулятивный спрос на них ($\delta I \gt 0$).
+            Заметим, что требования, вообще говоря, могут быть противоречивыми.
+          </p>
+        </div>
+      </li>
+
+      <li class="question practice">
+        <div class="name">
+          Макромодель экономического роста
+        </div>
+        <div class="content">
+          <p>
+            В растущей экономике число работающих непостоянно &mdash; $R = R(t)$.
+            В простейшей модели считается, что
+            \[
+            \dv{R}{t} = \alpha R(t).
+            \]
+            Поэтому $R(t) = R_0 e^{\alpha t}$ &mdash; заранее известная функция времени.
+          </p>
+
+          <p>
+            Работники производят национальный доход $Y(t)$, который частично идёт на
+            потребление и частично на накопление:
+            \[
+            Y(t) = \omega + A.
+            \]
+            Накопленная часть продукта $A$ возвращается в экономику с тем, чтобы
+            скомпенсировать выбывающие из строя производственные мощности, а также
+            для создания новых мощностей.
+          </p>
+
+          <div class="definition">
+            Под <i>мощностью</i> $M(t)$ подразумевается максимально возможный выпуск продукта
+            экономикой.
+          </div>
+
+          <p>
+            Реальный выпуск продукта зависит от числа работающих и задаётся производственной
+            функцией вида
+            \[
+            Y(t) = M(t) \cdot f(x(t)).
+            \]
+            В этой формуле величина $x(t) = \dfrac{R(t)}{M(t)}$ по своему смыслу
+            &mdash; количество работающих на единице мощности.
+          </p>
+
+          <p>
+            Относительно функции $f(x)$ делаются следующие предположения:
+          </p>
+          <ol>
+            <li>
+              $f(0) = 0$;
+            </li>
+
+            <li>
+              $f' \gt 0$ (выпуск растёт с увеличением числа занятых);
+            </li>
+
+            <li>
+              $f'' \lt 0$ (насыщение).
+            </li>
+          </ol>
+
+          <p>
+            Функция $f(x)$ определена для значений $x$ на отрезке $0 \leqslant x \leqslant x_M$,
+            где $x_M = \dfrac{R_M}{M}$, а $R_M(t)$ &mdash; число рабочих мест в хозяйстве при
+            мощности $M(t)$. Если все места заполнены, то выпуск $Y(t)$ по определению
+            равен $M(t)$, то есть для $f(x)$ должно выполняться условие
+            $f(x_M) = 1$.
+          </p>
+
+          <p>
+            Одна из главных задач теории экономического роста &mdash; нахождение
+            оптимальных в некотором смысле способов разделения произведённого продукта на
+            потребляемую и накапливаемую части. В качестве критерия можно взять, например,
+            душевое потребление:
+            \[
+            c(t) = \omega(t) / R(t).
+            \]
+          </p>
+
+          <p>
+            Сбережённый в единицу времени продукт $A(t)$ расходуется на создание
+            <i>новой мощности</i>:
+            \[
+            A(t) = aI(t),
+            \]
+            где $a \gt 0$ &mdash; заданное количество фондообразующего продукта, необходимое
+            для создания единицы новой мощности, а $I(t)$ &mdash; число единиц новой
+            мощности.
+          </p>
+
+          <p>
+            Темп выбытия существующей мощности предполагается пропорциональным величине
+            самой мощности, то есть величине $\beta M(t)$, где $\beta \gt 0$
+            &mdash; постоянная.
+          </p>
+
+          <p>
+            В итоге для изменения функции $M(t)$ получаем балансное соотношение:
+            \[
+            \dv{M}{t} = I(t) - \beta M(t).
+            \]
+          </p>
+
+          <p>
+            Уравнения
+            \[
+            \begin{gathered}
+            Y(t) = \omega + A, \\
+            Y(t) = M(t) f(x(t)), \\
+            \dv{M}{t} = I(t) - \beta M(t)
+            \end{gathered}
+            \]
+            содержат 4 неизвестных &mdash; $Y(t), \omega(t), M(t), I(t)$. Для
+            замыканиия модели предположим, что скорость введения новой мощности
+            пропорциональна величине существующей мощности: $I(t) = \gamma M(t)$,
+            где $\gamma \gt 0$ &mdash; постоянная (понятно, что $\gamma \gt \beta$).
+          </p>
+
+          <p>
+            Тогда из дифференциального уравнения можно найти мощность
+            \[
+            M(t) = M_0 e^{(\gamma - \beta) t},
+            \]
+            а вместе с этим определяются и все остальные неизвестные величины.
+          </p>
+
+          <hr/>
+
+          <p>
+            Рассмотрим простой случай экономического роста, когда мощность
+            увеличивается со временем в том же темпе, что и число рабочих. Для этого
+            необходимо выполнение равенства
+            \[
+            \gamma - \beta = \alpha.
+            \]
+            Оно также означает, что с тем же темпом растут функции $Y(t), \omega(t), I(t)$.
+          </p>
+
+          <p>
+            Найдём число работающих и соотношение между потреблением и накоплением, при
+            которых душевое потребление работников максимально. По определению
+            \[
+            c(t) = \frac{\omega(t)}{R(t)} = \frac{Y(t) - A(t)}{R(t)}.
+            \]
+            Учитывая, что $Y(t) = M(t) f(x)$ и $A(t) = a \gamma M(t)$,
+            получаем
+            \[
+            c(t) = c = \frac{f(x) - a(\alpha + \beta)}{x},
+            \]
+            то есть душевое потребление со временем не изменяется.
+          </p>
+
+          <p>
+            Его максимум достигается при условии
+            \[
+            \dv{c}{x} = \dv{}{x} \left[
+            \frac{f(x) - a(\alpha + \beta)}{x}
+            \right] = 0,
+            \]
+            откуда находим уравнение для искомой величины $x_m$:
+            \[
+            x_m f'(x_m) - f(x_m) + a(\alpha + \beta) = 0.
+            \]
+            Это уравнение всегда имеет единственное решение $0 \lt x_m \leqslant x_M$.
+          </p>
+
+          <p>
+            Помимо всех сделанных предположений, для реализации рассматриваемого
+            режима экономического роста необходимо согласование численности
+            работающих $R_0$ с мощностью $M_0$ в начальный момент времени
+            так, чтобы
+            \[
+            \frac{R_0}{M_0} = x_m.
+            \]
+          </p>
+
+          <p>
+            Норма накопления, обеспечивающая максимальное значение $c_m$,
+            \[
+            n_m = \frac{A_m}{Y_m},
+            \]
+            находится из равенств $Y_m = M_m f(x_m)$ и $A_m = a \gamma M_m$. Тогда
+            \[
+            n_m = 1 - x_m \frac{f'(x_m)}{f(x_m)};
+            \]
+            она называется <i>нормой золотого правила роста Солоу</i>.
+          </p>
+
+          <p>
+            Если условие
+            \[
+            \gamma - \beta = \alpha
+            \]
+            не выполняется, то режимы роста экономики становятся более сложными.
+          </p>
+        </div>
+      </li>
+
+      <li class="question theory">
+        <div class="name">
+          Гидродинамика. Вывод уравнения Бернулли. Задача об
+          истечении жидкости из ёмкости
+        </div>
+        <div class="content">
+          Рассмотрим стационарное течение идеальной жидкости (отсутствует вязкость).
+          Обозначим за $p_i$ давление на $i$-ом участке.
+
+          <div class="images small">
+            <img src="images/13-pipes.png" />
+          </div>
+
+          <p>
+            По закону сохранения массы имеем
+            \[
+            S_1 v_1 \Delta t = S_2 v_2 \Delta t = V.
+            \]
+            Изменение энергии рассматриваемого участка (1-2) за время $\Delta t$ равно
+            \[
+            E_{1' 2'} - E_{12}
+            = \cancel{E_{1' 2}} - E_{2 2'} - E_{1 1'} - \cancel{E_{1' 2}}
+            = E_{2 2'} - E_{1 1'}.
+            \]
+            Так как изменение энергии системы равно работе внешних сил за тот же промежуток
+            времени, то
+            \[
+            \begin{aligned}
+            \rho V g h_2
+            +
+            \frac{\rho V v_2^2}{2} - \left(
+            \rho V g h_1 + \frac{\rho V v_1^2}{2}
+            \right)
+            &= \underbrace{v_1 \Delta t S_1}_{V} p_1 -
+            \underbrace{v_2 \Delta t S_2}_{V} p_2.
+            \end{aligned}
+            \]
+            Сокращая на $V$, получаем
+            \[
+            \frac{\rho v_1^2}{2} + \rho g h_1 + p_1
+            =
+            \frac{\rho v_2^2}{2} + \rho g h_2 + p_2,
+            \]
+            поэтому
+            \[
+            \frac{\rho v^2}{2} + \rho g h + p = \const.
+            \]
+            Этот факт называют <i class="important">законом Бернулли</i>.
+          </p>
+
+          <p>
+            Можно заметить, что из $S_1 v_1 = S_2 v_2$ следует, что
+            \[
+            \frac{v_2}{v_1}
+            = \frac{S_1}{S_2}
+            = \frac{\pi r_1^2}{\pi r_2^2}
+            = \frac{r_1^2}{r_2^2}.
+            \]
+            Кроме того, выполняется $v_2 \gt v_1$, так как $r_1 \gt r_2$.
+          </p>
+
+          <p>
+            Положив $h_1 = h_2$, получим
+            \[
+            p_1 + \frac{\rho v_1^2}{2} = p_2 + \frac{\rho v_2^2}{2}.
+            \]
+            Так как
+            \[
+            p_1 - p_2
+            = \frac{\rho}{2} (v_2^2 - v_1^2)
+            = \frac{\rho}{2} v_1^2 \left[
+            \left( \frac{r_1}{r_2} \right)^4 - 1
+            \right],
+            \]
+            то $p_1 \gt p_2$.
+          </p>
+
+          <hr/>
+
+          <div class="images small">
+            <img src="images/13-pouring.png" />
+          </div>
+
+          Рассмотрим истечение жидкости из некоторой ёмкости через небольшое отверстие.
+          Введём следующие обозначения:
+          <ul>
+            <li>
+              $y$ &mdash; уровень поверхности жидкости;
+            </li>
+
+            <li>
+              $p_0$ &mdash; внешнее атмосферное давление.
+            </li>
+          </ul>
+          Пусть отверстие очень мало:
+          \[
+          v_B \ll v_A.
+          \]
+
+          Тогда по закону Бернулли
+          \[
+          \frac{\rho v_B^2}{2} + \rho g y + \rho_0 = \frac{\rho v_A^2}{2} + \rho_0,
+          \]
+          откуда следует, что $v_A = \sqrt{2 g y}$.
+
+          <p>
+            Пусть сечение отверстия равно $C$. Тогда сечение струи на выходе будет равно
+            $a C$, где $a = \const$, так как струя не может моментально поменять направление.
+            Таким образом, сечение струи на выходе будет меньше сечения отверстия.
+          </p>
+
+          <p>
+            Рассмотрим процесс истечения за короткий промежуток времени $\Delta t$,
+            получим
+            \[
+            \begin{aligned}
+            - S(y) \Delta y &= a C \sqrt{2 g y} \Delta t, \\
+            - S(y) \dv{y}{t} &= a C \sqrt{2gy}, \\
+            \int\limits_{h}^{y} \frac{- S(y)}{\sqrt{y}} dy &= \int\limits_{0}^{t} a C \sqrt{2g} dt,
+            \end{aligned}
+            \]
+            где $h$ &mdash; начальный уровень жидкости, а $t$ &mdash; момент времени, когда
+            уровень жидкости равен $y(t)$.
+          </p>
+
+          <div class="images small">
+            <img src="images/13-cone.png" />
+          </div>
+
+          <p>
+            Приняв за ёмкость усечённый конус с углом $\alpha$, получим:
+            \[
+            \int\limits_{h}^{y} \frac{-\pi y^2 {\tg}^2 \alpha}{\sqrt{y}} dy = \sqrt{2g} a C t,
+            \]
+            откуда
+            \[
+            t = \frac{2 \pi {\tg}^2 \alpha (h^{5/2} - y^{5/2})}{5 \sqrt{2g} a C}.
+            \]
+            Полное опустошение ёмкости происходит за
+            \[
+            t = \frac{2 \pi {\tg}^2 \alpha h^{5/2}}{5 \sqrt{2g} a C}.
+            \]
+            Средняя скорость истечения равна
+            \[
+            \frac{
+            \frac{\pi h^3 {\tg}^2 \alpha}{3 a C}
+            }{
+            \frac{2 \pi {\tg}^2 \alpha h^{5/2}}{5 \sqrt{2g} a C}
+            }
+            =
+            \frac{5}{6} \sqrt{2 g h}.
+            \]
+            Данная скорость близка к максимальной скорости $\sqrt{2gh}$, поэтому
+            большая часть жидкости вытекает, когда конус почти полон.
+          </p>
+
+          <p>
+            В случае цилиндра $S(y) = \pi r^2 = \const$, поэтому
+            \[
+            - \int\limits_{h}^{y} \frac{\pi r^2}{\sqrt{y}} dy = \sqrt{2g} a C t,
+            \]
+            откуда
+            \[
+            t = \frac{2 \pi r^2 (\sqrt{h} - \sqrt{y})}{\sqrt{2g} a C}.
+            \]
+            Время полного осушения:
+            \[
+            t = \frac{2 \pi r^2 \sqrt{h}}{\sqrt{2g} a C}.
+            \]
+          </p>
+        </div>
+      </li>
+
+      <li class="question practice">
+        <div class="name">
+          Моделирование процесса истечения молока из пакета без
+          наклона
+        </div>
+        <div class="content">
+          Рассмотрим задачу об истечении молока из пакета.
+
+          <div class="images small">
+            <img src="images/14-milk.png" />
+          </div>
+
+          Пусть
+          <ul>
+            <li>
+              $A$ &mdash; отверстие для стока;
+            </li>
+
+            <li>
+              $B$ &mdash; отверстие для воздуха.
+            </li>
+          </ul>
+          Обозначения:
+          \[
+          \begin{aligned}
+          AC &= b, & AB &= d, \\
+          AQ &= h_1, & AP &= h.
+          \end{aligned}
+          \]
+
+          Необходимо найти:
+          <ul>
+            <li>
+              $S(y)$ &mdash; площадь поверхности молока на уровне $y$;
+            </li>
+
+            <li>
+              время полного опустошения пакета.
+            </li>
+          </ul>
+
+          <p>
+            Для наклонного конуса с эллиптическим основанием имеем
+            \[
+            \begin{aligned}
+            S_0 &= \pi a b = \pi (h_1 \tg \gamma + h_1 \tg(\pi / 2 - \gamma)) (h_1 \tg \beta + h_1 \tg(\pi / 2 - \beta)), \\
+            S(y) &= \pi (y \tg \gamma + y \tg(\pi / 2 - \gamma)) (y \tg \beta + y \tg(\pi / 2 - \beta)).
+            \end{aligned}
+            \]
+          </p>
+
+          <p>
+            Рассмотрим структуру пакета подробнее.
+          </p>
+
+          <div class="images small">
+            <img src="images/14-cone.png" />
+          </div>
+
+          Заметим, что $AQ = h_1$ и $AQ' = y$, тогда
+          \[
+          \begin{gathered}
+          \Delta ODA \sim \Delta O'D'A' \implies \frac{OD}{O'D'} = \frac{AQ}{A'Q'} = \frac{h_1}{y}, \\
+          \Delta ONA \sim \Delta O'N'A' \implies \frac{OD}{O'N'} = \frac{OA}{O'A'} = \frac{h_1}{y},
+          \end{gathered}
+          \]
+          поэтому
+          \[
+          \frac{S(y)}{S_0} = \frac{y^2}{h_1^2},
+          \]
+          откуда следует, что
+          \[
+          S(y) = S_0 \paren{ \frac{y}{h_1} }^2.
+          \]
+          Итак,
+          \[
+          S(y)
+          =
+          \begin{cases}
+          S_0, & h_1 \leqslant y \leqslant h, \\
+          S_0 \paren{ \dfrac{y}{h_1} }^2, & 0 \leqslant y \leqslant h_1.
+          \end{cases}
+          \]
+
+          <p>
+            Процесс истечения описывается уравнением
+            \[
+            \int\limits_{h}^{y} \frac{- S(y)}{\sqrt{y}} dy = \int\limits_{0}^{t} a C \sqrt{2g} dt,
+            \]
+            поэтому
+            \[
+            \sqrt{2g} a C t
+            = \int\limits_{0}^{h_1} \frac{S_0}{\sqrt{y}} \paren{ \frac{y}{h_1} }^2 dy
+            + \int\limits_{h_1}^{h} \frac{S_0}{\sqrt{y}} dy.
+            \]
+            После интегрирования получаем:
+            \[
+            \sqrt{2g} a C t
+            = \frac{S_0}{h_1^2} \frac{2}{5} h_1^{5/2}
+            + 2 S_0 \left(h^{1/2} - h_1^{1/2}\right).
+            \]
+            Отсюда можно найти время истечения:
+            \[
+            t
+            = \frac{2 S_0 \paren{ - \frac{4}{5} h_1^{1/2} + h^{1/2} }}{\sqrt{2g} a C}
+            = \frac{2 S_0 h \left[ 1 - \frac{4}{5} \paren{ \frac{h_1}{h} }^{1/2} \right]}{\sqrt{2gh} a C}.
+            \]
+          </p>
+
+          <p>
+            Пусть имеется исходный объём молока $V_0$. Тогда
+            \[
+            V_0 = \frac{1}{3} S_0 h_1 + S_0 (h - h_1),
+            \]
+            поэтому
+            \[
+            S_0 = \frac{V_0}{-\frac{2}{3} h_1 + h}.
+            \]
+            Учитывая, что
+            \[
+            \sin \alpha = \frac{h_1}{b}, \qquad \cos \alpha = \frac{h}{d},
+            \]
+            получаем, что
+            \[
+            \begin{aligned}
+            h &= d \cos \alpha, \\
+            h_1 &= b \sin \alpha,
+            \end{aligned}
+            \implies
+            \frac{h_1}{h} = \frac{b}{d} \tg \alpha.
+            \]
+            Подставляя всё в уравнение для времени, окончательно получаем
+            \[
+            \begin{aligned}
+            t
+            &=
+            \frac
+            {2 h \left[ 1 - \frac{4}{5} \paren{ \frac{h_1}{h} }^{1/2} \frac{V_0}{h - \frac{2}{3} h_1} \right]}
+            {\sqrt{2gh} a C} = \\
+            &=
+            \frac{2 V_0}{\sqrt{2 g h} a C}
+            \frac{1 - \frac{4}{5} \paren{ \frac{h_1}{h} }^{1/2}}
+            {1 - \frac{2}{3} \paren{ \frac{h_1}{h} }} = \\
+            &=
+            \frac{2 V_0}{\sqrt{2 g d \cos \alpha} \cdot a C}
+            \frac{1 - \frac{4}{5} \paren{ \frac{b}{c} \tg \alpha }^{1/2}}
+            {1 - \frac{2}{3} \paren{ \frac{b}{c} \tg \alpha }}.
+            \end{aligned}
+            \]
+          </p>
+        </div>
+      </li>
+
+      <li class="question practice">
+        <div class="name">
+          Влияние наклона на процесс истечения молока из пакета
+        </div>
+        <div class="content">
+          Рассмотрим влияние наклона на истечение жидкости. На начальной стадии
+          поверхность имеет форму эллипса, и мы не можем наклонить её так, чтобы
+          достичь положения, симметричного относительно стенок пакета (именно
+          при этом положении высота оставшейся жидкости будет максимальна,
+          следовательно, будет максимальной и скорость истечения жидкости).
+          Это возможно только после того, как поверхность, оставшаяся в пакете молока,
+          пройдёт по диагонали пакета, то есть угол станет равен $\arctg \dfrac{d}{b}$.
+
+          <div class="images small">
+            <img src="images/15-second.png" />
+          </div>
+
+          <p>
+            Таким образом, при изменении угла от начального $\alpha$ до $\arctg
+            \dfrac{d}{b}$ мы пытаемся достичь наиболее оптимального наклона, но
+            так, чтобы молоко не вылилось. После исчезновения цилиндрической
+            части мы продолжим поворачивать пакет так, чтобы $\theta =
+            \dfrac{\pi}{4}$.
+          </p>
+
+          <div class="images small">
+            <img src="images/15-last.png" />
+          </div>
+
+          <p>
+            Если $S_0$ &mdash; поверхность жидкости в самом начале истечения, то $S(y)$
+            &mdash; почти эллипс, одну из осей которого можно считать постоянной. Пусть
+            первая ось равна $k$, а вторая ось равна
+            $\dfrac{b}{\cos \theta} = b \sec \theta$. Тогда
+            \[
+            S(y)
+            = \pi k b \sec \theta
+            = \pi \hat b \cos \alpha k \sec \theta
+            = \pi k \hat b \cos \alpha \sec \theta
+            = S_0 \cos \alpha \sec \theta.
+            \]
+          </p>
+
+          Итак, рассмотрим 3 стадии:
+          <ol type="I">
+            <li>
+              На этой стадии справедливы равенства:
+              \[
+              \begin{aligned}
+              V &= S (y - b \sin \theta) + \frac{1}{3} S b \sin \theta = \\
+              &= S \left( y - \frac{2}{3} b \sin \theta \right), \\
+              y &= d \cos \theta, \\
+              \dv{V}{t} &= - \sqrt{2 g y} a C.
+              \end{aligned}
+              \]
+              <div class="images small">
+                <img src="images/15-first.png" />
+              </div>
+              Уровень жидкости выше точки $C$, переменными являются $V, y$ и $\theta$.
+              Имеем:
+              \[
+              \begin{aligned}
+              V
+              &=
+              S_0 \cos \alpha \sec \theta \paren{
+              d \cos \theta - \frac{2}{3} b \sin \theta
+              } = \\
+              &= S_0 \cos \alpha \paren{ d - \frac{2}{3} b \tg \theta }, \\
+              \dv{V}{t}
+              &=
+              S_0 \cos \alpha \paren{ - \frac{2}{3} b \sec^2 \theta } \dv{\theta}{t}.
+              \end{aligned}
+              \]
+              Таким образом, получаем
+              \[
+              \begin{aligned}
+              \frac{2}{3} S_0 b \cos \alpha \sec^2 \theta \dv{\theta}{t}
+              &=
+              \sqrt{2gd} \cos^{1/2} \theta a C, \\
+              \sec^{5/2} \theta d\theta &= \frac{3}{2} \sqrt{2gd} \frac{a C}{S_0 b \cos \alpha} dt.
+              \end{aligned}
+              \]
+              Введём замену координат:
+              \[
+              \tau = \tg \theta \implies d\theta = \frac{d\tau}{1 + \tau^2},
+              \]
+              тогда, пользуясь тем, что
+              \[
+              \sec^{5/2} = \paren{ \sec^2 \theta }^{5/4} = \paren{ 1 + {\tg}^2 \theta }^{5/4},
+              \]
+              получаем
+              \[
+              \frac{3 a C \sqrt{2 g d}}{2 S_0 b \cos \alpha} t_1
+              = \int\limits_{\tg \alpha}^{d/b} \paren{1 + \tau^2}^{1/4} d\tau.
+              \]
+            </li>
+
+            <li>
+              В начальный момент имеем $\tg \theta = \dfrac{d}{b}$, поэтому
+              \[
+              S_1
+              = S_0 \cos \alpha \sec \paren{ \arctg \frac{d}{b} }
+              = S_0 \cos \alpha \paren{ 1 + \paren{ \frac{d}{b} }^2 }^{1/2}.
+              \]
+
+              <div class="images small">
+                <img src="images/15-second.png" />
+              </div>
+
+              Далее,
+              \[
+              S = S_1 \left[
+              \sin \paren{ \arctg \frac{d}{b} } \cosec \theta
+              \right]^2
+              =
+              S_1 \cosec^2 \theta \frac{d^2}{b^2 + d^2}.
+              \]
+              Тогда
+              \[
+              \begin{aligned}
+              V
+              &=
+              \frac{1}{3} S(y) = \\
+              &=
+              \frac{1}{3} S_1 \frac{d^2}{b^2 + d^2} \cosec^2 \theta \cos \theta, \\
+              - \dv{V}{t}
+              &=
+              \sqrt{2gy} a C = \\
+              &=
+              \sqrt{2 g d} a C (\cos \theta)^{1/2},
+              \end{aligned}
+              \]
+              но из первого уравнения следует, что
+              \[
+              \begin{aligned}
+              \dv{V}{t}
+              &= \frac{1}{3} S_1 \frac{d^3}{b^2 + d^2} \frac{d}{\theta} \paren{
+              \cosec^2 \theta \cos \theta
+              } \dv{\theta}{t} = \\
+              &=
+              \frac{1}{3} S_1 \frac{d^3}{b^2 + d^2} \paren{ - \cosec \theta (1 - 2 {\ctg}^2 \theta) }
+              \dv{\theta}{t},
+              \end{aligned}
+              \]
+              поэтому
+              \[
+              \frac{\cosec \theta (1 - 2 {\ctg}^2 \theta)}{\cos^{1/2} \theta} d\theta
+              =
+              \frac{3 \sqrt{2 g d} a C}{S_1 d^3} (b^2 + d^2) dt.
+              \]
+              Пользуясь той же заменой, получаем
+              \[
+              \begin{aligned}
+              \frac{3 a C \sqrt{2 g d} (b^2 + d^2)^{1/2} b}{S_0 \cos \alpha d^3} t_2
+              &=
+              \int\limits_{\argtg d/b}^{\pi / 4}
+              \frac{\sin^2 \theta - 2 \cos^2 \theta}{\sin^3 \theta \cos^{1/2} \theta} d\theta = \\
+              &=
+              \int\limits_{\argtg d/b}^{\pi / 4}
+              \frac{{\tg}^2 \theta - 2}{({\tg}^3 \theta \cos^{1/2} \theta) \cos \theta} d\theta = \\
+              &=
+              \int\limits_{a/b}^{1} \frac{\tau^2 - 2}{\tau^3 (1 + \tau^2)} (1 + \tau^2)^{3/4} d\tau.
+              \end{aligned}
+              \]
+            </li>
+
+            <li>
+              На данной стадии $\theta = \dfrac{\pi}{4}$.
+              <div class="images small">
+                <img src="images/15-last.png" />
+              </div>
+
+              Поэтому
+              \[
+              \begin{aligned}
+              y_2
+              &=
+              d \cos \frac{\pi}{4} = d \frac{\sqrt{2}}{2}, \\
+              S_2
+              &=
+              S_1 \frac{d^2}{b^2 + d^2} \cosec^2 \frac{\pi}{4} = \\
+              &=
+              2 S_0 \cos \alpha \frac{d^2}{b (b^2 + d^2)^{1/2}},
+              \end{aligned}
+              \]
+              поэтому
+              \[
+              t_3 = \frac{2 y_2 S_2}{5 \sqrt{2 g y_2} a C}.
+              \]
+            </li>
+          </ol>
+
+          Таким образом, время полного опустошения пакета равно
+          \[
+          T = t_1 + t_2 + t_3.
+          \]
+        </div>
+      </li>
+
+      <li class="question theory">
+        <div class="name">
+          Преобразование Лапласа. Основные свойства
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question theory">
+        <div class="name">
+          Преобразование Лапласа. Восстановление оригинала по
+          изображению
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question theory">
+        <div class="name">
+          Преобразование Лапласа и его применение к решению
+          дифференциальных уравнений с частными производными.
+          Вывод вспомогательных формул
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question theory">
+        <div class="name">
+          Преобразование Лапласа и его применение к решению
+          обыкновенных дифференциальных уравнений
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question theory">
+        <div class="name">
+          Преобразование Лапласа и его применение к решению
+          дифференциальных уравнений с частными производными
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question theory">
+        <div class="name">
+          Термодинамика. Вывод закона Фурье
+        </div>
+        <div class="content">
+          <div class="definition">
+            Процессы передачи тепла рассматриваются в условиях так называемого
+            <i>локального термодинамического равновесия</i>. Понятие ЛТР для
+            газов вводится при $\lambda \ll L$, то есть когда длина свободного
+            пробега частицы вещества много меньше характерных размеров
+            рассматриваемого объекта (<i>сплошная среда</i>). ЛТР подразумевает,
+            что процессы изучаются при временах, больших, чем $\tau$ &mdash;
+            время между столкновениями частиц, и на размерах, больших, чем
+            $\lambda$.
+          </div>
+
+          <p>
+            В условиях ЛТР в областях вещества, размеры превосходят величину $\lambda$
+            (но много меньше величины $L$), устанавливается равновесие, и для них
+            можно ввести средние величины плотности, скорости теплового движения частиц
+            и так далее. Также можно ввести температуру $T$, определяющую среднюю
+            кинетическую энергию частиц:
+            \[
+            \frac{m v^2}{2} = \frac{3}{2} k T,
+            \]
+            где $m$ &mdash; масса частицы, $v$ &mdash; средняя скорость хаотического
+            движения, $k$ &mdash; постоянная Больцмана (в случае больцмановского газа).
+          </p>
+
+          <p>
+            Внутренняя энергия, связанная с хаотическим движением частиц, определяется
+            через температуру с помощью <i class="important">удельной теплоёмкости</i>
+            $c(\rho, T)$:
+            \[
+            c(\rho, T) = \pd{\varepsilon(\rho, T)}{T}, \qquad c(\rho, T) \gt 0,
+            \]
+            где $\rho = m n$ &mdash; плотность вещества ($n$ &mdash; число
+            частиц в единице объёма), а $\varepsilon(\rho, T)$ &mdash;
+            <i class="important">внутренняя энергия единицы массы</i>.
+          </p>
+
+          <p>
+            Если в некотором объёме идеального газа содержится $N$ частиц,
+            то их полная внутренняя энергия есть
+            \[
+            E = N \frac{m v^2}{2} = \frac{3}{2} N k T = \frac{3}{2} M \frac{k}{m} T,
+            \]
+            где $M = N m$ &mdash; суммарная масса частиц, а удельная внутренняя энергия
+            даётся формулой
+            \[
+            \varepsilon = \frac{E}{M} = \frac{3}{2} \frac{k}{m} T,
+            \]
+            то есть теплоёмкость идеального газа равна
+            \[
+            c = \frac{3k}{2m}
+            \]
+            и не зависит от величин $\rho, T$.
+          </p>
+
+          <div class="definition">
+            <i>Потоком тепла</i> в данной точке называется количество тепла,
+            переносимое в единицу времени через единичную поверхность,
+            помещённую в данную точку вещества.
+          </div>
+
+          <p>
+            Выделим в среде точку с координатами $x,y,z$ и вычислим компоненты
+            потока тепла $W$ по соответствующим осям. Разместим её перпендикулярно оси $x$.
+          </p>
+
+          <div class="images small">
+            <img src="images/21-flux.png" />
+          </div>
+
+          <p>
+            Частицы, движущиеся вдоль оси $x$, пересекают её справа налево или слева направо
+            с равной вероятностью. Однако если температуры частиц разные по правую
+            и левую стороны площадки, то в единицу времени через неё
+            справа и слева переносятся разные энергии. Разность этих энергий и формирует
+            поток тепла вдоль оси $x$.
+          </p>
+
+          <p>
+            Выделим области, отстоящие на расстояние $\lambda = v \tau$ от площадки.
+            Из частиц, находящихся в правой области, примерно 1/6 часть движется налево,
+            так как все шесть направлений равновероятны. За время $\tau$ эта часть частиц
+            с необходимостью пересечёт площадку и перенесёт энергию, равную
+            \[
+            \frac{1}{6} n \lambda \frac{m v_r^2}{2},
+            \]
+            где $v_r$ &mdash; скорость частиц в правой области, а величины $n$ и $\lambda$
+            считаются в первом приближении равными по обе стороны площадки. Аналогично
+            частицы из левой области переносят энергию
+            \[
+            \frac{1}{6} n \lambda \frac{m v_l^2}{2}.
+            \]
+            Разность этих энергий, отнесённая к единице времени, представляет собой величину
+            \[
+            W_x = \frac{1}{6} n v \paren{
+            \frac{m v_l^2}{2} - \frac{m v_r^2}{2}
+            } = \frac{mnv}{6} \paren{ \varepsilon_l - \varepsilon_r },
+            \]
+            где $\varepsilon_l, \varepsilon_r$ &mdash; внутренняя энергия
+            вещества соответственно слева и справа от площадки, а в качестве
+            $v$ берётся средняя между $v_l$ и $v_r$.
+          </p>
+
+          <p>
+            В первом приближении величины $\varepsilon_l,\varepsilon_r$ можно выразить
+            через величину $\varepsilon$ (энергию в точке $x$, то есть на площадке)
+            следующим образом:
+            \[
+            \begin{aligned}
+            \varepsilon_r
+            &= \varepsilon + \lambda \pd{\varepsilon}{x}
+            = \varepsilon + \lambda c \pd{T}{x}, \\
+            \varepsilon_l
+            &= \varepsilon - \lambda \pd{\varepsilon}{x}
+            = \varepsilon - \lambda c \pd{T}{x}.
+            \end{aligned}
+            \]
+            Подставляя эти формулы в выражение для $W_x$, получаем
+            \[
+            W_x = - \kappa \pd{T}{x}, \qquad \kappa = \frac{\rho c \lambda v}{3}.
+            \]
+          </p>
+        </div>
+      </li>
+
+      <li class="question theory">
+        <div class="name">
+          Вывод уравнения теплопроводности. Постановка типичных
+          краевых условий
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question theory">
+        <div class="name">
+          Метод разделения переменных. Примеры
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question practice">
+        <div class="name">
+          Динамика скопления амёб
+        </div>
+        <div class="content">
+          Математическая модель динамики скопления амёб базируется на следующих
+          предположениях:
+          <ol>
+            <li>
+              расстояние между амёбами мало в сравнении с размерами их скоплений,
+              их можно рассматривать как сплошную среду и вводить концентрацию $N(x,y,z)$
+              &mdash; число амёб в единице объёма;
+            </li>
+
+            <li>
+              процесс одномерный, то есть концентрация амёб и другие величины являются
+              функциями только координаты $x$ и времени $t$;
+            </li>
+
+            <li>
+              амёбы не рождаются и не умирают в процессе макроскопического движения,
+              т.е. характерное время движения (несколько часов) мало по отношению
+              к характерным временам размножения и жизни амёб;
+            </li>
+
+            <li>
+              индивидуальное движение амёб при отсутствии стимулирующих внешних
+              воздействий (пища, тепло и т.д.) беспорядочно, хаотично; каждая
+              амёба может с равной вероятностью двигаться как вправо, так и влево;
+            </li>
+
+            <li>
+              если в среде есть притягивающее химическое вещество, то к собственному
+              неупорядоченному движению амёб добавляется их направленное движение
+              в область с большей плотностью этого вещества.
+            </li>
+          </ol>
+
+          <p>
+            Составим уравнение баланса амёб в элементе среды $dx$ за время $dt$, пользуясь
+            &laquo;законом сохранения&raquo; амёб (предположение 3). В этом случае
+            общее число амёб в объёме $dx$ (площадь поперечного сечения единична)
+            изменяется лишь из-за разности потока амёб $W(x,t)$ на левой и правой границах
+            элемента. Величина $W(x,t)$ понимается как число амёб, пересекающих единичную
+            поверхность за единичное время. Искомое уравнение выглядит так:
+            \[
+            \left[ \bar{N}(x, t + dt) - \bar N(x, t) \right] dx
+            =
+            \left[ \bar{W}(x, t) - \bar W(x + dx, t) \right] dt,
+            \]
+            где $\bar N, \bar W$ &mdash; некоторые средние значения величин на малых
+            промежутках $dx, dt$. Устремляя $dx$ и $dt$ к нулю, получаем дифференциальное
+            уравнение баланса числа амёб:
+            \[
+            \pd{N}{t} = - \pd{W}{x}.
+            \]
+            Величина $W = W_c + W_d$ складывается из двух составляющих. Часть $W_c$
+            общего потока формируется за счёт хаотического движения амёб, поэтому
+            по аналогии с законом Фурье для процесса диффузии тепла его можно записать через
+            градиент их концентрации:
+            \[
+            W_c = - \mu \pd{N}{x}, \qquad \mu \gt 0.
+            \]
+            При получении выражения для составляющей $W_d$, описывающей
+            направленный поток амёб, будем считать, что величина $W_d$ тем больше,
+            чем больше градиент плотности притягивающего вещества:
+            \[
+            W_d = \eta N \pd{\rho}{x},
+            \]
+            где $\eta \gt 0$ &mdash; некоторая постоянная, $\rho(x, t)$ &ndash;
+            плотность вещества, а множитель $N$ перед градиентом означает, что при
+            заданном градиенте величины $\rho$ составляющая потока $W_d$ пропорциональна
+            концентрации амёб в данной точке.
+          </p>
+
+          <p>
+            Подставляя полученные выражения в уравнение баланса, получаем
+            \[
+            \pd{N}{t} = \pd{}{x} \paren{ \mu \pd{N}{x} - \eta N \pd{\rho}{x} }.
+            \]
+            В этом уравнении две неизвестных, поэтому получим уравнение баланса
+            для концентрации вещества $\rho$. При этом надо учитывать, что скорость
+            выделения химического вещества пропорциональна концентрации амёб.
+            Учтём также распад вещества, скорость которого пропорциональна его концентрации.
+            Тогда в единицу времени в единичном объёме появляется и исчезает
+            количество вещества
+            \[
+            f = \alpha N - \beta \rho, \qquad \alpha, \beta \gt 0.
+            \]
+            Изменение плотности вещества в элементарном объёме среды происходит также
+            вследствие разности его потоков на левой
+            и правой границах элемента. Оно диффундирует в среде из мест с большей концентрацией
+            в места с меньшей концентрацией. Это движение создаёт поток
+            \[
+            W_\rho = -D \pd{\rho}{x},
+            \]
+            где $D \gt 0$ &mdash; коэффициент диффузии.
+          </p>
+
+          <p>
+            Итак, уравнение баланса вещества имеет вид
+            \[
+            \pd{\rho}{t} = - \pd{W_\rho}{x} + f,
+            \]
+            или
+            \[
+            \pd{\rho}{t} = D \pdv2{\rho}{x} + \alpha N - \beta \rho.
+            \]
+          </p>
+
+          <p>
+            Если амёбы не выделяют притягивающего вещества и $\rho(x,t) \equiv 0$, то
+            уравнение баланса амёб переходит в уравнение теплопроводности:
+            \[
+            \pd{N}{t} = \mu \pdv2{N}{x}.
+            \]
+            Если же $\rho(x, t) \not\equiv 0$, но амёбы перестали выделять вещество,
+            то $\alpha = 0$, а уравнение баланса вещества примет вид
+            \[
+            \pd{\rho}{t} = D \pdv2{\rho}{x} - \beta \rho
+            \]
+            и сводится простой заменой к уравнению теплопроводности:
+            \[
+            \pd{u}{t} = D \pdv2{u}{x}.
+            \]
+          </p>
+
+          <p>
+            Рассмотрим уравнение равновесия $N \equiv N_0, \rho \equiv \rho_0$,
+            которое возможно только при условии
+            \[
+            \alpha N_0 = \beta \rho,
+            \]
+            то есть когда выделение вещества и его распад уравновешивают друг друга.
+          </p>
+
+          <p>
+            Линеаризованная в окрестности постоянного решения система имеет вид
+            \[
+            \begin{aligned}
+            \pd{\tilde N}{t}
+            &=
+            \pd{}{x} \paren{ \mu \pd{\tilde N}{x} - \eta N_0 \pd{\tilde \rho}{x} }, \\
+            \pd{\tilde \rho}{t}
+            &=
+            D \pdv2{\tilde \rho}{x} + \alpha \tilde N - \beta \tilde \rho,
+            \end{aligned}
+            \]
+            где $\tilde N$ и $\tilde \rho$ &mdash; малые возмущения.
+            Её общее решение для неограниченного пространства $-\infty \lt x \lt \infty$
+            можно построить в виде суммы частных решений (гармоник):
+            \[
+            \tilde N = C_1 \sin k x e^{\gamma t},
+            \qquad
+            \tilde \rho = C_2 \sin k x e^{\gamma t},
+            \]
+            где $k \gt 0$ &mdash; волновое число, а $C_1, C_2 = \const$.
+          </p>
+
+          <p>
+            Для частных решений должны выполняться соотношения
+            \[
+            \begin{aligned}
+            C_1 (\gamma + \mu k^2) &= C_2 \eta N_0 k^2, \\
+            C_2 (\gamma + \beta + D k^2) &= C_1 \alpha,
+            \end{aligned}
+            \]
+            связывающие длину волны гармоники $\lambda = 2 \pi / k$ с величиной
+            $\gamma$ &mdash; её инкрементом (декрементом). Исключая из этих уравнений
+            константы, получаем
+            \[
+            \gamma^2 + b \gamma + c = 0,
+            \]
+            где
+            \[
+            b = \beta + k^2 (\mu + D),
+            \quad
+            c = \mu k^2 (\beta + D k^2) - \eta \alpha N_0 k^2.
+            \]
+            Оба корня отрицательны тогда и только тогда, когда $c \gt 0$, то есть при
+            выполнении неравенства
+            \[
+            \mu(\beta + D k^2) \gt \eta \alpha N_0.
+            \]
+            В этом случае решение устойчиво. Это неравенство заведомо выполнено при
+            \[
+            \mu \beta \gt \eta \alpha N_0,
+            \]
+            либо при $\mu \gt \eta \rho_0$, то есть для фиксированных параметров
+            задачи при достаточно малых концентрациях амёб и плотностях притягивающего
+            вещества. В противном случае возможна неустойчивость.
+          </p>
+        </div>
+      </li>
+
+      <li class="question theory">
+        <div class="name">
+          Метод Ритца. Основная идея. Сходимость. Примеры
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question theory">
+        <div class="name">
+          Методы Ритца и Галёркина. Доказательство относительной
+          полноты систем функций $\left\{ \sin \dfrac{\pi k x}{l} \right\}$ и
+          $\left\{ x^k (l - x) \right\}$. Примеры
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question theory">
+        <div class="name">
+          Методы Ритца и Галёркина для минимизации функционала
+          ${\displaystyle I(y) = \int\limits_{0}^{l} \left[ p {y'}^2 + q y^2 + 2 f y \right] dx}$
+        </div>
+        <div class="content">
+        </div>
+      </li>
+    </ol>
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+  </body>
+
+</html>

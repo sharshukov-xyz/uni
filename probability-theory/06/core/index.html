@@ -427,7 +427,7 @@
                 \qquad
                 A_i \cap A_j = \varnothing, \quad i \neq j,
                 \qquad
-                \bigcup_{i=1}^\infty A_i = \mathcal{A},
+                \bigcup_{i=1}^\infty A_i \in \mathcal{A},
                 \]
                 то справедливо равенство
                 \[
@@ -460,7 +460,7 @@
 
       <li class="question">
         <div class="name">
-          Свойства вероятности
+          Свойства вероятности (7 штук)
         </div>
         <div class="content">
           <ol>
@@ -830,7 +830,7 @@
 
       <li class="question">
         <div class="name">
-          Алгебры, не зависимые в совокупности
+          Алгебры, независимые в совокупности
         </div>
         <div class="content">
           Рассмотрим $(\Omega, \mathcal{F}, P)$, пусть алгебры
@@ -1318,7 +1318,7 @@
             P(A \cap B | \set{ a_t = k })
             =
             P(A | \set{ a_t = k })
-            P(B | \set{ a_k = k }).
+            P(B | \set{ a_t = k }).
             \]
           </div>
 
@@ -1407,7 +1407,7 @@
         <div class="content">
           Рассмотрим однородную марковскую цепь. Обозначим через
           \[
-          p_{ij}(k) = P(A_{t+k}^{(j)} | A_t^{(i)}) = p_{ij}
+          p_{ij}(k) = P(A_{t+k}^{(j)} | A_t^{(i)})
           \]
           вероятность перехода частицы из состояния $i$ в состояние $j$ за $k$
           шагов. Очевидно, что
@@ -1426,6 +1426,24 @@
             p_{ij}(t + s) = \sum_{k=1}^r p_{ik}(t) p_{kj}(s).
             \]
             </p>
+          </div>
+
+          <div class="remark">
+            В матричном виде это уравнение можно записать так:
+            \[
+            P(t + s) = P(t) P(s),
+            \]
+            где $P(t)$ &mdash; матрица переходных вероятностей за $t$ шагов, $P(1) = P$.
+            Если взять $s = 1$, то
+            \[
+            P(t+1) = P(t) P(1),
+            \]
+            откуда можно найти, что для всех $t \geqslant 1$ верно
+            \[
+            P(t) = P^t.
+            \]
+            Для определённости можно положить, что $P^0 = I$, где $I$ &mdash; единичная
+            матрица порядка $r$.
           </div>
         </div>
       </li>
@@ -1577,7 +1595,7 @@
           Борелевская $\sigma$-алгебра
         </div>
         <div class="content">
-          Пусть $\Omega = \mathbb{R}$. Рассмотрим семейство множество
+          Пусть $\Omega = \mathbb{R}$. Рассмотрим семейство множеств
           \[
           \mathcal{I}_1 = \set{
           (-\infty, +\infty),
@@ -2007,6 +2025,71 @@
             E\xi = \int\limits_\Omega \xi(\omega) dP,
             \]
             если этот интеграл существует.
+
+            <p>
+              Рассмотрим несколько типов случайной величины:
+            </p>
+            <ol>
+              <li>
+                Рассмотрим простую неотрицательную случайную величину:
+                \[
+                0 \leqslant \xi(\omega)
+                = \sum\limits_{i=1}^{m} a_i I\set{ \omega \in A_i },
+                \]
+                где $a_i \gt 0$ и
+                \[
+                A_i \in \mathcal{F},
+                \qquad \sum\limits_{i=1}^{m} A_i = \Omega,
+                \qquad A_i \cap A_j = \varnothing, \quad i \neq j.
+                \]
+                Тогда полагаем
+                \[
+                E \xi
+                = \int\limits_{\Omega} \xi(\omega) dP
+                = \sum\limits_{i=1}^{m} a_i P(A_i).
+                \]
+              </li>
+
+              <li>
+                Рассмотрим неотрицательную расширенную случайную величину
+                $\xi(\omega) \geqslant 0$. В этом случае существует последовательность
+                простых случайных величин $\xi_n(\omega) \geqslant 0$ таких, что в каждой
+                точке множества $\Omega$ случайные величины $\xi_n(\omega)$ монотонно
+                сходятся к случайной величине $\xi(\omega)$, то есть
+                \[
+                \lim\limits_{n \to \infty} \xi_n(\omega) = \xi(\omega),
+                \qquad \xi_n(\omega) \leqslant \xi_{n+1}(\omega).
+                \]
+                Тогда
+                \[
+                E \xi = \int\limits_{\Omega} \xi(\omega) dP
+                = \lim\limits_{n \to \infty} \int\limits_{\Omega} \xi_n(\omega) dP. 
+                \]
+              </li>
+
+              <li>
+                Рассмотрим любую $\mathcal{F}$-измеримую функцию $\xi(\omega)$
+                (расширенную случайную величину). Её можно представить единственным
+                образом в виде разности двух неотрицательных случайных величин
+                \[
+                \xi(\omega) = \xi^+(\omega) - \xi^-(\omega),
+                \]
+                где
+                \[
+                \begin{aligned}
+                \xi^+(\omega)
+                &= \phantom{-} \xi(\omega) I\set{ \omega: \xi(\omega) \geqslant 0 }, \\
+                \xi^-(\omega) &= -\xi(\omega) I\set{ \omega: \xi(\omega) \lt 0 }.
+                \end{aligned}
+                \]
+                В каждой точке $\omega$ выполняется $\xi^+ \xi^- = 0$. Положим
+                \[
+                E \xi = \int\limits_{\Omega} \xi(\omega) dP
+                = \int\limits_{\Omega} \xi^+(\omega) dP
+                - \int\limits_{\Omega} \xi^-(\omega) dP. 
+                \]
+              </li>
+            </ol>
           </div>
 
           Свойства:
@@ -2459,7 +2542,7 @@
             Пусть $\xi \geqslant 0$. Тогда для любого $\varepsilon \gt 0$
             справедливо неравенство
             \[
-            P \set{ \xi \geqslant a } \leqslant \frac{E \xi}{\varepsilon}.
+            P \set{ \xi \geqslant \varepsilon } \leqslant \frac{E \xi}{\varepsilon}.
             \]
             </p>
           </div>
@@ -2681,7 +2764,9 @@
             если
             \[
             P\left\{
-            \omega: \; \xi_n(\omega) \limto{n \to \infty} \xi(\omega)
+            \omega: \; \xi_n(\omega)
+            \underset{n \to \infty}{\cancel{\longrightarrow}}
+            \xi(\omega)
             \right\} = 0,
             \]
             или
@@ -2848,7 +2933,7 @@
 
       <li class="question">
         <div class="name">
-          Комплексная случайная величина
+          Комплексная случайная величина, мат. ожидание комплексной случайной величины
         </div>
         <div class="content">
           Рассмотрим вероятностное пространство $(\Omega, \mathcal{F}, P)$, на
@@ -2861,7 +2946,7 @@
             \]
             Её также можно представить в виде
             \[
-            \zeta(\omega) = \abs{\zeta{\omega}} e^{i \Arg \zeta(\omega)}.
+            \zeta(\omega) = \abs{\zeta(\omega)} e^{i \Arg \zeta(\omega)}.
             \]
           </div>
 
@@ -2902,7 +2987,7 @@
 
       <li class="question">
         <div class="name">
-          Свойства комплексных случайных величин
+          Свойства комплексных случайных величин (2 штуки)
         </div>
         <div class="content">
           Рассмотрим вероятностное пространство $(\Omega, \mathcal{F}, P)$, на
@@ -2965,7 +3050,7 @@
           <div class="remark">
             Характеристическую функцию случайного вектора можно найти по формуле
             \[
-            \varphi_\xi(t) = \int\limits_\Omega E e^{i \xi^T t} dP
+            \varphi_\xi(t) = \int\limits_\Omega e^{i \xi^T t} dP
             = \int\limits_{-\infty}^\infty \cdots \int\limits_{-\infty}^\infty
             e^{i x^T t} d F_\xi(x).
             \]
@@ -3104,7 +3189,7 @@
 
       <li class="question">
         <div class="name">
-          Определение: ЦПТ
+          Определение: к последовательности применима ЦПТ
         </div>
         <div class="content">
           <div class="definition">
@@ -3682,7 +3767,7 @@
             <p>
             Если выборка представлена статистическим рядом, то
             \[
-            a_r^{0*} = \frac{1}{n} \sum_{i=1}^n n_i
+            a_r^{0*} = \frac{1}{n} \sum_{i=1}^k n_i
             \paren{ X_i - \overline{X} }^r,
             \]
             причём
@@ -3769,7 +3854,7 @@
       <li class="question">
         <div class="name">
           Размах выборки, средний межквартильный размах, выборочная дисперсия,
-          выборочное с.к.о.
+          выборочное среднее квадратичное отклонение
         </div>
         <div class="content">
           Рассмотрим популярные меры рассеяния.
@@ -4358,6 +4443,26 @@
             $\ln L(X_{[n]}, \theta)$, поскольку функция $\ln(t)$ является строго
             возрастающей функцией аргумента $t$, то есть данный переход
             правомерен.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение: распределение Стьюдента с $k$ степенями свободы
+        </div>
+        <div class="content">
+          <div class="definition">
+            Пусть заданы независимые случайные величины
+            \[
+            \zeta \sim N(0,1), \qquad \tau_k \sim \chi_k^2.
+            \]
+            Тогда распределение случайной величины
+            \[
+            \xi = \frac{\zeta}{\sqrt{ \dfrac{\tau_k}{k} }}
+            \]
+            называется <i>распределением Стьюдента с $k$ степенями свободы</i>
+            и обозначается как $T_k$.
           </div>
         </div>
       </li>

@@ -1,0 +1,2611 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Вопросы &mdash; Поступление в магистратуру</title>
+
+    <link href="/assets/css/styles.css" rel="stylesheet">
+    <script defer src="/assets/js/core.js"></script>
+    <script defer src="/assets/js/questions.js"></script>
+    <script defer src="/assets/js/controls.js"></script>
+
+    <link rel="stylesheet" href="/assets/katex/katex.min.css">
+    <script defer src="/assets/katex/katex.min.js"></script>
+    <script defer src="/assets/katex/auto-render.min.js"></script>
+
+    <script>
+     document.addEventListener("DOMContentLoaded", function () {
+       renderMathInElement(document.body, {
+         // customised options
+         // • auto-render specific keys, e.g.:
+         delimiters: [
+           { left: '$$', right: '$$', display: true },
+           { left: '$', right: '$', display: false },
+           { left: '\\(', right: '\\)', display: false },
+           { left: '\\[', right: '\\]', display: true }
+         ],
+         // • rendering keys, e.g.:
+         throwOnError: false
+       });
+     });
+    </script>
+  </head>
+
+  <body>
+    <h1 id="title">Вопросы &mdash; Поступление в магистратуру</h1>
+    <nav>
+      <a href="/">Домой</a>
+      <a href="..">Поступление в магистратуру</a>
+      <a href="/links">Ссылки</a>
+      <a href="/about">Контакты</a>
+    </nav>
+
+    <div class="controls">
+      <button onclick="HideQuestions()">Скрыть вопросы</button>
+      <button onclick="ShowQuestions()">Показать вопросы</button>
+      <button onclick="HideAnswers()">Скрыть ответы</button>
+      <button onclick="ShowAnswers()">Показать ответы</button>
+      <button onclick="HideProofs()">Скрыть доказательства</button>
+      <button onclick="ShowProofs()">Показать доказательства</button>
+      <button onclick="ShowRandomElement(HideQuestions)">
+        Показать случайный вопрос
+      </button>
+    </div>
+
+    <div class="proof-type">
+      Показывать
+      <select id="select-proof-type" name="select-proof-type">
+        <option value="proofs">доказательства полностью</option>
+        <option value="ideas">только идеи доказательств</option>
+      </select>
+    </div>
+
+    <div style="display:none">
+      $\global\def\at#1#2{\left. #1 \right\rvert_{#2}}$
+      $\global\def\abs#1{\left\lvert #1 \right\rvert}$
+      $\global\def\norm#1{\left\lVert #1 \right\rVert}$
+      $\global\def\limto#1{\underset{#1}{\longrightarrow}}$
+
+      $\global\def\dp#1#2{#1 \cdot #2\,}$
+      $\global\def\vp#1#2{#1 \times #2\,}$
+
+      $\global\def\dv#1#2{\frac{d #1}{d #2}}$
+      $\global\def\pd#1#2{\frac{\partial #1}{\partial #2}}$
+      $\global\def\pdv2#1#2{\frac{\partial^2 #1}{\partial #2^2}}$
+      $\global\def\ppdv#1#2#3{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
+
+      $\global\def\paren#1{\left( #1 \right)}$
+
+      $\global\def\mbox#1{\text{#1}}$
+
+      $\global\def\div{\text{div}\,}$
+      $\global\def\dsum{\displaystyle\sum\,}$
+      $\global\def\grad{\text{grad}\,}$
+      $\global\def\rot{\text{rot}\,}$
+
+      $\global\def\vb#1{\textbf{#1}}$
+
+      $\global\def\op#1{\mathrm{#1}\,}$
+
+      $\global\def\proj{\mathrm{proj}}$
+      $\global\def\bydef{\mathrm{def}}$
+      $\global\def\const{\text{const}\,}$
+      $\global\def\res{\text{res}\,}$
+      $\global\def\Res{\text{Res}\,}$
+      $\global\def\Re{\text{Re}\,}$
+      $\global\def\Im{\text{Im}\,}$
+      $\global\def\ch{\text{ch}\,}$
+      $\global\def\sh{\text{sh}\,}$
+      $\global\def\tg{\mathrm{tg}\,}$
+      $\global\def\ctg{\mathrm{ctg}\,}$
+      $\global\def\argtg{\text{argtg}\,}$
+      $\global\def\Arg{\operatorname{Arg}}$
+      $\global\def\diag{\operatorname{diag}}$
+      $\global\def\inv{\operatorname{inv}}$
+      $\global\def\Sp{\operatorname{Sp}}$
+    </div>
+
+    <ol id="questions">
+      <li class="question">
+        <div class="name">
+          Комплексные числа: определения и алгебраические действия. Тригонометрическая
+          форма комплексного числа
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Комплексными числами</i> называют выражения вида
+            \[
+            z = x + iy, \qquad i = \sqrt{-1}, \quad x,y \in \mathbb{R}.
+            \]
+            Элемент $i$ называют <i>мнимой единицей</i>.
+            <br/>
+            Число $x$ называют <i>действительной частью</i>, $y$
+            &mdash; <i>мнимой частью</i> комплексного числа $z = x + i y$. Используют запись:
+            \[
+            x = \Re z, \qquad y = \Im z.
+            \]
+          </div>
+
+          <div class="definition">
+            Обозначение $z = x + iy$ называют <i>алгебраической</i> записью комплексного числа.
+          </div>
+
+          <div class="definition">
+            Число $\sqrt{x^2 + y^2}$ называют <i>модулем</i> комплексного числа $z = x + iy$
+            и обозначают как $\abs{z}$, то есть
+            \[
+            \abs{z} = \sqrt{x^2 + y^2}.
+            \]
+          </div>
+
+          <p>
+            Геометрически число $z = x + iy$ можно представить в виде точки $(x,y)$.
+          </p>
+
+          <div class="images small">
+            <img src="images/01-plane.png"/>
+          </div>
+
+          <div class="definition">
+            Координатная плоскость, точка $(x,y)$ которой поставлена в соответствие числу
+            $x + iy$, называется <i>комплексной плоскостью</i> и обозначается $\mathbb{C}$.
+            Ось $Ox$ при этом называют <i>действительной</i>, а $Oy$ &mdash; <i>мнимой</i> осью.
+          </div>
+
+          <div class="definition">
+            Угол $\varphi$ называется <i>аргументом</i> комплексного числа $z \neq 0$ и обозначается как
+            $\Arg z$. Значения $-\pi \leqslant \varphi \leqslant \pi$ обычно обозначают $\arg z$.
+          </div>
+
+          <p>
+            Пусть $\abs{z} = r$, тогда
+            \[
+            \begin{aligned}
+            x &= r \cos \varphi, \\
+            y &= r \sin \varphi,
+            \end{aligned}
+            \]
+            поэтому
+            \[
+            z = x + iy = r (\cos \varphi + i \sin \varphi).
+            \]
+          </p>
+
+          <div class="definition">
+            Запись $z = r (\cos \varphi + i \sin \varphi)$ называют
+            <i>тригонометрической формой комплексного числа $z$</i>.
+          </div>
+
+          <div class="remark">
+            В случае, когда $z = 0$, считают, что $r = 0$, а $\varphi$ может
+            принимать любые значения &mdash; аргумент нуля не определён.
+          </div>
+
+          <p>
+            Комплексные числа $z_1 = x_1 + iy_1$ и $z_2 = x_2 + iy_2$ считаются
+            равными тогда и только тогда, когда $x_1 = x_2$ и $y_1 = y_2$.
+          </p>
+
+          <div class="definition">
+            <i>Сумма</i> комплексных чисел $z_1 = x_1 + i y_1$ и $z_2 = x_2 + i y_2$
+            определяется как
+            \[
+            z_1 + z_2 = (x_1 + x_2) + i (y_1 + y_2).
+            \]
+            <br/>
+            <i>Разность</i> же определяется как
+            \[
+            z_1 - z_2 = (x_1 - x_2) + i (y_1 - y_2).
+            \]
+            Геометрически эти операции соответствуют сложению и
+            вычитанию векторов.
+          </div>
+
+          <div class="definition">
+            <i>Произведение</i> двух комплексных чисел $z_1 = x_1 + i y_1$ и $z_2 = x_2 + i y_2$
+            определяется по формуле
+            \[
+            z_1 z_2
+            = (x_1 + i y_1) (x_2 + i y_2)
+            = (x_1 x_2 - y_1 y_2) + i (x_1 y_2 + y_1 x_2).
+            \]
+            В тригонометрической форме:
+            \[
+            z_1 z_2 = r_1 r_2 \left[
+            \cos(\varphi_1 + \varphi_2) + i \sin (\varphi_1 + \varphi_2)
+            \right].
+            \]
+          </div>
+
+          Методом математической индукции можно доказать, что справедлива
+          <i class="important">формула Муавра</i>:
+          \[
+          z^n = r^n (\cos n \varphi + i \sin n \varphi).
+          \]
+
+          <div class="definition">
+            Число $\overline{z} = x - iy$ называют <i>сопряжённым</i>
+            к числу $z = x + iy$.
+          </div>
+
+          <div class="definition">
+            <i>Деление</i> определяется по формуле
+            \[
+            \frac{z_1}{z_2}
+            = \frac{x_1 x_2 + y_1 y_2}{x_2^2 + y_2^2}
+            + i \frac{y_1 x_2 - x_1 y_2}{x_2^2 + y_2^2}.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Метод Гаусса решения систем линейных уравнений
+        </div>
+        <div class="content">
+          Пусть требуется решить систему линейных алгебраических уравнений:
+          \[
+          \begin{aligned}
+          a_{11} x_1 + a_{12} x_2 + \dots + a_{1n} x_n &= b_1 \\
+          a_{21} x_1 + a_{22} x_2 + \dots + a_{2n} x_n &= b_2 \\
+          \dots \\
+          a_{m1} x_1 + a_{m2} x_2 + \dots + a_{mn} x_n &= b_m.
+          \end{aligned}
+          \]
+          Если все $a_{1i} = 0, i = \overline{1, n}$, то возможны два случая:
+          <ul>
+            <li>
+              $b_1 \neq 0$ &mdash; система не имеет решений (несовместна);
+            </li>
+
+            <li>
+              $b_1 = 0$ &mdash; в этом случае имеем тождество $0 = 0$, которое можно
+              исключить из рассмотрения.
+            </li>
+          </ul>
+          Пусть теперь $a_{11} \neq 0$ (этого всегда можно добиться перестановкой слагаемых).
+          Исключим переменную $x_1$ из уравнений системы, начиная со второго. Для этого
+          вычтем из второго уравнения первое, домноженное на $\dfrac{a_{21}}{a_{11}}$,
+          из третьего вычтем первое, домноженное на $\dfrac{a_{31}}{a_{11}}$, и так далее.
+          Получим систему:
+          \[
+          \begin{aligned}
+          a_{11} x_1 + a_{12} x_2 + \dots + a_{1n} x_n &= b_1 \\
+          \phantom{x_1 +} a_{22}^{(1)} x_2 + \dots + a_{2n}^{(1)} x_n &= b_2^{(1)} \\
+          \dots \\
+          \phantom{x_1 +} a_{m2}^{(1)} x_2 + \dots + a_{mn}^{(1)} x_n &= b_m^{(1)},
+          \end{aligned}
+          \]
+          где
+          \[
+          a_{ij}^{(1)} = a_{ij} - a_{1j} \frac{a_{i1}}{a_{11}},
+          \qquad
+          b_i^{(1)} = b_i - b_1 \frac{a_{i1}}{a_{11}},
+          \qquad i = \overline{1,m}, \; j = \overline{1,n}.
+          \]
+
+          Теперь метод Гаусса можно применить к подсистеме, состоящей из уравнений $2, 3, \dots, n$.
+
+          <p>
+            Если на каком-то шаге получили уравнение вида $0 = \beta_i$, где $\beta_i \neq 0$, то
+            система является несовместной. Тождества вида $0 = 0$ следует исключить из рассмотрения
+            ввиду того, что соответствующие им уравнения исходной системы являются избыточными.
+          </p>
+
+          В конце работы алгоритма возможны два случая:
+          <ol>
+            <li>
+              нет свободных переменных:
+              \[
+              \begin{aligned}
+              \alpha_{11} x_1 + \alpha_{12} x_2 + \alpha_{13} x_3 \dots + \alpha_{1n} x_n &= \beta_1 \\
+              \phantom{\alpha_{11} x_1 +} \alpha_{22} x_2 + \alpha_{23} x_3 \dots + \alpha_{2n} x_n &= \beta_2 \\
+              \phantom{\alpha_{11} x_1 + \alpha_{22} x_2 +} \alpha_{33} x_3 \dots + \alpha_{3n} x_n &= \beta_3 \\
+              \dots \\
+              \phantom{\alpha_{11} x_1 + \alpha_{22} x_2 + \alpha_{33} x_3 \dots +} \alpha_{nn} x_n &= \beta_n.
+              \end{aligned}
+              \]
+              В этом случае система имеет единственное решение, которое можно получить, последовательно
+              подставляя значения переменных в вышестоящие уравнения.
+            </li>
+
+            <li>
+              есть свободные переменные:
+              \[
+              \begin{aligned}
+              \alpha_{11} x_1 + \alpha_{12} x_2 + \dots + \alpha_{1r} x_r + \dots + \alpha_{1n} x_n &= \beta_1 \\
+              \phantom{\alpha_{11} x_1 +} \alpha_{22} x_2 + \dots + \alpha_{2r} x_r + \dots + \alpha_{2n} x_n &= \beta_2 \\
+              \dots \\
+              \phantom{\alpha_{11} x_1 + \alpha_{22} x_2 +} \alpha_{rr} x_r + \dots + \alpha_{rn} x_n &= \beta_n.
+              \end{aligned}
+              \]
+              Переменные $x_1, \dots, x_r$ называются <i>зависимыми</i>, а переменные $x_{r+1}, \dots, x_n$ &mdash; <i>свободными</i>.
+              <br/>
+              В этом случае необходимо выразить зависимые переменные через свободные:
+              \[
+              \begin{aligned}
+              \alpha_{11} x_1 + \alpha_{12} x_2 + \dots + \alpha_{1r} x_r &= \beta_1 - \alpha_{1,r+1} x_{r+1} - \dots - \alpha_{1n} x_n \\
+              \phantom{\alpha_{11} x_1 +} \alpha_{22} x_2 + \dots + \alpha_{2r} x_r &= \beta_2 - \alpha_{2,r+1} x_{r+1} - \dots - \alpha_{2n} x_n \\
+              \dots \\
+              \phantom{\alpha_{11} x_1 + \alpha_{22} x_2 +} \alpha_{rr} x_r &= \beta_n - \alpha_{r,r+1} x_{r+1} - \dots - \alpha_{rn} x_n.
+              \end{aligned}
+              \]
+              Далее, последовательно подставляя выражения зависимых переменных в вышестоящие уравнения, получаем
+              фундаментальное решение исходной системы уравнений.
+              <div class="remark">
+                В связи с тем, что свободные переменные могут принимать произвольные значения, заключаем, что исходная система уравнений имеет
+                счётное количество решений.
+              </div>
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Матрицы: основные определения и операции
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Матрицей</i> называют прямоугольную таблицу, заполненную некоторыми
+            математическими объектами.
+          </div>
+
+          <p>
+            Чаще всего матрицу размера $n \times m$ записывают в виде
+            \[
+            A =
+            \begin{pmatrix}
+            a_{11} & a_{12} & \dots & a_{1m} \\
+            a_{21} & a_{22} & \dots & a_{2m} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            a_{n1} & a_{n2} & \dots & a_{nm}
+            \end{pmatrix}.
+            \]
+          </p>
+
+          <div class="definition">
+            Матрица, количество строк и столбцов которой совпадают ($n = m$),
+            называется <i>квадратной</i>.
+          </div>
+
+          <div class="definition">
+            Квадратная матрица размера $n$, элементы которой равны нулю везде,
+            кроме позиций $(1,1), (2,2), \dots, (n,n)$, называют <i>диагональной</i>.
+            <br/>
+            Диагональная матрица $D$ с диагональными элементами $d_1, \dots, d_n$
+            обозначается как $\diag (d_1, d_2, \dots, d_n)$.
+          </div>
+
+          <div class="definition">
+            Матрица, составленная из элементов, находящихся на пересечении
+            нескольких выбранных строк и столбцов матрицы $A$, называется
+            <i>субматрицей</i> для матрицы $A$.
+            <br/>
+            Если $\alpha_1 \lt \alpha_2 \lt \dots \lt \alpha_k$ и
+            $\beta_1 \lt \beta_2 \lt \dots \lt \beta_l$ &mdash; номера соответственно
+            выбранных строк и столбцов, то соответствующая субматрица имеет вид
+            \[
+            \begin{pmatrix}
+            a_{\alpha_1 \beta_1} & a_{\alpha_1 \beta_2} & \dots & a_{\alpha_1 \beta_l} \\
+            a_{\alpha_2 \beta_1} & a_{\alpha_2 \beta_2} & \dots & a_{\alpha_2 \beta_l} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            a_{\alpha_k \beta_1} & a_{\alpha_k \beta_2} & \dots & a_{\alpha_k \beta_l}
+            \end{pmatrix}.
+            \]
+          </div>
+
+          <div class="definition">
+            <i>Произведение</i> матрицы $A$ на некоторое число $c$ определяется как
+            \[
+            cA =
+            \begin{pmatrix}
+            c a_{11} & c a_{12} & \dots & c a_{1m} \\
+            c a_{21} & c a_{22} & \dots & c a_{2m} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            c a_{n1} & c a_{n2} & \dots & c a_{nm}
+            \end{pmatrix}.
+            \]
+          </div>
+
+          <div class="definition">
+            Если матрицы $A$ и $B$ имеют одинаковый размер $(n, m)$, то
+            для них можно определить <i>сложение</i>:
+            \[
+            A + B =
+            \begin{pmatrix}
+            a_{11} + b_{11} & a_{12} + b_{12} & \dots & a_{1m} + b_{1m} \\
+            a_{21} + b_{21} & a_{22} + b_{22} & \dots & a_{2m} + b_{2m} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            a_{n1} + b_{n1} & a_{n2} + b_{n2} & \dots & a_{nm} + b_{nm}
+            \end{pmatrix}.
+            \]
+          </div>
+
+          Свойства введённых операций:
+          <ol>
+            <li>
+              $(A + B) + C = A + (B + C)$;
+            </li>
+
+            <li>
+              $A + B = B + A$;
+            </li>
+
+            <li>
+              пусть $\Theta$ &mdash; матрица, состоящая из нулей, тогда $A + \Theta = A$;
+            </li>
+
+            <li>
+              для любой матрицы $A$ существует противоположная матрица $-A$ такая, что
+              $A + (-A) = \Theta$.
+            </li>
+
+            <li>
+              $(c_1 + c_2) A = c_1 A + c_2 A$;
+            </li>
+
+            <li>
+              $c (A + B) = c A + c B$;
+            </li>
+
+            <li>
+              $c_1 (c_2 A) = (c_1 c_2) A$;
+            </li>
+
+            <li>
+              $1 \cdot A = A$.
+            </li>
+          </ol>
+
+          <div class="definition">
+            Для матриц $A$ и $B$ размера $(n, k)$ и $(k, m)$ соответственно, можно
+            ввести операцию <i>умножения</i>:
+            \[
+            AB = C,
+            \]
+            где $C$ &mdash; матрица размера $(n, m)$, элементы которой определяются
+            по формуле
+            \[
+            c_{ij} = \sum\limits_{\alpha=1}^{k} a_{1 \alpha} b_{\alpha 1}.
+            \]
+          </div>
+
+          <div class="remark">
+            Заметим, что произведение матриц не является в общем случае коммутативной
+            операцией (даже в том случае, когда $AB$ и $BA$ определены, то есть когда
+            $n = m$).
+          </div>
+
+          <div class="definition">
+            Матрицы $A$ и $B$, для которых $AB = BA$, называют <i>коммутирующими</i>.
+          </div>
+
+          Свойства произведения матриц:
+          <ol>
+            <li>
+              $(cA) B = c (AB)$;
+            </li>
+
+            <li>
+              $(A_1 + A_2) B = A_1 B + A_2 B$;
+            </li>
+
+            <li>
+              $A (B_1 + B_2) = A B_1 + A B_2$;
+            </li>
+
+            <li>
+              $(AB) C = A (BC)$.
+            </li>
+          </ol>
+
+          <div class="definition">
+            Матрица $E_n = \diag (\underbrace{1, \dots, 1}_{n})$, называется
+            <i>единичной матрицей размера $n$</i>.
+            <br/>
+            Зачастую (если порядок матрицы ясен из контекста) вместо
+            $E_n$ записывают просто $E$.
+          </div>
+
+          <div class="remark">
+            Из правила умножения матриц сразу следует, что $AE = A$ и $EA = A$.
+          </div>
+
+          <div class="definition">
+            Операция, при которой строки матрицы $A$ меняются местами
+            со столбцами, называют <i>транспонированием</i> матрицы
+            $A$ и обозначают как $A^T$. Так, если
+            \[
+            A =
+            \begin{pmatrix}
+            a_{11} & a_{12} & \dots & a_{1m} \\
+            a_{21} & a_{22} & \dots & a_{2m} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            a_{n1} & a_{n2} & \dots & a_{nm}
+            \end{pmatrix},
+            \]
+            то
+            \[
+            A^T =
+            \begin{pmatrix}
+            a_{11} & a_{21} & \dots & a_{n1} \\
+            a_{12} & a_{22} & \dots & a_{n2} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            a_{1m} & a_{2m} & \dots & a_{nm}
+            \end{pmatrix}.
+            \]
+          </div>
+
+          Свойства операции транспонирования:
+          <ol>
+            <li>
+              $(A^T)^T = A$;
+            </li>
+
+            <li>
+              $(A + B)^T = A^T + B^T$;
+            </li>
+
+            <li>
+              $(cA)^T = c A^T$;
+            </li>
+
+            <li>
+              $(AB)^T = B^T A^T$.
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение определителя. Определитель: элементарные свойства
+        </div>
+        <div class="content">
+          Для начала рассмотрим некоторые свойства совокупности перестановок чисел
+          $1, \dots, n$.
+
+          <div class="proposition">
+            Число всех перестановок $n$ элементов равно $n! = 1 \cdot 2 \cdots n$.
+          </div>
+
+          <div class="definition">
+            Пусть $(\alpha_1, \dots, \alpha_n)$ &mdash; некоторая перестановка
+            чисел $1, \dots, n$. Будем говорить, что пара элементов
+            $(\alpha_i, \alpha_j), \; i \lt j$, образует <i>инверсию</i>,
+            если $\alpha_i \gt \alpha_j$.
+          </div>
+
+          <div class="definition">
+            Число всех пар элементов, образующих инверсию, называют <i>числом инверсий</i>
+            в перестановке и обозначают как $\inv (\alpha_1, \dots, \alpha_n)$.
+            <br/>
+            Перестановки, содержащие чётное количество инверсий, называются <i>чётными</i>,
+            содержащие нечётное число инверсий &mdash; <i>нечётными</i>.
+          </div>
+
+          <div class="definition">
+            <i>Определителем</i> квадратной матрицы называется алгебраическая
+            сумма всевозможных произведений элементов этой матрицы, взятых
+            по одному из каждой строки и по одному из каждого столбца.
+            Сомножители в каждом слагаемом записываются в порядке следования
+            строк, тогда номера столбцов образуют перестановки; слагаемые,
+            соответствующие чётным перестановкам, берутся со знаком &laquo;плюс&raquo,
+            соответствующие нечётным &mdash; со знаком &laquo;минус&raquo;.
+
+            <p>
+              Определитель матрицы $A$ обозначают как
+              \[
+              \det A =
+              \begin{vmatrix}
+              a_{11} & a_{12} & \dots & a_{1n} \\
+              a_{21} & a_{22} & \dots & a_{2n} \\
+              \vdots & \vdots & \ddots & \vdots \\
+              a_{n1} & a_{n2} & \dots & a_{nn}
+              \end{vmatrix}
+              =
+              \sum\limits_{(\alpha_1, \dots, \alpha_n)}^{}
+              (-1)^{\inv(\alpha_1, \dots, \alpha_n)}
+              a_{1 \alpha_1} a_{2 \alpha_2} \cdots a_{n \alpha_n},
+              \]
+              где $(\alpha_1, \dots, \alpha_n)$ пробегает все перестановки чисел
+              $1, \dots, n$.
+            </p>
+          </div>
+
+          Свойства определителей:
+          <ol>
+            <li>
+              слагаемое $a_{\alpha_1 \beta_1} a_{\alpha_2 \beta_2} \cdots a_{\alpha_n \beta_n}$,
+              где $(\alpha_1, \dots, \alpha_n)$ и $(\beta_1, \dots, \beta_n)$ &mdash;
+              некоторые перестановки чисел $1, \dots, n$, входит в определитель
+              со знаком
+              \[
+              {(-1)}^{\inv(\alpha_1, \dots, \alpha_n) + \inv (\beta_1, \dots, \beta_n)};
+              \]
+            </li>
+
+            <li>
+              $\det A^T = \det A$;
+            </li>
+
+            <li>
+              справедливо равенство:
+              \[
+              \begin{vmatrix}
+              a_{11} & \dots & a_{1n} \\
+              \dots & \dots & \dots \\
+              b_{i1} + c_{i1} & \dots & b_{in} + c_{in} \\
+              \dots & \dots & \dots \\
+              a_{n1} & \dots & a_{nn}
+              \end{vmatrix}
+              =
+              \begin{vmatrix}
+              a_{11} & \dots & a_{1n} \\
+              \dots & \dots & \dots \\
+              b_{i1} & \dots & b_{in} \\
+              \dots & \dots & \dots \\
+              a_{n1} & \dots & a_{nn}
+              \end{vmatrix}
+              +
+              \begin{vmatrix}
+              a_{11} & \dots & a_{1n} \\
+              \dots & \dots & \dots \\
+              c_{i1} & \dots & c_{in} \\
+              \dots & \dots & \dots \\
+              a_{n1} & \dots & a_{nn}
+              \end{vmatrix};
+              \]
+            </li>
+
+            <li>
+              если все элементы какой-либо строки имеют общий множитель, то этот
+              множитель можно вынести за знак определителя:
+              \[
+              \begin{vmatrix}
+              a_{11} & \dots & a_{1n} \\
+              \dots & \dots & \dots \\
+              m a_{i1} & \dots & m a_{in} \\
+              \dots & \dots & \dots \\
+              a_{n1} & \dots & a_{nn}
+              \end{vmatrix}
+              =
+              m
+              \begin{vmatrix}
+              a_{11} & \dots & a_{1n} \\
+              \dots & \dots & \dots \\
+              a_{i1} & \dots & a_{in} \\
+              \dots & \dots & \dots \\
+              a_{n1} & \dots & a_{nn}
+              \end{vmatrix};
+              \]
+            </li>
+
+            <li>
+              определитель с двумя пропорциональными строками равен нулю;
+            </li>
+
+            <li>
+              если в матрице заменить местами две строки, то определитель изменит
+              знак на обратный:
+              \[
+              \begin{vmatrix}
+              a_{11} & \dots & a_{1n} \\
+              \dots & \dots & \dots \\
+              a_{i1} & \dots & a_{in} \\
+              \dots & \dots & \dots \\
+              a_{j1} & \dots & a_{jn} \\
+              \dots & \dots & \dots \\
+              a_{n1} & \dots & a_{nn}
+              \end{vmatrix}
+              =
+              -
+              \begin{vmatrix}
+              a_{11} & \dots & a_{1n} \\
+              \dots & \dots & \dots \\
+              a_{j1} & \dots & a_{jn} \\
+              \dots & \dots & \dots \\
+              a_{i1} & \dots & a_{in} \\
+              \dots & \dots & \dots \\
+              a_{n1} & \dots & a_{nn}
+              \end{vmatrix};
+              \]
+            </li>
+
+            <li>
+              определитель не меняется, если к какой-либо его строке добавить
+              числа, пропорциональные другой строке:
+              \[
+              \begin{vmatrix}
+              a_{11} & \dots & a_{1n} \\
+              \dots & \dots & \dots \\
+              a_{i1} & \dots & a_{in} \\
+              \dots & \dots & \dots \\
+              a_{j1} & \dots & a_{jn} \\
+              \dots & \dots & \dots \\
+              a_{n1} & \dots & a_{nn}
+              \end{vmatrix}
+              =
+              \begin{vmatrix}
+              a_{11} & \dots & a_{1n} \\
+              \dots & \dots & \dots \\
+              a_{i1} & \dots & a_{in} \\
+              \dots & \dots & \dots \\
+              a_{j1} + m a_{i1} & \dots & a_{jn} + m a_{in} \\
+              \dots & \dots & \dots \\
+              a_{n1} & \dots & a_{nn}
+              \end{vmatrix};
+              \]
+            </li>
+          </ol>
+
+          <div class="definition">
+            <i>Минором</i> называют определитель субматрицы матрицы $A$, полученной
+            вычёркиванием одной или нескольких строк и столбцов.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема Кронекера&dash;Капелли. Общее решение системы линейных уравнений
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Линейной комбинацией</i> векторов $x_1, \dots, x_n$ называется вектор
+            $c_1 x_1 + c_2 x_2 + \dots + c_n x_n$, где $c_1, \dots, c_n$ &mdash;
+            некоторые коэффициенты.
+          </div>
+
+          <div class="definition">
+            Совокупность векторов $x_1, \dots, x_n$ называют <i>линейно зависимой</i>,
+            если существует набор коэффициентов $c_1, \dots, c_n$, не обращающихся
+            в ноль одновременно, такой, что
+            \[
+            c_1 x_1 + \dots + c_n x_n = 0.
+            \]
+            Если такой набор не существует, то совокупность называют
+            <i>линейно независимой</i>.
+          </div>
+
+          <div class="definition">
+            <i>Рангом</i> матрицы $A$ размера $(n, m)$ называют максимальное количество
+            линейно независимых строк или столбцов.
+          </div>
+
+          <div class="theorem">
+            Для линейной зависимости множества строк квадратной матрицы необходимо
+            и достаточно обращение в ноль её определителя.
+          </div>
+
+          <p>
+            Рассмотрим неоднородную систему линейных уравнений
+            \[
+            \begin{aligned}
+            a_{11} x_1 + \dots + a_{1n} x_n &= b_1, \\
+            \dots & \\
+            a_{m1} x_1 + \dots + a_{mn} x_n &= b_m.
+            \end{aligned}
+            \]
+            Рассмотрим две матрицы: матрицу коэффициентов
+            \[
+            \begin{pmatrix}
+            a_{11} & \dots & a_{1n} \\
+            \dots & \dots & \dots \\
+            a_{m1} & \dots & a_{mn}
+            \end{pmatrix}
+            \]
+            и <i>расширенную матрицу</i>
+            \[
+            \begin{pmatrix}
+            a_{11} & \dots & a_{1n} & b_1 \\
+            \dots & \dots & \dots & \dots \\
+            a_{m1} & \dots & a_{mn} & b_m
+            \end{pmatrix}.
+            \]
+          </p>
+
+          <div class="theorem">
+            (Кронекера&dash;Капелли).
+            <br/>
+            Для того чтобы система линейных уравнений была совместна,
+            необходимо и достаточно, чтобы ранг матрицы коэффициентов
+            был равен рангу расширенной матрицы.
+          </div>
+
+          <hr/>
+
+          Рассмотрим систему линейных однородных уравнений
+          \[
+          \begin{aligned}
+          a_{11} x_1 + \dots + a_{1n} x_n &= 0, \\
+          \dots & \\
+          a_{m1} x_1 + \dots + a_{mn} x_n &= 0.
+          \end{aligned}
+          \]
+          Представим её в матричном виде:
+          \[
+          A x = 0.
+          \]
+
+          <div class="proposition">
+            Если столбцы $z_1, \dots, z_k$ &mdash; решения системы $Ax = 0$,
+            то любая их линейная комбинация $c_1 z_1 + \dots + c_k z_k$ также
+            является решением этой системы.
+          </div>
+
+          <div class="theorem">
+            Все решения линейной однородной системы являются линейными комбинациями
+            линейно независимых $n-r$ решений, где $n$ &mdash; число неизвестных, а
+            $r$ &mdash; ранг матрицы коэффициентов.
+          </div>
+
+          <div class="definition">
+            Пусть $z_{r+1}, \dots, z_n$ &mdash; такие линейно независимые решения,
+            что все решения являются их линейными комбинациями. Такую совокупность
+            решений называют <i>базисной</i> или <i>фундаментальной</i>, а их
+            линейную комбинацию называют <i>общим решением</i>.
+          </div>
+
+          <div class="theorem">
+            Общее решение неоднородной системы $Ax = b$ равно сумме частного решения
+            этой системы и общего решения однородной системы $Ax = 0$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Собственные числа и собственные векторы матриц
+        </div>
+        <div class="content">
+          <div class="definition">
+            Рассмотрим матрицу $A$. Если для некоторого $\lambda \in
+            \mathbb{R}$ существует такой вектор $x \neq 0$, что справедливо
+            равенство
+            \[
+            \tag{*}
+            A x = \lambda x,
+            \]
+            то вектор $x$ называют <i>собственным вектором</i> матрицы
+            $A$, а соответствующее ему число $\lambda$ &mdash;
+            <i>собственным числом</i>.
+          </div>
+
+          Перенося правую часть равенства $(*)$ налево и пользуясь свойством
+          произведения матриц, получаем следующее эквивалентное матричное равенство:
+          \[
+          (A - \lambda E) x = 0.
+          \]
+
+          Известно, что для существования нетривиальных решений полученной системы
+          необходимо и достаточно, чтобы определитель этой системы был равен нулю:
+          \[
+          \det (A - \lambda E) = 0.
+          \]
+
+          <div class="definition">
+            Уравнение
+            \[
+            \det (A - \lambda E) = 0
+            \]
+            называют <i>характеристическим уравнением</i> матрицы $A$, а его левую
+            часть &mdash; <i>характеристическим полиномом</i>
+            (его обозначают как $p(\lambda)$ или $p_A(\lambda)$).
+          </div>
+
+          Таким образом, каждое собственное число матрицы $A$ является корнем полинома
+          $p(\lambda)$. И наоборот, каждый корень полинома $p(\lambda)$ является
+          собственным числом матрицы $A$.
+
+          <p>
+            Отсюда следует, что квадратная матрица $A$ имеет не более чем $n$
+            различных собственных чисел.
+          </p>
+
+          <div class="theorem">
+            (Гамильтона&dash;Кэли).
+            <br/>
+            Всякая квадратная матрица $A$ удовлетворяет своему характеристическому
+            уравнению, то есть
+            \[
+            p(A) = 0.
+            \]
+          </div>
+
+          <div class="proposition">
+            Если $x_1, \dots, x_k$ &mdash; собственные векторы матрицы
+            $A$, соответствующие собственному числу $\lambda$, то их линейная
+            комбинация $c_1 x_1 + \dots + c_k x_k$ либо равна нулю, либо
+            также является собственным вектором матрицы $A$, соответствующим
+            тому же собственному числу $\lambda$.
+          </div>
+
+          <div class="lemma">
+            Собственные векторы, соответствующие попарно различным
+            собственным числам, линейно независимы.
+          </div>
+
+          <div class="definition">
+            <i>Следом</i> матрицы $A$ называют сумму её диагональных элементов:
+            \[
+            \Sp A = \sum\limits_{i=1}^{n} a_{ii}.
+            \]
+          </div>
+
+          <div class="proposition">
+            Пусть $\lambda_1, \dots, \lambda_n$ &mdash; собственные числа матрицы $A$,
+            тогда справедливо равенство:
+            \[
+            \Sp A = \sum\limits_{i=1}^{n} \lambda_i.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Непрерывные функции. Определение, свойства
+        </div>
+        <div class="content">
+          Рассмотрим функцию $f(x)$, определённую в некоторой окрестности
+          точки $x_0$. Будем считать, что точка $x_0$ также принадлежит области
+          определения функции $f(x)$.
+
+          <div class="definition">
+            Говорят, что функция $f(x)$ <i>непрерывна в точке $x = x_0$</i>,
+            если выполняется соотношение
+            \[
+            \lim\limits_{x \to x_0} f(x) = f(x_0).
+            \]
+            Если это соотношение нарушено, то говорят, что в этой точке функция
+            имеет разрыв.
+          </div>
+
+          На языке $\varepsilon-\delta$:
+          <div class="definition">
+            Говорят, что функция $f(x)$ <i>непрерывна в точке $x = x_0$</i>,
+            если для любого $\varepsilon \gt 0$ существует $\delta =
+            \delta(\varepsilon) \gt 0$ такое, что из неравенства
+            \[
+            \abs{x - x_0} \lt \delta
+            \quad \mbox{следует}
+            \quad \abs{f(x) - f(x_0)} \lt \varepsilon.
+            \]
+          </div>
+
+          <div class="remark">
+            Если функция $f(x)$ определена в точке $x = x_0$, но предел
+            $\lim\limits_{x \to x_0} f(x)$ не существует, то всё же говорят, что
+            функция в этой точке терпит разрыв.
+          </div>
+
+          <div class="definition">
+            Говорят, что функция $f(x)$, определённая на промежутке $X$ и непрерывная
+            в каждой точке $x \in X$, является <i>непрерывной в $X$</i>.
+          </div>
+
+          <div class="theorem">
+            Если функции $f(x)$ и $g(x)$ определены в промежутке $X$ и непрерывны
+            в точке $x_0$, то в этой же точке будут непрерывны и функции
+            \[
+            f(x) \pm g(x), \qquad f(x) \cdot g(x), \qquad \frac{f(x)}{g(x)}
+            \]
+            (последняя при условии, что $g(x_0) \neq 0$).
+          </div>
+
+          <div class="theorem">
+            (Первая теорема Больцано-Коши).
+            <br/>
+            Пусть функция $f(x)$ определена и непрерывна в замкнутом промежутке $[a,b]$
+            и на концах этого промежутка принимает значения разных знаков. Тогда
+            найдётся точка $c \in [a,b]$, в которой функция обращается в ноль:
+            \[
+            f(c) = 0.
+            \]
+          </div>
+
+          <div class="lemma">
+            Если функция $f(x)$ непрерывна в точке $x = x_0$ и
+            значение $f(x_0) \neq 0$, то для всех достаточно близких к
+            $x_0$ значений $x$ функция $f(x)$ сохраняет тот же знак,
+            какой она имеет в точке $x_0$.
+          </div>
+
+          <div class="theorem">
+            (Вторая теорема Больцано-Коши).
+            <br/>
+            Пусть функция $f(x)$ определена и непрерывна в некотором промежутке
+            $X$. Если в двух точках $x = a$ и $x = b$ ($a \lt b$) этого промежутка
+            функция принимает неравные значения
+            \[
+            f(a) = A \quad \mbox{и} \quad f(b) = B,
+            \]
+            то для любого числа $C \in [A,B]$ найдётся точка $c \in [a,b]$ такая,
+            что
+            \[
+            f(c) = C.
+            \]
+          </div>
+
+          <div class="theorem">
+            Пусть функция $y = f(x)$ определена, монотонно возрастает (убывает)
+            и непрерывна в некотором промежутке $X$. Тогда в соответствующем
+            промежутке $Y$ значений этой функции существует однозначная
+            обратная функция $x = g(y)$, также монотонно возрастающая (убывающая)
+            и непрерывная.
+          </div>
+
+          <div class="theorem">
+            (Первая теорема Вейерштрасса).
+            <br/>
+            Если функция $f(x)$ определена и непрерывна в замкнутом промежутке $[a,b]$,
+            то она ограничена: существуют постоянные конечные константы $m$ и $M$ такие,
+            что
+            \[
+            m \leqslant f(x) \leqslant M \qquad \forall x \in [a,b].
+            \]
+          </div>
+
+          <div class="theorem">
+            (Вторая теорема Вейерштрасса).
+            <br/>
+            Если функция $f(x)$ определена и непрерывна в замкнутом промежутке $[a,b]$,
+            то она достигает в этом промежутке своих точных верхней и нижней границ.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Производная функции. Непрерывность дифференцируемой функции
+        </div>
+        <div class="content">
+          Пусть функция $y = f(x)$ определена в промежутке $X$. Рассмотрим
+          некоторое значение $x = x_0 \in X$, которому придадим приращение $\Delta x$
+          так, чтобы $x_0 + \Delta x \in X$. Тогда значение $y = f(x_0)$ заменится
+          на новое значение $y + \Delta y = f(x_0 + \Delta x)$, то есть получит
+          приращение
+          \[
+          \Delta y = \Delta f(x_0) = f(x_0 + \Delta x) - f(x_0).
+          \]
+
+          <div class="definition">
+            Предел отношения приращения функции $\Delta y$ к приращению аргумента
+            $\Delta x$ при стремлении $\Delta x$ к нулю, то есть
+            \[
+            \lim\limits_{\Delta x \to 0} \frac{\Delta y}{\Delta x}
+            =
+            \lim\limits_{\Delta x \to 0} \frac{f(x_0 + \Delta x) - f(x_0)}{\Delta x},
+            \]
+            называется <i>производной</i> функции $y = f(x)$ в точке $x = x_0$.
+          </div>
+
+          <div class="remark">
+            Геометрический смысл производной: угловой коэффициент касательной к кривой
+            $y = f(x)$ имеет вид
+            \[
+            \tg \alpha = \frac{dy}{dx}.
+            \]
+          </div>
+
+          <div class="proposition">
+            Если функция $y = f(x)$ имеет в точке $x_0$ конечную производную, то
+            в этой точке функция непрерывна.
+          </div>
+
+          Свойства производной:
+          <ol>
+            <li>
+              $(c f(x))' = c f'(x)$;
+            </li>
+
+            <li>
+              $(f(x) \pm g(x))' = f'(x) \pm g'(x)$;
+            </li>
+
+            <li>
+              $(f(x) \cdot g(x))' = f'(x) g(x) + f(x) g'(x)$;
+            </li>
+
+            <li>
+              $\left( \dfrac{f(x)}{g(x)} \right)' = \dfrac{f'(x) g(x) - f(x) g'(x)}{g^2(x)}$;
+            </li>
+          </ol>
+
+          <div class="proposition">
+            (производная сложной функции).
+            <br/>
+            Пусть
+            <ol>
+              <li>
+                функция $u = f(x)$ имеет в некоторой точке $x_0$
+                производную $u_x' = f'(x)$,
+              </li>
+
+              <li>
+                функция $y = g(u)$ имеет в соответствующей точке
+                $u_0 = f(x_0)$ производную $y_u' = g'(u)$.
+              </li>
+            </ol>
+
+            Тогда сложная функция $y = g(f(x))$ в точке $x_0$ имеет производную
+            \[
+            \left[ g(f(x)) \right]' = g_u'(f(x_0)) \cdot f_x'(x_0),
+            \]
+            или
+            \[
+            y_x' = y_u' \cdot u_x'.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Понятие неопределённого интеграла. Формула интегрирования по частям
+        </div>
+        <div class="content">
+          <div class="definition">
+            Функция $F(x)$ в заданном промежутке $X$ называется
+            <i>первообразной функцией</i> для функции $f(x)$ или интегралом от $f(x)$,
+            если во всём этом промежутке $f(x)$ является производной для функции
+            $F(x)$:
+            \[
+            F'(x) = f(x).
+            \]
+          </div>
+
+          <div class="theorem">
+            Если в некотором (конечном или бесконечном) промежутке $X$ функция
+            $F(x)$ является первообразной для функции $f(x)$, то и функция
+            $F(x) + C$, где $C$ &mdash; любая постоянная, также будет первообразной.
+          </div>
+
+          <div class="definition">
+            Выражение $F(x) + C$ представляет собой общий вид функции, которая имеет
+            производную $f(x)$. Это выражение называется <i>неопределённым интегралом</i>
+            функции $f(x)$ и обозначается как
+            \[
+            \int\limits_{}^{} f(x) dx.
+            \]
+          </div>
+
+          Свойства неопределённого интеграла:
+          <ol>
+            <li>
+              $\displaystyle d \int\limits_{}^{} f(x) dx = f(x) dx$;
+            </li>
+
+            <li>
+              так как $F(x)$ &mdash; первообразная функции $f(x)$, то
+              \[
+              \int\limits_{}^{} F'(x) dx = F(x) + C,
+              \]
+              или
+              \[
+              \int\limits_{}^{} d F(x) = F(x) + C;
+              \]
+            </li>
+
+            <li>
+              если функция $f(x)$ непрерывна в $X$, то она в нём имеет первообразную.
+            </li>
+          </ol>
+
+          Правила интегрирования:
+          <ol>
+            <li>
+              $\displaystyle \int\limits_{}^{} a f(x) dx = a \int\limits_{}^{} f(x) dx$;
+            </li>
+
+            <li>
+              $\displaystyle \int\limits_{}^{} \left[ f(x) \pm g(x) \right] dx
+              = \int\limits_{}^{} f(x) dx \pm \int\limits_{}^{} g(x) dx$;
+            </li>
+
+            <li>
+              если
+              \[
+              \int\limits_{}^{} g(t) dt = G(t) + C,
+              \]
+              то
+              \[
+              \int\limits_{}^{} g(\omega(x)) \omega'(x) dx = G(\omega(x)) + C
+              \]
+              (считаем, что $g(t), \omega(x), \omega'(x)$ непрерывны)
+            </li>
+
+            <li>
+              (формула интегрирования по частям).
+              <br/>
+              Пусть $u = f(x)$ и $v = g(x)$ &mdash; две функции, имеющие
+              непрерывные производные $u' = f'(x)$ и $v' = g'(x)$. Тогда
+              справедлива формула
+              \[
+              \int\limits_{}^{} u dv = uv - \int\limits_{}^{} v du.
+              \]
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Степенные ряды. Радиус сходимости степенного ряда
+        </div>
+        <div class="content">
+          <div class="definition">
+            Ряд вида
+            \[
+            \sum\limits_{n=0}^{\infty} a_n x^n
+            = a_0 + a_1 x + a_2 x^2 + \dots + a_n x^n + \dots
+            \]
+            называют <i>степенным</i>.
+          </div>
+
+          <div class="lemma">
+            Если степенной ряд сходится для значения $x = \overline x \neq 0$, то он
+            абсолютно сходится для любого значения $x$, удовлетворяющего неравенству
+            \[
+            \abs{x} \lt \abs{\overline x}.
+            \]
+          </div>
+
+          <div class="proposition">
+            Для каждого степенного ряда (если только он не является всюду расходящимся),
+            &laquo;область сходимости&raquo; $X$ представляет собой сплошной промежуток
+            от $-R$ то $R$ (со включением концов или нет), причём:
+            <ul>
+              <li>
+                если $x \in (-R, R)$, то ряд сходится абсолютно;
+              </li>
+
+              <li>
+                если $x \lt -R$ или $x \gt R$, то ряд расходится;
+              </li>
+
+              <li>
+                если $x = \pm R$, то общего утверждения сделать нельзя &mdash; может
+                иметь место как сходимость, так и расходимость.
+              </li>
+            </ul>
+          </div>
+
+          <div class="definition">
+            Промежуток $(-R, R)$ называют <i>промежутком сходимости</i>, а число
+            $R$ ($0 \lt R \leqslant +\infty$) &mdash; <i>радиусом сходимости</i> ряда.
+          </div>
+
+          <p>
+            Рассмотрим последовательность
+            \[
+            \rho_1 = \abs{a_1}, \quad \rho_2 = \sqrt{\abs{a_2}},
+            \quad \dots, \quad \rho_n = \sqrt[n]{\abs{a_n}}, \quad \dots
+            \]
+            Обозначим через $\rho$ её наибольший предел:
+            \[
+            \rho
+            = \overline{\lim\limits_{n \to \infty}} \rho_n
+            = \overline{\lim\limits_{n \to \infty}} \sqrt[n]{\abs{a_n}}.
+            \]
+          </p>
+
+          <div class="theorem">
+            (Коши-Адамара).
+            <br/>
+            Радиус сходимости степенного ряда есть величина, обратная наибольшему
+            пределу $\rho$, то есть
+            \[
+            R = \frac{1}{\rho};
+            \]
+            при этом, если $\rho = 0$, то $R = +\infty$;
+            если $\rho = +\infty$, то $R = 0$.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Линейные пространства. Основные определения (линейной независимости, базиса,
+          размерности пространства, подпространства)
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Векторным (линейным) пространством</i> $V$ над полем $F$ называют
+            систему математических объектов, в которой определено действие сложения
+            и умножения на элементы поля $F$, причём справедливы следующие
+            свойства:
+            <ol>
+              <li>
+                $(x + y) + z = x + (y + z)$, где $x,y,z \in V$;
+              </li>
+
+              <li>
+                $x + y = y + x$;
+              </li>
+
+              <li>
+                существует элемент 0, нейтральный относительно сложения, то есть
+                $x + 0 = 0 + x = x$ для всех $x \in V$;
+              </li>
+
+              <li>
+                для любого элемента $x \in V$ существует элемент
+                $-x \in V$, противоположный данному: $x + (-x) = 0$;
+              </li>
+
+              <li>
+                $(\alpha + \beta) x = \alpha x + \beta x$,
+                где $x \in V, \; \alpha, \beta \in F$;
+              </li>
+
+              <li>
+                $\alpha (x + y) = \alpha x + \alpha y$;
+              </li>
+
+              <li>
+                $\alpha (\beta x) = (\alpha \beta) x$;
+              </li>
+
+              <li>
+                существует элемент $1$, нейтральный относительно умножения на элемент
+                поля $F$: $1 \cdot x = x$ для всех $x \in V$.
+              </li>
+            </ol>
+
+            Элементы множества $V$ называют <i>векторами</i>, а поля
+            $F$ &mdash; <i>числами</i> или <i>скалярами</i>.
+          </div>
+
+          <div class="definition">
+            <i>Линейной комбинацией</i> векторов $x_1, \dots, x_n \in V(F)$ называется
+            вектор $c_1 x_1 + \dots + c_n x_n$ при $c_i \in F$.
+          </div>
+
+          <div class="definition">
+            Совокупность векторов $(x_1, \dots, x_n$ называется <i>линейно независимой</i>,
+            если равенство
+            \[
+            c_1 x_1 + c_2 x_2 + \dots + c_n x_n = 0
+            \]
+            возможно только при $c_1 = c_2 = \dots = c_n = 0$.
+
+            <p>
+              Если же существуют не равные одновременно нулю $c_i$, при которых
+              \[
+              c_1 x_1 + c_2 x_2 + \dots + c_n x_n = 0,
+              \]
+              то совокупность векторов называют <i>линейно зависимой</i>.
+            </p>
+          </div>
+
+          <div class="definition">
+            Совокупность векторов называется <i>порождающей</i>, если все
+            векторы пространства $V$ являются их линейными комбинациями.
+          </div>
+
+          <div class="definition">
+            Если для $V$ существует конечная порождающая совокупность векторов,
+            то пространство $V$ называют <i>конечномерным</i>, иначе
+            &mdash; <i>бесконечномерном</i>.
+          </div>
+
+          <div class="proposition">
+            Любая минимальная (по числу векторов) порождающая совокупность
+            является линейно независимой.
+          </div>
+
+          <div class="definition">
+            Минимальная порождающая совокупность векторов называется
+            <i>базисом</i>, а число векторов, составляющих базис,
+            называется <i>размерностью</i> пространства $V$ (её
+            обозначают как $\dim V$).
+          </div>
+
+          <div class="definition">
+            <i>Подпространством</i> $P$ $n$-мерного пространства $V$
+            называется множество векторов, образующих векторное пространство
+            по отношению к действиям, которые определены в $V$.
+          </div>
+
+          <p>
+            Заметим, что, $\dim P \leqslant \dim V$, причём если
+            $\dim P = \dim V = n$, то $P = V$.
+          </p>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определённый интеграл. Сумма Римана. Свойства определённого интеграла
+        </div>
+        <div class="content">
+          <p>
+            Пусть функция $f(x)$ задана в некотором промежутке $[a, b]$.
+            Разобьём этот промежуток на части, вставив точки деления:
+            \[
+            x_0 = a \lt x_1 \lt x_2 \lt \dots \lt x_n = b.
+            \]
+            Наибольшую из разностей $\Delta x_i = x_{i+1} - x_i$ будем обозначать
+            через $\lambda$.
+          </p>
+
+          <p>
+            Возьмём в каждом из промежутков $[x_i, x_{i+1}]$ произвольную точку
+            $x = \xi_i$ (то есть $x_i \leqslant \xi_i \leqslant x_{i+1}$) и составим
+            сумму
+            \[
+            \sigma = \sum\limits_{i=0}^{n-1} f(\xi_i) \Delta x_i.
+            \]
+          </p>
+
+          <p>
+            Говорят, что сумма $\sigma$ при $\lambda \to 0$ имеет (конечный) предел $I$,
+            если для любого $\varepsilon \gt 0$ существует $\delta \gt 0$ такое,
+            что если $\lambda \lt \delta$, то неравенство
+            \[
+            \abs{\sigma - I} \lt \varepsilon
+            \]
+            выполняется при любом выборе чисел $\xi_i$.
+          </p>
+
+          <p>
+            Этот факт записывают так: $I = \lim\limits_{\lambda \to 0} \sigma$.
+          </p>
+
+          <div class="definition">
+            Конечный предел $I$ суммы $\sigma$ при $\lambda \to 0$ называется
+            <i>определённым интегралом</i> функции $f(x)$ в промежутке $[a,b]$
+            и обозначается символом
+            \[
+            I = \int\limits_{a}^{b} f(x) dx;
+            \]
+            в случае существования этого предела функция $f(x)$
+            называется <i>интегрируемой</i> в промежутке $[a,b]$.
+          </div>
+
+          <div class="definition">
+            Сумму $\sigma$ называют <i>римановой (интегральной) суммой</i>.
+          </div>
+
+          Классы интегрируемых функций:
+          <ol>
+            <li>
+              если функция $f(x)$ непрерывна в $[a,b]$, то она интегрируема в $[a,b]$;
+            </li>
+
+            <li>
+              если ограниченная функция $f(x)$ имеет в $[a,b]$ лишь конечное число
+              точек разрыва, то она интегрируема;
+            </li>
+
+            <li>
+              монотонная ограниченная функция $f(x)$ всегда интегрируема.
+            </li>
+          </ol>
+
+          Свойства определённого интеграла:
+          <ol>
+            <li>
+              Если $f(x)$ интегрируема в промежутке $[a,b]$, то она интегрируема и
+              в промежутке $[b, a]$, причём
+              \[
+              \int\limits_{a}^{b} f(x) dx = - \int\limits_{b}^{a} f(x) dx.
+              \]
+              Кроме того,
+              \[
+              \int\limits_{a}^{a} f(x) dx = 0.
+              \]
+            </li>
+
+            <li>
+              Пусть функция $f(x)$ интегрируема в наибольшем из промежутков
+              $[a,b], [a,c]$ и $[c, b]$. Тогда она интегрируема в двух
+              других, причём
+              \[
+              \int\limits_{a}^{b} f(x) dx
+              = \int\limits_{a}^{c} f(x) dx + \int\limits_{c}^{b} f(x) dx.
+              \]
+            </li>
+
+            <li>
+              Если $f(x)$ интегрируема в $[a,b]$, то $k f(x)$ ($k = \const$) также
+              интегрируема в $[a,b]$, причём
+              \[
+              \int\limits_{a}^{b} k f(x) dx = k \int\limits_{a}^{b} f(x) dx.
+              \]
+            </li>
+
+            <li>
+              Если $f(x)$ и $g(x)$ интегрируемы в $[a,b]$, то $f(x) \pm g(x)$
+              также интегрируема в $[a,b]$, причём
+              \[
+              \int\limits_{a}^{b} \left[ f(x) \pm g(x) \right] dx
+              =
+              \int\limits_{a}^{b} f(x) dx + \int\limits_{a}^{b} g(x) dx.
+              \]
+            </li>
+
+            <li>
+              Если функция $f(x)$, интегрируемая в промежутке $[a,b]$,
+              неотрицательна и $a \lt b$, то
+              \[
+              \int\limits_{a}^{b} f(x) dx \geqslant 0.
+              \]
+              Если же $f(x)$ положительна, то
+              \[
+              \int\limits_{a}^{b} f(x) dx \gt 0.
+              \]
+            </li>
+
+            <li>
+              Если две функции $f(x)$ и $g(x)$ интегрируемы в $[a,b]$, $a \lt b$,
+              причём $f(x) \leqslant g(x)$ (или $f(x) \lt g(x)$), то
+              \[
+              \int\limits_{a}^{b} f(x) dx \leqslant \int\limits_{a}^{b} g(x) dx
+              \qquad \left(
+              \int\limits_{a}^{b} f(x) dx \lt \int\limits_{a}^{b} g(x) dx
+              \right).
+              \]
+            </li>
+
+            <li>
+              Пусть функция $f(x)$ интегрируема в $[a,b]$, $a \lt b$, тогда
+              \[
+              \abs{ \int\limits_{a}^{b} f(x) dx }
+              \leqslant
+              \int\limits_{a}^{b} \abs{f(x)} dx.
+              \]
+            </li>
+
+            <li>
+              Если $f(x)$ интегрируема в $[a,b]$, $a \lt b$, и если во всём
+              этом промежутке справедливо неравенство
+              \[
+              m \leqslant f(x) \leqslant M,
+              \]
+              то
+              \[
+              m (b - a) \leqslant \int\limits_{a}^{b} f(x) dx \leqslant M (b - a).
+              \]
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Выпуклость и вогнутость функции. Условие выпуклости и вогнутости функции
+        </div>
+        <div class="content">
+          <div class="definition">
+            Функция $f(x)$, определённая и непрерывная в промежутке $X$, называется
+            <i>выпуклой</i>, если для любых $x_1, x_2 \in X$ выполняется неравенство
+            \[
+            f(q_1 x_1 + q_2 x_2) \leqslant q_1 f(x_1) + q_2 f(x_2),
+            \]
+            где $q_1, q_2$ &mdash; положительные числа, в сумме равные единице.
+          </div>
+
+          <div class="definition">
+            Функция называется <i>вогнутой</i>, если справедливо неравенство
+            \[
+            f(q_1 x_1 + q_2 x_2) \geqslant q_1 f(x_1) + q_2 f(x_2).
+            \]
+          </div>
+
+          Свойства выпуклых функций.
+          <ol>
+            <li>
+              Произведение выпуклой функции на положительную
+              постоянную &mdash; выпуклая функция.
+            </li>
+
+            <li>
+              Сумма двух или нескольких выпуклых функций выпукла.
+            </li>
+
+            <li>
+              Если $g(u)$ &mdash; выпуклая возрастающая функция, а $u = f(x)$
+              выпукла, то и сложная функция $g(f(x))$ будет выпуклой.
+            </li>
+
+            <li>
+              Выпуклая в промежутке $X$ функция $f(x)$, отличная от постоянной,
+              не может достигать наибольшего значения внутри этого промежутка.
+            </li>
+          </ol>
+
+          <div class="theorem">
+            Пусть функция $f(x)$ определена и непрерывна в промежутке
+            $X$ и имеет в нём конечную производную $f'(x)$. Для того,
+            чтобы $f(x)$ была выпуклой в $X$, необходимо и достаточно,
+            чтобы её производная $f'(x)$ возрастала.
+          </div>
+
+          <div class="theorem">
+            Пусть функция $f(x)$ определена и непрерывна вместе со
+            своей производной $f'(x)$ в промежутке $X$ и имеет внутри
+            него конечную вторую производную $f''(x)$. Для выпуклости
+            функции $f(x)$ в $X$ необходимо и достаточно, чтобы внутри
+            $X$ выполнялось неравенство:
+            \[
+            f''(x) \geqslant 0.
+            \]
+            <br/>
+            Для вогнутости &mdash; условие
+            \[
+            f''(x) \leqslant 0.
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Понятие обыкновенного дифференциального уравнения 1-го порядка и его решения
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Обыкновенным дифференциальным уравнением 1-го порядка</i> называется
+            соотношение, связывающее искомую функцию, её аргумент и первую производную
+            от искомой функции. Такое соотношение можно записать в виде
+            \[
+            \tag{1}
+            F(x, y, y') = 0,
+            \]
+            где $y(x)$ &mdash; искомая функция.
+          </div>
+
+          <div class="definition">
+            Если уравнение $(1)$ можно переписать в виде
+            \[
+            \tag{2}
+            y' = f(x,y),
+            \]
+            то такое уравнение называют <i>уравнением, разрешённым
+            относительно производной</i> (уравнением в нормальной форме).
+          </div>
+
+          <p>
+            Пусть функция $f(x,y)$ в уравнении $(2)$ определена и непрерывна на некотором
+            множестве $D$ на плоскости $Oxy$.
+          </p>
+
+          <div class="definition">
+            <i>Решением</i> ОДУ 1-го порядка на интервале $(a,b)$ называется
+            функция $y = \varphi(x)$, которая
+            <ol>
+              <li>
+                определена и дифференцируема во всех точках указанного интервала;
+              </li>
+
+              <li>
+                удовлетворяет условию $(x, \varphi(x)) \in D$, если $x \in (a,b)$;
+              </li>
+
+              <li>
+                при подстановке в уравнение $(2)$ обращает его в тождество на $(a,b)$.
+              </li>
+            </ol>
+          </div>
+
+          <div class="definition">
+            Если решение уравнения получено в виде $y = \varphi(x)$, то говорят,
+            что решение записано <i>в явной форме</i>.
+          </div>
+
+          <div class="definition">
+            Соотношение $\psi(y,x) = 0$ называется <i>решением в неявной форме</i>,
+            если оно определяет неявную функцию $y = y(x)$, которая является
+            решением уравнения $(2)$.
+          </div>
+
+          <p>
+            Чтобы убедиться в том, что $\psi(y, x) = 0$ является решением уравнения
+            $(2)$, нужно посчитать полную производную в силу системы $(2)$:
+            \[
+            \pd{\psi}{x} + \pd{\psi}{y} f(x,y) = 0.
+            \]
+            Если это равенство выполнится в силу соотношения $\psi(y,x) = 0$,
+            то это действительно решение уравнения, записанное в неявной форме.
+          </p>
+
+          <div class="definition">
+            Решение уравнения $(2)$ может быть записано также в
+            <i>параметрической форме</i>, то есть в виде двух соотношений
+            \[
+            x = \varphi(t), \qquad y = \psi(t),
+            \]
+            которые на некотором интервале дают тождество
+            \[
+            \frac{\psi'(t)}{\varphi'(t)} \equiv f(\varphi(t), \psi(t)).
+            \]
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема о существовании и единственности решения задачи Коши
+          дифференциального уравнения 1-го порядка (теорема Пикара).
+          Условие Липшица. Примеры
+        </div>
+        <div class="content">
+          <p>
+            Рассмотрим уравнение в нормальной форме
+            \[
+            \tag{1}
+            y' = f(x, y).
+            \]
+            Будем считать, что функция $f(x,y)$ определена и непрерывна на некотором
+            множестве $D$ изменения переменных $x$ и $y$.
+          </p>
+
+          <p>
+            Рассмотрим некоторую точку $(x_0, y_0)$ этого множества и поставим задачу:
+            найти решение уравнения $(1)$, удовлетворяющее условию
+            \[
+            \tag{2}
+            y(x_0) = y_0.
+            \]
+          </p>
+
+          <div class="definition">
+            Числа $x_0$ и $y_0$ называются <i>начальными данными</i>,
+            условие $(2)$ &mdash; <i>начальным условием</i>, а задача
+            нахождения решения уравнения $(1)$, удовлетворяющего условию $(2)$
+            &mdash; <i>задачей Коши</i> (начальной задачей).
+          </div>
+
+          <div class="definition">
+            Будем говорить, что через точку $(x_0, y_0)$ проходит
+            единственное решение уравнения $(1)$, если существует положительное
+            число $\delta \gt 0$ такое, что для любых двух решений
+            $\varphi_1(x)$ и $\varphi_2(x)$ этого уравнения, удовлетворяющих условию
+            \[
+            \varphi_1(x_0) = \varphi_2(x_0) = y_0,
+            \]
+            на интервале $\abs{x - x_0} \lt \delta$ выполняется тождество
+            \[
+            \varphi_1(x) \equiv \varphi_2(x).
+            \]
+            <br/>
+            Точка $(x_0, y_0)$ называется при этом <i>точкой единственности</i>,
+            в противном случае &mdash; <i>точкой неединственности</i>.
+          </div>
+
+          <div class="definition">
+            Решение уравнения $(1)$ называется <i>частным решением</i>, если каждая
+            его точка является точкой единственности. Всякое частное решение
+            входит в общее при некотором значении произвольной константы $C$.
+          </div>
+
+          <div class="definition">
+            Решение уравнения $(1)$ называется <i>особым решением</i>, если
+            каждая его точка является точкой неединственности. Особое решение
+            не входит в общее решение ни при каком значении произвольной константы $C$.
+          </div>
+
+          <div class="theorem">
+            (Пеано, о существовании решения).
+            <br/>
+            Пусть функция $f(x,y)$ задана и непрерывна по $x$ и $y$ на множестве
+            \[
+            R = \left\{ (x,y):
+            \abs{x - x_0} \leqslant a, \;
+            \abs{y - y_0} \leqslant b, \; a, b \gt 0 \right\}.
+            \]
+            Тогда существует решение уравнения $(1)$, удовлетворяющее условию $(2)$,
+            и это решение определено по крайней мере на отрезке
+            $\abs{x - x_0} \leqslant h$, где
+            \[
+            h = \min\left\{ a, \frac{b}{M} \right\},
+            \qquad
+            M = \max_R \abs{f(x,y)}.
+            \]
+          </div>
+
+          <div class="theorem">
+            (Пикара, о существовании и единственности решения).
+            <br/>
+            Пусть функция $f(x,y)$ задана и непрерывна по $x$ и $y$ на множестве
+            \[
+            R = \left\{ (x,y):
+            \abs{x - x_0} \leqslant a, \;
+            \abs{y - y_0} \leqslant b, \; a, b \gt 0 \right\}
+            \]
+            и существует конечное число $l$ такое, что для любых двух точек
+            $(x, y_1)$ и $(x, y_2)$ из $R$ выполнено
+            <i class="important">условие Липшица</i>
+            \[
+            \abs{f(x, y_1) - f(x, y_2)} \leqslant l \abs{y_1 - y_2}.
+            \]
+            Тогда существует единственное решение уравнения $(1)$, удовлетворяющее
+            условию $(2)$, причём это решение определено по крайней мере на отрезке
+            $\abs{x - x_0} \leqslant h$, где
+            \[
+            h = \min\left\{ a, \frac{b}{M} \right\},
+            \qquad
+            M = \max_R \abs{f(x,y)}.
+            \]
+            Константу $l$ называют <i class="important">константой Липшица</i>.
+          </div>
+
+          <div class="corollary">
+            Если функция $f$ определена и непрерывна в $D$ и непрерывно дифференцируема
+            в этой области по $y$, то любая точка $(x_0, y_0) \in D$ является точкой
+            единственности решения начальной задачи.
+          </div>
+
+          <div class="example">
+            Рассмотрим уравнение
+            \[
+            y' = p(x) y + q(x),
+            \]
+            где $p(x), q(x)$ определены и непрерывны на интервале $(\alpha, \beta)$.
+            Поскольку правая часть уравнения является непрерывной и непрерывно
+            дифференцируемой по $y$ функцией, то выполнены условия следствия из теоремы
+            Пикара, поэтому существует решение любой задачи Коши на множестве
+            \[
+            (x_0, y_0) \in (\alpha, \beta) \times (-\infty, +\infty).
+            \]
+          </div>
+
+          <div class="example">
+            Рассмотрим задачу Коши
+            \[
+            y' = 3 \sqrt[3]{y^2}, \qquad D = \mathbb{R}^2, \qquad (x_0, y_0) = (0, 0).
+            \]
+            Существуют два решения задачи Коши:
+            <ul>
+              <li>
+                $\varphi_1(x) \equiv 0$;
+              </li>
+
+              <li>
+                $\varphi_2(x) = x^3$.
+              </li>
+            </ul>
+            Решения $\varphi_1(x)$ и $\varphi_2(x)$ являются различными, поэтому
+            точка $(0, 0)$ является точкой неединственности.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Уравнения с разделяющимися переменными. Примеры
+        </div>
+        <div class="content">
+          Рассмотрим уравнение вида
+          \[
+          \tag{1}
+          \frac{d y}{d x} = \frac{M(x,y)}{N(x,y)},
+          \]
+          в котором правая часть определена и непрерывна на множестве
+          \[
+          R = \left\{ x \in (a,b), \; y \in (c, d) \right\}.
+          \]
+          Пусть функции $M(x,y)$ и $N(x,y)$ имеют вид
+          \[
+          \tag{2}
+          M(x,y) = M_1(x) M_2(y), \qquad N(x,y) = N_1(x) N_2(y).
+          \]
+
+          <div class="definition">
+            Уравнение $(1)$, для которого выполнены условия $(2)$, называется
+            <i>уравнением с разделяющимися переменными</i>.
+          </div>
+
+          При выполнении условий $(2)$ уравнение $(1)$ можно привести
+          к виду
+          \[
+          \tag{3}
+          \frac{M_1(x) dx}{N_1(x)} = \frac{N_2(y) dy}{M_2(y)}.
+          \]
+          Интегрируя обе части полученного уравнения, получаем общее решение
+          исходного уравнения на множестве $R$ в неявной форме:
+          \[
+          \int\limits_{}^{} \frac{M_1(x) dx}{N_1(x)}
+          - \int\limits_{}^{} \frac{N_2(y) dy}{M_2(y)} = C.
+          \]
+
+          <div class="remark">
+            Все точки множества $R$, в которых функции $M_1(x), M_2(y), N_1(x), N_2(y)$
+            не обращаются в ноль и бесконечность, являются точками единственности
+            решения задачи Коши.
+          </div>
+
+          Пусть
+          \[
+          f_1(x) = \frac{M_1(x)}{N_1(x)}, \qquad f_2(y) = \frac{M_2(y)}{N_2(y)}.
+          \]
+          Тогда уравнение примет вид
+          \[
+          \tag{4}
+          y' = f_1(x) f_2(y).
+          \]
+
+          <div class="theorem">
+            Пусть на множестве $R$ функции $f_1(x)$ и $f_2(y)$ непрерывны, и при этом
+            $f_2(y) \neq 0$. Тогда через каждую точку множества $R$ проходит
+            одно и только одно решение уравнения $(4)$.
+          </div>
+
+          <p>
+            В случае, если условия теоремы не выполняются, некоторые решения могут
+            оказаться особыми. При переходе от уравнения $(1)$ к уравнению $(3)$
+            могут быть потеряны решения вида $x \equiv \xi$ и $y \equiv \eta$,
+            если $N_1(\xi) = 0$ или $M_2(\eta) = 0$.
+          </p>
+
+          <div class="todo">Примеры</div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Обыкновенные дифференциальные уравнения $n$-го порядка с
+          постоянными коэффициентами
+        </div>
+        <div class="content">
+          <p>
+            Рассмотрим следующее уравнение
+            \[
+            \tag{1}
+            y^{(n)} + a_1 y^{(n-1)} + \dots + a_n y = 0,
+            \]
+            где $a_1, \dots, a_n$ &mdash; вещественные постоянные.
+            Используя оператор
+            \[
+            L = \frac{d^n}{d x^n} + a_1 \frac{d^{n-1}}{d x^{n-1}} +
+            \dots + a_{n-1} \frac{d }{d x} + a_n,
+            \]
+            уравнение можно записать в виде
+            \[
+            L(y) = 0.
+            \]
+          </p>
+
+          <p>
+            Известно, что всякое решение уравнения $(1)$ с любыми
+            начальными данными существует и единственно, при этом оно
+            определено на всей вещественной оси. Будем искать частное
+            решение уравнения $(1)$ в виде
+            \[
+            \tag{2}
+            y = e^{\lambda x},
+            \]
+            где $\lambda$ &mdash; некоторое комплексное число.
+          </p>
+
+          <p>
+            Подставляя это представление в уравнение, получаем
+            \[
+            L(e^{\lambda x})
+            = (\lambda^n + a_1 \lambda^{n-1} + \dots + a_n) e^{\lambda x}
+            = 0.
+            \]
+            Из этого равенства вытекает, что частное решение уравнения
+            $(1)$ существует в виде $(2)$ тогда и только тогда, когда
+            число $\lambda$ является корнем уравнения
+            \[
+            P(\lambda) = \lambda^n + a_1 \lambda^{n-1} + \dots + a_n = 0,
+            \]
+            которое называется <i>характеристическим уравнением</i>.
+          </p>
+
+          <p>
+            Общее решение уравнения $(1)$ представляется в виде суммы
+            слагаемых вида $C_i e^{\lambda_i x}$ для каждого простого
+            корня $\lambda_i$ и слагаемых вида
+            \[
+            (C_{m+1} + C_{m+2} x + C_{m+3} x^2
+            + \dots + C_{m+k}x^{k-1}) e^{\lambda x}
+            \]
+            для каждого корня $\lambda$ кратности $k$.
+          </p>
+
+          <p>
+            Каждой паре комплексных сопряжённых корней $\lambda =
+            \alpha \pm \beta i$ соответствуют слагаемые
+            \[
+            C_{m+1} e^{\alpha x} \cos \beta x
+            + C_{m+2} e^{\alpha x} \sin \beta x,
+            \]
+            если эти корни простые, и
+            \[
+            P_{k-1}(x) e^{\alpha x} \cos \beta x
+            + Q_{k-1}(x) e^{\alpha x} \sin \beta x,
+            \]
+            если каждый из корней $\alpha + \beta i$ и $\alpha - \beta i$
+            имеет кратность $k$.
+          </p>
+
+          <div class="theorem">
+            Общее решение линейного неоднородного уравнения порядка $n$
+            представляет собой сумму общего решения соответствующего
+            однородного уравнения и частного решения неоднородного.
+          </div>
+
+          <p>
+            Линейное неоднородное уравнение
+            \[
+            y^{(n)} + a_1 y^{(n-1)} + \dots + a_n y = f(x)
+            \]
+            решается методом вариации постоянных. Пусть найдено общее
+            решение
+            \[
+            y = C_1 y_1 + \dots + C_n y_n,
+            \]
+            тогда решение неоднородного уравнения ищется в виде
+            \[
+            y = C_1(x) y_1 + \dots + C_n(x) y_n.
+            \]
+            Функции $C_i(x)$ определяются из системы
+            \[
+            \begin{aligned}
+            C_1' y_1 + \dots + C_n' y_n &= 0, \\
+            C_1' y_1' + \dots + C_n' y_n' &= 0, \\
+            \dots \\
+            C_1' y_1^{(n-2)} + \dots + C_n' y_n^{(n-2)} &= 0, \\
+            C_1' y_1^{(n-1)} + \dots + C_n' y_n^{(n-1)} &= f(x).
+            \end{aligned}
+            \]
+          </p>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Линейная зависимость и независимость системы функций
+        </div>
+        <div class="content">
+          <div class="definition">
+            Функции $u_1(x), \dots, u_p(x)$ называются
+            <i>линейно независимыми</i> на интервале $(\alpha, \beta)$,
+            если тождество
+            \[
+            \sum\limits_{s=1}^{p} \gamma_s u_s(x) \equiv 0
+            \]
+            выполнено на этом интервале тогда и только тогда, когда
+            $\gamma_s = 0, s = \overline{1,p}$. В противном
+            случае функции называются <i>линейно зависимыми</i>
+            на $(\alpha, \beta)$.
+          </div>
+
+          <p>
+            Рассмотрим набор функций $u_1(x), \dots, u_p(x)$,
+            непрерывно дифференцируемых $p-1$ раз на интервале
+            $(\alpha, \beta)$.
+          </p>
+
+          <div class="definition">
+            Определитель
+            \[
+            W(u_1, \dots, u_p)
+            =
+            \begin{vmatrix}
+            u_1(x) & u_2(x) & \dots & u_p(x) \\
+            u_1'(x) & u_2'(x) & \dots & u_p'(x) \\
+            \dots & \dots & \dots & \dots \\
+            u_1^{(p-1)}(x) & u_2^{(p-1)}(x) & \dots & u_p^{(p-1)}(x)
+            \end{vmatrix}
+            \]
+            называют <i>определителем Вронского</i> (вронскианом).
+          </div>
+
+          <div class="theorem">
+            Если функции $u_1(x), \dots, u_p(x)$ линейно зависимы
+            на интервале $(\alpha, \beta)$, то определитель Вронского
+            тождественно равен нулю на этом интервале.
+          </div>
+
+          <p>
+            Рассмотрим уравнение
+            \[
+            \tag{1}
+            y^{(n)} + p_1(x) y^{(n-1)} + \dots + p_n(x) y = 0.
+            \]
+            Пусть $y_1(x), \dots, y_n(x)$ &mdash; набор из $n$ решений
+            уравнения на интервале $(\alpha, \beta)$. Построим для них
+            определитель Вронского:
+            \[
+            W(y_1, \dots, y_n)
+            =
+            \begin{vmatrix}
+            y_1(x) & y_2(x) & \dots & y_n(x) \\
+            y_1'(x) & y_2'(x) & \dots & y_n'(x) \\
+            \dots & \dots & \dots & \dots \\
+            y_1^{(n-1)}(x) & y_2^{(n-1)}(x) & \dots & y_n^{(n-1)}(x)
+            \end{vmatrix}.
+            \]
+            Для сокращения обозначим его как $W(x)$.
+          </p>
+
+          <div class="theorem">
+            Если на интервале $(\alpha, \beta)$ найдётся хотя бы
+            одна точка $x_0$, для которой $W(x_0) = 0$, то $W(x) \equiv 0$
+            на этом интервале, а набор решений $y_1(x), \dots, y_n(x)$
+            является линейно зависимым на этом интервале.
+          </div>
+
+          <div class="theorem">
+            Если коэффициенты $p_i(x)$ уравнения $(1)$ определены и
+            непрерывны на интервале $(\alpha, \beta)$, то на этом
+            интервале существует набор из $n$ линейно независимых
+            решений этого уравнения.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Линейные однородные уравнения $n$-го порядка с постоянными
+          коэффициентами. Фундаментальная система решений
+        </div>
+        <div class="content">
+          <p>
+            Рассмотрим уравнение
+            \[
+            \tag{1}
+            y^{(n)} + a_1 y^{(n-1)} + \dots + a_n y = 0.
+            \]
+          </p>
+
+          <div class="definition">
+            Набор из $n$ решений уравнения $(1)$, линейно независимых
+            на интервале $(\alpha, \beta)$, называется
+            <i>фундаментальной системой решений</i> этого уравнения
+            на указанном интервале.
+          </div>
+
+          <div class="definition">
+            Фундаментальная система решений уравнения $(1)$, для которой
+            матрица начальных данных в точке $x_0$ &mdash; единичная,
+            называется <i>фундаментальной системой решений,
+            нормированной в этой точке</i>.
+          </div>
+
+          <div class="theorem">
+            Если функции $y_1(x), \dots, y_n(x)$ образуют ФСР
+            уравнения $(1)$ на интервале $(\alpha, \beta)$, то формула
+            \[
+            y = \sum\limits_{s=1}^{n} C_s y_s(x),
+            \]
+            где $C_s$ &mdash; произвольные постоянные, определяет
+            общее решение уравнения $(1)$ на множестве
+            \[
+            R = \left\{ x \in (\alpha, \beta):
+            \abs{y} \lt \infty, \; \abs{y'} \lt \infty,
+            \; \dots, \; \abs{y^{(n-1)}} \lt \infty
+            \right\}.
+            \]
+          </div>
+
+          <div class="theorem">
+            Уравнение $(1)$ не может иметь на интервале $(\alpha, \beta)$
+            более чем $n$ линейно независимых решений.
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Системы линейных однородных уравнений. Свойства решений.
+          Фундаментальная матрица
+        </div>
+        <div class="content">
+          <div class="definition">
+            Совокупность соотношений вида
+            \[
+            F_i(x, y_1, y_1', \dots, y_1^{m_1},
+            y_2, y_2', \dots, y_2^{m_2}, \dots,
+            y_n, y_n', \dots, y_n^{m_n}) = 0,
+            \qquad i = \overline{1,n},
+            \]
+            называется системой обыкновенных дифференциальных
+            уравнений.
+          </div>
+
+          <p>
+            Рассмотрим
+            \[
+            \begin{aligned}
+            F_1(x, y_1, y_2, \dots, y_n, y_1', y_2', \dots, y_n') &= 0, \\
+            F_2(x, y_1, y_2, \dots, y_n, y_1', y_2', \dots, y_n') &= 0, \\
+            \dots \\
+            F_n(x, y_1, y_2, \dots, y_n, y_1', y_2', \dots, y_n') &= 0.
+            \end{aligned}
+            \]
+            Пусть функции $F_1, \dots, F_n$ таковы, что система функций
+            разрешима относительно производных искомых функций:
+            \[
+            \tag{1}
+            \begin{aligned}
+            \frac{d y_1}{d x} &= f_1(x, y_1, \dots, y_n), \\
+            \dots \\
+            \frac{d y_n}{d x} &= f_n(x, y_1, \dots, y_n).
+            \end{aligned}
+            \]
+          </p>
+
+          <div class="definition">
+            Система вида $(1)$ называется <i>системой обыкновенных
+            дифференциальных уравнений в нормальной форме</i>.
+            Функции $f_s \in C(D), \; D \subset \mathbb{R}^{n+1}$,
+            а $D$ &mdash; односвязная область.
+          </div>
+
+          <div class="definition">
+            Число уравнений в системе $(1)$ называется <i>порядком</i>
+            этой системы.
+          </div>
+
+          <p>
+            Векторная запись системы $(1)$:
+            \[
+            y' = f(x,y),
+            \]
+            где
+            \[
+            y = (y_1, \dots, y_n)^T,
+            \qquad
+            f = (f_1, \dots, f_n)^T.
+            \]
+          </p>
+
+          <p>
+            Рассмотрим однородную систему линейных уравнений:
+            \[
+            \tag{2}
+            y' = A(x) y.
+            \]
+
+            Рассмотрим $m$ решений однородной линейной системы $(2)$:
+            $y^{(1)}(x), \dots, y^{(m)}(x)$. Их <i>линейной
+            комбинацией</i> будем называть вектор-функцию
+            \[
+            \sum\limits_{k=1}^{m} C_k y^{(k)}(x),
+            \]
+            где $C_k$ &mdash; некоторые постоянные.
+          </p>
+
+          <div class="theorem">
+            Линейная комбинация решений однородной линейной системы
+            является также решением этой системы.
+          </div>
+
+          <div class="theorem">
+            Если вектор-функции линейно зависимы, то их вронскиан
+            тождественно равен нулю.
+          </div>
+
+          <div class="definition">
+            Совокупность $n$ линейно независимых решений системы $(2)$
+            называется её <i>фундаментальной системой решений</i>.
+          </div>
+
+          <div class="definition">
+            Матрицу, столбцами которой являются решения ФСР:
+            \[
+            Y(x) = (y^{(1)}(x), \dots, y^{(n)}(x)),
+            \]
+            называют <i>фундаментальной матрицей (ФМ)</i>.
+          </div>
+
+          <div class="definition">
+            ФМ $Y(x)$ называется <i>нормированной</i>, если
+            $Y(x_0) = E$. Её также называют <i>матрицантом</i>
+            и обозначают $z(x, x_0)$.
+          </div>
+
+          Свойства ФМ:
+          <ol>
+            <li>
+              ФМ является решением матричного уравнения
+              \[
+              \frac{d Y(x)}{d x} A(x) Y(x).
+              \]
+            </li>
+
+            <li>
+              (теорема Лиувилля). Определитель ФМ определяется
+              следующим образом:
+              \[
+              \abs{Y(x)} = \abs{Y(x_0)} \exp \left(\int\limits_{x_0}^{x} \sum\limits_{s=1}^{n} a_{ss}(\tau) d\tau\right).
+              \]
+            </li>
+
+            <li>
+              Пусть $\tilde Y(x)$ &mdash; ФМ системы $(2)$, $Q$ &mdash;
+              произвольная невырожденная матрица, тогда $\tilde Y(x) Q$
+              &mdash; ФМ системы $(2)$.
+            </li>
+
+            <li>
+              Предположим, что $Y_1(x)$ и $Y_2(x)$ &mdash; ФМ
+              системы $(2)$. Тогда существует постоянная
+              невырожденная матрица $Q$ такая, что
+              \[
+              Y_1(x) = Y_2(x) Q.
+              \]
+            </li>
+
+            <li>
+              Общее решение системы $(2)$ имеет вид
+              \[
+              y = Y(x)
+              \begin{pmatrix}
+              c_1 \\ \dots \\ c_n
+              \end{pmatrix},
+              \]
+              где $c_1, \dots, c_n$ &mdash; произвольные параметры.
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Задача линейного программирования
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Задача линейного программирования</i> заключается
+            в поиске минимума или максимума линейной
+            функции при линейных ограничениях.
+          </div>
+
+          Обозначения:
+          <ol>
+            <li>
+              $x = (\xi_1, \dots, \xi_m) \in \mathbb{R}^m$;
+            </li>
+
+            <li>
+              $y = (\eta_1, \dots, \eta_n) \in \mathbb{R}^n$;
+            </li>
+
+            <li>
+              $c = (\gamma_1, \dots, \gamma_m) \in \mathbb{R}^m$;
+            </li>
+
+            <li>
+              $b = (\beta_1, \dots, \beta_n) \in \mathbb{R}^n$;
+            </li>
+
+            <li>
+              $A = \set{\alpha_{ij}}_{m \times n}$.
+            </li>
+          </ol>
+
+          <div class="definition">
+            <i>Прямая задача ЛП</i>:
+            \[
+            \begin{gathered}
+            \max \dp{c}{x}, \\
+            xA \leqslant b, \\
+            x \geqslant 0.
+            \end{gathered}
+            \]
+          </div>
+
+          <div class="definition">
+            <i>Двойственная задача ЛП</i>:
+            \[
+            \begin{gathered}
+            \min \dp{b}{y}, \\
+            Ay \geqslant c, \\
+            y \geqslant 0.
+            \end{gathered}
+            \]
+          </div>
+
+          <div class="definition">
+            Вектор $x$, удовлетворяющий всем ограничениям ЗЛП,
+            называют <i>допустимым решением</i>. Множество
+            всех допустимых значений ЗЛП &mdash;
+            $M \subset \mathbb{R}^m$.
+          </div>
+
+          <div class="definition">
+            Допустимое решение $x^*$, на котором целевая функция
+            достигает максимального (минимального) значения,
+            называют <i>оптимальным решением</i>.
+          </div>
+
+          <div class="proposition">
+            Двойственная задача к двойственной &mdash; прямая.
+          </div>
+
+          <div class="lemma">
+            Пусть $x, y$ &mdash; допустимые решения ПЗ и ДвЗ
+            соответственно. Тогда
+            \[
+            cx \leqslant by.
+            \]
+          </div>
+
+          <div class="theorem">
+            <i>(критерий оптимальности)</i>.
+            Если существуют допустимые решения $\bar x$ и $\bar y$
+            для ПЗ и ДЗ соответственно такие, что
+            \[
+            c \bar x = b \bar y,
+            \]
+            то $\bar x$ и $\bar y$ &mdash; оптимальные для ПЗ и ДЗ
+            соответственно.
+          </div>
+
+          <div class="theorem">
+            <i>(двойственности)</i>.
+
+            <ol>
+              <li>
+                Если существуют решения ПЗ и ДЗ, то
+                существует оптимальные решения ПЗ и ДЗ, причём
+                их значения совпадают.
+              </li>
+
+              <li>
+                Если одна из задач не имеет допустимых решений,
+                то двойственная к ней не имеет оптимального.
+              </li>
+            </ol>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Прямая и двойственная задачи линейного программирования
+        </div>
+        <div class="content">
+          <div class="definition">
+            <i>Задача линейного программирования</i> заключается
+            в поиске минимума или максимума линейной
+            функции при линейных ограничениях.
+          </div>
+
+          Обозначения:
+          <ol>
+            <li>
+              $x = (\xi_1, \dots, \xi_m) \in \mathbb{R}^m$;
+            </li>
+
+            <li>
+              $y = (\eta_1, \dots, \eta_n) \in \mathbb{R}^n$;
+            </li>
+
+            <li>
+              $c = (\gamma_1, \dots, \gamma_m) \in \mathbb{R}^m$;
+            </li>
+
+            <li>
+              $b = (\beta_1, \dots, \beta_n) \in \mathbb{R}^n$;
+            </li>
+
+            <li>
+              $A = \set{\alpha_{ij}}_{m \times n}$.
+            </li>
+          </ol>
+
+          <div class="definition">
+            <i>Прямая задача ЛП</i>:
+            \[
+            \begin{gathered}
+            \max \dp{c}{x}, \\
+            xA \leqslant b, \\
+            x \geqslant 0.
+            \end{gathered}
+            \]
+          </div>
+
+          <div class="definition">
+            <i>Двойственная задача ЛП</i>:
+            \[
+            \begin{gathered}
+            \min \dp{b}{y}, \\
+            Ay \geqslant c, \\
+            y \geqslant 0.
+            \end{gathered}
+            \]
+          </div>
+
+          <div class="definition">
+            Вектор $x$, удовлетворяющий всем ограничениям ЗЛП,
+            называют <i>допустимым решением</i>. Множество
+            всех допустимых значений ЗЛП &mdash;
+            $M \subset \mathbb{R}^m$.
+          </div>
+
+          <div class="definition">
+            Допустимое решение $x^*$, на котором целевая функция
+            достигает максимального (минимального) значения,
+            называют <i>оптимальным решением</i>.
+          </div>
+
+          <div class="proposition">
+            Двойственная задача к двойственной &mdash; прямая.
+          </div>
+
+          <div class="lemma">
+            Пусть $x, y$ &mdash; допустимые решения ПЗ и ДвЗ
+            соответственно. Тогда
+            \[
+            cx \leqslant by.
+            \]
+          </div>
+
+          <div class="theorem">
+            <i>(критерий оптимальности)</i>.
+            Если существуют допустимые решения $\bar x$ и $\bar y$
+            для ПЗ и ДЗ соответственно такие, что
+            \[
+            c \bar x = b \bar y,
+            \]
+            то $\bar x$ и $\bar y$ &mdash; оптимальные для ПЗ и ДЗ
+            соответственно.
+          </div>
+
+          <div class="theorem">
+            <i>(двойственности)</i>.
+
+            <ol>
+              <li>
+                Если существуют решения ПЗ и ДЗ, то
+                существует оптимальные решения ПЗ и ДЗ, причём
+                их значения совпадают.
+              </li>
+
+              <li>
+                Если одна из задач не имеет допустимых решений,
+                то двойственная к ней не имеет оптимального.
+              </li>
+            </ol>
+          </div>
+        </div>
+      </li>
+    </ol>
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+  </body>
+
+</html>

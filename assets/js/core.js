@@ -60,9 +60,11 @@ function ShowAnswers() {
 
 function HideProofs() {
   HideElements('proof-toggle');
+  HideElements('derivation-toggle');
 }
 function ShowProofs() {
   ShowElements('proof-toggle');
+  ShowElements('derivation-toggle');
 }
 
 function HideIdeas() {
@@ -81,6 +83,13 @@ function HideExamples() {
 }
 function ShowExamples() {
   ShowElements('example-toggle');
+}
+
+function HideQuestionAnswers() {
+  HideElements('answer-toggle');
+}
+function ShowQuestionAnswers() {
+  ShowElements('answer-toggle');
 }
 
 function ShowSubtitles() {
@@ -147,9 +156,14 @@ function SetButtonsHandlers() {
     PrependButtonWithHandler(derivation, 'derivation-toggle', 'вывод');
   });
 
-  var derivations = document.getElementsByClassName('example');
-  Array.from(derivations).map(function (derivation) {
-    PrependButtonWithHandler(derivation, 'example-toggle', 'пример');
+  var examples = document.getElementsByClassName('example');
+  Array.from(examples).map(function (example) {
+    PrependButtonWithHandler(example, 'example-toggle', 'пример');
+  });
+
+  var questionAnswers = document.querySelectorAll('.quick-question > .answer');
+  Array.from(questionAnswers).map(function (answer) {
+    PrependButtonWithHandler(answer, 'answer-toggle', 'ответ');
   });
 }
 
@@ -236,14 +250,21 @@ function SetProofButtonHandlers() {
   Array.from(derivations).map(CreateProofControls);
 }
 
-function AssignNumbersToTheorems() {
+function AssignNumbersToElements(className, elementName) {
+  // Set up initial attribute
+  var elements = document.getElementsByClassName(className);
+  for (var j = 0; j < elements.length; ++j) {
+    var element = elements[j];
+    element.setAttribute(`${className}-name`, `${elementName} ${j+1}. `);
+  }
+
   var contents = document.getElementsByClassName('content');
   for (var i = 0; i < contents.length; ++i) {
     var content = contents[i];
-    var theorems = content.getElementsByClassName('theorem');
-    for (var j = 0; j < theorems.length; ++j) {
-      var theorem = theorems[j];
-      theorem.setAttribute('theorem-name', `Теорема ${i+1}.${j+1}. `);
+    var elements = content.getElementsByClassName(className);
+    for (var j = 0; j < elements.length; ++j) {
+      var element = elements[j];
+      element.setAttribute(`${className}-name`, `${elementName} ${i+1}.${j+1}. `);
     }
   }
 }
@@ -266,9 +287,24 @@ function init(elementsClass) {
 
   SetButtonsHandlers();
   SetProofButtonHandlers();
-  AssignNumbersToTheorems();
+
+  const numberedElements = [
+    { className: 'theorem', elementName: 'Теорема' },
+    { className: 'lemma', elementName: 'Лемма' },
+    { className: 'definition', elementName: 'Определение' },
+    { className: 'axiom', elementName: 'Аксиома' },
+  ];
+
+  for (const element of numberedElements) {
+    const className = element.className;
+    const elementName = element.elementName;
+
+    AssignNumbersToElements(className, elementName);
+  }
+
   // HideExamples();
   // HideDerivations();
+  HideQuestionAnswers();
 
   var elements = document.getElementsByClassName(elementsClass);
   var nonEmptyQuestions = Array.from(elements).filter(function (element) {

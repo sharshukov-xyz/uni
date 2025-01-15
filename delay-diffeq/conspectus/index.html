@@ -1,0 +1,1904 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>ДУ с запаздыванием &mdash; 07 &mdash; Конспект</title>
+
+    <link href="/assets/css/styles.css" rel="stylesheet">
+    <script defer src="/assets/js/core.js"></script>
+    <script defer src="/assets/js/questions.js"></script>
+    <script defer src="/assets/js/controls.js"></script>
+
+    <link rel="stylesheet" href="/assets/katex/katex.min.css">
+    <script defer src="/assets/katex/katex.min.js"></script>
+    <script defer src="/assets/katex/auto-render.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          renderMathInElement(document.body, {
+              // customised options
+              // • auto-render specific keys, e.g.:
+              delimiters: [
+                  { left: '$$', right: '$$', display: true },
+                  { left: '$', right: '$', display: false },
+                  { left: '\\(', right: '\\)', display: false },
+                  { left: '\\[', right: '\\]', display: true }
+              ],
+              // • rendering keys, e.g.:
+              throwOnError: false
+          });
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1 id="title">ДУ с запаздыванием &mdash; 07 &mdash; Конспект</h1>
+    <nav>
+      <a href="/">Домой</a>
+      <a href="..">ДУ с запаздыванием</a>
+      <a href="/links">Ссылки</a>
+      <a href="/about">Контакты</a>
+    </nav>
+
+    <div style="display:none">
+      $\global\def\at#1{\left. #1 \right\rvert}$
+      $\global\def\abs#1{\left\lvert #1 \right\rvert}$
+      $\global\def\norm#1{\left\lVert #1 \right\rVert}$
+      $\global\def\bvec#1{\mathbf{#1}}$
+      $\global\def\floor#1{\left\lfloor #1 \right\rfloor}$
+
+      $\global\def\limto#1{\xrightarrow[#1]{}}$
+      $\global\def\prob#1{\mathbb{P} \left\{ #1 \right\}}$
+      $\global\def\mean#1{\mathbb{E} \left[ #1 \right]}$
+      $\global\def\disp#1{D \left[ #1 \right]}$
+
+      $\global\def\dp#1#2{#1 \cdot #2\,}$
+      $\global\def\vp#1#2{#1 \times #2\,}$
+
+      $\global\def\dv#1#2{\frac{d #1}{d #2}}$
+      $\global\def\rdv#1#2{\frac{d' #1}{d #2}}$ <!-- относительная производная -->
+      $\global\def\pd#1#2{\frac{\partial #1}{\partial #2}}$
+      $\global\def\pdv2#1#2{\frac{\partial^2 #1}{\partial #2^2}}$
+      $\global\def\pdvk#1#2#3{\frac{\partial^#1 #2}{\partial #3^#1}}$
+      $\global\def\ppdv#1#2#3{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
+
+      $\global\def\pois#1{\left\{ #1 \right\}}$
+      $\global\def\paren#1{\left( #1 \right)}$
+      $\global\def\bydef#1{\overset{\mathrm{def}}{#1}}$
+
+      $\global\def\mbox#1{\text{#1}}$
+
+      $\global\def\div{\text{div}\,}$
+      $\global\def\dsum{\displaystyle\sum\,}$
+      $\global\def\grad{\text{grad}\,}$
+      $\global\def\rot{\text{rot}\,}$
+
+      $\global\def\vb#1{\textbf{#1}}$
+
+      $\global\def\op#1{\mathrm{#1}\,}$
+
+      $\global\def\Im{\text{Im}\,}$
+      $\global\def\Res{\text{Res}\,}$
+      $\global\def\Re{\text{Re}\,}$
+      $\global\def\argtg{\text{argtg}\,}$
+      $\global\def\ch{\text{ch}\,}$
+      $\global\def\const{\text{const}\,}$
+      $\global\def\degree{\text{degree}\,}$
+      $\global\def\proj{\mathrm{proj}}$
+      $\global\def\rank{\mathrm{rank}}$
+      $\global\def\res{\text{res}\,}$
+      $\global\def\sh{\text{sh}\,}$
+      $\global\def\sign{\text{sign}\,}$
+      $\global\def\tg{\mathrm{tg}\,}$
+
+      $\global\def\C{\mathbb{C}}$
+    </div>
+
+    <h2>2023-10-28</h2>
+
+    <h4>Метод $D$-разбиений</h4>
+    <p>
+      Рассмотрим его сначала для скалярного уравнения
+      \[
+      \tag{6}
+      \dot x = a x(t) + b x(t - \tau).
+      \]
+      Тогда характеристическое уравнение имеет вид
+      \[
+      \lambda - a - b c^{-\lambda \tau} = 0.
+      \]
+      Преобразуем его так: умножим на $\tau$:
+      \[
+      \lambda \tau - a \tau - b \tau e^{-\lambda \tau} = 0
+      \]
+      и введём обозначения
+      \[
+      z = \lambda \tau,
+      \qquad
+      a_1 = a \tau,
+      \qquad
+      b_1 b \tau.
+      \]
+      Умножим также на экспоненту с плюсовым показателем. Окончательно получаем
+      \[
+      \tag{7}
+      z e^z - a_1 e^z - b_1 = 0
+      \]
+    </p>
+
+    <div class="todo">
+      рис 1
+    </div>
+
+    <p>
+      На плоскости $a_1 b_1$ зафиксируем точку. Значит мы тем самым зафиксировали
+      уравнение (7), а значит зафиксировали какое-то расположение корней на плоскости.
+      Начнём эту точку на $a_1 b_1$ непрерывно двигать. Для квазиполинома справедливо то,
+      что корни непрерывно зависят от коэффициентов, поэтому при непрерывном сдвиге точки
+      $(a_1,b_1)$ начали непрерывно сдвигаться корни уравнения (7).
+    </p>
+
+    <p>
+      В силу непрерывности ни один корень не может перейти из одной полуплоскости
+      в другую без пересекания мнимой оси.
+    </p>
+
+    <p>
+      Для применения метода на плоскости $a_1 b_1$ построим линии, точкам которых
+      соответствуют уравнения (7), имеющие хотя бы один корень на мнимой оси. Построенные
+      линии разделят плоскость $a_1 b_1$ на области. Их будет, вообще говоря, счётное
+      число. При этом всем точкам какой-либо одной области соответствует уравнения (7)
+      с одинаковым количеством корней в правой полуплоскости.
+    </p>
+
+    <p>
+      Как это разбиение построить? Начнём с нуля:
+      \[
+      z = 0,
+      \]
+      тогда
+      \[
+      a_1 + b_1 = 0.
+      \]
+    </p>
+
+    <div class="todo">
+      рис 2
+    </div>
+
+    <p>
+      Теперь подставим $z = iy$, тогда
+      \[
+      \begin{aligned}
+      iy e^{iy} - a_1 e^{iy} - b_1
+      &=
+      iy (\cos y + i \sin y) - a_1 (\cos y + i \sin y) - b_1 = 0.
+      \end{aligned}
+      \]
+      Приравниваем вещественные и мнимые части нулю:
+      \[
+      \begin{aligned}
+      -y \sin y - a_1 \cos y - b_1 &= 0, \\
+      y \cos y - a_1 \sin y &= 0.
+      \end{aligned}
+      \]
+      Отсюда следует, что
+      \[
+      \tag{8}
+      \begin{aligned}
+      a_1 &= \frac{y \cos y}{\sin y}, \\
+      b_1 &= -\frac{y}{\sin y}.
+      \end{aligned}
+      \]
+    </p>
+
+    Заметим, что:
+    <ol>
+      <li>
+        Обе функции по $y$ являются чётными, значит, можно использовать только
+        положительные $y$.
+      </li>
+
+      <li>
+        Знаменатели обращаются в $0$ в точках, кратных $\pi$, значит, положительную
+        полуось разбиваем на интервалы
+        \[
+        y \in (0, \pi) \cup (\pi, 2\pi) \cup \dots,
+        \]
+        и на каждом интервале получаем свой кусок границы.
+      </li>
+    </ol>
+
+    <p>
+      Рассмотрим интервал $(0, \pi)$. Пусть $y \to +0$, тогда
+      \[
+      a_1 \to 1, \qquad b_1 \to -1.
+      \]
+      Получаем точку $(1, -1)$, она находится на ранее построенной прямой.
+    </p>
+
+    <p>
+      Пусть $y = \pi / 2$, тогда
+      \[
+      a_1 = 0, \qquad b_1 = -\frac{\pi}{2}.
+      \]
+      Если теперь рассмотрим $y \to \pi - 0$, то
+      \[
+      a_1 \to -\infty, \qquad b_1 \to -\infty.
+      \]
+      Заметим, что $a_1 = b_1$ служит асимптотой.
+    </p>
+
+    <p>
+      Если теперь расмотреть второй интервал и $y \to \pi + 0$, то оба значения поменяли
+      знак (на рисунке видно). И так далее &mdash; получаем счётное число областей.
+    </p>
+
+    <p>
+      Можно установить, что заштрихованная область является областью, которая отвечает
+      0 корням в правой полуплоскости. Это можно проверить, взяв точку
+      \[
+      a_1 \lt 0, \qquad b_1 = 0.
+      \]
+    </p>
+
+    <p>
+      Возникает вопрос: а одна ли такая область?
+    </p>
+
+    <p>
+      Вертикальная ось протыкает все области, которые лежат выше прямой $a_1 + b_1 = 0$.
+      Будем рассматривать точки
+      \[
+      a_1 = 0, \qquad b_1 \gt 0,
+      \]
+      а $z = x \in R$. Тогда
+      \[
+      x e^x = b_1, \implies e^x = \frac{b_1}{x}.
+      \]
+      Заметим, что экспонента и гипербола могут пересекаться только в положительной
+      области:
+    </p>
+
+    <div class="todo">
+      рис 3
+    </div>
+
+    <p>
+      Остальные области проверяются в книге Эльсгольца.
+    </p>
+
+    <p>
+      Таким образом, построили $D$-разбиение для этого уравнения.
+    </p>
+
+    <hr/>
+
+    <p>
+      Если уравнение (7) имеет порядок выше первого, то для исследования можно попытаться
+      разложить квазиполином в произведение нескольких квазиполиномов первого порядка
+      или (что тоже возможно) в произведение квазиполиномов первого порядка и полинома
+      произвольного порядка (так как для исследования его корней есть методы), то есть
+      произвести <i class="important">факторизацию</i>.
+    </p>
+
+    <p>
+      Мулюков исследовал случай $n = 2$:
+      \[
+      \dot X = A_0 X(t) + A_1 X(t - \tau), \qquad n = 2.
+      \]
+      Критерий (необходимое и достаточное условие) факторизации:
+      \[
+      \det \paren{ A_0 A_1 - A_1 A_0 } = 0.
+      \]
+    </p>
+
+    <div class="example">
+      Выяснить вопрос об устойчивости нулевого решения системы
+      \[
+      \ddot x(t) + 3 \dot x(t) + 2 x(t) - 3 \dot x(t - 1) - 5 x(t - 1) + 2 x(t - 2) = 0.
+      \]
+
+      <div class="solution">
+        Запишем характеристическое уравнение: пусть $x = e^{\lambda t}$, тогда
+        \[
+        \lambda^2 + 3 \lambda + 2
+        - 3 \lambda e^{-\lambda} - 5 e^{-\lambda} + 2 e^{- 2 \lambda} = 0.
+        \]
+        Хотим разбить его в произведение двух квазиполиномов первого порядка:
+        \[
+        \begin{aligned}
+        \paren{ \lambda - a_1 - b_1 e^{-\lambda} }
+        \paren{ \lambda - a_2 - b_2 e^{-\lambda} }
+        &=
+        \lambda^2 - a_1 \lambda - b_1 \lambda e^{-\lambda}
+        - a_2 \lambda + a_1 a_2 + b_1 a_2 e^{-\lambda} - \\
+        &\phantom{=}- b_2 \lambda e^{-\lambda} + a_1 b_2 e^{-\lambda}
+        + b_1 b_2 e^{- 2 \lambda} = \\
+        &=
+        \lambda^2 - (a_1 + a_2) \lambda + (a_1 b_2 + b_1 a_2) e^{-\lambda} - \\
+        &\phantom{=}- (b_1 + b_2) \lambda e^{-\lambda} + b_1 b_2 e^{-2 \lambda} + a_1 a_2.
+        \end{aligned}
+        \]
+        Тогда
+        \[
+        \left\{
+        \begin{aligned}
+        a_1 + a_2 &= -3, \\
+        b_1 + b_2 &= 3, \\
+        a_1 a_2 &= 2, \\
+        b_1 b_2 &= 2, \\
+        a_1 b_2 + b_1 a_2 &= -5.
+        \end{aligned}
+        \right.
+        \]
+        <div class="todo">
+          Последнее уравнение равно 5?..
+        </div>
+
+        Тогда
+        \[
+        \begin{aligned}
+        a_1 &= -1, \\
+        a_2 &= -2, \\
+        b_1 &= 1, \\
+        b_2 &= 2,
+        \end{aligned}
+        \]
+        и квазиполином факторизуется как
+        \[
+        \paren{ \lambda + 1 - e^{-\lambda} }
+        \paren{ \lambda + 2 - 2 e^{-\lambda} }.
+        \]
+        Из первого квазиполинома следует, что асимптотической услойчивости нет, так как
+        $(a_1, b_1)$ должна попасть внутрь области, а не на границу.
+
+        <div class="todo">
+          рис 4, проверь предложение выше
+        </div>
+      </div>
+    </div>
+
+    <h4>Класс систем, всегда допускающий факторизацию</h4>
+    \[
+    \tag{9}
+    \dot X = A X(t - \tau).
+    \]
+
+    Размерность произвольная, но матрица всего одна. Характеристическое уравнение:
+    \[
+    \det\paren{ \lambda E - A e^{-\lambda \tau} } = 0,
+    \]
+    или
+    \[
+    \det\paren{ \lambda e^{\lambda \tau} E - A } = 0.
+    \]
+    Пусть характеристическое уравнение матрицы $A$ имеет вид
+    \[
+    \det\paren{ \lambda E - A }
+    =
+    \prod_{k=1}^n \paren{ \lambda - \lambda_k },
+    \]
+    откуда следует, что характеристическое уравнение системы (9) можно представить как
+    \[
+    \tag{10}
+    \prod_{k=1}^n \paren{ \lambda e^{\lambda \tau} - \lambda_k } = 0.
+    \]
+    Посмотрим, что даёт применение метода $D$-разбиений к каждому сомножителю:
+    \[
+    \lambda e^{\lambda \tau} - \lambda_k, \qquad \lambda_k = \alpha + i \beta.
+    \]
+    Тогда, подставив $\lambda = i y$, получаем
+    \[
+    \begin{aligned}
+    iy e^{iy\tau} - \alpha - i \beta
+    &=
+    iy \paren{ \cos(y \tau) + i \sin(y \tau) } - \alpha - i \beta = 0.
+    \end{aligned}
+    \]
+    Рассматриваем вещественные и мнимые части:
+    \[
+    \begin{aligned}
+    \alpha &= -y \sin (y \tau), \\
+    \beta &= \phantom{-} y \cos (y \tau).
+    \end{aligned}
+    \]
+    Домножим оба уравнения на $\tau$ и введём обозначения:
+    \[
+    \alpha_1 = \alpha \tau,
+    \qquad
+    \beta_1 = \beta \tau,
+    \qquad
+    z = y \tau,
+    \]
+    тогда
+    \[
+    \begin{aligned}
+    \alpha_1 &= -z \sin z, \\
+    \beta_1 &= \phantom{-} z \cos z.
+    \end{aligned}
+    \]
+    причём
+    \[
+    z \in \paren{ -\frac{\pi}{2}, \frac{\pi}{2} }.
+    \]
+    Для асимптотической устойчивости системы (9) можно сосчитать, что получится в разных
+    точках области
+    <div class="todo">
+      рис 5
+    </div>
+
+    <p>
+      В эту область вписывается окружность, которая задаётся как
+      \[
+      \paren{ \alpha_1 + \frac{1}{2} }^2 + \beta_1^2 = \frac{1}{4},
+      \]
+      а попадание в эту окружность легко проверить.
+    </p>
+
+    <p>
+      Покажем, что эта окружность вписывается в область устойчивости на комплексной
+      плоскости. Подставим вместо $\alpha_1, \beta_1$ выражения через $z$, тогда
+      \[
+      \begin{aligned}
+      \paren{ -z \sin z + \frac{1}{2} }^2 + \paren{ z \cos z }^2
+      &=
+      z^2 - z \sin z + \frac{1}{4} = \\
+      &=
+      z^2 \underbrace{\paren{ 1 - \frac{\sin z}{z} }}_{\gt 0} + \frac{1}{4}
+      \gt \frac{1}{4}.
+      \end{aligned}
+      \]
+    </p>
+
+    <div class="todo">
+      почитай методичку и проверь что тут написано
+    </div>
+
+    <div class="example">
+      \[
+      A =
+      \begin{pmatrix}
+      0 & 1 \\
+      - 13 & -6
+      \end{pmatrix},
+      \]
+      собственные числа:
+      \[
+      \lambda = -3 \pm 2 i.
+      \]
+
+      <div class="todo">я забил, сумбур + пишет на мокрой доске, я ничего не вижу</div>
+    </div>
+
+    <h2>2023-11-11</h2>
+
+    Исследование по линейному приближению
+
+    \[
+    \tag{1}
+    \dot x = f(x(t), x(t - \tau))
+    \]
+
+    Пусть
+    \[
+    y(t) = x(t) - x_0, \qquad y_\tau = y(t - \tau) = x(t - \tau) - x_0,
+    \]
+    тогда
+    \[
+    \tag{3}
+    \begin{aligned}
+    \dot y &= \dot x = f(x, x_\tau) = \\
+    &= f(x_0, x_0) + \at{\pd{f}{x}}{x = x_0, x_\tau = x_0} \cdot (x - x_0)
+    + \at{\pd{f}{x_\tau}}{x = x_0, x_\tau = x_0} \cdot (x_\tau - x_0)
+    + l(x - x_0, x_\tau - x_0) = \\
+    &= a y + b y(t - \tau) + l(y, y_\tau)
+    \end{aligned}
+    \]
+    Так как
+    \[
+    x(t) \equiv x_0 \implies y(t) \equiv 0, \varphi(t) \equiv 0.
+    \]
+
+    Тогда
+    \[
+    \tag{4}
+    \dot y = ay + b y_\tau.
+    \]
+
+    <div class="theorem">
+      <i>(Пуанкаре-Ляпунова)</i>.
+
+      <div class="todo">
+        Добавить формулировку
+      </div>
+
+      Если
+      <ol>
+        <li>
+          Все корни характеристического уравнения
+          \[
+          \tag{5}
+          \lambda - a - b e^{-\lambda \tau} = 0
+          \]
+          имеют отрицательные вещественные части
+        </li>
+
+        <li>
+          выполнено условие
+          \[
+          \tag{6}
+          \lim\limits_{\abs{y} + \abs{y_\tau} \to 0}
+          \frac{\abs{l(y, y_\tau)}}{\abs{y} + \abs{y_\tau}} = 0,
+          \]
+        </li>
+      </ol>
+
+      то нулевое решение уравнения (3) асимптотически устойчиво.
+
+      <div class="idea">
+        <div class="todo">
+          Разбей на пункты
+        </div>
+
+        Перейдём от уравнения (3) к равносильному интегральному уравнению.
+        Построим последовательное приближение. Доказательство таким образом
+        частично будет напоминать доказательство теоремы Пикара.
+
+        <br />
+
+        Покажем, что если начальные функции выбираются из условия
+        \[
+        \abs{\varphi_\tau(\cdot)}_\tau \lt \delta,
+        \]
+        где $\delta$ достаточно мало, то все последовательные приближения
+        нелокально продолжимы вправо, то есть определены при всех
+        $t \geqslant \tau$, и последовательность приближений равномерно
+        ограничена.
+
+        <p>
+          Напоминание: норма
+          \[
+          \norm{\varphi_{t_0}(\cdot)}_\tau =
+          \max_{[t_0 - \tau, t_0]} \abs{\varphi_i(s)}, \qquad i = \overline{1,n}
+          \]
+        </p>
+
+        Установим, что построенная последовательность равномерно
+        относительно $t$ сходится на $[\tau, +\infty)$ к некоторой
+        предельной функции $\bar y(t)$.
+
+        <p>
+          Проверим, что $\bar y(t)$ является решением интегрального уравнения,
+          которое было введено вместо уравнения (3), и покажем, что $\bar y(t)
+          \limto{t \to +\infty} 0$.
+        </p>
+      </div>
+
+      <div class="proof">
+        Рассмотрим уравнение (4). Все корни уравнения (5) имеют отрицательные вещественные части.
+        В прошлый раз было доказано, что если $\lambda_k$ &mdash; некоторый корень уравнения (5),
+        то соответствующее ему решение уравнения (4) может быть представлено в виде
+        \[
+        y_k(t) = P_k(t) e^{\lambda_k t},
+        \]
+        где $P_k(t)$ &mdash; полином относительно $t$ с произвольными постоянными коэффициентами
+        степени на 1 меньше чем кратность корня. Тогда все решения уравнения (4) содержатся в формуле
+        \[
+        y = \sum\limits_{k=1}^{\infty} P_k(t) e^{\lambda_k t}.
+        \]
+        По условию все корни имеют отрицательные вещественные части:
+        \[
+        \Re \lambda_k \lt 0,
+        \]
+        следовательно, все решения уравнения (4) стремятся к нулю при $t \to +\infty$:
+        \[
+        \forall y \limto{t \to +\infty} 0
+        \]
+        независимо от начальной функции. При этом говорят, что уравнение (4) асимптотически устойчиво
+        в целом.
+
+        <p>
+          Пусть далее $k(t)$ &mdash; одномерный аналог фундаментальной матрицы для уравнения (4).
+          Поскольку выбран начальный момент времени $\tau$, то $k(\tau) = 1$, причём
+          \[
+          k(t) \equiv 0, \qquad t \lt \tau.
+          \]
+          Выпишем решение уравнение (4), соответствующее начальной функции $\varphi$:
+          \[
+          y(t, \varphi_\tau(\cdot), \tau)
+          =
+          k(t - \tau) \varphi(\tau)
+          + b \int\limits_{-\tau}^{0} k(t - \tau - \tau - \xi) \varphi(\tau + \xi) d\xi.
+          \]
+          Введём замену: $s = \tau + \xi$, поэтому $ds = d\xi$, откуда следует, что
+          \[
+          \tag{7}
+          y(t, \varphi_\tau(\cdot), \tau)
+          =
+          k(t - \tau) \varphi(\tau)
+          + b \int\limits_{0}^{\tau} k(t - \tau - s) \varphi(s) ds.
+          \]
+          Для сокращения введём обозначение
+          \[
+          y_0(t) \equiv y(t, \varphi_\tau(\cdot), \tau).
+          \]
+          В силу ранее сказанного мы знаем, что $y_0(t)$ ограничена, причём
+          \[
+          y_0(t) \limto{t \to +\infty} 0 \qquad \forall \varphi.
+          \]
+          Построим оценку на $k(t)$. Оно удовлетворяет условию для фундаментальной матрицы:
+          \[
+          \dv{k}{t} = a k(t) + b k(t - \tau).
+          \]
+          Тогда оценить можно так:
+          \[
+          \abs{k(t)} \leqslant c_0 e^{\alpha_0 t},
+          \]
+          где $c_0, \alpha_0 = \const$, причём $\alpha_0 \lt 0$ &mdash;
+          вещественная часть корня уравнения (5), ближайшего слева к мнимой оси.
+        </p>
+
+        <p>
+          Используя эту оценку, напишем оценку для $\abs{y_0(t)}$. Для этого посмотрим на формулу (7).
+          В неё входит $k$ и $\varphi$ в оба слагаемых, причём
+          \[
+          \abs{\varphi_\tau(\cdot)}_\tau \lt \delta,
+          \]
+          поэтому
+          \[
+          \abs{y_0(t)} \leqslant c_1 \delta,
+          \]
+          где $c_1 = c_1(c_0, \alpha_0, \abs{b}, \tau)$.
+        </p>
+
+        <p>
+          Заменим уравнение (3) следующим интегральным уравнением:
+          \[
+          \tag{8}
+          y(t) = y_0(t) + \int\limits_{\tau}^{t} k(t - s) l(y(s), y(s - \tau)) ds.
+          \]
+          Обратим внимание на пределы интегрирования. Нижний предел равняется $\tau$, так как
+          $y(s - \tau)$, который определяется только при неотрицательных значениях аргумента.
+        </p>
+
+        <p>
+          Проверим на равномерную ограниченность последовательные приближения:
+          \[
+          \tag{9}
+          y_{n+1}(t) =
+          \begin{cases}
+          \varphi(t), & t \in [0, \tau], \\
+          y_0(t) + \int\limits_{\tau}^{t} k(t - s) l(y_n(s), y_n(s - \tau)) ds,
+          & t \geqslant \tau.
+          \end{cases}
+          \]
+          В качестве нулевого приближения возьмём $y_0(t)$.
+        </p>
+
+        <p>
+          Так как
+          \[
+          \abs{y_0(t)} \leqslant c_1 \delta \lt 2 c_1 \delta,
+          \]
+          то для $y_0(t)$ очевидно.
+        </p>
+
+        <div class="remark">
+          Двойка в оценке появилась, так как в приближение входит два аргумента:
+          $y_n(s)$ и $y_n(s - \tau)$.
+        </div>
+
+        <p>
+          Индуктивное предположение: пусть
+          \[
+          \tag{10}
+          \abs{y_n(t)} \lt 2 c_1 \delta, \qquad \abs{y_n(t - \tau)} \lt 2 c_1 \delta
+          \qquad \forall t \geqslant \tau.
+          \]
+          Нелокальную продолжимость $y_{n+1}$ может нарушить только $l$.
+          Рассуждаем следующим образом.  Уравнение (3) имело нулевое решение,
+          следовательно,
+          \[
+          l(0, 0) = 0,
+          \]
+          поэтому функция $l$ определена в некоторой окрестности нуля. Но ведь
+          условие (10) эту некоторую окрестность нуля и задаёт, поэтому в нём
+          выберем $\delta$ настолько малым, чтобы значения $y_n(s)$ и $y_n(s -
+          \tau)$ не выходили из области определения $l$. Если так, то $y_{n+1}$
+          будет определена тоже для всех $t \geqslant \tau$, потому что никакие
+          другие элементы формулы (9) этому не мешают.
+        </p>
+
+        <p>
+          Таким образом показали нелокальную продолжимость. Оценим её теперь.
+          Для этого вернёмся к функции $f(x, x_0)$, она удовлетворяла условию
+          Липшица, следовательно, функция $l(y, y_\tau)$ тоже липшицева:
+          \[
+          \abs{l(u,v) - l(\bar u, \bar v)} \leqslant L \paren{
+          \abs{u - \bar u} + \abs{v - \bar v}
+          }.
+          \]
+          Положим $\bar u = \bar v = 0$, откуда
+          \[
+          \abs{l(u,v)} \leqslant L\paren{ \abs{u} + \abs{v} }.
+          \]
+          Тогда
+          \[
+          \frac{\abs{l(u,v)}}{\abs{u} + \abs{v}} \leqslant L,
+          \]
+          однако в силу условия (6) величина слева не просто ограничена
+          константой, но и стремится к нулю, если $\abs{u} + \abs{v} \to 0$.
+          Отсюда следует, что существует величина $\hat L(u, v) \leqslant L$
+          такая, что
+          \[
+          \hat L(u, v) \limto{\abs{u} + \abs{v} \to 0} 0,
+          \]
+          для которой
+          \[
+          \tag{11}
+          \abs{l(u, v)} \leqslant \hat L(u, v) \cdot \paren{ \abs{u} + \abs{v} }.
+          \]
+          Отсюда сразу следует, что
+          \[
+          \tag{12}
+          \begin{aligned}
+          \abs{l(y_n(s), y_n(s - \tau))}
+          &\leqslant
+          \hat L(y_n(s), y_n(s - \tau)) \cdot \paren{ \abs{y_n(s)} + \abs{y_n(s - \tau)} } \lt \\
+          &\lt
+          4 c_1 \delta \hat L.
+          \end{aligned}
+          \]
+          Тогда
+          \[
+          \abs{y_{n+1}(t)} \leqslant
+          \begin{cases}
+          \delta, & t \in [0, \tau], \\
+          \abs{y_0(t)} + \int\limits_{\tau}^{t} \abs{k(t - s)} \abs{l(y_n(s), y_n(s - \tau))} ds.
+          & t \geqslant \tau.
+          \end{cases}
+          \]
+          Поэтому при $t \geqslant \tau$
+          \[
+          \abs{y_{n+1}(t)}
+          \lt
+          c_1 \delta + \int\limits_{0}^{\infty} \abs{k} \cdot 4 c_1 \delta \hat L ds.
+          \]
+
+          <div class="remark">
+            Пределы интегрирования такие, тк подынтегральное выражение неотрицательно, поэтому
+            с такими пределами оценка только усилится.
+          </div>
+        </p>
+
+        <p>
+          Рассмотрим
+          \[
+          \int\limits_{0}^{\infty} \abs{k} ds.
+          \]
+          Этот интеграл сходится, так как при отрицательных значениях аргумента $k = 0$, а при
+          положительных значениях
+          \[
+          \abs{k(t)} \leqslant c_0 e^{\alpha_0 t},
+          \]
+          поэтому
+          \[
+          \int\limits_{0}^{\infty} \abs{k} ds = I_0.
+          \]
+          Численное значение нас не интересует.
+        </p>
+
+        <p>
+          Окончательно получаем, что при $t \geqslant \tau$.
+          \[
+          \begin{aligned}
+          \abs{y_{n+1}(t)}
+          &\lt
+          c_1 \delta + 4 c_1 \delta \hat L I_0 = \\
+          &= c_1 \delta \paren{ 1 + 4 \hat L I_0 }.
+          \end{aligned}
+          \]
+          Известно, что $\hat L \limto{\abs{y_n} + \abs{y_n(t - \tau)} \to 0}
+          0$, то есть при $t \to +\infty$. Значит, при достаточно больших
+          значениях $t$
+          \[
+          4 \hat L I_0 \lt 1,
+          \]
+          поэтому
+          \[
+          \abs{y_{n+1}(t)} \lt 2 c_1 \delta.
+          \]
+          Величина справа не зависит ни от $t$, ни от номера $n$. Итак, получили
+          равномерную ограниченность всех элементов последовательности.
+        </p>
+
+        <hr />
+
+        <p>
+          Покажем теперь, что последовательность $y_n$ равномерно по $t$ сходится на интервале
+          $[\tau, +\infty)$. Заменим равномерную сходимость последовательности на равномерную сходимость
+          функционального ряда:
+          \[
+          \tag{13}
+          y_0(t) + \sum\limits_{n=0}^{\infty} \paren{ y_{n-1}(t) - y_n(t) }.
+          \]
+          Построим числовой мажорантный ряд. $y_0(t)$ по модулю уже оценен, поэтому, пользуясь
+          формулой (9), оценим первую разность:
+          \[
+          \abs{y_1(t) - y_0(t)}
+          \leqslant
+          \int\limits_{\tau}^{t} \abs{k(t - s)} \cdot \abs{l(y_0(s), y_0(s - \tau))} ds.
+          \]
+          Применим опять формулу, полученную для оценки на $l$:
+          \[
+          \begin{aligned}
+          \abs{y_1(t) - y_0(t)}
+          &\lt
+          \int\limits_{0}^{\infty} \abs{k(t - s)}
+          \cdot \hat L \paren{ \abs{y_0(s)} + \abs{y_0(s - \tau)} } ds \lt \\
+          &\lt
+          4 \hat L c_1 \delta \int\limits_{0}^{\infty} \abs{k(t - s)} ds.
+          \end{aligned}
+          \]
+          Но
+          \[
+          \int\limits_{0}^{\infty} \abs{k(t - s)} ds = \frac{c_0}{\abs{\alpha_0}},
+          \]
+          поэтому
+          \[
+          \abs{y_1(t) - y_0(t)}
+          \lt
+          \frac{4 c_0 c_1 \delta \hat L}{\abs{\alpha_0}}
+          \limto{t \to +\infty} 0.
+          \]
+          Итак, получили, что
+          \[
+          \abs{y_1(t) - y_0(t)} \limto{t \to +\infty} 0,
+          \]
+          но
+          \[
+          y_0(t) \limto{t \to +\infty} 0,
+          \]
+          поэтому
+          \[
+          y_1(t) \limto{t \to +\infty} 0.
+          \]
+        </p>
+
+        <p>
+          Рассмотрим теперь оценку на произвольное слагаемое:
+          \[
+          \begin{aligned}
+          \abs{y_{n+1}(t) - y_n(t)}
+          &\overset{(9)}{=}
+          \abs{
+          y_0(t) + \int\limits_{\tau}^{t} k(t - s) \cdot l\paren{ y_n(s), y_n(s - \tau) } ds
+          -
+          y_0(t) + \int\limits_{\tau}^{t} k(t - s) \cdot l\paren{ y_{n-1}(s), y_{n-1}(s - \tau) } ds
+          } \leqslant \\
+          &\leqslant
+          \int\limits_{\tau}^{t} \abs{k(t-s)} \abs{
+          l( y_n(s), y_n(s - \tau) ) - l(y_{n-1}(s), y_{n-1}(s - \tau))
+          } ds \lt \\
+          &\lt
+          \int\limits_{\tau}^{t} \abs{k(t - s)} \hat L \paren{
+          \abs{y_n(s) - y_{n-1}(s)} + \abs{ y_n(s - \tau) - y_{n-1}(s - \tau) }
+          } ds.
+          \end{aligned}
+          \]
+          Ограничим величину $\abs{y_n(s) - y_{n-1}(s)}$. Для этого введём величину
+          \[
+          m_n(t) = \max_{[\tau, t]} \abs{y_n - y_{n-1}},
+          \]
+          тогда
+          \[
+          \begin{aligned}
+          \abs{y_{n+1}(t) - y_n(t)}
+          &\lt
+          2 \hat L m_n(t) \int\limits_{0}^{\infty} \abs{k(t - s)} ds = \\
+          &=
+          \frac{2 \hat L c_0}{\abs{\alpha_0}} m_n(t).
+          \end{aligned}
+          \]
+          Введём теперь обозначение
+          \[
+          m_{n+1}(t)
+          = \max_{[\tau, t]} \abs{ y_{n+1} - y_n }
+          \lt
+          \frac{2 \hat L c_0}{\abs{\alpha_0}} m_n(t).
+          \]
+          Обозначим
+          \[
+          c_2 := \frac{2 \hat L c_0}{\abs{\alpha_0}},
+          \]
+          тогда
+          \[
+          \abs{y_{n+1}(t) - y_n(t)} \lt c_2 m_n(t).
+          \]
+        </p>
+
+        <p>
+          Построили мажорантный ряд:
+          \[
+          \begin{aligned}
+          \abs{y_0} + \abs{y_1 - y_0} + \cdots + \abs{y_{n+1} - y_n} + \dots
+          &\lt
+          2 c_1 \delta + m_1(t) + c_2 m_1(t) + c_2^2 m_1(t) + \dots = \\
+          &=
+          2 c_1 \delta + m_1(t) \paren{ 1 + \sum\limits_{k=1}^{\infty} c_2^k } \leqslant \\
+          &\leqslant
+          2 c_1 \delta + \paren{ 1 + \sum\limits_{k=1}^{\infty} c_2^k } 2 c_1 c_2 \delta.
+          \end{aligned}
+          \]
+          Так как в $c_2$ входит $\hat L$, то при достаточно больших $t$ $\abs{c_2} \lt 1$,
+          поэтому
+          \[
+          \abs{y_0} + \abs{y_1 - y_0} + \cdots + \abs{y_{n+1} - y_n} + \dots \lt \infty.
+          \]
+          Сошёлся мажорантный ряд, причём сумма ряда не зависит от $t$, поэтому
+          по признаку Вейерштрасса функциональный ряд (13) сходится равномерно
+          к предельной функции $\bar y(t)$.
+        </p>
+
+        <p>
+          Перейдём к пределу при $n \to \infty$ в формулах последовательных приближений (9).
+          Получаем, что
+          \[
+          \tag{14}
+          \bar y(t) = y_0(t) + \int\limits_{\tau}^{t} k(t - s) \cdot l(\bar y(s), \bar y(s - \tau)) ds.
+          \]
+          Так как
+          \[
+          y_0(t) \to 0, \qquad k(t - s) \to 0, \qquad l \to 0,
+          \]
+          то $\bar y(t) \to 0$, если
+          \[
+          \abs{\varphi_\tau(\cdot)}_\tau \lt \delta,
+          \]
+          причём $\delta$ достаточно мало (насколько достаточно &mdash; смотри
+          индукционное предположение).
+        </p>
+      </div>
+    </div>
+
+    <div class="remark">
+      Условие (6)
+      \[
+      \lim\limits_{\abs{y} + \abs{y_\tau} \to 0}
+      \frac{\abs{l(y, y_\tau)}}{\abs{y} + \abs{y_\tau}} = 0,
+      \]
+      выполнено автоматически, если функция $f$ в уравнении (1) имеет
+      вторые непрерывные производные по $x, x_\tau$ и смешанные
+      хотя бы в окрестности точек равновесия.
+
+      <div class="idea">
+        В этом случае тейлоровское разложение можем продолжить, тогда порядок малости
+        $l(y, y_\tau)$ квадратом, и условие выполняется.
+      </div>
+    </div>
+
+    <div class="example">
+      Исследовать на усточивость стационарное решение уравнения
+      \[
+      \dot x = - 2 \sin x(t) - x(t - \tau).
+      \]
+
+      <div class="solution">
+        Найдём положения равновесия (приравниваем нулю правую часть), получаем $x = 0$.
+        Условие (6) выполнено по предыдущему замечанию, поэтому рассмотрим
+        \[
+        \dot y = a y + b y_\tau,
+        \]
+        где
+        \[
+        \begin{aligned}
+        a &= \at{\pd{f}{x}}{0} = -2, \\
+        b &= \at{\pd{f}{x_\tau}}{0} = -1.
+        \end{aligned}
+        \]
+        Тогда уравнение линейного приближения имеет вид
+        \[
+        \dot y = -2 y - y(t - \tau).
+        \]
+        <div class="todo">
+          Посмотри методичку. Картинку можно найти в Эльсгольце (стр. 126)
+        </div>
+      </div>
+    </div>
+
+    <div class="example">
+      \[
+      \dot x = x^2(t) - x^3(t - \tau).
+      \]
+      <div class="solution">
+        Две точки равновесия: $x \equiv 0, x \equiv 1$.
+        <br />
+        Рассмотрим первое. Так как $\dot x = 0$, то есть у характеристического
+        уравнения есть нулевой корень. Первое условие теоремы не выполнено,
+        поэтому ей пользоваться нельзя.
+        <br />
+        Рассмотрим второе.
+        \[
+        \pd{f}{x} = 2, \qquad \pd{f}{x_\tau} = -3,
+        \]
+        поэтому
+        \[
+        a_1 = 2 \tau, \qquad b_1 = - 3 \tau.
+        \]
+        Если провести эту линию на $D$-разбиениях (рис. 11 Эльсгольца), то можно
+        увидеть, что при небольших $\tau$ точка лежит в области асимптотической
+        устойчивости, а при $\tau \gt \bar \tau$ линия выходит, поэтому можно
+        сказать, что второе положение равновесия устойчиво при малых
+        запаздываниях.
+      </div>
+    </div>
+
+    <div class="todo">
+      Потренироваться решать задачи из методчики.
+    </div>
+
+    <h4>Применение к системам</h4>
+
+    Рассмотрим систему
+    \[
+    \begin{aligned}
+    \dot x &= P(x, x_\tau, y, y_\tau), \\
+    \dot y &= Q(x, x_\tau, y, y_\tau).
+    \end{aligned}
+    \]
+    Запаздывание одно, постоянное и равно $\tau = \const$. Про функции $P$ и $Q$
+    предполагаем, что они непрерывны и имеют непрерывные первые производные на
+    области задания.
+
+    <p>
+      Положения равновесия находятся из системы
+      \[
+      \begin{aligned}
+      P(x_0, x_0, y_0, y_0) = 0, \\
+      Q(x_0, x_0, y_0, y_0) = 0.
+      \end{aligned}
+      \]
+      Если она разрешима, то
+      \[
+      x(t) \equiv x_0, \qquad y(t) \equiv y_0.
+      \]
+      Введём систему в отклонениях. Пусть
+      \[
+      \begin{aligned}
+      u(t) &= x(t) - x_0, \\
+      v(t) &= y(t) - y_0,
+      \end{aligned}
+      \]
+      тогда
+      \[
+      \begin{aligned}
+      \dot u = \dot x
+      &= P(x_0, x_0, y_0, y_0) + \\
+      &\phantom{=}+ \at{\pd{P}{x}}{(x_0, y_0)} \cdot (x - x_0)
+      + \at{\pd{P}{x_\tau}}{(x_0, y_0)} \cdot (x_\tau - x_0) + \\
+      &\phantom{=} + \at{\pd{P}{y}}{(x_0, y_0)} \cdot (y - y_0)
+      + \at{\pd{P}{y_\tau}}{(x_0, y_0)} \cdot (y_\tau - y_0) + \\
+      &\phantom{=} + l_1(...).
+      \end{aligned}
+      \]
+      Аналогично для $\dot v$. Заметим, что $l_1, l_2$ зависят от скобок $(x - x_0)$ и так далее.
+    </p>
+
+    <p>
+      Итак, система в отклонениях:
+      \[
+      \begin{pmatrix}
+      \dot u \\
+      \dot v
+      \end{pmatrix}
+      =
+      A (x_0, y_0)
+      \begin{pmatrix}
+      u \\ v
+      \end{pmatrix}
+      +
+      B (x_0, y_0)
+      \begin{pmatrix}
+      u_\tau \\ v_\tau
+      \end{pmatrix}
+      +
+      \begin{pmatrix}
+      l_1(u, v, u_\tau, v_\tau) \\
+      l_2(u, v, u_\tau, v_\tau)
+      \end{pmatrix},
+      \]
+      где
+      \[
+      A =
+      \left.
+      \begin{pmatrix}
+      \pd{P}{x} & \pd{P}{y} \\
+      \pd{Q}{x} & \pd{Q}{y} \\
+      \end{pmatrix}
+      \right|_{(x_0, y_0)},
+      \qquad
+      B =
+      \left.
+      \begin{pmatrix}
+      \pd{P}{x_\tau} & \pd{P}{y_\tau} \\
+      \pd{Q}{x_\tau} & \pd{Q}{y_\tau} \\
+      \end{pmatrix}
+      \right|_{(x_0, y_0)}.
+      \]
+      Тогда система линейного приближения:
+      \[
+      \begin{pmatrix}
+      \dot u \\
+      \dot v
+      \end{pmatrix}
+      =
+      A
+      \begin{pmatrix}
+      u \\ v
+      \end{pmatrix}
+      +
+      B
+      \begin{pmatrix}
+      u_\tau \\ v_\tau
+      \end{pmatrix}.
+      \]
+    </p>
+
+    <p>
+      Условия теоремы:
+    </p>
+
+    <ol>
+      <li>
+        \[
+        \det( \lambda E - A - B e^{-\lambda \tau} ) = 0.
+        \]
+      </li>
+
+      <li>
+        \[
+        \lim\limits_{\abs{u} + \abs{v} + \abs{u_\tau} + \abs{v_\tau} \to 0}
+        \frac{\abs{l_i(u, v, u_\tau, v_\tau)}}{\abs{u} + \abs{v} + \abs{u_\tau} + \abs{v_\tau}}
+        = 0.
+        \]
+      </li>
+    </ol>
+
+    <div class="remark">
+      Замечание из прошлого пункта также справедливо.
+    </div>
+
+    <h2>2023-11-25</h2>
+
+    <div class="content">
+      <h4>§2. Теоремы о неустойчивости</h4>
+
+      Рассмотрим систему
+      \[
+      \tag{1}
+      \dot X = A_0 X(t) + A_1 X(t - \tau)
+      \]
+
+      <div class="theorem">
+        Система (1) неустойчива тогда и только тогда, когда существует
+        $\lambda_0 \in \C$ с неотрицательной вещественной частью
+        $\Re \lambda_0 \geqslant 0$ и постоянный ненулевой вектор $C$
+        такой, что функция Ляпунова
+        \[
+        \tag{2}
+        V(t,x) = e^{(\alpha - \lambda_0) t} C^T x,
+        \]
+        продифференцированная в силу системы (1), имеет
+        на нетривиальных решения вспомогательной системы
+        \[
+        \tag{3}
+        \dot z_i = \lambda_0 z_i, \qquad i = \overline{1,n}
+        \]
+        вид
+        \[
+        \at{\dv{V}{t}}_{(1), (3)} = \alpha V(t, Z),
+        \]
+        где $\alpha \in \C$ &mdash; произвольная постоянная.
+
+        <div class="remark">
+          Обычно мы писали
+          \[
+          \at{\dv{V}{t}}_{(1)} = \pd{V}{t} + \pd{V}{x} \dot x.
+          \]
+          Всюду вместо $x$ подставляем нетривиальное решение системы (3).
+        </div>
+
+        <div class="proof">
+          <div class="necessity">
+            Пусть система (1) неустойчива. Рассмотрим характеристическое уравнение
+            \[
+            \det \paren{ \lambda E - A_0 - A_1 e^{-\lambda \tau} } = 0.
+            \]
+            В силу неустойчивости это уравнение имеет хотя бы один корень
+            с неотрицательной вещественной частью. Возьмём его в качестве $\lambda_0$,
+            а вектор $C$ построим как собственный вектор для собственного числа
+            $\lambda_0$:
+            \[
+            \tag{4}
+            C^T \paren{ \lambda_0 E - A_0 - A_1 e^{-\lambda_0 \tau} } = 0.
+            \]
+            Тогда вектор $C \neq 0$.
+
+            <p>
+              Рассмотрим теперь систему (3). Её нетривиальное решение имеет вид
+              \[
+              z_i(t) = e^{\lambda_0 t}.
+              \]
+              Тогда
+              \[
+              \tag{5}
+              z_i(t - \tau)
+              = e^{\lambda_0 (t - \tau)}
+              = z_i(t) e^{- \lambda_0 \tau}.
+              \]
+
+              Рассмотрим теперь производную функции Ляпунова в силу системы (1):
+              \[
+              \begin{aligned}
+              \at{\dv{V}{t}}_{(1)} &= \pd{V}{t} + \pd{V}{x} \dot x = \\
+              &=
+              (\alpha - \lambda_0) e^{(\alpha - \lambda_0) t} C^T X(t)
+              +
+              e^{(\alpha - \lambda_0) t} C^T \paren{ A_0 X(t) + A_1 X(t - \tau) }.
+              \end{aligned}
+              \]
+              Вместо $X(t)$ подставим решение вспомогательной системы:
+              \[
+              \tag{6}
+              \begin{aligned}
+              \at{\dv{V}{t}}_{(1), (3)}
+              &=
+              \overbrace{\alpha e^{(\alpha - \lambda_0) t} C^T Z}^{\alpha V(t, Z)}
+              +
+              e^{(\alpha - \lambda_0) t} C^T \paren{ A_0 Z + A_1 e^{-\lambda_0 \tau} Z } - \\
+              &\phantom{=}
+              - \lambda_0 e^{(\alpha - \lambda_0) t} C^T Z = \\
+              &= \alpha V(t, Z)
+              +
+              e^{(\alpha - \lambda_0) t} C^T \paren{
+              A_0 + A_1 e^{-\lambda_0 \tau} - \lambda_0 E
+              } Z.
+              \end{aligned}
+              \]
+              В силу соотношения (4)
+              \[
+              C^T \paren{ A_0 + A_1 e^{-\lambda_0 \tau} - \lambda_0 E } = 0.
+              \]
+            </p>
+
+            Необходимость доказана.
+          </div>
+
+          <div class="sufficiency">
+            Пусть выполнены условия теоремы. Продифференцируем функцию $V$ в силу системы (1)
+            и рассмотрим эту производную на нетривиальных решениях системы (3). Получим
+            \[
+            \at{\dv{V}{t}}_{(1), (3)}
+            = \alpha V(t, Z)
+            +
+            e^{(\alpha - \lambda_0) t} C^T \paren{
+            A_0 + A_1 e^{-\lambda_0 \tau} - \lambda_0 E
+            } Z.
+            \]
+            но по условию теоремы эта производная должна равняться
+            $\alpha V(t, Z)$. Следовательно, второе слагаемое равняется нулю:
+            \[
+            e^{(\alpha - \lambda_0) t}
+            C^T \paren{ A_0 + A_1 e^{-\lambda_0 \tau} - \lambda_0 E } Z = 0.
+            \]
+            Так как $Z \neq 0$, следовательно, выполняется равенство (4):
+            \[
+            C^T \paren{ \lambda_0 E - A_0 - A_1 e^{-\lambda_0 \tau} } = 0,
+            \]
+            где $\lambda_0$ &mdash; корень характеристического уравнения системы (1)
+            с неотрицательной вещественной частью. Отсюда следует неустойчивость.
+          </div>
+        </div>
+      </div>
+
+      <p>
+        Вернёмся к нелинейному случаю и рассмотрим ещё одно определение &mdash; устойчивость
+        в широком смысле как отрицание равномерной устойчивости.
+      </p>
+
+      <p>
+        Рассмотрим систему
+        \[
+        \tag{7}
+        \dot X = F(t, X_t(\cdot)).
+        \]
+      </p>
+
+      <div class="definition">
+        Говорят, что нулевое решение системы (7) <i>неустойчиво в широком смысле</i>, если
+        существует $\varepsilon \gt 0$ такой, что можно построить три последовательности
+        \[
+        \set{ t_{0_k} }_{k=1}^\infty, \qquad
+        \set{ X_{0_k} }_{k=1}^\infty, \qquad
+        \set{ T_k }_{k=1}^\infty,
+        \]
+        удовлетворяющие набору условий:
+        <ol>
+          <li>
+            $t_{0_k} \lt t_{0_{k+1}}$;
+          </li>
+
+          <li>
+            $\norm{X_{0_k}} \lt \varepsilon, \quad X_{0_k} \limto{k \to +\infty} 0$;
+          </li>
+
+          <li>
+            $T_k = T_k(\varepsilon, t_{0_k}, X_{0_k}) \gt t_{0_k}$;
+          </li>
+
+          <li>
+            $\lim\limits_{k \to +\infty} \norm{X(T_k, t_{0_k}, X_{0_k})} \geqslant \varepsilon$,
+          </li>
+        </ol>
+
+        где
+        <ul>
+          <li>
+            $\set{ t_{0_k} }_{k=1}^\infty$ &mdash; последовательность начальных
+            моментов времени,
+          </li>
+
+          <li>
+            $\set{ X_{0_k} }_{k=1}^\infty$ &mdash; последовательность начальных
+            условий, взятых в $\varepsilon$-окрестности.
+          </li>
+        </ul>
+      </div>
+
+      <div class="theorem">
+        Нулевое решение системы (7) неустойчиво в широком смысле, если
+        существует функция $V(t, X)$, заданная при $t \geqslant 0$ и $\norm{X} \lt H$,
+        такая, что выполняются условия
+        <ol>
+          <li>
+            $V(t, X)$ ограничена в области задания;
+          </li>
+
+          <li>
+            $V(t, X)$ допускает б.м.в.п.;
+          </li>
+
+          <li>
+            существует значение $t^* \gt 0$ такое, что в любой сколь угодно
+            малой окрестности нуля найдётся $X^*$ такой, что
+            \[
+            V(t^*, X^*) \gt 0;
+            \]
+          </li>
+
+          <li>
+            производная $V(t, X)$ в силу системы (7) есть функционал
+            \[
+            \at{\dv{V}{t}}_{(7)} = U(t, X_t(\cdot)),
+            \]
+            заданный на любых непрерывных кривых $y_t(\cdot)$, удовлетворяющих
+            условию $\norm{y_t(\cdot)}_\tau \lt H$, и удовлетворяющий условию
+            \[
+            \tag{8}
+            U(t, y_t(\cdot)) \geqslant W(\norm{y(t)})
+            \]
+            на кривых, подчинённых условию Разумихина:
+            \[
+            V(s, y(s)) \leqslant V(t, X(t)),
+            \qquad y(t) = X(t), \quad s \in [t - \tau, t],
+            \]
+            где $W(z)$ &mdash; определённо-положительная функция.
+          </li>
+        </ol>
+
+        <div class="proof">
+          Докажем от противного. Пусть в условиях теоремы нулевое решение системы (7)
+          равномерно устойчиво. Зададим $\varepsilon \gt 0$, по нему построим
+          $\delta(\varepsilon)$, не зависящее от начальной точки, возьмём начальную функцию
+          из $\delta$-окрестности:
+          \[
+          \norm{\varphi_{t_0}(\cdot)}_\tau \lt \delta(\varepsilon),
+          \]
+          тогда
+          \[
+          \norm{X_\varphi(t)} \lt \varepsilon, \qquad \forall t \geqslant t_0.
+          \]
+          Подставим это решение в функцию $V(t, X)$ и найдём ту точку $(t^*,
+          X^*)$, где
+          \[
+          V(t^*, X^*) \gt 0.
+          \]
+          Так как $X^*$ существует в сколь угодно малой окрестности нуля, то
+          считаем, что
+          \[
+          \norm{X^*} \lt \delta.
+          \]
+          Перенесём начальную точку в точку $t^*$. Из предположения о равномерной
+          устойчивости следует, что $\delta$ не изменится. Новое начальное множество:
+          \[
+          E_{t^*} = [t^* - \tau, t^*].
+          \]
+          На нём определим новую начальную функцию $\overline \varphi(t)$ такую, что
+          <ol>
+            <li>
+              $\norm{\overline \varphi_{t^*}(\cdot)}_\tau \lt \delta$;
+            </li>
+
+            <li>
+              $\overline \varphi(t^*) = X^*$.
+            </li>
+
+            <li>
+              для функции $\overline \varphi(t)$ на начальном множестве $E_{t^*}$
+              выполняется условие Разумихина:
+              \[
+              V(s, \overline \varphi(s))
+              \leqslant
+              V(t^*, \overline \varphi(t^*))
+              = V(t^*, X^*),
+              \qquad s \in E_{t^*}.
+              \]
+              Так как $V(t^*, X^*) \gt 0$, то этому условию можно удовлетворить.
+            </li>
+          </ol>
+
+          Из выполнения условия Разумихина вытекает, что
+          \[
+          \tag{9}
+          U(t^*, \overline \varphi_{t^*}(\cdot))
+          \geqslant
+          W(\norm{\overline \varphi(t^*)})
+          =
+          W(\norm{X^*})
+          \gt 0.
+          \]
+          Отсюда следует, что в начальной точке $t^*$ решение системы (7),
+          соответствующее начальной функции $\overline \varphi(t)$, возрастает.
+
+          <p>
+            По непрерывности решение будет возрастать ещё на некотором интервале
+            $(t^*, T)$, но на возрастающих функциях условие Разумихина всегда
+            выполнено.
+          </p>
+
+          Из неравенства (8) вытекает, что $T = \infty$.
+
+          <div class="derivation">
+            Пусть $T \lt \infty$ и
+            \[
+            U(T, X_{\overline\varphi}(T)) = 0.
+            \]
+            Это сразу противоречит неравенству (8).
+          </div>
+
+          Проинтегрируем
+          \[
+          \at{\dv{V}{t}}_{(7)} = U
+          \]
+          по $[t^*, +\infty)$ вдоль этого возрастающего решения, получим
+          \[
+          \tag{10}
+          V(t, X_{\overline\varphi}(t))
+          \geqslant
+          V(t^*, X^*)
+          +
+          W(\norm{X^*})(t - t^*),
+          \qquad t \to +\infty.
+          \]
+          Это противоречит ограниченности функции $V(t, X)$.
+        </div>
+      </div>
+    </div>
+
+    <h3>Синтез управлений с запаздыванием</h3>
+    <div class="content">
+      <h4>§1. Построение управлений с запаздыванием, переводящих систему из точки в точку</h4>
+      <p>
+        Рассмотрим для начала линейный случай в случае полной информации:
+        \[
+        \tag{1}
+        \dot X = P(t) X + Q(t) u + f(t).
+        \]
+        Пусть
+        \[
+        \dim X = n, \qquad \dim u = r \leqslant n
+        \]
+        и
+        \[
+        P(t), Q(t), f(t) \in C[0, T].
+        \]
+      </p>
+
+      <div class="problem">
+        Построить управление
+        \[
+        \tag{2}
+        u = u(t, X(t - \tau))
+        \]
+        и начальную функцию $\varphi(t) \in C[0, \tau]$ (здесь $t_0 = \tau$) так, чтобы
+        система (1), замкнутая построенным управлением, имело решение, соответствующее
+        начальной функции $\varphi$, которое удовлетворяло бы граничным условиям
+        \[
+        \tag{3}
+        X(0) = X_0, \qquad X(T) = 0.
+        \]
+      </div>
+
+      <p>
+        Подставим управление (2) в систему (1), используя представление из
+        леммы о представлении допустимых управлений
+        \[
+        \tag{4}
+        u = B^T(t) C + V(t),
+        \]
+        где
+        \[
+        B(t) = Y^{-1}(t) Q(t),
+        \]
+        а $Y(t)$ &mdash; фундаментальная матрица системы
+        \[
+        \dot X = P(t) X,
+        \]
+        нормированная в нуле: $Y(0) = E$, а $V(t)$ &mdash; вектор, удовлетворяющий условию
+        ортогональности:
+        \[
+        \int\limits_{0}^{T} B(t) V(t) dt = 0.
+        \]
+      </p>
+
+      <p>
+        Получаем
+        \[
+        \tag{5}
+        \dot X
+        =
+        P(t) X
+        + Q(t) \paren{
+        B^T C + V
+        } + f(t).
+        \]
+        По формуле Коши
+        \[
+        X(t) = Y(t) \paren{
+        X_0
+        + \int\limits_{0}^{t} \underbrace{Y^{-1} Q}_{=B} (B^T C + V) dt
+        + \int\limits_{0}^{t} Y^{-1} f dt
+        }.
+        \]
+        Вычислим решение в момент времени $t = T$:
+        \[
+        X(T) = Y(T) \paren{
+        X_0
+        + \int\limits_{0}^{T} B B^T dt \cdot C + \cancel{\int\limits_{0}^{T} B V dt}
+        + \int\limits_{0}^{T} Y^{-1} f dt
+        }.
+        \]
+        Введём обозначение
+        \[
+        A(0, T) = \int\limits_{0}^{T} B B^T dt.
+        \]
+        Необходимо, чтобы $X(T) = 0$, поэтому
+        \[
+        Y(T) \paren{
+        X_0
+        + A(0, T) C + \int\limits_{0}^{T} Y^{-1} f dt
+        } = 0.
+        \]
+        Отсюда следует, что
+        \[
+        \tag{6}
+        X_0 + A(0, T) C + \int\limits_{0}^{T} Y^{-1} f dt = 0.
+        \]
+
+        Проинтегрируем систему (5) на отрезке $[t, T]$ при произвольном текущем $t$,
+        учитывая, что $X(T) = 0$:
+        \[
+        - Y^{-1}(t) X(t)
+        =
+        \int\limits_{t}^{T} B(s) B^T(s) ds \cdot C
+        +
+        \int\limits_{t}^{T} \paren{ B(s) V(s) + Y^{-1}(s) f(s) } ds.
+        \]
+        Пусть
+        \[
+        A(t, T) = \int\limits_{t}^{T} B(s) B^T(s) ds.
+        \]
+        Тогда
+        \[
+        \tag{7}
+        X(t) = - Y(t) A(t, T) C
+        - Y(t) \int\limits_{t}^{T} \paren{ BV + Y^{-1} f } ds.
+        \]
+
+        Из соотношения (6) выразим вектор $C$ (предполагая, что это возможно):
+        \[
+        \tag{8}
+        C = A^{-1}(0, T) \paren{
+        X_0 + \int\limits_{0}^{T} Y^{-1} f ds
+        }.
+        \]
+        Подставим это соотношение в (7):
+        \[
+        \tag{9}
+        \begin{aligned}
+        X(t)
+        &=
+        - Y(t) A(t, T) A^{-1}(0, T) \paren{
+        X_0 + \int\limits_{0}^{T} Y^{-1} f ds
+        } - \\
+        &\phantom{=}
+        - Y(t) \int\limits_{t}^{T} \paren{ BV + Y^{-1} f } ds.
+        \end{aligned}
+        \]
+        Проверим, что функция (9) удовлетворяет граничным условиям (3):
+        очевидно, что $X(T) = 0$. Теперь рассмотрим
+        \[
+        \begin{aligned}
+        X(0) &= E A(0, T) A^{-1}(0, T) \paren{
+        X_0 + \int\limits_{0}^{T} Y^{-1} f ds
+        } - \\
+        &\phantom{=}
+        - E
+        \int\limits_{0}^{T} Y^{-1} f ds = \\
+        &= E X_0 = X_0.
+        \end{aligned}
+        \]
+        Итак, граничные условия (3) для функции (9) выполнены, поэтому на отрезке $[0, \tau]$
+        мы можем считать её начальной функцией.
+      </p>
+
+      <p>
+        Построим теперь управление. Так как выражение (7) представляет собой решение
+        системы (1), то подставим вместо $t$ значение $t - \tau$:
+        \[
+        X(t - \tau) = - Y(t - \tau) A(t - \tau, T) C
+        - Y(t - \tau) \int\limits_{t - \tau}^{T} \paren{ BV + Y^{-1} f } ds.
+        \]
+        Отсюда выразим $C$ (предполагая, что это возможно):
+        \[
+        C =
+        - A^{-1}(t - \tau, T) Y^{-1}(t - \tau)
+        \left[
+        X(t - \tau) + Y(t - \tau) \int\limits_{t - \tau}^{T} \paren{ BV + Y^{-1} f } ds
+        \right].
+        \]
+        Получилась структура, линейная относительно $X(t - \tau)$, поэтому
+        можно ввести новые обозначения и записать
+        \[
+        \tag{10}
+        C = M(t - \tau, T) X(t - \tau) + N(t - \tau, T).
+        \]
+        Подставим это выражение в (4) и получим требуемое управление.
+      </p>
+
+      <p>
+        Соберём теперь все условия, которые позволяют нам выполнить все действия.
+        Нужно, чтобы были невырождены две матрицы:
+        \[
+        A(0, T) \quad \text{и} \quad A(t - \tau, T)
+        \]
+        для произвольного $t$.
+      </p>
+
+      <div class="theorem">
+        Поставленная задача имеет решение, если строки матрицы $B(t)$ линейно
+        независимы на любом отрезке $[t, T]$, где $t \in [0, T - \tau]$,
+        при этом начальная функция выражается формулой (9), а управление &mdash;
+        формулами (4) и (10).
+      </div>
+
+      <p>
+        Рассмотрим теперь задачу с неполной информацией. Пусть известен вектор $Z$,
+        заданный как
+        \[
+        \tag{11}
+        Z(t) = \int\limits_{-\tau}^{0} d R(t, \theta) X(t + \theta),
+        \]
+        где $R(t, \theta) \in \R^{n \times n}$ &mdash; матрица, непрерывная по $t$,
+        а относительно $\theta$ являющаяся матричной функцией ограниченной вариации.
+        Интегрирование проводится по $\theta \in [-\tau, 0]$, а интеграл понимается
+        как интеграл Стилтьеса.
+      </p>
+
+      <div class="problem">
+        Построить управление
+        \[
+        \tag{12}
+        u = u(t, Z(t))
+        \]
+        и начальную функцию на отрезке $[0, \tau]$ так, чтобы для соответствующего
+        решения выполнялись граничные условия (3).
+      </div>
+
+      <p>
+        Из формулы (9) следует, что для её построения ни вектор $X$, ни вектор $Z$
+        не нужны, следовательно, в качестве начальной функции можно и в этой задаче
+        взять (9).
+      </p>
+
+      <p>
+        Для построения управления воспользуемся формулой (7), а вместо $t$ подставим
+        $t + \theta$:
+        \[
+        \tag{13}
+        X(t + \theta) = - Y(t + \theta) A(t + \theta, T) C
+        - Y(t + \theta) \int\limits_{t + \theta}^{T} \paren{ BV + Y^{-1} f } ds.
+        \]
+        Подставим это выражение в (11):
+        \[
+        \begin{aligned}
+        Z(t)
+        &=
+        -\int\limits_{-\tau}^{0} d R(t, \theta) Y(t + \theta) A(t + \theta, T) C - \\
+        &\phantom{=}
+        -\int\limits_{-\tau}^{0} d R(t, \theta)
+        Y(t + \theta) \int\limits_{t + \theta}^{T} \paren{ BV + Y^{-1} f } ds.
+        \end{aligned}
+        \]
+        Введём два обозначения:
+        \[
+        \begin{aligned}
+        H(t, T)
+        &=
+        -\int\limits_{-\tau}^{0} d R(t, \theta) Y(t + \theta) A(t + \theta, T), \\
+        D(t, T)
+        &=
+        -\int\limits_{-\tau}^{0} d R(t, \theta)
+        Y(t + \theta) \int\limits_{t + \theta}^{T} \paren{ BV + Y^{-1} f } ds.
+        \end{aligned}
+        \]
+        Тогда
+        \[
+        \tag{14}
+        Z(t) = H(t, T) C + D(t, T).
+        \]
+        Выражая отсюда $C$ (предполагая, что это возможно), получаем
+        \[
+        \tag{15}
+        C = H^{-1}(t, T) Z(t) - H^{-1}(t, T) D(t, T).
+        \]
+        Структура линейна по $Z$. Подставляем в (4) и получаем требуемую конструкцию
+        управления.
+      </p>
+
+      <p>
+        Существование решения опять упирается в невырожденность $A(0, T)$ и $H(t, T)$.
+      </p>
+
+      <div class="theorem">
+        Поставленная задача (11) имеет решение, если строки матрицы $B(t)$ линейно
+        независимы на отрезке $[0, T]$ и матрица $H(t, T)$ невырожденная.
+      </div>
+
+      <p>
+        Второй вариант задачи с неполной информацией: пусть задан
+        вектор
+        \[
+        \tag{16}
+        \xi(t) = R(t) X(t).
+        \]
+        Задача осложняется тем, что матрица $R(t)$ не квадратная:
+        \[
+        \dim \xi(t) \lt \dim X(t).
+        \]
+        К тому же задан набор
+        \[
+        \tag{17}
+        \xi(t - \tau_1(t)), \quad \dots, \quad \xi(t - \tau_n(t)).
+        \]
+        Можно сказать, что задан своего рода аналог задачи дискретной наблюдаемости.
+      </p>
+
+      <div class="problem">
+        По набору наблюдений (17) построить управление и начальную функцию так, чтобы
+        для соответствующего решения выполнялись граничные условия (3).
+      </div>
+
+      <p>
+        Пусть строки матрицы $B(t)$ линейно независимы на отрезке $[0, T]$, тогда
+        в качестве начальной функции опять возьмём функцию (9).
+      </p>
+
+      <p>
+        Будем подставлять (16) в (7). Заранее введём следующую матрицу:
+        \[
+        \tag{18}
+        \beta(t, T) = -R(t) Y(t) A(t, T).
+        \]
+      </p>
+
+      <div class="theorem">
+        Задача построения начальной функции и управления по набору наблюдений вида (17)
+        разрешима, если строки матрицы $B(t)$ линейно независимы на отрезке $[0, T]$
+        и существует число $\tau \in [0, T]$ такое, что столбцы матрицы $\beta(t, T)$
+        линейно независимы на любом отрезке $[t - \tau, t]$.
+
+        <div class="proof">
+          Пусть условия теоремы выполнены, тогда для любого отрезка $[t - \tau, t]$
+          найдутся моменты
+          \[
+          t - \tau_1(t), \quad \dots, \quad t - \tau_n(t)
+          \]
+          такие, что квадратная матрица
+          \[
+          \tag{19}
+          \overline \beta
+          =
+          \sum\limits_{j=1}^{n} \beta^T (t - \tau_j(t), T) \beta(t - \tau_j(t), T)
+          \]
+          невырожденная:
+          \[
+          \det \overline \beta \neq 0.
+          \]
+          В формуле (7) вместо $t$ ставим $t - \tau_j(t)$ и всё, что получилось, подставляем
+          в (16):
+          \[
+          \xi(t - \tau_j(t))
+          =
+          \beta(t - \tau_j(t), T) C
+          -
+          R(t - \tau_j(t)) Y(t - \tau_j(t))
+          \int\limits_{t - \tau_j(t)}^{T} (BV + Y^{-1} f) ds.
+          \]
+          Пусть
+          \[
+          \mu(t - \tau_j(t), T)
+          =
+          - R(t - \tau_j(t)) Y(t - \tau_j(t))
+          \int\limits_{t - \tau_j(t)}^{T} (BV + Y^{-1} f) ds.
+          \]
+          Тогда
+          \[
+          \tag{20}
+          \xi(t - \tau_j(t))
+          =
+          \beta(t - \tau_j(t), T) C +
+          \mu(t - \tau_j(t), T),
+          \qquad j = \overline{1,n}.
+          \]
+          Матрица $\beta$ не является квадратной, поэтому сразу же выразить $C$
+          не получится. Домножим каждое из этих выражений на $\beta^T(t - \tau_j(t), T)$
+          и просуммируем по $j$ от $1$ до $n$:
+          \[
+          \overline \beta C = \sum\limits_{j=1}^{n} \beta^T(t - \tau_j(t), T)
+          \left[
+          \xi(t - \tau_j(t)) - \mu(t - \tau_j(t), T)
+          \right].
+          \]
+          Так как $\overline \beta$ невырожденная, то можно отсюда выразить $C$
+          и подставить в (4).
+        </div>
+      </div>
+    </div>
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+  </body>
+</html>

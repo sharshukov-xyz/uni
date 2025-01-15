@@ -3344,7 +3344,7 @@
           \[
           \int\limits_\Omega \left[
           \sum_{\beta,\gamma=1}^n
-          g_{\beta \gamma} \pd{u}{z_\beta} \pd{v}{z_\gamma}
+          g_{\beta \gamma} \pd{u}{z_\beta} \pd{\eta}{z_\gamma}
           - f \eta
           \right] J d\Omega = 0.
           \]
@@ -3360,8 +3360,29 @@
           \]
           </p>
 
-          <div class="todo">
-            Расписать интегрирование по частям.
+          <div class="derivation">
+            \[
+            \begin{aligned}
+            \int\limits_{\Omega}^{} \left[
+            \sum\limits_{\beta,\gamma=1}^{n}
+            g_{\beta \gamma} J \pd{u}{z_\beta} \pd{\eta}{z_\gamma}
+            \right] d\Omega
+            &=
+            \overbrace{
+            \int\limits_{\Gamma}^{} \eta \left[
+            \sum\limits_{\beta,\gamma=1}^{n} g_{\beta \gamma} J \pd{u}{z_\beta}
+            \right] \cos(\vec{n}, z_\gamma) d\Gamma
+            }^{=0} - \\
+            &\phantom{=}-
+            \int\limits_{\Omega}^{} \eta \pd{}{z_\gamma} \paren{
+            \sum\limits_{\beta,\gamma=1}^{n} g_{\beta \gamma} J \pd{u}{z_\beta}
+            } d\Omega = \\
+            &=
+            - \int\limits_{\Omega}^{} \eta \pd{}{z_\gamma} \paren{
+            \sum\limits_{\beta,\gamma=1}^{n} g_{\beta \gamma} J \pd{u}{z_\beta}
+            } d\Omega.
+            \end{aligned}
+            \]
           </div>
 
           <p>
@@ -7738,12 +7759,12 @@
             \]
             где
             \[
-            \begin{gathered}
-            f_1(x) = f(x), \qquad f_m(x) = f_{m-1}(x) + \lambda
+            \begin{aligned}
+            f_1(x) &= f(x), & f_m(x) &= f_{m-1}(x) + \lambda
             \int\limits_a^b K(x,t) f_{m-1}(t) dt, \\
-            K_1(x,y) = K(x,y), \quad
-            K_m(x,y) = \int\limits_a^b K(x,t) K_{m-1}(t,y) dt.
-            \end{gathered}
+            K_1(x,y) &= K(x,y), &
+            K_m(x,y) &= \int\limits_a^b K(x,t) K_{m-1}(t,y) dt.
+            \end{aligned}
             \]
             Отсюда следует
           </p>

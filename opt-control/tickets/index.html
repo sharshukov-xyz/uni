@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Билеты &mdash; Оптимальное управление</title>
+
+    <link href="/assets/css/styles.css" rel="stylesheet">
+    <script defer src="/assets/js/core.js"></script>
+    <script defer src="/assets/js/tickets.js"></script>
+    <script defer src="/assets/js/controls.js"></script>
+
+    <link rel="stylesheet" href="/assets/katex/katex.min.css">
+    <script defer src="/assets/katex/katex.min.js"></script>
+    <script defer src="/assets/katex/auto-render.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false },
+            { left: '\\(', right: '\\)', display: false },
+            { left: '\\[', right: '\\]', display: true }
+          ],
+          // • rendering keys, e.g.:
+          throwOnError: false
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1 id="title">Билеты &mdash; Оптимальное управление</h1>
+    <nav>
+      <a href="/">Домой</a>
+      <a href="..">Оптимальное управление</a>
+      <a href="/links">Ссылки</a>
+      <a href="/about">Контакты</a>
+    </nav>
+
+    <div class="controls">
+      <button onclick="HideTickets()">Спрятать билеты</button>
+      <button onclick="ShowTickets()">Показать все билеты</button>
+      <button onclick="ShowRandomElement(HideTickets)">
+        Показать случайный билет
+      </button>
+    </div>
+
+    <div style="display:none">
+      $\global\def\abs#1{\left\lvert #1 \right\rvert}$
+
+      $\global\def\dv#1#2{\frac{d #1}{d #2}}$
+      $\global\def\pd#1#2{\frac{\partial #1}{\partial #2}}$
+      $\global\def\pdv2#1#2{\frac{\partial^2 #1}{\partial #2^2}}$
+      $\global\def\ppdv#1#2#3{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
+
+      $\global\def\paren#1{\left( #1 \right)}$
+
+      $\global\def\mbox#1{\text{#1}}$
+
+      $\global\def\div{\text{div}\,}$
+      $\global\def\grad{\text{grad}\,}$
+      $\global\def\rot{\text{rot}\,}$
+
+      $\global\def\vb#1{\textbf{#1}}$
+
+      $\global\def\const{\text{const}\,}$
+      $\global\def\res{\text{res}\,}$
+      $\global\def\Res{\text{Res}\,}$
+      $\global\def\Re{\text{Re}\,}$
+      $\global\def\Im{\text{Im}\,}$
+      $\global\def\ch{\text{ch}\,}$
+      $\global\def\sh{\text{sh}\,}$
+      $\global\def\argtg{\text{argtg}\,}$
+    </div>
+
+    <ol id="tickets">
+      <li class="ticket">
+        <div class="name">
+          Постановка задач оптимального управления. Минимизируемый
+          функционал. Ограничения на траекторию и управление
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Необходимые условия оптимальности в классическом
+          вариационном исчислении
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Принцип максимума Понтрягина
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Гашение колебаний спутника относительно центра масс: постановка задачи
+          и исследование функции Гамильтона
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Гашение колебаний спутника относительно центра масс: фазовый портрет
+          энергетически оптимальных траекторий
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Гашение колебаний спутника относительно центра масс: фазовый портрет
+          траекторий, оптимальных по быстродействию
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Уравнения, описывающие эволюцию отдельной популяции.
+          Сообщества двух видов и более
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Постановки задач управления экологическими системами
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Управление по быстродействию системой &laquo;хищник-жертва&raquo;
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Модель Моно. Максимизация выхода биомассы в хемостате
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Модель Моно. Минимизация времени выхода хемостата на
+          стационарный режим
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Модели процессов в паразитарных системах
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Модели управления в паразитарных системах. Способы управления
+          эпидемическим процессом
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Оптимизация противоэпидемических мероприятий на основе принципа
+          максимума
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Производственная функция и её свойства
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Импульсные управления. Описание структуры разрывных траекторий
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Постановка задачи оптимизации для импульсного управления. Гамильтониан
+          и уравнения Эйлера-Лагранжа
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Принцип максимума для импульсной постановки
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Задача оптимизации рекламных расходов для модели Эрроу-Нерлофа
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Оптимизация рекламных расходов в модели Видала-Вулфа
+        </div>
+      </li>
+    </ol>
+  </body>
+
+</html>

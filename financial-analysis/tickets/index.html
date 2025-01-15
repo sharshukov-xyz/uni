@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset=utf-8>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Билеты &mdash; Математические методы финансового анализа</title>
+
+  <link href="/assets/css/styles.css" rel="stylesheet">
+  <script defer src="/assets/js/core.js"></script>
+  <script defer src="/assets/js/tickets.js"></script>
+  <script defer src="/assets/js/controls.js"></script>
+
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/katex/katex.min.js"></script>
+  <script defer src="/assets/katex/auto-render.min.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      renderMathInElement(document.body, {
+        // customised options
+        // • auto-render specific keys, e.g.:
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        // • rendering keys, e.g.:
+        throwOnError: false
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <h1 id="title">Билеты &mdash; Математические методы финансового анализа</h1>
+  <nav>
+    <a href="/">Домой</a>
+    <a href="..">Математические методы финансового анализа</a>
+    <a href="/links">Ссылки</a>
+    <a href="/about">Контакты</a>
+  </nav>
+
+  <div class="controls">
+    <button onclick="HideTickets()">Спрятать билеты</button>
+    <button onclick="ShowTickets()">Показать все билеты</button>
+    <button onclick="ShowRandomElement(HideTickets)">
+      Показать случайный билет
+    </button>
+  </div>
+
+  <div style="display:none">
+    $\global\def\abs#1{\left\lvert #1 \right\rvert}$
+
+    $\global\def\dv#1#2{\frac{d #1}{d #2}}$
+    $\global\def\pd#1#2{\frac{\partial #1}{\partial #2}}$
+    $\global\def\pdv2#1#2{\frac{\partial^2 #1}{\partial #2^2}}$
+    $\global\def\ppdv#1#2#3{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
+
+    $\global\def\paren#1{\left( #1 \right)}$
+
+    $\global\def\mbox#1{\text{#1}}$
+
+    $\global\def\div{\text{div}\,}$
+    $\global\def\grad{\text{grad}\,}$
+    $\global\def\rot{\text{rot}\,}$
+
+    $\global\def\vb#1{\textbf{#1}}$
+
+    $\global\def\const{\text{const}\,}$
+    $\global\def\res{\text{res}\,}$
+    $\global\def\Res{\text{Res}\,}$
+    $\global\def\Re{\text{Re}\,}$
+    $\global\def\Im{\text{Im}\,}$
+    $\global\def\ch{\text{ch}\,}$
+    $\global\def\sh{\text{sh}\,}$
+    $\global\def\argtg{\text{argtg}\,}$
+  </div>
+
+  <ol id="tickets">
+    <li class="ticket">
+      <div class="name">
+        Время как фактор финансовых операций. Проценты и виды процентных ставок
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Наращение по простой процентной ставке. Приведение к базовому периоду
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Простая процентная ставка. Реинвестирование
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Погашение задолженности частями. Актуарный метод
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Погашение задолженности частями. Правило торговца. Выплата процентов в потребительском кредите
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Конверсия валюты и наращение в схеме простых процентов
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Дисконтирование по простым учётным ставкам. Математическое дисконтирование
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Банковский учёт и его сравнение с математическим дисконтированием
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Наращение по учётной ставке. Прямые и обратные задачи. Определение срока ссуды и величины процентной ставки
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Начисление сложных процентов. Формулы наращения
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Начисление при дробном числе лет. Сравнение множителей наращения простых и сложных процентов
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Наращение процентов $m$ раз в году. Номинальная и эффективная ставки
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Дисконтирование по сложной ставке процентов
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Учёт по сложной учётной ставке. Номинальная и эффективная учётная ставка
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Наращение по сложной учётной ставке. Сравнение наращения и дисконтирования по разным видам
+        процентных ставок
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Непрерывное наращение и дисконтирование. Сила роста (постоянная и переменная)
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Конверсия валюты и наращение сложных процентов
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Учёт налогообложения в схемах наращения
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Учёт инфляции в схемах наращения
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Эквивалентность финансовых обязательств
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Консолидирование платежей. Величина консолидированного платежа
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Консолидирование платежей. Срок консолидированного платежа
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Эквивалентность простых и сложных процентных ставок
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Эквивалентность сложных процентных ставок
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Средние ставки
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Системный подход в реализации процессов управления (§13)
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Деньги как управленчески значимая информация (§13)
+      </div>
+    </li>
+
+    <li class="ticket">
+      <div class="name">
+        Социальный дарвинизм в практике кредитования бизнеса (§13)
+      </div>
+    </li>
+  </ol>
+</body>
+
+</html>
