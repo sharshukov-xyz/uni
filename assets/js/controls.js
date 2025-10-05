@@ -87,7 +87,7 @@ function setHandler()
 if (window.addEventListener) // W3C standard
 {
   window.addEventListener('load', setHandler, false); // NB **not** 'onload'
-} 
+}
 else if (window.attachEvent) // Microsoft
 {
   window.attachEvent('onload', setHandler);
