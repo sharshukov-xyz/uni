@@ -995,6 +995,323 @@
           полной наблюдаемости
         </div>
         <div class="content">
+          Рассмотрим систему
+          \[
+          \left\{
+          \begin{aligned}
+          \dot x(t) &= A(t) x(t) + B(t) u(t), \\
+          y(t) &= C(t) x(t).
+          \end{aligned}
+          \right.
+          \]
+          на отрезке $[0, T]$.
+
+          <div class="definition">
+            Система называется <i>полностью наблюдаемой</i> на отрезке $[0, T]$, если из того, что
+            \[
+            u(t) \equiv 0, \qquad t \in [0, T]
+            \]
+            и
+            \[
+            y(t) \equiv 0, \qquad t \in [0, T],
+            \]
+            следует, что
+            \[
+            x(t) \equiv 0, \qquad t \in [0, T].
+            \]
+          </div>
+
+          <div class="definition">
+            Система называется <i>полностью наблюдаемой</i> на отрезке $[0, T]$, если из того, что
+            \[
+            u_1(t) \equiv u_2(t) \quad \text{и} \quad y_1(t) \equiv y_2(t), \quad t \in [0, T]
+            \]
+            следует, что
+            \[
+            x_1(t) \equiv x_2(t), \quad t \in [0, T].
+            \]
+          </div>
+
+          <div class="lemma">
+            Определения выше эквивалентны.
+
+            <div class="idea">
+              Рассмотрим две системы с $u_1, y_1, x_1$ и $u_2, y_2, x_2$. Вычтем из первой вторую, предположим, что
+              \[
+              u_1(t) - u_2(t) \equiv 0, \qquad y_1(t) - y_2(t) \equiv 0.
+              \]
+              Из того, что $C(t) \not\equiv 0$, получаем, что $x_1(t) - x_2(t) \equiv 0$.
+
+              <p>
+                Если обозначим разности, получим первое определение. Если перенесём вторые слагаемые вправо, получим
+                второе определение.
+              </p>
+            </div>
+
+            <div class="proof">
+              Рассмотрим две системы:
+              \[
+              \left\{
+              \begin{aligned}
+              \dot x_1(t) &= A(t) x_1(t) + B(t) u_1(t), \\
+              y_1(t) &= C(t) x_1(t)
+              \end{aligned}
+              \right.
+              \]
+              и
+              \[
+              \left\{
+              \begin{aligned}
+              \dot x_2(t) &= A(t) x_2(t) + B(t) u_2(t), \\
+              y_2(t) &= C(t) x_2(t).
+              \end{aligned}
+              \right.
+              \]
+
+              Вычтем из первой вторую:
+              \[
+              \left\{
+              \begin{aligned}
+              \frac{d }{d t} \left( x_1(t) - x_2(t)\right)
+              &=
+              A(t) \left(x_1(t) - x_2(t) \right) + B(t) \left( u_1(t) - u_2(t) \right), \\
+              y_1(t) - y_2(t) &= C(t) \left( x_1(t) - x_2(t) \right).
+              \end{aligned}
+              \right.
+              \]
+
+              Заметим, что если $u_1(t) - u_2(t) \equiv 0$ и $y_1(t) - y_2(t) \equiv 0$, то
+              \[
+              \left\{
+              \begin{aligned}
+              \frac{d }{d t} \left( x_1(t) - x_2(t)\right)
+              &=
+              A(t) \left(x_1(t) - x_2(t) \right), \\
+              0 &= C(t) \left( x_1(t) - x_2(t) \right).
+              \end{aligned}
+              \right.
+              \]
+              Так как $C(t) \not\equiv 0$, получаем, что $x_1(t) - x_2(t) \equiv 0$.
+
+              <ol>
+                <li>
+                  Первое определение получаем, если положим
+                  \[
+                  \begin{aligned}
+                  u(t) &= u_1(t) - u_2(t) \equiv 0, \\
+                  y(t) &= y_1(t) - y_2(t) \equiv 0, \\
+                  x(t) &= x_1(t) - x_2(t) \equiv 0.
+                  \end{aligned}
+                  \]
+                </li>
+
+                <li>
+                  Второе определение получаем, если перепишем тождества:
+                  \[
+                  \begin{aligned}
+                  u_1(t) - u_2(t) \equiv 0 \implies & u_1(t) \equiv u_2(t), \\
+                  y_1(t) - y_2(t) \equiv 0 \implies & y_1(t) \equiv y_2(t), \\
+                  x_1(t) - x_2(t) \equiv 0 \implies & x_1(t) \equiv x_2(t).
+                  \end{aligned}
+                  \]
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="problem">
+            По доступным наблюдениям $y(t)$ определить $x(t)$ на отрезке $[0, T]$.
+
+            <div class="solution">
+              Пусть $x(0) = x^0$, тогда рассмотрим общее решение в форме Коши:
+              \[
+              \begin{aligned}
+              x(t)
+              &=
+              Y(t) \paren{
+              x^0 + \int\limits_0^t Y^{-1}(\tau) B(\tau) u(\tau) d\tau
+              } = \\
+              &=
+              Y(t) \paren{
+              x^0 + \int\limits_0^t Q(\tau) u(\tau) d\tau
+              }.
+              \end{aligned}
+              \]
+              Подставим это выражение в уравнение наблюдателя:
+              \[
+              \begin{aligned}
+              y(t)
+              &=
+              C(t) Y(t) \paren{
+              x^0 + \int\limits_0^t Q(\tau) u(\tau) d\tau
+              } = \\
+              &=
+              C(t) Y(t) x^0
+              +
+              C(t) Y(t) \int\limits_0^t Q(\tau) u(\tau) d\tau.
+              \end{aligned}
+              \]
+
+              Пусть $P(t) := C(t) Y(t)$, тогда
+              \[
+              \begin{aligned}
+              y(t)
+              &=
+              P(t) x^0
+              +
+              P(t) \int\limits_0^t Q(\tau) u(\tau) d\tau = \\
+              &=
+              P(t) x^0
+              +
+              \varphi(t),
+              \end{aligned}
+              \]
+              где
+              \[
+              \varphi(t) = P(t) \int\limits_0^t Q(\tau) u(\tau) d\tau.
+              \]
+            </div>
+          </div>
+
+          <div class="definition">
+            Матрицу
+            \[
+            O(T) = \int\limits_{0}^{T} P^T(\tau) P(\tau) d\tau
+            \]
+            называют <i>грамианом наблюдаемости</i>.
+          </div>
+
+          <div class="remark">
+            $\dim P(t) = r \times n$, а $\dim O(T) = n \times n$.
+          </div>
+
+          <div class="theorem">
+            Система наблюдаема тогда и только тогда, когда
+            \[
+            \rank O(T) = n.
+            \]
+
+            <div class="idea">
+              <div class="necessity">
+                Доказываем от противного: предполагаем, что система полностью наблюдаема, но $\rank O(T) \lt n$.
+                Отсюда следует, что существует $z \neq 0$ такой, что $O(T) z = 0$.
+
+                <p>
+                  Теперь рассматриваем $z^T O(T) z$, получаем, что $P(t) z \equiv 0$ на $[0, T]$.
+                </p>
+
+                <p>
+                  Окончательно рассматриваем два начальных условия: $x^1 = 0$ и $x^2 = z$, строим наблюдения.
+                  Первые слагаемые у них обнулятся, они будут равны друг другу, и тут фиксируем противоречие
+                  с полной наблюдаемостью, т.к. управления и наблюдения совпадают, а решения нет.
+                </p>
+              </div>
+
+              <div class="sufficiency">
+                Доказываем от противного: предполагаем, что $\rank O(T) = n$, но система не является полностью
+                наблюдаемой. По определению это значит, что существуют начальные условия $x^1 \neq x^2$ такие,
+                что наблюдения и управления совпадут. Строим для каждого начального условия наблюдатель,
+                их разница тождественно равна нулю, поэтому $P(t) (x^1 - x^2) = P(t) z \equiv 0$ на $[0, T]$.
+
+                <p>
+                  Рассматриваем теперь квадратичную форму $z^T O(T) z$, подставляем определение грамиана наблюдаемости,
+                  получаем, что эта форма равна нулю при ненулевом $z$ &mdash; получаем противоречие с тем, что
+                  $\rank O(T) = n$.
+                </p>
+              </div>
+            </div>
+
+            <div class="proof">
+              <div class="necessity">
+                От противного. Пусть система полностью наблюдаема, но $\rank O(T) \lt n$. Следовательно,
+                существует $z \neq 0$ такой, что
+                \[
+                O(T) z = 0.
+                \]
+                Тогда
+                \[
+                \begin{aligned}
+                0
+                &=
+                O(T) z = \\
+                &=
+                z^T O(T) z = \\
+                &=
+                z^T \left[
+                \int\limits_{0}^{T} P^T(\tau) P(\tau) d\tau
+                \right] z = \\
+                &=
+                \int\limits_{0}^{T} z^T P^T(\tau) P(\tau) z d\tau = \\
+                &=
+                \int\limits_{0}^{T} \norm{P(\tau) z}^2 d\tau = 0.
+                \end{aligned}
+                \]
+                Следовательно,
+                \[
+                P(t) z \equiv 0, \quad t \in [0, T].
+                \]
+
+                Рассмотрим теперь два начальных условия: $x^1 = 0$ и $x^2 = z$. Им соответствуют наблюдения
+                \[
+                y_1(t) = P(t) x^1 + \varphi_1(t)
+                \quad
+                \text{и}
+                \quad
+                y_2(t) = P(t) x^2 + \varphi_2(t).
+                \]
+                Заметим, что $P(t) x^1 \equiv 0$, так как $x^1 = 0$, и $P(t) x^2 = P(t) z \equiv 0$.
+
+                <p>
+                  Также заметим, что $\varphi_1(t) \equiv \varphi_2(t) \equiv \varphi(t)$, так как это
+                  слагаемое не зависит от начальных условий.
+                </p>
+
+                <p>
+                  Получаем, что $y_1(t) \equiv y_2(t)$ и $u_1(t) \equiv u_2(t)$, но $x_1(t) \not\equiv x_2(t)$,
+                  что противоречит предположению о полной наблюдаемости системы.
+                </p>
+              </div>
+
+              <div class="sufficiency">
+                От противного. Пусть $\rank O(T) = n$, но система не является полностью наблюдаемой. Значит,
+                существуют $x^1 \neq x^2$ такие, что $y_1(t) \equiv y_2(t)$ и
+                $u_1(t) \equiv u_2(t)$, но $x_1(t) \not\equiv x_2(t)$.
+
+                <p>
+                  Наблюдения, соответствующие этим начальным условиям:
+                  \[
+                  y_1(t) = P(t) x^1 + \varphi(t), \quad y_2(t) = P(t) x^2 + \varphi(t),
+                  \]
+                  причём
+                  \[
+                  y_1(t) - y_2(t) = P(t) (x^1 - x^2) \equiv 0, \quad t \in [0, T].
+                  \]
+                  Обозначим $z = x^1 - x^2 \neq 0$. Тогда
+                  \[
+                  P(t) z \equiv 0, \quad t \in [0, T].
+                  \]
+                </p>
+
+                <p>
+                  Рассмотрим теперь квадратичную форму:
+                  \[
+                  \begin{aligned}
+                  z^T O(T) z
+                  &=
+                  z^T \left[
+                  \int\limits_{0}^{T} P^T(\tau) P(\tau) d\tau
+                  \right] z = \\
+                  &=
+                  \int\limits_{0}^{T} z^T P^T(\tau) P(\tau) z d\tau = \\
+                  &=
+                  \int\limits_{0}^{T} \norm{P(\tau) z}^2 d\tau = 0.
+                  \end{aligned}
+                  \]
+                  Это противоречит предположению о том, что $\rank O(T) = n$.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </li>
 
