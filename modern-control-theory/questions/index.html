@@ -436,7 +436,7 @@
         <div class="content">
           Рассмотрим систему
           \[
-          \dot x(t) = A(t) x(t) + B(t) u(t) + \xi(t),
+          \dot x(t) = A(t) x(t) + B(t) u(t) + \xi(t)
           \]
           на отрезке $[0, T]$.
 
@@ -611,7 +611,7 @@
         <div class="content">
           Рассмотрим систему
           \[
-          \dot x(t) = A(t) x(t) + B(t) u(t) + \xi(t),
+          \dot x(t) = A(t) x(t) + B(t) u(t) + \xi(t)
           \]
           на отрезке $[0, T]$.
 
@@ -714,7 +714,7 @@
         <div class="content">
           Рассмотрим систему
           \[
-          \dot x(t) = A(t) x(t) + B(t) u(t) + \xi(t),
+          \dot x(t) = A(t) x(t) + B(t) u(t) + \xi(t)
           \]
           на отрезке $[0, T]$.
 
@@ -858,7 +858,7 @@
         <div class="content">
           Рассмотрим систему
           \[
-          \dot x(t) = A(t) x(t) + B(t) u(t) + \xi(t),
+          \dot x(t) = A(t) x(t) + B(t) u(t) + \xi(t)
           \]
           на отрезке $[0, T]$.
 
@@ -1000,7 +1000,7 @@
           \left\{
           \begin{aligned}
           \dot x(t) &= A(t) x(t) + B(t) u(t), \\
-          y(t) &= C(t) x(t).
+          y(t) &= C(t) x(t)
           \end{aligned}
           \right.
           \]
@@ -1321,6 +1321,182 @@
           управляемости двойственных систем
         </div>
         <div class="content">
+          Рассмотрим наблюдаемую систему
+          \[
+          \left\{
+          \begin{aligned}
+          \dot x(t) &= A(t) x(t) + B(t) u(t), \\
+          y(t) &= C(t) x(t)
+          \end{aligned}
+          \right.
+          \]
+          на отрезке $[0, T]$.
+
+          <div class="definition">
+            Система
+            \[
+            \left\{
+            \begin{aligned}
+            \dot{\widetilde x}(t) &= A_1(t) \widetilde x(t) + B_1(t) \widetilde u(t), \\
+            \widetilde y(t) &= C_1(t) \widetilde x(t),
+            \end{aligned}
+            \right.
+            \]
+            где
+            \[
+            A_1(t) = -A^T(t), \quad B_1(t) = C^T(t), \quad C_1(t) = B^T(t),
+            \]
+            называется <i>двойственной системой</i>.
+
+            <p>
+              Размерности:
+              <ul>
+                <li>
+                  $\widetilde x \in \mathbb{R}^n$;
+                </li>
+
+                <li>
+                  $\widetilde u \in \mathbb{R}^r$;
+                </li>
+
+                <li>
+                  $\widetilde y \in \mathbb{R}^m$.
+                </li>
+              </ul>
+            </p>
+          </div>
+
+          <div class="problem">
+            Пусть $Y(t)$ &mdash; фундаментальная матрица системы $\dot x(t) = A x(t)$.
+            Требуется найти фундаментальную матрицу системы $\dot{\widetilde x(t)} = -A^T \widetilde x(t)$.
+
+            <div class="solution">
+              Рассмотрим
+              \[
+              Y^{-1}(t) Y(t) = E.
+              \]
+              Продифференцируем:
+              \[
+              \begin{aligned}
+              0
+              &=
+              \frac{d }{d t} Y^{-1}(t) Y(t) + Y^{-1}(t) \frac{d }{d t} Y(t) = \\
+              &=
+              \frac{d }{d t} Y^{-1}(t) Y(t) + Y^{-1}(t) A(t) Y(t).
+              \end{aligned}
+              \]
+              Отсюда следует, что
+              \[
+              \frac{d }{d t} Y^{-1}(t) = - Y^{-1}(t) A(t).
+              \]
+              Транспонируем:
+              \[
+              {\left( \frac{d }{d t} Y^{-1}(t) \right)}^T = - A^T(t) {\left( Y^{-1}(t) \right)}^T.
+              \]
+              Заметим, что
+              \[
+              {\left( \frac{d }{d t} Y^{-1}(t) \right)}^T = \frac{d }{d t} {\left( Y^{-1}(t) \right)}^T.
+              \]
+              Следовательно,
+              \[
+              \frac{d }{d t} {\left( Y^{-1}(t) \right)}^T = - A^T(t) {\left( Y^{-1}(t) \right)}^T.
+              \]
+              Значит, матрица ${\left( Y^{-1}(t) \right)}^T$ является фундаментальной для системы
+              $\dot{\widetilde x(t)} = -A^T \widetilde x(t)$.
+            </div>
+          </div>
+
+          <p>
+            Введём обозначение:
+            \[
+            \widetilde Y(t) = {\left( Y^{-1}(t) \right)}^T.
+            \]
+          </p>
+
+          <div class="theorem">
+            Система полностью управляема на $[0, T]$ тогда и только тогда, когда двойственная ей система
+            полностью наблюдаема на $[0, T]$.
+
+            <div class="proof">
+              <p>
+                Рассмотрим грамиан управляемости:
+                \[
+                \begin{aligned}
+                \Gamma(T)
+                &\bydef=
+                \int\limits_{0}^{T} Q(t) Q^T(t) dt = \\
+                &=
+                \int\limits_{0}^{T} Y^{-1}(t) B(t) B^T(t) {\left( Y^{-1}(t) \right)}^T dt = \\
+                &=
+                \int\limits_{0}^{T} {\left(\widetilde Y(t)\right)}^T C_1^T(t) C_1(t) \widetilde Y(t) dt = \\
+                &=
+                \int\limits_{0}^{T} \widetilde P^T(t) \widetilde P(t) dt \bydef= \\
+                &\bydef=
+                \widetilde O(T).
+                \end{aligned}
+                \]
+                Следовательно, грамиан управляемости исходной системы совпадает с грамианом наблюдаемости двойственной
+                системы, поэтому из полной управляемости исходной системы следует полная наблюдаемость двойственной
+                (например, из первого критерия полной управляемости и необходимого и достаточного условия полной
+                наблюдаемости).
+              </p>
+
+              <p>
+                Проверим в обратную сторону:
+                \[
+                \begin{aligned}
+                O(T)
+                &\bydef=
+                \int\limits_{0}^{T} P^T(t) P(t) dt = \\
+                &=
+                \int\limits_{0}^{T} Y^T(t) C^T(t) C(t) Y(t) dt = \\
+                &=
+                \int\limits_{0}^{T} \widetilde Y^{-1}(t) B(t) B^T(t) {\left( \widetilde Y^{-1}(t) \right)}^T dt = \\
+                &=
+                \int\limits_{0}^{T} \widetilde Q(t) \widetilde Q^T(t) dt \bydef= \\
+                &\bydef=
+                \widetilde \Gamma(T).
+                \end{aligned}
+                \]
+              </p>
+            </div>
+          </div>
+
+          <div class="proposition">
+            Если система полностью наблюдаема на отрезке $[0, T]$, то она является полностью наблюдаемой на $[0, T_1]$
+            при любом $T_1 \geqslant T$.
+          </div>
+
+          <div class="theorem">
+            Система полностью наблюдаема тогда и только тогда, когда столбцы матрицы $P$ линейно независимы на $[0, T]$.
+
+            <div class="proof">
+              Если система полностью наблюдаема на $[0, T]$, то двойственная ей полностью управляема на $[0, T]$.
+              Из второго критерия полной управляемости следует, что строки матрицы $\widetilde Q(t)$ являются
+              линейно независимыми на $[0, T]$.
+
+              <p>
+                Распишем $\widetilde Q(t)$:
+                \[
+                \begin{aligned}
+                \widetilde Q(t)
+                &=
+                \widetilde Y^{-1}(t) B_1(t) = \\
+                &=
+                Y^T(t) C^T(t) = \\
+                &=
+                {\left[ C(t) Y(t) \right]}^T \bydef= \\
+                &\bydef=
+                P^T(t).
+                \end{aligned}
+                \]
+
+                Строки матрицы $Q(t)$ линейно независимы на $[0, T]$, следовательно, и строки матрицы $P^T(t)$ будут
+                линейно независимыми на $[0, T]$, что эквивалентно тому, что столбцы матрицы $P(t)$ являются
+                линейно независимыми на $[0, T]$.
+              </p>
+            </div>
+          </div>
         </div>
       </li>
 
@@ -1330,6 +1506,117 @@
           управляемости
         </div>
         <div class="content">
+          Рассмотрим наблюдаемую стационарную систему
+          \[
+          \left\{
+          \begin{aligned}
+          \dot x(t) &= A x(t) + B u(t), \\
+          y(t) &= C x(t)
+          \end{aligned}
+          \right.
+          \]
+          на отрезке $[0, T]$.
+
+          <p>
+            Фундаментальная матрица однородной системы $\dot x(t) = A x(t)$ имеет вид
+            \[
+            Y(t) = e^{A t} = \sum_{k = 0}^{\infty} \frac{t^k}{k!} A^k.
+            \]
+            Обратная ей:
+            \[
+            Y^{-1}(t) = e^{-A t}.
+            \]
+          </p>
+
+          <p>
+            Рассмотрим блочную матрицу, которую называют <i>матрицей Калмана</i>:
+            \[
+            K = \left[
+            B, AB, \dots, A^{n-1} B
+            \right].
+            \]
+          </p>
+
+          <div class="theorem">
+            <i>(критерий Калмана полной управляемости.)</i>
+            <br/>
+
+            Стационарная система полностью управляема тогда и только тогда, когда $\rank K = n$.
+
+            <div class="proof">
+              <div class="necessity">
+                От противного. Пусть стационарная система полностью управляема, но $\rank K \lt n$. Значит, существует
+                $C \neq 0$ такой, что $C^T K = 0$, то есть
+                \[
+                C^T B = 0, \quad C^T AB = 0, \quad \dots, \quad C^T A^{n-1} B = 0.
+                \]
+
+                Рассмотрим матрицу $A$ и её характеристический многочлен
+                \[
+                c(\lambda) = \lambda^n + \alpha_1 \lambda^{n-1} + \dots + \alpha_n = 0.
+                \]
+                По
+                <a
+                  href="https://ru.wikipedia.org/wiki/Теорема_Гамильтона_—_Кэли"
+                  target="_blank">
+                  теореме Гамильтона-Кэли
+                </a>
+                $c(A) = 0$, то есть
+                \[
+                A^n + \alpha_1 A^{n-1} + \dots + \alpha_n E_{n \times n} = 0
+                \]
+                или
+                \[
+                A^n = -\alpha_1 A^{n-1} - \dots - \alpha_n E_{n \times n}.
+                \]
+
+                Домножем это равенство справа на $B$, а слева &mdash; на $C^T$:
+                \[
+                C^T A^n B = -\alpha_1 C^T A^{n-1} B - \dots - \alpha_n C^T B = 0.
+                \]
+
+                Отсюда следует, что
+                \[
+                C^T A^k B = 0, \quad k \geqslant 0.
+                \]
+
+                <p>
+                  Рассмотрим теперь
+                  \[
+                  \begin{aligned}
+                  C^T Q(t)
+                  &=
+                  C^T Y^{-1}(t) B = \\
+                  &=
+                  C^T e^{-A t} B = \\
+                  &=
+                  C^T \left[ \sum_{k=0}^{\infty} \frac{{(-t)}^k}{k!} A^k \right] B = \\
+                  &=
+                  \sum_{k=0}^{\infty} \frac{{(-t)}^k}{k!} C^T A^k B \equiv 0, \quad t \in [0, T].
+                  \end{aligned}
+                  \]
+                  Следовательно, строки матрицы $Q(t)$ являются линейно зависимыми на $[0, T]$, что противоречит
+                  предположению о полной управляемости стационарной системы (по второму критерию полной управляемости).
+                </p>
+              </div>
+
+              <div class="sufficiency">
+                От противного: пусть $\rank K = n$, но стационарная система не является полностью управляемой.
+                Тогда существует $C \neq 0$ такой, что $C^T Q(t) \equiv 0$ на $[0, T]$. Следовательно,
+                \[
+                C^T Q(t)
+                =
+                \sum_{k=0}^{\infty} \frac{{(-t)}^k}{k!} C^T A^k B \equiv 0, \quad t \in [0, T].
+                \]
+                Отсюда следует, что
+                \[
+                C^T A^k B = 0, \quad k \geqslant 0.
+                \]
+                Но в таком случае $C^T K = 0$, то есть строки матрицы $K$ являются линейно зависимыми, что противоречит
+                предположению о том, что $\rank K = n$.
+              </div>
+            </div>
+          </div>
         </div>
       </li>
 
