@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Билеты &mdash; Современные разделы теории управления</title>
+
+    <link href="/assets/css/styles.css" rel="stylesheet">
+    <script defer src="/assets/js/core.js"></script>
+    <script defer src="/assets/js/tickets.js"></script>
+    <script defer src="/assets/js/controls.js"></script>
+
+    <link rel="stylesheet" href="/assets/katex/katex.min.css">
+    <script defer src="/assets/katex/katex.min.js"></script>
+    <script defer src="/assets/katex/auto-render.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+            {left: '\\(', right: '\\)', display: false},
+            {left: '\\[', right: '\\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1 id="title">Билеты &mdash; Современные разделы теории управления</h1>
+    <nav>
+      <a href="/">Домой</a>
+      <a href="..">Современные разделы теории управления</a>
+      <a href="/links">Ссылки</a>
+      <a href="/about">Контакты</a>
+    </nav>
+
+    <div class="controls">
+      <button onclick="HideTickets()">Спрятать билеты</button>
+      <button onclick="ShowTickets()">Показать все билеты</button>
+      <button onclick="ShowRandomElement(HideTickets)">Показать случайный билет</button>
+    </div>
+
+    <div style="display:none">
+      $\global\def\abs#1{\left\lvert #1 \right\rvert}$
+
+      $\global\def\dv#1#2{\frac{d #1}{d #2}}$
+      $\global\def\pd#1#2{\frac{\partial #1}{\partial #2}}$
+      $\global\def\pdv2#1#2{\frac{\partial^2 #1}{\partial #2^2}}$
+      $\global\def\ppdv#1#2#3{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
+
+      $\global\def\paren#1{\left( #1 \right)}$
+
+      $\global\def\mbox#1{\text{#1}}$
+
+      $\global\def\div{\text{div}\,}$
+      $\global\def\grad{\text{grad}\,}$
+      $\global\def\rot{\text{rot}\,}$
+
+      $\global\def\vb#1{\textbf{#1}}$
+
+      $\global\def\const{\text{const}\,}$
+      $\global\def\res{\text{res}\,}$
+      $\global\def\Res{\text{Res}\,}$
+      $\global\def\Re{\text{Re}\,}$
+      $\global\def\Im{\text{Im}\,}$
+      $\global\def\ch{\text{ch}\,}$
+      $\global\def\sh{\text{sh}\,}$
+      $\global\def\argtg{\text{argtg}\,}$
+    </div>
+
+    <ol id="tickets">
+      <li class="ticket">
+        <div class="name">
+          Построение программного управления. Лемма о допустимых
+          управлениях
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Первый критерий полной управляемости: теорема о полноте
+          ранга матрицы Грама управляемости
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Второй критерий полной управляемости: теорема о линейной
+          независимости на отрезке $[0, T]$ строк произведения
+          матрицы, обратной к фундаментальной, на матрицу управления
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Третий критерий полной управляемости: теорема о
+          существовании конечного числа точек на отрезке управления
+          $[0, T]$ таких, что матрица, составленная из матриц
+          произведения матрицы, обратной к фундаментальной, на
+          матрицу управления, вычисленных в данных точках,
+          имеет полный ранг
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Достаточный признак полной управляемости
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Понятие наблюдаемости. Необходимое и достаточное условие
+          полной наблюдаемости
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Двойственность. Теорема о полной наблюдаемости и полной
+          управляемости двойственных систем
+        </div>
+      </li>
+
+      <h4 class="subtitle">
+        Стационарные системы
+      </h4>
+
+      <li class="ticket">
+        <div class="name">
+          Стационарные системы. Критерий Калмана полной
+          управляемости
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Первое разбиение управляемой системы
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Второе разбиение управляемой системы
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Каноническое разбиение управляемой системы
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Критерий Хаутуса полной управляемости стационарных
+          систем
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Критерий Калмана и критерий Хаутуса полной наблюдаемости
+        </div>
+      </li>
+
+      <h4 class="subtitle">
+        Разностные системы
+      </h4>
+
+      <li class="ticket">
+        <div class="name">
+          Программное управление в разностных системах. Критерий
+          полной управляемости
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Задача наблюдения в разностных системах. Критерий полной
+          наблюдаемости
+        </div>
+      </li>
+
+      <h4 class="subtitle">
+        Передаточная функция
+      </h4>
+
+      <li class="ticket">
+        <div class="name">
+          Оценка матричной экспоненты
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Оценка решения линейной системы
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Преобразование Лапласа. Основные свойства
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Определение передаточной функции (матрицы).
+          Свойства передаточной функции
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Физический смысл передаточной функции. Частотная
+          характеристика
+        </div>
+      </li>
+
+      <h4 class="subtitle">
+        Задача стабилизации
+      </h4>
+
+      <li class="ticket">
+        <div class="name">
+          Статическая обратная связь. Управляемость и наблюдаемость
+          замкнутой системы
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Стабилизация системы со скалярным управлением. Случай
+          управления системы с матрицей Фробениуса
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Стабилизация полностью управляемой системы со скалярным
+          управлением
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Стабилизация не полностью управляемой системы со скалярным
+          управлением
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Первая каноническая форма Зубова
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Вторая каноническая форма Зубова
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Критерий Найквиста
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Стабилизация по выходу. Пример полностью управляемой и
+          полностью наблюдаемой системы, не стабилизируемой по
+          выходу. Наблюдатель Люенбергера
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Динамическая стабилизация по выходу полностью управляемой
+          и полностью наблюдаемой системы
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Свойства Кронекерова (прямого) произведения матриц
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Теорема о собственных значениях составных матриц
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Теорема о разрешимости матричных уравнений вида
+          $AX + XB = C$
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Теорема о разрешимости матричных уравнений вида
+          $A^T X + XA = C$ для гурвицевой матрицы $A$
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Лемма о разрешимости матричного неравенства вида
+          $A^T X + XA \leqslant C^T C$ для наблюдаемой пары $(A, C)$
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Стабилизация полностью наблюдаемой системы в терминах
+          матричного уравнения Лурье&mdash;Риккати
+        </div>
+      </li>
+
+      <h4 class="subtitle">
+        Нелинейные системы
+      </h4>
+
+      <li class="ticket">
+        <div class="name">
+          Теорема Ляпунова об устойчивости нулевого решения
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Теорема Ляпунова об асимптотической устойчивости нулевого
+          решения
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Пример асимптотической устойчивости нулевого решения
+          при неотрицательной производной функции Ляпунова в силу
+          системы (физический маятник с трением)
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Теорема Барбашина&mdash;Красовского об асимптотической
+          устойчивости
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Теорема о неустойчивости
+        </div>
+      </li>
+
+      <li class="ticket">
+        <div class="name">
+          Исследование устойчивости по линейному приближению
+        </div>
+      </li>
+    </ol>
+  </body>
+</html>
+
+

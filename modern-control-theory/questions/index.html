@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Вопросы &mdash; Современные разделы теории управления</title>
+
+    <link href="/assets/css/styles.css" rel="stylesheet">
+    <script defer src="/assets/js/core.js"></script>
+    <script defer src="/assets/js/questions.js"></script>
+    <script defer src="/assets/js/controls.js"></script>
+
+    <link rel="stylesheet" href="/assets/katex/katex.min.css">
+    <script defer src="/assets/katex/katex.min.js"></script>
+    <script defer src="/assets/katex/auto-render.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false },
+            { left: '\\(', right: '\\)', display: false },
+            { left: '\\[', right: '\\]', display: true }
+          ],
+          // • rendering keys, e.g.:
+          throwOnError: false
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1 id="title">Вопросы &mdash; Современные разделы теории управления</h1>
+    <nav>
+      <a href="/">Домой</a>
+      <a href="..">Современные разделы теории управления</a>
+      <a href="/links">Ссылки</a>
+      <a href="/about">Контакты</a>
+    </nav>
+
+    <div class="controls">
+      <button onclick="HideQuestions()">Скрыть вопросы</button>
+      <button onclick="ShowQuestions()">Показать вопросы</button>
+      <button onclick="HideAnswers()">Скрыть ответы</button>
+      <button onclick="ShowAnswers()">Показать ответы</button>
+      <button onclick="HideProofs()">Скрыть доказательства</button>
+      <button onclick="ShowProofs()">Показать доказательства</button>
+      <button onclick="ShowRandomElement(HideQuestions)">
+        Показать случайный вопрос
+      </button>
+    </div>
+
+    <div class="proof-type">
+      Показывать
+      <select id="select-proof-type" name="select-proof-type">
+        <option value="proofs">доказательства полностью</option>
+        <option value="ideas">только идеи доказательств</option>
+      </select>
+    </div>
+
+    <div style="display:none">
+      $\global\def\at#1#2{\left. #1 \right\rvert_{#2}}$
+      $\global\def\abs#1{\left\lvert #1 \right\rvert}$
+      $\global\def\norm#1{\left\lVert #1 \right\rVert}$
+
+      $\global\def\dp#1#2{#1 \cdot #2\,}$
+      $\global\def\vp#1#2{#1 \times #2\,}$
+
+      $\global\def\dv#1#2{\frac{d #1}{d #2}}$
+      $\global\def\pd#1#2{\frac{\partial #1}{\partial #2}}$
+      $\global\def\pdv2#1#2{\frac{\partial^2 #1}{\partial #2^2}}$
+      $\global\def\ppdv#1#2#3{\frac{\partial^2 #1}{\partial #2 \partial #3}}$
+
+      $\global\def\paren#1{\left( #1 \right)}$
+
+      $\global\def\mbox#1{\text{#1}}$
+
+      $\global\def\div{\text{div}\,}$
+      $\global\def\dsum{\displaystyle\sum\,}$
+      $\global\def\grad{\text{grad}\,}$
+      $\global\def\rot{\text{rot}\,}$
+
+      $\global\def\bydef#1{\overset{\mathrm{def}}{#1}}$
+      $\global\def\vb#1{\textbf{#1}}$
+
+      $\global\def\rddots{\cdot^{\displaystyle \cdot^{\displaystyle \cdot}}}$
+
+      $\global\def\op#1{\mathrm{#1}\,}$
+
+      $\global\def\diag{\mathrm{diag}\,}$
+      $\global\def\rank{\mathrm{rank}\,}$
+      $\global\def\Sp{\,\mathrm{Sp}\,}$
+      $\global\def\proj{\mathrm{proj}}$
+      $\global\def\grad{\,\mathrm{grad}\,}$
+      $\global\def\const{\text{const}\,}$
+      $\global\def\res{\text{res}\,}$
+      $\global\def\Res{\text{Res}\,}$
+      $\global\def\Lin{\,\text{Lin}\,}$
+      $\global\def\Re{\text{Re}\,}$
+      $\global\def\Im{\text{Im}\,}$
+      $\global\def\ch{\text{ch}\,}$
+      $\global\def\sh{\text{sh}\,}$
+      $\global\def\tg{\mathrm{tg}\,}$
+      $\global\def\argtg{\text{argtg}\,}$
+    </div>
+
+    <ol id="questions">
+      <li class="question">
+        <div class="name">
+          Построение программного управления. Лемма о допустимых
+          управлениях
+        </div>
+        <div class="content">
+          Рассмотрим систему
+          \[
+          \left\{
+          \begin{aligned}
+          \dot x(t) &= A(t) x(t) + B(t) u(t) + \xi(t), \\
+          y(t) &= C(t) x(t) + \eta(t),
+          \end{aligned}
+          \right.
+          \]
+          где
+          <ul>
+            <li>
+              $t \in [0, T]$, где $T > 0$;
+            </li>
+
+            <li>
+              $x(t) \in \mathbb{R}^n, \;
+              u(t) \in \mathbb{R}^m, \;
+              y(t) \in \mathbb{R}^r$;
+            </li>
+
+            <li>
+              $A(t) \in \mathbb{R}^{n \times n}, \;
+              B(t) \in \mathbb{R}^{n \times m}, \;
+              C(t) \in \mathbb{R}^{r \times n}$
+            </li>
+
+            <li>
+              $\xi(t) \in \mathbb{R}^n, \; \eta(t) \in \mathbb{R}^r$.
+            </li>
+          </ul>
+
+          <div class="definition">
+            Вектор $x(t)$ назыывают <i>вектором состояния</i>, $u(t)$ &mdash; <i>управлением</i>,
+            $y(t)$ &mdash; <i>наблюдением</i>, а $\xi(t)$ и $\eta(t)$ &mdash; <i>внешними воздействиями</i>.
+          </div>
+
+          <p>
+            Будем считать, что $A(t), B(t)$ и $C(t)$ непрерывны.
+          </p>
+
+          <div class="definition">
+            Функцию $u(t) \in U$ называют допустимым управлением,
+            если она
+            <ol>
+              <li>
+                задана на $[0, T]$;
+              </li>
+
+              <li>
+                кусочно-непрерывна.
+              </li>
+            </ol>
+
+            <div class="remark">
+              Если потребуется, можно ещё сказать, что интенсивность функции $u(t)$ должна быть ограничена
+              на $[0, T]$:
+              \[
+              \chi[u] = \int\limits_0^T u^T(\tau) u(\tau) d \tau \lt \infty.
+              \]
+            </div>
+          </div>
+
+          <p>
+            Рассмотрим линейную систему ОДУ:
+            \[
+            \dot x(t) = A(t) x(t) + B(t) u(t) + \xi(t).
+            \]
+            Пусть $Y(t)$ &mdash; фундаментальная матрица соответствующей однородной
+            системы, нормированная в нуле: $Y(0) = E$. Тогда можно записать
+            <i>общее решение неоднородной системы в форме Коши</i>:
+            \[
+            x(t, 0, x^0) = Y(t)
+            \left(
+            x^0 + \int\limits_0^t Y^{-1}(\tau)
+            \left[
+            B(\tau) u(\tau) +
+            \xi(\tau)
+            \right]
+            d\tau
+            \right).
+            \]
+          </p>
+
+          <div class="problem">
+            Требуется найти допустимое управление $u(t)$, переводящее систему
+            \[
+            \dot x(t) = A(t) x(t) + B(t) u(t) + \xi(t),
+            \]
+            из состояния $x(0) = x^0$ в состояние $x(T) = x^1$.
+          </div>
+
+          <div class="definition">
+            Допустимое управление $u(t)$ называется <i>программным</i>, если
+            оно переводит систему
+            \[
+            \dot x(t) = A(t) x(t) + B(t) u(t) + \xi(t)
+            \]
+            из состояния $x(0) = x^0$ в состояние $x(T) = x^1$.
+          </div>
+
+          <div class="solution">
+            Рассмотрим общее решение исходной системы в форме Коши:
+            \[
+            x(t, 0, x^0) = Y(t)
+            \left(
+            x^0 + \int\limits_0^t Y^{-1}(\tau)
+            \left[
+            B(\tau) u(\tau) +
+            \xi(\tau)
+            \right]
+            d\tau
+            \right).
+            \]
+            Если $u(t)$ &mdash; программное, то
+            \[
+            x(T, 0, x^0) = x^1,
+            \]
+            то есть поиск программного решения сводится к поиску решения, удовлетворяющего этому равенству.
+
+            <p>
+              Найдём из него, что
+              \[
+              x^1 = Y(T) \paren{
+              x^0 + \int\limits_0^T Y^{-1}(\tau) B(\tau) u(\tau) d\tau
+              + \int\limits_0^T Y^{-1}(\tau) \xi(\tau) d\tau
+              }.
+              \]
+              Обозначим $Q(t) := Y^{-1}(t) B(t)$ и домножим уравнение слева на $Y^{-1}(T)$:
+
+              \[
+              \begin{gathered}
+              Y^{-1}(T) x^1
+              =
+              x^0 + \int\limits_0^T \underbrace{Y^{-1}(\tau) B(\tau)}_{= Q(\tau)} u(\tau) d\tau
+              + \int\limits_0^T Y^{-1}(\tau) \xi(\tau) d\tau, \\
+
+              \implies
+              \int\limits_0^T Q(\tau) u(\tau) d\tau
+              =
+              Y^{-1}(T) x^1
+              - x^0
+              - \int\limits_0^T Y^{-1}(\tau) \xi(\tau) d\tau.
+              \end{gathered}
+              \]
+
+              Правая часть &mdash; некоторая константа, которую можно обозначить
+              как $\eta$, тогда
+              \[
+              \int\limits_0^T Q(\tau) u(\tau) d\tau = \eta,
+              \]
+              то есть если $u(t)$ удовлетворяет этому интегральному уравнению, то
+              оно программное.
+            </p>
+          </div>
+
+          <div class="lemma">
+            <i>(о допустимых управлениях)</i>
+            <br/>
+            Если допустимое управление $u(t)$ линейной системы
+            \[
+            \dot x(t) = A(t) x(t) + B(t) u(t) + \xi(t)
+            \]
+            на $[0, T]$ существует, то оно представимо в виде
+            \[
+            u(t) = Q^T(t) C + V(t), \qquad Q(t) := Y^{-1}(t) B(t),
+            \]
+            где
+            <ul>
+              <li>
+                $Y(t)$ &mdash; нормированная в нуле фундаментальная матрица
+                соответствующей однородной системы;
+              </li>
+
+              <li>
+                $C \in \mathbb{R}^n$ &mdash; постоянный вектор, подлежащий определению;
+              </li>
+
+              <li>
+                $V(t)$ &mdash; $m$-мерная векторная функция, удовлетворяющая
+                условию ортогональности:
+                \[
+                \int\limits_0^T Q(\tau) V(\tau) d\tau = 0.
+                \]
+              </li>
+            </ul>
+
+            <div class="idea">
+              Подставим представление
+              \[
+              u(t) = Q^T(t) C + V(t)
+              \]
+              в уравнение ортогональности, докажем совместность системы от
+              противного (предположив, что $\rank \Gamma(T) \lt \rank (\Gamma(T), \eta)$),
+              воспользовавшись теоремой Фредгольма: система $A x = b$ несовместна тогда и только тогда,
+              когда существует ненулевой вектор $\gamma$ такой, что $\gamma^T A = 0$, но $\gamma^T b \neq 0$.
+            </div>
+
+            <div class="proof">
+              Пусть существует допустимое управление $u(t)$. Тогда
+              утверждение леммы справедливо, если
+              \[
+              V(t) = u(t) - Q^T(t) C
+              \]
+              и
+              \[
+              \int\limits_0^T Q(\tau) \left[ u(\tau) - Q^T(\tau) C \right] d\tau = 0.
+              \]
+              Перепишем это равенство в виде
+              \[
+              \int\limits_0^T Q(\tau) u(\tau) d\tau
+              = \int\limits_{0}^{T} Q(\tau) Q^T(\tau) C d\tau
+              = \left( \int\limits_{0}^{T} Q(\tau) Q^T(\tau) d\tau \right) C
+              \]
+              и рассмотрим его как СЛАУ относительно неизвестного вектора $C$:
+              \[
+              \Gamma(T) C = \eta,
+              \]
+              где
+              \[
+              \Gamma(T) := \int\limits_0^T Q(\tau) Q^T(\tau) d\tau,
+              \quad \eta := \int\limits_0^T Q(\tau) u(\tau) d\tau.
+              \]
+
+              <div class="definition">
+                Матрицу
+                \[
+                \Gamma(T) = \int\limits_0^T Q(\tau) Q^T(\tau) d\tau
+                \]
+                называют <i>матрицей Грама (грамианом) управляемости</i>.
+              </div>
+
+              <p>
+                Из
+                <a
+                  href="https://ru.wikipedia.org/wiki/Теорема_Кронекера_—_Капелли"
+                  target="_blank">
+                  теоремы Кронекера-Капелли
+                </a>
+                известно, что система $Ax = b$ совместна тогда и только тогда, когда
+                $\rank A = \rank (A, b)$.
+              </p>
+
+              <p>
+                Предположим, что система несовместна, то есть
+                $\rank \Gamma(T) \lt \rank (\Gamma(T), \eta)$. Тогда по теореме Фредгольма
+                найдётся вектор $\gamma \neq 0$, ортогональный всем столбцам матрицы $\Gamma(T)$,
+                но не ортогональный вектору $\eta$, то есть
+                \[
+                \gamma^T \Gamma(T) = 0, \quad \gamma^T \eta \neq 0.
+                \]
+                Отсюда следует, что
+                \[
+                \begin{aligned}
+                0
+                &=
+                \gamma^T \Gamma(T) \\
+                &=
+                \gamma^T \Gamma(T) \gamma \\
+                &=
+                \gamma^T \int\limits_0^T Q(\tau) Q^T(\tau) d\tau \cdot \gamma \\
+                &=
+                \int\limits_0^T \gamma^T Q(\tau) Q^T(\tau) \gamma d\tau \\
+                &=
+                \int\limits_0^T \norm{\gamma^T Q(\tau)}^2 d\tau
+                =
+                0,
+                \end{aligned}
+                \]
+                то есть $\gamma^T Q(t) \equiv 0$ на $[0, T]$.
+                Но тогда
+                \[
+                \gamma^T \eta
+                =
+                \gamma^T \int\limits_0^T Q(\tau) u(\tau) d\tau
+                =
+                \int\limits_0^T \underbrace{\gamma^T Q(\tau)}_{\equiv 0} u(\tau) d\tau
+                =
+                0,
+                \]
+                что противоречит выбору $\gamma$. Значит, $\rank \Gamma(T) = \rank (\Gamma(T), \eta)$,
+                то есть система совместна.
+              </p>
+
+              <p>
+                Решая эту систему, находим вектор $C$, при котором разность
+                $u(t) - Q^T(t) C$ удовлетворяет условию
+                \[
+                \int\limits_0^T Q(\tau) \left[ u(\tau) - Q^T(\tau) C \right] d\tau = 0.
+                \]
+                Введя обозначение $V(t) := u(t) - Q^T(t) C$, получаем, что
+                \[
+                u(t) = Q^T(t) C + V(t).
+                \]
+              </p>
+
+              <div class="remark">
+                В случае поиска программного управления $u(t)$, переводящего
+                систему из $x(0) = x^0$ в $x(T) = x^1$, известен коэффициент
+                \[
+                \eta
+                =
+                \int\limits_0^T Q(\tau) u(\tau) d\tau
+                \bydef=
+                Y^{-1}(T) x^1 - x^0 - \int\limits_0^T Y^{-1}(\tau) \xi(\tau) d\tau.
+                \]
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Первый критерий полной управляемости: теорема о полноте
+          ранга матрицы Грама управляемости
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Второй критерий полной управляемости: теорема о линейной
+          независимости на отрезке $[0, T]$ строк произведения
+          матрицы, обратной к фундаментальной, на матрицу управления
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Третий критерий полной управляемости: теорема о
+          существовании конечного числа точек на отрезке управления
+          $[0, T]$ таких, что матрица, составленная из матриц
+          произведения матрицы, обратной к фундаментальной, на
+          матрицу управления, вычисленных в данных точках,
+          имеет полный ранг
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Достаточный признак полной управляемости
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Понятие наблюдаемости. Необходимое и достаточное условие
+          полной наблюдаемости
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Двойственность. Теорема о полной наблюдаемости и полной
+          управляемости двойственных систем
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Стационарные системы. Критерий Калмана полной
+          управляемости
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Первое разбиение управляемой системы
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Второе разбиение управляемой системы
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Каноническое разбиение управляемой системы
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Критерий Хаутуса полной управляемости стационарных
+          систем
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Критерий Калмана и критерий Хаутуса полной наблюдаемости
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Программное управление в разностных системах. Критерий
+          полной управляемости
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Задача наблюдения в разностных системах. Критерий полной
+          наблюдаемости
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Оценка матричной экспоненты
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Оценка решения линейной системы
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Преобразование Лапласа. Основные свойства
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Определение передаточной функции (матрицы).
+          Свойства передаточной функции
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Физический смысл передаточной функции. Частотная
+          характеристика
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Статическая обратная связь. Управляемость и наблюдаемость
+          замкнутой системы
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Стабилизация системы со скалярным управлением. Случай
+          управления системы с матрицей Фробениуса
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Стабилизация полностью управляемой системы со скалярным
+          управлением
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Стабилизация не полностью управляемой системы со скалярным
+          управлением
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Первая каноническая форма Зубова
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Вторая каноническая форма Зубова
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Критерий Найквиста
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Стабилизация по выходу. Пример полностью управляемой и
+          полностью наблюдаемой системы, не стабилизируемой по
+          выходу. Наблюдатель Люенбергера
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Динамическая стабилизация по выходу полностью управляемой
+          и полностью наблюдаемой системы
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Свойства Кронекерова (прямого) произведения матриц
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема о собственных значениях составных матриц
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема о разрешимости матричных уравнений вида
+          $AX + XB = C$
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема о разрешимости матричных уравнений вида
+          $A^T X + XA = C$ для гурвицевой матрицы $A$
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Лемма о разрешимости матричного неравенства вида
+          $A^T X + XA \leqslant C^T C$ для наблюдаемой пары $(A, C)$
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Стабилизация полностью наблюдаемой системы в терминах
+          матричного уравнения Лурье&mdash;Риккати
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема Ляпунова об устойчивости нулевого решения
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема Ляпунова об асимптотической устойчивости нулевого
+          решения
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Пример асимптотической устойчивости нулевого решения
+          при неотрицательной производной функции Ляпунова в силу
+          системы (физический маятник с трением)
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема Барбашина&mdash;Красовского об асимптотической
+          устойчивости
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Теорема о неустойчивости
+        </div>
+        <div class="content">
+        </div>
+      </li>
+
+      <li class="question">
+        <div class="name">
+          Исследование устойчивости по линейному приближению
+        </div>
+        <div class="content">
+        </div>
+      </li>
+    </ol>
+  </body>
+
+</html>
+
