@@ -107,6 +107,8 @@
       $\global\def\sh{\text{sh}\,}$
       $\global\def\tg{\mathrm{tg}\,}$
       $\global\def\argtg{\text{argtg}\,}$
+
+      $\global\def\span{\operatorname{span}}$
     </div>
 
     <ol id="questions">
@@ -1570,7 +1572,7 @@
                 A^n = -\alpha_1 A^{n-1} - \dots - \alpha_n E_{n \times n}.
                 \]
 
-                Домножем это равенство справа на $B$, а слева &mdash; на $C^T$:
+                Домножим это равенство справа на $B$, а слева &mdash; на $C^T$:
                 \[
                 C^T A^n B = -\alpha_1 C^T A^{n-1} B - \dots - \alpha_n C^T B = 0.
                 \]
@@ -1625,6 +1627,291 @@
           Первое разбиение управляемой системы
         </div>
         <div class="content">
+          Рассмотрим пространство $\mathbb{R}^n$ и его подпространство $L \subset \mathbb{R}^n$. Известно, что
+          $\dim L$ совпадает с максимальным количеством линейно независимых векторов в $L$.
+
+          <p>
+            Рассмотрим два подпространства $L_1$ и $L_2$.
+          </p>
+
+          <div class="definition">
+            <i>Прямой суммой пространств</i> $L_1$ и $L_2$ называют пространство
+            \[
+            L_1 \oplus L_2 = \set{ x + y | x \in L_1, \; y \in L_2 },
+            \]
+            если каждый элемент $z = x + y \in L_1 \oplus L_2$ представляется единственным образом.
+          </div>
+
+          <div class="definition">
+            Пространство $L \subset \mathbb{R}^n$ называется <i>$A$-инвариантным</i>, если для любого $x \in L$ следует,
+            что $Ax \in L$.
+          </div>
+
+          <hr/>
+
+          Рассмотрим наблюдаемую стационарную систему
+          \[
+          \left\{
+          \begin{aligned}
+          \dot x(t) &= A x(t) + B u(t), \\
+          y(t) &= C x(t)
+          \end{aligned}
+          \right.
+          \]
+          на отрезке $[0, T]$.
+
+          <p>
+            Рассмотрим матрицу Калмана $K = \left[ B, AB, A^2B, \dots, A^{n-1} B \right]$.
+            Её размерность &mdash; $n \times nm$.
+          </p>
+
+          <p>
+            Пусть $\rank K = l \leqslant n$. Рассмотрим $L = \span K$ &mdash; линейную оболочку столбцов матрицы $K$,
+            её размерность $\dim L = l$, оно является линейным подпространством $L \subset \mathbb{R}^n$.
+          </p>
+
+          <div class="lemma">
+            Подпространство $L = \span K$ является $A$-инвариантным.
+
+            <div class="proof">
+              Достаточно показать, что для любого $z \in L$ выполняется $Az \in L$.
+
+              <p>
+                Очевидно, что
+                \[
+                B \subset L, \quad AB \subset L, \quad \dots, \quad A^{n-1}B \subset L.
+                \]
+              </p>
+
+              Рассмотрим матрицу $A$ и её характеристический многочлен
+              \[
+              c(\lambda) = \lambda^n + \alpha_1 \lambda^{n-1} + \dots + \alpha_n = 0.
+              \]
+              По
+              <a
+                href="https://ru.wikipedia.org/wiki/Теорема_Гамильтона_—_Кэли"
+                target="_blank">
+                теореме Гамильтона-Кэли
+              </a>
+              $c(A) = 0$, то есть
+              \[
+              A^n + \alpha_1 A^{n-1} + \dots + \alpha_n E_{n \times n} = 0
+              \]
+              или
+              \[
+              A^n = -\alpha_1 A^{n-1} - \dots - \alpha_n E_{n \times n}.
+              \]
+
+              Домножим это равенство справа на $B$:
+              \[
+              A^n B = -\alpha_1 A^{n-1} B - \dots - \alpha_n B \subset L.
+              \]
+            </div>
+          </div>
+
+          Пусть стационарная система не является полностью управляемой, то есть $\rank K = l \lt n$.
+
+          <p>
+            Обозначим через $v_1, \dots, v_l$ линейно независимые столбцы матрицы $K$. Нетрудно видеть, что
+            \[
+            \span (v_1, \dots, v_l) = \span K,
+            \]
+            то есть они образуют базис.
+          </p>
+
+          <p>
+            Введём теперь дополнительное пространство $L_2$ так, чтобы $\mathbb{R}^n = L \oplus L_2$. Тогда
+            $v_{l+1}, \dots, v_n$ &mdash; базис в $L_2$, а $(v_1, \dots, v_n)$ &mdash; базис в $\mathbb{R}^n$.
+          </p>
+
+          <p>
+            Рассмотрим матрицу $T = (v_1, \dots, v_n)$. Она обратима, то есть существует $T^{-1}$. Положим $x = T z$,
+            тогда стационарная система примет вид
+            \[
+            \left\{
+            \begin{aligned}
+            T \dot z(t) &= A T z(t) + B u(t), \\
+            y(t) &= C T z(t).
+            \end{aligned}
+            \right.
+            \]
+            Запишем её в виде
+            \[
+            \left\{
+            \begin{aligned}
+            \dot z(t) &= T^{-1} A T z(t) + T^{-1} B u(t), \\
+            y(t) &= C T z(t)
+            \end{aligned}
+            \right.
+            \]
+            и введём обозначения:
+            \[
+            \overline A = T^{-1} A T, \quad \overline B = T^{-1} B, \quad \overline C = C T.
+            \]
+            Используя их, окончательно имеем
+            \[
+            \left\{
+            \begin{aligned}
+            \dot z(t) &= \overline A z(t) + \overline B u(t), \\
+            y(t) &= \overline C z(t).
+            \end{aligned}
+            \right.
+            \]
+          </p>
+
+          <div class="lemma">
+            Матрицы $\overline A$ и $\overline B$ имеют вид
+            \[
+            \overline A =
+            \begin{bmatrix}
+            A_{11} & A_{12} \\
+            0_{(n - l) \times l} & A_{22}
+            \end{bmatrix},
+            \quad
+            \overline B =
+            \begin{bmatrix}
+            B_1 \\
+            0_{(n - l) \times m}
+            \end{bmatrix},
+            \]
+            причём
+            \[
+            \dim A_{11} = l \times l, \quad \dim A_{12} = l \times (n - l), \quad \dim A_{22} = (n - l) \times (n - l)
+            \]
+            и
+            \[
+            \dim B_1 = l \times m.
+            \]
+
+            <div class="proof">
+              Рассмотрим
+              \[
+              \overline A = T^{-1} A T.
+              \]
+              Представим это уравнение в виде $T \overline A = A T$ и рассмотрим его по столбцам.
+
+              <ul>
+                <li>
+                  Первый столбец: $T \overline a_1 = A v_1$. Так как $v_1 \in \span K$, а оно является $A$-инвариантным,
+                  то столбец $\overline a_1$ представим в виде линейной комбинации векторов $(v_1, \dots, v_l)$.
+                </li>
+
+                <li>
+                  Для столбцов $\overline a_2, \dots, \overline a_l$ аналогично.
+                </li>
+
+                <li>
+                  $(l+1)$-ый столбец: $T \overline a_{l+1} = A v_{l+1}$. Так как $v_{l+1} \not \in \span K$, то и
+                  $A v_{l+1} \not \in \span K$, поэтому столбец $\overline a_{l+1}$ представим в виде линейной
+                  комбинации столбцов $T$.
+                </li>
+
+                <li>
+                  Для столбцов $\overline a_{l+2}, \dots, \overline a_n$ аналогично.
+                </li>
+              </ul>
+
+              <p>
+                Отсюда следует, что
+                \[
+                \overline A
+                = T^{-1} \left[ A T_1, A T_2 \right]
+                =
+                \begin{bmatrix}
+                A_{11} & A_{12} \\
+                0_{(n - l) \times l} & A_{22}
+                \end{bmatrix}.
+                \]
+              </p>
+
+              <p>
+                Выясним теперь вид матрицы $\overline B = T^{-1} B$. Запишем его в виде $T \overline B = B$ и рассмотрим
+                по столбцам.
+              </p>
+
+              <p>
+                Начнём с первого: $T \overline b_1 = b_1$. Так как $b_1 \in \span K$, то вектор $\overline b_1$
+                представим в виде линейной комбинации столбцов $(v_1, \dots, v_l)$. Для остальных столбцов аналогично,
+                поэтому
+                \[
+                \overline B = T^{-1} B =
+                \begin{bmatrix}
+                B_1 \\
+                0_{(n - l) \times m}
+                \end{bmatrix}.
+                \]
+              </p>
+            </div>
+          </div>
+
+          Представим решение и управление в следующем виде:
+          \[
+          z =
+          \begin{bmatrix}
+          z_1 \\
+          z_2
+          \end{bmatrix},
+          \qquad
+          u =
+          \begin{bmatrix}
+          u_1 \\
+          0_{(n - l) \times m}
+          \end{bmatrix},
+          \]
+          где $\dim z_1 = 1 \times l$ и $\dim z_2 = 1 \times (n - l)$. Тогда систему можно представить в виде
+          \[
+          \tag{*}
+          \left\{
+          \begin{aligned}
+          \dot z_1(t) &= A_{11} z_1(t) &&+ A_{12} z_2 + B_1 u_1(t), \\
+          \dot z_2(t) &= &&\phantom{+} A_{22} z_2, \\
+          y(t) &= C_1 z_1 &&+ C_2 z_2.
+          \end{aligned}
+          \right.
+          \]
+
+          <div class="proposition">
+            $\rank \left[ B_1, A_{11} B_1, \dots, A_{11}^{l-1} B_1 \right] = l$.
+
+            <div class="proof">
+              Рассмотрим матрицу $\left[ \overline B, \overline A \overline B, \dots, \overline A^{n-1} \overline B \right]$:
+              \[
+              \left[ \overline B, \overline A \overline B, \dots, \overline A^{n-1} \overline B \right]
+              =
+              \begin{bmatrix}
+              B_1 & A_{11} B_1 & A_{11}^2 B_1 & \dots & A_{11}^{n-1} B_1 \\
+              0 & 0 & 0 & \dots & 0
+              \end{bmatrix},
+              \]
+              поэтому
+              \[
+              \begin{aligned}
+              \rank \left[ \overline B, \overline A \overline B, \dots, \overline A^{n-1} \overline B \right]
+              &=
+              \rank \begin{bmatrix}
+              B_1 & A_{11} B_1 & A_{11}^2 B_1 & \dots & A_{11}^{n-1} B_1 \\
+              0 & 0 & 0 & \dots & 0
+              \end{bmatrix} = \\
+              &=
+              \rank \begin{bmatrix}
+              B_1 & A_{11} B_1 & A_{11}^2 B_1 & \dots & A_{11}^{n-1} B_1
+              \end{bmatrix} = \\
+              &=
+              \rank \begin{bmatrix}
+              B_1 & A_{11} B_1 & A_{11}^2 B_1 & \dots & A_{11}^{l-1} B_1
+              \end{bmatrix} = l.
+              \end{aligned}
+              \]
+            </div>
+          </div>
+
+          <div class="theorem">
+            <i>(первое разбиение управляемой системы)</i>
+            <br/>
+
+            Если стационарная система не является полностью управляемой, то существует неособое преобразование $T$,
+            приводящее её к виду $(*)$ и разбивающее её на полностью управляемую и неуправляемую части.
+          </div>
         </div>
       </li>
 
