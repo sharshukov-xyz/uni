@@ -1920,6 +1920,184 @@
           Второе разбиение управляемой системы
         </div>
         <div class="content">
+          Рассмотрим наблюдаемую стационарную систему
+          \[
+          \left\{
+          \begin{aligned}
+          \dot x(t) &= A x(t) + B u(t), \\
+          y(t) &= C x(t)
+          \end{aligned}
+          \right.
+          \]
+          на отрезке $[0, T]$.
+
+          <div class="theorem">
+            <i>(критерий Калмана полной наблюдаемости)</i>
+            <br/>
+
+            Система полностью наблюдаема на $[0, T]$ тогда и только тогда, когда
+            \[
+            \rank K
+            = \rank
+            \begin{bmatrix}
+            C \\
+            C A \\
+            C A^2 \\
+            \vdots \\
+            C A^{n-1}
+            \end{bmatrix} = n.
+            \]
+
+            <div class="proof">
+              Рассмотрим двойственную систему:
+              \[
+              \left\{
+              \begin{aligned}
+              \dot{\widetilde x}(t) &= -A^T \widetilde x(t) + C^T \widetilde u(t), \\
+              \widetilde y(t) &= B^T \widetilde x(t),
+              \end{aligned}
+              \right.
+              \]
+
+              Построим для неё матрицу Калмана:
+              \[
+              \widetilde K = \left[ C^T, -A^T C^T, \left(-A^T\right)^2 C^T, \dots, \left(-A^T\right)^{n-1} C^T \right].
+              \]
+              Так как нас интересует только ранг матрицы, опустим знаки:
+              \[
+              \widetilde K = \left[ C^T, A^T C^T, \left(A^T\right)^2 C^T, \dots, \left(A^T\right)^{n-1} C^T \right].
+              \]
+              Транспонируем (ранг от этого не изменится):
+              \[
+              \widetilde K^T =
+              \begin{bmatrix}
+              C \\
+              C A \\
+              C A^2 \\
+              \vdots \\
+              C A^{n-1}
+              \end{bmatrix}.
+              \]
+
+              По теореме о полной наблюдаемости и полной управляемости из полной управляемости двойственной системы
+              следует полная наблюдаемость исходной системы. Полная управляемость двойственной системы следует
+              из критерия Калмана: $\rank \widetilde K = n$. Положив $K := \widetilde K^T$, заканчиваем доказательство.
+            </div>
+          </div>
+
+          <p>
+            Построим линейную оболочку строк матрицы $K$: $L = \span K$.
+          </p>
+
+          <div class="proposition">
+            $L$ &mdash; $A$-инвариантно справа: для любого $z \in L$ справедливо $z A \in L$.
+
+            <div class="proof">
+              Доказательство аналогично случаю управляемости. Очевидно, что
+              \[
+              C \subset L, \quad CA \subset L, \quad \dots, \quad C A^{n-1} \subset L.
+              \]
+              Проверим, что $C A^{n-1} \cdot A = C A^{n} \subset L$. Из теоремы Гамильтона&dash;Кэли следует, что
+              $A^n$ представляется в виде линейной комбинации $A^k$, где $k = \overline{0, n-1}$. Домножаем
+              слева на $C$ и получаем требуемое включение.
+            </div>
+          </div>
+
+          <p>
+            Пусть система не является полностью наблюдаемой, тогда $\rank K = l \lt n$. Пусть
+            $v_1, \dots, v_l$ &mdash; линейно независимые строки в $K$ (базис в $L$). Введём дополнительное
+            подпространство $L_2 = \span(v_{l+1}, \dots, v_n)$ так, чтобы
+            \[
+            \mathbb{R}^n = L \oplus L_2.
+            \]
+            Составим матрицу из строк $v_1, \dots, v_n$:
+            \[
+            R =
+            \begin{bmatrix}
+            v_1 \\
+            v_2 \\
+            \vdots \\
+            v_l \\
+            v_{l+1} \\
+            \vdots \\
+            v_n
+            \end{bmatrix}.
+            \]
+            Очевидно, у неё существует обратная матрица $R^{-1}$.
+          </p>
+
+          <p>
+            Сделаем замену переменных: $\xi = R x \implies x = R^{-1} \xi$. Тогда система примет вид
+            \[
+            \left\{
+            \begin{aligned}
+            R^{-1} \dot \xi(t) &= A R^{-1} \xi(t) + B u(t), \\
+            y(t) &= C R^{-1} \xi(t),
+            \end{aligned}
+            \right.
+            \]
+            или
+            \[
+            \left\{
+            \begin{aligned}
+            \dot \xi(t) &= R A R^{-1} \xi(t) + R B u(t), \\
+            y(t) &= C R^{-1} \xi(t).
+            \end{aligned}
+            \right.
+            \]
+            Введём обозначения:
+            \[
+            \overline A = R A R^{-1}, \quad \overline B = R B, \quad \overline C = C R^{-1}.
+            \]
+            Пользуясь ими, система окончательно представляется в виде
+            \[
+            \tag{*}
+            \left\{
+            \begin{aligned}
+            \dot \xi(t) &= \overline A \xi(t) + \overline B u(t), \\
+            y(t) &= \overline C \xi(t).
+            \end{aligned}
+            \right.
+            \]
+          </p>
+
+          <div class="theorem">
+            Матрицы $\overline A$ и $\overline C$ имеют вид
+            \[
+            \overline A
+            =
+            \begin{bmatrix}
+            A_{11} & 0_{l \times (n - l)} \\
+            A_{21} & A_{22}
+            \end{bmatrix},
+            \quad
+            \overline C
+            =
+            \begin{bmatrix}
+            C_1 & 0_{r \times (n - l)}
+            \end{bmatrix},
+            \]
+            где
+            \[
+            \dim A_{11} = l \times l, \quad \dim A_{21} = (n-l) \times l, \quad \dim A_{22} = (n-l) \times (n-l)
+            \]
+            и
+            \[
+            \dim C_1 = r \times l.
+            \]
+
+            <div class="proof">
+              Доказывается аналогично первому разбиению управляемой системы.
+            </div>
+          </div>
+
+          <div class="theorem">
+            <i>(второе разбиение управляемой системы)</i>
+            <br/>
+
+            Если система не является полностью наблюдаемой, то существует неособое преобразование, приводящее её
+            к виду $(*)$ и разбивающее её на полностью наблюдаемую и ненаблюдаемую части.
+          </div>
         </div>
       </li>
 
@@ -1928,6 +2106,247 @@
           Каноническое разбиение управляемой системы
         </div>
         <div class="content">
+          Рассмотрим наблюдаемую стационарную систему
+          \[
+          \left\{
+          \begin{aligned}
+          \dot x(t) &= A x(t) + B u(t), \\
+          y(t) &= C x(t)
+          \end{aligned}
+          \right.
+          \]
+          на отрезке $[0, T]$.
+
+          <p>
+            Всякая управляемая система может быть с помощью неособого преобразования разбита на полностью управляемую
+            и неуправляемую части, а всякая наблюдаемая система &mdash; на полностью наблюдаемую и ненаблюдаемую части.
+          </p>
+
+          <p>
+            Рассмотрим совместно эти два разбиения. Составим две матрицы:
+            \[
+            K_1 = \left[ B, AB, \dots, A^{n-1} B\right],
+            \quad
+            K_2 =
+            \begin{bmatrix}
+            C \\
+            C A \\
+            \vdots \\
+            C A^{n-1}
+            \end{bmatrix}.
+            \]
+
+            Пусть $\rank K_1 = l_1$ и $\rank K_2 = l_2$. Разобьём пространство $\mathbb{R}^n$ на две прямые суммы:
+            \[
+            \mathbb{R}^n = L_1 \oplus L_2 \quad \text{и} \quad \mathbb{R}^n = N_1 \oplus N_2,
+            \]
+            где
+            \[
+            \dim L_1 = l_1, \quad \dim L_2 = n - l_1, \quad \dim N_1 = l_2, \quad \dim N_2 = n - l_2.
+            \]
+          </p>
+
+          <p>
+            Разобъём теперь всё пространство на 4 части:
+            \[
+            \mathbb{R}^n = \Omega_1 \oplus \Omega_2 \oplus \Omega_3 \oplus \Omega_4,
+            \]
+            где
+            <ul>
+              <li>
+                $\Omega_1 = L_1 \cap N_1$ &mdash; полностью управляемая и полностью наблюдаемая часть;
+              </li>
+
+              <li>
+                $\Omega_2 = L_1 \cap N_2$ &mdash; полностью управляемая, но ненаблюдаемая часть;
+              </li>
+
+              <li>
+                $\Omega_3 = L_2 \cap N_1$ &mdash; неуправляемая, но полностью наблюдаемая часть;
+              </li>
+
+              <li>
+                $\Omega_4 = L_2 \cap N_2$ &mdash; неуправляемая и ненаблюдаемая часть.
+              </li>
+            </ul>
+
+            В каждом из пространств выберем базис, составим из них матрицу $T$ и сделаем замену $z = Tx$,
+            причём вектор $z$ также разобъём на 4 части:
+            \[
+            z = \begin{bmatrix}
+            z_1 \\
+            z_2 \\
+            z_3 \\
+            z_4
+            \end{bmatrix}.
+            \]
+
+            По построению $z_1, z_2$ описывают управляемую, а $z_3, z_4$ &mdash; неуправляемую часть системы.
+            Тогда получим новую систему:
+            \[
+            \left\{
+            \begin{aligned}
+            \begin{bmatrix}
+            \dot z_1 \\
+            \dot z_2
+            \end{bmatrix}
+            &=
+            \hat A_{11}
+            \begin{bmatrix}
+            z_1 \\
+            z_2
+            \end{bmatrix}
+            &&+
+            \hat A_{12}
+            \begin{bmatrix}
+            z_3 \\
+            z_4
+            \end{bmatrix}
+            +
+            \hat B_1 u_1, \\
+            \begin{bmatrix}
+            \dot z_3 \\
+            \dot z_4
+            \end{bmatrix}
+            &=
+            &&\phantom{+}
+            \hat A_{22}
+            \begin{bmatrix}
+            z_3 \\
+            z_4
+            \end{bmatrix}, \\
+            y &= \left[ C_1, C_2, C_3, C_4 \right]
+            \begin{bmatrix}
+            z_1 \\
+            z_2 \\
+            z_3 \\
+            z_4
+            \end{bmatrix}.
+            \end{aligned}
+            \right.
+            \]
+
+            Представим матрицы системы в следующем виде:
+            \[
+            \overline A
+            =
+            \begin{bmatrix}
+            A_{11} & A_{12} & A_{13} & A_{14} \\
+            A_{21} & A_{22} & A_{23} & A_{24} \\
+            0 & 0 & A_{33} & A_{34} \\
+            0 & 0 & A_{43} & A_{44}
+            \end{bmatrix},
+            \quad
+            \overline B
+            =
+            \begin{bmatrix}
+            B_1 \\
+            B_2 \\
+            0 \\
+            0
+            \end{bmatrix}
+            \]
+
+            Величины $z_1, z_3$ описывают наблюдаемую часть системы. Сделаем замену:
+            \[
+            \begin{aligned}
+            w_1 &= z_1, \\
+            w_2 &= z_3, \\
+            w_3 &= z_2, \\
+            w_4 &= z_4.
+            \end{aligned}
+            \]
+
+            Теперь $w_1, w_2$ описывают наблюдаемую, а $w_3, w_4$ &mdash; ненаблюдаемую части.
+          </p>
+
+          <p>
+            Система примет вид:
+            \[
+            \left\{
+            \begin{aligned}
+            \dot w_1 &= A_{11} w_1 + A_{13} w_2 + A_{12} w_3 + A_{14} w_4 + B_1 u, \\
+            \dot w_2 &= \phantom{A_{11} w_1 +} A_{33} w_2 \phantom{+ A_{12} w_3} + A_{34} w_4, \\
+            \dot w_3 &= A_{21} w_1 + A_{23} w_2 + A_{22} w_3 + A_{24} w_4 + B_2 u, \\
+            \dot w_4 &= \phantom{A_{11} w_1 +} A_{13} w_2 \phantom{+ A_{12} w_3} + A_{44} w_4, \\
+            y &= C_1 w_1 + C_3 w_2 + C_2 w_3 + C_4 w_4.
+            \end{aligned}
+            \right.
+            \]
+            Так как $w_3, w_4$ &mdash; ненаблюдаемая часть, $C_2 = C_4 = 0$, а также $A_{12} = A_{14} = A_{34} = 0$.
+            Итак,
+            \[
+            \left\{
+            \begin{aligned}
+            \dot w_1 &= A_{11} w_1 + A_{13} w_2 \phantom{+ A_{12} w_3 + A_{14} w_4} + B_1 u, \\
+            \dot w_2 &= \phantom{A_{11} w_1 +} A_{33} w_2, \phantom{+ A_{12} w_3} \phantom{+ A_{34} w_4} \\
+            \dot w_3 &= A_{21} w_1 + A_{23} w_2 + A_{22} w_3 + A_{24} w_4 + B_2 u, \\
+            \dot w_4 &= \phantom{A_{11} w_1 +} A_{13} w_2 \phantom{+ A_{12} w_3} + A_{44} w_4, \\
+            y &= C_1 w_1 + C_3 w_2.
+            \end{aligned}
+            \right.
+            \]
+          </p>
+
+          <p>
+            Возвращаясь к переменным $z$, окончательно имеем <i>каноническое разбиение</i>:
+            \[
+            \tag{*}
+            \left\{
+            \begin{aligned}
+            \dot z_1 &= A_{11} z_1 \phantom{+ A_{12} z_2} + A_{13} z_3 \phantom{+ A_{14} z_4} + B_1 u, \\
+            \dot z_2 &= A_{21} z_1 + A_{22} z_2 + A_{23} z_3 + A_{24} z_4 + B_2 u, \\
+            \dot z_3 &= \phantom{A_{11} z_1 + A_{12} z_2 +} A_{33} z_3, \phantom{+ A_{34} z_4} \\
+            \dot z_4 &= \phantom{A_{11} z_1 + A_{12} z_2 +} A_{13} z_3 + A_{44} z_4, \\
+            y &= C_1 z_1 + C_3 z_3
+            \end{aligned}
+            \right.
+            \]
+            с матрицами
+            \[
+            \overline A
+            =
+            \begin{bmatrix}
+            A_{11} & 0 & A_{13} & 0 \\
+            A_{21} & A_{22} & A_{23} & A_{24} \\
+            0 & 0 & A_{33} & 0 \\
+            0 & 0 & A_{43} & A_{44}
+            \end{bmatrix},
+            \quad
+            \overline B
+            =
+            \begin{bmatrix}
+            B_1 \\
+            B_2 \\
+            0 \\
+            0
+            \end{bmatrix},
+            \quad
+            \overline C = \left[ C_1, 0, C_3, 0 \right].
+            \]
+          </p>
+
+          <div class="theorem">
+            Любая управляемая и наблюдаемая система может быть неособым преобразованием приведена к виду $(*)$
+            и разбита на
+            <ul>
+              <li>
+                полностью управляемую и полностью наблюдаемую;
+              </li>
+
+              <li>
+                полностью управляемую и ненаблюдаемую;
+              </li>
+
+              <li>
+                неуправляемую и полностью наблюдаемую;
+              </li>
+
+              <li>
+                неуправляемую и ненаблюдаемую части.
+              </li>
+            </ul>
+          </div>
         </div>
       </li>
 
