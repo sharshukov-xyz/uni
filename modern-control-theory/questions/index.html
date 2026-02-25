@@ -2352,10 +2352,157 @@
 
       <li class="question">
         <div class="name">
-          Критерий Хаутуса полной управляемости стационарных
-          систем
+          Критерий Хаутуса полной управляемости стационарных систем
         </div>
         <div class="content">
+          Рассмотрим наблюдаемую управляемую стационарную систему
+          \[
+          \left\{
+          \begin{aligned}
+          \dot x(t) &= A x(t) + B u(t), \\
+          y(t) &= C x(t)
+          \end{aligned}
+          \right.
+          \]
+          на отрезке $[0, T]$.
+
+          <div class="theorem">
+            <i>(критерий Хаутуса полной управляемости)</i>
+            <br/>
+
+            Система полностью управляема тогда и только тогда, когда для любого $\lambda \in \mathbb{C}$ справедливо
+            \[
+            \rank (\lambda E - A, B) = n
+            \]
+
+            <div class="proof">
+              <div class="necessity">
+                От противного. Пусть система полностью управляема, но найдётся $\lambda \in \mathbb{C}$ такое,
+                что
+                \[
+                \rank (\lambda E - A, B) = l \lt n.
+                \]
+                Это значит, что существует $C \neq 0$ такой, что
+                \[
+                C^T \left( \lambda E - A \right) = 0, \quad C^T B = 0.
+                \]
+                Рассмотрим первое равенство; перепишем его:
+                \[
+                C^T \lambda = \lambda C^T = C^T A.
+                \]
+                Домножим справа на $A$:
+                \[
+                \lambda \underbrace{C^T A}_{= \lambda C^T} = C^T A^2, \implies \lambda^2 C^T = C^T A^2.
+                \]
+                Аналогично получаем, что
+                \[
+                C^T A^k = \lambda^k C^T, \quad k \in \overline{0, n-1}.
+                \]
+                Домножим справа на $B$:
+                \[
+                C^T A^k B = \lambda^k C^T B, \quad k \in \overline{0, n-1}.
+                \]
+                Составим матрицу Калмана и домножим её слева на $C^T$:
+                \[
+                \begin{aligned}
+                C^T K
+                &=
+                \left[
+                C^T B, C^T AB, C^T A^2 B, \dots, C^T A^{n-1} B
+                \right] = \\
+                &=
+                \left[
+                C^T B, \lambda C^T B, \lambda^2 C^T B, \dots, \lambda^{n-1} C^T B
+                \right] = 0.
+                \end{aligned}
+                \]
+                То есть существует ненулевой вектор $C$ такой, что $C^T K = 0$ &mdash; это противоречит предположению
+                о полной управляемости системы.
+              </div>
+
+              <div class="sufficiency">
+                От противного. Пусть для всех $\lambda \in \mathbb{C}$
+                \[
+                \rank (\lambda E - A, B) = n,
+                \]
+                но система не является полностью управляемой. Это значит, что $\rank K = l \lt n$.
+
+                <p>
+                  Проведём первое разбиение управляемой системы: $T = (v_1, \dots, v_l, v_{l+1}, \dots, v_n)$,
+                  \[
+                  \overline A = T^{-1} A T, \quad \overline B = T^{-1} B.
+                  \]
+
+                  Рассмотрим матрицу $(\lambda E - \overline A, \overline B)$:
+                  \[
+                  \begin{aligned}
+                  (\lambda E - \overline A, \overline B)
+                  &=
+                  (\lambda T^{-1} T - T^{-1} A T, T^{-1} B) = \\
+                  &=
+                  T^{-1} (\lambda T - AT, B) = \\
+                  &=
+                  T^{-1} (\lambda E - A, B)
+                  \times
+                  \begin{bmatrix}
+                  T & 0 \\
+                  0 & E_{m}
+                  \end{bmatrix}.
+                  \end{aligned}
+                  \]
+                  Матрицы слева и справа определяют неособые преобразования, поэтому
+                  \[
+                  \rank (\lambda E - A, B) = \rank (\lambda E - \overline A, \overline B) = n.
+                  \]
+
+                  Так как
+                  \[
+                  \overline A
+                  =
+                  \begin{bmatrix}
+                  A_{11} & A_{12} \\
+                  0 & A_{22}
+                  \end{bmatrix},
+                  \quad
+                  \overline B
+                  =
+                  \begin{bmatrix}
+                  B_1 \\
+                  0
+                  \end{bmatrix}
+                  \],
+                  то
+                  \[
+                  (\lambda E - \overline A, \overline B)
+                  =
+                  \begin{bmatrix}
+                  \lambda E - A_{11} & - A_{12} & B_1 \\
+                  0 & \lambda E - A_{22} & 0
+                  \end{bmatrix}.
+                  \]
+
+                  Выберем $\lambda$ так, чтобы оно было собственным числом матрицы $A_{22}$, тогда
+                  \[
+                  (\lambda E - \overline A, \overline B)
+                  =
+                  \begin{bmatrix}
+                  \lambda E - A_{11} & - A_{12} & B_1 \\
+                  0 & 0 & 0
+                  \end{bmatrix}.
+                  \]
+
+                  Отсюда следует, что
+                  \[
+                  \rank (\lambda E - A, B)
+                  =
+                  \rank (\lambda E - \overline A, \overline B)
+                  = l \lt n,
+                  \]
+                  то есть получили противоречие.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </li>
 
