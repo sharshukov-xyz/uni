@@ -2511,6 +2511,89 @@
           Критерий Калмана и критерий Хаутуса полной наблюдаемости
         </div>
         <div class="content">
+          Рассмотрим наблюдаемую управляемую стационарную систему
+          \[
+          \left\{
+          \begin{aligned}
+          \dot x(t) &= A x(t) + B u(t), \\
+          y(t) &= C x(t)
+          \end{aligned}
+          \right.
+          \]
+          на отрезке $[0, T]$.
+
+          <div class="theorem">
+            <i>(критерий Калмана полной наблюдаемости)</i>
+            <br/>
+
+            Система полностью наблюдаема на $[0, T]$ тогда и только тогда, когда
+            \[
+            \rank K
+            = \rank
+            \begin{bmatrix}
+            C \\
+            C A \\
+            C A^2 \\
+            \vdots \\
+            C A^{n-1}
+            \end{bmatrix} = n.
+            \]
+
+            <div class="proof">
+              Рассмотрим двойственную систему:
+              \[
+              \left\{
+              \begin{aligned}
+              \dot{\widetilde x}(t) &= -A^T \widetilde x(t) + C^T \widetilde u(t), \\
+              \widetilde y(t) &= B^T \widetilde x(t),
+              \end{aligned}
+              \right.
+              \]
+
+              Построим для неё матрицу Калмана:
+              \[
+              \widetilde K = \left[ C^T, -A^T C^T, \left(-A^T\right)^2 C^T, \dots, \left(-A^T\right)^{n-1} C^T \right].
+              \]
+              Так как нас интересует только ранг матрицы, опустим знаки:
+              \[
+              \widetilde K = \left[ C^T, A^T C^T, \left(A^T\right)^2 C^T, \dots, \left(A^T\right)^{n-1} C^T \right].
+              \]
+              Транспонируем (ранг от этого не изменится):
+              \[
+              \widetilde K^T =
+              \begin{bmatrix}
+              C \\
+              C A \\
+              C A^2 \\
+              \vdots \\
+              C A^{n-1}
+              \end{bmatrix}.
+              \]
+
+              По теореме о полной наблюдаемости и полной управляемости из полной управляемости двойственной системы
+              следует полная наблюдаемость исходной системы. Полная управляемость двойственной системы следует
+              из критерия Калмана: $\rank \widetilde K = n$. Положив $K := \widetilde K^T$, заканчиваем доказательство.
+            </div>
+          </div>
+
+          <div class="theorem">
+            <i>(критерий наблюдаемости Хаутуса)</i>
+            <br/>
+
+            Система полностью наблюдаема тогда и только тогда, когда для любого $\lambda \in \mathbb{C}$ справедливо
+            \[
+            \rank
+            \begin{bmatrix}
+            \lambda E - A \\
+            C
+            \end{bmatrix}
+            = n.
+            \]
+
+            <div class="proof">
+              Очевидно: переходим к двойственной системе и пользуемся критерием управляемости Хаутуса.
+            </div>
+          </div>
         </div>
       </li>
 
