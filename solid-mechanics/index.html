@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>ОМДТТ</title>
+
+    <link href="/assets/css/styles.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/assets/katex/katex.min.css">
+    <script defer src="/assets/katex/katex.min.js"></script>
+    <script defer src="/assets/katex/auto-render.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false },
+            { left: '\\(', right: '\\)', display: false },
+            { left: '\\[', right: '\\]', display: true }
+          ],
+          // • rendering keys, e.g.:
+          throwOnError: false
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1 id="title">Основы механики деформируемого твёрдого тела</h1>
+    <nav>
+      <a href="/">Домой</a>
+      <a href="/links">Ссылки</a>
+      <a href="/about">Контакты</a>
+    </nav>
+
+    <table class="teachers">
+      <tr>
+        <td>Лектор</td>
+        <td>
+          Пронина Юлия Григорьевна
+        </td>
+      </tr>
+    </table>
+
+    <h2>Экзамен</h2>
+    <ul>
+      <li>
+        <a href="tickets">
+          Список билетов
+        </a>
+      </li>
+
+      <li>
+        <a href="questions">
+          Список вопросов
+        </a>
+      </li>
+    </ul>
+  </body>
+</html>

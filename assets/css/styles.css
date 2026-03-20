@@ -120,6 +120,11 @@ h4.subtitle {
   border-bottom: 1px solid lightgreen;
 }
 
+.highlighted {
+    border: 1px solid #555;
+    padding: 0 5px;
+}
+
 .definition::before {
   content: attr(definition-name);
   font-weight: bold;
@@ -150,11 +155,18 @@ h4.subtitle {
   text-align: center;
 }
 
+img {
+    max-width: 100%;
+}
 
 @media (min-width: 600px) {
   .images.small {
     max-width: 40%;
     min-width: 200px;
+  }
+
+  .images.small-height > img {
+      max-height: 400px;
   }
 }
 
@@ -517,13 +529,22 @@ div.break {
     margin: 24px auto;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background-color: #1c1c1c;
-    --text-color: white;
-    --border-color: white;
+.image-on-white {
+    background-color: white;
+}
 
-    --blue-color: rgb(113, 170, 235);
-    --red-color: lightpink;
-  }
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #1c1c1c;
+        --text-color: white;
+        --border-color: white;
+
+        --blue-color: rgb(113, 170, 235);
+        --red-color: lightpink;
+    }
+
+    .highlighted {
+        background-color: #75113b;
+        border: unset;
+    }
 }

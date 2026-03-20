@@ -109,6 +109,7 @@
       $\global\def\argtg{\text{argtg}\,}$
 
       $\global\def\span{\operatorname{span}}$
+      $\global\def\adj{\operatorname{adj}}$
     </div>
 
     <ol id="questions">
@@ -2920,6 +2921,120 @@
           наблюдаемости
         </div>
         <div class="content">
+          Рассмотрим разностную систему наблюдения:
+          \[
+          \left\{
+          \begin{aligned}
+          x[k+1] &= P[k] x[k] + F[k], & k &= \overline{0, m}, \\
+          y[k] &= R[k] x[k].
+          \end{aligned}
+          \right.
+          \]
+
+          <div class="problem">
+            По наблюдениям $y[0], y[1], \dots, y[m]$ восстановить решение $x[k]$ при $k = \overline{0, m}$.
+          </div>
+
+          <p>
+            Построим решение системы, зависящее от $x[0]$:
+            \[
+            \begin{aligned}
+            x[1] &= P[0] x[0] + F[0], \\
+            x[2] &= P[1] \left( P[0] x[0] + F[0] \right) + F[1], \\
+            &\vdots \\
+            x[m] &= P[m-1] \cdots P[0] x[0] + P[m-1] \cdots P[1] F[0] + \dots + F[m-1].
+            \end{aligned}
+            \]
+
+            Подставим значения $x[k]$ в уравнение наблюдения:
+            \[
+            \tag{*}
+            \begin{aligned}
+            y[0] &= R[0] x[0], \\
+            y[1] &= R[1] \left( P[0] x[0] + F[0] \right), \\
+            &\vdots \\
+            y[m] &= R[m] P[m-1] \cdots P[0] x[0] + \\
+            &\phantom{=} + R[m] P[m-1] \cdots P[0] F[0] + \dots + R[m] F[m-1].
+            \end{aligned}
+            \]
+          </p>
+
+          <div class="theorem">
+            <i>(критерий полной наблюдаемости разностной системы)</i>
+            <br/>
+
+            Система полностью наблюдаема на $[0, m]$ тогда и только тогда, когда
+            \[
+            \rank \Theta
+            =
+            \rank
+            \begin{bmatrix}
+            R[0] \\
+            R[1] P[0] \\
+            R[2] P[1] P[0] \\
+            \vdots \\
+            R[m] P[m-1] \cdots P[0]
+            \end{bmatrix}
+            = n.
+            \]
+
+            <div class="proof">
+              <div class="necessity">
+                От противного. Пусть система полностью наблюдаема, но $\rank \Theta \lt n$. Тогда существует некоторый
+                $C \neq 0$ такой, что $\Theta C = 0$, то есть
+                \[
+                \left\{
+                \begin{aligned}
+                R[0] C &= 0, \\
+                R[1] P[0] C &= 0, \\
+                &\vdots \\
+                R[m] P[m-1] \cdots P[0] C &= 0.
+                \end{aligned}
+                \right.
+                \]
+                Но тогда для двух разных векторов $x[0] = 0$ и $x[0] = C$ получим одинаковые наблюдения, что
+                противоречит полной наблюдаемости.
+              </div>
+
+              <div class="sufficiency">
+                Пусть $\rank \Theta = n$. Из системы $(*)$ можно найти $x[0]$. По построению эта система разрешима,
+                а так как $\rank \Theta = n$, то она разрешима однозначно. Следовательно, зная $x[0]$, однозначно
+                построим решение.
+              </div>
+            </div>
+          </div>
+
+          Рассмотрим наблюдаемую стационарную систему:
+          \[
+          \left\{
+          \begin{aligned}
+          x[k+1] &= P x[k] + F, & k &= \overline{0, m}, \\
+          y[k] &= R x[k].
+          \end{aligned}
+          \right.
+          \]
+
+          <div class="theorem">
+            <i>(критерий полной наблюдаемости стационарной системы)</i>
+            <br/>
+
+            Стационарная система полностью наблюдаема на $[0, m]$ тогда и только тогда, когда
+            \[
+            \rank \Theta = \rank
+            \begin{bmatrix}
+            R \\
+            RP \\
+            RP^2 \\
+            \vdots \\
+            RP^{m-1}
+            \end{bmatrix}
+            = n.
+            \]
+
+            <div class="proof">
+              Частный случай критерия полной наблюдаемости нестационарной системы.
+            </div>
+          </div>
         </div>
       </li>
 
@@ -2928,6 +3043,9 @@
           Оценка матричной экспоненты
         </div>
         <div class="content">
+          <div class="todo">
+            Расписать.
+          </div>
         </div>
       </li>
 
@@ -2936,6 +3054,93 @@
           Оценка решения линейной системы
         </div>
         <div class="content">
+          Рассмотрим систему
+          \[
+          \dot x = A x + f(t),
+          \]
+          где $f(t) \in \mathbb{R}^n$ и $t \geqslant 0$. Предположим, что $f(t)$ является кусочно-непрерывной,
+          причём
+          \[
+          \norm{f(t)} \leqslant \rho e^{\alpha_0 t},
+          \]
+          где $\alpha_0 \in \mathbb{R}$ и $\rho \gt 0$.
+
+          <div class="theorem">
+            Пусть $\alpha$ &mdash; максимальное вещественное число собственных значений матрицы $A$:
+            \[
+            \alpha = \max_{i = \overline{1, n}} \Re (s_i),
+            \]
+            тогда для любого $\varepsilon \gt 0$ справедлива оценка:
+            \[
+            \norm{x(t, x_0)} \leqslant \gamma(x_0) e^{\max\{\alpha + \varepsilon, \alpha_0\} t}, \quad t \geqslant 0.
+            \]
+
+            <div class="proof">
+              Запишем формулу Коши:
+              \[
+              \begin{aligned}
+              x(t, x_0)
+              &=
+              e^{A t} \left(
+              x_0 + \int\limits_{0}^{t} e^{-A \tau} f(\tau) d\tau
+              \right) = \\
+              &=
+              e^{A t} x_0
+              + \int\limits_{0}^{t} e^{A (t - \tau)} f(\tau) d\tau
+              = \\
+              \end{aligned}
+              \]
+              Пусть $\alpha_1 = \max\{ \alpha + \varepsilon, \alpha_0 \}$, тогда
+              \[
+              \begin{aligned}
+              \norm{x(t, x_0)}
+              &\leqslant
+              \norm{e^{At} x_0} +
+              \norm{\int\limits_{0}^{t} e^{A (t - \tau)} f(\tau) d\tau} \leqslant \\
+              &\leqslant
+              \norm{e^{At}} \norm{x_0}
+              +
+              \int\limits_{0}^{t} \norm{e^{A (t - \tau)}} \norm{f(\tau)} d\tau \leqslant \\
+              &\leqslant
+              \gamma \norm{x_0} e^{\alpha_1 t}
+              +
+              \int\limits_{0}^{t}
+              \gamma e^{\alpha_1 (t - \tau)}
+              \rho e^{\alpha_1 t} d\tau = \\
+              &=
+              \gamma e^{\alpha_1 t} \left[
+              \norm{x_0}
+              +
+              \rho \int\limits_{0}^{t}
+              e^{\alpha_1 (t - \tau)}
+              d\tau
+              \right] = \\
+              &=
+              \gamma e^{\alpha_1 t} \left[
+              \norm{x_0}
+              +
+              \rho e^{\alpha_1 t} \int\limits_{0}^{t}
+              e^{- \alpha_1 \tau}
+              d\tau
+              \right] = \\
+              &=
+              \gamma e^{\alpha_1 t} \left[
+              \norm{x_0}
+              +
+              \rho e^{\alpha_1 t}
+              \left(
+              - \frac{1}{\alpha_1} e^{- \alpha_1 t}
+              + \frac{1}{\alpha_1}
+              \right)
+              \right].
+              \end{aligned}
+              \]
+
+              <div class="todo">
+                Довести до ума.
+              </div>
+            </div>
+          </div>
         </div>
       </li>
 
@@ -2944,15 +3149,249 @@
           Преобразование Лапласа. Основные свойства
         </div>
         <div class="content">
+          Пусть $f$ &mdash; функция, удовлетворяющая следующим условиям:
+          <ol>
+            <li>
+              $f$ &mdash; кусочно-непрерывная;
+            </li>
+
+            <li>
+              $f(t) = 0$ при $t \lt 0$;
+            </li>
+
+            <li>
+              $\abs{f(t)} \leqslant M e^{\alpha t}$, где $M$ и $\alpha$ &mdash; константы.
+            </li>
+          </ol>
+
+          Константа $M$ для разных функций может быть разной, но $\alpha$ у всех одинаковая.
+
+          <div class="definition">
+            <i>Преобразование Лапласа</i>:
+            \[
+            \hat f(s) = \int\limits_{0}^{\infty} f(t) e^{-st} dt.
+            \]
+          </div>
+
+          <div class="proposition">
+            Интеграл сходится абсолютно для всех $s \in \mathbb{C}_\alpha = \set{ \Re s \gt \alpha }$.
+
+            <div class="proof">
+              \[
+              \begin{aligned}
+              \int\limits_{0}^{T} \abs{f(t) e^{-st}} dt
+              &\leqslant
+              M \int\limits_{0}^{T} e^{(\alpha-\Re s)t} dt = \\
+              &=
+              M \frac{1}{\alpha - \Re s} e^{(\alpha-\Re s) T} - \frac{M}{\alpha - \Re s}
+              \underset{T \to \infty}{\longrightarrow} \frac{M}{\Re s - \alpha} \lt \infty.
+              \end{aligned}
+              \]
+            </div>
+          </div>
+
+          <div class="definition">
+            Оператор $\mathcal{L}: f(t) \to \hat f(s)$ называется <i>оператором Лапласа</i>.
+          </div>
+
+          Свойства:
+          <ol>
+            <li>
+              Линейность: $\mathcal{L}(c_1 f_1 + c_2 f_2) = c_1 \mathcal{L}(f_1) + c_2 \mathcal{L}(f_2)$.
+            </li>
+
+            <li>
+              Если $f(t) \mapsto \hat f(s)$, то $e^{\alpha t} \mapsto \hat f(s - \alpha)$.
+            </li>
+
+            <li>
+              Если $f(t) \mapsto \hat f(s)$, то $\dot f(t) \mapsto s \hat f(s) - f(0)$
+            </li>
+
+            <li>
+              Если $f(t) \mapsto \hat f(s)$, то
+              \[
+              \int\limits_{0}^{t} f(\tau) d\tau \mapsto \frac{\hat f(s)}{s}.
+              \]
+
+              <div class="proof">
+                Обозначим искомый образ через $I$.
+                Пользуясь предыдущим свойством и тем, что
+                \[
+                \frac{d }{d t}
+                \left(
+                \int\limits_{0}^{t} f(\tau) d\tau
+                \right)
+                = f(t),
+                \]
+                получаем
+                \[
+                \mathcal{L}(f) = s I \implies I = \frac{\hat f(s)}{s}.
+                \]
+              </div>
+            </li>
+
+            <li>
+              Дифференцирование по параметру. Пусть $f(t, p) \mapsto \hat f(s, p)$. Тогда
+              \[
+              \frac{\partial f(t, p)}{\partial p} \mapsto \frac{\partial \hat f(s, p)}{\partial p}.
+              \]
+            </li>
+
+            <li>
+              Теорема о свёртке. Пусть
+              \[
+              h(t) = \int\limits_{0}^{t} f(t - \tau) g(\tau) d\tau = f * g.
+              \]
+              Тогда
+              \[
+              \hat h (s) = \hat f (s) \cdot \hat g (s).
+              \]
+            </li>
+
+            <li>
+              Если $f(t) \mapsto \hat f(s)$, то $f(t - h) \mapsto e^{-h s} \hat f(s)$.
+            </li>
+
+            <li>
+              Обратное преобразование:
+              \[
+              \begin{aligned}
+              f(t)
+              &= \frac{v.p.}{2 \pi i} \int\limits_{\sigma - i\infty}^{\sigma + i\infty} e^{st} \hat f(s) ds = \\
+              &= \frac{1}{2 \pi i} \lim\limits_{R \to +\infty}
+              \int\limits_{\sigma - i R}^{\sigma + i R} e^{st} \hat f(s) ds.
+              \end{aligned}
+              \]
+              В пределе интегрирование происходит по прямой линии.
+            </li>
+          </ol>
         </div>
       </li>
 
       <li class="question">
         <div class="name">
-          Определение передаточной функции (матрицы).
-          Свойства передаточной функции
+          Определение передаточной функции (матрицы). Свойства передаточной функции
         </div>
         <div class="content">
+          Рассмотрим систему
+          \[
+          \left\{
+          \begin{aligned}
+          \dot x &= A x + B u + \varphi(t), \\
+          y &= C x + \psi(t).
+          \end{aligned}
+          \right.
+          \]
+
+          Обозначим чяерез $\alpha$ максимальную вещественную часть собственных чисел матрицы $A$:
+          \[
+          \alpha = \max_{i = \overline{1,n}} \Re(\lambda_i).
+          \]
+          Пусть
+          \[
+          \norm{u(t)} \leqslant M_1 e^{\alpha t},
+          \quad
+          \norm{\varphi(t)} \leqslant M_2 e^{\alpha t},
+          \quad
+          \norm{\psi(t)} \leqslant M_3 e^{\alpha t}.
+          \]
+          Тогда
+          \[
+          \norm{x(t)} \leqslant \gamma(x_0) e^{(\alpha + \varepsilon) t}.
+          \]
+
+          Возьмём преобразование Лапласа от обеих частей системы:
+          \[
+          s \hat x(s) - x_0 = A \hat x(s) + B \hat u(s) + \hat \varphi(s).
+          \]
+          Тогда
+          \[
+          (s E - A) \hat x(s) = x_0 + B \hat u(s) + \hat \varphi(s).
+          \]
+          Поделим на $(s E - A)$:
+          \[
+          \hat x(s)
+          =
+          {\left( s E - A \right)}^{-1} x_0
+          + {\left( s E - A \right)}^{-1} B \hat u(s)
+          + {\left( s E - A \right)}^{-1} \hat \varphi(s).
+          \]
+          Образ наблюдения:
+          \[
+          \begin{aligned}
+          \hat y(s)
+          &= C \hat x(s) + \hat \psi(s) \\
+          &=
+          C {\left( s E - A \right)}^{-1} x_0
+          + C {\left( s E - A \right)}^{-1} B \hat u(s) + \\
+          &\phantom{=}
+          + C {\left( s E - A \right)}^{-1} \hat \varphi(s)
+          + \hat \psi(s)
+          \end{aligned}
+          \]
+
+          <div class="definition">
+            Функцию $W(s) = C {\left( s E - A \right)}^{-1} B$ называют <i>передаточной функцией</i> системы
+            от входа $\hat u(s)$ к выходу $\hat y(s)$.
+          </div>
+
+          Свойства.
+          <ol>
+            <li>
+              Передаточная функция представляет из себя дробно-рациональную функцию
+              \[
+              W(s) = \frac{P(s)}{Q(s)},
+              \]
+              причём порядок числителя $m$ не превышает порядок знаменателя $n$.
+            </li>
+
+            <li>
+              Рассмотрим ${\left( s E - A \right)}^{-1}$:
+              \[
+              {\left( s E - A \right)}^{-1}
+              =
+              \frac{\adj A}{\det A},
+              \]
+              следовательно, в знаменателе передаточной функции стоит характеристический полином матрицы $A$.
+              Отсюда заключаем, что передаточная функция определена везде, кроме собственных значений матрицы $A$.
+            </li>
+
+            <li>
+              Передаточная функция инвариантна относительно линейных преобразований.
+
+              <div class="proof">
+                Рассмотрим неособое преобразование $T$. Сделаем замену: $x = Tz$, получаем систему
+                \[
+                \left\{
+                \begin{aligned}
+                \dot z &= T^{-1} A T z + T^{-1} B u, \\
+                y &= C T z.
+                \end{aligned}
+                \right.
+                \]
+
+                Найдём передаточную функцию:
+                \[
+                \begin{aligned}
+                \overline W(s)
+                &=
+                \overline C {\left( s E - \overline A \right)}^{-1} \overline B = \\
+                &=
+                C T {\left( s T^{-1} T - T^{-1} A T \right)}^{-1} T^{-1} B = \\
+                &=
+                C T {\left( T^{-1} \left( s - A \right) T \right)}^{-1} T^{-1} B = \\
+                &=
+                C T T^{-1} {\left(s - A \right)}^{-1} T T^{-1} B = \\
+                &=
+                C {\left(s - A \right)}^{-1} B = \\
+                &=
+                W(s).
+                \end{aligned}
+                \]
+              </div>
+            </li>
+          </ol>
         </div>
       </li>
 
@@ -2962,6 +3401,205 @@
           характеристика
         </div>
         <div class="content">
+          Рассмотрим систему
+          \[
+          \left\{
+          \begin{aligned}
+          \dot x &= A x + B u + \varphi(t), \\
+          y &= C x + \psi(t).
+          \end{aligned}
+          \right.
+          \]
+
+          Рассмотрим передаточную функцию $W(s) = C {\left( s E - A \right)}^{-1} B$.
+
+          <div class="theorem">
+            Передаточная функция системы совпадает с передаточной функцией полностью управляемой и полностью
+            наблюдаемой части.
+
+            <div class="proof">
+              Известно, что передаточная функция инвариантна относительно неособых линейных преобразований.
+
+              <p>
+                Приведём систему к каноническому разложению преобразованием $T$:
+                \[
+                \begin{aligned}
+                \dot z &= \overline A z + \overline B, \\
+                y &= \overline C z,
+                \end{aligned}
+                \]
+                где
+                \[
+                \overline A
+                =
+                \begin{bmatrix}
+                A_{11} & 0 & A_{13} & 0 \\
+                A_{21} & A_{22} & A_{23} & A_{24} \\
+                0 & 0 & A_{33} & 0 \\
+                0 & 0 & A_{43} & A_{44}
+                \end{bmatrix},
+                \quad
+                \overline B
+                =
+                \begin{bmatrix}
+                B_1 \\
+                B_2 \\
+                0 \\
+                0
+                \end{bmatrix},
+                \quad
+                \overline C = \left[ C_1, 0, C_3, 0 \right].
+                \]
+
+                Найдём передаточную функцию этой системы. Для начала вычислим ${\left( s E - \overline A \right)}^{-1}$:
+                \[
+                \begin{aligned}
+                {\left( s E - \overline A \right)}^{-1}
+                &=
+                \begin{bmatrix}
+                s E - A_{11} & 0 & - A_{13} & 0 \\
+                - A_{21} & s E - A_{22} & - A_{23} & - A_{24} \\
+                0 & 0 & s E - A_{33} & 0 \\
+                0 & 0 & - A_{43} & s E - A_{44}
+                \end{bmatrix}^{-1}.
+                \end{aligned}
+                \]
+
+                Заметим, что
+                \[
+                \begin{bmatrix}
+                A & B \\
+                0 & C
+                \end{bmatrix}
+                \cdot
+                \begin{bmatrix}
+                A^{-1} & -A^{-1} B C^{-1} \\
+                0 & C^{-1}
+                \end{bmatrix}
+                =
+                \begin{bmatrix}
+                E & 0 \\
+                0 & E
+                \end{bmatrix}
+                \]
+                и
+                \[
+                \begin{bmatrix}
+                A & 0 \\
+                B & C
+                \end{bmatrix}
+                \cdot
+                \begin{bmatrix}
+                A^{-1} & 0 \\
+                -C^{-1} B A^{-1} & C^{-1}
+                \end{bmatrix}
+                =
+                \begin{bmatrix}
+                E & 0 \\
+                0 & E
+                \end{bmatrix}.
+                \]
+
+                Получаем, что
+                \[
+                \begin{aligned}
+                {\left( s E - \overline A \right)}^{-1}
+                &=
+                \begin{bmatrix}
+                \left(s E - A_{11}\right)^{-1} & 0 & M_{13} & M_{14} \\
+                M_{21} & \left(s E - A_{22}\right)^{-1} & M_{23} & M_{24} \\
+                0 & 0 & \left(s E - A_{33}\right)^{-1} & 0 \\
+                0 & 0 & M_{43} & \left(s E - A_{44}\right)^{-1}
+                \end{bmatrix},
+                \end{aligned}
+                \]
+                где $M_{ij}$ &mdash; некоторые матрицы.
+              </p>
+
+              <p>
+                Далее, вычислим
+                \[
+                \begin{aligned}
+                \overline C {\left( s E - \overline A \right)}^{-1}
+                &=
+                \begin{bmatrix}
+                C_1 & 0 & C_3 & 0
+                \end{bmatrix}
+                \begin{bmatrix}
+                \left(s E - A_{11}\right)^{-1} & 0 & M_{13} & M_{14} \\
+                M_{21} & \left(s E - A_{22}\right)^{-1} & M_{23} & M_{24} \\
+                0 & 0 & \left(s E - A_{33}\right)^{-1} & 0 \\
+                0 & 0 & M_{43} & \left(s E - A_{44}\right)^{-1}
+                \end{bmatrix} = \\
+                &=
+                \begin{bmatrix}
+                C_1 \left(s E - A_{11}\right)^{-1} & 0 & C_1 M_{13} + C_3 \left(s E - A_{33}\right)^{-1} & C_1 M_{14}
+                \end{bmatrix}.
+                \end{aligned}
+                \]
+
+                Домножим теперь справа на $\overline B$:
+                \[
+                \begin{aligned}
+                \overline W(s)
+                &=
+                \overline C {\left( s E - \overline A \right)}^{-1} \overline B = \\
+                &=
+                \begin{bmatrix}
+                C_1 \left(s E - A_{11}\right)^{-1} & 0 & C_1 M_{13} + C_3 \left(s E - A_{33}\right)^{-1} & C_1 M_{14}
+                \end{bmatrix}
+                \begin{bmatrix}
+                B_1 \\
+                B_2 \\
+                0 \\
+                0
+                \end{bmatrix} = \\
+                &=
+                C_1 \left(s E - A_{11}\right)^{-1} B_1.
+                \end{aligned}
+                \]
+              </p>
+            </div>
+          </div>
+
+          <p>
+            Предположим теперь, что управление и наблюдение являются скалярными. Пусть $A$ не имеет чисто мнимых
+            собственных значений.
+          </p>
+
+          <p>
+            Пусть $u = u_0 e^{i \omega t}$ и $x = P e^{i \omega t}$, где $P \in \mathbb{C}^n$ &mdash; некоторый вектор.
+            Тогда
+            \[
+            \begin{gathered}
+            P \cdot i \omega e^{i \omega t} = A P e^{i \omega t} + B u_0 e^{i \omega t}, \\
+            P \cdot i \omega = A P + B u_0, \\
+            \left( i \omega E - A \right) P = B u_0, \\
+            \implies P = {\left( i \omega E - A \right)}^{-1} B u_0.
+            \end{gathered}
+            \]
+
+            Подставим решение в наблюдение:
+            \[
+            \begin{aligned}
+            y
+            &= C {\left( i \omega E - A \right)}^{-1} B u_0 e^{i \omega t} = \\
+            &= W(i \omega) u_0 e^{i \omega t} = \\
+            &= r(\omega) e^{i \arg W(i \omega)} u_0 e^{i \omega t}.
+            \end{aligned}
+            \]
+
+            Тогда
+            <ul>
+              <li>
+                $r(\omega)$ &mdash; амплитудно-частотная характеристика;
+              </li>
+
+              <li>
+                ${\displaystyle e^{i \arg W(i \omega)}}$ &mdash; фазово-частотная характеристика.
+              </li>
+            </ul>
+          </p>
         </div>
       </li>
 
@@ -2971,6 +3609,113 @@
           замкнутой системы
         </div>
         <div class="content">
+          Рассмотрим управляемую наблюдаемую систему:
+          \[
+          \begin{aligned}
+          \dot x &= A x + B u, \\
+          y &= C x.
+          \end{aligned}
+          \]
+          Будем искать управление в виде $u = K y + \overline u$. Подставим его в систему:
+          \[
+          \dot x = A x + B K C x + B \overline u = (A + B K C) x + B \overline u.
+          \]
+          Обозначим через $A_{\mathrm{cl}} = A + B K C$ матрицу замкнутой системы.
+
+          <div class="theorem">
+            $\rank (s E - A_\mathrm{cl}, B) = \rank (s E - A, B)$.
+
+            <div class="proof">
+              Рассмотрим матрицу слева:
+              \[
+              \begin{aligned}
+              (s E - A_\mathrm{cl}, B)
+              &=
+              (s E - A - B K C, B) = \\
+              &=
+              (s E - A, B)
+              \cdot
+              \begin{bmatrix}
+              E & 0 \\
+              - KC & E
+              \end{bmatrix}.
+              \end{aligned}
+              \]
+              Матрица справа невырожденная, поэтому $\rank (s E - A, B) = \rank (s E - A_\mathrm{cl}, B)$.
+            </div>
+          </div>
+
+          <div class="corollary">
+            Система полностью управляема тогда и только тогда, когда полностью управляема замкнутая система.
+
+            <div class="proof">
+              Критерий Хаутуса в обе стороны.
+            </div>
+          </div>
+
+          <div class="theorem">
+            Справедливо равенство:
+            \[
+            \rank
+            \begin{bmatrix}
+            s E - A_\mathrm{cl} \\
+            C
+            \end{bmatrix}
+            =
+            \rank
+            \begin{bmatrix}
+            s E - A \\
+            C
+            \end{bmatrix}.
+            \]
+
+            <div class="proof">
+              Рассмотрим матрицу слева:
+              \[
+              \begin{bmatrix}
+              s E - A_\mathrm{cl} \\
+              C
+              \end{bmatrix}
+              =
+              \begin{bmatrix}
+              s E - A - BKC \\
+              C
+              \end{bmatrix}
+              =
+              \begin{bmatrix}
+              E & - BK \\
+              0 & E
+              \end{bmatrix}
+              \begin{bmatrix}
+              s E - A \\
+              C
+              \end{bmatrix}.
+              \]
+
+              Первая матрица в произведении невырождена, поэтому
+              \[
+              \rank
+              \begin{bmatrix}
+              s E - A_\mathrm{cl} \\
+              C
+              \end{bmatrix}
+              =
+              \rank
+              \begin{bmatrix}
+              s E - A \\
+              C
+              \end{bmatrix}.
+              \]
+            </div>
+          </div>
+
+          <div class="corollary">
+            Система полностью наблюдаема тогда и только тогда, когда замкнутая система полностью наблюдаема.
+
+            <div class="proof">
+              Переходим к двойственной и пользуемся предыдущим следствием либо критерием Хаутуса напрямую.
+            </div>
+          </div>
         </div>
       </li>
 
@@ -2980,6 +3725,115 @@
           управления системы с матрицей Фробениуса
         </div>
         <div class="content">
+          Рассмотрим управляемую систему
+          \[
+          \dot y = P_0 y + q_0 u,
+          \]
+          где $u$ &mdash; скалярное управление, а матрицы имеют вид
+          \[
+          P_0
+          =
+          \begin{bmatrix}
+          0 & 0 & \dots & 0 & -\alpha_k \\
+          1 & 0 & \dots & 0 & -\alpha_{k-1} \\
+          \dots & \dots & \dots & \dots & \dots \\
+          0 & 0 & \dots & 0 & -\alpha_2 \\
+          0 & 0 & \dots & 1 & -\alpha_1 \\
+          \end{bmatrix},
+          \quad
+          q_0
+          =
+          \begin{bmatrix}
+          1 \\
+          0 \\
+          \vdots \\
+          0
+          \end{bmatrix}.
+          \]
+          Матрица $P_0$ называется матрицей Фробениуса или сопровождающей матрицей для полинома
+          \[
+          f_0(\lambda) = \det (\lambda E - P_0) = \lambda^k + \alpha_1 \lambda^{k-1} + \dots + \alpha_k.
+          \]
+
+          <div class="lemma">
+            Для любого набора комплексных чисел $\mu_1, \dots, \mu_k$ найдётся строка $c_0$ такая, что собственные
+            числа матрицы замкнутой системы $P_0 + q_0 c_0$ будут совпадать с $\mu_1, \dots, \mu_k$.
+
+            <div class="proof">
+              Построим замену переменных
+              \[
+              y = K_0 z,
+              \]
+              в результате которой матрица новой системы будет совпадать с $P_0^T$. Это возможно при
+              \[
+              K_0
+              =
+              \begin{bmatrix}
+              \alpha_{k-1} & \alpha_{k-2} & \dots & \alpha_1 & 1 \\
+              \alpha_{k-2} & \alpha_{k-3} & \dots & 1 & 0 \\
+              \dots & \dots & \dots & \dots & \dots \\
+              \alpha_{1} & 1 & \dots & 0 & 0 \\
+              1 & 0 & \dots & 0 & 0
+              \end{bmatrix}.
+              \]
+              Она найдена как решение линейного матричного уравнения
+              \[
+              K_0 P_0^T = P_0 K_0.
+              \]
+              Вектор $q_0$ перейдёт в вектор
+              \[
+              \overline q_0 = K_0^{-1} q_0
+              =
+              \begin{bmatrix}
+              0 \\
+              \dots \\
+              0 \\
+              1
+              \end{bmatrix}.
+              \]
+
+              После замены получем систему
+              \[
+              \dot z = P_0^T z + \overline q_0 u.
+              \]
+              Построим для неё управление вида $u = \gamma z$, обеспечивающее ей собственные числа $\mu_1, \dots,
+              \mu_k$. Матрица замкнутой системы примет вид
+              \[
+              P_0^T + \overline q_0 \gamma
+              =
+              \begin{bmatrix}
+              0 & 1 & \dots & 0 \\
+              \dots & \dots & \dots & \dots \\
+              0 & \dots & 0 & 1 \\
+              -(\alpha_k - \gamma_1) & -(\alpha_{k-1} - \gamma_2) & \dots & -(\alpha_1 - \gamma_k)
+              \end{bmatrix}
+              \]
+              будет сопровождающей матрицей для полинома
+              \[
+              f(\lambda)
+              = \lambda^k + (\alpha_1 - \gamma_k) \lambda^{k-1} + \dots + (\alpha_k - \gamma_1)
+              = \det (\lambda E - P_0^T - \overline q_0 \gamma).
+              \]
+
+              Построим эталонный многочлен с заданными комплексными числами:
+              \[
+              f_\mathrm{э}(\lambda)
+              = (\lambda - \mu_1) \cdot \dots \cdot (\lambda - \mu_k)
+              = \lambda^k + \beta_1 \lambda^{k-1} + \dots + \beta_k.
+              \]
+
+              Чтобы найти строку $\gamma$, приравняем коэффициенты:
+              \[
+              \gamma_1 = \alpha_k - \beta_k, \quad \dots, \quad \gamma_k = \alpha_1 - \beta_1.
+              \]
+
+              Учитывая замену переменных, получаем искомое управление:
+              \[
+              u = \gamma z = \gamma K_0^{-1} y,
+              \]
+              откуда $c_0 = \gamma K_0^{-1}$.
+            </div>
+          </div>
         </div>
       </li>
 
@@ -2989,6 +3843,292 @@
           управлением
         </div>
         <div class="content">
+          Рассмотрим управляемую систему
+          \[
+          \dot y_1 = P_{11} y_1 + Q_1 u,
+          \]
+          где $P_{11}$ и $Q_1$ &mdash; матрицы $m \times m$ и $m \times r$ соответственно.
+
+          <div class="lemma">
+            В управляемой системе выбором управления $u = C_1 y_1$ можно обеспечить любой наперёд заданный набор
+            собственных чисел $\mu_1, \dots, \mu_m$.
+
+            <div class="proof">
+              Система управляемая, поэтому по критерию Калмана
+              \[
+              \rank \left[ Q_1, P_1 Q_1, \dots, P^{m-1} Q_1 \right] = m.
+              \]
+
+              Делаем замену переменных: $y_1 = T_1 z_1$, где
+              \[
+              T = \left[
+              q_1, P_{11} q_1, \dots, P_{11}^{k_1 - 1} q_1,
+              \dots,
+              q_l, P_{11} q_l, \dots, P_{11}^{k_l - 1} q_l
+              \right],
+              \]
+              где $q_1, \dots, q_l$, $1 \leqslant l \leqslant r$ &mdash; столбцы матрицы $Q_1$.
+
+              <p>
+                Первая цепочка из $k_1$ векторов
+                \[
+                q_1, P_{11} q_1, \dots, P_{11}^{k_1 - 1} q_1
+                \]
+                формируется до тех пор, пока остаётся линейно независимой. Как только появляется линейно зависимый
+                вектор $P_{11}^{k_1} q_1$, процесс останавливается, $k_1$ фиксируется.
+              </p>
+
+              <p>
+                Если $k_1 \lt n$, то добавляем цепочку из $k_2$ вектров, образованную вектором $q_2$.
+              </p>
+
+              <p>
+                Заканчиваем формирование матрицы $T_1$, когда при некотором $l$ выполняется условие
+                \[
+                k_1 + k_2 + \dots + k_l = m.
+                \]
+              </p>
+
+              После замены получаем систему
+              \[
+              \dot z_1 = \widetilde P_{11} z_1 + \widetilde Q_1 u,
+              \]
+              где
+              \[
+              \widetilde P_{11} = T_1^{-1} P_{11} T_1,
+              \quad
+              \widetilde Q_1 = T_1^{-1} Q_1.
+              \]
+
+              <p>
+                Теперь надо выяснить структуру $\widetilde P_{11}$ и $\widetilde Q_1$. Начнём с первой матрицы,
+                рассмотрим $T_1 \widetilde P_{11} = P_{11} T_1$ по столбцам.
+              </p>
+
+              <p>
+                Здесь $\widetilde p_1$ &mdash; вектор коэффициентов разложения вектора $P_{11} q_1$ по
+                столбцам $T_1$. Заметим, что $P_{11} q_1$ &mdash; второй столбец в $T_1$, поэтому
+                \[
+                \widetilde p_1 =
+                \begin{bmatrix}
+                0 \\
+                1 \\
+                0 \\
+                \dots \\
+                0 \\
+                0
+                \end{bmatrix}.
+                \]
+
+                Аналогично для $2, \dots, k_1 - 1$. Смотрим на $k_1$-ый столбец:
+                \[
+                T_1 \widetilde p_{k_1} = P_{11} P_{11}^{k_1 - 1} q_1 = P_{11}^{k_1} q_1.
+                \]
+                Разложение вектора $P_{11}^{k_1} q_1$ по столбцам $T_1$ уже известно из теоремы Гамильтона-Кэли,
+                поэтому
+                \[
+                \widetilde p_{k_1}
+                =
+                \begin{bmatrix}
+                -\alpha_{k_1}^{(1)} \\
+                -\alpha_{k_1-1}^{(1)} \\
+                \vdots \\
+                -\alpha_{1}^{(1)} \\
+                0 \\
+                0 \\
+                0
+                \end{bmatrix}
+                \]
+              </p>
+
+              <p>
+                Дальше с $k_1 + 1$ до $k_1 + k_2$ шага всё аналогично, но уже для второй группы столбцов, и так далее.
+              </p>
+
+              <p>
+                Получается, что после замены переменных матрица $\widetilde P_{11}$ будет блочно-треугольной,
+                на диагонали будут стоять матрицы Фробениуса вида
+                \[
+                \begin{aligned}
+                \widetilde P_{11}^{(1)}
+                &=
+                \begin{bmatrix}
+                0 & 0 & 0 & \dots & 0 & -\alpha_{k_1}^{(1)} \\
+                1 & 0 & 0 & \dots & 0 & -\alpha_{k_1-1}^{(1)} \\
+                \dots & \dots & \dots & \dots & \dots & \dots \\
+                0 & 0 & 0 & \dots & 1 & -\alpha_{1}^{(1)} \\
+                \end{bmatrix}, \\
+                \widetilde P_{11}^{(2)}
+                &=
+                \begin{bmatrix}
+                0 & 0 & 0 & \dots & 0 & -\alpha_{k_2}^{(2)} \\
+                1 & 0 & 0 & \dots & 0 & -\alpha_{k_2-1}^{(2)} \\
+                \dots & \dots & \dots & \dots & \dots & \dots \\
+                0 & 0 & 0 & \dots & 1 & -\alpha_{1}^{(2)} \\
+                \end{bmatrix}, \\
+                &\vdots \\
+                \widetilde P_{11}^{(l)}
+                &=
+                \begin{bmatrix}
+                0 & 0 & 0 & \dots & 0 & -\alpha_{k_l}^{(l)} \\
+                1 & 0 & 0 & \dots & 0 & -\alpha_{k_l-1}^{(l)} \\
+                \dots & \dots & \dots & \dots & \dots & \dots \\
+                0 & 0 & 0 & \dots & 1 & -\alpha_{1}^{(l)} \\
+                \end{bmatrix}.
+                \end{aligned}
+                \]
+
+                Размеры блоков: $(k_1 \times k_1), \dots, (k_l, k_l)$ соответственно.
+              </p>
+
+              <p>
+                Тогда
+                \[
+                \widetilde P_{11}
+                =
+                \begin{bmatrix}
+                \widetilde P_{11}^{(1)} & * & \dots & * \\
+                0 & \widetilde P_{11}^{(2)} & \dots & * \\
+                \dots & \dots & \dots & \dots \\
+                0 & 0 & \dots & \widetilde P_{11}^{(l)}
+                \end{bmatrix}.
+                \]
+
+                Это представление называется обобщённой формой Фробениуса.
+              </p>
+
+              <p>
+                Теперь анализируем структуру матрицы $\widetilde Q_1$. Рассматриваем $T_1 \widetilde Q_1 = Q_1$.
+                Смотрим первый столбец:
+                \[
+                T_1 \widetilde q_1 = q_1.
+                \]
+                но $q_1$ &mdash; первый столбец в $T_1$, поэтому
+                \[
+                \widetilde q_1
+                =
+                \begin{bmatrix}
+                1 \\
+                0 \\
+                \dots \\
+                0
+                \end{bmatrix}.
+                \]
+                Аналогично со вторым:
+                \[
+                \widetilde q_2
+                =
+                \begin{bmatrix}
+                0 \\
+                \dots \\
+                0 \\
+                1 \\
+                0 \\
+                \dots \\
+                0
+                \end{bmatrix}.
+                \]
+                И так далее. Единицы стоят в местах с индексами $1, k_1 + 1, \dots, k_1 + k_2 + \dots + k_{l-1} + 1$.
+              </p>
+
+              <p>
+                Тут есть два варианта формирования $T_1$: когда $l = r$ и когда $l \lt r$. В первом варианте
+                \[
+                \widetilde Q_1 =
+                \begin{bmatrix}
+                e_1 & 0 & \dots & 0 \\
+                0 & e_2 & \dots & 0 \\
+                \dots & \dots & \dots & \dots \\
+                0 & 0 & 0 & e_l
+                \end{bmatrix},
+                \]
+                где $e_k$ &mdash; единичные векторы размерностей $k_1, \dots, k_l$ соответственно.
+              </p>
+
+              <p>
+                Во втором случае нам нужно продолжить анализировать столбцы, но так как они уже не встречаются
+                в $T_1$, то там будет произвольное разложение, то есть
+                \[
+                \widetilde Q_1 =
+                \begin{bmatrix}
+                e_1 & 0 & \dots & 0 & * & \dots & * \\
+                0 & e_2 & \dots & 0  & * & \dots & * \\
+                \dots & \dots & \dots & \dots & \dots & \dots & \dots \\
+                0 & 0 & 0 & e_l & * & \dots & *
+                \end{bmatrix},
+                \]
+              </p>
+
+              <p>
+                Теперь рассмотрим допустимое управление с учётом замены:
+                \[
+                u = C_1 y_1 = C_1 T_1 z_1 = \widetilde C_1 z_1, \qquad \widetilde C_1 = C_1 T_1.
+                \]
+                Запишем замкнутую систему:
+                \[
+                \dot z_1 = \left( \widetilde P_{11} + \widetilde Q_1 \widetilde C_1 \right) z_1.
+                \]
+                Задача свелась к поиску матрицы $\widetilde C_1$, чтобы матрица замкнутой системы имела наперёд заданные
+                собственные числа $\mu_1, \dots, \mu_m$.
+              </p>
+
+              <p>
+                Если $l = r$, то ищем в виде
+                \[
+                \widetilde C_1 =
+                \begin{bmatrix}
+                c_1 & 0 & \dots & 0 \\
+                0 & c_2 & \dots & 0 \\
+                \dots & \dots & \dots & \dots \\
+                0 & 0 & \dots & c_l
+                \end{bmatrix},
+                \]
+                где $c_1, \dots, c_l$ &mdash; строки длины $k_1, \dots, k_l$, а остальное заполнено нулями.
+              </p>
+
+              <p>
+                Если $l \lt r$, то ищем так:
+                \[
+                \widetilde C_1 =
+                \begin{bmatrix}
+                c_1 & 0 & \dots & 0 \\
+                0 & c_2 & \dots & 0 \\
+                \dots & \dots & \dots & \dots \\
+                0 & 0 & \dots & c_l \\
+                0 & 0 & \dots & 0 \\
+                \dots & \dots & \dots & \dots \\
+                0 & 0 & \dots & 0
+                \end{bmatrix},
+                \]
+                где нижний нулевой блок имеет размерность $(r - l) \times m$.
+              </p>
+
+              Итак, с учётом проведённого анализа матрица замкнутой системы примет вид
+              \[
+              \begin{bmatrix}
+              \widetilde P_{11}^{(1)} + e_1 c_1 & * & \dots & * \\
+              0 & \widetilde P_{11}^{(2)} & \dots + e_2 c_2 & * \\
+              \dots & \dots & \dots & \dots \\
+              0 & 0 & \dots & \widetilde P_{11}^{(l)} + e_l c_l
+              \end{bmatrix}.
+              \]
+              Это справедливо как в случае $l = r$, так и в случае $l \lt r$.
+
+              <p>
+                Теперь отметим, что спектр матрицы замкнутой системы совпадает с объединением спектров диагональных
+                блоков $\widetilde P_{11}^{(k)} + e_k c_k$, решаем как было сказано в предыдущем билете, то
+                есть строим характеристический полином, эталонный характеристический полином и приравниваем их.
+              </p>
+
+              <p>
+                В конце формируем матрицу $\widetilde C_{1}$, находим $C_1 = \widetilde C_1 T_1^{-1}$ и получаем
+                искомое управление:
+                \[
+                u = \widetilde C_1 T_1^{-1} y.
+                \]
+              </p>
+            </div>
+          </div>
         </div>
       </li>
 
@@ -2998,6 +4138,167 @@
           управлением
         </div>
         <div class="content">
+          <div class="theorem">
+            Для того чтобы существовало стабилизирующее управление $u = Cx$ для системы
+            \[
+            \dot x = P x + Q u,
+            \]
+            необходимо и достаточно, чтобы вещественные части неуправляемых собственных чисел были
+            отрицательны.
+
+            <div class="proof">
+              <div class="necessity">
+                Если существует хотя бы одно неуправляемое число с неотрицательной вещественной частью, то
+                система будет иметь это собственное чисто в своём спектре вне зависимости от выбора управления,
+                поэтому асимптотической устойчивости не добиться никак.
+              </div>
+
+              <div class="sufficiency">
+                В случае, когда условие теоремы выполняется, программное управление можно построить конструктивно.
+              </div>
+            </div>
+
+            <div class="corollary">
+              Если система полностью управляема, то она стабилизируема управлением вида $u = Cx$.
+            </div>
+
+            <div class="solution">
+              <i>(алгоритм построения стабилизирующего управления)</i>
+              <br/>
+
+              <ol>
+                <li>
+                  Строим матрицу замены переменных $T$. Два возможных варианта:
+                  <ol>
+                    <li>
+                      система полностью управляема, тогда
+                      \[
+                      T = \left[
+                      q_1, Pq_1, \dots, P^{k_1-1} q_1, \dots,
+                      q_l, Pq_l, \dots, P^{k_l-1} q_l
+                      \right]
+                      \]
+                      и $k_1 + \dots + k_l = n$;
+                    </li>
+
+                    <li>
+                      система не полностью управляема, тогда строим столько можем, остальное добиваем до базиса
+                      $\mathbb{R}^n$:
+                      \[
+                      T = \left[
+                      q_1, Pq_1, \dots, P^{k_1-1} q_1, \dots,
+                      q_l, Pq_l, \dots, P^{k_l-1} q_l, \widetilde s_{m+1}, \dots, \widetilde s_n,
+                      \right]
+                      \]
+                      где $k_1 + \dots + k_l = m = \rank K$ &mdash; ранг матрицы Калмана.
+                    </li>
+                  </ol>
+
+                  Делаем замену: $x = T y$.
+                </li>
+
+                <li>
+                  Строим матрицу системы после замены переменных: $\overline P = T^{-1} P T$, можно решать $n$
+                  алгебраических систем вида $T \overline P = P T$ относительно столбцов $\overline P$ методом Гаусса.
+
+                  <ol>
+                    <li>
+                      Если полная управляемость, то $\overline P$ &mdash; блочно-диагональная с матрицами
+                      Фробениуса.
+                    </li>
+
+                    <li>
+                      Если не полная управляемость, то $\overline P$ &mdash; блочно-диагональная с матрицами
+                      Фробениуса, но последний блок будет соответствовать неуправляемой подсистеме.
+                    </li>
+                  </ol>
+                </li>
+
+                <li>
+                  Если не полная управляемость, надо найти собственные числа неуправляемого блока и проверить, что
+                  их вещественные части меньше нуля. Если это не так, то стабилизирующее управление построить
+                  невозможно.
+                </li>
+
+                <li>
+                  Строим матрицу $K$:
+
+                  <ol>
+                    <li>
+                      в случае полной управляемости строим как $K = \diag (K_1, \dots, K_l)$,
+                      где каждый блок выглядит как
+                      \[
+                      K_0
+                      =
+                      \begin{bmatrix}
+                      \alpha_{k-1} & \alpha_{k-2} & \dots & \alpha_1 & 1 \\
+                      \alpha_{k-2} & \alpha_{k-3} & \dots & 1 & 0 \\
+                      \dots & \dots & \dots & \dots & \dots \\
+                      \alpha_{1} & 1 & \dots & 0 & 0 \\
+                      1 & 0 & \dots & 0 & 0
+                      \end{bmatrix},
+                      \]
+                      где альфы надо взять из соответствующего блока Фробениуса;
+                    </li>
+
+                    <li>
+                      если не полная управляемость, то делаем то же самое для всех фробениусовых блоков и докидываем
+                      последним блоком единичную матрицу: $K = \diag (K_1, \dots, K_l, E_{n - m})$.
+                      Ставим единичную, так как преобразование неуправляемого блока смысла не имеет.
+                    </li>
+                  </ol>
+
+                  Проводим замену $y = K z$.
+                </li>
+
+                <li>
+                  Каждому диагональному блоку полученной матрицы ставим в соответствие эталонный многочлен степени
+                  $k_s$, приравниваем его к тому многочлену, что получили в блоке, отсюда находим коэффициенты.
+                </li>
+
+                <li>
+                  Далее из полученных строчек $\gamma_s$ строим $(r \times n)$ матрицу:
+                  \[
+                  \Gamma
+                  =
+                  \begin{bmatrix}
+                  \gamma_1 & 0 & \dots & 0 \\
+                  0 & \gamma_2 & \dots & 0 \\
+                  \dots & \dots & \dots & \dots \\
+                  0 & 0 & \dots & \gamma_l \\
+                  0 & 0 & \dots & 0 \\
+                  0 & 0 & \dots & 0 \\
+                  \dots & \dots & \dots & \dots \\
+                  0 & 0 & \dots & 0 \\
+                  \end{bmatrix}
+                  \],
+                  или, если не полная управляемость, то
+                  \[
+                  \Gamma
+                  =
+                  \begin{bmatrix}
+                  \gamma_1 & 0 & \dots & 0 & 0 \\
+                  0 & \gamma_2 & \dots & 0 & 0\\
+                  \dots & \dots & \dots & \dots & \dots \\
+                  0 & 0 & \dots & \gamma_l & 0 \\
+                  0 & 0 & \dots & 0 & 0 \\
+                  0 & 0 & \dots & 0 & 0 \\
+                  \dots & \dots & \dots & \dots & \dots \\
+                  0 & 0 & \dots & 0 & 0 \\
+                  \end{bmatrix}
+                  \],
+                </li>
+
+                <li>
+                  Находим искомое управление:
+                  \[
+                  u = \Gamma z = \Gamma K^{-1} y = \Gamma K^{-1} T^{-1} x = C x,
+                  \]
+                  где $C = \Gamma K^{-1} T^{-1}$.
+                </li>
+              </ol>
+            </div>
+          </div>
         </div>
       </li>
 
@@ -3032,6 +4333,95 @@
           выходу. Наблюдатель Люенбергера
         </div>
         <div class="content">
+          Рассмотрим управляемую систему:
+          \[
+          \dot x = A x + B u.
+          \]
+          Будем искать управление в виде $u = Kx$.
+
+          <div class="theorem">
+            Если система полностью управляемая, тогда подбором $K$ можно получить произвольный спектр замкнутой системы.
+
+            <div class="remark">
+              Это означает, что из полной управляемости следует стабилизируемость. Обратное, вообще говоря, неверно.
+            </div>
+          </div>
+
+          Рассмотрим матрицу Хаутуса: $(sE - A, B)$.
+
+          <div class="theorem">
+            Система стабилизируема тогда и только тогда, когда $\rank (sE - A, B) = n$ для всех неустойчивых собственных
+            чисел матрицы $A$.
+          </div>
+
+          <div class="example">
+            Рассмотрим систему
+            \[
+            A = \begin{pmatrix}
+            0 & 1 & 0 \\
+            0 & 0 & 1 \\
+            1 & -1 & 1
+            \end{pmatrix},
+            \quad
+            b = \begin{pmatrix}
+            0 \\ 0 \\ 1
+            \end{pmatrix},
+            \quad
+            C = \begin{pmatrix}
+            0 & 0 & 1
+            \end{pmatrix}.
+            \]
+
+            <p>
+              Проверим полную управляемость:
+              \[
+              K = \begin{bmatrix}
+              0 & 0 & 1 \\
+              0 & 1 & 1 \\
+              1 & 1 & 0
+              \end{bmatrix},
+              \quad \rank K = 3 = n,
+              \]
+              следовательно, система полностью управляема.
+            </p>
+
+            <p>
+              Проверим полную наблюдаемость:
+              \[
+              K =
+              \begin{bmatrix}
+              0 & 0 & 1 \\
+              1 & -1 & 1 \\
+              1 & 0 & 0
+              \end{bmatrix},
+              \quad \rank K = 3 = n,
+              \]
+              следовательно, система полностью наблюдаема.
+            </p>
+
+            Собственные числа матрицы $A$: 1, i, -i. Проверим неустойчивые собственные числа, посчитав ранг матрицы
+            Хаутуса:
+            \[
+            \rank (E - A, B) = 3, \quad
+            \rank (Ei - A, B) = 3.
+            \]
+
+            <div class="todo">
+              Тут по идее должно быть нестабилизируемо?
+            </div>
+          </div>
+
+          <p>
+            Рассмотрим теперь вспомогательную систему вида
+            \[
+            \dot{\hat x} = A \hat x + B u + L(y - C \hat x),
+            \]
+            где матрица $L$ подлежит определению.
+          </p>
+
+          <div class="definition">
+            Данная система называется <i>динамическим наблюдателем Люенбергера</i>.
+          </div>
         </div>
       </li>
 
@@ -3041,6 +4431,124 @@
           и полностью наблюдаемой системы
         </div>
         <div class="content">
+          Рассмотрим систему без управления:
+          \[
+          \begin{aligned}
+          \dot x &= A x, \\
+          y &= C x, \\
+          \dot{\hat x} &= A \hat x + L(y - C \hat x).
+          \end{aligned}
+          \]
+
+          <div class="definition">
+            Величина $e = x - \hat x$ называется <i>невязкой</i>.
+          </div>
+
+          Продифференцируем:
+          \[
+          \begin{aligned}
+          \dot e &= \dot x - \dot{\hat x} = A x - A \hat x - L(y - C \hat x) = \\
+          &= \dot x - \dot{\hat x} = A x - A \hat x - L(C x - C \hat x) = \\
+          &= (A - LC) e.
+          \end{aligned}
+          \]
+
+          <div class="lemma">
+            Пусть система полностью наблюдаема, тогда выбором матрицы $L$ можно получить произвольный спектр
+            матрицы $A - LC$.
+
+            <div class="proof">
+              Если пара $(A, C)$ полностью наблюдаема, то пара $(A^T, C^T)$ полностью управляема. Следовательно,
+              двойственная система стабилизируема. Выберем $K$ таким образом, чтобы матрица $A^T + C^T K$ имела заданный
+              спектр:
+              \[
+              (A^T + C^T K)^T = A + K^T C = A - LC,
+              \]
+              если положить $L = -K^T$.
+
+              <p>
+                Так как $\sigma(Y) = \sigma(Y^T)$, то
+                \[
+                \sigma(A^T C^T K) = \sigma(A - LC).
+                \]
+              </p>
+            </div>
+          </div>
+
+          Рассмотрим теперь управляемую и наблюдаемую систему:
+          \[
+          \tag{2}
+          \begin{aligned}
+          \dot x &= A x + B u, \\
+          y &= C x, \\
+          \dot{\hat x} &= A \hat x + B u + L(y - C \hat x).
+          \end{aligned}
+          \]
+
+          Введём невязку: $e(t) = x(t) - \hat x(t)$, отсюда $\hat x(t) = x(t) - e(t)$.
+
+          <p>
+            Пусть $u = K \hat x$, тогда
+            \[
+            \dot x = Ax + B K \hat x = Ax + B K (x - e) = (A + BK) x - BK e.
+            \]
+            Теперь продифференцируем выражение с невязкой:
+            \[
+            \dot{\hat x} = \dot x - \dot e = A \hat x + B K \hat x + L(C x - C \hat x).
+            \]
+            С другой стороны,
+            \[
+            \dot{\hat x} = A x + B u - \dot e.
+            \]
+            Приравниваем:
+            \[
+            \begin{aligned}
+            A x + B u - \dot e &= A (x - e) + B K (x - e) + LC e, \\
+            A x + \cancel{B K (x - e)} - \dot e &= A (x - e) + \cancel{B K (x - e)} + LC e, \\
+            -\dot e &= - A e + LC e, \\
+            \dot e &= (A - LC) e.
+            \end{aligned}
+            \]
+
+            В итоге получаем следующую систему:
+            \[
+            \begin{aligned}
+            \dot x &= (A + B K) x - BK e, \\
+            \dot e &= (A - LC) e.
+            \end{aligned}
+            \]
+
+            Пусть
+            \[
+            z = \begin{bmatrix}
+            x \\ e
+            \end{bmatrix},
+            \]
+            тогда её можно представить в следующем виде:
+            \[
+            \dot z = A_\mathrm{cl} z,
+            \]
+            где
+            \[
+            A_\mathrm{cl}
+            =
+            \begin{bmatrix}
+            A + BK & - BK \\
+            0 & A - LC
+            \end{bmatrix}.
+            \]
+
+            Значит,
+            \[
+            \sigma(A_\mathrm{cl}) = \sigma(A + BK) \cup \sigma(A - LC).
+            \]
+          </p>
+
+          <div class="theorem">
+            Если система $(2)$ полностью наблюдаема и полностью управляема, то при помощи динамического наблюдателя
+            и выбора матриц $K$ и $L$ можно стабилизировать систему, используя стационарную (статическую) обратную связь
+            по динамическому наблюдателю: $u = K \hat x$.
+          </div>
         </div>
       </li>
 
@@ -3049,6 +4557,135 @@
           Свойства Кронекерова (прямого) произведения матриц
         </div>
         <div class="content">
+          Рассмотрим матрицы $A \in \mathbb{R}^{m \times n}$ и $B \in \mathbb{R}^{n \times n}$.
+
+          <div class="definition">
+            <i>Кронекеровым (прямым) произведением матриц</i> $A$ и $B$ называется матрица вида
+            \[
+            A \otimes B
+            =
+            \begin{bmatrix}
+            a_{11} B & a_{12} B & \dots & a_{1m} B \\
+            a_{21} B & a_{22} B & \dots & a_{2m} B \\
+            \dots & \dots & \dots & \dots \\
+            a_{m1} B & a_{m2} B & \dots & a_{mm} B
+            \end{bmatrix}.
+            \]
+            Размерность матрицы $\dim A \otimes B = mn \times mn$.
+          </div>
+
+          <div class="example">
+            Пусть
+            \[
+            A
+            =
+            \begin{bmatrix}
+            a_{11} & a_{12} \\
+            a_{21} & a_{22}
+            \end{bmatrix}
+            \quad \text{и} \quad
+            B
+            =
+            \begin{bmatrix}
+            b_{11} & b_{12} \\
+            b_{21} & b_{22}
+            \end{bmatrix},
+            \]
+            тогда
+            \[
+            A \otimes B
+            =
+            \begin{bmatrix}
+            a_{11} b_{11} & a_{11} b_{12} & a_{12} b_{11} & a_{12} b_{12} \\
+            a_{11} b_{21} & a_{11} b_{22} & a_{12} b_{21} & a_{12} b_{22} \\
+            a_{21} b_{11} & a_{21} b_{12} & a_{22} b_{11} & a_{22} b_{12} \\
+            a_{21} b_{21} & a_{21} b_{22} & a_{22} b_{21} & a_{22} b_{22}
+            \end{bmatrix}.
+            \]
+          </div>
+
+          Свойства:
+          <ol>
+            <li>
+              Элемент матрицы $A \otimes B$ с индексами $k, l$ задаётся следующим образом:
+              \[
+              (A \otimes B)_{kl} = a_{ri} b_{sj},
+              \]
+              где
+              \[
+              k = (r - 1) n + s, \quad l = (i - 1) n + j,
+              \qquad r, i = \overline{1, m}, \quad s, j = \overline{1, n}.
+              \]
+            </li>
+
+            <li>
+              $(A + B) \otimes C = A \otimes C + B \otimes C$.
+            </li>
+
+            <li>
+              $A \otimes (B + C) = A \otimes B + A \otimes C$.
+            </li>
+
+            <li>
+              $(\mu A) \otimes B = \mu (A \otimes B) = A \otimes (\mu B)$.
+            </li>
+
+            <li>
+              $(A \otimes B) \otimes C = A \otimes (B \otimes C)$.
+            </li>
+
+            <li>
+              $(A \otimes B)^T = A^T \otimes B^T$.
+            </li>
+
+            <li>
+              $A \otimes B \neq B \otimes A$.
+            </li>
+          </ol>
+
+          <div class="theorem">
+            Пусть $A, C \in \mathbb{R}^{m \times m}$ и $B, D \in \mathbb{R}^{n \times n}$. Тогда
+            \[
+            (A \otimes B) (C \otimes D) = AC \otimes BD.
+            \]
+
+            <div class="proof">
+              <div class="todo">
+                Расписать.
+              </div>
+            </div>
+          </div>
+
+          <div class="corollary">
+            $A \otimes B = (A \otimes E_n) (E_m \otimes B)$.
+          </div>
+
+          <div class="corollary">
+            $\det (A \otimes B) = (\det A)^n (\det B)^m$.
+          </div>
+
+          <div class="corollary">
+            $(A \otimes B)^{-1} = A^{-1} \otimes B^{-1}$.
+          </div>
+
+          <div class="corollary">
+            $(A_1 \otimes B_1) (A_2 \otimes B_2) \cdots (A_k \otimes B_k) = (A_1, \dots, A_k) \otimes (B_1, \dots, B_k)$.
+          </div>
+
+          <div class="proposition">
+            Рассмотрим некоторую билинейную форму
+            \[
+            \varphi(x, y) = \sum_{i,j = 0}^{r} c_{ij} x^i y^j,
+            \]
+            где $c_{ij}$ &mdash; комплексные коэффициенты. Тогда
+            \[
+            \varphi(A, B) = \sum_{i,j = 0}^{r} c_{ij} A^i B^j.
+            \]
+
+            <div class="example">
+              Если $\varphi(x, y) = 2x + x^2 y$, то $\varphi(A, B) = 2 A \otimes E_n + A^2 \otimes B$.
+            </div>
+          </div>
         </div>
       </li>
 
@@ -3057,6 +4694,45 @@
           Теорема о собственных значениях составных матриц
         </div>
         <div class="content">
+          <div class="theorem">
+            Пусть $\lambda_1, \dots, \lambda_m$ &mdash; собственные значения матрицы $A$ и
+            $\mu_1, \dots, \mu_n$ &mdash; собственные значения матрицы $B$. Тогда собственными значениями
+            матрицы $\varphi(A, B)$ будет множество чисел $\varphi(\lambda_i, \mu_j)$ для всех $i = \overline{1,m}$ и
+            $j = \overline{1,n}$.
+
+            <div class="proof">
+              Преобразуем матрицы $A$ и $B$ к жордановым формам:
+              \[
+              J_1 = P A P^{-1}, \quad J_2 = Q B Q^{-1}.
+              \]
+              Тогда $J_1 \otimes J_2$ будет верхнетреугольной, а на диагонали будут стоять числа
+              $\lambda_r^i \mu_s^j$.
+            </div>
+          </div>
+
+          <div class="corollary">
+            Собственными значениями произведения $A \otimes B$ являются $\lambda_i \mu_j$.
+
+            <div class="proof">
+              Надо рассмотреть функцию $\varphi(x,y) = xy$.
+            </div>
+          </div>
+
+          <div class="corollary">
+            Собственными значениями суммы
+            \[
+            (A \otimes E_n) + (E_m \otimes B)
+            \]
+            являются числа $\lambda_i + \mu_j$.
+
+            <div class="proof">
+              Надо рассмотреть функцию $\varphi(x,y) = x + y$.
+            </div>
+          </div>
+
+          <div class="todo">
+            Дописать.
+          </div>
         </div>
       </li>
 
@@ -3066,6 +4742,101 @@
           $AX + XB = C$
         </div>
         <div class="content">
+          <div class="theorem">
+            Матричное уравнение $AX + XB = C$ имеет единственное решение, если $A, -B$ не имеют общих собственных
+            значений.
+
+            <div class="proof">
+              Рассмотрим левую часть уравнения:
+              \[
+              AX + XB = AX I + I XB = C.
+              \]
+              Пусть
+              \[
+              Q = A \otimes I + I \otimes B^T.
+              \]
+              Пользуясь этим обозначением, исходное уравнение можно записать в виде
+              \[
+              Q X = C.
+              \]
+              Его решение существует и единственно тогда и только тогда, когда собственные числа матрицы
+              $\gamma_{sr} = \varphi(A, B) \neq 0$, то есть матрица невырождена.
+
+              <p>
+                Пусть
+                \[
+                \varphi(A, B) = \sum_{ij}^{} c_{ij} A^i \otimes B^j.
+                \]
+                Тогда собственные числа имеют вид
+                \[
+                \varphi(\lambda_r, \mu_s) = \sum_{ij}^{} c_{ij} \lambda_r^i \mu_s^j.
+                \]
+                Но
+                \[
+                Q = A \otimes I + I \otimes B^T = \varphi(A, B^T),
+                \]
+                то есть $\varphi(x, y) = x + y$.
+              </p>
+
+              <p>
+                От транспонирования матрицы собственные числа не меняются, поэтому если $\mu_s$ &mdash; собственные
+                числа $B$, то они же будут являться собственными числами $B^T$.
+              </p>
+
+              <p>
+                Значит, собственные числа матрицы $Q$ имеют вид:
+                \[
+                \gamma_{sr} = \lambda_s + \mu_r.
+                \]
+                Чтобы система имела единственное решение, требуется, чтобы $\gamma_{sr} \neq 0$, откуда следует, что
+                $\lambda_s \neq - \mu_r$.
+              </p>
+            </div>
+          </div>
+
+          <div class="corollary">
+            Пусть $A$ и $B$ &mdash; гурвицевы. Тогда решение матричного уравнения $AX + XB = C$ существует и единственно,
+            причём
+            \[
+            X = - \int\limits_{0}^{\infty} e^{At} C e^{Bt} dt.
+            \]
+
+            <div class="proof">
+              Так как матрицы $A$ и $B$ гурвицевы, то собственные значения матриц $A$ и $-B$ не могут совпасть.
+
+              <p>
+                Рассмотрим теперь подынтегральное выражение:
+                \[
+                \begin{aligned}
+                \frac{d }{d t} \left( e^{At} C e^{Bt} \right)
+                &=
+                A e^{At} C e^{Bt} + e^{At} C \left(B e^{Bt}\right) = \\
+                &=
+                A e^{At} C e^{Bt} + e^{At} C e^{Bt} B.
+                \end{aligned}
+                \]
+              </p>
+
+              Из гурвицевости матрицы $A$ следует, что $\alpha = \max \Re \lambda_j \lt 0$. Следовательно,
+              \[
+              \norm{e^{At}} \leqslant \gamma(\varepsilon) e^{(\alpha + \varepsilon) t}.
+              \]
+              Аналогично и для матрицы $B$, поэтому следующий несобственный интеграл сходится:
+              \[
+              \begin{aligned}
+              \int\limits_{0}^{\infty} A e^{At} C e^{Bt} dt + \int\limits_{0}^{\infty} e^{At} C e^{Bt} B dt
+              &=
+              \int\limits_{0}^{\infty} \left[ A e^{At} C e^{Bt} dt + e^{At} C e^{Bt} B \right] dt \\
+              &=
+              \left. e^{At} C e^{Bt} \right|_{0}^{\cancel \infty} = -C,
+              \end{aligned}
+              \]
+              поэтому
+              \[
+              X = - \int\limits_{0}^{\infty} e^{At} C e^{Bt} dt.
+              \]
+            </div>
+          </div>
         </div>
       </li>
 
@@ -3075,13 +4846,140 @@
           $A^T X + XA = C$ для гурвицевой матрицы $A$
         </div>
         <div class="content">
+          Рассмотрим систему
+          \[
+          \dot x = A x.
+          \]
+
+          Зададим функцию Ляпунова в виде квадратичной формы:
+          \[
+          v(t) = x^T V x,
+          \]
+          где $V = V^T$ &mdash; симметричная матрица.
+
+          <p>
+            Найдём производную в силу системы:
+            \[
+            \begin{aligned}
+            \frac{d }{d t} v(t)
+            &=
+            \dot x^T V x + x^T V \dot x = \\
+            &=
+            x^T A^T V x + x^T V A x = \\
+            &=
+            x^T (A^T V + V A) x = \\
+            &= -x^T W x,
+            \end{aligned}
+            \]
+            где $A^T V + V A = -W$.
+          </p>
+
+          <div class="theorem">
+            <ol>
+              <li>
+                Если $A$ &mdash; гурвицева и $W$ &mdash; положительно определена (неотрицательно определена),
+                тогда существует единственное положительно определённое (неотрицательно определённое) решение
+                $V$ матричного уравнения Ляпунова.
+              </li>
+
+              <li>
+                Если $V$ &mdash; положительно определена и найдём такое $W$, что $-W = A^T V + V A$,
+                причём для всех различных собственных значений матрицы $A$ существует собственный вектор $a$,
+                для которого выполняется неравенство $a^T W a \gt 0$, то матрица $A$ &mdash; гурвицева.
+              </li>
+            </ol>
+
+            <div class="proof">
+              <ol>
+                <li>
+                  Решение матричного уравнения существует и единственно и имеет вид
+                  \[
+                  V = \int\limits_{0}^{\infty} e^{A^T t} W e^{A t} dt.
+                  \]
+
+                  Рассмотрим некоторый $\xi \neq 0$, составим квадратичную форму:
+                  \[
+                  \begin{aligned}
+                  \xi^T V \xi
+                  &= \int\limits_{0}^{\infty} \xi^T e^{A^T t} W e^{A t} \xi dt = \\
+                  &= \int\limits_{0}^{\infty} \eta^T(t) W \eta(t) dt,
+                  \end{aligned}
+                  \]
+                  где $\eta(t) = e^{At} \cdot \xi$.
+
+                  <ul>
+                    <li>
+                      Если $W \gt 0$, то $\xi^T V \xi \gt 0$.
+                    </li>
+
+                    <li>
+                      Если $W \geqslant 0$, то $\xi^T V \xi \geqslant 0$.
+                    </li>
+                  </ul>
+                </li>
+
+                <li>
+                  Пусть $\lambda$ &mdash; собственное значение матрицы $A$, которому соответствует собственный вектор $a$.
+                  Тогда
+                  \[
+                  A a = \lambda a, \qquad a^T A^T = \overline \lambda a^T.
+                  \]
+
+                  <p>
+                    Тогда
+                    \[
+                    \begin{aligned}
+                    a^T \left( A^T V + V A \right) a
+                    &=
+                    \left( a^T A^T V + a^T V A \right) a = \\
+                    &=
+                    \left( \overline \lambda a^T V + a^T V A \right) a = \\
+                    &=
+                    \overline \lambda a^T V a + a^T V A a = \\
+                    &=
+                    \overline \lambda a^T V a + \lambda a^T V a = \\
+                    &=
+                    (\overline \lambda + \lambda) a^T V a = \\
+                    &=
+                    2 \Re \lambda a^T V a.
+                    \end{aligned}
+                    \]
+                    Заметим, что $a^T V a \gt 0$ в силу положительной определённости $V$. С другой стороны,
+                    \[
+                    a^T \left( A^T V + V A \right) a = - a^T W a \lt 0,
+                    \]
+                    откуда следует, что $\Re \lambda \lt 0$, то есть матрица $A$ &mdash; гурвицева.
+                  </p>
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="theorem">
+            Рассмотрим $A^T X + X A = -W$.
+
+            <p>
+              $W$ положительно определена и $A$ гурвицева тогда и только тогда, когда матричное уравнение имеет
+              положительно определённое решение $V$.
+            </p>
+
+            <div class="proof">
+              <div class="necessity">
+                Следует из условия 1 предыдущей теоремы.
+              </div>
+
+              <div class="sufficiency">
+                Следует из условия 2 предыдущей теоремы.
+              </div>
+            </div>
+          </div>
         </div>
       </li>
 
       <li class="question">
         <div class="name">
           Лемма о разрешимости матричного неравенства вида
-          $A^T X + XA \leqslant C^T C$ для наблюдаемой пары $(A, C)$
+          $a^t x + xa \leqslant c^t c$ для наблюдаемой пары $(a, c)$
         </div>
         <div class="content">
         </div>
@@ -3101,6 +4999,144 @@
           Теорема Ляпунова об устойчивости нулевого решения
         </div>
         <div class="content">
+          Рассмотрим систему
+          \[
+          \tag{*}
+          \dot x = f(t, x),
+          \]
+          где $x \in \mathbb{R}^n$ и $t \geqslant 0$.
+
+          <div class="definition">
+            Движение $x = \overline x(t)$ называют <i>устойчивым по Ляпунову</i>, если для любого $t_0 \gt 0$
+            и любого $\varepsilon \gt 0$ существует $\delta = \delta(t_0, \varepsilon) \gt 0$ такое, что
+            при
+            \[
+            \norm{x_0 - \overline x_0} \lt \delta(t_0, \varepsilon)
+            \]
+            будет
+            \[
+            \norm{x(t, t_0, x_0) - \overline x(t)} \lt \varepsilon
+            \]
+            при $t \geqslant t_0$, где $x(t, t_0, x_0)$ &mdash; возмущённое движение, проходящее через точку
+            $x_0$ в момент времени $t_0$.
+          </div>
+
+          <p>
+            Пусть
+            \[
+            \Lambda = \set{ (t, x) | t \geqslant 0, \norm{x} \leqslant m }.
+            \]
+          </p>
+
+          <div class="definition">
+            Функция $V(t, x)$, определённая в $\Lambda$ и непрерывная в $\Lambda$ по $t$ и $x$,
+            называется <i>положительно или отрицательно определённой</i>, если существует непрерывная функция
+            $\gamma(x)$ такая,
+            что
+            <ol>
+              <li>
+                $V(t, x) \geqslant \gamma(x) \gt 0$ или $V(t, x) \leqslant -\gamma(x) \lt 0$ при $\norm{x} \neq 0$;
+              </li>
+
+              <li>
+                $V(t, 0) = \gamma(0) = 0$.
+              </li>
+            </ol>
+          </div>
+
+          <div class="theorem">
+            Пусть система имеет нулевое решение и пусть существует непрерывно-дифференцируемая функция Ляпунова
+            $V(t, x)$ такая, что
+            <ol>
+              <li>
+                $V(t, x)$ &mdash; положительно определённая;
+              </li>
+
+              <li>
+                $\left. \dot V(t, x) \right|_{(*)}$ знакоотрицательная, то нулевое решение системы устойчиво
+                по Ляпунову.
+              </li>
+            </ol>
+
+            <div class="proof">
+              Из положительной определённости функции $V(t, x)$ по определению следует, что существует функция
+              $\gamma(x)$ такая, что
+              \[
+              V(t, x) \geqslant \gamma(x) \gt 0 \quad \text{для всех} \quad \norm{x} \neq 0
+              \]
+              и
+              \[
+              V(t, 0) = \gamma(0) = 0.
+              \]
+
+              Рассмотрим в пространстве $\mathbb{R}^n$ сферу $S_\varepsilon$:
+              \[
+              \norm{x} = \varepsilon,
+              \]
+              где $0 \lt \varepsilon \leqslant m \lt M$.
+
+              <p>
+                Так как сфера &mdash; компактное множество, а функция $\gamma(x)$ непрерывна, то по теореме Вейерштрасса
+                нижняя грань этой функции достигается в некоторой точке $x^* \in S_\varepsilon$, поэтому
+                \[
+                \min_{x \in S_\varepsilon} \gamma(x) = \gamma(x^*) = \alpha \gt 0.
+                \]
+              </p>
+
+              <p>
+                Рассмотрим произвольный момент времени $t_0 \in (0, \infty)$. Функция $V(t_0, x)$ непрерывна по $x$,
+                причём $V(t_0, 0) = 0$. Следовательно, существует окрестность $\norm{x} \lt \delta \lt \varepsilon$
+                такая, что
+                \[
+                0 \leqslant V(t_0, x) \lt \alpha \quad \text{при} \quad \norm{x} \lt \delta.
+                \]
+
+                Рассмотрим любое нетривиальное решение $x = x(t)$ с начальным условием $\norm{x(t_0)} \lt \delta$.
+              </p>
+
+              <p>
+                Проверим, что траектория этого решения целиком остаётся внутри сферы, то есть
+                \[
+                \norm{x(t)} \lt \varepsilon, \quad t_0 \leqslant t \lt \infty.
+                \]
+                Действительно, при $t = t_0$ имеем
+                \[
+                \norm{x(t_0)} \lt \delta \lt \varepsilon.
+                \]
+                От противного: пусть существует момент времени $t_1 \gt t_0$, при котором
+                \[
+                \norm{x(t_1)} = \varepsilon,
+                \quad \text{причём} \quad
+                \norm{x(t)} \lt \varepsilon
+                \quad \forall t \in (t_0, t_1).
+                \]
+                Рассмотрим, как ведёт себя функция $v(t) = V(t, x(t))$ вдоль решения $x(t)$.
+              </p>
+
+              <p>
+                Так как в силу условия теоремы
+                \[
+                \dot v(t) = \frac{d }{d t} V(t, x(t)) \leqslant 0,
+                \]
+                то функция $v(t)$ невозрастающая. Следовательно,
+                \[
+                \alpha \gt V(t_0, x(t_0)) \geqslant V(t_1, x(t_1)) \geqslant \gamma(x(t_1)) \geqslant \alpha,
+                \]
+                что невозможно.
+              </p>
+
+              <p>
+                Значит, решение $x = x(t)$ при любом конечном $t \in [t_0, \infty)$ остаётся внутри сферы $S_\varepsilon$
+                и, так как $\varepsilon \lt M$, это решение определено при $t_0 \leqslant t \lt \infty$ (бесконечно
+                продолжаемо вправо), причём
+                \[
+                \norm{x(t)} \lt \varepsilon \quad \text{при} \quad t_0 \leqslant t \lt \infty,
+                \]
+                если только $\norm{x(t_0)} \lt \delta$. А это и означает, что тривиальное решение $x = 0$ устойчиво
+                по Ляпунову при $t \to +\infty$.
+              </p>
+            </div>
+          </div>
         </div>
       </li>
 
@@ -3110,6 +5146,91 @@
           решения
         </div>
         <div class="content">
+          Рассмотрим систему
+          \[
+          \tag{*}
+          \dot x = f(t, x),
+          \]
+          где $x \in \mathbb{R}^n$ и $t \geqslant 0$.
+
+          <div class="definition">
+            Решение $x = \overline x(t)$ называют <i>асимптотически устойчивым по Ляпунову</i>,
+            если
+            <ol>
+              <li>
+                оно устойчиво по Ляпунову;
+              </li>
+
+              <li>
+                существует такое положительное $h(t_0)$, что при
+                \[
+                \norm{x(t_0) - \overline x(t_0)} \lt h(t_0)
+                \]
+                справедливо
+                \[
+                \norm{x(t, t_0, x_0) - \overline x(t)} \to 0 \quad \text{при} \quad t \to +\infty.
+                \]
+              </li>
+            </ol>
+          </div>
+
+          <div class="definition">
+            Говорят, что функция $V(t, x)$ <i>допускает бесконечно малый высший предел</i> при $x \to 0$, если
+            <ol>
+              <li>
+                $V(t, 0) = 0$,
+              </li>
+
+              <li>
+                $V(t, x)$ является непрерывной в точке $x = 0$ равномерно по $t$, то есть
+                \[
+                \forall \varepsilon \gt 0
+                \quad \exists \delta = \delta(\varepsilon) \gt 0:
+                \quad \abs{V(t, x)} \lt \varepsilon
+                \quad \forall t \geqslant 0
+                \quad \text{при} \quad \norm{x} \lt \delta,
+                \]
+                причём $\delta$ не зависит от времени.
+              </li>
+            </ol>
+          </div>
+
+          <div class="theorem">
+            Пусть существует положительно определённая непрерывно дифференцируемая функция $V(t, x)$, допускающая
+            бесконечно малый высший предел при $x \to 0$ и имеющая отрицательную производную по $t$ в силу системы.
+            Тогда тривиальное решение $x = 0$ является асимптотически устойчивым по Ляпунову при $t \to +\infty$.
+
+            <div class="proof">
+              Из теоремы Ляпунова об устойчивости следует, что $x = 0$ является устойчивым.
+
+              <p>
+                Надо доказать, что для любого нетривиального решения $x(t)$, у которого
+                $\norm{x(t_0)} \leqslant m \lt M$, справедливо равенство
+                \[
+                \lim\limits_{t \to \infty} \norm{x(t)} = 0.
+                \]
+              </p>
+
+              <p>
+                Рассмотрим функцию $v(t) = V(t, x(t))$. Так как из условия теоремы
+                \[
+                \dot v(t) = \frac{d V}{d t} \lt 0,
+                \]
+                то функция $v(t)$ монотонно убывающая и, будучи ограниченной снизу (следует из положительной
+                определённости), имеет конечный предел:
+                \[
+                \lim\limits_{t \to \infty} v(t) = \inf_t v(t) = \alpha \geqslant 0.
+                \]
+              </p>
+
+              <p>
+                Предположим, что $\alpha \gt 0$, тогда нетривиальное решение $x(t)$ удовлетворяет неравенству
+                \[
+                \norm{x(t)} \geqslant \beta \gt 0 \quad \text{при} \quad t_0 \geqslant t \lt \infty.
+                \]
+              </p>
+            </div>
+          </div>
         </div>
       </li>
 
